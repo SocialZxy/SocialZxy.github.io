@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>二分图匹配 | SocialZxy's Blog</title><meta name="description" content="简单的二分图匹配"><meta name="keywords" content="图论,二分图匹配"><meta name="author" content="SocialZxy"><meta name="copyright" content="SocialZxy"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="二分图匹配"><meta name="twitter:description" content="简单的二分图匹配"><meta name="twitter:image" content="https://i.loli.net/2020/03/26/qOolNbWuK9CcUy7.png"><meta property="og:type" content="article"><meta property="og:title" content="二分图匹配"><meta property="og:url" content="http://socialzxy.github.io/2020/03/26/bipartite-graph/"><meta property="og:site_name" content="SocialZxy's Blog"><meta property="og:description" content="简单的二分图匹配"><meta property="og:image" content="https://i.loli.net/2020/03/26/qOolNbWuK9CcUy7.png"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      now = new Date();
+      hour = now.getHours();
+      isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="http://socialzxy.github.io/2020/03/26/bipartite-graph/"><link rel="prev" title="二分图匹配（升级版）" href="http://socialzxy.github.io/2020/03/26/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%EF%BC%88%E5%8D%87%E7%BA%A7%E7%89%88%EF%BC%89/"><link rel="next" title="就这样，ZXY的博客重获新生" href="http://socialzxy.github.io/2020/03/25/hello-world/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"◆pure◆","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false
+}</script><meta name="generator" content="Hexo 4.2.0"><link rel="alternate" href="/atom.xml" title="SocialZxy's Blog" type="application/atom+xml">
+</head><body><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="https://i.loli.net/2019/11/14/ejNVG6t9JAuvZPT.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">7</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">6</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">6</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></div></div><i class="fa fa-arrow-right on" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#§0-前言"><span class="toc-number">1.</span> <span class="toc-text">§0 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#§1-什么叫二分图"><span class="toc-number">2.</span> <span class="toc-text">§1 什么叫二分图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#§2-什么是二分图匹配"><span class="toc-number">3.</span> <span class="toc-text">§2 什么是二分图匹配</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#§3-匈牙利算法求二分图最大匹配"><span class="toc-number">4.</span> <span class="toc-text">§3 匈牙利算法求二分图最大匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#§3-1-增广路"><span class="toc-number">4.1.</span> <span class="toc-text">§3.1 增广路</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#§3-2-匈牙利算法的过程"><span class="toc-number">4.2.</span> <span class="toc-text">§3.2 匈牙利算法的过程</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(https://i.loli.net/2020/03/26/qOolNbWuK9CcUy7.png)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">SocialZxy's Blog</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div></div></span></div><div id="post-info"><div id="post-title"><div class="posttitle">二分图匹配</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> 发表于 2020-03-26<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> 更新于 2020-03-26</time><span class="post-meta__separator">|</span><span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/">OI</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/OI/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">算法笔记</a></span><div class="post-meta-wordcount"><div class="post-meta-pv-cv"></div></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div id="article-container"><p>浅谈简单的二分图匹配</p>
+<h2 id="§0-前言"><a href="#§0-前言" class="headerlink" title="§0 前言"></a>§0 前言</h2><p>不知道为什么总有一些巨佬喜欢用“组CP”来比喻二分图以及二分图匹配……我个人觉得看这些人组CP很EX</p>
+<p>所以我就用一种正常（装逼）一点的方式来整理二分图匹配这方面的笔记。</p>
+<p>起码我是看得懂的。如果您看不懂，还是去看组CP的博客吧。</p>
+<h2 id="§1-什么叫二分图"><a href="#§1-什么叫二分图" class="headerlink" title="§1 什么叫二分图"></a>§1 什么叫二分图</h2><blockquote>
+<p>如果一张<strong>无向图</strong>的n(n≥2)个节点A、B两个<strong>非空</strong>集合，<strong>A∩B=∅</strong>，且 同一集合中的点间没有边相连，那么称这张无向图为<strong>二分图</strong>。A、B分别叫做二分图的<strong>左部节点和 右部节点</strong>（谁左谁右没太大区别）。</p>
+</blockquote>
+<p>并且有一个</p>
+<p>定理</p>
+<p>用于判定一个（无向图）是否为二分图：</p>
+<blockquote>
+<p>如果一个（无向）图是二分图，那么<strong>图中无长度为奇数的环</strong>。</p>
+</blockquote>
+<h2 id="§2-什么是二分图匹配"><a href="#§2-什么是二分图匹配" class="headerlink" title="§2 什么是二分图匹配"></a>§2 什么是二分图匹配</h2><blockquote>
+<p>任意两边<strong>没有公共点</strong>的边集（以后写作M）称为<strong>图的匹配</strong><br>所以二分图匹配就是二分图中的<strong>匹配</strong><br>其中，M中的边是匹配边，其他为非匹配边，匹配边的端点叫匹配点，其他为非匹配点。</p>
+</blockquote>
+<p>在常见问题中，经常出现的是求一个二分图的<strong>最大匹配</strong>，即包含边数最多的边集M。</p>
+<h2 id="§3-匈牙利算法求二分图最大匹配"><a href="#§3-匈牙利算法求二分图最大匹配" class="headerlink" title="§3 匈牙利算法求二分图最大匹配"></a>§3 匈牙利算法求二分图最大匹配</h2><p>匈牙利算法是匈牙利人发明的。它是一种<strong>增广路算法</strong>。</p>
+<h3 id="§3-1-增广路"><a href="#§3-1-增广路" class="headerlink" title="§3.1 增广路"></a>§3.1 增广路</h3><blockquote>
+<p>一条连接两个非匹配点的路径，在这条路径上匹配边和非匹配边交替出现，则这条路径叫做<strong>增广路</strong>。</p>
+</blockquote>
+<p>增广路很明显会有以下两条性质：</p>
+<p>边数为奇数。</p>
+<p>奇数边为非匹配边，偶数边为匹配边</p>
+<p>最开始我看到增广路就头疼。其实理解这个概念最重要的就是理解它的名字。</p>
+<p>而这个名字的来源就是第三条性质：</p>
+<p>如果把增广路上的边的状态全部取反（匹配→非匹配，非匹配→匹配），那么得到的M’依然是合法的匹配，且边数<strong>增加了 一条</strong></p>
+<p>比如，一条增广路上的边的状态为（0：非匹配，1：匹配）0101010，匹配边数为3，取反后的到1010101，边数为4.</p>
+<p>这就是增广在二分图匹配中的体现（在网络最大流中又有另外的体现）</p>
+<p>于是又有了以下的理论：</p>
+<p><strong>一个边集M是二分图中的最大匹配，就没有增广路。</strong></p>
+<p>匈牙利算法就是依靠这个过程来求解的。</p>
+<h3 id="§3-2-匈牙利算法的过程"><a href="#§3-2-匈牙利算法的过程" class="headerlink" title="§3.2 匈牙利算法的过程"></a>§3.2 匈牙利算法的过程</h3><p>设M为空集，所有边都为非匹配边。</p>
+<p>寻找增广路，取反，直到图中无增广路。</p>
+<p>说起来是这样的，但是这个“寻找增广路”方法不是很好理解。我们有一种更好理解的方式：</p>
+<p>尝试给每一个左点找一个右点进行匹配，这个右点需满足以下条件之一</p>
+<ul>
+<li>右点为非匹配点</li>
+<li>右点已经匹配了x点，但是x点可以换一个新的y点匹配，然后右点可以与x点匹配</li>
+</ul>
+<p>在这样的“尝试、更换”的过程中，我们就找到了增广路。下面看例题：</p>
+<p><a href="https://www.luogu.org/problemnew/show/P3386" target="_blank" rel="noopener">洛谷P3386【模板】二分图匹配</a></p>
+<p>这题是让求二分图的最大匹配。我们直接放上匈牙利算法的板子、注释以供参考</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">&gt; 变量定义：</span></span><br><span class="line"><span class="comment">&gt; 左部点标号1~n，右部点标号n+1~n+m</span></span><br><span class="line"><span class="comment">&gt; f[u]=v：u与v匹配</span></span><br><span class="line"><span class="comment">&gt; vis：标记数组</span></span><br><span class="line"><span class="comment">&gt; ans：最大匹配的边数</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MaxN = <span class="number">2005</span>;</span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MaxM = <span class="number">2</span> * MaxN * MaxN;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">    <span class="keyword">int</span> v, nxt;</span><br><span class="line">&#125;edge[MaxM];</span><br><span class="line"><span class="keyword">int</span> head[MaxN], k = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, e;</span><br><span class="line"><span class="keyword">int</span> f[MaxN];</span><br><span class="line"><span class="keyword">bool</span> vis[MaxN];</span><br><span class="line"><span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    edge[++k].v = v;</span><br><span class="line">    edge[k].nxt = head[u];</span><br><span class="line">    head[u] = k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v)</span> <span class="comment">//添加无向边</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    addedge(u, v);</span><br><span class="line">    addedge(v, u);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">dfs</span><span class="params">(<span class="keyword">int</span> u)</span> <span class="comment">//dfs找增广路</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(vis[u]) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    vis[u] = <span class="number">1</span>; <span class="comment">//编辑访问，否则会死循</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = edge[i].nxt) &#123; <span class="comment">//枚举可以连接的点</span></span><br><span class="line">        <span class="keyword">int</span> v = edge[i].v; </span><br><span class="line">        <span class="keyword">if</span>(!f[v] || dfs(f[v])) &#123; <span class="comment">//非匹配/可以换点</span></span><br><span class="line">             f[v] = u; <span class="comment">//v与u匹配</span></span><br><span class="line">             <span class="keyword">return</span> <span class="number">1</span>; <span class="comment">//找到增广路</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>; <span class="comment">//没找到增广路</span></span><br><span class="line">&#125;</span><br><span class="line">                    </span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d%d"</span>, &amp;n, &amp;m, &amp;e);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= e; i++) &#123;</span><br><span class="line">        <span class="keyword">int</span> u, v;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;u, &amp;v);</span><br><span class="line">        <span class="keyword">if</span>(u &gt; n || v &gt; m) <span class="keyword">continue</span>; <span class="comment">//防爆</span></span><br><span class="line">        insert(u, v + n); <span class="comment">//插入边</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123; <span class="comment">//枚举所有左点</span></span><br><span class="line">        <span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis)); <span class="comment">//清空访问</span></span><br><span class="line">        ans += dfs(i); <span class="comment">//如果找到增广路就++</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>, ans);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这道题就完了，有一些双倍经验（逃）</p>
+<p><a href="https://www.luogu.org/problemnew/show/P2756" target="_blank" rel="noopener">P2756 飞行员配对方案问题</a></p>
+<p><a href="https://www.luogu.org/problemnew/show/P1129" target="_blank" rel="noopener">P1129 【ZJOI2007】矩阵游戏</a></p>
+<p>完结撒花</p>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">SocialZxy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://socialzxy.github.io/2020/03/26/bipartite-graph/">http://socialzxy.github.io/2020/03/26/bipartite-graph/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://socialzxy.github.io" target="_blank">SocialZxy's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%9B%BE%E8%AE%BA/">图论    </a><a class="post-meta__tags" href="/tags/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D/">二分图匹配    </a></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2019/10/26/O3aICQxG9DhWEcN.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/26/%E4%BA%8C%E5%88%86%E5%9B%BE%E5%8C%B9%E9%85%8D%EF%BC%88%E5%8D%87%E7%BA%A7%E7%89%88%EF%BC%89/"><img class="prev_cover lazyload" data-src="https://i.loli.net/2019/10/03/E9rCo4ZpsgnW1DA.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">二分图匹配（升级版）</div></div></a></div><div class="next-post pull_right"><a href="/2020/03/25/hello-world/"><img class="next_cover lazyload" data-src="https://i.loli.net/2020/03/26/Rw3repN9SAtg6Qu.png" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">就这样，ZXY的博客重获新生</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> 相关推荐</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/2020/03/26/二分图匹配（升级版）/" title="二分图匹配（升级版）"><img class="relatedPosts_cover lazyload"data-src="https://i.loli.net/2019/10/03/E9rCo4ZpsgnW1DA.jpg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-03-26</div><div class="relatedPosts_title">二分图匹配（升级版）</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><script id="utterances_comment" src="https://utteranc.es/client.js" repo="github.com/SocialZxy/SocialZxy.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async></script><script>var themeNow = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+document.getElementById('utterances_comment').setAttribute('theme',themeNow)
+
+function utterancesTheme () {
+var theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+const message = {
+  type: 'set-theme',
+  theme: theme
+};
+const iframe = document.querySelector('.utterances-frame');
+iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By SocialZxy</div><div class="framework-info"><span>驱动 </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>主题 </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script type="text/x-mathjax-config">MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  CommonHTML: {
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "HTML-CSS": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  },
+  "SVG": { 
+    linebreaks: { automatic: true, width: "90% container" }
+  }
+});
+</script><script type="text/x-mathjax-config">MathJax.Hub.Queue(function() {
+  var all = MathJax.Hub.getAllJax(), i;
+  for (i=0; i < all.length; i += 1) {
+    all[i].SourceElement().parentNode.className += ' has-jax';
+  }
+});
+</script><script src="https://cdn.jsdelivr.net/npm/mathjax/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script id="ribbon_piao" mobile="false" src="/js/third-party/piao.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="/js/third-party/ClickShowText.js"></script></body></html>
