@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://socialzxy.github.io/"/>
-  <updated>2020-08-09T02:56:31.269Z</updated>
+  <updated>2020-08-09T03:09:30.751Z</updated>
   <id>http://socialzxy.github.io/</id>
   
   <author>
@@ -21,13 +21,13 @@
     <link href="http://socialzxy.github.io/2020/08/09/%E5%A4%9A%E9%A1%B9%E5%BC%8F-Index/"/>
     <id>http://socialzxy.github.io/2020/08/09/%E5%A4%9A%E9%A1%B9%E5%BC%8F-Index/</id>
     <published>2020-08-09T03:40:09.000Z</published>
-    <updated>2020-08-09T02:56:31.269Z</updated>
+    <updated>2020-08-09T03:09:30.751Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="各种多项式知识的目录"><a href="#各种多项式知识的目录" class="headerlink" title="各种多项式知识的目录"></a>各种多项式知识的目录</h1><div class="note info">                      </div>]]></content>
+    <content type="html"><![CDATA[<h1 id="各种多项式知识的目录"><a href="#各种多项式知识的目录" class="headerlink" title="各种多项式知识的目录"></a>各种多项式知识的目录</h1><div class="note info">            <h2 id="多项式基础"><a href="#多项式基础" class="headerlink" title="多项式基础"></a><a href="http://socialzxy.github.io/2020/08/02/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/">多项式基础</a></h2><p>一些关于多项式的基本概念</p>          </div>]]></content>
     
     <summary type="html">
     
-      关于多项式的各种知识（由于公式用太多就会崩，所以我将其拆成多篇来写）
+      各种多项式的目录
     
     </summary>
     
@@ -35,24 +35,43 @@
       <category term="Index" scheme="http://socialzxy.github.io/categories/Index/"/>
     
     
-      <category term="数学" scheme="http://socialzxy.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
-    
       <category term="多项式" scheme="http://socialzxy.github.io/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
     
   </entry>
   
   <entry>
-    <title>基础多项式入门经典</title>
-    <link href="http://socialzxy.github.io/2020/08/02/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/"/>
-    <id>http://socialzxy.github.io/2020/08/02/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/</id>
-    <published>2020-08-02T02:53:00.000Z</published>
-    <updated>2020-08-09T03:01:37.871Z</updated>
-    
-    <content type="html"><![CDATA[<div class="note warning">            <p>由于某些东西比较复杂，本文略去了一些证明过程。</p>          </div><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>一个环 <strong>R</strong> 上的关于 x 的多项式可以写作</p><p>$A(x)=\sum\limits_{i=0}^n{a_ix^i}$</p><p>其中 $a_i\in R$，表示每一项的<strong>系数</strong>，一个多项式最高非零项的次数称为这个多项式的<strong>次数</strong>。</p><h1 id="多项式的运算"><a href="#多项式的运算" class="headerlink" title="多项式的运算"></a>多项式的运算</h1><p><strong>多项式的线性运算</strong>：$A(x)\pm B(x)=\sum\limits_{i=0}^n(a_i\pm b_i)x^i$。</p><p><strong>多项式的乘法</strong>：$A(x)B(x)=\sum\limits_{i=0}^n\sum\limits_{j=0}^na_ib_jx^{i+j}$，或者说，若 $A(x)B(x)=C(x)$，那么 $c_n=\sum\limits_{i=0}^na_ib_{n-i}$。前面的这个式子就是以后将会提到的<strong>卷积的形式</strong>。</p><h1 id="多项式的两种表示方法"><a href="#多项式的两种表示方法" class="headerlink" title="多项式的两种表示方法"></a>多项式的两种表示方法</h1><p>分别是<strong>系数表示法</strong>和<strong>点值表示法</strong>。</p><p>系数表示法就是上文提到的形式。</p><p>而众所周知，一个 $n$ 次函数可以被 $n+1$ 个点唯一确定。这 $n+1$ 个点 $(x_i, y_i)$ 就叫做这个多项式的<strong>点值表示</strong>。</p><p>接下来考虑多项式的乘法如何进行。</p><p>每一种表示方法都对应了一种多项式相乘的方法。</p><p>对于<strong>系数表示法</strong>，可以直接列竖式，即<strong>按照卷积的定义计算</strong>。这样时间复杂度为 $O(n^2)$。</p><p>对于<strong>点值表示法</strong>，可以将两个多项式带入一组相同的 $x_i$，将对应的 $y_i$ 相乘起来就得到了新多项式的点值表示。然而，在实际情况中一般都使用系数表示法，所以要用某种方法把点值转成系数。用<strong>高斯消元</strong>时间复杂度为 $O(n^3)$，用<strong>拉格朗日插值</strong>时间复杂度为 $O(n^2)$。</p><p>对于这两种方法也分别有优化的方法，下面的文章会讲到。</p>]]></content>
+    <title>数论 Index</title>
+    <link href="http://socialzxy.github.io/2020/08/09/%E6%95%B0%E8%AE%BA-Index/"/>
+    <id>http://socialzxy.github.io/2020/08/09/%E6%95%B0%E8%AE%BA-Index/</id>
+    <published>2020-08-09T03:40:08.000Z</published>
+    <updated>2020-08-09T03:09:39.814Z</updated>
     
     <summary type="html">
     
-      基础多项式再入门
+      各种数论知识的目录
+    
+    </summary>
+    
+    
+      <category term="Index" scheme="http://socialzxy.github.io/categories/Index/"/>
+    
+    
+      <category term="数论" scheme="http://socialzxy.github.io/tags/%E6%95%B0%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>FFT（快速傅里叶变换）</title>
+    <link href="http://socialzxy.github.io/2020/08/09/FFT%EF%BC%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%89/"/>
+    <id>http://socialzxy.github.io/2020/08/09/FFT%EF%BC%88%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%EF%BC%89/</id>
+    <published>2020-08-09T02:53:00.000Z</published>
+    <updated>2020-08-09T03:16:34.324Z</updated>
+    
+    <content type="html"><![CDATA[<p>本节点所需要的前置研发项目：<a href="http://socialzxy.github.io/2020/08/08/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/">多项式基础</a></p><p>在上一篇文章中，我们知道多项式有两种表示方法，这两种表示方法分别对应了求多项式卷积的两种方式，然而效率都比较低</p>]]></content>
+    
+    <summary type="html">
+    
+      一种快速计算多项式卷积的方法
     
     </summary>
     
@@ -62,7 +81,55 @@
       <category term="算法笔记" scheme="http://socialzxy.github.io/categories/OI/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
     
     
-      <category term="数学" scheme="http://socialzxy.github.io/tags/%E6%95%B0%E5%AD%A6/"/>
+      <category term="多项式" scheme="http://socialzxy.github.io/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>多项式基础</title>
+    <link href="http://socialzxy.github.io/2020/08/08/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/"/>
+    <id>http://socialzxy.github.io/2020/08/08/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/</id>
+    <published>2020-08-08T02:53:00.000Z</published>
+    <updated>2020-08-09T03:17:54.296Z</updated>
+    
+    <content type="html"><![CDATA[<div class="note warning">            <p>由于某些东西比较复杂，本文略去了一些证明过程。</p>          </div><h1 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h1><p>一个环 <strong>R</strong> 上的关于 x 的多项式可以写作</p><p>在上一篇文章中，我们知道多项式有两种表示方法，这两种表示方法分别对应了求多项式卷积的两种方式，然而效率都比较低</p><p>其中 $a_i\in R$，表示每一项的<strong>系数</strong>，一个多项式最高非零项的次数称为这个多项式的<strong>次数</strong>。</p><h1 id="多项式的运算"><a href="#多项式的运算" class="headerlink" title="多项式的运算"></a>多项式的运算</h1><p><strong>多项式的线性运算</strong>：$A(x)\pm B(x)=\sum\limits_{i=0}^n(a_i\pm b_i)x^i$。</p><p><strong>多项式的乘法</strong>：$A(x)B(x)=\sum\limits_{i=0}^n\sum\limits_{j=0}^na_ib_jx^{i+j}$，或者说，若 $A(x)B(x)=C(x)$，那么 $c_n=\sum\limits_{i=0}^na_ib_{n-i}$。前面的这个式子就是以后将会提到的<strong>卷积的形式</strong>。</p><h1 id="多项式的两种表示方法"><a href="#多项式的两种表示方法" class="headerlink" title="多项式的两种表示方法"></a>多项式的两种表示方法</h1><p>分别是<strong>系数表示法</strong>和<strong>点值表示法</strong>。</p><p>系数表示法就是上文提到的形式。</p><p>而众所周知，一个 $n$ 次函数可以被 $n+1$ 个点唯一确定。这 $n+1$ 个点 $(x_i, y_i)$ 就叫做这个多项式的<strong>点值表示</strong>。</p><p>接下来考虑多项式的乘法如何进行。</p><p>每一种表示方法都对应了一种多项式相乘的方法。</p><p>对于<strong>系数表示法</strong>，可以直接列竖式，即<strong>按照卷积的定义计算</strong>。这样时间复杂度为 $O(n^2)$。</p><p>对于<strong>点值表示法</strong>，可以将两个多项式带入一组相同的 $x_i$，将对应的 $y_i$ 相乘起来就得到了新多项式的点值表示。然而，在实际情况中一般都使用系数表示法，所以要用某种方法把点值转成系数。用<strong>高斯消元</strong>时间复杂度为 $O(n^3)$。</p><p>对于这两种方法也分别有优化的方法，下面的文章会讲到。</p>]]></content>
+    
+    <summary type="html">
+    
+      一些关于多项式的基本概念
+    
+    </summary>
+    
+    
+      <category term="OI" scheme="http://socialzxy.github.io/categories/OI/"/>
+    
+      <category term="算法笔记" scheme="http://socialzxy.github.io/categories/OI/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
+    
+      <category term="多项式" scheme="http://socialzxy.github.io/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拉格朗日插值</title>
+    <link href="http://socialzxy.github.io/2020/08/08/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/"/>
+    <id>http://socialzxy.github.io/2020/08/08/%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E6%8F%92%E5%80%BC/</id>
+    <published>2020-08-08T02:52:00.000Z</published>
+    <updated>2020-08-09T03:48:50.149Z</updated>
+    
+    <content type="html"><![CDATA[<p>本节点所需要的前置研发项目：<a href="http://socialzxy.github.io/2020/08/08/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E5%9F%BA%E7%A1%80/">多项式基础</a></p><h1 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h1><div class="note default">            <h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>先给定 $n$ 个点以及一个数 $k$，有一个函数经过了这 $n$ 个点，请求出 $k$ 在函数上对应的函数值。</p>          </div><p>如何解决这个问题呢？</p><p>下面给出一种较为暴力的方法。</p><p>我们设这个函数的解析式为 $f(x)=\sum\limits_{i=0}^{n-1}a_ix^i$，将点值代入，直接高斯消元解出系数，然后把 $k$ 带入式子中去即可。时间复杂度为 $O(n^3)$。</p><p>然而有一种神奇的方法可以在 $O(n^2)$ 的时间内解决此问题。这种方法就是<strong>拉格朗日插值法</strong>。</p><h1 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h1><blockquote><p>在<a href="https://zh.wikipedia.org/wiki/数值分析" target="_blank" rel="noopener">数值分析</a>中，<strong>拉格朗日插值法</strong>是以<a href="https://zh.wikipedia.org/wiki/法国" target="_blank" rel="noopener">法国</a>18世纪<a href="https://zh.wikipedia.org/wiki/数学家" target="_blank" rel="noopener">数学家</a><a href="https://zh.wikipedia.org/wiki/约瑟夫·拉格朗日" target="_blank" rel="noopener">约瑟夫·拉格朗日</a>命名的一种<a href="https://zh.wikipedia.org/wiki/多项式插值" target="_blank" rel="noopener">多项式插值</a>方法。许多实际问题中都用<a href="https://zh.wikipedia.org/wiki/函数" target="_blank" rel="noopener">函数</a>来表示各结果之间某种内在联系或规律，而不少函数都只能通过繁复实验和多次观测来了解。而，如果对实践中的某个<a href="https://zh.wikipedia.org/wiki/物理" target="_blank" rel="noopener">物理</a>量进行观测，在若干个不同的地方得到相应的观测值，拉格朗日插值法可以找到一个<a href="https://zh.wikipedia.org/wiki/多项式" target="_blank" rel="noopener">多项式</a>，其恰好在各个观测的点取到观测到的值。上面这样的多项式就称为<strong>拉格朗日（插值）多项式</strong>（Lagrange polynomial）。</p><p>——摘自 维基百科-拉格朗日插值法</p></blockquote><p>首先放上公式。<br>$$<br>f(k)=\sum\limits_{i=1}^ny_i\prod_{i\ne j}\dfrac{k-x_j}{x_i-x_j}<br>$$<br>其中的 $x_i,y_j$ 都是给出的点值。</p><p>为什么这个式子就可以保证 $k$ 在 $n$ 个点确定的函数上呢？我们带入一个 $x_p$ 试试。（$p$ 是给出的点值）</p><p>这里有一个 Sigma，我们分类讨论。</p><p>如果 $i=p$，那么 Prod 后面的分式分子分母都相同，取值为 1，这一部分的值就是 $y_p$</p><p>如果 $i\ne p$，那么总有一个 $j$ 满足 $j=p$ 使得 Prod 后面的分式分子为 0，这一部分取值为 0.</p><p>综上所述，如果带入 $x_p$，得到的函数值为 $y_p$，这就保证了 $k$ 在 $n$ 个点确定的函数上。</p><h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><p>下面给出 C++ 实现的代码。代码中的函数值对 998244353 取模，所以使用了乘法逆元。代码中的<code>qpow(fac, P - 2)</code> 在取模 P 的意义下等价于 $fac^{-1}$（费马小定理）。</p><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line"><span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">'-'</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line"><span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">'0'</span>; c = getchar(); &#125;</span><br><span class="line"><span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e3</span> + <span class="number">5</span>, P = <span class="number">998244353</span>;</span><br><span class="line"><span class="keyword">int</span> n, k, x[N], y[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">qpow</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line"><span class="keyword">int</span> res = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span>(y) &#123;</span><br><span class="line"><span class="keyword">if</span>(y &amp; <span class="number">1</span>) res = (res * x) % P;</span><br><span class="line">x = x * x % P;</span><br><span class="line">y &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">n = get(), k = get();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) x[i] = get(), y[i] = get();</span><br><span class="line"><span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line"><span class="keyword">int</span> res = <span class="number">1</span>, fac = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line"><span class="keyword">if</span>(j == i) <span class="keyword">continue</span>;</span><br><span class="line">res = res * (k - x[j]) % P;</span><br><span class="line">fac = fac * (x[i] - x[j]) % P;</span><br><span class="line">&#125;</span><br><span class="line">res = y[i] * res % P * qpow(fac, P - <span class="number">2</span>) % P;</span><br><span class="line">ans = (ans + res) % P;</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; (ans + P) % P;</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      一种多项式快速插值的方法
+    
+    </summary>
+    
+    
+      <category term="OI" scheme="http://socialzxy.github.io/categories/OI/"/>
+    
+      <category term="算法笔记" scheme="http://socialzxy.github.io/categories/OI/%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/"/>
+    
     
       <category term="多项式" scheme="http://socialzxy.github.io/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F/"/>
     
