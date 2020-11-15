@@ -1,0 +1,280 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2020. 11. 14 水题 | SocialZxy's Blog</title><meta name="author" content="SocialZxy"><meta name="copyright" content="SocialZxy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="2020. 11. 14 水题">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="2020. 11. 14 水题">
+<meta property="og:url" content="http://socialzxy.github.io/2020/11/14/20201114%E6%B0%B4%E9%A2%98/index.html">
+<meta property="og:site_name" content="SocialZxy&#39;s Blog">
+<meta property="og:description" content="2020. 11. 14 水题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg">
+<meta property="article:published_time" content="2020-11-14T03:45:14.000Z">
+<meta property="article:modified_time" content="2020-11-14T13:58:36.444Z">
+<meta property="article:author" content="SocialZxy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://socialzxy.github.io/2020/11/14/20201114%E6%B0%B4%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: {"text":"pure","fontSize":"15px"},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2020-11-14 21:58:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'true'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="SocialZxy's Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">SocialZxy's Blog</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">2020. 11. 14 水题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-14T03:45:14.000Z" title="发表于 2020-11-14 11:45:14">2020-11-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T13:58:36.444Z" title="更新于 2020-11-14 21:58:36">2020-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/">OI</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/%E6%B0%B4%E9%A2%98%E6%97%A5%E8%AE%B0/">水题日记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2020-11-14-水题"><a href="#2020-11-14-水题" class="headerlink" title="2020. 11. 14 水题"></a>2020. 11. 14 水题</h1><blockquote>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>今日收获语录一条：</p>
+<p><strong>DP 没有前途</strong>。</p>
+<p><del>下半句是 “考虑生成函数”</del></p>
+</blockquote>
+<h2 id="洛谷-P4329-COCI2006-2007-1-Bond"><a href="#洛谷-P4329-COCI2006-2007-1-Bond" class="headerlink" title="洛谷 P4329 [COCI2006-2007#1] Bond"></a>洛谷 P4329 [COCI2006-2007#1] Bond</h2><p><strong>来源：</strong> 不知道是谁的杂题选假</p>
+<p><strong>关键词：</strong> 对数、费用流</p>
+<p>把人和任务看成左右部点，可以发现是一个二分图。要求的是一个乘积的最大值，然而费用流是求费用的和，我们想个办法变乘为加。这里就涉及到一个常见的套路——<strong>取对数</strong>，对费用取个对数（当然只有非零才连边），跑最大费用最大流，最后用 $e^x$ 来还原即可。注意如果网络最大流不等于人数，那么任务总无法完成，特判输出 <code>0</code>。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> in(i) (i)</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> out(i) (i + n)</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">5005</span>, oo = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, s, t, pre[N], flow[N], inq[N], MaxFlow; </span><br><span class="line"><span class="keyword">double</span> dis[N], MinCost;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> v, nxt, f;</span><br><span class="line">	<span class="keyword">double</span> c;</span><br><span class="line">&#125; edge[<span class="number">100005</span>];</span><br><span class="line"><span class="keyword">int</span> head[N], k = <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addedge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> f, <span class="keyword">double</span> c)</span> </span>&#123;</span><br><span class="line">	edge[++k].nxt = head[u];</span><br><span class="line">	edge[k].v = v;</span><br><span class="line">	edge[k].f = f;</span><br><span class="line">	edge[k].c = c;</span><br><span class="line">	head[u] = k;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insedge</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> f, <span class="keyword">double</span> c)</span> </span>&#123;</span><br><span class="line">	addedge(u, v, f, c), addedge(v, u, <span class="number">0</span>, -c);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">SPFA</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= t; i++) dis[i] = <span class="number">-100001</span>;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q; q.push(s), inq[s] = <span class="number">1</span>;</span><br><span class="line">	dis[s] = <span class="number">0</span>, flow[s] = oo, flow[t] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span>(q.size()) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = q.front(); q.pop();</span><br><span class="line">		inq[u] = <span class="number">0</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = head[u]; i; i = edge[i].nxt) &#123;</span><br><span class="line">			<span class="keyword">int</span> v = edge[i].v, f = edge[i].f;</span><br><span class="line">			<span class="keyword">double</span> c = edge[i].c;</span><br><span class="line">			<span class="keyword">if</span>(!f || dis[v] &gt;= dis[u] + c) <span class="keyword">continue</span>;</span><br><span class="line">			dis[v] = dis[u] + c, flow[v] = min(f, flow[u]), pre[v] = i;</span><br><span class="line">			<span class="keyword">if</span>(!inq[v]) q.push(v);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> flow[t] &gt; <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	MaxFlow += flow[t];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = t; i != s; i = edge[pre[i] ^ <span class="number">1</span>].v) </span><br><span class="line">		edge[pre[i]].f -= flow[t], edge[pre[i] ^ <span class="number">1</span>].f += flow[t], MinCost += flow[t] * edge[pre[i]].c;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get(), s = <span class="number">0</span>, t = out(n) + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= n; j++) &#123;</span><br><span class="line">			<span class="keyword">int</span> a = get();</span><br><span class="line">			<span class="keyword">if</span>(a) insedge(in(i), out(j), <span class="number">1</span>, <span class="built_in">log</span>(<span class="number">1.0</span> * a / <span class="number">100</span>));</span><br><span class="line">		&#125;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) insedge(s, in(i), <span class="number">1</span>, <span class="number">0</span>), insedge(out(i), t, <span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">while</span>(SPFA()) update();</span><br><span class="line">	<span class="keyword">if</span>(MaxFlow == n) <span class="built_in">printf</span>(<span class="string">&quot;%lf\n&quot;</span>, <span class="built_in">exp</span>(MinCost) * <span class="number">100.0</span>);</span><br><span class="line">	<span class="keyword">else</span> <span class="built_in">printf</span>(<span class="string">&quot;0\n&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="GMOJ-6859-无尽之前"><a href="#GMOJ-6859-无尽之前" class="headerlink" title="GMOJ 6859. 无尽之前"></a>GMOJ 6859. 无尽之前</h2><p><strong>来源：</strong> 2020. 11. 14 提高组模拟（大嘘）</p>
+<p><strong>关键词：</strong> 人类智慧</p>
+<p>由于这个 OJ 可能不好找所以胡一波题面。</p>
+<blockquote>
+<p>给定一个 $n\times m$ 的棋盘，上面有一个车，给出车的起点和终点，你需要在棋盘上放置最少数量的兵，防止车走到终点。（放置好后，车先手，接下来双方轮流行动，可以放弃行动）</p>
+</blockquote>
+<p>首先对于一般情况，最少 3 个兵就可以把车堵死（证明略）。然后是一大堆特殊情况。</p>
+<ul>
+<li>直接相连，无解。</li>
+<li>到所有边界距离都小于等于 1，1 个兵即可。</li>
+<li>两行或两列，堵死通道，2 个即可。<ul>
+<li>如果起点和终点斜角相连，那么需要 3 个。</li>
+</ul>
+</li>
+<li>到某个角距离为 1，两个即可。</li>
+</ul>
+<p><del>不知道情况列完没有，感觉差不多了，反正 AC 了，这种人类智慧题真不想做第二次</del></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	freopen(<span class="string">&quot;game.in&quot;</span>, <span class="string">&quot;r&quot;</span>, <span class="built_in">stdin</span>);</span><br><span class="line">	freopen(<span class="string">&quot;game.out&quot;</span>, <span class="string">&quot;w&quot;</span>, <span class="built_in">stdout</span>);</span><br><span class="line">	n = get(), m = get(), x1 = get(), y1_ = get(), x2 = get(), y2 = get();</span><br><span class="line">	<span class="comment">// 直接相邻，无解</span></span><br><span class="line">	<span class="keyword">if</span>((x1 == x2 &amp;&amp; <span class="built_in">abs</span>(y1_ - y2) == <span class="number">1</span>) || (y1_ == y2 &amp;&amp; <span class="built_in">abs</span>(x1 - x2) == <span class="number">1</span>)) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;-1\n&quot;</span>); </span><br><span class="line">	<span class="comment">// 两行两列且不直接相邻，一个即可 </span></span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">2</span> &amp;&amp; m == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;1\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 三行三列，不直接相邻且终点在正中央，一个即可</span></span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">3</span> &amp;&amp; m == <span class="number">3</span> &amp;&amp; x2 == <span class="number">2</span> &amp;&amp; y2 == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;1\n&quot;</span>); </span><br><span class="line">	<span class="comment">// 如果是斜角</span></span><br><span class="line">	<span class="keyword">if</span>(<span class="built_in">abs</span>(x1 - x2) == <span class="number">1</span> &amp;&amp; <span class="built_in">abs</span>(y1_ - y2) == <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;3\n&quot;</span>); </span><br><span class="line">	<span class="comment">// 行数 &lt;= 2，堵死通道即可 </span></span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">1</span> || n == <span class="number">2</span> || m == <span class="number">1</span> || m == <span class="number">2</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;2\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 边上，三个即可 </span></span><br><span class="line">	<span class="keyword">if</span>(x2 == <span class="number">1</span> || y2 == <span class="number">1</span> || x2 == n || y2 == m) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;3\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 到角的距离 &lt;= 1 </span></span><br><span class="line">	<span class="keyword">if</span>(dis(<span class="number">1</span>, m, x2, y2) &lt;= <span class="number">1</span> || dis(<span class="number">1</span>, <span class="number">1</span>, x2, y2) &lt;= <span class="number">1</span> || dis(n, <span class="number">1</span>, x2, y2) &lt;= <span class="number">1</span> || dis(n, m, x2, y2) &lt;= <span class="number">1</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;2\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 如果堵死通道更优，则堵死通道</span></span><br><span class="line">	<span class="keyword">if</span>(n == <span class="number">3</span> || m == <span class="number">3</span>) <span class="keyword">return</span> <span class="number">0</span> * <span class="built_in">printf</span>(<span class="string">&quot;3\n&quot;</span>);</span><br><span class="line">	<span class="comment">// 否则三个一定足够</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;3\n&quot;</span>); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="GMOJ-6860-鬼渊传说"><a href="#GMOJ-6860-鬼渊传说" class="headerlink" title="GMOJ 6860. 鬼渊传说"></a>GMOJ 6860. 鬼渊传说</h2><p><strong>来源：</strong> 2020. 11. 14 提高组模拟（大嘘）</p>
+<p><strong>关键词：</strong> 欧拉公式（拓扑学）、BFS、Two Pointers</p>
+<blockquote>
+<p>给定一个 $n\times m$ 的 0/1 矩阵，请求出内部没有白点形成空腔且黑点联通的子矩阵个数</p>
+</blockquote>
+<p>这道题思路懂了就好，代码我打了 130+ 行还没过样例，已经自闭了（</p>
+<p>首先枚举方式：枚举上下右边界，凑左边界。</p>
+<p>这道题有两个限制，下面逐一考虑。</p>
+<ol>
+<li><p><strong>没有空腔</strong></p>
+<p>开始 BFS 出所有空腔（个数为 $O(n^2)$ 级别），求出每个空腔的上下左右端点。如果一个子矩阵包含空腔，那么其向外扩展得到的子矩阵依然包含空腔。我们可以根据这个限制求出对于某个右端点，其最左的合法左端点在何处。</p>
+</li>
+<li><p><strong>只有一个连通块</strong></p>
+<p>由于这是一个平面图，所以我们考虑欧拉公式（拓扑学）——$n+r=m+2$，若无空腔，面数为图中四元环的数量加一，记四元环个数为 $Sum$，则有 $n+Sum-m=1$</p>
+<p>设四个数组：$SumN, SumH, SumS, Sum4$，分别表示确定了上下边界后，点数、横边数、竖边数、四元环数量的前缀和，则有：<br>$$<br>sumN_r-sumN_{l-1}+Sum4_r-Sum4_l-SumH_r+SumH_l-SumS_r+SumS_{l-1}=1<br>$$<br>移项，将 $l$ 和 $r$ 分离，得到：<br>$$<br>sumN_r+Sum4_r-SumH_r-SumS_r-1=sumN_{l-1}+Sum4_l-SumH_l-SumS_{l-1}<br>$$<br>我们每次把形如等式右边的值放进桶里，查询左边式子对应的数量，即答案。、</p>
+</li>
+</ol>
+<p>把这两者结合起来，用 Two Pointers 扫一遍，即得答案。</p>
+<p>然而这玩意真的难调，我就当一波口胡选手吧（（（</p>
+<p><del>顺便骂一句，这真 tm 是提高组模拟？？？</del></p>
+<h2 id="洛谷-P3512-POI2010-PIL-Pilots"><a href="#洛谷-P3512-POI2010-PIL-Pilots" class="headerlink" title="洛谷 P3512 [POI2010]PIL-Pilots"></a>洛谷 P3512 [POI2010]PIL-Pilots</h2><p><strong>来源：</strong> 不知道是谁的杂题选假</p>
+<p><strong>关键词：</strong> 单调队列</p>
+<p>开两个单调队列分别维护最大值和最小值，如果发现队首差值大于 k 那么选择一个下标较小的弹出。维护一个变量 lst，表示当前考虑到的下标最小的位置，那么 $ans = max(ans, i - lst + 1)$</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> k, n, a[N], mx[N], mn[N], lx = <span class="number">1</span>, ln = <span class="number">1</span>, rx, rn, ans; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	k = get(), n = get();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) a[i] = get();</span><br><span class="line">	<span class="keyword">int</span> lst = <span class="number">1</span>;</span><br><span class="line">	mn[<span class="number">1</span>] = mx[<span class="number">1</span>] = lx = ln = rx = rn = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">while</span>(lx &lt;= rx &amp;&amp; a[mx[rx]] &lt; a[i]) rx--;</span><br><span class="line">		<span class="keyword">while</span>(ln &lt;= rn &amp;&amp; a[mn[rn]] &gt; a[i]) rn--;</span><br><span class="line">		mx[++rx] = i, mn[++rn] = i;</span><br><span class="line">		<span class="keyword">while</span>(a[mx[lx]] - a[mn[ln]] &gt; k) &#123;</span><br><span class="line">			<span class="keyword">if</span>(mx[lx] &lt; mn[ln]) lst = mx[lx] + <span class="number">1</span>, ++lx;</span><br><span class="line">			<span class="keyword">else</span> lst = mn[ln] + <span class="number">1</span>, ++ln;</span><br><span class="line">		&#125;</span><br><span class="line">		ans = max(ans, i - lst + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">SocialZxy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://socialzxy.github.io/2020/11/14/20201114%E6%B0%B4%E9%A2%98/">http://socialzxy.github.io/2020/11/14/20201114%E6%B0%B4%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://socialzxy.github.io" target="_blank">SocialZxy's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2020/11/13/20201113%E6%B0%B4%E9%A2%98/"><img class="next-cover" src="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2020. 11. 13 水题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">SocialZxy</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/SocialZxy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:socialzxy@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020-11-14-%E6%B0%B4%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">2020. 11. 14 水题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-P4329-COCI2006-2007-1-Bond"><span class="toc-number">1.1.</span> <span class="toc-text">洛谷 P4329 [COCI2006-2007#1] Bond</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMOJ-6859-%E6%97%A0%E5%B0%BD%E4%B9%8B%E5%89%8D"><span class="toc-number">1.2.</span> <span class="toc-text">GMOJ 6859. 无尽之前</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMOJ-6860-%E9%AC%BC%E6%B8%8A%E4%BC%A0%E8%AF%B4"><span class="toc-number">1.3.</span> <span class="toc-text">GMOJ 6860. 鬼渊传说</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-P3512-POI2010-PIL-Pilots"><span class="toc-number">1.4.</span> <span class="toc-text">洛谷 P3512 [POI2010]PIL-Pilots</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/14/20201114%E6%B0%B4%E9%A2%98/" title="2020. 11. 14 水题">2020. 11. 14 水题</a><time datetime="2020-11-14T03:45:14.000Z" title="发表于 2020-11-14 11:45:14">2020-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/13/20201113%E6%B0%B4%E9%A2%98/" title="2020. 11. 13 水题">2020. 11. 13 水题</a><time datetime="2020-11-13T03:45:14.000Z" title="发表于 2020-11-13 11:45:14">2020-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/11/20201111%E6%B0%B4%E9%A2%98/" title="2020. 11. 11 水题">2020. 11. 11 水题</a><time datetime="2020-11-11T03:45:14.000Z" title="发表于 2020-11-11 11:45:14">2020-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/10/25/P3899-%5B%E6%B9%96%E5%8D%97%E9%9B%86%E8%AE%AD%5D%E8%B0%88%E7%AC%91%E9%A3%8E%E7%94%9F/" title="P3899 [湖南集训]谈笑风生">P3899 [湖南集训]谈笑风生</a><time datetime="2020-10-25T00:59:50.000Z" title="发表于 2020-10-25 08:59:50">2020-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/26/20200918%20%E6%80%BB%E7%BB%93/" title="9月18日DP网课题解合集">9月18日DP网课题解合集</a><time datetime="2020-09-26T01:41:59.000Z" title="发表于 2020-09-26 09:41:59">2020-09-26</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By SocialZxy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'https://github.com/SocialZxy/SocialZxy.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !false) {
+  if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="click-show-text" src="/js/third-party/ClickShowText.js" async="async" mobile="false"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>

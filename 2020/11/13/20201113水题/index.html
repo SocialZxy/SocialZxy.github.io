@@ -1,0 +1,283 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2020. 11. 13 水题 | SocialZxy's Blog</title><meta name="author" content="SocialZxy"><meta name="copyright" content="SocialZxy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="2020. 11. 13 水题">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="2020. 11. 13 水题">
+<meta property="og:url" content="http://socialzxy.github.io/2020/11/13/20201113%E6%B0%B4%E9%A2%98/index.html">
+<meta property="og:site_name" content="SocialZxy&#39;s Blog">
+<meta property="og:description" content="2020. 11. 13 水题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg">
+<meta property="article:published_time" content="2020-11-13T03:45:14.000Z">
+<meta property="article:modified_time" content="2020-11-14T13:58:21.792Z">
+<meta property="article:author" content="SocialZxy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://socialzxy.github.io/2020/11/13/20201113%E6%B0%B4%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: {"text":"pure","fontSize":"15px"},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2020-11-14 21:58:21'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'true'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="SocialZxy's Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">SocialZxy's Blog</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">2020. 11. 13 水题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-13T03:45:14.000Z" title="发表于 2020-11-13 11:45:14">2020-11-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-14T13:58:21.792Z" title="更新于 2020-11-14 21:58:21">2020-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/">OI</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/%E6%B0%B4%E9%A2%98%E6%97%A5%E8%AE%B0/">水题日记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2020-11-13-水题"><a href="#2020-11-13-水题" class="headerlink" title="2020. 11. 13 水题"></a>2020. 11. 13 水题</h1><p>因为昨天晚上听<del>湖南师大附中 Pho 金牌教练</del>讲座去了，所以咕了一天。</p>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><h2 id="MZOJ-353-中位数之中位数"><a href="#MZOJ-353-中位数之中位数" class="headerlink" title="MZOJ #353. 中位数之中位数"></a>MZOJ #353. 中位数之中位数</h2><p><strong>来源：</strong> 上午考试</p>
+<p><strong>关键词：</strong> 树状数组、二分</p>
+<p>非常经典的中位数问题。我们二分答案 $x$，将序列中大于等于 $x$ 的数权值设为 $1$，反之设为 $-1$，那么区间中位数小于等于 $x$ 即权值之和小于 $0$，求出权值的前缀和，来推一波式子（这还需要推？）：<br>$$<br>\begin{aligned}<br>sum_r-sum_l&amp;&lt;0\<br>sum_r&amp;&lt;sum_l<br>\end{aligned}<br>$$<br>相当于求区间中满足某种关系的 $l, r$ 个数，用树状数组维护后缀和即可。</p>
+<p>顺带一提，爷考试的时候把满分做法（二分答案）和 50 分做法（主席树求区间中位数）揉在一起喜提 30 分属实脑瘫……</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e5</span> + <span class="number">5</span>, sgn[] = &#123;<span class="number">-1</span>, <span class="number">1</span>&#125;;</span><br><span class="line"><span class="keyword">int</span> n, a[N], b[N], sum[N], val[N], lim, tot;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lowbit</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; <span class="keyword">return</span> x &amp; -x; &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">ask</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123; x += n + <span class="number">1</span>; <span class="keyword">int</span> res = <span class="number">0</span>; <span class="keyword">while</span>(x &gt; <span class="number">0</span>) res += val[x], x -= lowbit(x); <span class="keyword">return</span> res; &#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> v)</span> </span>&#123; x += n + <span class="number">1</span>; <span class="keyword">while</span>(x &lt;= n * <span class="number">2</span>) val[x] += v, x += lowbit(x); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">chk</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">memset</span>(val, <span class="number">0</span>, <span class="keyword">sizeof</span>(val));</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) sum[i] = sum[i - <span class="number">1</span>] + sgn[a[i] &gt;= x];</span><br><span class="line">	<span class="keyword">long</span> <span class="keyword">long</span> res = <span class="number">0</span>;</span><br><span class="line">	add(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">		res += ask(-sum[i] - <span class="number">1</span>), add(-sum[i], <span class="number">1</span>);</span><br><span class="line">	<span class="keyword">return</span> res &lt;= lim;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get(), tot = n * n / <span class="number">2</span>, lim = ((n + <span class="number">1</span>) * n / <span class="number">2</span>) / <span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; ++i) b[i] = a[i] = get();</span><br><span class="line">	sort(b + <span class="number">1</span>, b + <span class="number">1</span> + n);</span><br><span class="line">	<span class="keyword">int</span> l = <span class="number">1</span>, r = unique(b + <span class="number">1</span>, b + <span class="number">1</span> + n) - b - <span class="number">1</span>, ans = <span class="number">-114514</span>;</span><br><span class="line">	<span class="keyword">while</span>(l &lt;= r) &#123;</span><br><span class="line">		<span class="keyword">int</span> mid = l + r &gt;&gt; <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">if</span>(chk(b[mid])) ans = b[mid], l = mid + <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">else</span> r = mid - <span class="number">1</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MZOJ-352-拼图王"><a href="#MZOJ-352-拼图王" class="headerlink" title="MZOJ #352. 拼图王"></a>MZOJ #352. 拼图王</h2><p><strong>来源：</strong> 上午考试</p>
+<p><strong>关键词：</strong> 十分迷惑的 DP 优化</p>
+<p>首先这道题，如果一开始就往 $O(n^2)$ DP 上面想，那么很遗憾，顶天拿到 75 分（本来是60，数据水了）。</p>
+<p>实际上这道题从状态设计到优化都非常迷惑。</p>
+<p>将每个 0/1 串二进制压缩，记为 $a_i$。</p>
+<p>设 $f[i][j][k]$ 表示前 $i$ 个串分成的两个子序列中，不包含 $a_i$ 的子序列长度为 $j$ 的后缀为 $k$ 的最短长度，因为我们知道 $a_i$ 所在的子序列后缀就是 $a_i$ 的后缀。于是有以下两种转移：</p>
+<ol>
+<li><p>将 $a_i$ 接在 $a_{i-1}$ 后面，另一个子序列后缀不变：<br>$$<br>f[i][j][k]=f[i-1][j][k]+len-calc(a_i,a_j)<br>$$<br>其中，$calc(a_i,a_j)$ 表示 $a_i$ 和 $a_j$ 的公共部分。</p>
+</li>
+<li><p>将 $a_i$ 接在另一个子序列后面，那么 $a_i$ 不在的子序列的后缀变为 $a_{i-1}$ 的后缀。枚举 $a_i$ 和上一个串重合的长度 $k$ 则有：<br>$$<br>f[i][j][suf(a_{i-1},j)]=min_{k=0}^{len}(f[i-1][k][pre(a_i,k)]+len-k)<br>$$</p>
+</li>
+</ol>
+<p>转移的复杂度为 $O(n\times len\times 2^{len})$，第一个转移是大头。（原来这才是 60 分做法吗……）</p>
+<p>优化方法同样非常迷惑，我们想办法消除第一种转移。</p>
+<p>设 $shit=len-calc(a_i, a_{i-1})$，将第二种转移改写为：<br>$$<br>f[i][j][suf(a_{i-1},j)]=min_{k=0}^{len}(f[i-1][k][pre(a_i,k)]+len-k-shit)+shit<br>$$<br>于是不管选择哪种转移方法，DP 值都会加上 $shit$，可以拿出来放到最后统一计算，而如果第二种转移无法进行则相当于进行了第一种转移，这样就可以不使用第一种转移了，复杂度降为 $O(n\times len)$。另外空间开不下，需要滚动数组。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">21</span>, M = <span class="number">1</span> &lt;&lt; N;</span><br><span class="line"><span class="keyword">int</span> f[N][M], n, a[M], len;</span><br><span class="line"><span class="keyword">char</span> opt[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">pre</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x &gt;&gt; (len - y); &#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">suf</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123; <span class="keyword">return</span> x &amp; ((<span class="number">1</span> &lt;&lt; y) - <span class="number">1</span>); &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = len; i &gt;= <span class="number">1</span>; i--) <span class="keyword">if</span>(suf(x, i) == pre(y, i)) <span class="keyword">return</span> i;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">&quot;%s&quot;</span>, opt + <span class="number">1</span>);</span><br><span class="line">		len = <span class="built_in">strlen</span>(opt + <span class="number">1</span>);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">1</span>; j &lt;= len; j++) a[i] = a[i] * <span class="number">2</span> + opt[j] - <span class="string">&#x27;0&#x27;</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">memset</span>(f, <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(f));</span><br><span class="line">	f[<span class="number">0</span>][<span class="number">0</span>] = len;</span><br><span class="line">	<span class="keyword">int</span> other = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> shit = len - calc(a[i - <span class="number">1</span>], a[i]);</span><br><span class="line">		other += shit;</span><br><span class="line">		<span class="keyword">int</span> mn = <span class="number">0x3f3f3f3f</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= len; k++) mn = min(mn, f[k][pre(a[i], k)] + len - k - shit);</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= len; j++) f[j][suf(a[i - <span class="number">1</span>], j)] = min(f[j][suf(a[i - <span class="number">1</span>], j)], mn);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, f[<span class="number">0</span>][<span class="number">0</span>] + other);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MZOJ-348-三角形"><a href="#MZOJ-348-三角形" class="headerlink" title="MZOJ #348. 三角形"></a>MZOJ #348. 三角形</h2><p><strong>来源：</strong> 昨天考试（普 及 组）</p>
+<p><strong>关键词：</strong> 容斥 <del>（怎么考试又没做出来？）</del></p>
+<p>正难则反，考虑用总情况减去不合法的情况。</p>
+<ul>
+<li><p>总情况：相当于将 $L$ 分给 $a,b,c$，可以有剩余，相当于将 $L$ 个球放入三个桶里，至于可以有剩，我们开一个垃圾桶，即将 $L$ 个球放进四个桶里。用隔板法并化简式子，得到这个值为 $\dfrac{(L+1)(L+2)(L+3)}{6}$。</p>
+</li>
+<li><p>不合法情况：与三角形不等式相反，即有三个属性——$a&gt;b+c,b&gt;a+c,c&gt;a+b$，可以发现这三者没有交集，不需要进一步容斥。</p>
+<p>现在我们单独考虑 $a&gt;b+c$ 的计数方法，其它与之类似。枚举 $a$ 的增加量，由前面的不等式可以得出 $b,c$ 最大的增加量，发现方案数是和这个最大增加量有关的等差数列。直接求和即可。</p>
+</li>
+</ul>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a, b, c, l, ans, tot; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">S</span><span class="params">(<span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i * (i + <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calc</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b, <span class="keyword">int</span> c)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= l; i++) &#123;</span><br><span class="line">		<span class="keyword">int</span> dwn = min(tot - a - i, a + i);</span><br><span class="line">		<span class="keyword">if</span>(b + c &lt;= dwn) res += S(dwn - b - c + <span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> res;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	a = get(), b = get(), c = get(), l = get(), tot = a + b + c + l;</span><br><span class="line">	ans = (l + <span class="number">1</span>) * (l + <span class="number">2</span>) * (l + <span class="number">3</span>) / <span class="number">6</span>;</span><br><span class="line">	ans -= calc(a, b, c) + calc(b, c, a) + calc(c, b, a);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="洛谷-P3937-Changing"><a href="#洛谷-P3937-Changing" class="headerlink" title="洛谷 P3937 Changing"></a>洛谷 P3937 Changing</h2><p><strong>来源：</strong> 每日杂题选假——ZZQ’s part</p>
+<p><strong>关键词：</strong> 二项式、异或</p>
+<p>首先，异或 $\Longleftrightarrow$ 取模 $2$ 意义下的加法。大概画一下变换的过程，发现每个数以及它后面 $k$ 个数被计算的次数是二项式系数，于是问题转化为求以下式子的值：<br>$$<br>(\sum_{i=0}^ka_{(t+i)\bmod n}\times\binom{k}{i})\bmod 2<br>$$<br>也就是快速计算二项式系数的奇偶性。我们知道：<br>$$<br>\binom{n}{m}=\dfrac{n!}{m!(n-m)!}<br>$$<br>只需要计算这个式子含有 $2$ 的幂次即可。这里可以 $O(n)$ 预处理出 $i!$ 含有的 2 的幂次然后做差。</p>
+<p>另外还有一种很优美的分形做法，然而我不会……</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">3e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n, t, k, a[N], pw[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">C</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> a = pw[x], b = pw[y], c = pw[x - <span class="number">1</span>];</span><br><span class="line">	<span class="keyword">return</span> (pw[x] - pw[y] - pw[x - y] == <span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get(), k = get(), t = get() - <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) a[i] = get();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) <span class="keyword">if</span>(i % <span class="number">2</span>); <span class="keyword">else</span> pw[i] = pw[i / <span class="number">2</span>] + <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= k; i++) pw[i] += pw[i - <span class="number">1</span>];</span><br><span class="line"><span class="comment">//	int ans = a[t];</span></span><br><span class="line">	<span class="keyword">int</span> ans;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= k; i++) </span><br><span class="line">		ans = (ans + a[(t + i) % n] * C(k, i)) % <span class="number">2</span>;</span><br><span class="line"><span class="comment">//	ans = (ans + a[(t + k) % n]) % 2;</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%d\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="MZOJ-345-友谊序列"><a href="#MZOJ-345-友谊序列" class="headerlink" title="MZOJ #345. 友谊序列"></a>MZOJ #345. 友谊序列</h2><p><strong>来源：</strong> 傻逼题</p>
+<p><strong>关键词：</strong> 傻逼题</p>
+<p>时限 2s，空间 256MB，数据范围 $10^5$，多组数据，$T\leq 3$，<strong>全是来迷惑人的</strong>。</p>
+<p><del>我上钩了</del><br>$$<br>a_i \oplus b_j =a_k \Longleftrightarrow a_k \oplus b_j = a_i\<br>a_i \oplus b_j =b_k \Longleftrightarrow a_i \oplus b_k = a_j<br>$$<br>所以输出 T 个 0! 即可。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> T = get();</span><br><span class="line">	<span class="keyword">while</span>(T--) <span class="built_in">printf</span>(<span class="string">&quot;0!\n&quot;</span>); </span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="洛谷-P1121-环状最大两段子段和"><a href="#洛谷-P1121-环状最大两段子段和" class="headerlink" title="洛谷 P1121 环状最大两段子段和"></a>洛谷 P1121 环状最大两段子段和</h2><p><strong>来源：</strong> wty 昨晚口胡的题</p>
+<p><strong>关键词：</strong> 简单 DP</p>
+<p>由于是环状的，所以情况只有以下两种（这里用 <code>.</code> 表示不选的部分，<code>+</code> 表示选择的部分）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">...+++++.....+++++....</span><br><span class="line">+++.....+++++.....++++</span><br></pre></td></tr></table></figure>
+
+<p>对于第一种，这是 PJ 组初赛 DP。</p>
+<p>对于第二种，我们反过来跑最小割，也是 PJ 组初赛 DP。</p>
+<p>然而需要加一个特判，就是最小割的大小不能超过 <code>n - 1</code>，否则无法选出两段子序列。</p>
+<p>其实这道题的最难点就在上面这一句。以后做题记得把情况考虑完，不然 PJ 组的水题都过不了。代码就免了（</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">SocialZxy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://socialzxy.github.io/2020/11/13/20201113%E6%B0%B4%E9%A2%98/">http://socialzxy.github.io/2020/11/13/20201113%E6%B0%B4%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://socialzxy.github.io" target="_blank">SocialZxy's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/14/20201114%E6%B0%B4%E9%A2%98/"><img class="prev-cover" src="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2020. 11. 14 水题</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/11/20201111%E6%B0%B4%E9%A2%98/"><img class="next-cover" src="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2020. 11. 11 水题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">SocialZxy</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">20</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/SocialZxy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:socialzxy@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">This is my Blog</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020-11-13-%E6%B0%B4%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">2020. 11. 13 水题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#MZOJ-353-%E4%B8%AD%E4%BD%8D%E6%95%B0%E4%B9%8B%E4%B8%AD%E4%BD%8D%E6%95%B0"><span class="toc-number">1.1.</span> <span class="toc-text">MZOJ #353. 中位数之中位数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MZOJ-352-%E6%8B%BC%E5%9B%BE%E7%8E%8B"><span class="toc-number">1.2.</span> <span class="toc-text">MZOJ #352. 拼图王</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MZOJ-348-%E4%B8%89%E8%A7%92%E5%BD%A2"><span class="toc-number">1.3.</span> <span class="toc-text">MZOJ #348. 三角形</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-P3937-Changing"><span class="toc-number">1.4.</span> <span class="toc-text">洛谷 P3937 Changing</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MZOJ-345-%E5%8F%8B%E8%B0%8A%E5%BA%8F%E5%88%97"><span class="toc-number">1.5.</span> <span class="toc-text">MZOJ #345. 友谊序列</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B4%9B%E8%B0%B7-P1121-%E7%8E%AF%E7%8A%B6%E6%9C%80%E5%A4%A7%E4%B8%A4%E6%AE%B5%E5%AD%90%E6%AE%B5%E5%92%8C"><span class="toc-number">1.6.</span> <span class="toc-text">洛谷 P1121 环状最大两段子段和</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/14/20201114%E6%B0%B4%E9%A2%98/" title="2020. 11. 14 水题">2020. 11. 14 水题</a><time datetime="2020-11-14T03:45:14.000Z" title="发表于 2020-11-14 11:45:14">2020-11-14</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/13/20201113%E6%B0%B4%E9%A2%98/" title="2020. 11. 13 水题">2020. 11. 13 水题</a><time datetime="2020-11-13T03:45:14.000Z" title="发表于 2020-11-13 11:45:14">2020-11-13</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/11/20201111%E6%B0%B4%E9%A2%98/" title="2020. 11. 11 水题">2020. 11. 11 水题</a><time datetime="2020-11-11T03:45:14.000Z" title="发表于 2020-11-11 11:45:14">2020-11-11</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/10/25/P3899-%5B%E6%B9%96%E5%8D%97%E9%9B%86%E8%AE%AD%5D%E8%B0%88%E7%AC%91%E9%A3%8E%E7%94%9F/" title="P3899 [湖南集训]谈笑风生">P3899 [湖南集训]谈笑风生</a><time datetime="2020-10-25T00:59:50.000Z" title="发表于 2020-10-25 08:59:50">2020-10-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/09/26/20200918%20%E6%80%BB%E7%BB%93/" title="9月18日DP网课题解合集">9月18日DP网课题解合集</a><time datetime="2020-09-26T01:41:59.000Z" title="发表于 2020-09-26 09:41:59">2020-09-26</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By SocialZxy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'https://github.com/SocialZxy/SocialZxy.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !false) {
+  if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="click-show-text" src="/js/third-party/ClickShowText.js" async="async" mobile="false"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
