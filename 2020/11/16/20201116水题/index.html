@@ -1,0 +1,267 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>2020. 11. 16 水题 | SocialZxy's Blog</title><meta name="author" content="SocialZxy"><meta name="copyright" content="SocialZxy"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="description" content="2020. 11. 16 水题">
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><meta property="og:type" content="article">
+<meta property="og:title" content="2020. 11. 16 水题">
+<meta property="og:url" content="http://socialzxy.github.io/2020/11/16/20201116%E6%B0%B4%E9%A2%98/index.html">
+<meta property="og:site_name" content="SocialZxy&#39;s Blog">
+<meta property="og:description" content="2020. 11. 16 水题">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg">
+<meta property="article:published_time" content="2020-11-16T03:45:14.000Z">
+<meta property="article:modified_time" content="2020-11-22T08:38:27.238Z">
+<meta property="article:author" content="SocialZxy">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://socialzxy.github.io/2020/11/16/20201116%E6%B0%B4%E9%A2%98/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  ClickShowText: {"text":"pure","fontSize":"15px"},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  justifiedGallery: {
+    js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+    css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+};
+
+var saveToLocal = {
+  set: function setWithExpiry(key, value, ttl) {
+    const now = new Date()
+    const expiryDay = ttl * 86400000
+    const item = {
+      value: value,
+      expiry: now.getTime() + expiryDay,
+    }
+    localStorage.setItem(key, JSON.stringify(item))
+  },
+
+  get: function getWithExpiry(key) {
+    const itemStr = localStorage.getItem(key)
+
+    if (!itemStr) {
+      return undefined
+    }
+    const item = JSON.parse(itemStr)
+    const now = new Date()
+
+    if (now.getTime() > item.expiry) {
+      localStorage.removeItem(key)
+      return undefined
+    }
+    return item.value
+  }
+}</script><script id="config_change">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: undefined,
+  isToc: true,
+  postUpdate: '2020-11-22 16:38:27'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(function () {  window.activateDarkMode = function () {
+    document.documentElement.setAttribute('data-theme', 'dark')
+    if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+    }
+  }
+  window.activateLightMode = function () {
+    document.documentElement.setAttribute('data-theme', 'light')
+   if (document.querySelector('meta[name="theme-color"]') !== null) {
+      document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+    }
+  }
+  const autoChangeMode = 'true'
+  const t = saveToLocal.get('theme')
+  if (autoChangeMode === '1') {
+    const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+    const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+    const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+    if (t === undefined) {
+      if (isLightMode) activateLightMode()
+      else if (isDarkMode) activateDarkMode()
+      else if (isNotSpecified || hasNoSupport) {
+        const now = new Date()
+        const hour = now.getHours()
+        const isNight = hour <= 6 || hour >= 18
+        isNight ? activateDarkMode() : activateLightMode()
+      }
+      window.matchMedia('(prefers-color-scheme: dark)').addListener(function (e) {
+        if (saveToLocal.get('theme') === undefined) {
+          e.matches ? activateDarkMode() : activateLightMode()
+        }
+      })
+    } else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else if (autoChangeMode === '2') {
+    const now = new Date()
+    const hour = now.getHours()
+    const isNight = hour <= 6 || hour >= 18
+    if (t === undefined) isNight ? activateDarkMode() : activateLightMode()
+    else if (t === 'light') activateLightMode()
+    else activateDarkMode()
+  } else {
+    if (t === 'dark') activateDarkMode()
+    else if (t === 'light') activateLightMode()
+  }const asideStatus = saveToLocal.get('aside-status')
+if (asideStatus !== undefined) {
+   if (asideStatus === 'hide') {
+     document.documentElement.classList.add('hide-aside')
+   } else {
+     document.documentElement.classList.remove('hide-aside')
+   }
+}})()</script><meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="SocialZxy's Blog" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg)"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">SocialZxy's Blog</a></span><span id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><span class="close" id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></span></span></nav><div id="post-info"><h1 class="post-title">2020. 11. 16 水题</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-16T03:45:14.000Z" title="发表于 2020-11-16 11:45:14">2020-11-16</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2020-11-22T08:38:27.238Z" title="更新于 2020-11-22 16:38:27">2020-11-22</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/">OI</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/OI/%E6%B0%B4%E9%A2%98%E6%97%A5%E8%AE%B0/">水题日记</a></span></div><div class="meta-secondline"> <span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="2020-11-16-水题"><a href="#2020-11-16-水题" class="headerlink" title="2020. 11. 16 水题"></a>2020. 11. 16 水题</h1><h2 id="GMOJ-6863-食堂计划"><a href="#GMOJ-6863-食堂计划" class="headerlink" title="GMOJ 6863. 食堂计划"></a>GMOJ 6863. 食堂计划</h2><blockquote>
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>求给定有向图上满足以下条件的最短路径对数量：</p>
+<ul>
+<li>从 $s$ 到 $t$</li>
+<li>只在 $s$ 和 $t$ 相交</li>
+</ul>
+</blockquote>
+<p><strong>来源：</strong> 上午考试</p>
+<p><strong>关键词：</strong> 容斥</p>
+<p>这种和最短路计数有关系的题，首先应该想到把最短路 DAG 建出来。</p>
+<p>然后观察这个限制，有一个直接的想法就是用总量减去不合法的，即在某个点相交的方案数。</p>
+<p>如果设 $f_i$ 表示在 $i$ 处相交的方案数，那么又会有新的问题：如果有两条路径在多处相交，那么会减重复。那么怎么解决呢？如果使用普通的容斥方法，复杂度为 $2^n$，那就完了。</p>
+<p>考虑一个类似于线性筛的过程，让某一种不合法方案只在第一次重复时被减掉，这样就可以保证不减重了。</p>
+<p>设 $f_i$ 表示在 $i$ 处第一次重合的方案数，用总数减去在前面第一次重合的方案数即可。</p>
+<p>顺带一提，有人给这种容斥方法起了个名字，叫做<strong>代表元容斥</strong>，大概指的就是在违反限制里面找了一个代表以保证不减重。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">2e3</span> + <span class="number">5</span>, M = <span class="number">1e5</span> + <span class="number">5</span>, P = <span class="number">1e9</span> + <span class="number">9</span>, inv = <span class="number">500000005</span>;</span><br><span class="line"><span class="keyword">int</span> n, m, s, t, dis[<span class="number">2</span>][N], vis[N], e[N][N];</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Edge</span> &#123;</span></span><br><span class="line">	<span class="keyword">int</span> v, nxt, w;</span><br><span class="line">&#125; edge[<span class="number">2</span>][M];</span><br><span class="line"><span class="keyword">int</span> head[<span class="number">2</span>][N], tot[<span class="number">2</span>], deg[N], bin[N], top;</span><br><span class="line"><span class="keyword">int</span> g[N][N], f[N];</span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; adj[N];</span><br><span class="line"></span><br><span class="line"><span class="comment">// G[i][j]: 从 i 到 j 经过点集不同的路径数</span></span><br><span class="line"><span class="comment">// F[i]: 从终点倒推，在 i 处第一次相遇的方案数 </span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">add</span><span class="params">(<span class="keyword">int</span> opt, <span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">	edge[opt][++tot[opt]].v = v;</span><br><span class="line">	edge[opt][tot[opt]].w = w;</span><br><span class="line">	edge[opt][tot[opt]].nxt = head[opt][u];</span><br><span class="line">	head[opt][u] = tot[opt];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ins</span><span class="params">(<span class="keyword">int</span> u, <span class="keyword">int</span> v, <span class="keyword">int</span> w)</span> </span>&#123;</span><br><span class="line">	add(<span class="number">0</span>, u, v, w), add(<span class="number">1</span>, v, u, w);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Dijkstra</span><span class="params">(<span class="keyword">int</span> S, <span class="keyword">int</span> opt)</span> </span>&#123;</span><br><span class="line">	<span class="built_in">priority_queue</span>&lt;<span class="built_in">pair</span>&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; &gt; q;</span><br><span class="line">	<span class="built_in">memset</span>(dis[opt], <span class="number">0x3f</span>, <span class="keyword">sizeof</span>(dis[opt])), dis[opt][S] = <span class="number">0</span>;</span><br><span class="line">	<span class="built_in">memset</span>(vis, <span class="number">0</span>, <span class="keyword">sizeof</span>(vis));</span><br><span class="line">	q.push(<span class="built_in">make_pair</span>(<span class="number">0</span>, S));</span><br><span class="line">	<span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = q.top().second; q.pop();</span><br><span class="line">		<span class="keyword">if</span>(vis[u]) <span class="keyword">continue</span>;</span><br><span class="line">		vis[u] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = head[opt][u]; i; i = edge[opt][i].nxt) &#123;</span><br><span class="line">			<span class="keyword">int</span> v = edge[opt][i].v, w = edge[opt][i].w;</span><br><span class="line">			<span class="keyword">if</span>(dis[opt][u] + w &lt; dis[opt][v]) </span><br><span class="line">				dis[opt][v] = dis[opt][u] + w, q.push(<span class="built_in">make_pair</span>(-dis[opt][v], v));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">buildDAG</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> u = <span class="number">1</span>; u &lt;= n; u++) &#123;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = head[<span class="number">0</span>][u]; i; i = edge[<span class="number">0</span>][i].nxt) &#123;</span><br><span class="line">			<span class="keyword">int</span> v = edge[<span class="number">0</span>][i].v, w = edge[<span class="number">0</span>][i].w;</span><br><span class="line">			<span class="keyword">if</span>(dis[<span class="number">0</span>][u] + dis[<span class="number">1</span>][v] + w == dis[<span class="number">0</span>][t]) adj[u].push_back(v), deg[v]++, e[u][v] = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">		sort(adj[u].begin(), adj[u].end());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">topoSort</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">queue</span>&lt;<span class="keyword">int</span>&gt; q;</span><br><span class="line">	q.push(s);</span><br><span class="line">	<span class="keyword">while</span>(!q.empty()) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = q.front(); q.pop(), bin[++top] = u;</span><br><span class="line">		<span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = adj[u].begin(); it != adj[u].end(); ++it) &#123;</span><br><span class="line">			<span class="keyword">int</span> v = *it;</span><br><span class="line">			--deg[v];</span><br><span class="line">			<span class="keyword">if</span>(!deg[v]) q.push(v);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getG</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = top; i; i--) &#123;</span><br><span class="line">		<span class="keyword">int</span> x = bin[i];</span><br><span class="line">		g[x][x] = <span class="number">1</span>;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i - <span class="number">1</span>; j; j--) &#123;</span><br><span class="line">			<span class="keyword">int</span> u = bin[j], lst = <span class="number">0</span>;</span><br><span class="line">			<span class="keyword">for</span>(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;::iterator it = adj[u].begin(); it != adj[u].end(); ++it) &#123;</span><br><span class="line">				<span class="keyword">int</span> v = *it;</span><br><span class="line">				<span class="keyword">if</span>(v == lst) <span class="keyword">continue</span>; <span class="comment">//重边不考虑 </span></span><br><span class="line">				lst = v;</span><br><span class="line">				g[u][x] = (g[u][x] + g[v][x]) % P;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getF</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = top - <span class="number">1</span>; i; i--) &#123;</span><br><span class="line">		<span class="keyword">int</span> u = bin[i];</span><br><span class="line">		f[u] = g[u][t] * g[u][t] % P;</span><br><span class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt;= top; j++) &#123;</span><br><span class="line">			<span class="keyword">int</span> v = bin[j];</span><br><span class="line">			f[u] = (f[u] - f[v] * g[u][v] % P * g[u][v] % P) % P;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get(), m = get(), s = get(), t = get();</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>, u, v, w; i &lt;= m; i++) &#123;</span><br><span class="line">		u = get(), v = get(), w = get();</span><br><span class="line">		<span class="keyword">if</span>(u != v) ins(u, v, w);</span><br><span class="line">	&#125;</span><br><span class="line">	Dijkstra(s, <span class="number">0</span>), Dijkstra(t, <span class="number">1</span>);</span><br><span class="line">	buildDAG(); <span class="comment">//建立最短路DAG </span></span><br><span class="line">	topoSort(); <span class="comment">//拓扑排序</span></span><br><span class="line">	getG();		<span class="comment">//获得两点之间的路径条数 </span></span><br><span class="line">	getF();		<span class="comment">//求答案 </span></span><br><span class="line">	<span class="keyword">int</span> ans = (f[s] + e[s][t]) * inv % P;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, (ans + P) % P);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="GMOJ-6864-笛卡尔树"><a href="#GMOJ-6864-笛卡尔树" class="headerlink" title="GMOJ 6864. 笛卡尔树"></a>GMOJ 6864. 笛卡尔树</h2><blockquote>
+<p>求所有 $n$ 排列的笛卡尔树的权值之和。</p>
+<p>一个笛卡尔树的权值定义为：$\sum rs_i-ls_i(\exist rs_i\and \exist ls_i)$，这里 $ls_i$ 和 $rs_i$ 均指下标。（貌似数学符号不太规范，懂意思就行 QwQ）</p>
+</blockquote>
+<p><strong>来源：</strong> 上午考试</p>
+<p><strong>关键词：</strong> 递推，<del>公式恐惧症治疗仪</del></p>
+<p>设 $F_i$ 表示 $i$ 排列的权值总和。$G_i$ 表示 $i$ 排列根节点可能出现的下标之和。</p>
+<p>那么 $G_i=\sum\limits_{j=1}^ij\times(i-1)!=(i-1)!\dfrac{i(i+1)}{2}$。可以这么来理解这个式子：考虑每个下标的贡献，枚举根节点的位置，在这个位置出现的次数为其他 $i-1$ 个点的全排列。</p>
+<p>再来考虑 $F$ 的式子。把总贡献拆成两部分来考虑，设两个子树大小分别为 $a,b$：</p>
+<ol>
+<li>子树内部的贡献：$(b!F_a+a!F_b)\times \binom{a+b}{a}$，也是考虑左右两边的贡献，再乘上合并的方案。</li>
+<li>两个根节点的贡献：$[a!G_b+(a+1)a!b!-b!G_a]\times \binom{a+b}{a}$，也是考虑左右两边的贡献，因为右边根节点下标增加了 $a+1$，所以再考虑一下增加这部分的贡献，最后乘组合数和上面同理。</li>
+</ol>
+<p>据此写出 $F_i$ 的转移方程，其中 $j$ 为枚举的新根节点下标。<br>$$<br>\begin{aligned}<br>F_i&amp;=\sum_{j=1}^i[\binom{i-1}{j-1}(j-1)!F_{i-j}+\binom{i-1}{j-1}(i-j)!F_{j-1}]\<br>&amp;+\sum_{j=2}^{i-1}[G_{i-j}(j-1)!+j(i-j)!(j-1)!-G_{j-1}(i-j)!]\binom{i-1}{j-1}<br>\end{aligned}<br>$$<br>这样就可以写出一个 $n^2$ 的 DP，不过相当恶心，而且慢。考虑化简式子。</p>
+<p>这些 $\sum$ 之间相互独立，可以分开求和。然后 $(j-1)!F_{i-j}, (i-j)!F_{j-1}$ 这两个东西本质相同，可以直接合并，那些含 $G$ 的项直接相互抵消掉了，最后式子变成了这个样子：<br>$$<br>F_i=\sum_{j=1}^{i-1}2\binom{i-1}{j-1}(j-1)!F_{i-j}+\sum_{j=2}^{i-1}j(i-j)!(j-1)!\binom{i-1}{j-1}<br>$$<br>然后用组合数的公式可以再干掉一部分式子。<br>$$<br>F_i=\sum_{j=1}^{i-1}2\dfrac{(i-1)!}{(i-j)!}F_{i-j}+\sum_{j=2}^{i-1}j(i-1)!<br>$$<br>这个式子有如下特点：</p>
+<ul>
+<li>左边只和 $i$ 有关，右边有个公因式 $(i-1)!$，也只和 $i$ 有关。</li>
+<li>$F_{i-j}$ 和 $(i-j)!$ 相关性非常强。</li>
+<li>最后一项提掉公因式之后是一个等差数列。</li>
+</ul>
+<p>所以我们把 $(i-1)$ 移到左边去：<br>$$<br>\dfrac{F_i}{(i-1)!}=\sum_{j=1}^{i-1}2\dfrac{F_{i-j}}{(i-j)!}+\dfrac{(i+1)(i-2)}{2}<br>$$<br>如果设 $H_i=\dfrac{F_i}{i!}$，那么显而易见 $H_i$ 的递推式为</p>
+<p>$$<br>H_i=\dfrac{\sum\limits_{j=1}^{i-1}2H_j+\dfrac{(i+1)(i-2)}{2}}{i}<br>$$<br>可以用前缀和优化求解，答案是 $H_n\times n!$。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> int long long</span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">get</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> x = <span class="number">0</span>, f = <span class="number">1</span>; <span class="keyword">char</span> c = getchar();</span><br><span class="line">	<span class="keyword">while</span>(!<span class="built_in">isdigit</span>(c)) &#123; <span class="keyword">if</span>(c == <span class="string">&#x27;-&#x27;</span>) f = <span class="number">-1</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">while</span>(<span class="built_in">isdigit</span>(c)) &#123; x = x * <span class="number">10</span> + c - <span class="string">&#x27;0&#x27;</span>; c = getchar(); &#125;</span><br><span class="line">	<span class="keyword">return</span> x * f;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> N = <span class="number">1e6</span> + <span class="number">5</span>;</span><br><span class="line"><span class="keyword">int</span> n, P, inv[N], H[N], sumH[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">signed</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	n = get(), P = get();</span><br><span class="line">	inv[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">2</span>; i &lt;= n; i++) inv[i] = (P - P / i) * inv[P % i] % P;</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">3</span>; i &lt;= n; i++) &#123;</span><br><span class="line">		H[i] = (<span class="number">2</span> * sumH[i - <span class="number">1</span>] + (i + <span class="number">1</span>) * (i - <span class="number">2</span>) / <span class="number">2</span>) % P * inv[i] % P;</span><br><span class="line">		sumH[i] = (sumH[i - <span class="number">1</span>] + H[i]) % P;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">int</span> ans = H[n];</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) ans = ans * i % P;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">&quot;%lld\n&quot;</span>, ans);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">SocialZxy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://socialzxy.github.io/2020/11/16/20201116%E6%B0%B4%E9%A2%98/">http://socialzxy.github.io/2020/11/16/20201116%E6%B0%B4%E9%A2%98/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://socialzxy.github.io" target="_blank">SocialZxy's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/11/18/20201117%E6%B0%B4%E9%A2%98/"><img class="prev-cover" src="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">2020. 11. 17 &amp; 18 水题</div></div></a></div><div class="next-post pull-right"><a href="/2020/11/15/20201115%E6%B0%B4%E9%A2%98/"><img class="next-cover" src="https://i.loli.net/2019/10/03/El6hT8HFkn9uzQc.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">2020. 11. 15 水题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside_content" id="aside_content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><img class="avatar-img" src="https://en.gravatar.com/userimage/165080169/c7b634912f6c03334bd8077c336b30b9.jpg?size=200" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">SocialZxy</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">26</div></a></div><div class="card-info-data-item is-center"><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a></div><div class="card-info-data-item is-center"><a href="/categories/"><div class="headline">分类</div><div class="length-num">10</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xxxxxx"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/SocialZxy" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:socialzxy@qq.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a></div></div></div><div class="card-widget card-announcement"><div class="card-content"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">这里是 SocialZxy 的博客，由于只有家里电脑能用 hexo 所以每周刷新一次 =.=</div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="card-content"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#2020-11-16-%E6%B0%B4%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">2020. 11. 16 水题</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#GMOJ-6863-%E9%A3%9F%E5%A0%82%E8%AE%A1%E5%88%92"><span class="toc-number">1.1.</span> <span class="toc-text">GMOJ 6863. 食堂计划</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#GMOJ-6864-%E7%AC%9B%E5%8D%A1%E5%B0%94%E6%A0%91"><span class="toc-number">1.2.</span> <span class="toc-text">GMOJ 6864. 笛卡尔树</span></a></li></ol></li></ol></div></div></div><div class="card-widget card-recent-post"><div class="card-content"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/22/%E6%B5%85%E8%B0%88%E4%B8%A5%E9%98%9F%E7%AE%97%E6%B3%95/" title="浅谈严队算法">浅谈严队算法</a><time datetime="2020-11-22T03:45:14.000Z" title="发表于 2020-11-22 11:45:14">2020-11-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/20/20201120%E6%B0%B4%E9%A2%98/" title="2020. 11. 20 水题">2020. 11. 20 水题</a><time datetime="2020-11-20T03:45:14.000Z" title="发表于 2020-11-20 11:45:14">2020-11-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/19/20201119%E6%B0%B4%E9%A2%98/" title="2020. 11. 19 水题">2020. 11. 19 水题</a><time datetime="2020-11-19T03:45:14.000Z" title="发表于 2020-11-19 11:45:14">2020-11-19</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/18/20201117%E6%B0%B4%E9%A2%98/" title="2020. 11. 17 &amp; 18 水题">2020. 11. 17 &amp; 18 水题</a><time datetime="2020-11-18T03:45:14.000Z" title="发表于 2020-11-18 11:45:14">2020-11-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2020/11/16/20201116%E6%B0%B4%E9%A2%98/" title="2020. 11. 16 水题">2020. 11. 16 水题</a><time datetime="2020-11-16T03:45:14.000Z" title="发表于 2020-11-16 11:45:14">2020-11-16</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2020 By SocialZxy</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    loader: {
+      source: {
+        '[tex]/amsCd': '[tex]/amscd'
+      }
+    },
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        addClass: [200,() => {
+          document.querySelectorAll('mjx-container:not([display=\'true\']').forEach( node => {
+            const target = node.parentNode
+            if (!target.classList.contains('has-jax')) {
+              target.classList.add('mathjax-overflow')
+            }
+          })
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css"><script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css"><script>$(function () {
+  $('span.katex-display').wrap('<div class="katex-wrap"></div>')
+})</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'https://github.com/SocialZxy/SocialZxy.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !false) {
+  if (false) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script defer="defer" id="ribbon" src="/js/third-party/canvas-ribbon.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script id="click-show-text" src="/js/third-party/ClickShowText.js" async="async" mobile="false"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
