@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="4.5 分块矩阵">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 线性代数 A（期末）">
+<meta property="og:url" content="http://example.com/2023/12/19/LinearAlgeRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="4.5 分块矩阵">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-12-19T09:27:51.000Z">
+<meta property="article:modified_time" content="2023-12-27T15:13:06.430Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Linear Algebra">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2023/12/19/LinearAlgeRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/12/19/LinearAlgeRevision/","path":"2023/12/19/LinearAlgeRevision/","title":"Revision | 线性代数 A（期末）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 线性代数 A（期末） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/19/LinearAlgeRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 线性代数 A（期末） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 线性代数 A（期末）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-19 17:27:51" itemprop="dateCreated datePublished" datetime="2023-12-19T17:27:51+08:00">2023-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2023-12-27 23:13:06" itemprop="dateModified" datetime="2023-12-27T23:13:06+08:00">2023-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/Problems/" itemprop="url" rel="index"><span itemprop="name">Problems</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+<ul>
+<li><a href="#45-%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">4.5 分块矩阵</a></li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h1><span id="45-分块矩阵">4.5 分块矩阵</span></h1>
+<p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
+<p><strong>定理 1</strong>(Sylvester 秩不等式) $\mathbf{A}, \mathbf{B}$ 分别为 $s\times n, n\times m$ 矩阵，则</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{AB}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B}) - n<br>
+$$</p>
+<p><strong>证明</strong> 构造分块矩阵</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{I} &amp; \mathbf{B} \\ \mathbf{A} &amp; \mathbf{O} \end{pmatrix}<br>
+$$</p>
+<p>可以发现 $\mathrm{rank}(\mathbf{R}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B})$。用 $I$ 消掉 $A, B$ 得</p>
+<p>$$<br>
+\begin{pmatrix} \mathbf{I} &amp; \mathbf{O} \\ \mathbf{O} &amp; -\mathbf{AB} \end{pmatrix}<br>
+$$</p>
+<p>因此 $\mathrm{rank}(\mathbf{R}) = \mathrm{rank}(\mathbf{AB}) + n$，即得到该不等式。$\square$</p>
+<div class="note info"><p>称 $\mathbf{A}$ 为幂等矩阵，若 $\mathbf{A} = \mathbf{A}^2$。证明矩阵幂等当且仅当<br>
+$$<br>
+\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{I} - \mathbf{A}) = n<br>
+$$</p>
+<details class="note "><summary><p>solution</p>
+</summary>
+<p>有</p>
+<p>$$<br>
+\begin{align*}<br>
+&amp;\mathbf{A} = \mathbf{A}^2 \\<br>
+\Leftrightarrow &amp;\mathbf{A}(\mathbf{I} - \mathbf{A}) = 0  \\<br>
+\Leftrightarrow &amp;\mathrm{rank}(\mathbf{A}(\mathbf{I} - \mathbf{A})) = 0<br>
+\end{align*}<br>
+$$</p>
+<p>如果只是证明必要性那么可以直接用 Sylvester 不等式，但是现在要证明充要性，我们继续构造分块矩阵。</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+$$</p>
+<p>做初等变换</p>
+<p>$$<br>
+\begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} &amp; \mathbf{A} \\ \mathbf{A} &amp; \mathbf{I} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} - \mathbf{A}^2 &amp;  \\  &amp; I \end{pmatrix}<br>
+$$</p>
+<p>可知 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) + n$，于是 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = n \Leftrightarrow \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) = 0$。$\square$</p>
+</details></div>
+<div class="note info"><p>证明线性方程组 $\mathbf{A}^T\mathbf{A}x = \mathbf{A}^T\beta$ 必然有解。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>只需证明 $\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T\mathbf{A})$。而</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T(\mathbf{A}, \beta))\leq \mathrm{rank}(\mathbf{A}^T) = \mathbf{rank}(\mathbf{A}^T\mathbf{A})<br>
+$$</p>
+<p>$\geq$ 是显然的。</p>
+</details></div>
+<div class="note info"><p>证明 $|\mathbf{A}^*| = |\mathbf{A}|^{n - 1}$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>若 $|\mathbf{A}|\ne 0$，$\mathbf{AA}^* = |\mathbf{A}|\mathbf{I}$，两边取行列式即得结论。</p>
+<p>若 $\mathbf{A} = 0$ 结论显然成立。由于 $\mathbf{AA}^* = |A|I = 0$，根据 Sylvester 不等式</p>
+<p>$$<br>
+\mathrm{\mathbf{A}}^* + \mathrm{rank}(\mathbf{A}) \leq n \Rightarrow \mathrm{rank}(\mathbf{A}) &lt; n<br>
+$$</p>
+<p>等式仍然成立。</p>
+</details>
+<p>还有一个弱智的做法是，如果 $|\mathbf{A}| = 0$，如果 $\mathrm{rank}(\mathbf{A})\leq n - 2$，那么 $|\mathbf{A}^*| = 0$（有空行），否则经典结论是 $\mathbf{A}^*$ 的每一行都是 $\mathbf{A}x = 0$ 的解，解空间维数为 $1$，所以行成比例，行列式为 $0$。</p></div>
+<p>与此类似可以证明</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^*) = \begin{cases}<br>
+n, &amp; \mathrm{rank}(\mathbf{A}) = n \\<br>
+1, &amp; \mathrm{rank}(\mathbf{A}) = n - 1 \\<br>
+0, &amp; \mathrm{otherwise.}<br>
+\end{cases}<br>
+$$</p>
+<p>根据这个结论可以简单地推出</p>
+<p>$$<br>
+(\mathbf{A}^*)^* = \begin{cases}<br>
+|\mathbf{A}|^{n - 2}\mathbf{A}, &amp;n &gt; 2 \\<br>
+\mathbf{A}, &amp; n = 2<br>
+\end{cases}<br>
+$$</p>
+<p><strong>命题 1</strong> $(\mathbf{AB})^* = \mathbf{B}^*\mathbf{A}^*$。</p>
+<blockquote>
+<p>用 Binet-Cauchy 公式拆开 $AB$_{ij} 即可。</p>
+</blockquote>
+<p><strong>命题 2</strong> $\mathbf{AX} = \mathbf{B}$ 有解的充要条件是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
+<blockquote>
+<p>视为 $(\alpha_1, …, \alpha_n)\mathbf{X} = (\beta_1, …, \beta_n)$ 有解，拆开发现是 $\beta$ 可以被 $\alpha$ 线性表出，也就是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
+</blockquote>
+<div class="note info"><p>求由 $(1, 2, …, n)$ 生成的循环矩阵的逆。</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>我们看作解矩阵方程 $\mathbf{AX} = \mathbf{I}$，也就是 $\mathbf{A}(x_1, …, x_n) = (\varepsilon_1, …, \varepsilon_n)$，而 $\mathbf{A}x_i = \varepsilon_\i$ 这样的方程是好解的。</p>
+<p>实际上你只需要解一个出来，因为是循环矩阵。这个东西简化了计算。</p>
+</details></div>
+<p>接下来一些重点是分块矩阵的逆和行列式。我们记录一些结论。</p>
+<p><strong>命题 3</strong> 若 $\mathbf{A}$ 可逆，$\begin{pmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{pmatrix}$ 可逆的充分必要条件是 $\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}$ 可逆。</p>
+<blockquote>
+<p>消元消至上三角，可逆等价于行列式非零。</p>
+</blockquote>
+<p><strong>命题 4</strong> 若 $\mathbf{AC} = \mathbf{AC}$，则</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{AD} - \mathbf{BC}|<br>
+$$</p>
+<details class="note "><summary><p><strong>证明</strong></p>
+</summary>
+<p>如果 $\mathbf{A}$ 可逆，可以消元，显然成立。</p>
+<p>否则我们构造 $\mathbf{A}(t) = \mathbf{A} - t\mathbf{I}$，则可以推出</p>
+<p>$$<br>
+\mathbf{A}(t)\mathbf{C} = \mathbf{AC} - t\mathbf{C} = \mathbf{CA} - t\mathbf{C} = \mathbf{CA}(t)<br>
+$$</p>
+<p>而且有 $|\mathbf{A}(0)| = 0$，并且 $\mathbf{A}(t)$ 是一个多项式，所以在 $0$ 附近连续，且存在一个去心邻域 $U(0, \delta) \setminus \{0\}$ 内非零。套用可逆的结论得到</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A}(t) &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{A}(t)\mathbf{D} - \mathbf{BC}|<br>
+$$</p>
+<p>两边取 $\lim\limits_{x\rightarrow 0}$，可以得到原结论。</p>
+
+</details>
+<p><strong>命题 5</strong></p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{I} &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I} \end{vmatrix} = |\mathbf{I} - \mathbf{AB}| = |\mathbf{I} - \mathbf{BA}|<br>
+$$</p>
+<div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| = |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>提出一个 $\mathbf{A}$ 之后用命题 5 即可。</p>
+</details></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Linear-Algebra/" rel="tag"># Linear Algebra</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/04/InfoAndEntropy45/" rel="prev" title="Infomation and Entropy (4 ~ 5) Errors & Probablities">
+                  <i class="fa fa-angle-left"></i> Infomation and Entropy (4 ~ 5) Errors & Probablities
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/25/AdvMathRevision/" rel="next" title="Revision | 高等数学 A（期末）">
+                  Revision | 高等数学 A（期末） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
