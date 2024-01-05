@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。 这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。    Variable-Length Encoding Run Length Encoding Static Dictionary Semi-adaptive Dictiona">
+    <meta name="description" content="Abstract. 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。 这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。   Variable-Length Encoding Run Length Encoding Static Dictionary Semi-adaptive Dictionar">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Infomation and Entropy (3) Compression">
 <meta property="og:url" content="http://example.com/2023/11/27/InfoAndEntropy3Comp/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。 这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。    Variable-Length Encoding Run Length Encoding Static Dictionary Semi-adaptive Dictiona">
+<meta property="og:description" content="Abstract. 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。 这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。   Variable-Length Encoding Run Length Encoding Static Dictionary Semi-adaptive Dictionar">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/11/27/tnb3OgwisH9Z1hL.png">
 <meta property="og:image" content="https://s2.loli.net/2023/11/27/mBKOPxo37Q4eVlj.png">
@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -145,7 +145,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -234,54 +234,61 @@
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。</p>
 <p>这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。</p>
 <!-- toc -->
-
 <ul>
 <li><a href="#variable-length-encoding">Variable-Length Encoding</a></li>
 <li><a href="#run-length-encoding">Run Length Encoding</a></li>
 <li><a href="#static-dictionary">Static Dictionary</a></li>
 <li><a href="#semi-adaptive-dictionary">Semi-adaptive Dictionary</a></li>
-<li><a href="#dynamic-dictionary-lzw-compression">Dynamic Dictionary, LZW Compression</a><ul>
+<li><a href="#dynamic-dictionary-lzw-compression">Dynamic Dictionary, LZW Compression</a>
+<ul>
 <li><a href="#encoder">Encoder</a></li>
 <li><a href="#decoder">Decoder</a></li>
 </ul>
 </li>
-<li><a href="#discrete-cosine-transformation">Discrete Cosine Transformation</a><ul>
+<li><a href="#discrete-cosine-transformation">Discrete Cosine Transformation</a>
+<ul>
 <li><a href="#discrete-linear-transformation">Discrete Linear Transformation</a></li>
 <li><a href="#discrete-cosine-transformation-1">Discrete Cosine Transformation</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-
 <span id="more"></span>
-
 <p>经过压缩之后我们传递信息的模型可以改写为</p>
-<p><img src="https://s2.loli.net/2023/11/27/tnb3OgwisH9Z1hL.png"></p>
+<p><img src="https://s2.loli.net/2023/11/27/tnb3OgwisH9Z1hL.png" alt></p>
 <p>注意其中增加了两个模块 Compressor 和 Expander 来支持上面的压缩和解压缩操作。这里压缩可以分为两类。</p>
 <ul>
-<li><strong>Lossless &#x2F; reversible.</strong> 只有在原来的编码不够高效时可以实现。</li>
-<li><strong>Lossy &#x2F; irreversible.</strong> 编码已经足够高效，经过压缩之后信息有所丢失，但是 expander 可以还原出一个可以接受的近似版本。</li>
+<li><strong>Lossless / reversible.</strong> 只有在原来的编码不够高效时可以实现。</li>
+<li><strong>Lossy / irreversible.</strong> 编码已经足够高效，经过压缩之后信息有所丢失，但是 expander 可以还原出一个可以接受的近似版本。</li>
 </ul>
 <p>接下来我们给出五种 reversible 压缩方式和一种 irreversible 压缩方式，每一种都各有优劣。</p>
-<h1><span id="variable-length-encoding">Variable-Length Encoding</span></h1><p>变长编码。</p>
+<h1><span id="variable-length-encoding">Variable-Length Encoding</span></h1>
+<p>变长编码。</p>
 <p>前一章提到的 Morse Code，和我们熟悉的 Haffman 编码，都属于这种技巧。在这两种压缩方式当中高频出现的字有短编码，因此编码的总期望长度小于定长编码的长度。</p>
-<h1><span id="run-length-encoding">Run Length Encoding</span></h1><p>游程编码。</p>
+<h1><span id="run-length-encoding">Run Length Encoding</span></h1>
+<p>游程编码。</p>
 <p>在需要编码的文本中存在大规模的连续段时可以采用这种编码（比方说你要编码一个德国国旗），压缩连续段为符号 + 重复次数的形式。</p>
 <p>但是在文本中没有大规模连续段时这种做法是非常低效的。</p>
-<h1><span id="static-dictionary">Static Dictionary</span></h1><p>对高频词单独给定编码，比如说如果 ASCII 码里面你不需要 DEL 这个东西，就可以用 127 位来编码单词 the，这样可以知道编码长度会缩小。</p>
+<h1><span id="static-dictionary">Static Dictionary</span></h1>
+<p>对高频词单独给定编码，比如说如果 ASCII 码里面你不需要 DEL 这个东西，就可以用 127 位来编码单词 the，这样可以知道编码长度会缩小。</p>
 <p>当然实际上我们肯定不会只用一位，而是给定一个编码和词之间的静态的对应关系，称为 Static Dictionary。</p>
 <p>举了一个上上上个世纪的例子，即英国的 Shutter Telegraph <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://newmarkethistory.org.uk/newmarket-at-war/shutter-telegraph/">[1]</span></a></sup>。可见其宝宝巴士。</p>
-<h1><span id="semi-adaptive-dictionary">Semi-adaptive Dictionary</span></h1><p>可以想到对于不同的信息采用最优的字典的话长度可能会更好。那么你可以每条信息都先发字典然后再发内容本身。</p>
+<h1><span id="semi-adaptive-dictionary">Semi-adaptive Dictionary</span></h1>
+<p>可以想到对于不同的信息采用最优的字典的话长度可能会更好。那么你可以每条信息都先发字典然后再发内容本身。</p>
 <p>但是这样做其实很傻逼，因为首先你需要把字典发过去这件事开销就非常大，其次为了找一个好的字典你需要先知道要编码的全部文本，这意味着你的算法必须是离线的（带有很大的 latency），所以这个编码也不怎么用。</p>
-<h1><span id="dynamic-dictionary-lzw-compression">Dynamic Dictionary, LZW Compression</span></h1><p>事实上现在常用的技术是一边处理文本一边算字典。有一种算法称为 LZW Compression。</p>
+<h1><span id="dynamic-dictionary-lzw-compression">Dynamic Dictionary, LZW Compression</span></h1>
+<p>事实上现在常用的技术是一边处理文本一边算字典。有一种算法称为 LZW Compression。</p>
 <p>这个算法的过程如下：</p>
-<h2><span id="encoder">Encoder</span></h2><ul>
+<h2><span id="encoder">Encoder</span></h2>
+<ul>
 <li>初始时字典中有 ASCII 码表，以及 <code>256: Start</code> 和 <code>257: End</code>，置 <code>tot = 258</code></li>
 <li>发送 $\mathtt{256}$</li>
 <li>接下来定义一个量 <code>new_entry</code>，初始时这个量为空。</li>
-<li>迭代整个文本，假设当前字符为 $\mathtt{c}$。<ul>
-<li>令 <code>new_entry&#39;</code> 为 <code>new_entry + c</code>。</li>
-<li>如果 <code>new_entry&#39;</code> 不在字典中<ul>
+<li>迭代整个文本，假设当前字符为 $\mathtt{c}$。
+<ul>
+<li>令 <code>new_entry'</code> 为 <code>new_entry + c</code>。</li>
+<li>如果 <code>new_entry'</code> 不在字典中
+<ul>
 <li>那么向字典中增加 <code>tot: new_entry</code>，<code>tot += 1</code>。</li>
 <li>发送 <code>new_entry</code> 对应的编码。</li>
 <li>令 <code>new_entry = c</code></li>
@@ -292,28 +299,44 @@
 </li>
 <li>发送剩下的边角料和 $\mathtt{257}$</li>
 </ul>
-<h2><span id="decoder">Decoder</span></h2><p>其实写到这里很明显了，你只需要按照上面的方式动态地同步维护字典即可。这个编码是 Reversible 的。</p>
+<h2><span id="decoder">Decoder</span></h2>
+<p>其实写到这里很明显了，你只需要按照上面的方式动态地同步维护字典即可。这个编码是 Reversible 的。</p>
 <p>这样你发现基本上所有长度为 $2$ 的 pattern 都会在可以接受的轮次之后被假如字典，所以说我们可以期望文本的编码长度缩小到了原始编码长度的 $\frac 12$。</p>
-<h1><span id="discrete-cosine-transformation">Discrete Cosine Transformation</span></h1><p>DCT 用于将图片压缩，保留和人类知觉最相关的信息，而其他稍微无关的信息则被忽略。</p>
-<h2><span id="discrete-linear-transformation">Discrete Linear Transformation</span></h2><p>对于矩阵 $\mathbf{I}$，可以定义</p>
-<p>$$<br>\mathcal{T}_{\mathbf{CD}}(\mathbf{I}) &#x3D; \mathbf{CID}<br>$$</p>
+<h1><span id="discrete-cosine-transformation">Discrete Cosine Transformation</span></h1>
+<p>DCT 用于将图片压缩，保留和人类知觉最相关的信息，而其他稍微无关的信息则被忽略。</p>
+<h2><span id="discrete-linear-transformation">Discrete Linear Transformation</span></h2>
+<p>对于矩阵 $\mathbf{I}$，可以定义</p>
+<p>$$<br>
+\mathcal{T}_{\mathbf{CD}}(\mathbf{I}) = \mathbf{CID}<br>
+$$</p>
 <p>容易验证这个变换的线性性。</p>
-<h2><span id="discrete-cosine-transformation">Discrete Cosine Transformation</span></h2><p>考虑一张像素 $n\times n$ 的图片，假设其矩阵表示为 $\mathbf{A}$</p>
-<p>定义矩阵 $\mathbf{C}_{n\times n}$ </p>
-<p>$$<br>C_{ij} &#x3D; k_j\cos\left(\frac{(2i+1)j\pi}{2n}\right)<br>$$</p>
+<h2><span id="discrete-cosine-transformation">Discrete Cosine Transformation</span></h2>
+<p>考虑一张像素 $n\times n$ 的图片，假设其矩阵表示为 $\mathbf{A}$</p>
+<p>定义矩阵 $\mathbf{C}_{n\times n}$</p>
+<p>$$<br>
+C_{ij} = k_j\cos\left(\frac{(2i+1)j\pi}{2n}\right)<br>
+$$</p>
 <p>其中</p>
-<p>$$<br>k_j &#x3D; \begin{cases}<br>\sqrt{\frac 1n} &amp;, j &#x3D; 1 \\<br>\sqrt{\frac 2n} &amp;, \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>$$<br>
+k_j = \begin{cases}<br>
+\sqrt{\frac 1n} &amp;, j = 1 \\<br>
+\sqrt{\frac 2n} &amp;, \text{otherwise.}<br>
+\end{cases}<br>
+$$</p>
 <p>可以验证 $\mathbf{C}$ 是一个正交矩阵。</p>
 <p><strong>定义.</strong>(Discrete Cosine Transformation)</p>
-<p>$$<br>\mathcal{T}(\mathbf{A}) &#x3D; \mathbf{C}^{T}\mathbf{AC}<br>$$</p>
+<p>$$<br>
+\mathcal{T}(\mathbf{A}) = \mathbf{C}^{T}\mathbf{AC}<br>
+$$</p>
 <p>那么逆变换的形式也显然</p>
-<p>$$<br>\mathcal{T}^{-1}(\mathbf{A}) &#x3D; \mathbf{C}\mathbf{AC}^{T}<br>$$</p>
+<p>$$<br>
+\mathcal{T}^{-1}(\mathbf{A}) = \mathbf{C}\mathbf{AC}^{T}<br>
+$$</p>
 <p>注意到这个算法实际上和离散傅里叶变换很像，只是它没有虚部。因此你可以想象这个算法还是实现了某种时域到频域的变换，高频信号全部集中在左上角。因此你只保留 DCT 结果的左上角，将其他位置全部置为 0，对图像的影响不会很大，只会有一点包浆，这样的特性使得这个算法可以用来压缩图片。而可以想象你如果保留右上、左下、右下则会得到一些抽象画。我们甚至可以语言保留右上，左下会得到一些有倾向性的条纹，而右下角则是纯抽象画。</p>
 <p>作为测试我们写了一些 python 代码（顺便学了一些 python 语法），然后用我的头像做了一些操作。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt, cos</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">save</span>(<span class="params">mat, path, scalar = <span class="number">1</span></span>):</span><br><span class="line">    tmp = np.array(mat) * scalar</span><br><span class="line">    im = Image.fromarray(np.uint8(tmp))</span><br><span class="line">    im.save(path)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">mult</span>(<span class="params">a, b</span>):</span><br><span class="line">    res  = [ [<span class="number">0.0</span>] * <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>) ]</span><br><span class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">                res[i][j] += a[i][k] * b[k][j]</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">dct</span>(<span class="params">mat, <span class="built_in">type</span></span>):</span><br><span class="line">    c  = [ [<span class="number">0.0</span>] * <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>) ]</span><br><span class="line">    ct = [ [<span class="number">0.0</span>] * <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>) ]</span><br><span class="line">    k = [<span class="number">0.0</span>] * <span class="number">256</span></span><br><span class="line">    n = <span class="number">256</span></span><br><span class="line">    pi = <span class="number">3.141592653589793238</span></span><br><span class="line">    k[<span class="number">0</span>] = sqrt(<span class="number">1</span> / n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">256</span>): k[i] = sqrt(<span class="number">2</span> / n)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            c[i][j] = k[j] * cos((<span class="number">2</span> * i + <span class="number">1</span>) * j * pi / (<span class="number">2</span> * n))</span><br><span class="line">            ct[j][i] = c[i][j]</span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">type</span> == <span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> mult(ct, mult(mat, c))</span><br><span class="line">    <span class="keyword">elif</span> <span class="built_in">type</span> == -<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> mult(c, mult(mat, ct))</span><br><span class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> mult(c, ct)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">modify</span>(<span class="params">mat, x = <span class="number">0</span>, y = <span class="number">0</span></span>):</span><br><span class="line">    res = [ [<span class="number">0.0</span>] * <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>) ]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            <span class="keyword">if</span> (i &gt;= <span class="number">128</span>) == x <span class="keyword">and</span> (j &gt;= <span class="number">128</span>) == y:</span><br><span class="line">                res[i][j] = mat[i][j]</span><br><span class="line">    <span class="keyword">return</span> res</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">main</span>():</span><br><span class="line">    im = Image.<span class="built_in">open</span>(<span class="string">&#x27;E:\\Notes\\Others\\Discrete Cosine Transform\\test.jpg&#x27;</span>)</span><br><span class="line">    lim = im.convert(<span class="string">&#x27;L&#x27;</span>).resize((<span class="number">256</span>, <span class="number">256</span>))</span><br><span class="line">    mat = [ [<span class="number">0.0</span>] * <span class="number">256</span> <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>) ]</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">256</span>):</span><br><span class="line">            mat[j][i] = lim.getpixel((i, j))</span><br><span class="line">    save(mat, <span class="string">&#x27;test_origin.jpg&#x27;</span>);</span><br><span class="line">    dmat = dct(mat, <span class="number">1</span>)</span><br><span class="line">    save(dmat, <span class="string">&#x27;test_dct.jpg&#x27;</span>, <span class="number">256</span>)</span><br><span class="line">    idmat = dct(dmat, -<span class="number">1</span>)</span><br><span class="line">    save(idmat, <span class="string">&#x27;test_idct.jpg&#x27;</span>)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">2</span>):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">0</span>, <span class="number">2</span>):</span><br><span class="line">            mmat = modify(dmat, i, j)</span><br><span class="line">            save(mmat, <span class="string">&#x27;test_dct_m&#x27;</span> + <span class="built_in">str</span>(i) + <span class="built_in">str</span>(j) + <span class="string">&#x27;.jpg&#x27;</span>, <span class="number">256</span>)</span><br><span class="line">            immat = dct(mmat, -<span class="number">1</span>)</span><br><span class="line">            save(immat, <span class="string">&#x27;test_idct_m.jpg&#x27;</span> + <span class="built_in">str</span>(i) + <span class="built_in">str</span>(j) + <span class="string">&#x27;.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    main()</span><br></pre></td></tr></table></figure>
-
 <p>得到的结果如下</p>
-<p><img src="https://s2.loli.net/2023/11/27/mBKOPxo37Q4eVlj.png"></p>
+<p><img src="https://s2.loli.net/2023/11/27/mBKOPxo37Q4eVlj.png" alt></p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://newmarkethistory.org.uk/newmarket-at-war/shutter-telegraph/<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 

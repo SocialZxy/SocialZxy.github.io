@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-count">13</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -140,7 +140,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -237,101 +237,132 @@
     
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
-
 <ul>
 <li><a href="#45-%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">4.5 分块矩阵</a></li>
 </ul>
 <!-- tocstop -->
-
 <span id="more"></span>
-
-<h1><span id="45-分块矩阵">4.5 分块矩阵</span></h1><p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
+<h1><span id="45-分块矩阵">4.5 分块矩阵</span></h1>
+<p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
 <p><strong>定理 1</strong>(Sylvester 秩不等式) $\mathbf{A}, \mathbf{B}$ 分别为 $s\times n, n\times m$ 矩阵，则</p>
-<p>$$<br>\mathrm{rank}(\mathbf{AB}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B}) - n<br>$$</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{AB}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B}) - n<br>
+$$</p>
 <p><strong>证明</strong> 构造分块矩阵</p>
-<p>$$<br>\mathbf{R} &#x3D; \begin{pmatrix} \mathbf{I} &amp; \mathbf{B} \\ \mathbf{A} &amp; \mathbf{O} \end{pmatrix}<br>$$</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{I} &amp; \mathbf{B} \\ \mathbf{A} &amp; \mathbf{O} \end{pmatrix}<br>
+$$</p>
 <p>可以发现 $\mathrm{rank}(\mathbf{R}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B})$。用 $I$ 消掉 $A, B$ 得</p>
-<p>$$<br>\begin{pmatrix} \mathbf{I} &amp; \mathbf{O} \\ \mathbf{O} &amp; -\mathbf{AB} \end{pmatrix}<br>$$</p>
-<p>因此 $\mathrm{rank}(\mathbf{R}) &#x3D; \mathrm{rank}(\mathbf{AB}) + n$，即得到该不等式。$\square$</p>
-<div class="note info"><p>称 $\mathbf{A}$ 为幂等矩阵，若 $\mathbf{A} &#x3D; \mathbf{A}^2$。证明矩阵幂等当且仅当<br>$$<br>\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{I} - \mathbf{A}) &#x3D; n<br>$$</p>
+<p>$$<br>
+\begin{pmatrix} \mathbf{I} &amp; \mathbf{O} \\ \mathbf{O} &amp; -\mathbf{AB} \end{pmatrix}<br>
+$$</p>
+<p>因此 $\mathrm{rank}(\mathbf{R}) = \mathrm{rank}(\mathbf{AB}) + n$，即得到该不等式。$\square$</p>
+<div class="note info"><p>称 $\mathbf{A}$ 为幂等矩阵，若 $\mathbf{A} = \mathbf{A}^2$。证明矩阵幂等当且仅当<br>
+$$<br>
+\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{I} - \mathbf{A}) = n<br>
+$$</p>
 <details class="note "><summary><p>solution</p>
 </summary>
-<p>有 </p>
-<p>$$<br>\begin{align*}<br>&amp;\mathbf{A} &#x3D; \mathbf{A}^2 \\<br>\Leftrightarrow &amp;\mathbf{A}(\mathbf{I} - \mathbf{A}) &#x3D; 0  \\<br>\Leftrightarrow &amp;\mathrm{rank}(\mathbf{A}(\mathbf{I} - \mathbf{A})) &#x3D; 0<br>\end{align*}<br>$$</p>
+<p>有</p>
+<p>$$<br>
+\begin{align*}<br>
+&amp;\mathbf{A} = \mathbf{A}^2 \\<br>
+\Leftrightarrow &amp;\mathbf{A}(\mathbf{I} - \mathbf{A}) = 0  \\<br>
+\Leftrightarrow &amp;\mathrm{rank}(\mathbf{A}(\mathbf{I} - \mathbf{A})) = 0<br>
+\end{align*}<br>
+$$</p>
 <p>如果只是证明必要性那么可以直接用 Sylvester 不等式，但是现在要证明充要性，我们继续构造分块矩阵。</p>
-<p>$$<br>\mathbf{R} &#x3D; \begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>$$</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+$$</p>
 <p>做初等变换</p>
-<p>$$<br>\begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>\rightarrow \begin{pmatrix} \mathbf{A} &amp; \mathbf{A} \\ \mathbf{A} &amp; \mathbf{I} \end{pmatrix}<br>\rightarrow \begin{pmatrix} \mathbf{A} - \mathbf{A}^2 &amp;  \\  &amp; I \end{pmatrix}<br>$$</p>
-<p>可知 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) &#x3D; \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) + n$，于是 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) &#x3D; n \Leftrightarrow \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) &#x3D; 0$。$\square$</p>
-
+<p>$$<br>
+\begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} &amp; \mathbf{A} \\ \mathbf{A} &amp; \mathbf{I} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} - \mathbf{A}^2 &amp;  \\  &amp; I \end{pmatrix}<br>
+$$</p>
+<p>可知 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) + n$，于是 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = n \Leftrightarrow \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) = 0$。$\square$</p>
 </details></div>
-
-<div class="note info"><p>证明线性方程组 $\mathbf{A}^T\mathbf{A}x &#x3D; \mathbf{A}^T\beta$ 必然有解。</p>
+<div class="note info"><p>证明线性方程组 $\mathbf{A}^T\mathbf{A}x = \mathbf{A}^T\beta$ 必然有解。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>只需证明 $\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) &#x3D; \mathrm{rank}(\mathbf{A}^T\mathbf{A})$。而</p>
-<p>$$<br>\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) &#x3D; \mathrm{rank}(\mathbf{A}^T(\mathbf{A}, \beta))\leq \mathrm{rank}(\mathbf{A}^T) &#x3D; \mathbf{rank}(\mathbf{A}^T\mathbf{A})<br>$$</p>
+<p>只需证明 $\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T\mathbf{A})$。而</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T(\mathbf{A}, \beta))\leq \mathrm{rank}(\mathbf{A}^T) = \mathbf{rank}(\mathbf{A}^T\mathbf{A})<br>
+$$</p>
 <p>$\geq$ 是显然的。</p>
-
 </details></div>
-
-<div class="note info"><p>证明 $|\mathbf{A}^*| &#x3D; |\mathbf{A}|^{n - 1}$</p>
+<div class="note info"><p>证明 $|\mathbf{A}^*| = |\mathbf{A}|^{n - 1}$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>若 $|\mathbf{A}|\ne 0$，$\mathbf{AA}^* &#x3D; |\mathbf{A}|\mathbf{I}$，两边取行列式即得结论。</p>
-<p>若 $\mathbf{A} &#x3D; 0$ 结论显然成立。由于 $\mathbf{AA}^* &#x3D; |A|I &#x3D; 0$，根据 Sylvester 不等式</p>
-<p>$$<br>\mathrm{\mathbf{A}}^* + \mathrm{rank}(\mathbf{A}) \leq n \Rightarrow \mathrm{rank}(\mathbf{A}) &lt; n<br>$$</p>
+<p>若 $|\mathbf{A}|\ne 0$，$\mathbf{AA}^* = |\mathbf{A}|\mathbf{I}$，两边取行列式即得结论。</p>
+<p>若 $\mathbf{A} = 0$ 结论显然成立。由于 $\mathbf{AA}^* = |A|I = 0$，根据 Sylvester 不等式</p>
+<p>$$<br>
+\mathrm{\mathbf{A}}^* + \mathrm{rank}(\mathbf{A}) \leq n \Rightarrow \mathrm{rank}(\mathbf{A}) &lt; n<br>
+$$</p>
 <p>等式仍然成立。</p>
-
 </details>
-
-<p>还有一个弱智的做法是，如果 $|\mathbf{A}| &#x3D; 0$，如果 $\mathrm{rank}(\mathbf{A})\leq n - 2$，那么 $|\mathbf{A}^*| &#x3D; 0$（有空行），否则经典结论是 $\mathbf{A}^*$ 的每一行都是 $\mathbf{A}x &#x3D; 0$ 的解，解空间维数为 $1$，所以行成比例，行列式为 $0$。</p></div>
-
+<p>还有一个弱智的做法是，如果 $|\mathbf{A}| = 0$，如果 $\mathrm{rank}(\mathbf{A})\leq n - 2$，那么 $|\mathbf{A}^*| = 0$（有空行），否则经典结论是 $\mathbf{A}^*$ 的每一行都是 $\mathbf{A}x = 0$ 的解，解空间维数为 $1$，所以行成比例，行列式为 $0$。</p></div>
 <p>与此类似可以证明</p>
-<p>$$<br>\mathrm{rank}(\mathbf{A}^*) &#x3D; \begin{cases}<br>    n, &amp; \mathrm{rank}(\mathbf{A}) &#x3D; n \\<br>    1, &amp; \mathrm{rank}(\mathbf{A}) &#x3D; n - 1 \\<br>    0, &amp; \mathrm{otherwise.}<br>\end{cases}<br>$$</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^*) = \begin{cases}<br>
+n, &amp; \mathrm{rank}(\mathbf{A}) = n \\<br>
+1, &amp; \mathrm{rank}(\mathbf{A}) = n - 1 \\<br>
+0, &amp; \mathrm{otherwise.}<br>
+\end{cases}<br>
+$$</p>
 <p>根据这个结论可以简单地推出</p>
-<p>$$<br>(\mathbf{A}^*)^* &#x3D; \begin{cases}<br>    |\mathbf{A}|^{n - 2}\mathbf{A}, &amp;n &gt; 2 \\<br>    \mathbf{A}, &amp; n &#x3D; 2<br>\end{cases}<br>$$</p>
-<p><strong>命题 1</strong> $(\mathbf{AB})^* &#x3D; \mathbf{B}^*\mathbf{A}^*$。</p>
+<p>$$<br>
+(\mathbf{A}^*)^* = \begin{cases}<br>
+|\mathbf{A}|^{n - 2}\mathbf{A}, &amp;n &gt; 2 \\<br>
+\mathbf{A}, &amp; n = 2<br>
+\end{cases}<br>
+$$</p>
+<p><strong>命题 1</strong> $(\mathbf{AB})^* = \mathbf{B}^*\mathbf{A}^*$。</p>
 <blockquote>
 <p>用 Binet-Cauchy 公式拆开 $AB$_{ij} 即可。</p>
 </blockquote>
-<p><strong>命题 2</strong> $\mathbf{AX} &#x3D; \mathbf{B}$ 有解的充要条件是 $\mathrm{rank}(\mathbf{A}) &#x3D; \mathrm{rank(A, B)}$。</p>
+<p><strong>命题 2</strong> $\mathbf{AX} = \mathbf{B}$ 有解的充要条件是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
 <blockquote>
-<p>视为 $(\alpha_1, …, \alpha_n)\mathbf{X} &#x3D; (\beta_1, …, \beta_n)$ 有解，拆开发现是 $\beta$ 可以被 $\alpha$ 线性表出，也就是 $\mathrm{rank}(\mathbf{A}) &#x3D; \mathrm{rank(A, B)}$。</p>
+<p>视为 $(\alpha_1, …, \alpha_n)\mathbf{X} = (\beta_1, …, \beta_n)$ 有解，拆开发现是 $\beta$ 可以被 $\alpha$ 线性表出，也就是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
 </blockquote>
 <div class="note info"><p>求由 $(1, 2, …, n)$ 生成的循环矩阵的逆。</p>
 <details class="note "><summary><p>Hint.</p>
 </summary>
-<p>我们看作解矩阵方程 $\mathbf{AX} &#x3D; \mathbf{I}$，也就是 $\mathbf{A}(x_1, …, x_n) &#x3D; (\varepsilon_1, …, \varepsilon_n)$，而 $\mathbf{A}x_i &#x3D; \varepsilon_\i$ 这样的方程是好解的。</p>
+<p>我们看作解矩阵方程 $\mathbf{AX} = \mathbf{I}$，也就是 $\mathbf{A}(x_1, …, x_n) = (\varepsilon_1, …, \varepsilon_n)$，而 $\mathbf{A}x_i = \varepsilon_\i$ 这样的方程是好解的。</p>
 <p>实际上你只需要解一个出来，因为是循环矩阵。这个东西简化了计算。</p>
-
 </details></div>
-
 <p>接下来一些重点是分块矩阵的逆和行列式。我们记录一些结论。</p>
 <p><strong>命题 3</strong> 若 $\mathbf{A}$ 可逆，$\begin{pmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{pmatrix}$ 可逆的充分必要条件是 $\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}$ 可逆。</p>
 <blockquote>
 <p>消元消至上三角，可逆等价于行列式非零。</p>
 </blockquote>
-<p><strong>命题 4</strong> 若 $\mathbf{AC} &#x3D; \mathbf{AC}$，则</p>
-<p>$$<br>\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} &#x3D; |\mathbf{AD} - \mathbf{BC}|<br>$$</p>
+<p><strong>命题 4</strong> 若 $\mathbf{AC} = \mathbf{AC}$，则</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{AD} - \mathbf{BC}|<br>
+$$</p>
 <details class="note "><summary><p><strong>证明</strong></p>
 </summary>
 <p>如果 $\mathbf{A}$ 可逆，可以消元，显然成立。</p>
-<p>否则我们构造 $\mathbf{A}(t) &#x3D; \mathbf{A} - t\mathbf{I}$，则可以推出</p>
-<p>$$<br>\mathbf{A}(t)\mathbf{C} &#x3D; \mathbf{AC} - t\mathbf{C} &#x3D; \mathbf{CA} - t\mathbf{C} &#x3D; \mathbf{CA}(t)<br>$$</p>
-<p>而且有 $|\mathbf{A}(0)| &#x3D; 0$，并且 $\mathbf{A}(t)$ 是一个多项式，所以在 $0$ 附近连续，且存在一个去心邻域 $U(0, \delta) \setminus \{0\}$ 内非零。套用可逆的结论得到</p>
-<p>$$<br>\begin{vmatrix} \mathbf{A}(t) &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} &#x3D; |\mathbf{A}(t)\mathbf{D} - \mathbf{BC}|<br>$$</p>
+<p>否则我们构造 $\mathbf{A}(t) = \mathbf{A} - t\mathbf{I}$，则可以推出</p>
+<p>$$<br>
+\mathbf{A}(t)\mathbf{C} = \mathbf{AC} - t\mathbf{C} = \mathbf{CA} - t\mathbf{C} = \mathbf{CA}(t)<br>
+$$</p>
+<p>而且有 $|\mathbf{A}(0)| = 0$，并且 $\mathbf{A}(t)$ 是一个多项式，所以在 $0$ 附近连续，且存在一个去心邻域 $U(0, \delta) \setminus \{0\}$ 内非零。套用可逆的结论得到</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A}(t) &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{A}(t)\mathbf{D} - \mathbf{BC}|<br>
+$$</p>
 <p>两边取 $\lim\limits_{x\rightarrow 0}$，可以得到原结论。</p>
 
 </details>
-
-<p><strong>命题 5</strong> </p>
-<p>$$<br>\begin{vmatrix} \mathbf{I} &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I} \end{vmatrix} &#x3D; |\mathbf{I} - \mathbf{AB}| &#x3D; |\mathbf{I} - \mathbf{BA}|<br>$$</p>
-<div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| &#x3D; |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
+<p><strong>命题 5</strong></p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{I} &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I} \end{vmatrix} = |\mathbf{I} - \mathbf{AB}| = |\mathbf{I} - \mathbf{BA}|<br>
+$$</p>
+<div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| = |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
 <details class="note "><summary><p>Hint.</p>
 </summary>
 <p>提出一个 $\mathbf{A}$ 之后用命题 5 即可。</p>
-
 </details></div>
     </div>
 
