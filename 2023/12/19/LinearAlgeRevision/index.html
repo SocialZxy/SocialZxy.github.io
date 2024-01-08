@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="4.5 分块矩阵">
+    <meta name="description" content="分块矩阵  习题   正交空间相关">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 线性代数 A（期末）">
 <meta property="og:url" content="http://example.com/2023/12/19/LinearAlgeRevision/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="4.5 分块矩阵">
+<meta property="og:description" content="分块矩阵  习题   正交空间相关">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-19T09:27:51.000Z">
-<meta property="article:modified_time" content="2023-12-27T15:13:06.430Z">
+<meta property="article:modified_time" content="2024-01-08T13:01:49.734Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Linear Algebra">
 <meta name="twitter:card" content="summary">
@@ -114,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">4.5 分块矩阵</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">分块矩阵</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">习题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">正交空间相关</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -211,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2023-12-27 23:13:06" itemprop="dateModified" datetime="2023-12-27T23:13:06+08:00">2023-12-27</time>
+      <time title="Modified: 2024-01-08 21:01:49" itemprop="dateModified" datetime="2024-01-08T21:01:49+08:00">2024-01-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -220,10 +220,6 @@
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
           <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Revision-Notes/Problems/" itemprop="url" rel="index"><span itemprop="name">Problems</span></a>
         </span>
     </span>
 
@@ -238,11 +234,16 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
 <ul>
-<li><a href="#45-%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">4.5 分块矩阵</a></li>
+<li><a href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">分块矩阵</a>
+<ul>
+<li><a href="#%E4%B9%A0%E9%A2%98">习题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E4%BA%A4%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3">正交空间相关</a></li>
 </ul>
 <!-- tocstop -->
 <span id="more"></span>
-<h1><span id="45-分块矩阵">4.5 分块矩阵</span></h1>
+<h1><span id="分块矩阵">分块矩阵</span></h1>
 <p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
 <p><strong>定理 1</strong>(Sylvester 秩不等式) $\mathbf{A}, \mathbf{B}$ 分别为 $s\times n, n\times m$ 矩阵，则</p>
 <p>$$<br>
@@ -337,13 +338,17 @@ $$</p>
 <blockquote>
 <p>消元消至上三角，可逆等价于行列式非零。</p>
 </blockquote>
-<p><strong>命题 4</strong> 若 $\mathbf{AC} = \mathbf{AC}$，则</p>
+<p><strong>命题 4</strong> 若 $\mathbf{AC} = \mathbf{CA}$，则</p>
 <p>$$<br>
 \begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{AD} - \mathbf{BC}|<br>
 $$</p>
 <details class="note "><summary><p><strong>证明</strong></p>
 </summary>
-<p>如果 $\mathbf{A}$ 可逆，可以消元，显然成立。</p>
+<p>如果 $\mathbf{A}$ 可逆，那么有</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{A}||\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}| = |\mathbf{AD} - \mathbf{ACA}^{-1}B| = |\mathbf{AD}-\mathbf{CB}|<br>
+$$</p>
+<p>最后一步用到了交换性。</p>
 <p>否则我们构造 $\mathbf{A}(t) = \mathbf{A} - t\mathbf{I}$，则可以推出</p>
 <p>$$<br>
 \mathbf{A}(t)\mathbf{C} = \mathbf{AC} - t\mathbf{C} = \mathbf{CA} - t\mathbf{C} = \mathbf{CA}(t)<br>
@@ -357,13 +362,140 @@ $$</p>
 </details>
 <p><strong>命题 5</strong></p>
 <p>$$<br>
-\begin{vmatrix} \mathbf{I} &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I} \end{vmatrix} = |\mathbf{I} - \mathbf{AB}| = |\mathbf{I} - \mathbf{BA}|<br>
+\begin{vmatrix} \mathbf{I}_n &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I}_m \end{vmatrix} = |\mathbf{I_n} - \mathbf{AB}| = |\mathbf{I_m} - \mathbf{BA}|<br>
 $$</p>
 <div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| = |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
 <details class="note "><summary><p>Hint.</p>
 </summary>
 <p>提出一个 $\mathbf{A}$ 之后用命题 5 即可。</p>
 </details></div>
+<p>接下来是一些利用分块矩阵做归纳，一个比较重要的东西是：</p>
+<p><strong>定义.</strong>(LU 分解) $A$ 可以被写成一个主对角线全是 $1$ 的下三角矩阵 $L$ 和一个可逆上三角矩阵 $U$ 的乘积。</p>
+<div class="note info"><p>$A$ 可 LU 分解当且仅当 $A$ 的所有顺序主子式均非 $0$，且分解方案唯一。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>$\Leftarrow$ 分块矩阵归纳，非常容易。</p>
+<p>$\Rightarrow$ 设</p>
+<p>$$<br>
+A = LU = \begin{pmatrix} L_{11} &amp;  \\ L_{21} &amp; L_{22} \end{pmatrix} \begin{pmatrix} U_{11} &amp; U_{12} \\  &amp; U_{22} \end{pmatrix}<br>
+$$</p>
+<p>其中 $L_{11}$ 是 $k$ 阶方阵，那么 $L_{11}U_{11}$ 就是 $k$ 阶主子式（Binet Cauchy 公式）。</p>
+<p><strong>唯一性.</strong> 考虑 $A = L_1U_1 = L_2U_2$，那么</p>
+<p>$$<br>
+L_1L_2^{-1} = U_1U_2^{-1}<br>
+$$</p>
+<p>下三角等于上三角，那么只可能是对焦，而且主对角元全是 $1$，所以 $L_1 = L_2, U_1 = U_2$。</p>
+</details></div>
+<h2><span id="习题">习题</span></h2>
+<p>摘录一些没做出来的。</p>
+<div class="note info"><p>若 $\mathrm{rank}(\mathbf{A}) = 1$，那么 $\mathbf{A}^2 = k\mathbf{A}$。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>有 $\mathrm{rank}(\mathbf{A}) = 1$ 则 $A = \alpha\beta^T$。</p>
+<p>于是 $\mathbf{A}^2 = \alpha(\beta^T\alpha)\beta^T = \langle\beta, \alpha\rangle \mathbf{A}$。$\square$</p>
+</details></div>
+<div class="note info"><p>求</p>
+<p>$$<br>
+\begin{vmatrix}<br>
+0 &amp; 1 &amp; \cdots &amp; 1 \\<br>
+1 &amp; 0 &amp; \cdots &amp; 1 \\<br>
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>
+1 &amp; 1 &amp; \cdots &amp; 0<br>
+\end{vmatrix}<br>
+$$</p>
+<p>这个其实做出来了，但是答案做法比较好。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>即</p>
+<p>$$<br>
+(\begin{pmatrix} 1 \\ \vdots \\ 1\end{pmatrix}\begin{pmatrix}1 &amp; \vdots &amp; 1\end{pmatrix} - I)<br>
+$$</p>
+<p>用命题 5。</p>
+</details></div>
+<div class="note info"><p>求证（$\mathbf{B}, \mathbf{C}$ 分别为 $n\times s, n\times (n - s)$ 矩阵）</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{B}^T\mathbf{B} &amp; \mathbf{B}^T\mathbf{C} \\ \mathbf{C}^T\mathbf{B} &amp; \mathbf{C}^T\mathbf{C} \end{vmatrix} \leq |\mathbf{B}^T\mathbf{B}||\mathbf{C}^T\mathbf{C}|<br>
+$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>$$<br>
+\mathrm{LHS} = \left|(\mathbf{B}, \mathbf{C})^T(\mathbf{B}, \mathbf{C})\right| = |\mathbf{B}, \mathbf{C}|^2<br>
+$$</p>
+<p>左边拉普拉斯展开，右边用 Binet-Cauchy 公式，发现是个柯西不等式。$\square$</p>
+</details></div>
+<p>后面懒得加粗了。</p>
+<h1><span id="正交空间相关">正交空间相关</span></h1>
+<p><strong>定义.</strong>(QR 分解) 对于一个 $m\times n(m\geq n)$ 阶列满秩矩阵 $A$，如果可以写成 $A = QR$，其中 $Q$ 列向量组正交，$R$ 上三角，则称 $QR$ 是 $A$ 的 QR 分解。</p>
+<p><strong>命题 1.</strong> 一个满秩方阵矩阵可以做 $QR$ 分解，且唯一。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>考虑将 $A$ 的列向量组 Schmidt 正交化并单位化，就得到了一个正交矩阵。</p>
+<p>显然这个逆变换的矩阵是上三角的，所以完成了 QR 分解。</p>
+<p>假设有两组分解 $A = QR = Q_1R_1$，那么有</p>
+<p>$$<br>
+Q = Q_1R_1R^{-1}<br>
+$$</p>
+<p>其中 $R_1R^{-1}$ 上三角，记为 $R_2$。于是 $Q = Q_1R_2$。考虑列向量。</p>
+<p>$$<br>
+(q_1, q_2, …, q_n) = (r_{11}q’<em>1, r</em>{12}q’<em>1 + r</em>{22}q’<em>2, …, \sum r</em>{in}q’_i)<br>
+$$</p>
+<p>因为 $||q’<em>1|| = ||q_1|| = 1$，$r</em>{11} = 1, q_{1} = q’_1$。</p>
+<p>$\langle r_{11}q’<em>1, r</em>{12}q’<em>1 + r</em>{22}q’<em>2\rangle = 0$ 推出 $r</em>{12} = 0, r_{22} = 1, q_2 = q’_2$。</p>
+<p>…</p>
+<p>可知 $Q_1 = Q_2$，$R_1R^{-1} = I$ 即 $R_1 = R$。$\square$</p>
+
+</details>
+<p><strong>命题 2.</strong> $A$ 列满秩，则方程 $A^TAx = A^T\beta$ 有唯一解 $R^{-1}Q^T\beta$。</p>
+<p>显然。</p>
+<p>需要注意正交矩阵的行列式只能是 $\pm 1$。</p>
+<p><strong>命题 3.</strong> $n$ 阶（$n\geq 3$）非零实矩阵 $A$ 正交当且仅当 $A(i, j) = \pm A_{ij}$，这里 $A_{ij}$ 是代数余子式。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$\Rightarrow$. 有 $A^* = \frac{1}{|A|}A^{-1} = \frac{1}{|A|}A’$。拆开即可得到结论。</p>
+<p>$\Rightarrow$ 以 $A(i, j) = \pm A_{ij}$ 的情况为例。</p>
+<p>先证明 $A$ 可逆。找到 $A$ 的一个非零行</p>
+<p>$$<br>
+|A| = \sum_{i=1}^n a_{ki}A_{ki} = \sum_{i=1}^n a_{ki}^2 &gt; 0<br>
+$$</p>
+<p>根据条件可以得到 $A’ = A^<em>$。根据经典结论 $|A^</em>| = |A|^{n - 1}$，于是</p>
+<p>$$<br>
+|A’| = |A|^{n - 1} \Rightarrow |A|^{n - 2} = 1<br>
+$$</p>
+<p>结合 $|A| &gt; 0$ 可知实数域下只可能是 $|A| = 1$。于是 $A^{*} = A^{-1} = A’$，$A$ 正交。</p>
+<p>负的情况同理。$\square$</p>
+
+</details>
+<p>然后有一些重要结论。</p>
+<p><strong>定理 4.</strong> $\mathcal{N}(A^T) = \mathcal{C}(A)^\perp$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>首先有维数关系</p>
+<p>$$<br>
+\dim\mathcal{N}(A^T) + \dim\mathcal{C}(A) = n<br>
+$$</p>
+<p>若 $u\in \mathcal{N}(A^T), v\in \mathcal{C}(A)$，即 $A^Tu = 0, v = Ax$， 则</p>
+<p>$$<br>
+\langle u, v\rangle = \langle u, Ax\rangle = \langle A^Tu, x\rangle = 0<br>
+$$</p>
+<p>因此 $\mathcal{N}(A^T) = \mathcal{C}(A)^\perp$。$\square$</p>
+
+</details>
+<p><strong>定理 5.</strong>(最小二乘法) $Ax = \beta$ 的最小二乘解 $\Leftrightarrow$ $A^TAx = A^T\beta$ 的解。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>考虑 $\mathbb{R}^n = \mathcal{N}(A^T) \oplus \mathcal{C}(A)$，可知 $\beta = \beta_c + \beta_n$。其中 $Ax = \beta_c$ 有解。</p>
+<p>然后有</p>
+<p>$$<br>
+A^T\beta_n = A^T(\beta - \beta_c) = A^T(\beta - Ax) = 0 \<br>
+\Leftrightarrow A^T\beta = A^TAx<br>
+$$</p>
+<p>想要证明最小，只需考虑</p>
+<p>$$<br>
+||Ax’ - \beta|| = ||\beta_n + (\beta_c - Ax)||\geq ||\beta_n||<br>
+$$</p>
+<p>这是因为 $(\beta_c - Ax’)\in \mathcal{N}(A^T)\perp$，因此和 $\langle\beta_c - Ax’, \beta_n\rangle = 0$。于是上面的解就是最小的解。$\square$</p>
+
+</details>
     </div>
 
     
