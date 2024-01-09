@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 两章好像都没有什么深刻的内容，所以写一起。摘录一些有价值的内容。 Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。 Chapter 5. Probability 讲了一些基础的概率。   Errors  Hamming Distance Single">
+    <meta name="description" content="Abstract. 两章好像都没有什么深刻的内容，所以写一起。摘录一些有价值的内容。 Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。 Chapter 5. Probability 讲了一些基础的概率。    Errors Hamming Distance Single">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Infomation and Entropy (4 ~ 5) Errors &amp; Probablities">
 <meta property="og:url" content="http://example.com/2023/12/04/InfoAndEntropy45/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 两章好像都没有什么深刻的内容，所以写一起。摘录一些有价值的内容。 Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。 Chapter 5. Probability 讲了一些基础的概率。   Errors  Hamming Distance Single">
+<meta property="og:description" content="Abstract. 两章好像都没有什么深刻的内容，所以写一起。摘录一些有价值的内容。 Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。 Chapter 5. Probability 讲了一些基础的概率。    Errors Hamming Distance Single">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/12/04/EnlGWUxtJr8k9pX.png">
 <meta property="article:published_time" content="2023-12-04T09:24:06.000Z">
@@ -238,13 +238,12 @@
 <p>Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。</p>
 <p>Chapter 5. Probability 讲了一些基础的概率。</p>
 <!-- toc -->
+
 <ul>
-<li><a href="#errors">Errors</a>
-<ul>
+<li><a href="#errors">Errors</a><ul>
 <li><a href="#hamming-distance">Hamming Distance</a></li>
 <li><a href="#single-bits">Single Bits</a></li>
-<li><a href="#multiple-bits">Multiple Bits</a>
-<ul>
+<li><a href="#multiple-bits">Multiple Bits</a><ul>
 <li><a href="#parity">Parity</a></li>
 <li><a href="#rectangular-code">Rectangular Code</a></li>
 <li><a href="#hamming-code">Hamming Code</a></li>
@@ -254,21 +253,18 @@
 </li>
 </ul>
 </li>
-<li><a href="#probability">Probability</a>
-<ul>
+<li><a href="#probability">Probability</a><ul>
 <li><a href="#information">Information</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
-<h1><span id="errors">Errors</span></h1>
-<p>显然传输信息的时候会发生损失或者混入噪音，这是一个需要解决的问题。两个关键的步骤是错误的 Detection 和 Correction</p>
-<h2><span id="hamming-distance">Hamming Distance</span></h2>
-<p><strong>Definition.</strong>(Hamming Distance) 对于两个等长的字符串 $S$ 和 $S’$，定义他们的 Hamming Distance 为</p>
-<p>$$<br>
-\#\{S_i \ne S’_i\}<br>
-$$</p>
+
+<h1><span id="errors">Errors</span></h1><p>显然传输信息的时候会发生损失或者混入噪音，这是一个需要解决的问题。两个关键的步骤是错误的 Detection 和 Correction</p>
+<h2><span id="hamming-distance">Hamming Distance</span></h2><p><strong>Definition.</strong>(Hamming Distance) 对于两个等长的字符串 $S$ 和 $S’$，定义他们的 Hamming Distance 为</p>
+<p>$$<br>\#\{S_i \ne S’_i\}<br>$$</p>
 <p>错误的 effect 即为输入和输出的 Hamming Distance。</p>
 <p>那么如果想要做 Detection，如果已知错误的 effect 最多为 $i$，就必须保证编码中两个有效编码之间的 Hamming Distance 要大于 $i$。</p>
 <p>一个简单的例子如下。</p>
@@ -276,64 +272,48 @@ $$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>首先用上面的性质得到长度必须满足的不等式。如果一个串长度为 $m$，那么有 $m$ 个串和它的 Hamming Distance 为 $1$，因此需要满足</p>
-<p>$$<br>
-2^n \times m \leq 2^m<br>
-$$</p>
-<p>在一般的范围内 $m / log m$ 是单调递增的。注意到一个显然的下界是</p>
-<p>$$<br>
-m = n + \log_2 n + 1<br>
-$$</p>
+<p>$$<br>2^n \times m \leq 2^m<br>$$</p>
+<p>在一般的范围内 $m &#x2F; log m$ 是单调递增的。注意到一个显然的下界是</p>
+<p>$$<br>m &#x3D; n + \log_2 n + 1<br>$$</p>
 <p>考虑构造一种方案到达这个下界。我们的编码由三部分组成。</p>
 <p>第一部分为原来的长度为 $n$ 的字符串。</p>
 <p>第二部分为 $\log_2 n$ 个 Parity Code。其中第 $i$ 个是原字符串中，下标二进制第 $i$ 位是 $1$ 的所有位的异或和。</p>
 <p>第三部分为第二部分的 Parity Code，为第二部分所有位的异或和。</p>
 <p>首先可以确认错误是否发生在第二、三部分。否则，通过第二部分出错的位置可以定位到第一部分出错的位置。</p>
+
 </details>
+
 <p>其实这个做法类似于 Hamming Code，只是 Hamming Code 的排列方式更高妙一点。这标志着我们能想到的东西的最近年代来到了 20 世纪（雾）。</p></div>
-<h2><span id="single-bits">Single Bits</span></h2>
-<p>为了 dectect 和 correct 一个位的错误我们采用的方法是反复发送。发送两次称为 double redundant，三次称为 triple redundant。</p>
+
+<h2><span id="single-bits">Single Bits</span></h2><p>为了 dectect 和 correct 一个位的错误我们采用的方法是反复发送。发送两次称为 double redundant，三次称为 triple redundant。</p>
 <p><strong>定义.</strong>(Code rate) 称一个编码的 code rate 为原始信息长度除以编码长度。</p>
 <p>可以用 code rate 衡量一个编码的效率。</p>
-<h2><span id="multiple-bits">Multiple Bits</span></h2>
-<h3><span id="parity">Parity</span></h3>
-<p>奇偶校验位。考虑将信息八位一组，后附八位的异或和。</p>
-<h3><span id="rectangular-code">Rectangular Code</span></h3>
-<p>将信息摆成 $2\times n$ 的矩形，然后对每行每列求 parity 并摆在对应的行列，再求 parity 的 parity 摆在右下角。</p>
-<p><img src="https://s2.loli.net/2023/12/04/EnlGWUxtJr8k9pX.png" alt></p>
+<h2><span id="multiple-bits">Multiple Bits</span></h2><h3><span id="parity">Parity</span></h3><p>奇偶校验位。考虑将信息八位一组，后附八位的异或和。</p>
+<h3><span id="rectangular-code">Rectangular Code</span></h3><p>将信息摆成 $2\times n$ 的矩形，然后对每行每列求 parity 并摆在对应的行列，再求 parity 的 parity 摆在右下角。</p>
+<p><img src="https://s2.loli.net/2023/12/04/EnlGWUxtJr8k9pX.png"></p>
 <p>可以纠正一位错误和检验两位错误。</p>
-<h3><span id="hamming-code">Hamming Code</span></h3>
-<p>第 $0$ 位是废位，$2^i$ 位是校验位，扣掉这些位置后，顺次在其他位置上填写有效信息。第 $i$ 个校验位存放所有二进制第 $i$ 位为 $1$ 的位置的异或和。</p>
+<h3><span id="hamming-code">Hamming Code</span></h3><p>第 $0$ 位是废位，$2^i$ 位是校验位，扣掉这些位置后，顺次在其他位置上填写有效信息。第 $i$ 个校验位存放所有二进制第 $i$ 位为 $1$ 的位置的异或和。</p>
 <p>回忆我们在 Hamming Distance 中提出的编码的原理。这个编码的长度同样符合该节中的不等式给出的下界。纠错方法为将二进制第 $i$ 位为 $1$ 的所有位置的值异或起来，这就是错误位的二进制第 $i$ 位。</p>
-<h3><span id="block-code">Block Code</span></h3>
-<p>称一个长度为 $n$，有效数据（除开 parity bit）的长度为 $k$，编码之间最小 Hamming Distance 为 $(n, k, d)$ Block Code。</p>
-<h3><span id="advanced-code">Advanced Code</span></h3>
-<p>诸如 Bose-Chaudhuri-Hocquenhem (BCH) Codes 和 Reed-Solomon Codes 等。</p>
+<h3><span id="block-code">Block Code</span></h3><p>称一个长度为 $n$，有效数据（除开 parity bit）的长度为 $k$，编码之间最小 Hamming Distance 为 $(n, k, d)$ Block Code。</p>
+<h3><span id="advanced-code">Advanced Code</span></h3><p>诸如 Bose-Chaudhuri-Hocquenhem (BCH) Codes 和 Reed-Solomon Codes 等。</p>
 <p>这些编码都用了比前述朴素编码要高级一些的代数。一般会将信息看成 $\mathbb{F}_2[x]$ 中的多项式。</p>
-<h1><span id="probability">Probability</span></h1>
-<p>出现了很多术语，中英文对照一下。</p>
+<h1><span id="probability">Probability</span></h1><p>出现了很多术语，中英文对照一下。</p>
 <p><strong>Outcome.</strong> 结果。</p>
 <p><strong>Event.</strong> 事件，实验所有可能结果的一个子集。</p>
 <p><strong>Fundamental Event.</strong> 基本事件，即单个结果构成的事件。</p>
 <p><strong>Universal Event, Null Event</strong> 必然事件和不可能事件，对应全集和空集。</p>
 <p><strong>Mutal Exclusive, Exhaustive</strong> 互斥，完备。</p>
 <p>将完备的事件分成若干个互斥的成分称为 <strong>Partition</strong>，如果每个成分都是 fundamental event 称为 <strong>Fundamental Partition</strong>。</p>
-<p>定性地可以将 partition 分为 coarse-grained partition 和 fine-grained partition（粗/细粒度划分）两类。</p>
+<p>定性地可以将 partition 分为 coarse-grained partition 和 fine-grained partition（粗&#x2F;细粒度划分）两类。</p>
 <p>接下来讲了一些东西诸如 Joint Event，Conditional Probability 等。其中 Bayes 公式比较有用，摘录如下</p>
-<p>$$<br>
-P(A_i | M) = \frac{P(A_i)P(M|A_i)}{P(M)}<br>
-$$</p>
-<h2><span id="information">Information</span></h2>
-<p>考虑如何衡量我们对一个事件的不确定度。下面是一个例子：</p>
+<p>$$<br>P(A_i | M) &#x3D; \frac{P(A_i)P(M|A_i)}{P(M)}<br>$$</p>
+<h2><span id="information">Information</span></h2><p>考虑如何衡量我们对一个事件的不确定度。下面是一个例子：</p>
 <p>现有 $32$ 人，其中有 $2$ 女 $30$ 男，从中随机选出一个人，要表示这个人需要 $5$ 个 bit。</p>
 <p>假设我们现在知道了这个人是女的，那么我们就只需要 $1$ bit 就能表示这个人，这里我们得到了 $4$ bit 的信息。类似地如果知道了这个人是男的，那么我们就只需要 $\log_2 30$ bit，得到了 $\log_2 \frac{32}{30}$ 的信息。</p>
 <p>形式化地，给定了一个 partiton $A_1, A_2, …, A_n$，如果确定了结果属于 $A_i$，那么我们得到的信息量为</p>
-<p>$$<br>
-\log_2(\sum |A_i|) - \log_2(|A_i|) = \log_2\left(\frac 1{P(A_i)}\right)<br>
-$$</p>
+<p>$$<br>\log_2(\sum |A_i|) - \log_2(|A_i|) &#x3D; \log_2\left(\frac 1{P(A_i)}\right)<br>$$</p>
 <p>若仅已知此划分而不知结果具体属于哪一个分事件，我们可以计算得到的信息量的期望为</p>
-<p>$$<br>
-I = \sum_{i=1}^nP(A_i)\log_2\left(\frac{1}{P(A_i)}\right)<br>
-$$</p>
+<p>$$<br>I &#x3D; \sum_{i&#x3D;1}^nP(A_i)\log_2\left(\frac{1}{P(A_i)}\right)<br>$$</p>
 
     </div>
 

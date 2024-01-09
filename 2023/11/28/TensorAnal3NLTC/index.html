@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract.   Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
+    <meta name="description" content="Abstract.    Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensor Analysis (3) Newton&#39;s Law and Tensor Calculus">
 <meta property="og:url" content="http://example.com/2023/11/28/TensorAnal3NLTC/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract.   Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
+<meta property="og:description" content="Abstract.    Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-28T12:18:13.000Z">
 <meta property="article:modified_time" content="2023-11-29T13:14:35.915Z">
@@ -235,6 +235,7 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
 <!-- toc -->
+
 <ul>
 <li><a href="#rigid-bodies">Rigid Bodies</a></li>
 <li><a href="#new-conservative-laws">New Conservative Laws</a></li>
@@ -244,85 +245,44 @@
 <li><a href="#the-physical-components-of-a-vector">The Physical Components of a Vector</a></li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
-<h1><span id="rigid-bodies">Rigid Bodies</span></h1>
-<p>简单力学，主要内容是刚体的牛顿定律，动量定理和角动量定理等。</p>
-<h1><span id="new-conservative-laws">New Conservative Laws</span></h1>
-<p>简单力学，主要内容是保守力，机械能守恒等。</p>
-<h1><span id="nomenclature">Nomenclature</span></h1>
-<p>简单力学，定义了一些记号。</p>
+
+<h1><span id="rigid-bodies">Rigid Bodies</span></h1><p>简单力学，主要内容是刚体的牛顿定律，动量定理和角动量定理等。</p>
+<h1><span id="new-conservative-laws">New Conservative Laws</span></h1><p>简单力学，主要内容是保守力，机械能守恒等。</p>
+<h1><span id="nomenclature">Nomenclature</span></h1><p>简单力学，定义了一些记号。</p>
 <p>称下面的参数方程 $C$ 为质点 $p$ 的<strong>轨迹</strong>（trajectory）</p>
-<p>$$<br>
-C: \mathbf{x} = \hat{\mathbf{x}}(t) = \hat{x}(t)\mathbf{e}_x + \hat{y}(t)\mathbf{e}_y + \hat{z}(t)\mathbf{e}_z<br>
-$$</p>
+<p>$$<br>C: \mathbf{x} &#x3D; \hat{\mathbf{x}}(t) &#x3D; \hat{x}(t)\mathbf{e}_x + \hat{y}(t)\mathbf{e}_y + \hat{z}(t)\mathbf{e}_z<br>$$</p>
 <p>$C$ 的曲线称为 $p$ 的轨道（orbit）。</p>
 <p>如果 $\mathbf{x}$ 可微，那么称下面的量为 $p$ 的速度</p>
-<p>$$<br>
-\hat{\mathbf{v}}(t) = \dot{\mathbf{x}}<br>
-$$</p>
+<p>$$<br>\hat{\mathbf{v}}(t) &#x3D; \dot{\mathbf{x}}<br>$$</p>
 <p>称 $\hat{\mathbf{x}}$ 在 $t$ 处平滑（smooth），若 $\dot{\mathbf{x}}$ 在 $t$ 处连续。称其平滑（smooth）若 $\dot{\mathbf{x}}$ 处处连续。</p>
 <p>若 $\hat{\mathbf{x}}$ 在 $t$ 处平滑，那么根据导数和切线的定义立即推得 $\hat{\mathbf{v}}$ 在 $t$ 处是轨道的切线。</p>
 <p>若一段轨迹是连续的那么我们可以定义路程</p>
-<p>$$<br>
-\frac {ds}{dt} = |\hat{\mathbf{v}}(t)| \\<br>
-s(t_1) = 0<br>
-$$</p>
+<p>$$<br>\frac {ds}{dt} &#x3D; |\hat{\mathbf{v}}(t)| \\<br>s(t_1) &#x3D; 0<br>$$</p>
 <p>换言之</p>
-<p>$$<br>
-s = \int_{t_1}^{t_2} |\hat{\mathbf{v}}(t)|\mathrm{d} t<br>
-$$</p>
+<p>$$<br>s &#x3D; \int_{t_1}^{t_2} |\hat{\mathbf{v}}(t)|\mathrm{d} t<br>$$</p>
 <p>若 $\hat{\mathbf{v}}(t)$ 在 $t$ 可微，那么称下面的量为 $p$ 在 $t$ 点的加速度</p>
-<p>$$<br>
-\hat{\mathbf{a}}(t) = \dot{\mathbf{v}}(t) = \ddot{\mathbf{x}}(t)<br>
-$$</p>
+<p>$$<br>\hat{\mathbf{a}}(t) &#x3D; \dot{\mathbf{v}}(t) &#x3D; \ddot{\mathbf{x}}(t)<br>$$</p>
 <p>接下来谈了一些式子如扫过的面积，角动量守恒，开普勒第二定律等。这里略过。</p>
-<h1><span id="newtons-law-in-cartesian-components">Newton’s Law in Cartesian Components</span></h1>
-<p>简单力学，牛顿定律的分量形式</p>
-<h1><span id="newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</span></h1>
-<p>引入平面极坐标 $(r, \theta)$，其定义为</p>
-<p>$$<br>
-x = r\cos \theta, \qquad y = r\sin \theta<br>
-$$</p>
+<h1><span id="newtons-law-in-cartesian-components">Newton’s Law in Cartesian Components</span></h1><p>简单力学，牛顿定律的分量形式</p>
+<h1><span id="newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</span></h1><p>引入平面极坐标 $(r, \theta)$，其定义为</p>
+<p>$$<br>x &#x3D; r\cos \theta, \qquad y &#x3D; r\sin \theta<br>$$</p>
 <p>这样可以表示位矢为（左边是极坐标的特殊形式，右边是一般的张量形式）</p>
-<p>$$<br>
-\mathbf{x} = \hat{\mathbf{x}}(r, \theta) = r\cos \theta \mathbf{e}_x + r\sin \theta\mathbf{e}_y \qquad<br>
-\mathbf{x} = \hat{\mathbf{x}}(u^j) = \hat{x}^i(u^j)\mathbf{e}_i<br>
-$$</p>
+<p>$$<br>\mathbf{x} &#x3D; \hat{\mathbf{x}}(r, \theta) &#x3D; r\cos \theta \mathbf{e}_x + r\sin \theta\mathbf{e}_y \qquad<br>\mathbf{x} &#x3D; \hat{\mathbf{x}}(u^j) &#x3D; \hat{x}^i(u^j)\mathbf{e}_i<br>$$</p>
 <p>这里 $r$ 和 $\theta$ 都是关于时间的函数，那么速度就是</p>
-<p>$$<br>
-\mathbf{v} = \dot{\mathbf{x}} = (\partial\mathbf{x}/\partial r)\dot{r} + (\partial\mathbf{x}/\partial\theta)\dot{\theta} \qquad<br>
-\mathbf{v} = (\partial\mathbf{x} /\partial u^i)\dot{u}^i<br>
-$$</p>
+<p>$$<br>\mathbf{v} &#x3D; \dot{\mathbf{x}} &#x3D; (\partial\mathbf{x}&#x2F;\partial r)\dot{r} + (\partial\mathbf{x}&#x2F;\partial\theta)\dot{\theta} \qquad<br>\mathbf{v} &#x3D; (\partial\mathbf{x} &#x2F;\partial u^i)\dot{u}^i<br>$$</p>
 <p>可以定义</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{g}_r &amp;= \partial\mathbf{x} / \partial r = \cos \theta \mathbf{e}_x + \sin \theta\mathbf{e}_y \\<br>
-\mathbf{g}_\theta &amp;= \partial\mathbf{x} / \partial\theta = -r\sin \theta \mathbf{e}_x + r\cos \theta\mathbf{e}_y<br>
-\end{aligned}<br>
-\qquad\mathbf{g}_i = \partial\mathbf{x} / \partial u^i = (\partial x^k / \partial u^i) \mathbf{e}_k<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{g}_r &amp;&#x3D; \partial\mathbf{x} &#x2F; \partial r &#x3D; \cos \theta \mathbf{e}_x + \sin \theta\mathbf{e}_y \\<br>\mathbf{g}_\theta &amp;&#x3D; \partial\mathbf{x} &#x2F; \partial\theta &#x3D; -r\sin \theta \mathbf{e}_x + r\cos \theta\mathbf{e}_y<br>\end{aligned}<br>\qquad\mathbf{g}_i &#x3D; \partial\mathbf{x} &#x2F; \partial u^i &#x3D; (\partial x^k &#x2F; \partial u^i) \mathbf{e}_k<br>$$</p>
 <p>然后</p>
-<p>$$<br>
-J(\mathbf{g}_r, \mathbf{g}_\theta) = \left|\begin{matrix}\cos\theta &amp; -r\sin\theta \\ \sin\theta &amp; r\cos\theta\end{matrix}\right| = r \qquad<br>
-J(\mathbf{g}_1, …) = \det[x^i_{\cdot j}]<br>
-$$</p>
+<p>$$<br>J(\mathbf{g}_r, \mathbf{g}_\theta) &#x3D; \left|\begin{matrix}\cos\theta &amp; -r\sin\theta \\ \sin\theta &amp; r\cos\theta\end{matrix}\right| &#x3D; r \qquad<br>J(\mathbf{g}_1, …) &#x3D; \det[x^i_{\cdot j}]<br>$$</p>
 <p>我们称 $\mathbf{g}_r, \mathbf{g}_\theta$ 为 $(r, \theta)$ 坐标系的 <strong>cellar base vector</strong>，那么他们的系数可以定义为</p>
-<p>$$<br>
-v^r = \dot{r}, v^\theta = \dot{\theta} \qquad v^i = \dot{u}^i<br>
-$$</p>
+<p>$$<br>v^r &#x3D; \dot{r}, v^\theta &#x3D; \dot{\theta} \qquad v^i &#x3D; \dot{u}^i<br>$$</p>
 <p>这些称为 $\mathbf{v}$ 的 <strong>roof components</strong>。</p>
-<p>$$<br>
-\mathbf{v} = v^r\mathbf{g}_r + v^\theta\mathbf{g}\theta \qquad \mathbf{v} = v^i\mathbf{g}_i<br>
-$$</p>
+<p>$$<br>\mathbf{v} &#x3D; v^r\mathbf{g}_r + v^\theta\mathbf{g}\theta \qquad \mathbf{v} &#x3D; v^i\mathbf{g}_i<br>$$</p>
 <p>$\mathbf{g}_r$ 和 $\mathbf{g}_\theta$ 的几何解释大致是：除了原点外的任何一个点 $P(r_0, \theta_0)$，都存在唯一的一条 $r-$坐标曲线 $(r, \theta_0)$ 和一条唯一的 $\theta-$坐标曲线 $(r_0, \theta)$，在这个点上两条坐标曲线的切向方向向量张成了整个平面。</p>
-<h1><span id="the-physical-components-of-a-vector">The Physical Components of a Vector</span></h1>
-<p>首先可以求到前面提到的基的 reciprocal(roof) base vector</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{g}^{r} &amp;= \cos\theta\mathbf{e}_x + \sin\theta\mathbf{e}_y \\<br>
-\mathbf{g}^{\theta} &amp;= \frac 1r(-\sin\theta\mathbf{e}_x + \cos\theta\mathbf{e}_y)<br>
-\end{aligned}<br>
-$$</p>
+<h1><span id="the-physical-components-of-a-vector">The Physical Components of a Vector</span></h1><p>首先可以求到前面提到的基的 reciprocal(roof) base vector</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{g}^{r} &amp;&#x3D; \cos\theta\mathbf{e}_x + \sin\theta\mathbf{e}_y \\<br>\mathbf{g}^{\theta} &amp;&#x3D; \frac 1r(-\sin\theta\mathbf{e}_x + \cos\theta\mathbf{e}_y)<br>\end{aligned}<br>$$</p>
 <p><strong>Definition</strong></p>
 
     </div>

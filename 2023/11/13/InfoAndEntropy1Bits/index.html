@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="参考资料：Information and Entropy by Prof. Paul Penfield Abstract. 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。   The Boolean Bit The Circuit Bit The Control Bit The Physical Bit The Quantum Bit An Advantage">
+    <meta name="description" content="参考资料：Information and Entropy by Prof. Paul Penfield Abstract. 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。    The Boolean Bit The Circuit Bit The Control Bit The Physical Bit The Quantum Bit An Advantage">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Infomation and Entropy (1) Bits">
 <meta property="og:url" content="http://example.com/2023/11/13/InfoAndEntropy1Bits/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="参考资料：Information and Entropy by Prof. Paul Penfield Abstract. 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。   The Boolean Bit The Circuit Bit The Control Bit The Physical Bit The Quantum Bit An Advantage">
+<meta property="og:description" content="参考资料：Information and Entropy by Prof. Paul Penfield Abstract. 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。    The Boolean Bit The Circuit Bit The Control Bit The Physical Bit The Quantum Bit An Advantage">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/11/13/3Mly1NZvxim2AT8.png">
 <meta property="og:image" content="https://s2.loli.net/2023/11/13/ag5VnpfZxHlbMmC.png">
@@ -241,6 +241,7 @@
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>参考资料：<a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/">Information and Entropy by Prof. Paul Penfield</a></p>
 <p><strong>Abstract.</strong> 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。</p>
 <!-- toc -->
+
 <ul>
 <li><a href="#the-boolean-bit">The Boolean Bit</a></li>
 <li><a href="#the-circuit-bit">The Circuit Bit</a></li>
@@ -251,7 +252,9 @@
 <li><a href="#the-classical-bit">The Classical Bit</a></li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
+
 <p>度量信息的基本单位是 bits。</p>
 <p>通过考虑下列情景来体会信息的度量：</p>
 <ul>
@@ -273,53 +276,39 @@
 <li>信息有损失，或者因为数据自身而损失，或者在编码过程中损失。</li>
 <li>信息存在的物理形式局限于时间和空间，因而可以可以被发送、存储和提取。</li>
 </ul>
-<h1><span id="the-boolean-bit">The Boolean Bit</span></h1>
-<p>上述过程中用到的 $01$ 序列种的每一位称为 Boolean Bit。</p>
+<h1><span id="the-boolean-bit">The Boolean Bit</span></h1><p>上述过程中用到的 $01$ 序列种的每一位称为 Boolean Bit。</p>
 <p>为了进行进一步的讨论，我们需要一些布尔代数。</p>
-<p>考虑 $S = {0, 1}$，此时 $S\mapsto S$ 的一元函数有且仅有以下四种：IDENTITY，NOT，ZERO，ONE（名字直接的解释了作用）。</p>
+<p>考虑 $S &#x3D; {0, 1}$，此时 $S\mapsto S$ 的一元函数有且仅有以下四种：IDENTITY，NOT，ZERO，ONE（名字直接的解释了作用）。</p>
 <p>接下来考虑考虑二元函数。很明显一共有 $16$ 种，其中常用的有 AND，OR，XOR，NAND（not and），NOR（not or）这些函数实际上我们都很熟悉，因此这里不再列真值表。</p>
 <p>可以发现 AND 的效果类似于数域中的乘法，OR 类似于加法（实际上 XOR 更类似于加法），我们接受如下通用的记号：</p>
-<p>$$<br>
-\begin{matrix}<br>
-NOT &amp; \overline A \\<br>
-AND &amp; A\cdot B \\<br>
-NAND &amp; \overline{A\cdot B} \\<br>
-OR &amp; A + B \\<br>
-NOR &amp; \overline{A+B} \\<br>
-XOR &amp; A \oplus B<br>
-\end{matrix}<br>
-$$</p>
+<p>$$<br>\begin{matrix}<br>NOT &amp; \overline A \\<br>AND &amp; A\cdot B \\<br>NAND &amp; \overline{A\cdot B} \\<br>OR &amp; A + B \\<br>NOR &amp; \overline{A+B} \\<br>XOR &amp; A \oplus B<br>\end{matrix}<br>$$</p>
 <p>有一些实用的布尔函数的性质，比如：</p>
 <ul>
 <li><strong>Reversible.</strong> 根据结果可以推断出输入。比如说 $4$ 个单边缘函数种 IDENTITY 和 NOT 都是 Reversible 的。显而易见任何一个二元函数（只有一个输出）都不能是 Reversible 的。但是如果 $A\oplus B$ 同时返回结果和 $A$，那么它就是 Reversible 的。</li>
 <li><strong>Commutative.</strong> 即交换性。不多赘述。</li>
 </ul>
 <p>另外布尔代数中还有下面的运算律：</p>
-<p><img src="https://s2.loli.net/2023/11/13/3Mly1NZvxim2AT8.png" alt></p>
+<p><img src="https://s2.loli.net/2023/11/13/3Mly1NZvxim2AT8.png"></p>
 <p>注意 Boolean Bit 具有可复制性、可丢弃性（can be copied or discarded）。然而这个性质在量子的系统中不好，所以下面 $(1.3)$ 节中描述了量子比特的模型。</p>
-<h1><span id="the-circuit-bit">The Circuit Bit</span></h1>
-<p>一个将布尔表达式实体化的方式是组合逻辑电路。每一个布尔函数都可以对应一种门电路，如下表所示：</p>
-<p><img src="https://s2.loli.net/2023/11/13/ag5VnpfZxHlbMmC.png" alt></p>
+<h1><span id="the-circuit-bit">The Circuit Bit</span></h1><p>一个将布尔表达式实体化的方式是组合逻辑电路。每一个布尔函数都可以对应一种门电路，如下表所示：</p>
+<p><img src="https://s2.loli.net/2023/11/13/ag5VnpfZxHlbMmC.png"></p>
 <p>将门电路组合起来可以得到一些布尔表达式对应的电路。</p>
-<p><img src="https://s2.loli.net/2023/11/13/ArPMluojeWn7F3C.png" alt></p>
+<p><img src="https://s2.loli.net/2023/11/13/ArPMluojeWn7F3C.png"></p>
 <p>注意电路当中不应当有环，有环的逻辑电路称为时序逻辑电路，而布尔代数不适用于此类电路。</p>
 <p>Circuit Bit 也具有上面的性质（复制就是重复电路，丢弃就是输出端什么都不接）。</p>
-<h1><span id="the-control-bit">The Control Bit</span></h1>
-<p>写在程序里面的控制流，形如 <code>if P then A else B</code>。</p>
+<h1><span id="the-control-bit">The Control Bit</span></h1><p>写在程序里面的控制流，形如 <code>if P then A else B</code>。</p>
 <p>这东西的代数和 Boolean Bit 基本上是相同的，但是一个很有趣的差异是程序中存在短路运算，比如说一个 <code>and 0</code> 的参数的副作用会被废弃。</p>
 <p>实际上我有点没搞懂这一节和信息有什么关系。</p>
-<h1><span id="the-physical-bit">The Physical Bit</span></h1>
-<p>为了存储和传输信息，它必须要有一个物理的形式。</p>
+<h1><span id="the-physical-bit">The Physical Bit</span></h1><p>为了存储和传输信息，它必须要有一个物理的形式。</p>
 <p>一个直观的想法是盒子里面放小球。但是为了工程上的需要我们希望盒子和小球尽量小。这个下界在量子力学中有所讨论，在这里我们的水平不足以涉及。</p>
-<h1><span id="the-quantum-bit">The Quantum Bit</span></h1>
-<p>量子力学告诉我们一个小物体可能有两种可以被测量出的状态，这个性质和 bit 非常相似，因此我们引入 qubit（量子比特）。qubit 的取值常被记作 $|0\rangle$ 和 $|1\rangle$ 而非 $0, 1$，在推广到多于 1 个量子比特的时候这个记号比较方便，而且它和实数 $0, 1$ 相区别。</p>
+<h1><span id="the-quantum-bit">The Quantum Bit</span></h1><p>量子力学告诉我们一个小物体可能有两种可以被测量出的状态，这个性质和 bit 非常相似，因此我们引入 qubit（量子比特）。qubit 的取值常被记作 $|0\rangle$ 和 $|1\rangle$ 而非 $0, 1$，在推广到多于 1 个量子比特的时候这个记号比较方便，而且它和实数 $0, 1$ 相区别。</p>
 <p>量子力学中有三个特性，reversibility, superposition, entanglement，这使得 qubit 和传统的 bit 不同。</p>
 <p><strong>Reversibility.</strong> （可逆性）量子系统中的变换都是可逆的，因此 qubit 的代数中所有的函数都是 reversible 的，所以任何一个函数的输出都是不可丢弃（discard）的（不妨与 The Boolean Bit 一节中的性质对比）。但是在非封闭的量子系统中不可逆性会有两个来源：</p>
 <ol>
 <li>该系统和一个无法观测的环境之间存在交互，导致系统中信息损失。</li>
 <li>对系统状态的测量是不可逆的。</li>
 </ol>
-<p><strong>Superposition.</strong> （叠加性）在经典的情况下，每有一次测量我们就能确定这个 bit 的状态，而且我们可以重复测量多次。但是在量子系统中，我们还是只能问形如“测量对象是不是处于某态”的问题，然后得到一个确定的是/否的回答，且在此后的测量中我们将无法得到新的信息。我们也没法预知测量的结果，只能预知答案的概率分布。这个性质给单个 qubit 携带信息赋予了局限性和一些奇怪的机会。</p>
+<p><strong>Superposition.</strong> （叠加性）在经典的情况下，每有一次测量我们就能确定这个 bit 的状态，而且我们可以重复测量多次。但是在量子系统中，我们还是只能问形如“测量对象是不是处于某态”的问题，然后得到一个确定的是&#x2F;否的回答，且在此后的测量中我们将无法得到新的信息。我们也没法预知测量的结果，只能预知答案的概率分布。这个性质给单个 qubit 携带信息赋予了局限性和一些奇怪的机会。</p>
 <p>考虑下面的例子。光的方向偏振可以用来存储 1 bit 的信息。现在 Alice 可以给 Bob 发送一个水平或垂直偏振的光量子，然后 Bob 测量它是否是垂直偏振的。如果答案是 Yes，那么 Bob 就可以推测这个 qubit 的状态是 $|1\rangle$。</p>
 <p>那么我们思路打开，考虑除了水平垂直方向（称为 $\oplus$），再按其他方向，方便起见取 $\frac \pi 4, \frac {3\pi}{4}$ 方向发送光子（称为 $\otimes$）。此时如果选错了测量方向（下面称为<strong>偏振基</strong>），测量结果将是不确定的。具体地，测量结果将会以 $\cos^2 \theta$ 的概率出现 Yes，其中 $\theta$ 是选定的测量方向和实际偏振方向的夹角。而且在一次测量之后，该光子的偏振方向将会被“reset”至测量方向或者垂直于测量的方向。并且包括 Bob 在内的任何人都无法做到多次平行重复测量（包括直接多次测量和赋值光量子）</p>
 <p>结合如下量子密钥分发的过程来理解上述“reset”的作用。</p>
@@ -335,12 +324,10 @@ $$</p>
 </blockquote>
 <p><strong>Entanglement.</strong> （纠缠性）你可以通过某种方式产生两个或以上处于纠缠态的 qubit。这两个 qubit 可以被发送到不同的位置但是始终保持相同的方向，对一者的测量会影响到另一者。</p>
 <p>需要注意的是量子系统也可以不表现出量子性，比如说独立产生 qubit 并且只用 $\oplus$ 调制，这样获得的 qubit 就和一般的 boolean bit 没有什么区别。</p>
-<h1><span id="an-advantage-of-qubits">An Advantage of Qubits</span></h1>
-<p>似乎我们在 The Quantum Bit 一节中已经偷跑了书中这一节的内容，甚至更深入。</p>
-<h1><span id="the-classical-bit">The Classical Bit</span></h1>
-<p>和 qubit 相对的，测量不会影响其状态的 bit 都叫做 qubit。</p>
+<h1><span id="an-advantage-of-qubits">An Advantage of Qubits</span></h1><p>似乎我们在 The Quantum Bit 一节中已经偷跑了书中这一节的内容，甚至更深入。</p>
+<h1><span id="the-classical-bit">The Classical Bit</span></h1><p>和 qubit 相对的，测量不会影响其状态的 bit 都叫做 qubit。</p>
 <p>考虑到宏观物体也符合量子力学的定律，我们所谓的 classical bit 都是“近似的”完全不变的东西，随着集成电路的集成度越做越高，量子效应开始不可忽略。</p>
-<p><img src="https://s2.loli.net/2023/11/14/Z3zGdSWbMgnhi6K.png" alt></p>
+<p><img src="https://s2.loli.net/2023/11/14/Z3zGdSWbMgnhi6K.png"></p>
 <p>疑似这个讲义写于 2015 年前。</p>
 
     </div>
