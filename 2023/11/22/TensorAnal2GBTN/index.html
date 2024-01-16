@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。   General Bases The Jacobian of a Basis Is Nonzero The Summation Convention Computing the Dot Product in a Gener">
+    <meta name="description" content="Abstract. 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。    General Bases The Jacobian of a Basis Is Nonzero The Summation Convention Computing the Dot Product in a Gene">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensor Analysis (2) General Bases and Tensor Notation">
 <meta property="og:url" content="http://example.com/2023/11/22/TensorAnal2GBTN/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。   General Bases The Jacobian of a Basis Is Nonzero The Summation Convention Computing the Dot Product in a Gener">
+<meta property="og:description" content="Abstract. 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。    General Bases The Jacobian of a Basis Is Nonzero The Summation Convention Computing the Dot Product in a Gene">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2023/11/23/JK5utZqLpoAQ3EC.png">
 <meta property="og:image" content="https://s2.loli.net/2023/11/23/ICPkLJp9hTFOqBi.png">
@@ -245,6 +245,7 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。</p>
 <!-- toc -->
+
 <ul>
 <li><a href="#general-bases">General Bases</a></li>
 <li><a href="#the-jacobian-of-a-basis-is-nonzero">The Jacobian of a Basis Is Nonzero</a></li>
@@ -258,245 +259,116 @@
 <li><a href="#change-of-basis">Change of Basis</a></li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
-<h1><span id="general-bases">General Bases</span></h1>
-<p>考虑取 $\mathbb{R}^3$ 中的一组基 $\mathbf{g}_1, \mathbf{g}_2, \mathbf{g_3}$，则任意一个向量可以被唯一表出。</p>
-<p>$$<br>
-\mathbf{v} = \sum_{i=1}^3 v^i\mathbf{g_i}<br>
-$$</p>
+
+<h1><span id="general-bases">General Bases</span></h1><p>考虑取 $\mathbb{R}^3$ 中的一组基 $\mathbf{g}_1, \mathbf{g}_2, \mathbf{g_3}$，则任意一个向量可以被唯一表出。</p>
+<p>$$<br>\mathbf{v} &#x3D; \sum_{i&#x3D;1}^3 v^i\mathbf{g_i}<br>$$</p>
 <p>注意这里的 $i$ 在上标和下标位置上都表示编号而不是乘方，这个记号是一个伏笔。</p>
-<h1><span id="the-jacobian-of-a-basis-is-nonzero">The Jacobian of a Basis Is Nonzero</span></h1>
-<p><strong>Definition 2.1.</strong>(Jacobian Matrix) $G = (\mathbf{g}_1^T, \mathbf{g}_2^T, \mathbf{g_3}^T)$。</p>
-<p><strong>Definition 2.2.</strong>(Jacobian) $J = \mathrm{det~}G$。</p>
+<h1><span id="the-jacobian-of-a-basis-is-nonzero">The Jacobian of a Basis Is Nonzero</span></h1><p><strong>Definition 2.1.</strong>(Jacobian Matrix) $G &#x3D; (\mathbf{g}_1^T, \mathbf{g}_2^T, \mathbf{g_3}^T)$。</p>
+<p><strong>Definition 2.2.</strong>(Jacobian) $J &#x3D; \mathrm{det~}G$。</p>
 <p>根据线性代数我们知道如果 $\mathbf{g}_1, \mathbf{g}_2, \mathbf{g}_3$ 线性无关，必有 $J\ne 0$。</p>
-<h1><span id="the-summation-convention">The Summation Convention</span></h1>
-<p>由于我们的讨论都是 $\mathbb{R}^3$ 下的，所以求和指标是确定的。而且求和中的 $i$ 是一个 dummy variable。简便起见并且不丢失任何信息地，我们可以约定：去掉求和符号，用下面的方法来表示分解式</p>
-<p>$$<br>
-\mathbf{v} = v_i\mathbf{g}^i<br>
-$$</p>
-<p>这个记号表示分解式当且仅当两个相同的 dummy index 一个是上标，一个是下标。举例来说 $v^iv_i = \sum_i v^iv_i$，而 $v^iv^i$ 可能是 $v^1v^1, v^2v^2$ 或者 $v^3v^3$。</p>
+<h1><span id="the-summation-convention">The Summation Convention</span></h1><p>由于我们的讨论都是 $\mathbb{R}^3$ 下的，所以求和指标是确定的。而且求和中的 $i$ 是一个 dummy variable。简便起见并且不丢失任何信息地，我们可以约定：去掉求和符号，用下面的方法来表示分解式</p>
+<p>$$<br>\mathbf{v} &#x3D; v_i\mathbf{g}^i<br>$$</p>
+<p>这个记号表示分解式当且仅当两个相同的 dummy index 一个是上标，一个是下标。举例来说 $v^iv_i &#x3D; \sum_i v^iv_i$，而 $v^iv^i$ 可能是 $v^1v^1, v^2v^2$ 或者 $v^3v^3$。</p>
 <p>这个约定是爱因斯坦提出的，称为爱因斯坦求和约定。这个约定现在看起来非常奇怪，但是到第六节之后它的简便性就会有所体现。</p>
-<h1><span id="computing-the-dot-product-in-a-general-basis">Computing the Dot Product in a General Basis</span></h1>
-<p>很明显在任意基下面我们就不能用原来对位相乘的方法来计算点积。正确的表达式是</p>
-<p>$$<br>
-\mathbf{u}\cdot\mathbf{v} = u^iv^j\mathbf{g}_i\cdot\mathbf{g}_j<br>
-$$</p>
+<h1><span id="computing-the-dot-product-in-a-general-basis">Computing the Dot Product in a General Basis</span></h1><p>很明显在任意基下面我们就不能用原来对位相乘的方法来计算点积。正确的表达式是</p>
+<p>$$<br>\mathbf{u}\cdot\mathbf{v} &#x3D; u^iv^j\mathbf{g}_i\cdot\mathbf{g}_j<br>$$</p>
 <p>这个是一个九项的式子，为了让它更简单我们引入 reciprocal base vectors。</p>
-<h1><span id="reciprocal-base-vectors">Reciprocal Base Vectors</span></h1>
-<p>先考虑二维的情形，现在要计算 $\mathbf{u}\cdot\mathbf{v}$，我们将 $u$ 分解为 $\mathbf{u} = u^1\mathbf{g}_1 + u^2\mathbf{g}_2$。</p>
+<h1><span id="reciprocal-base-vectors">Reciprocal Base Vectors</span></h1><p>先考虑二维的情形，现在要计算 $\mathbf{u}\cdot\mathbf{v}$，我们将 $u$ 分解为 $\mathbf{u} &#x3D; u^1\mathbf{g}_1 + u^2\mathbf{g}_2$。</p>
 <p>现在我们找一组新的基 $\mathbf{g}^1, \mathbf{g}^2$，将 $\mathbf{v}$ 用这两个向量表出，然后写出乘积式。</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{u}\cdot\mathbf{v} &amp;= (u^1\mathbf{g}_1 + u^2\mathbf{g}_2)(v_1\mathbf{g}^2 + v_2\mathbf{g^2}) \\<br>
-&amp;= u^1v_1\mathbf{g}_1\mathbf{g}^1+u^1v_2\mathbf{g}_1\mathbf{g}^2+u^2v_1\mathbf{g}_2\mathbf{g}^1+u^2v_2\mathbf{g}_2\mathbf{g}^2<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{u}\cdot\mathbf{v} &amp;&#x3D; (u^1\mathbf{g}_1 + u^2\mathbf{g}_2)(v_1\mathbf{g}^2 + v_2\mathbf{g^2}) \\<br>&amp;&#x3D; u^1v_1\mathbf{g}_1\mathbf{g}^1+u^1v_2\mathbf{g}_1\mathbf{g}^2+u^2v_1\mathbf{g}_2\mathbf{g}^1+u^2v_2\mathbf{g}_2\mathbf{g}^2<br>\end{aligned}<br>$$</p>
 <p>我们希望这个式子保持原来对点相乘的简单形式，也就是要求</p>
-<p>$$<br>
-g_ig^i = 1, g^ig^j = 0 (i\ne j)<br>
-$$</p>
+<p>$$<br>g_ig^i &#x3D; 1, g^ig^j &#x3D; 0 (i\ne j)<br>$$</p>
 <p>事实上这时候，从几何上已经非常容易理解了，如下图所示我们可以找到 reciprocal base vector</p>
-<p><img src="https://s2.loli.net/2023/11/23/JK5utZqLpoAQ3EC.png" alt></p>
+<p><img src="https://s2.loli.net/2023/11/23/JK5utZqLpoAQ3EC.png"></p>
 <p>但是我们还希望有一个代数上的方法。</p>
 <p>首先写出 $\mathbf{g}_1, \mathbf{g}_2, \mathbf{g}_3$ 的 Jacobian Matrix $G_1$ 和 $\mathbf{g}^1, \mathbf{g}^2, \mathbf{g}^3$ 的 Jacobian Matrix $G_2$。</p>
 <p>拓展并翻译上面的条件，就是</p>
-<p>$$<br>
-\mathbf{g}_i (\mathbf{g}^i)^T = \delta_i^j<br>
-$$</p>
+<p>$$<br>\mathbf{g}_i (\mathbf{g}^i)^T &#x3D; \delta_i^j<br>$$</p>
 <p>其中 $\delta_{ij}$ 是 Kronecker delta 函数，满足</p>
-<p>$$<br>
-\delta_i^j = [i = j]<br>
-$$</p>
+<p>$$<br>\delta_i^j &#x3D; [i &#x3D; j]<br>$$</p>
 <p>换言之</p>
-<p>$$<br>
-G_1G_2^T = I<br>
-$$</p>
+<p>$$<br>G_1G_2^T &#x3D; I<br>$$</p>
 <p>也就是</p>
-<p>$$<br>
-G_2 = (G_1^{-1})^T<br>
-$$</p>
-<h1><span id="the-roof-contravariant-and-cellar-covariant-components-of-a-vector">The Roof (Contravariant) and Cellar (Covariant) Components of a Vector</span></h1>
-<p>翻译是逆变分量 （Contravariant Component）和协变分量（Covariant Component）。这个名字的意义暂时不是很明确，方便起见我们下文均采用 Roof Component 和 Cellar Component 的说法。</p>
+<p>$$<br>G_2 &#x3D; (G_1^{-1})^T<br>$$</p>
+<h1><span id="the-roof-contravariant-and-cellar-covariant-components-of-a-vector">The Roof (Contravariant) and Cellar (Covariant) Components of a Vector</span></h1><p>翻译是逆变分量 （Contravariant Component）和协变分量（Covariant Component）。这个名字的意义暂时不是很明确，方便起见我们下文均采用 Roof Component 和 Cellar Component 的说法。</p>
 <p>也就是上面的在 $\mathbf{g}_i$ 和 $\mathbf{g}^i$ 下的分解。你可以这样记忆，Roof 是指 $v^i\mathbf{g_i}$ 中 $v^i$ 是上标（Roof）。而且由于某些巧合，这里的 Roof 和 Cellar 和矩阵的 Row 和 Column 是联系的。</p>
 <p>推导 Cellar Components 可以采用如下方法。</p>
-<p>$$<br>
-(v_i\mathbf{g}^i)\cdot \mathbf{g}_j = v\cdot\mathbf{g}_j<br>
-$$</p>
+<p>$$<br>(v_i\mathbf{g}^i)\cdot \mathbf{g}_j &#x3D; v\cdot\mathbf{g}_j<br>$$</p>
 <p>将左式展开</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathrm{LHS} &amp;= v_i\mathbf{g}^i\cdot\mathbf{g}_j \\<br>
-&amp;= v_i\delta_j^i  \\<br>
-&amp;= v_j<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{LHS} &amp;&#x3D; v_i\mathbf{g}^i\cdot\mathbf{g}_j \\<br>             &amp;&#x3D; v_i\delta_j^i  \\<br>             &amp;&#x3D; v_j<br>\end{aligned}<br>$$</p>
 <p>因此</p>
-<p>$$<br>
-v_i = \mathbf{v}\cdot\mathbf{g}_i \tag{1}<br>
-$$</p>
+<p>$$<br>v_i &#x3D; \mathbf{v}\cdot\mathbf{g}_i \tag{1}<br>$$</p>
 <p>可以用同样的方法推出</p>
-<p>$$<br>
-v^j = \mathbf{v}\cdot\mathbf{g}^j \tag{2}<br>
-$$</p>
+<p>$$<br>v^j &#x3D; \mathbf{v}\cdot\mathbf{g}^j \tag{2}<br>$$</p>
 <p>这个推导方法和我们熟知的反演非常相似。</p>
 <p>这也启发我们 kronecker delta 函数可以视为一种 replacement operator（换位算符）。形式化地</p>
-<p>$$<br>
-v^i\delta_i^j = v^j<br>
-$$</p>
-<h1><span id="simplification-of-the-component-form-of-the-dot-product-in-a-general-basis">Simplification of the Component Form of the Dot Product in a General Basis</span></h1>
-<p>根据上文的铺垫我们容易进行以下推导</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{u}\cdot\mathbf{v} &amp;= u^iv_j\mathbf{g}_i\cdot\mathbf{g}^j \\<br>
-&amp;= u^iv_j\delta_i^j \\<br>
-&amp;= u^iv_i<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>v^i\delta_i^j &#x3D; v^j<br>$$</p>
+<h1><span id="simplification-of-the-component-form-of-the-dot-product-in-a-general-basis">Simplification of the Component Form of the Dot Product in a General Basis</span></h1><p>根据上文的铺垫我们容易进行以下推导</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{u}\cdot\mathbf{v} &amp;&#x3D; u^iv_j\mathbf{g}_i\cdot\mathbf{g}^j \\<br>                          &amp;&#x3D; u^iv_j\delta_i^j \\<br>                          &amp;&#x3D; u^iv_i<br>\end{aligned}<br>$$</p>
 <p>当然你一开始如果将 $\mathbf{u}$ 分解为 Cellar Components，那么也可以写成</p>
-<p>$$<br>
-\mathbf{u}\cdot\mathbf{v} = u_iv^i<br>
-$$</p>
-<h1><span id="computing-the-cross-product-in-a-general-basis">Computing the Cross Product in a General Basis</span></h1>
-<p>现考虑如何求解 $\mathbf{u}\times\mathbf{v}$ 在 General Basis 下面的分解式，不妨求解它的 Cellar Components。</p>
-<p>$$<br>
-\mathbf{u}\times\mathbf{v} = (\mathbf{u}\times\mathbf{v})_k\mathbf{g}^k<br>
-$$</p>
+<p>$$<br>\mathbf{u}\cdot\mathbf{v} &#x3D; u_iv^i<br>$$</p>
+<h1><span id="computing-the-cross-product-in-a-general-basis">Computing the Cross Product in a General Basis</span></h1><p>现考虑如何求解 $\mathbf{u}\times\mathbf{v}$ 在 General Basis 下面的分解式，不妨求解它的 Cellar Components。</p>
+<p>$$<br>\mathbf{u}\times\mathbf{v} &#x3D; (\mathbf{u}\times\mathbf{v})_k\mathbf{g}^k<br>$$</p>
 <p>对于 $(\mathbf{u}\times\mathbf{v})_k$，将 $\mathbf{u}, \mathbf{v}$ 分解为 Roof Components，然后利用上一节的结论</p>
-<p>$$<br>
-\begin{aligned}<br>
-(\mathbf{u}\times\mathbf{v})_k &amp;= ((u^i\mathbf{g}_i)\times(v^j\mathbf{g}_j))\cdot \mathbf{g}_k \\<br>
-&amp;= u^iv^j(\mathbf{g}_i\times\mathbf{g}_j)\cdot\mathbf{g}_k<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>(\mathbf{u}\times\mathbf{v})_k &amp;&#x3D; ((u^i\mathbf{g}_i)\times(v^j\mathbf{g}_j))\cdot \mathbf{g}_k \\<br>                               &amp;&#x3D; u^iv^j(\mathbf{g}_i\times\mathbf{g}_j)\cdot\mathbf{g}_k<br>\end{aligned}<br>$$</p>
 <p>后面的混合积我们是熟悉的，如果 $i, j, k$ 两两不同，那么得到的东西是 $\pm J$（J 是 $\mathbf{g}_1, \mathbf{g}_2, \mathbf{g}_3$ Jacobian），否则为 $0$。这里我们引入 Levi-Civita 记号，其中</p>
-<p>$$<br>
-\epsilon_{ijk} = \begin{cases}<br>
-J, &amp; i, j, k \text{ is an even permutation of } (1, 2, 3) \\<br>
--J, &amp; i, j, k \text{ is an odd permutation of } (1, 2, 3) \\<br>
-0, &amp; \text{otherwise}<br>
-\end{cases}<br>
-$$</p>
+<p>$$<br>\epsilon_{ijk} &#x3D; \begin{cases}<br>J, &amp; i, j, k \text{ is an even permutation of } (1, 2, 3) \\<br>-J, &amp; i, j, k \text{ is an odd permutation of } (1, 2, 3) \\<br>0, &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
 <p>然后叉乘可以改写成</p>
-<p>$$<br>
-\mathbf{u}\times\mathbf{v} = \epsilon_{ijk}u^iv^j\mathbf{g}^k<br>
-$$</p>
+<p>$$<br>\mathbf{u}\times\mathbf{v} &#x3D; \epsilon_{ijk}u^iv^j\mathbf{g}^k<br>$$</p>
 <p>接下来，如果需要 $\mathbf{u}\times\mathbf{v}$ 的 Roof Component，这个推导和上面的过程是高度相似的，只是现在混合积变成了 $\mathbf{g}^1, \mathbf{g}^2, \mathbf{g^3}$ 的 Jacobian，根据 Reciprocal Base Vectors 的关系，可以知道此时的 Jacobian 是 $J^{-1}$，因此 Levi-Civita 记号需要相应改写为</p>
-<p>$$<br>
-\epsilon^{ijk} = \begin{cases}<br>
-J^{-1}, &amp; i, j, k \text{ is an even permutation of } (1, 2, 3) \\<br>
--J^{-1}, &amp; i, j, k \text{ is an odd permutation of } (1, 2, 3) \\<br>
-0, &amp; \text{otherwise}<br>
-\end{cases}<br>
-$$</p>
+<p>$$<br>\epsilon^{ijk} &#x3D; \begin{cases}<br>J^{-1}, &amp; i, j, k \text{ is an even permutation of } (1, 2, 3) \\<br>-J^{-1}, &amp; i, j, k \text{ is an odd permutation of } (1, 2, 3) \\<br>0, &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
 <p>叉乘可以写作</p>
-<p>$$<br>
-\mathbf{u}\times\mathbf{v} = \epsilon^{ijk}u_iv_j\mathbf{g}_k<br>
-$$</p>
+<p>$$<br>\mathbf{u}\times\mathbf{v} &#x3D; \epsilon^{ijk}u_iv_j\mathbf{g}_k<br>$$</p>
 <p>显而易见</p>
-<p>$$<br>
-\epsilon_{ijk} = J^2\epsilon^{ijk}<br>
-$$</p>
+<p>$$<br>\epsilon_{ijk} &#x3D; J^2\epsilon^{ijk}<br>$$</p>
 <blockquote>
 <p><strong>Hint.</strong> $\epsilon_{ijk}$ 和 $\epsilon^{ijk}$ 又称为 Permutation Tensor 的 Cellar Component 和 Roof Component（【Fixme：Exercise 2.13】）</p>
 </blockquote>
 <p><strong>Proposition 1.</strong></p>
-<p>$$<br>
-\epsilon^{ijk}\epsilon_{pqr} = \left\vert\begin{matrix}<br>
-\delta^i_p &amp; \delta^i_q &amp; \delta^i_r \\<br>
-\delta^j_p &amp; \delta^j_q &amp; \delta^j_r \\<br>
-\delta^k_p &amp; \delta^k_q &amp; \delta^k_r<br>
-\end{matrix}\right\vert<br>
-$$</p>
+<p>$$<br>\epsilon^{ijk}\epsilon_{pqr} &#x3D; \left\vert\begin{matrix}<br>    \delta^i_p &amp; \delta^i_q &amp; \delta^i_r \\<br>    \delta^j_p &amp; \delta^j_q &amp; \delta^j_r \\<br>    \delta^k_p &amp; \delta^k_q &amp; \delta^k_r<br>\end{matrix}\right\vert<br>$$</p>
 <p><strong>Proof.</strong> 只需要验证 $ijk$ 和 $pqr$ 均取 123 的情形，其余情况或者平凡或者可以对称得到。$\square$</p>
 <p><strong>Corollary 1.</strong></p>
-<p>$$<br>
-\epsilon^{ijk}\epsilon_{pqk} = \delta_p^i\delta_q^j - \delta_q^i\delta_p^j<br>
-$$</p>
-<h1><span id="a-second-order-tensor-has-four-sets-of-components-in-general">A Second Order Tensor Has Four Sets of Components in General</span></h1>
-<p>接下来我们考虑二阶张量在 General Bases 下的分量。</p>
+<p>$$<br>\epsilon^{ijk}\epsilon_{pqk} &#x3D; \delta_p^i\delta_q^j - \delta_q^i\delta_p^j<br>$$</p>
+<h1><span id="a-second-order-tensor-has-four-sets-of-components-in-general">A Second Order Tensor Has Four Sets of Components in General</span></h1><p>接下来我们考虑二阶张量在 General Bases 下的分量。</p>
 <p>首先我们可以将作用的向量分解为 Roof Component，此时我们需要知道</p>
-<p>$$<br>
-\mathbf{T}g_j = \mathbf{T}_j<br>
-$$</p>
+<p>$$<br>\mathbf{T}g_j &#x3D; \mathbf{T}_j<br>$$</p>
 <p>然后对得到的东西分解为 Cellar Component，此时我们需要知道</p>
-<p>$$<br>
-T_{ij}\mathbf{g}^i = \mathbf{T}_j<br>
-$$</p>
+<p>$$<br>T_{ij}\mathbf{g}^i &#x3D; \mathbf{T}_j<br>$$</p>
 <p>套用式 $(6.1)$，得到</p>
-<p>$$<br>
-T_{ij} = \mathbf{g}_i\cdot\mathbf{Tg}_j<br>
-$$</p>
+<p>$$<br>T_{ij} &#x3D; \mathbf{g}_i\cdot\mathbf{Tg}_j<br>$$</p>
 <p>然后我们试图将上面的式子写成此前定义的直积的形式。</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{Tv} &amp;= \mathbf{T}(v^j\mathbf{g}_j) \\<br>
-&amp;= v^j\mathbf{T}\mathbf{g}_j \\<br>
-&amp;= v^j\mathbf{T}_j \\<br>
-&amp;= v^jT_{ij}\mathbf{g}^i \\<br>
-&amp;= T_{ij}(\mathbf{g}^j\cdot v)\mathbf{g}^i \\<br>
-&amp;= T_{ij}\mathbf{g}^i\mathbf{g}^j(\mathbf{v})<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{Tv} &amp;&#x3D; \mathbf{T}(v^j\mathbf{g}_j) \\<br>            &amp;&#x3D; v^j\mathbf{T}\mathbf{g}_j \\<br>            &amp;&#x3D; v^j\mathbf{T}_j \\<br>            &amp;&#x3D; v^jT_{ij}\mathbf{g}^i \\<br>            &amp;&#x3D; T_{ij}(\mathbf{g}^j\cdot v)\mathbf{g}^i \\<br>            &amp;&#x3D; T_{ij}\mathbf{g}^i\mathbf{g}^j(\mathbf{v})<br>\end{aligned}<br>$$</p>
 <p>换言之</p>
-<p>$$<br>
-\mathbf{T} = T_{ij}\mathbf{g}^i\mathbf{g}^j<br>
-$$</p>
+<p>$$<br>\mathbf{T} &#x3D; T_{ij}\mathbf{g}^i\mathbf{g}^j<br>$$</p>
 <p>这称为 $\mathbf{T}$ 的 Cellar Component。</p>
 <p>类似于我们之前的提取思路，我们将基全部换成对应的 reciprocal base vector，可以得到</p>
-<p>$$<br>
-T^{ij} = \mathbf{g}^i\cdot\mathbf{Tg}^j, \qquad \mathbf{T} = T^{ij}\mathbf{g}_i\mathbf{g}_j<br>
-$$</p>
+<p>$$<br>T^{ij} &#x3D; \mathbf{g}^i\cdot\mathbf{Tg}^j, \qquad \mathbf{T} &#x3D; T^{ij}\mathbf{g}_i\mathbf{g}_j<br>$$</p>
 <p>这称为 $\mathbf{T}$ 的 Roof Component。</p>
 <p>可以想象还有两个 Mixed Component。</p>
-<p>$$<br>
-T^i_{\cdot j} = g^i\cdot\mathbf{Tg}_j, T^{\cdot i}_j = \mathbf{g}_j\mathbf{Tg}^i<br>
-$$</p>
+<p>$$<br>T^i_{\cdot j} &#x3D; g^i\cdot\mathbf{Tg}_j, T^{\cdot i}_j &#x3D; \mathbf{g}_j\mathbf{Tg}^i<br>$$</p>
 <p>一般地 $T^i_{\cdot j}\ne T^{\cdot i}_j$。同理可以证明</p>
-<p>$$<br>
-\mathbf{T} = T^i_{\cdot j}\mathbf{g}_i\mathbf{g}^j = T^{\cdot i}_j\mathbf{g}^j\mathbf{g}_i<br>
-$$</p>
+<p>$$<br>\mathbf{T} &#x3D; T^i_{\cdot j}\mathbf{g}_i\mathbf{g}^j &#x3D; T^{\cdot i}_j\mathbf{g}^j\mathbf{g}_i<br>$$</p>
 <p>如果 $\mathbf{T}$ 是对称的，那么有</p>
-<p>$$<br>
-\begin{aligned}<br>
-T_{ij} &amp;= \mathbf{g}_i\cdot\mathbf{Tg} &amp;\\<br>
-&amp;= \mathbf{g}_j\cdot\mathbf{T}^T\mathbf{g}_i &amp; (\text{Definition of } \mathbf{T}^T) \\<br>
-&amp;= \mathbf{g}_j\cdot\mathbf{T}\mathbf{g}_i &amp; (\mathbf{T}\text{ is Symmetric}) \\<br>
-&amp;=T_{ji}<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>T_{ij} &amp;&#x3D; \mathbf{g}_i\cdot\mathbf{Tg} &amp;\\<br>       &amp;&#x3D; \mathbf{g}_j\cdot\mathbf{T}^T\mathbf{g}_i &amp; (\text{Definition of } \mathbf{T}^T) \\<br>       &amp;&#x3D; \mathbf{g}_j\cdot\mathbf{T}\mathbf{g}_i &amp; (\mathbf{T}\text{ is Symmetric}) \\<br>       &amp;&#x3D;T_{ji}<br>\end{aligned}<br>$$</p>
 <p>这表明矩阵 $(T_{ij})$ 也是对称的，类似地 $(T^{ij})$ 也是对称的，但是两个 Mixed Component 的矩阵则未必是对称的。你会发现这里存在某种交叉相等的关系。</p>
-<h1><span id="change-of-basis">Change of Basis</span></h1>
-<p>在给定的参考系下，向量和张量都不依赖于坐标系的选取，换言之他们都是 geometric invariant。当我们选取的基底变化时，变化的是他们的分量式而不是其本身。</p>
+<h1><span id="change-of-basis">Change of Basis</span></h1><p>在给定的参考系下，向量和张量都不依赖于坐标系的选取，换言之他们都是 geometric invariant。当我们选取的基底变化时，变化的是他们的分量式而不是其本身。</p>
 <p>下面我们希望推导坐标变换时张量的 component 的表示。</p>
 <p>考虑一组新的基 $\widetilde{\mathbf{g}}_i$，它和 $\mathbf{g}_i$ 的关系如下</p>
-<p>$$<br>
-\widetilde{\mathbf{g}}_i = A_i^j\mathbf{g}_j<br>
-$$</p>
+<p>$$<br>\widetilde{\mathbf{g}}_i &#x3D; A_i^j\mathbf{g}_j<br>$$</p>
 <p>或者用矩阵的形式表示（这里基底都写成列向量，$A_i^j$ 是 $A$ 的第 $i$ 列第 $j$ 行）</p>
-<p>$$<br>
-\widetilde{G} = GA<br>
-$$</p>
+<p>$$<br>\widetilde{G} &#x3D; GA<br>$$</p>
 <p>由于 $G, \widetilde{G}$ 都可逆（它们的列向量都是基），$A$ 也可逆，因此</p>
-<p>$$<br>
-G = \widetilde{G}A^{-1}<br>
-$$</p>
+<p>$$<br>G &#x3D; \widetilde{G}A^{-1}<br>$$</p>
 <p>或者写成分量的形式</p>
-<p>$$<br>
-\mathbf{g}_i = (A^{-1})_i^j\widetilde{\mathbf{g}}_j<br>
-$$</p>
+<p>$$<br>\mathbf{g}_i &#x3D; (A^{-1})_i^j\widetilde{\mathbf{g}}_j<br>$$</p>
 <p>将两边求逆，还可以得到</p>
-<p>$$<br>
-\begin{aligned}<br>
-&amp;\widetilde{G}^{-1} = A^{-1}G^{-1}, &amp; &amp;\mathbf{\widetilde{g}}^i = (A^{-1})_j^i\mathbf{g}^j \\<br>
-&amp;G^{-1} = A\widetilde{G}^{-1},      &amp; &amp;\mathbf{g}^i = A_j^i\widetilde{\mathbf{g}}^j<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    &amp;\widetilde{G}^{-1} &#x3D; A^{-1}G^{-1}, &amp; &amp;\mathbf{\widetilde{g}}^i &#x3D; (A^{-1})_j^i\mathbf{g}^j \\<br>    &amp;G^{-1} &#x3D; A\widetilde{G}^{-1},      &amp; &amp;\mathbf{g}^i &#x3D; A_j^i\widetilde{\mathbf{g}}^j<br>\end{aligned}<br>$$</p>
 <p>以及坐标变换后向量的坐标表示</p>
-<p>$$<br>
-\widetilde{v}_i = \widetilde{\mathbf{g}}_i\cdot\mathbf{v} = A_i^j\mathbf{g}_j\cdot \mathbf{v} = A_i^jv_j<br>
-$$</p>
+<p>$$<br>\widetilde{v}_i &#x3D; \widetilde{\mathbf{g}}_i\cdot\mathbf{v} &#x3D; A_i^j\mathbf{g}_j\cdot \mathbf{v} &#x3D; A_i^jv_j<br>$$</p>
 <p>上面的结果经过一些琐碎的推导也可以得到张量的坐标变换公式</p>
-<p><img src="https://s2.loli.net/2023/11/23/ICPkLJp9hTFOqBi.png" alt></p>
+<p><img src="https://s2.loli.net/2023/11/23/ICPkLJp9hTFOqBi.png"></p>
 
     </div>
 
