@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">14</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -134,7 +134,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -159,6 +159,139 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/19/InfoAndEntropy2Codes/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/19/InfoAndEntropy2Codes/" class="post-title-link" itemprop="url">Infomation and Entropy (2) Codes</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-19 20:43:21" itemprop="dateCreated datePublished" datetime="2023-11-19T20:43:21+08:00">2023-11-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-12 15:54:51" itemprop="dateModified" datetime="2024-01-12T15:54:51+08:00">2024-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Information-and-Entropy/" itemprop="url" rel="index"><span itemprop="name">Information and Entropy</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 上一章中我们提到了传输信息的过程中有涉及到 Setup 和 Outcome 两个过程，对应的是对信息的编码和解码。</p>
+<p>这一章我们主要谈编码。</p>
+<p>然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。</p>
+<!-- toc -->
+<ul>
+<li><a href="#symbol-space-size">Symbol Space Size</a></li>
+<li><a href="#use-of-spare-capacity">Use of Spare Capacity</a>
+<ul>
+<li><a href="#binary-coded-decimalbcd">Binary Coded Decimal（BCD）</a></li>
+<li><a href="#genetic-code">Genetic Code</a></li>
+<li><a href="#telephone-area-codes">Telephone Area Codes</a></li>
+<li><a href="#ip-address">IP Address</a></li>
+<li><a href="#ascii">ASCII</a></li>
+</ul>
+</li>
+<li><a href="#extension-of-codes">Extension of Codes</a></li>
+<li><a href="#fixed-length-and-variable-length-codes">Fixed-Length and Variable-Length Codes</a>
+<ul>
+<li><a href="#morse-code">Morse Code</a></li>
+</ul>
+</li>
+<li><a href="#detail-ascii">Detail: ASCII</a></li>
+<li><a href="#detail-integer-codes">Detail: Integer Codes</a>
+<ul>
+<li><a href="#binary-code">Binary Code</a></li>
+<li><a href="#gray-code">Gray Code</a></li>
+<li><a href="#2s-complement">2’s Complement</a></li>
+<li><a href="#signmagnitude">Sign/Magnitude</a></li>
+<li><a href="#1s-complement">1’s Complement</a></li>
+</ul>
+</li>
+<li><a href="#detail-the-genetic-code-ip-addresses-ip-addresses">Detail: The Genetic Code / IP Addresses / IP Addresses</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/19/InfoAndEntropy2Codes/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -204,7 +337,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-12 15:55:31" itemprop="dateModified" datetime="2024-01-12T15:55:31+08:00">2024-01-12</time>
+      <time title="Modified: 2024-01-15 11:23:16" itemprop="dateModified" datetime="2024-01-15T11:23:16+08:00">2024-01-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -237,7 +370,6 @@
           <p><strong>Abstract.</strong> 参考资料是 James G Simmonds 的 A Brief on Tensor Analysis。</p>
 <p>本章是向量代数和张量代数基础。</p>
 <!-- toc -->
-
 <ul>
 <li><a href="#directed-line-segments">Directed Line Segments</a></li>
 <li><a href="#addition-multiplication-by-scalar">Addition, Multiplication by Scalar</a></li>
@@ -320,7 +452,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-12 15:54:45" itemprop="dateModified" datetime="2024-01-12T15:54:45+08:00">2024-01-12</time>
+      <time title="Modified: 2024-01-15 11:23:08" itemprop="dateModified" datetime="2024-01-15T11:23:08+08:00">2024-01-15</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,7 +485,6 @@
           <p>参考资料：<a target="_blank" rel="noopener" href="https://ocw.mit.edu/courses/6-050j-information-and-entropy-spring-2008/resources/mit6_050js08_textbook/">Information and Entropy by Prof. Paul Penfield</a></p>
 <p><strong>Abstract.</strong> 讲了各种 bit。科普性质比较大，里面除了量子比特之外涉及的知识都是常识的真子集。</p>
 <!-- toc -->
-
 <ul>
 <li><a href="#the-boolean-bit">The Boolean Bit</a></li>
 <li><a href="#the-circuit-bit">The Circuit Bit</a></li>
@@ -440,17 +571,18 @@
     
     <div class="post-body" itemprop="articleBody">
           <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2><span id="quick-start">Quick Start</span></h2><h3><span id="create-a-new-post">Create a new post</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
+<h2><span id="quick-start">Quick Start</span></h2>
+<h3><span id="create-a-new-post">Create a new post</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3><span id="run-server">Run server</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
+<h3><span id="run-server">Run server</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3><span id="generate-static-files">Generate static files</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
+<h3><span id="generate-static-files">Generate static files</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
+<h3><span id="deploy-to-remote-sites">Deploy to remote sites</span></h3>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
 <p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 
       
