@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 命题逻辑相关的内容，跳过了众所周知的内容，写一些以前没见过的。 第一节主要从语义角度讨论命题逻辑的等值和推理，第二节从语法角度讨论命题逻辑的公理系统，以完备性（和可靠性，但是这里没写）作为连接两者的桥梁。在开头简单阐释一下语义和语法的概念：语义意义下任何等值的变换都可以接受，语法意义下只有变换规则给出的变换可以接受。 参考资料是 thu 的数理逻辑与集合论教材。    命题逻辑">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数理逻辑与集合论 (1) 命题逻辑">
+<meta property="og:url" content="http://example.com/2024/01/22/Logic1Basic/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 命题逻辑相关的内容，跳过了众所周知的内容，写一些以前没见过的。 第一节主要从语义角度讨论命题逻辑的等值和推理，第二节从语法角度讨论命题逻辑的公理系统，以完备性（和可靠性，但是这里没写）作为连接两者的桥梁。在开头简单阐释一下语义和语法的概念：语义意义下任何等值的变换都可以接受，语法意义下只有变换规则给出的变换可以接受。 参考资料是 thu 的数理逻辑与集合论教材。    命题逻辑">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-01-22T05:33:08.000Z">
+<meta property="article:modified_time" content="2024-01-24T13:41:49.731Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/01/22/Logic1Basic/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/01/22/Logic1Basic/","path":"2024/01/22/Logic1Basic/","title":"数理逻辑与集合论 (1) 命题逻辑"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数理逻辑与集合论 (1) 命题逻辑 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">命题逻辑的等值和推理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">命题公式与真值表的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.1.1.</span> <span class="nav-text">主析取范式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">联结词的完备集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">对偶式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">推理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.1.</span> <span class="nav-text">重言蕴含</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.2.</span> <span class="nav-text">推理演算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.4.3.</span> <span class="nav-text">归结推理法（Resolution）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">命题逻辑的公理化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">完备性证明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">自然演绎系统</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">15</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/22/Logic1Basic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="数理逻辑与集合论 (1) 命题逻辑 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数理逻辑与集合论 (1) 命题逻辑
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-01-22 13:33:08" itemprop="dateCreated datePublished" datetime="2024-01-22T13:33:08+08:00">2024-01-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-24 21:41:49" itemprop="dateModified" datetime="2024-01-24T21:41:49+08:00">2024-01-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Mathematical-Logic/" itemprop="url" rel="index"><span itemprop="name">Mathematical Logic</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 命题逻辑相关的内容，跳过了众所周知的内容，写一些以前没见过的。</p>
+<p>第一节主要从语义角度讨论命题逻辑的等值和推理，第二节从语法角度讨论命题逻辑的公理系统，以完备性（和可靠性，但是这里没写）作为连接两者的桥梁。在开头简单阐释一下语义和语法的概念：语义意义下任何等值的变换都可以接受，语法意义下只有变换规则给出的变换可以接受。</p>
+<p>参考资料是 thu 的数理逻辑与集合论教材。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91%E7%9A%84%E7%AD%89%E5%80%BC%E5%92%8C%E6%8E%A8%E7%90%86">命题逻辑的等值和推理</a><ul>
+<li><a href="#%E5%91%BD%E9%A2%98%E5%85%AC%E5%BC%8F%E4%B8%8E%E7%9C%9F%E5%80%BC%E8%A1%A8%E7%9A%84%E5%85%B3%E7%B3%BB">命题公式与真值表的关系</a><ul>
+<li><a href="#%E4%B8%BB%E6%9E%90%E5%8F%96%E8%8C%83%E5%BC%8F">主析取范式</a></li>
+</ul>
+</li>
+<li><a href="#%E8%81%94%E7%BB%93%E8%AF%8D%E7%9A%84%E5%AE%8C%E5%A4%87%E9%9B%86">联结词的完备集</a></li>
+<li><a href="#%E5%AF%B9%E5%81%B6%E5%BC%8F">对偶式</a></li>
+<li><a href="#%E6%8E%A8%E7%90%86">推理</a><ul>
+<li><a href="#%E9%87%8D%E8%A8%80%E8%95%B4%E5%90%AB">重言蕴含</a></li>
+<li><a href="#%E6%8E%A8%E7%90%86%E6%BC%94%E7%AE%97">推理演算</a></li>
+<li><a href="#%E5%BD%92%E7%BB%93%E6%8E%A8%E7%90%86%E6%B3%95resolution">归结推理法（Resolution）</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91%E7%9A%84%E5%85%AC%E7%90%86%E5%8C%96">命题逻辑的公理化</a><ul>
+<li><a href="#%E5%AE%8C%E5%A4%87%E6%80%A7%E8%AF%81%E6%98%8E">完备性证明</a></li>
+<li><a href="#%E8%87%AA%E7%84%B6%E6%BC%94%E7%BB%8E%E7%B3%BB%E7%BB%9F">自然演绎系统</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="命题逻辑的等值和推理">命题逻辑的等值和推理</span></h1><h2><span id="命题公式与真值表的关系">命题公式与真值表的关系</span></h2><p>给定命题公式可以写出真值表，这是显然的。</p>
+<p>给定 $P_1, …, P_n$ 到 $A$ 的真值表，可以写出一个和 $A$ 等价的命题公式，两种方法基于如下显然的操作：</p>
+<p>取 $F_1(P_n)\wedge \cdots \wedge F_n(P_n)$，其中 $F_i(P)$ 为 $P$ 或者 $\neg P$，可以提取 $P_1, …, P_n$ 是否依次取 $T$（若 $F_i(P_i) &#x3D; P_i$）和 $F$（若 $F_i(P_i) &#x3D; \neg P_i$）。</p>
+<p>那么将所有为 $T$ 的行用上述式子提取，然后析取起来即可得到和 $A$ 等价的命题公式；将所有为 $F$ 的行用上述式子提取，然后析取起来即可得到和 $\neg A$ 等价的命题公式。</p>
+<h3><span id="主析取范式">主析取范式</span></h3><p>事实上这个公式称为“主范式”，其中按 $T$ 列写得到的称为主析取范式，按 $F$ 列写的，取反用 De Morgan 将 $\neg$ 分配至每一项得到的称为主合取范式。接下来我们给出主析取范式的严格定义。</p>
+<p>对于命题变项 $P_1, …, P_n$，定义 $Q_i &#x3D; P_i \text{ 或 } \neg P_i$，称为<strong>文字</strong>。定义全部的 $n$ 个文字组成的合取式</p>
+<p>$$<br>Q_1 \wedge \cdots \wedge Q_n<br>$$</p>
+<p>为<strong>极小项</strong>。称仅有极小项构成的析取式为<strong>主析取范式</strong>。</p>
+<p>我们将每个文字是否取 $\neg$ 记为 $0&#x2F;1$，那么每个极小式可以表示成一个二进制数 $x$，这个极小式简记为 $m_x$，主析取范式可以简记为 $\vee_{i_1, …, i_k}$ </p>
+<div class="note info"><p><strong>Theorem.</strong> 任意公式有唯一主析取范式。</p>
+<blockquote>
+<p>可以用真值表法来列写。</p>
+</blockquote>
+</div>
+
+<div class="note info"><p><strong>主范式的改写方法，以及简记方法</strong> 将 $P\rightarrow Q$ 改写为主范式。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    &amp;P \rightarrow Q \\<br>    &#x3D;&amp; \neg P \vee Q \\<br>    &#x3D;&amp; (\neg P \wedge (Q \vee \neg Q)) \vee (Q \wedge (P \vee \neg P)) \\<br>    &#x3D;&amp; (\neg P \wedge Q) \vee (\neg P \wedge \neg Q) \vee (P \wedge Q) \vee (\neg P \wedge Q) \\<br>    &#x3D;&amp; (\neg P \wedge Q) \vee (\neg P \wedge \neg Q) \vee (P \wedge Q) \\<br>    &#x3D;&amp; m_1 \vee m_0 \vee m_3 \\<br>    &#x3D;&amp; \vee_{0, 1, 3}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<p>对于主合取范式，我们对称地定义<strong>极大项</strong>等，这里不多赘述。</p>
+<p>主合取范式和主析取范式之间可以相互转化。从由真值表列写主范式的方法可以看出：</p>
+<p>$$<br>\wedge_{i_1, …, i_k} &#x3D; \vee_{\{0, …, 2^n - 1\} \setminus \{2^n - 1 - i_1, …, 2^n - 1 - i_k\}}<br>$$</p>
+<h2><span id="联结词的完备集">联结词的完备集</span></h2><div class="note success"><p><strong>Definition.</strong> 设 $C$ 为一联结词的集合，若任意命题公式都有一 $C$ 中联结词表示的公式与之等值，则称 $C$ <strong>完备</strong>。</p>
+</div>
+
+<div class="note info"><p><strong>Theorem.</strong> $\{\neg, \wedge, \vee\}$ 完备。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>将逻辑公式写成真值表，然后给定真值表可以只用 $\{\neg, \wedge, \vee\}$ 写出逻辑公式（上一节结论）。$\square$</p>
+
+</details></div>
+
+<p>进一步根据摩根律 $P \vee Q &#x3D; \neg (\neg P\wedge \neg Q)$ 等，$\{\neg, \wedge\}$ 和 $\{\neg, \vee\}$ 也完备。</p>
+<h2><span id="对偶式">对偶式</span></h2><div class="note success"><p><strong>Definition 1.</strong> 设 $A$ 为一用 $\vee, \wedge, \neg$ 写成的命题公式，将 $A$ 中 $\vee$ 和 $\wedge$ 互换，$T, F$ 互换，得到的式子记为 $A^*$，称为对偶式。</p>
+</div>
+
+<div class="note success"><p><strong>Definition 2.</strong> 若 $A &#x3D; A(P_1, …, P_n)$，那么记 $A^- &#x3D; A(\neg P_1, …, \neg P_n)$。</p>
+</div>
+
+<div class="note info"><p><strong>Theorem 1.</strong> $\neg (A^*) &#x3D; (\neg A)^*, \neg (A^-) &#x3D; (\neg A)^-$.</p>
+<p><strong>Theorem 2.</strong> $(A^*)^* &#x3D; A, (A^-)^- &#x3D; (\neg A)^-$.</p>
+<p><strong>Theorem 3.</strong> $\neg A &#x3D; A^{*-}$. 这个其实是 De Morgan 定理的通式。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>对逻辑联结词个数归纳，因为众所周知逻辑公式是可以归纳构造的。</p>
+<p>对于单变量显然成立，接下来以 Theorem 1，前半句为例</p>
+<p>若 $A &#x3D; \neg A_1$，那么 </p>
+<p>$$<br>\begin{aligned}<br>\neg (A^*) &amp;&#x3D; \neg (\neg A_1)^* \\<br>           &amp;&#x3D; \neg \neg (A_1^*) &amp; (\text{sym Theorem $1$}) \\<br>           &amp;&#x3D; A_1^* \\<br>           &amp;&#x3D; (\neg A)^*<br>\end{aligned}<br>$$</p>
+<blockquote>
+<p>突然有一瞬间感觉这东西循环论证了，但是好像实际上没有。</p>
+</blockquote>
+<p>若 $A &#x3D; P\vee Q$，那么 </p>
+<p>$$<br>\begin{aligned}<br>\neg (A^*) &amp;&#x3D; \neg ((P \vee Q)^*) \\<br>           &amp;&#x3D; \neg (P^* \wedge Q^*) \\<br>           &amp;&#x3D; (\neg P^*) \vee (\neg Q^*) &amp; (\text{De Morgan}) \\<br>           &amp;&#x3D; (\neg P)^* \vee (\neg Q^*) &amp; (\text{sym Theorem $1$}) \\<br>           &amp;&#x3D; (\neg P \wedge \neg Q)^* \\<br>           &amp;&#x3D; (\neg A)^* &amp; (\text{De Morgan})<br>\end{aligned}<br>$$</p>
+<p>$\wedge$ 和 $\vee$ 的证明是对称的。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 4.</strong> $A \leftrightarrow B$ 永真则 $A^* \leftrightarrow B^*$ 永真，i.e. $A &#x3D; B$ 则 $A^* &#x3D; B^*$。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p><strong>Lemma.</strong> $A \leftrightarrow B$ 永真则 $A^- \leftrightarrow B^-$ 永真。</p>
+<blockquote>
+<p>相当于全部带入取反后的值。</p>
+</blockquote>
+<p>$$<br>\begin{aligned}<br>    &amp;A\leftrightarrow B \\<br>    \Rightarrow&amp; \neg A \leftrightarrow \neg B \\<br>    \Rightarrow&amp; A^{*-} \leftrightarrow \neg B^{*-} \\<br>    \Rightarrow&amp; A^* &#x3D; B^*<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 5.</strong> $A\rightarrow B$ 永真则 $B^* \rightarrow A^*$ 永真。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    &amp;A \rightarrow B &#x3D; T \\<br>    \Rightarrow&amp; \neg A \vee B &#x3D; T \\<br>    \Rightarrow&amp; (\neg A \vee B)^* &#x3D; (T)^* &amp; (\text{Theorem $4$}) \\<br>    \Rightarrow&amp; (\neg A)^* \wedge B^* &#x3D; F \\<br>    \Rightarrow&amp; \neg((\neg A)^* \wedge B^*) &#x3D; \neg F \\<br>    \Rightarrow&amp; \neg B^* \vee A^* &#x3D; T &amp; (\text{De Morgan, Theorem $1$}) \\<br>    \Rightarrow&amp; B^* \rightarrow A^* &#x3D; T<br>\end{aligned}<br>$$</p>
+
+</details>
+
+<blockquote>
+<p>上面的证明中出现了 $\Rightarrow$ 这个符号，现在我还不清楚它严格来说是什么意思，只是依照习惯用来简称“若…则…”。</p>
+</blockquote></div>
+
+<div class="note info"><p><strong>Theorem 6.</strong> $A$ 和 $A^-$ 同永真，同可满足；$\neg A$ 和 $A^*$ 同永真，同可满足。</p>
+<blockquote>
+<p>这个就非常显然了，所以不证明了。</p>
+</blockquote>
+</div>
+
+<h2><span id="推理">推理</span></h2><p>有两类推理关系（直接证明和归谬），用命题逻辑的语言表述如下</p>
+<p>$$<br>\begin{aligned}<br>(P\rightarrow Q) \wedge P \rightarrow Q \\<br>(P\rightarrow Q) \wedge \neg Q \rightarrow \neg P<br>\end{aligned}<br>$$</p>
+<p>注意 $(P\rightarrow Q) \wedge \neg P \rightarrow \neg Q$ 不正确。</p>
+<h3><span id="重言蕴含">重言蕴含</span></h3><p>接下来正式解释上面的 $\Rightarrow$ 的含义（好像并没有用错）。</p>
+<p>对于两个公式 $A, B$，若 $A$ 为真则 $B$ 必真，那么称 $A\Rightarrow B$（$A$ 重言蕴含 $B$）。注意这里和逻辑联结词 $\rightarrow$ 不同，$A\Rightarrow B$ 不是合式公式，只表示真值关系。</p>
+<h3><span id="推理演算">推理演算</span></h3><p>有如下定理：</p>
+<div class="note info"><p><strong>Theorem.</strong> $A\Rightarrow B$ 等价于 $A\rightarrow B$ 永真。</p>
+<p><em>证明方法显然，这里不写。</em></p>
+</div>
+
+<p>可以用真值表法验证或者简要说明如下公式，书上列了 $16$ 条，并不想抄，因此每个等价类取一个代表元。</p>
+<details class="note "><summary><p><strong>基本的推理公式.</strong></p>
+</summary>
+<ol>
+<li>$P\wedge Q \Rightarrow P, P \Rightarrow P\vee Q$。注意 $P\rightarrow Q &#x3D; \neg P \vee Q$，所以说可以推出 $\neg P \Rightarrow P\rightarrow Q$，$\neg(P\rightarrow Q)\Rightarrow P$ 等。</li>
+<li>$\neg P \wedge (P\vee Q) \Rightarrow Q$。</li>
+<li>$(P\rightarrow Q)\wedge (Q\rightarrow R) \Rightarrow P \rightarrow R$，这个式子称为<strong>三段论</strong>。</li>
+<li>$(P\rightarrow Q)\wedge (R\rightarrow S)\wedge (P\vee R) \Rightarrow Q \vee S$。</li>
+<li>$(Q\rightarrow R)\Rightarrow (P \vee Q) \rightarrow (P \vee R)$，当然这里你取 $\neg P$ 的话可以把右边的 $\vee$ 换成 $\rightarrow$。</li>
+</ol>
+
+</details>
+
+<p>基本推理公式常配合如下推理规则使用：</p>
+<ol>
+<li><strong>前提引入</strong>，可以随时引入前提；</li>
+<li><strong>结论引用</strong>，可随时引用已经推出的结论；</li>
+<li><strong>代入</strong>，可以对重言式的命题变项进行代入；</li>
+<li><strong>置换</strong>，可以将命题公式任何部分替换为与其等价的公式；</li>
+<li><strong>分离</strong>，$A \wedge A\rightarrow B\Rightarrow B$；</li>
+<li><strong>条件证明</strong> $A_1 \wedge A_2 \Rightarrow B$ 等价于 $A_1 \Rightarrow A_2 \rightarrow B$。</li>
+</ol>
+<p>分离规则因为其重要性被列为推理规则而非基本推理公式。</p>
+<p>做几个题。</p>
+<div class="note warning"><p><strong>Example.</strong> 证明 $(P\rightarrow Q)\wedge (R\rightarrow S)\wedge (P\vee R) \Rightarrow Q \vee S$。（基本推理公式 4）</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; (P\vee R) &amp; \text{前提引入} \\<br>    (2) &amp; \neg P \rightarrow R &amp; \text{(1) 置换} \\<br>    (3) &amp; R \rightarrow S &amp; \text{前提引入} \\<br>    (4) &amp; \neg P \rightarrow S &amp; \text{(2) (3) 三段论} \\<br>    (5) &amp; \neg S \rightarrow P &amp; \text{(4) 置换} \\<br>    (6) &amp; P \rightarrow Q &amp; \text{前提引入} \\<br>    (7) &amp; \neg S \rightarrow Q &amp; \text{(5) (6) 三段论} \\<br>    (8) &amp; Q \vee S &amp; \text{(7) 置换} \\<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<p>还有下面两个例题，自己做了一手感觉没啥难的，但是体现出了一些思路</p>
+<div class="note warning"><p><strong>Example.</strong> </p>
+<ol>
+<li>证明 $(P\rightarrow (Q\rightarrow S))\wedge (\neg R\vee P)\wedge Q \Rightarrow R\rightarrow S$。</li>
+<li>证明 $(\neg (P \rightarrow Q) \neg (R\vee S)) \wedge ((Q\rightarrow P)\vee \neg R) \wedge R \Rightarrow (P\leftrightarrow Q)$。</li>
+</ol>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<ol>
+<li>可以用条件规则，将 $R$ 放到左边去（称为附加条件引入），然后证明 $S$。当然也可以不用，开局先把 $(\neg R\vee P)$ 置换成 $R \rightarrow P$，可以直接三段论证明 $R\rightarrow S$。</li>
+<li>可以引入 $\neg (P\leftrightarrow Q)$，然后证明 $\bot$（$R\wedge \neg R$）。当然也可以不用，开局把 $((Q\rightarrow P)\vee \neg R)$ 置换成 $R\rightarrow (Q \rightarrow P)$，且 $R \Rightarrow (R \vee S)$，可以直接证明结论。</li>
+</ol>
+
+</details></div>
+
+<blockquote>
+<p><strong>Remark.</strong> 做题的时候的一些可能的方向：</p>
+<ul>
+<li>$P\rightarrow Q$ 和 $\neg P \vee Q$ 之间的置换。</li>
+<li>条件证明规则（引入 $\rightarrow$ 的第一个参数作为附加条件）。</li>
+<li>反证（引入 $\Rightarrow$ 右边的逆命题作为附加条件，证明 $\bot$）。</li>
+</ul>
+<p>感觉实际上第三条的本质是 $A\Rightarrow B$，因为 $B &#x3D; \neg B\rightarrow B$，相当于证明 $A \Rightarrow \neg B\rightarrow B$，使用条件证明规则，只需证明 $A\wedge \neg B \Rightarrow B$。已知 $\bot \Rightarrow B$，如果我们证明了 $A \Rightarrow \neg B \Rightarrow \bot$，那么自然 $A \Rightarrow \neg B\rightarrow B$。</p>
+</blockquote>
+<h3><span id="归结推理法resolution">归结推理法（Resolution）</span></h3><p>是一种粗暴的机械化方法。</p>
+<div class="note success"><p><strong>Definition</strong> 若子句 $C_1 &#x3D; L \vee C_1’, C_2 &#x3D; \neg L \vee C_2’$，即其中含有互补对。定义其<strong>归结式（resolvent）</strong>为</p>
+<p>$$<br>R(C_1, C_2) &#x3D; C_1’ \vee C_2’<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>Theorem</strong>(归结原理)</p>
+<p>$$<br>(L \vee C_1) \wedge (\neg L \vee C_2) \Rightarrow C_1 \vee C_2<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; L \vee C_1 &amp; \text{条件引入} \\<br>    (2) &amp; \neg L \rightarrow C_1 &amp; \text{(1) 置换} \\<br>    (3) &amp; \neg L \vee C_2 &amp; \text{条件引入} \\<br>    (4) &amp; L \rightarrow C_2 &amp; \text{(3) 置换} \\<br>    (5) &amp; L \vee \neg L &amp; \text{排中律} \\<br>    (6) &amp; C_1 \vee C_2 &amp; \text{(2) (4) (5) 基本推理公式 4}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<p>上面的定理指出 $C_1 \wedge C_2 \vee R(C_1, C_2)$。</p>
+<p><strong>归结推理法</strong>是仅采用归结原理作为推理规则的一种方法，其流程大致如下：</p>
+<ul>
+<li>将右边的命题取反，作为条件（引入附加条件）</li>
+<li>将条件化为合取范式。</li>
+<li>重复使用归结原理，推出 $\bot$。</li>
+</ul>
+<p>这个算法在之前看的 CS50’s Introduction to Artificial Intelligence with Python 的课的时候，前面讲几个符号主义模型的时候有用 python 实现的 lab。然而这个算法写下来还是非常垃圾，中间结果最多可以有 $2^n$ 个，当然这个上界可能不紧，总之是个指数级的东西。</p>
+<h1><span id="命题逻辑的公理化">命题逻辑的公理化</span></h1><p>在上一节中我们所做的推理均是基于对命题变项进行赋值来得到重言，这属于从语义角度来理解命题逻辑。在这一节中，我们从语法的角度来看待这件事情。</p>
+<p>一个公理系统通常包括：</p>
+<ul>
+<li><strong>初始符号</strong> 可出现的全部符号。</li>
+<li><strong>形成规则</strong> 如何由初始符号构成一个合法的序列。在此形成规则的基础上你可以定义一些别的合法公式的简称。</li>
+<li><strong>公理</strong> 几条初始的语句。</li>
+<li><strong>变形规则</strong> 如何进行演算。可以从公理变形得到的式子称为定理。</li>
+<li><strong>建立定理</strong> 包括所有重言式及其证明。</li>
+</ul>
+<p>其他教材对语义和语法做了如下区分：如果一个语句 $A$ 是重言式，则记为 $\vDash A$；如果 $A$ 可以证明，则称 $\vdash A$。一个公理系统可以被证明具有如下两类性质：</p>
+<ul>
+<li><strong>可靠性.</strong> 若 $\vdash A$ 那么 $\vDash A$。</li>
+<li><strong>完备性.</strong> 若 $\vDash A$ 那么 $\vdash A$。</li>
+</ul>
+<p>当然出于效率考虑部分不完备的公理系统也是被允许的。</p>
+<p>对于命题逻辑我们介绍如下有代表性的公理系统。</p>
+<div class="note success"><p><strong>初始符号</strong> 原子命题，$\neg, \vee$（联结词），$(, )$（括号），$\vdash$。$\vdash A$ 语义上表示 $A$ 是重言式，语法上表示 $A$ 可以证明。</p>
+<p><strong>形成规则</strong> 和普通合式公式的形成规则一样。</p>
+<p>补充定义 $A\rightarrow B :&#x3D; \neg A \vee B, A \wedge B :&#x3D; \neg (\neg A \vee \neg B), A \leftrightarrow B :&#x3D; (A\rightarrow B) \wedge (B \rightarrow A)$，用于简写。</p>
+<p><strong>公理</strong></p>
+<p>$$<br>\begin{aligned}<br>    \text{A1} \quad &amp; \vdash ((P \vee P) \rightarrow P) \\<br>    \text{A2} \quad &amp; \vdash (P \rightarrow (P \vee Q)) \\<br>    \text{A3} \quad &amp; \vdash ((P \vee Q) \rightarrow (Q \vee P)) \\<br>    \text{A4} \quad &amp; \vdash ((Q \rightarrow R) \rightarrow ((P \vee Q) \rightarrow (P \vee R))) \\<br>\end{aligned}<br>$$</p>
+<p><strong>变形规则</strong></p>
+<ul>
+<li><strong>代入</strong> 可以做整体代换。</li>
+<li><strong>分离</strong> $\vdash A, \vdash A \rightarrow B$ 则 $\vdash B$。</li>
+<li><strong>置换</strong> 可以把补充定义内容的左右两边互相代换。</li>
+</ul>
+</div>
+
+<p>作为示例我们证明几个重要结论，顺便挖掘一下这个公理系统的性质。</p>
+<div class="note info"><p><strong>Theorem.</strong>($\text{Syl}$)<br>$$<br>\vdash (Q \rightarrow R) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R))<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash ((Q \rightarrow R) \rightarrow (\neg P \vee Q) \rightarrow (\neg P \vee R))) &amp; \text{[A4 $\neg P$ $Q$ $R$]} \\<br>    (2) &amp; \vdash (Q \rightarrow R) \rightarrow ((P \rightarrow Q) \rightarrow (P \rightarrow R)) &amp; \text{“$\rightarrow$” 定义置换}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Lemma.</strong>($\text{Refl}$)</p>
+<p>$$<br>\vdash P \rightarrow P<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash P \rightarrow (P \vee P) &amp; [\text{A2 $P$ $P$}] \\<br>    (2) &amp; \vdash (P \vee P) \rightarrow P &amp; [\text{A1}] \\<br>    (3) &amp; \vdash ((P \vee P) \rightarrow P) \rightarrow ((P \rightarrow (P \vee P)) \rightarrow (P \rightarrow P)) &amp; [\text{Syl $P$ $P\vee P$ $P$}] \\<br>    (4) &amp; \vdash (P \rightarrow (P \vee P)) \rightarrow (P \rightarrow P) &amp; \text{(2) (3) 分离} \\<br>    (5) &amp; \vdash (P \rightarrow P) &amp; \text{(1) (4) 分离}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Lemma.</strong>($\text{EM}$)</p>
+<p>$$<br>P \vee \neg P<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash P \rightarrow P &amp; [\text{Refl}] \\<br>    (2) &amp; \vdash \neg P \vee P &amp; \text{“$\rightarrow$” 定义置换} \\<br>    (3) &amp; \vdash (\neg P \vee P) \rightarrow (P \vee \neg P) &amp; [\text{A3 $\neg P$ $P$}] \\<br>    (4) &amp; \vdash P \vee \neg P &amp; \text{(2) (3) 分离}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem.</strong>($\text{Elim}_r$)<br>$$<br>\vdash P \rightarrow  \neg \neg P<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash \neg P \vee \neg \neg P &amp; [\text{EM $\neg P$}] \\<br>    (2) &amp; \vdash P \rightarrow \neg \neg P &amp; \text{“$\rightarrow$” 定义置换}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem.</strong>($\text{Elim}_l$)<br>$$<br>\vdash \neg \neg P \rightarrow P<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash \neg P \rightarrow \neg \neg \neg P &amp; [\text{Idem$_r$ $\neg P$}] \\<br>    (2) &amp; \vdash \neg P \vee P &amp; \text{EM} \\<br>    (3) &amp; \vdash (\neg P \rightarrow \neg \neg \neg P) \rightarrow ((\neg P \vee P)\rightarrow (P \vee \neg \neg \neg P)) &amp; [\text{A4}] \\<br>    (4) &amp; \neg \neg P \rightarrow P &amp; \text{分离两次，[A3], “$\rightarrow$” 定义}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem.</strong>($\text{Assoc}$)</p>
+<p>$$<br>\vdash (A \vee (B \vee C)) \rightarrow ((A \vee B) \vee C)<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash B \rightarrow (A \vee B) &amp; [\text{A2 $B$ $A$}] \\<br>    (2) &amp; \vdash(B \rightarrow (A \vee B)) \rightarrow ((B \vee C) \rightarrow ((A \vee B) \vee C)) &amp; [\text{A4}] \\<br>    (3) &amp; \vdash(B \vee C) \rightarrow ((A \vee B) \vee C) &amp; \text{(1) (2) 分离} \\<br>    (4) &amp; \vdash((B \vee C) \rightarrow ((A \vee B) \vee C)) \rightarrow ((A \vee (B \vee C)) \rightarrow (A \vee ((A \vee B) \vee C))) &amp; [\text{A4}] \\<br>    (5) &amp; \vdash(A \vee (B \vee C)) \rightarrow (A \vee ((A \vee B) \vee C)) &amp; \text{(3) (4) 分离} \\<br>    (6) &amp; \vdash A \rightarrow ((A \vee B) \vee C) &amp; [\text{A2}] \\<br>    (7) &amp; \vdash(A \rightarrow ((A \vee B) \vee C)) \\<br>        &amp; \rightarrow ((A \vee ((A \vee B) \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C))) &amp; [\text{A4}] \\<br>    (8) &amp; \vdash(A \vee ((A \vee B) \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C)) &amp; \text{(6) (7) 分离} \\<br>    (9) &amp; \vdash(A \vee (B \vee C)) \rightarrow (A \vee ((A \vee B) \vee C)) \\<br>        &amp; \rightarrow (((A \vee ((A \vee B) \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C)) \\<br>        &amp; (A \vee (B \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C)))) &amp; [\text{Syl}] \\<br>    (10)&amp; \vdash(A \vee (B \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C)) &amp; \text{分离两次} \\<br>    (11)&amp; \vdash(((A \vee B) \vee C) \vee ((A \vee B) \vee C)) \rightarrow ((A \vee B) \vee C) &amp; [\text{A1}] \\<br>    (12)&amp; \vdash(A \vee (B \vee C)) \rightarrow (((A \vee B) \vee C) \vee ((A \vee B) \vee C)) \\<br>        &amp; (((((A \vee B) \vee C) \vee ((A \vee B) \vee C)) \rightarrow ((A \vee B) \vee C)) \\<br>        &amp; \rightarrow ((A \vee (B \vee C)) \rightarrow ((A \vee B) \vee C))) &amp; [\text{Syl}] \\<br>    (13)&amp; \vdash(A \vee (B \vee C)) \rightarrow ((A \vee B) \vee C) &amp; \text{分离两次}<br>\end{aligned}<br>$$</p>
+<blockquote>
+<p>这里核心思路是 $A \vee (B \vee C)$ 推成 $((A \vee B) \vee C) \vee ((A \vee B) \vee C)$，上面的过程可能不太是人看的，故此提醒。</p>
+</blockquote>
+
+</details>
+
+<p>做两次交换律，可以得到反方向的结合律，下面均称为 Assoc。</p>
+<p>$$<br>\vdash ((A \vee B) \vee C) \rightarrow (A \vee (B \vee C))<br>$$</p></div>
+
+<div class="note info"><p><strong>Theorem.</strong>($\text{AT}$)</p>
+<p>$$<br>\vdash A \rightarrow (B \rightarrow (A \wedge B))<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash (\neg A \vee \neg B) \vee \neg (\neg A \vee \neg B) &amp; [\text{EM}] \\<br>    (2) &amp; \vdash \neg A \vee (\neg B \vee \neg (\neg A \vee \neg B)) &amp; [\text{Assoc}] \\<br>    (3) &amp; \vdash A \rightarrow (B \rightarrow (A \wedge B)) &amp; \text{定义置换}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+
+<h2><span id="完备性证明">完备性证明</span></h2><p>上述公理系统的完备性可以简单地说明。对于任意一个重言式，它可以被写成若干个重言的合取子句的析取范式。即</p>
+<p>$$<br>A &#x3D; A_1 \wedge \cdots \wedge A_n<br>$$</p>
+<p>其中一个合取子句必然形如（这里可以反证得到）</p>
+<p>$$<br>A_i &#x3D; \pi \vee \neg \pi \vee B<br>$$</p>
+<p>因为结合律已经得证了，我们不再打括号。有</p>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash \pi \vee \neg \pi &amp; [\text{EM}] \\<br>    (2) &amp; \vdash (\pi \vee \neg \pi) \vee B &amp; [\text{A2}] \\<br>    (2) &amp; \vdash A_i &amp; \text{定义置换}<br>\end{aligned}<br>$$</p>
+<p>接下来 </p>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; \vdash A_i \\<br>    (2) &amp; \vdash A_j \\<br>    (3) &amp; \vdash A_i \rightarrow (A_j \rightarrow (A_i \wedge A_j)) &amp; [\text{AT}] \\<br>    (4) &amp; \vdash A_i \wedge A_j<br>\end{aligned}<br>$$</p>
+<p>施归纳法于命题标号，可以得到 $\vdash A$，因此系统完备。</p>
+<div class="note danger"><p>这里有些东西看起来有问题。比如我们使用了集合，反证法和 Peano 自然数导出的归纳法，这些东西并不是建立在当前公理系统上的。公理系统自证完备性疑似是困难的，因此在这里我们暂时接受上述的证明。</p>
+</div>
+
+<h2><span id="自然演绎系统">自然演绎系统</span></h2><p>对上述公理系统做一些扩展，我们定义自然演绎系统。这是一个只有变换规则而没有公理的系统。</p>
+<div class="note success"><p><strong>初始符号</strong> 在上述公理系统的基础上，新增</p>
+<p>$$<br>\Gamma &#x3D; \{A_1,。。。， A_n\}<br>$$</p>
+<p>表示有限个命题公式的集合。</p>
+<p><strong>形成规则</strong> 命题公式的形成规则同上述公理系统，而一条完整的公式必须形如</p>
+<p>$$<br>\Gamma \vdash A<br>$$</p>
+<p>其中 $A$ 是命题公式，称为形式结论，$\Gamma$ 是命题公式的有限集，称为形式前提。整个式子表示 $\Gamma$ 和 $A$ 之间存在推理关系。</p>
+<p><strong>变形规则</strong></p>
+<ul>
+<li><strong>肯定前提</strong> $\Gamma \vdash A_i$；</li>
+<li><strong>转递</strong> $\Gamma \vdash A, A\vdash B$ 则 $\Gamma \vdash B$；这里想说的应该是 $A$ 是一个集合。</li>
+<li><strong>反证</strong> $\Gamma \cap \{\neg A\} \vdash B$ 且 $\Gamma \cap \{\neg A\} \vdash \neg B$，则 $\Gamma \vdash A$；</li>
+<li><strong>分离</strong> $\{A \rightarrow B, A\} \vdash B$；</li>
+<li><strong>蕴含词引入</strong> $\Gamma \cup \{A\}\vdash B$ 则 $\Gamma \vdash A\rightarrow B$。</li>
+</ul>
+</div>
+
+<p>我们证明三段论来演示这个系统的运作方式。</p>
+<div class="note info"><p><strong>Theorem.</strong></p>
+<p>$$<br>A\rightarrow B, B\rightarrow C \vdash A \rightarrow C<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; A \rightarrow B, B\rightarrow C, A \vdash A &amp; \text{肯定前件} \\<br>    (2) &amp; A \rightarrow B, B\rightarrow C, A \vdash A\rightarrow B &amp; \text{肯定前件} \\<br>    (3) &amp; A \rightarrow B, A \vdash B &amp; \text{分离} \\<br>    (4) &amp; A \rightarrow B, B\rightarrow C, A \vdash B &amp; \text{传递} \\<br>    \vdots &amp; \\<br>    (5) &amp; A \rightarrow B, B\rightarrow C, A \vdash C &amp; \text{(同理)} \\<br>    (6) &amp; A\rightarrow B, B\rightarrow C \vdash A \rightarrow C &amp; \text{蕴含词引入}<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<hr>
+<p>此外还有一种演绎系统称为 Hilbert 系统，可以参考这篇文章<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="命题逻辑演绎系统的可靠性与完备性, Ref: https://zhuanlan.zhihu.com/p/165188972">[1]</span></a></sup>，看完之后会对这块内容有更深刻的理解。</p>
+<hr>
+<p>剩下王浩算法和非标准逻辑，感觉重要度不高，故略去。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">命题逻辑演绎系统的可靠性与完备性, Ref: https://zhuanlan.zhihu.com/p/165188972<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/01/17/InfoAndEntropy7Proc/" rel="prev" title="Information and Entropy (7) Processes">
+                  <i class="fa fa-angle-left"></i> Information and Entropy (7) Processes
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+    <div class="comments utterances-container"></div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+<script class="next-config" data-name="utterances" type="application/json">{"enable":true,"repo":"SocialZxy/SocialZxy.github.io","issue_term":"pathname","theme":"github-light"}</script>
+<script src="/js/third-party/comments/utterances.js"></script>
+
+</body>
+</html>
