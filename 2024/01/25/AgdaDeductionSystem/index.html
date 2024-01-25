@@ -19,27 +19,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null,"activeClass":"utterances"},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract.    Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
+    <meta name="description" content="Abstract. 最不想学 FP 的一集《三句话让我写了一晚上形式化验证》。 本文讲如何在 Agda 中定义《数理逻辑与集合论 (1) 命题逻辑》中提到的演绎系统，并形式化验证了文中的几个定理。 好像现在我们的姿势还不太正确，我们确实找到了一种方法来验证一个证明对不对，但是对自己证明定理没有一点帮助（甚至有负贡献）。    初始符号 形成规则 补充定义 公理 变形规则 诸定理的形式化验证">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tensor Analysis (3) Newton&#39;s Law and Tensor Calculus">
-<meta property="og:url" content="http://example.com/2023/11/28/TensorAnal3NLTC/index.html">
+<meta property="og:title" content="在 Agda 中定义演绎系统并进行定理证明">
+<meta property="og:url" content="http://example.com/2024/01/25/AgdaDeductionSystem/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract.    Rigid Bodies New Conservative Laws Nomenclature Newton’s Law in Cartesian Components Newton’s Law in Plane Polar Coordinates The Physical Components of a Vector">
+<meta property="og:description" content="Abstract. 最不想学 FP 的一集《三句话让我写了一晚上形式化验证》。 本文讲如何在 Agda 中定义《数理逻辑与集合论 (1) 命题逻辑》中提到的演绎系统，并形式化验证了文中的几个定理。 好像现在我们的姿势还不太正确，我们确实找到了一种方法来验证一个证明对不对，但是对自己证明定理没有一点帮助（甚至有负贡献）。    初始符号 形成规则 补充定义 公理 变形规则 诸定理的形式化验证">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-11-28T12:18:13.000Z">
-<meta property="article:modified_time" content="2024-01-17T08:11:50.671Z">
+<meta property="article:published_time" content="2024-01-25T12:20:36.000Z">
+<meta property="article:modified_time" content="2024-01-25T12:46:40.898Z">
 <meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Agda">
+<meta property="article:tag" content="Logic">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/11/28/TensorAnal3NLTC/">
+<link rel="canonical" href="http://example.com/2024/01/25/AgdaDeductionSystem/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/11/28/TensorAnal3NLTC/","path":"2023/11/28/TensorAnal3NLTC/","title":"Tensor Analysis (3) Newton's Law and Tensor Calculus"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/01/25/AgdaDeductionSystem/","path":"2024/01/25/AgdaDeductionSystem/","title":"在 Agda 中定义演绎系统并进行定理证明"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Tensor Analysis (3) Newton's Law and Tensor Calculus | Stellary's Notes</title>
+<title>在 Agda 中定义演绎系统并进行定理证明 | Stellary's Notes</title>
   
 
 
@@ -113,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rigid Bodies</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">New Conservative Laws</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Nomenclature</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Newton’s Law in Cartesian Components</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Newton’s Law in Plane Polar Coordinates</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">The Physical Components of a Vector</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">初始符号 形成规则 补充定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">公理 变形规则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">诸定理的形式化验证</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -174,7 +176,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/28/TensorAnal3NLTC/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/25/AgdaDeductionSystem/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
@@ -187,12 +189,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Tensor Analysis (3) Newton's Law and Tensor Calculus | Stellary's Notes">
+      <meta itemprop="name" content="在 Agda 中定义演绎系统并进行定理证明 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Tensor Analysis (3) Newton's Law and Tensor Calculus
+          在 Agda 中定义演绎系统并进行定理证明
         </h1>
 
         <div class="post-meta-container">
@@ -202,15 +204,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2023-11-28 20:18:13" itemprop="dateCreated datePublished" datetime="2023-11-28T20:18:13+08:00">2023-11-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-17 16:11:50" itemprop="dateModified" datetime="2024-01-17T16:11:50+08:00">2024-01-17</time>
+      <time title="Created: 2024-01-25 20:20:36 / Modified: 20:46:40" itemprop="dateCreated datePublished" datetime="2024-01-25T20:20:36+08:00">2024-01-25</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -218,15 +214,7 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/Tensor-Analysis/" itemprop="url" rel="index"><span itemprop="name">Tensor Analysis</span></a>
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
         </span>
     </span>
 
@@ -239,57 +227,36 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 最不想学 FP 的一集《三句话让我写了一晚上形式化验证》。</p>
+<p>本文讲如何在 Agda 中定义<a href="../../../../2024/01/22/Logic1Basic/">《数理逻辑与集合论 (1) 命题逻辑》</a>中提到的演绎系统，并形式化验证了文中的几个定理。</p>
+<p>好像现在我们的姿势还不太正确，我们确实找到了一种方法来验证一个证明对不对，但是对自己证明定理没有一点帮助（甚至有负贡献）。</p>
 <!-- toc -->
 
 <ul>
-<li><a href="#rigid-bodies">Rigid Bodies</a></li>
-<li><a href="#new-conservative-laws">New Conservative Laws</a></li>
-<li><a href="#nomenclature">Nomenclature</a></li>
-<li><a href="#newtons-law-in-cartesian-components">Newton’s Law in Cartesian Components</a></li>
-<li><a href="#newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</a></li>
-<li><a href="#the-physical-components-of-a-vector">The Physical Components of a Vector</a></li>
+<li><a href="#%E5%88%9D%E5%A7%8B%E7%AC%A6%E5%8F%B7-%E5%BD%A2%E6%88%90%E8%A7%84%E5%88%99-%E8%A1%A5%E5%85%85%E5%AE%9A%E4%B9%89">初始符号 形成规则 补充定义</a></li>
+<li><a href="#%E5%85%AC%E7%90%86-%E5%8F%98%E5%BD%A2%E8%A7%84%E5%88%99">公理 变形规则</a></li>
+<li><a href="#%E8%AF%B8%E5%AE%9A%E7%90%86%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E9%AA%8C%E8%AF%81">诸定理的形式化验证</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="rigid-bodies">Rigid Bodies</span></h1><p>简单力学，主要内容是刚体的牛顿定律，动量定理和角动量定理等。</p>
-<h1><span id="new-conservative-laws">New Conservative Laws</span></h1><p>简单力学，主要内容是保守力，机械能守恒等。</p>
-<h1><span id="nomenclature">Nomenclature</span></h1><p>简单力学，定义了一些记号。</p>
-<p>称下面的参数方程 $C$ 为质点 $p$ 的<strong>轨迹</strong>（trajectory）</p>
-<p>$$<br>C: \mathbf{x} &#x3D; \hat{\mathbf{x}}(t) &#x3D; \hat{x}(t)\mathbf{e}_x + \hat{y}(t)\mathbf{e}_y + \hat{z}(t)\mathbf{e}_z<br>$$</p>
-<p>$C$ 的曲线称为 $p$ 的轨道（orbit）。</p>
-<p>如果 $\mathbf{x}$ 可微，那么称下面的量为 $p$ 的速度</p>
-<p>$$<br>\hat{\mathbf{v}}(t) &#x3D; \dot{\mathbf{x}}<br>$$</p>
-<p>称 $\hat{\mathbf{x}}$ 在 $t$ 处平滑（smooth），若 $\dot{\mathbf{x}}$ 在 $t$ 处连续。称其平滑（smooth）若 $\dot{\mathbf{x}}$ 处处连续。</p>
-<p>若 $\hat{\mathbf{x}}$ 在 $t$ 处平滑，那么根据导数和切线的定义立即推得 $\hat{\mathbf{v}}$ 在 $t$ 处是轨道的切线。</p>
-<p>若一段轨迹是连续的那么我们可以定义路程</p>
-<p>$$<br>\frac {ds}{dt} &#x3D; |\hat{\mathbf{v}}(t)| \\<br>s(t_1) &#x3D; 0<br>$$</p>
-<p>换言之</p>
-<p>$$<br>s &#x3D; \int_{t_1}^{t_2} |\hat{\mathbf{v}}(t)|\mathrm{d} t<br>$$</p>
-<p>若 $\hat{\mathbf{v}}(t)$ 在 $t$ 可微，那么称下面的量为 $p$ 在 $t$ 点的加速度</p>
-<p>$$<br>\hat{\mathbf{a}}(t) &#x3D; \dot{\mathbf{v}}(t) &#x3D; \ddot{\mathbf{x}}(t)<br>$$</p>
-<p>接下来谈了一些式子如扫过的面积，角动量守恒，开普勒第二定律等。这里略过。</p>
-<h1><span id="newtons-law-in-cartesian-components">Newton’s Law in Cartesian Components</span></h1><p>简单力学，牛顿定律的分量形式</p>
-<h1><span id="newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</span></h1><p>引入平面极坐标 $(r, \theta)$，其定义为</p>
-<p>$$<br>x &#x3D; r\cos \theta, \qquad y &#x3D; r\sin \theta<br>$$</p>
-<p>这样可以表示位矢为（左边是极坐标的特殊形式，右边是一般的张量形式）</p>
-<p>$$<br>\mathbf{x} &#x3D; \hat{\mathbf{x}}(r, \theta) &#x3D; r\cos \theta \mathbf{e}_x + r\sin \theta\mathbf{e}_y \qquad<br>\mathbf{x} &#x3D; \hat{\mathbf{x}}(u^j) &#x3D; \hat{x}^i(u^j)\mathbf{e}_i<br>$$</p>
-<p>这里 $r$ 和 $\theta$ 都是关于时间的函数，那么速度就是</p>
-<p>$$<br>\mathbf{v} &#x3D; \dot{\mathbf{x}} &#x3D; (\partial\mathbf{x}&#x2F;\partial r)\dot{r} + (\partial\mathbf{x}&#x2F;\partial\theta)\dot{\theta} \qquad<br>\mathbf{v} &#x3D; (\partial\mathbf{x} &#x2F;\partial u^i)\dot{u}^i<br>$$</p>
-<p>可以定义</p>
-<p>$$<br>\begin{aligned}<br>\mathbf{g}_r &amp;&#x3D; \partial\mathbf{x} &#x2F; \partial r &#x3D; \cos \theta \mathbf{e}_x + \sin \theta\mathbf{e}_y \\<br>\mathbf{g}_\theta &amp;&#x3D; \partial\mathbf{x} &#x2F; \partial\theta &#x3D; -r\sin \theta \mathbf{e}_x + r\cos \theta\mathbf{e}_y<br>\end{aligned}<br>\qquad\mathbf{g}_i &#x3D; \partial\mathbf{x} &#x2F; \partial u^i &#x3D; (\partial x^k &#x2F; \partial u^i) \mathbf{e}_k<br>$$</p>
-<p>然后</p>
-<p>$$<br>J(\mathbf{g}_r, \mathbf{g}_\theta) &#x3D; \left|\begin{matrix}\cos\theta &amp; -r\sin\theta \\ \sin\theta &amp; r\cos\theta\end{matrix}\right| &#x3D; r \qquad<br>J(\mathbf{g}_1, …) &#x3D; \det[x^i_{\cdot j}]<br>$$</p>
-<p>我们称 $\mathbf{g}_r, \mathbf{g}_\theta$ 为 $(r, \theta)$ 坐标系的 <strong>cellar base vector</strong>，那么他们的系数可以定义为</p>
-<p>$$<br>v^r &#x3D; \dot{r}, v^\theta &#x3D; \dot{\theta} \qquad v^i &#x3D; \dot{u}^i<br>$$</p>
-<p>这些称为 $\mathbf{v}$ 的 <strong>roof components</strong>。</p>
-<p>$$<br>\mathbf{v} &#x3D; v^r\mathbf{g}_r + v^\theta\mathbf{g}\theta \qquad \mathbf{v} &#x3D; v^i\mathbf{g}_i<br>$$</p>
-<p>$\mathbf{g}_r$ 和 $\mathbf{g}_\theta$ 的几何解释大致是：除了原点外的任何一个点 $P(r_0, \theta_0)$，都存在唯一的一条 $r-$坐标曲线 $(r, \theta_0)$ 和一条唯一的 $\theta-$坐标曲线 $(r_0, \theta)$，在这个点上两条坐标曲线的切向方向向量张成了整个平面。</p>
-<h1><span id="the-physical-components-of-a-vector">The Physical Components of a Vector</span></h1><p>首先可以求到前面提到的基的 reciprocal(roof) base vector</p>
-<p>$$<br>\begin{aligned}<br>\mathbf{g}^{r} &amp;&#x3D; \cos\theta\mathbf{e}_x + \sin\theta\mathbf{e}_y \\<br>\mathbf{g}^{\theta} &amp;&#x3D; \frac 1r(-\sin\theta\mathbf{e}_x + \cos\theta\mathbf{e}_y)<br>\end{aligned}<br>$$</p>
-<p><strong>Definition</strong></p>
+<h1><span id="初始符号-形成规则-补充定义">初始符号 形成规则 补充定义</span></h1><p>这三部分内容可以用 data constructor 来完成。我们这里以 <code>var ℕ</code> 作为变量，然后定义两个构造器 <code>¬_</code> 和 <code>_∨_</code>。对于补充定义，可以直接写函数。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">data Expr : Set where</span><br><span class="line">  var_ : ℕ → Expr</span><br><span class="line">  ¬_ : Expr → Expr </span><br><span class="line">  _∨_ : Expr → Expr → Expr </span><br><span class="line"></span><br><span class="line">_-→_ : Expr → Expr → Expr</span><br><span class="line">A -→ B = (¬ A) ∨ B</span><br><span class="line"></span><br><span class="line">_∧_ : Expr → Expr → Expr</span><br><span class="line">A ∧ B = ¬ ((¬ A) ∨ (¬ B))</span><br></pre></td></tr></table></figure>
+
+<h1><span id="公理-变形规则">公理 变形规则</span></h1><p>定义一个 data constructor <code>⊢_ : Expr → Set</code>，然后里面的内容就是公理和变形规则。代入规则的实现依赖于显参，分离规则和公理是 <code>constructor</code>，置换规则直接由 normalization 完成。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">data ⊢_ : Expr → Set where</span><br><span class="line">  A1 : ∀ A     → ⊢ ((A ∨ A) -→ A)</span><br><span class="line">  A2 : ∀ A B   → ⊢ (A -→ (A ∨ B))</span><br><span class="line">  A3 : ∀ A B   → ⊢ ((A ∨ B) -→ (B ∨ A))</span><br><span class="line">  A4 : ∀ A B C → ⊢ ((B -→ C) -→ ((A ∨ B) -→ (A ∨ C)))</span><br><span class="line">  MP : ∀ &#123;A B&#125; → ⊢ A → ⊢ (A -→ B) → ⊢ B</span><br></pre></td></tr></table></figure>
+
+<h1><span id="诸定理的形式化验证">诸定理的形式化验证</span></h1><p>这里验证了三段论，自反律，排中律和结合律。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Syl : ∀ (A B C : Expr) → ⊢ ((B -→ C) -→ ((A -→ B) -→ (A -→ C)))</span><br><span class="line">Syl A B C = A4 (¬ A) B C</span><br><span class="line"></span><br><span class="line">Refl : ∀ (A : Expr) → ⊢ (A -→ A)</span><br><span class="line">Refl A = MP (A2 A A) (MP (A1 A) ((Syl A (A ∨ A) A)))</span><br><span class="line"></span><br><span class="line">EM : ∀ (A : Expr) → ⊢ (A ∨ (¬ A))</span><br><span class="line">EM A = MP (Refl A) (A3 (¬ A) A)</span><br><span class="line"></span><br><span class="line">Assoc : ∀ (A B C : Expr) → ⊢ ((A ∨ (B ∨ C)) -→ ((A ∨ B) ∨ C))</span><br><span class="line">Assoc A B C = MP (MP (MP (MP (MP (A3 B C) (MP (MP (MP (MP (A2 B A) (MP (A3 B A) (Syl B (B ∨ A) (A ∨ B)))) (A4 C B (A ∨ B))) (MP (A3 (C) (A ∨ B)) (Syl (C ∨ B) (C ∨ (A ∨ B)) ((A ∨ B) ∨ C)))) (Syl (B ∨ C) (C ∨ B) ((A ∨ B) ∨ C)))) (A4 A (B ∨ C) ((A ∨ B) ∨ C))) (MP (A3 A ((A ∨ B) ∨ C)) (Syl (A ∨ (B ∨ C)) (A ∨ ((A ∨ B) ∨ C)) (((A ∨ B) ∨ C) ∨ A)))) (MP (MP (MP (A2 A B) (MP (A2 (A ∨ B) C) (Syl A (A ∨ B) ((A ∨ B) ∨ C)))) (A4 ((A ∨ B) ∨ C) A ((A ∨ B) ∨ C))) (Syl (A ∨ (B ∨ C)) (((A ∨ B) ∨ C) ∨ A) (((A ∨ B) ∨ C) ∨ ((A ∨ B) ∨ C))))) (MP (A1 ((A ∨ B) ∨ C)) (Syl (A ∨ (B ∨ C)) (((A ∨ B) ∨ C) ∨ ((A ∨ B) ∨ C)) ((A ∨ B) ∨ C)))</span><br></pre></td></tr></table></figure>
+
+<p>可以看到结合律的证明非常阴间。我们有一套操作流程，可以比较流畅地完成验证的工作：</p>
+<ul>
+<li>开一个 Hole，观察要证明的式子，定位到对应的定理。</li>
+<li>观察后面的提示文字，如果是 $\text{A}x, \text{Syl}$ 等，直接写 <code>Ax (X1) (X2) ...</code>。如果是分离，写 <code>MP ? (对应的定理)</code>；如果是分离两次，写 <code>MP ? (MP ? (对应的定理))</code>，然后一个一个填。</li>
+</ul>
+<p>这样你自己会写的非常爽，然后得到一坨奥里给。</p>
+<p>当然你也可以使用 <code>where</code>，这样代码就会有一些可读性，但是还是对证明定理没什么帮助。可能以后我们会补一个这种风格的结合律证明。</p>
 
     </div>
 
@@ -298,19 +265,20 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Agda/" rel="tag"># Agda</a>
+              <a href="/tags/Logic/" rel="tag"># Logic</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2023/11/28/PhyInInfo1Mechanics/" rel="prev" title="Revision | 信息科学中的物理学（上）力学">
-                  <i class="fa fa-angle-left"></i> Revision | 信息科学中的物理学（上）力学
+                <a href="/2024/01/25/Logic2Pred/" rel="prev" title="数理逻辑 (2) 谓词逻辑">
+                  <i class="fa fa-angle-left"></i> 数理逻辑 (2) 谓词逻辑
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2023/12/04/InfoAndEntropy45/" rel="next" title="Infomation and Entropy (4 ~ 5) Errors & Probablities">
-                  Infomation and Entropy (4 ~ 5) Errors & Probablities <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
