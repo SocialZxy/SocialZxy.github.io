@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="分块矩阵 习题   正交空间相关 习题   矩阵的相抵与相似 实对称矩阵的对角化 习题   矩阵的合同 正定矩阵 习题">
+    <meta name="description" content="分块矩阵  习题   正交空间相关  习题   矩阵的相抵与相似  实对称矩阵的对角化 习题   矩阵的合同  正定矩阵 习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 线性代数 A（期末）">
 <meta property="og:url" content="http://example.com/2023/12/19/LinearAlgeRevision/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="分块矩阵 习题   正交空间相关 习题   矩阵的相抵与相似 实对称矩阵的对角化 习题   矩阵的合同 正定矩阵 习题">
+<meta property="og:description" content="分块矩阵  习题   正交空间相关  习题   矩阵的相抵与相似  实对称矩阵的对角化 习题   矩阵的合同  正定矩阵 习题">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-12-19T09:27:51.000Z">
 <meta property="article:modified_time" content="2024-01-12T07:55:09.579Z">
@@ -233,122 +233,158 @@
     
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
-
 <ul>
-<li><a href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">分块矩阵</a><ul>
+<li><a href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">分块矩阵</a>
+<ul>
 <li><a href="#%E4%B9%A0%E9%A2%98">习题</a></li>
 </ul>
 </li>
-<li><a href="#%E6%AD%A3%E4%BA%A4%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3">正交空间相关</a><ul>
+<li><a href="#%E6%AD%A3%E4%BA%A4%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3">正交空间相关</a>
+<ul>
 <li><a href="#%E4%B9%A0%E9%A2%98-1">习题</a></li>
 </ul>
 </li>
-<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%9B%B8%E6%8A%B5%E4%B8%8E%E7%9B%B8%E4%BC%BC">矩阵的相抵与相似</a><ul>
+<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%9B%B8%E6%8A%B5%E4%B8%8E%E7%9B%B8%E4%BC%BC">矩阵的相抵与相似</a>
+<ul>
 <li><a href="#%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%B9%E8%A7%92%E5%8C%96">实对称矩阵的对角化</a></li>
 <li><a href="#%E4%B9%A0%E9%A2%98-2">习题</a></li>
 </ul>
 </li>
-<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E5%90%88%E5%90%8C">矩阵的合同</a><ul>
+<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E5%90%88%E5%90%8C">矩阵的合同</a>
+<ul>
 <li><a href="#%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5">正定矩阵</a></li>
 <li><a href="#%E4%B9%A0%E9%A2%98-3">习题</a></li>
 </ul>
 </li>
 </ul>
 <!-- tocstop -->
-
 <span id="more"></span>
-
-<h1><span id="分块矩阵">分块矩阵</span></h1><p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
+<h1><span id="分块矩阵">分块矩阵</span></h1>
+<p>本章一个重点是基于构造分块矩阵证明的秩不等式。</p>
 <p><strong>定理 1</strong>(Sylvester 秩不等式) $\mathbf{A}, \mathbf{B}$ 分别为 $s\times n, n\times m$ 矩阵，则</p>
-<p>$$<br>\mathrm{rank}(\mathbf{AB}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B}) - n<br>$$</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{AB}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B}) - n<br>
+$$</p>
 <p><strong>证明</strong> 构造分块矩阵</p>
-<p>$$<br>\mathbf{R} &#x3D; \begin{pmatrix} \mathbf{I} &amp; \mathbf{B} \\ \mathbf{A} &amp; \mathbf{O} \end{pmatrix}<br>$$</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{I} &amp; \mathbf{B} \\ \mathbf{A} &amp; \mathbf{O} \end{pmatrix}<br>
+$$</p>
 <p>可以发现 $\mathrm{rank}(\mathbf{R}) \geq \mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{B})$。用 $I$ 消掉 $A, B$ 得</p>
-<p>$$<br>\begin{pmatrix} \mathbf{I} &amp; \mathbf{O} \\ \mathbf{O} &amp; -\mathbf{AB} \end{pmatrix}<br>$$</p>
-<p>因此 $\mathrm{rank}(\mathbf{R}) &#x3D; \mathrm{rank}(\mathbf{AB}) + n$，即得到该不等式。$\square$</p>
-<div class="note info"><p>称 $\mathbf{A}$ 为幂等矩阵，若 $\mathbf{A} &#x3D; \mathbf{A}^2$。证明矩阵幂等当且仅当<br>$$<br>\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{I} - \mathbf{A}) &#x3D; n<br>$$</p>
+<p>$$<br>
+\begin{pmatrix} \mathbf{I} &amp; \mathbf{O} \\ \mathbf{O} &amp; -\mathbf{AB} \end{pmatrix}<br>
+$$</p>
+<p>因此 $\mathrm{rank}(\mathbf{R}) = \mathrm{rank}(\mathbf{AB}) + n$，即得到该不等式。$\square$</p>
+<div class="note info"><p>称 $\mathbf{A}$ 为幂等矩阵，若 $\mathbf{A} = \mathbf{A}^2$。证明矩阵幂等当且仅当<br>
+$$<br>
+\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{I} - \mathbf{A}) = n<br>
+$$</p>
 <details class="note "><summary><p>solution</p>
 </summary>
-<p>有 </p>
-<p>$$<br>\begin{align*}<br>&amp;\mathbf{A} &#x3D; \mathbf{A}^2 \\<br>\Leftrightarrow &amp;\mathbf{A}(\mathbf{I} - \mathbf{A}) &#x3D; 0  \\<br>\Leftrightarrow &amp;\mathrm{rank}(\mathbf{A}(\mathbf{I} - \mathbf{A})) &#x3D; 0<br>\end{align*}<br>$$</p>
+<p>有</p>
+<p>$$<br>
+\begin{align*}<br>
+&amp;\mathbf{A} = \mathbf{A}^2 \\<br>
+\Leftrightarrow &amp;\mathbf{A}(\mathbf{I} - \mathbf{A}) = 0  \\<br>
+\Leftrightarrow &amp;\mathrm{rank}(\mathbf{A}(\mathbf{I} - \mathbf{A})) = 0<br>
+\end{align*}<br>
+$$</p>
 <p>如果只是证明必要性那么可以直接用 Sylvester 不等式，但是现在要证明充要性，我们继续构造分块矩阵。</p>
-<p>$$<br>\mathbf{R} &#x3D; \begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>$$</p>
+<p>$$<br>
+\mathbf{R} = \begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+$$</p>
 <p>做初等变换</p>
-<p>$$<br>\begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>\rightarrow \begin{pmatrix} \mathbf{A} &amp; \mathbf{A} \\ \mathbf{A} &amp; \mathbf{I} \end{pmatrix}<br>\rightarrow \begin{pmatrix} \mathbf{A} - \mathbf{A}^2 &amp;  \\  &amp; I \end{pmatrix}<br>$$</p>
-<p>可知 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) &#x3D; \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) + n$，于是 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) &#x3D; n \Leftrightarrow \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) &#x3D; 0$。$\square$</p>
-
+<p>$$<br>
+\begin{pmatrix} \mathbf{A} &amp;  \\  &amp; \mathbf{\mathbf{I} - \mathbf{A}} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} &amp; \mathbf{A} \\ \mathbf{A} &amp; \mathbf{I} \end{pmatrix}<br>
+\rightarrow \begin{pmatrix} \mathbf{A} - \mathbf{A}^2 &amp;  \\  &amp; I \end{pmatrix}<br>
+$$</p>
+<p>可知 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) + n$，于是 $\mathrm{rank}(\mathbf{A}) + \mathrm{rank}(\mathbf{A} - \mathbf{I}) = n \Leftrightarrow \mathrm{rank}(\mathbf{A}(\mathbf{A} - \mathbf{I})) = 0$。$\square$</p>
 </details></div>
-
-<div class="note info"><p>证明线性方程组 $\mathbf{A}^T\mathbf{A}x &#x3D; \mathbf{A}^T\beta$ 必然有解。</p>
+<div class="note info"><p>证明线性方程组 $\mathbf{A}^T\mathbf{A}x = \mathbf{A}^T\beta$ 必然有解。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>只需证明 $\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) &#x3D; \mathrm{rank}(\mathbf{A}^T\mathbf{A})$。而</p>
-<p>$$<br>\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) &#x3D; \mathrm{rank}(\mathbf{A}^T(\mathbf{A}, \beta))\leq \mathrm{rank}(\mathbf{A}^T) &#x3D; \mathbf{rank}(\mathbf{A}^T\mathbf{A})<br>$$</p>
+<p>只需证明 $\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T\mathbf{A})$。而</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^T\mathbf{A}, \mathbf{A}^T\beta) = \mathrm{rank}(\mathbf{A}^T(\mathbf{A}, \beta))\leq \mathrm{rank}(\mathbf{A}^T) = \mathbf{rank}(\mathbf{A}^T\mathbf{A})<br>
+$$</p>
 <p>$\geq$ 是显然的。</p>
-
 </details></div>
-
-<div class="note info"><p>证明 $|\mathbf{A}^*| &#x3D; |\mathbf{A}|^{n - 1}$</p>
+<div class="note info"><p>证明 $|\mathbf{A}^*| = |\mathbf{A}|^{n - 1}$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>若 $|\mathbf{A}|\ne 0$，$\mathbf{AA}^* &#x3D; |\mathbf{A}|\mathbf{I}$，两边取行列式即得结论。</p>
-<p>若 $\mathbf{A} &#x3D; 0$ 结论显然成立。由于 $\mathbf{AA}^* &#x3D; |A|I &#x3D; 0$，根据 Sylvester 不等式</p>
-<p>$$<br>\mathrm{\mathbf{A}}^* + \mathrm{rank}(\mathbf{A}) \leq n \Rightarrow \mathrm{rank}(\mathbf{A}) &lt; n<br>$$</p>
+<p>若 $|\mathbf{A}|\ne 0$，$\mathbf{AA}^* = |\mathbf{A}|\mathbf{I}$，两边取行列式即得结论。</p>
+<p>若 $\mathbf{A} = 0$ 结论显然成立。由于 $\mathbf{AA}^* = |A|I = 0$，根据 Sylvester 不等式</p>
+<p>$$<br>
+\mathrm{\mathbf{A}}^* + \mathrm{rank}(\mathbf{A}) \leq n \Rightarrow \mathrm{rank}(\mathbf{A}) &lt; n<br>
+$$</p>
 <p>等式仍然成立。</p>
-
 </details>
-
-<p>还有一个弱智的做法是，如果 $|\mathbf{A}| &#x3D; 0$，如果 $\mathrm{rank}(\mathbf{A})\leq n - 2$，那么 $|\mathbf{A}^*| &#x3D; 0$（有空行），否则经典结论是 $\mathbf{A}^*$ 的每一行都是 $\mathbf{A}x &#x3D; 0$ 的解，解空间维数为 $1$，所以行成比例，行列式为 $0$。</p></div>
-
+<p>还有一个弱智的做法是，如果 $|\mathbf{A}| = 0$，如果 $\mathrm{rank}(\mathbf{A})\leq n - 2$，那么 $|\mathbf{A}^*| = 0$（有空行），否则经典结论是 $\mathbf{A}^*$ 的每一行都是 $\mathbf{A}x = 0$ 的解，解空间维数为 $1$，所以行成比例，行列式为 $0$。</p></div>
 <p>与此类似可以证明</p>
-<p>$$<br>\mathrm{rank}(\mathbf{A}^*) &#x3D; \begin{cases}<br>    n, &amp; \mathrm{rank}(\mathbf{A}) &#x3D; n \\<br>    1, &amp; \mathrm{rank}(\mathbf{A}) &#x3D; n - 1 \\<br>    0, &amp; \mathrm{otherwise.}<br>\end{cases}<br>$$</p>
+<p>$$<br>
+\mathrm{rank}(\mathbf{A}^*) = \begin{cases}<br>
+n, &amp; \mathrm{rank}(\mathbf{A}) = n \\<br>
+1, &amp; \mathrm{rank}(\mathbf{A}) = n - 1 \\<br>
+0, &amp; \mathrm{otherwise.}<br>
+\end{cases}<br>
+$$</p>
 <p>根据这个结论可以简单地推出</p>
-<p>$$<br>(\mathbf{A}^*)^* &#x3D; \begin{cases}<br>    |\mathbf{A}|^{n - 2}\mathbf{A}, &amp;n &gt; 2 \\<br>    \mathbf{A}, &amp; n &#x3D; 2<br>\end{cases}<br>$$</p>
-<p><strong>命题 1</strong> $(\mathbf{AB})^* &#x3D; \mathbf{B}^*\mathbf{A}^*$。</p>
+<p>$$<br>
+(\mathbf{A}^*)^* = \begin{cases}<br>
+|\mathbf{A}|^{n - 2}\mathbf{A}, &amp;n &gt; 2 \\<br>
+\mathbf{A}, &amp; n = 2<br>
+\end{cases}<br>
+$$</p>
+<p><strong>命题 1</strong> $(\mathbf{AB})^* = \mathbf{B}^*\mathbf{A}^*$。</p>
 <blockquote>
 <p>用 Binet-Cauchy 公式拆开 $AB$_{ij} 即可。</p>
 </blockquote>
-<p><strong>命题 2</strong> $\mathbf{AX} &#x3D; \mathbf{B}$ 有解的充要条件是 $\mathrm{rank}(\mathbf{A}) &#x3D; \mathrm{rank(A, B)}$。</p>
+<p><strong>命题 2</strong> $\mathbf{AX} = \mathbf{B}$ 有解的充要条件是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
 <blockquote>
-<p>视为 $(\alpha_1, …, \alpha_n)\mathbf{X} &#x3D; (\beta_1, …, \beta_n)$ 有解，拆开发现是 $\beta$ 可以被 $\alpha$ 线性表出，也就是 $\mathrm{rank}(\mathbf{A}) &#x3D; \mathrm{rank(A, B)}$。</p>
+<p>视为 $(\alpha_1, …, \alpha_n)\mathbf{X} = (\beta_1, …, \beta_n)$ 有解，拆开发现是 $\beta$ 可以被 $\alpha$ 线性表出，也就是 $\mathrm{rank}(\mathbf{A}) = \mathrm{rank(A, B)}$。</p>
 </blockquote>
 <div class="note info"><p>求由 $(1, 2, …, n)$ 生成的循环矩阵的逆。</p>
 <details class="note "><summary><p>Hint.</p>
 </summary>
-<p>我们看作解矩阵方程 $\mathbf{AX} &#x3D; \mathbf{I}$，也就是 $\mathbf{A}(x_1, …, x_n) &#x3D; (\varepsilon_1, …, \varepsilon_n)$，而 $\mathbf{A}x_i &#x3D; \varepsilon_\i$ 这样的方程是好解的。</p>
+<p>我们看作解矩阵方程 $\mathbf{AX} = \mathbf{I}$，也就是 $\mathbf{A}(x_1, …, x_n) = (\varepsilon_1, …, \varepsilon_n)$，而 $\mathbf{A}x_i = \varepsilon_\i$ 这样的方程是好解的。</p>
 <p>实际上你只需要解一个出来，因为是循环矩阵。这个东西简化了计算。</p>
-
 </details></div>
-
 <p>接下来一些重点是分块矩阵的逆和行列式。我们记录一些结论。</p>
 <p><strong>命题 3</strong> 若 $\mathbf{A}$ 可逆，$\begin{pmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{pmatrix}$ 可逆的充分必要条件是 $\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}$ 可逆。</p>
 <blockquote>
 <p>消元消至上三角，可逆等价于行列式非零。</p>
 </blockquote>
-<p><strong>命题 4</strong> 若 $\mathbf{AC} &#x3D; \mathbf{CA}$，则</p>
-<p>$$<br>\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} &#x3D; |\mathbf{AD} - \mathbf{BC}|<br>$$</p>
+<p><strong>命题 4</strong> 若 $\mathbf{AC} = \mathbf{CA}$，则</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{AD} - \mathbf{BC}|<br>
+$$</p>
 <details class="note "><summary><p><strong>证明</strong></p>
 </summary>
 <p>如果 $\mathbf{A}$ 可逆，那么有</p>
-<p>$$<br>\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} &#x3D; |\mathbf{A}||\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}| &#x3D; |\mathbf{AD} - \mathbf{ACA}^{-1}B| &#x3D; |\mathbf{AD}-\mathbf{CB}|<br>$$</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A} &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{A}||\mathbf{D} - \mathbf{CA}^{-1}\mathbf{B}| = |\mathbf{AD} - \mathbf{ACA}^{-1}B| = |\mathbf{AD}-\mathbf{CB}|<br>
+$$</p>
 <p>最后一步用到了交换性。</p>
-<p>否则我们构造 $\mathbf{A}(t) &#x3D; \mathbf{A} - t\mathbf{I}$，则可以推出</p>
-<p>$$<br>\mathbf{A}(t)\mathbf{C} &#x3D; \mathbf{AC} - t\mathbf{C} &#x3D; \mathbf{CA} - t\mathbf{C} &#x3D; \mathbf{CA}(t)<br>$$</p>
-<p>而且有 $|\mathbf{A}(0)| &#x3D; 0$，并且 $\mathbf{A}(t)$ 是一个多项式，所以在 $0$ 附近连续，且存在一个去心邻域 $U(0, \delta) \setminus \{0\}$ 内非零。套用可逆的结论得到</p>
-<p>$$<br>\begin{vmatrix} \mathbf{A}(t) &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} &#x3D; |\mathbf{A}(t)\mathbf{D} - \mathbf{BC}|<br>$$</p>
+<p>否则我们构造 $\mathbf{A}(t) = \mathbf{A} - t\mathbf{I}$，则可以推出</p>
+<p>$$<br>
+\mathbf{A}(t)\mathbf{C} = \mathbf{AC} - t\mathbf{C} = \mathbf{CA} - t\mathbf{C} = \mathbf{CA}(t)<br>
+$$</p>
+<p>而且有 $|\mathbf{A}(0)| = 0$，并且 $\mathbf{A}(t)$ 是一个多项式，所以在 $0$ 附近连续，且存在一个去心邻域 $U(0, \delta) \setminus \{0\}$ 内非零。套用可逆的结论得到</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{A}(t) &amp; \mathbf{B} \\ \mathbf{C} &amp; \mathbf{D} \end{vmatrix} = |\mathbf{A}(t)\mathbf{D} - \mathbf{BC}|<br>
+$$</p>
 <p>两边取 $\lim\limits_{x\rightarrow 0}$，可以得到原结论。</p>
 
 </details>
-
-<p><strong>命题 5</strong> </p>
-<p>$$<br>\begin{vmatrix} \mathbf{I}_n &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I}_m \end{vmatrix} &#x3D; |\mathbf{I_n} - \mathbf{AB}| &#x3D; |\mathbf{I_m} - \mathbf{BA}|<br>$$</p>
-<div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| &#x3D; |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
+<p><strong>命题 5</strong></p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{I}_n &amp; \mathbf{A} \\ \mathbf{B} &amp; \mathbf{I}_m \end{vmatrix} = |\mathbf{I_n} - \mathbf{AB}| = |\mathbf{I_m} - \mathbf{BA}|<br>
+$$</p>
+<div class="note info"><p>$\mathbf{A}$ 可逆，证明 $|\mathbf{A} - aa^T| = |\mathbf{A}||1 - a^T\mathbf{A}^{-1}a|$</p>
 <details class="note "><summary><p>Hint.</p>
 </summary>
 <p>提出一个 $\mathbf{A}$ 之后用命题 5 即可。</p>
-
 </details></div>
-
 <p>接下来是一些利用分块矩阵做归纳，一个比较重要的东西是：</p>
 <p><strong>定义.</strong>(LU 分解) $A$ 可以被写成一个主对角线全是 $1$ 的下三角矩阵 $L$ 和一个可逆上三角矩阵 $U$ 的乘积。</p>
 <div class="note info"><p>$A$ 可 LU 分解当且仅当 $A$ 的所有顺序主子式均非 $0$，且分解方案唯一。</p>
@@ -356,249 +392,294 @@
 </summary>
 <p>$\Leftarrow$ 分块矩阵归纳，非常容易。</p>
 <p>$\Rightarrow$ 设</p>
-<p>$$<br>A &#x3D; LU &#x3D; \begin{pmatrix} L_{11} &amp;  \\ L_{21} &amp; L_{22} \end{pmatrix} \begin{pmatrix} U_{11} &amp; U_{12} \\  &amp; U_{22} \end{pmatrix}<br>$$</p>
+<p>$$<br>
+A = LU = \begin{pmatrix} L_{11} &amp;  \\ L_{21} &amp; L_{22} \end{pmatrix} \begin{pmatrix} U_{11} &amp; U_{12} \\  &amp; U_{22} \end{pmatrix}<br>
+$$</p>
 <p>其中 $L_{11}$ 是 $k$ 阶方阵，那么 $L_{11}U_{11}$ 就是 $k$ 阶主子式（Binet Cauchy 公式）。</p>
-<p><strong>唯一性.</strong> 考虑 $A &#x3D; L_1U_1 &#x3D; L_2U_2$，那么</p>
-<p>$$<br>L_1L_2^{-1} &#x3D; U_1U_2^{-1}<br>$$</p>
-<p>下三角等于上三角，那么只可能是对焦，而且主对角元全是 $1$，所以 $L_1 &#x3D; L_2, U_1 &#x3D; U_2$。</p>
-
+<p><strong>唯一性.</strong> 考虑 $A = L_1U_1 = L_2U_2$，那么</p>
+<p>$$<br>
+L_1L_2^{-1} = U_1U_2^{-1}<br>
+$$</p>
+<p>下三角等于上三角，那么只可能是对焦，而且主对角元全是 $1$，所以 $L_1 = L_2, U_1 = U_2$。</p>
 </details></div>
-
 <p>这里是一个重要的结论。</p>
-<div class="note info"><p>矩阵方程 $ABX &#x3D; A$ 有解的充要条件是 $\mathrm{rank}(AB) &#x3D; \mathrm{rank}(A)$</p>
+<div class="note info"><p>矩阵方程 $ABX = A$ 有解的充要条件是 $\mathrm{rank}(AB) = \mathrm{rank}(A)$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>等价于 $\mathrm{rank}(AB) &#x3D; \mathrm{rank}(AB, A)$。</p>
-<p>等价于两个矩阵列向量组等价。而 $AB$ 的列向量组可以被 $A$ 的列向量组表出，因此等价于 $AB$ 和 $A$ 的列向量组等价，即 $\mathrm{rank}(A) &#x3D; \mathrm{rank}(AB)$。$\square$</p>
-
+<p>等价于 $\mathrm{rank}(AB) = \mathrm{rank}(AB, A)$。</p>
+<p>等价于两个矩阵列向量组等价。而 $AB$ 的列向量组可以被 $A$ 的列向量组表出，因此等价于 $AB$ 和 $A$ 的列向量组等价，即 $\mathrm{rank}(A) = \mathrm{rank}(AB)$。$\square$</p>
 </details>
-
 <blockquote>
-<p><strong>Remark.</strong> 这个结论可以用于做非常规分块矩阵消元。将式子转置得到 $XBA &#x3D; A$ 有解，因此行变换和列变换都可以做。</p>
+<p><strong>Remark.</strong> 这个结论可以用于做非常规分块矩阵消元。将式子转置得到 $XBA = A$ 有解，因此行变换和列变换都可以做。</p>
 </blockquote></div>
-
 <p>这里有三个非常阴间的秩不等式。</p>
 <div class="note info"><p>证明 $\mathrm{rank}(I-AB) \leq \mathrm{rank}(I - A) + \mathrm{rank}(I - B)$。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>$$<br>\begin{aligned}<br>\mathrm{RHS} &amp;&#x3D; \mathrm{rank}\begin{pmatrix} I-A &amp;  \\  &amp; I-B \end{pmatrix} &#x3D; \mathrm{rank}\begin{pmatrix} I-A &amp; I-B \\  &amp; I-B \end{pmatrix} \\<br>&amp;&#x3D; \mathrm{rank}\begin{pmatrix} I-A - A(I-B) &amp; I-B \\ A-AB &amp; I-B \end{pmatrix} &#x3D; \mathrm{rank}\begin{pmatrix} I-AB &amp; I-B \\ A-AB &amp; I-B \end{pmatrix} \\<br>&amp;\geq \mathrm{LHS}.\square<br>\end{aligned}<br>$$</p>
-
+<p>$$<br>
+\begin{aligned}<br>
+\mathrm{RHS} &amp;= \mathrm{rank}\begin{pmatrix} I-A &amp;  \\  &amp; I-B \end{pmatrix} = \mathrm{rank}\begin{pmatrix} I-A &amp; I-B \\  &amp; I-B \end{pmatrix} \\<br>
+&amp;= \mathrm{rank}\begin{pmatrix} I-A - A(I-B) &amp; I-B \\ A-AB &amp; I-B \end{pmatrix} = \mathrm{rank}\begin{pmatrix} I-AB &amp; I-B \\ A-AB &amp; I-B \end{pmatrix} \\<br>
+&amp;\geq \mathrm{LHS}.\square<br>
+\end{aligned}<br>
+$$</p>
 </details>
-
-<p>若 $\mathrm{rank}(A) &#x3D; \mathrm{rank}(A^2), AB &#x3D; BA &#x3D; 0$，求证 $\mathrm{rank}(A + B) &#x3D; \mathrm{rank}(A) + \mathrm{rank}(B)$。</p>
+<p>若 $\mathrm{rank}(A) = \mathrm{rank}(A^2), AB = BA = 0$，求证 $\mathrm{rank}(A + B) = \mathrm{rank}(A) + \mathrm{rank}(B)$。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>考虑上一道题的结论，$A^2X &#x3D; A$ 和 $XA^2 &#x3D; A$ 有解，接下来的过程中应该看得出来哪里用了结论。</p>
-<p>$$<br>\begin{aligned}<br>    \mathrm{rank}\begin{pmatrix} A+B &amp;  \\  &amp; O \end{pmatrix} &#x3D;&amp; \mathrm{rank}\begin{pmatrix} A+B &amp; XA(A+B) \\  &amp; O \end{pmatrix} &#x3D; \mathrm{rank}\begin{pmatrix} A+B &amp; A \\  &amp; O \end{pmatrix} \\<br>    &#x3D;&amp; \mathrm{rank}\begin{pmatrix} A+B &amp; A  \\ (A+B)AX &amp; A^2X \end{pmatrix} &#x3D; \mathrm{rank}\begin{pmatrix} A+B &amp; A \\ A &amp; A \end{pmatrix} \\<br>    &#x3D;&amp; \mathrm{rank}\begin{pmatrix} B &amp;  \\ A &amp; A \end{pmatrix} &#x3D; \mathrm{rank}\begin{pmatrix} B &amp;  \\  &amp; A \end{pmatrix} .\square<br>\end{aligned}<br>$$</p>
+<p>考虑上一道题的结论，$A^2X = A$ 和 $XA^2 = A$ 有解，接下来的过程中应该看得出来哪里用了结论。</p>
+<p>$$<br>
+\begin{aligned}<br>
+\mathrm{rank}\begin{pmatrix} A+B &amp;  \\  &amp; O \end{pmatrix} =&amp; \mathrm{rank}\begin{pmatrix} A+B &amp; XA(A+B) \\  &amp; O \end{pmatrix} = \mathrm{rank}\begin{pmatrix} A+B &amp; A \\  &amp; O \end{pmatrix} \\<br>
+=&amp; \mathrm{rank}\begin{pmatrix} A+B &amp; A  \\ (A+B)AX &amp; A^2X \end{pmatrix} = \mathrm{rank}\begin{pmatrix} A+B &amp; A \\ A &amp; A \end{pmatrix} \\<br>
+=&amp; \mathrm{rank}\begin{pmatrix} B &amp;  \\ A &amp; A \end{pmatrix} = \mathrm{rank}\begin{pmatrix} B &amp;  \\  &amp; A \end{pmatrix} .\square<br>
+\end{aligned}<br>
+$$</p>
 <p>好像位置全写错了，反正就是这个意思。</p>
-
 </details></div>
-
-<h2><span id="习题">习题</span></h2><p>摘录一些没做出来的。</p>
-<div class="note info"><p>若 $\mathrm{rank}(\mathbf{A}) &#x3D; 1$，那么 $\mathbf{A}^2 &#x3D; k\mathbf{A}$。</p>
+<h2><span id="习题">习题</span></h2>
+<p>摘录一些没做出来的。</p>
+<div class="note info"><p>若 $\mathrm{rank}(\mathbf{A}) = 1$，那么 $\mathbf{A}^2 = k\mathbf{A}$。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>有 $\mathrm{rank}(\mathbf{A}) &#x3D; 1$ 则 $A &#x3D; \alpha\beta^T$。</p>
-<p>于是 $\mathbf{A}^2 &#x3D; \alpha(\beta^T\alpha)\beta^T &#x3D; \langle\beta, \alpha\rangle \mathbf{A}$。$\square$</p>
-
+<p>有 $\mathrm{rank}(\mathbf{A}) = 1$ 则 $A = \alpha\beta^T$。</p>
+<p>于是 $\mathbf{A}^2 = \alpha(\beta^T\alpha)\beta^T = \langle\beta, \alpha\rangle \mathbf{A}$。$\square$</p>
 </details></div>
-
 <div class="note info"><p>求</p>
-<p>$$<br>\begin{vmatrix}<br>    0 &amp; 1 &amp; \cdots &amp; 1 \\<br>    1 &amp; 0 &amp; \cdots &amp; 1 \\<br>    \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>    1 &amp; 1 &amp; \cdots &amp; 0<br>\end{vmatrix}<br>$$</p>
+<p>$$<br>
+\begin{vmatrix}<br>
+0 &amp; 1 &amp; \cdots &amp; 1 \\<br>
+1 &amp; 0 &amp; \cdots &amp; 1 \\<br>
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>
+1 &amp; 1 &amp; \cdots &amp; 0<br>
+\end{vmatrix}<br>
+$$</p>
 <p>这个其实做出来了，但是答案做法比较好。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>即</p>
-<p>$$<br>(\begin{pmatrix} 1 \\ \vdots \\ 1\end{pmatrix}\begin{pmatrix}1 &amp; \vdots &amp; 1\end{pmatrix} - I)<br>$$</p>
+<p>$$<br>
+(\begin{pmatrix} 1 \\ \vdots \\ 1\end{pmatrix}\begin{pmatrix}1 &amp; \vdots &amp; 1\end{pmatrix} - I)<br>
+$$</p>
 <p>用命题 5。</p>
-
 </details></div>
-
 <div class="note info"><p>求证（$\mathbf{B}, \mathbf{C}$ 分别为 $n\times s, n\times (n - s)$ 矩阵）</p>
-<p>$$<br>\begin{vmatrix} \mathbf{B}^T\mathbf{B} &amp; \mathbf{B}^T\mathbf{C} \\ \mathbf{C}^T\mathbf{B} &amp; \mathbf{C}^T\mathbf{C} \end{vmatrix} \leq |\mathbf{B}^T\mathbf{B}||\mathbf{C}^T\mathbf{C}|<br>$$</p>
+<p>$$<br>
+\begin{vmatrix} \mathbf{B}^T\mathbf{B} &amp; \mathbf{B}^T\mathbf{C} \\ \mathbf{C}^T\mathbf{B} &amp; \mathbf{C}^T\mathbf{C} \end{vmatrix} \leq |\mathbf{B}^T\mathbf{B}||\mathbf{C}^T\mathbf{C}|<br>
+$$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>$$<br>\mathrm{LHS} &#x3D; \left|(\mathbf{B}, \mathbf{C})^T(\mathbf{B}, \mathbf{C})\right| &#x3D; |\mathbf{B}, \mathbf{C}|^2<br>$$</p>
+<p>$$<br>
+\mathrm{LHS} = \left|(\mathbf{B}, \mathbf{C})^T(\mathbf{B}, \mathbf{C})\right| = |\mathbf{B}, \mathbf{C}|^2<br>
+$$</p>
 <p>左边拉普拉斯展开，右边用 Binet-Cauchy 公式，发现是个柯西不等式。$\square$</p>
-
 </details></div>
-
 <p>后面懒得加粗了。</p>
-<h1><span id="正交空间相关">正交空间相关</span></h1><p><strong>定义.</strong>(QR 分解) 对于一个 $m\times n(m\geq n)$ 阶列满秩矩阵 $A$，如果可以写成 $A &#x3D; QR$，其中 $Q$ 列向量组正交，$R$ 上三角，则称 $QR$ 是 $A$ 的 QR 分解。</p>
+<h1><span id="正交空间相关">正交空间相关</span></h1>
+<p><strong>定义.</strong>(QR 分解) 对于一个 $m\times n(m\geq n)$ 阶列满秩矩阵 $A$，如果可以写成 $A = QR$，其中 $Q$ 列向量组正交，$R$ 上三角，则称 $QR$ 是 $A$ 的 QR 分解。</p>
 <p><strong>命题 1.</strong> 一个满秩方阵矩阵可以做 $QR$ 分解，且唯一。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>考虑将 $A$ 的列向量组 Schmidt 正交化并单位化，就得到了一个正交矩阵。</p>
 <p>显然这个逆变换的矩阵是上三角的，所以完成了 QR 分解。</p>
-<p>假设有两组分解 $A &#x3D; QR &#x3D; Q_1R_1$，那么有</p>
-<p>$$<br>Q &#x3D; Q_1R_1R^{-1}<br>$$</p>
-<p>其中 $R_1R^{-1}$ 上三角，记为 $R_2$。于是 $Q &#x3D; Q_1R_2$。考虑列向量。</p>
-<p>$$<br>(q_1, q_2, …, q_n) &#x3D; (r_{11}q’_1, r_{12}q’_1 + r_{22}q’_2, …, \sum r_{in}q’_i)<br>$$</p>
-<p>因为 $||q’<em>1|| &#x3D; ||q_1|| &#x3D; 1$，$r</em>{11} &#x3D; 1, q_{1} &#x3D; q’_1$。</p>
-<p>$\langle r_{11}q’_1, r_{12}q’_1 + r_{22}q’_2\rangle &#x3D; 0$ 推出 $r_{12} &#x3D; 0, r_{22} &#x3D; 1, q_2 &#x3D; q’_2$。</p>
+<p>假设有两组分解 $A = QR = Q_1R_1$，那么有</p>
+<p>$$<br>
+Q = Q_1R_1R^{-1}<br>
+$$</p>
+<p>其中 $R_1R^{-1}$ 上三角，记为 $R_2$。于是 $Q = Q_1R_2$。考虑列向量。</p>
+<p>$$<br>
+(q_1, q_2, …, q_n) = (r_{11}q’_1, r_{12}q’_1 + r_{22}q’_2, …, \sum r_{in}q’_i)<br>
+$$</p>
+<p>因为 $||q’<em>1|| = ||q_1|| = 1$，$r</em>{11} = 1, q_{1} = q’_1$。</p>
+<p>$\langle r_{11}q’_1, r_{12}q’_1 + r_{22}q’_2\rangle = 0$ 推出 $r_{12} = 0, r_{22} = 1, q_2 = q’_2$。</p>
 <p>…</p>
-<p>可知 $Q_1 &#x3D; Q_2$，$R_1R^{-1} &#x3D; I$ 即 $R_1 &#x3D; R$。$\square$</p>
+<p>可知 $Q_1 = Q_2$，$R_1R^{-1} = I$ 即 $R_1 = R$。$\square$</p>
 
 </details>
-
-<p><strong>命题 2.</strong> $A$ 列满秩，则方程 $A^TAx &#x3D; A^T\beta$ 有唯一解 $R^{-1}Q^T\beta$。</p>
+<p><strong>命题 2.</strong> $A$ 列满秩，则方程 $A^TAx = A^T\beta$ 有唯一解 $R^{-1}Q^T\beta$。</p>
 <p>显然。</p>
 <p>需要注意正交矩阵的行列式只能是 $\pm 1$。</p>
-<p><strong>命题 3.</strong> $n$ 阶（$n\geq 3$）非零实矩阵 $A$ 正交当且仅当 $A(i, j) &#x3D; \pm A_{ij}$，这里 $A_{ij}$ 是代数余子式。</p>
+<p><strong>命题 3.</strong> $n$ 阶（$n\geq 3$）非零实矩阵 $A$ 正交当且仅当 $A(i, j) = \pm A_{ij}$，这里 $A_{ij}$ 是代数余子式。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>$\Rightarrow$. 有 $A^* &#x3D; \frac{1}{|A|}A^{-1} &#x3D; \frac{1}{|A|}A’$。拆开即可得到结论。</p>
-<p>$\Rightarrow$ 以 $A(i, j) &#x3D; \pm A_{ij}$ 的情况为例。</p>
+<p>$\Rightarrow$. 有 $A^* = \frac{1}{|A|}A^{-1} = \frac{1}{|A|}A’$。拆开即可得到结论。</p>
+<p>$\Rightarrow$ 以 $A(i, j) = \pm A_{ij}$ 的情况为例。</p>
 <p>先证明 $A$ 可逆。找到 $A$ 的一个非零行</p>
-<p>$$<br>|A| &#x3D; \sum_{i&#x3D;1}^n a_{ki}A_{ki} &#x3D; \sum_{i&#x3D;1}^n a_{ki}^2 &gt; 0<br>$$</p>
-<p>根据条件可以得到 $A’ &#x3D; A^*$。根据经典结论 $|A^*| &#x3D; |A|^{n - 1}$，于是</p>
-<p>$$<br>|A’| &#x3D; |A|^{n - 1} \Rightarrow |A|^{n - 2} &#x3D; 1<br>$$</p>
-<p>结合 $|A| &gt; 0$ 可知实数域下只可能是 $|A| &#x3D; 1$。于是 $A^{*} &#x3D; A^{-1} &#x3D; A’$，$A$ 正交。</p>
+<p>$$<br>
+|A| = \sum_{i=1}^n a_{ki}A_{ki} = \sum_{i=1}^n a_{ki}^2 &gt; 0<br>
+$$</p>
+<p>根据条件可以得到 $A’ = A^<em>$。根据经典结论 $|A^</em>| = |A|^{n - 1}$，于是</p>
+<p>$$<br>
+|A’| = |A|^{n - 1} \Rightarrow |A|^{n - 2} = 1<br>
+$$</p>
+<p>结合 $|A| &gt; 0$ 可知实数域下只可能是 $|A| = 1$。于是 $A^{*} = A^{-1} = A’$，$A$ 正交。</p>
 <p>负的情况同理。$\square$</p>
 
 </details>
-
 <p>然后有一些重要结论。</p>
-<p><strong>定理 4.</strong> $\mathcal{N}(A^T) &#x3D; \mathcal{C}(A)^\perp$</p>
+<p><strong>定理 4.</strong> $\mathcal{N}(A^T) = \mathcal{C}(A)^\perp$</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>首先有维数关系</p>
-<p>$$<br>\dim\mathcal{N}(A^T) + \dim\mathcal{C}(A) &#x3D; n<br>$$</p>
-<p>若 $u\in \mathcal{N}(A^T), v\in \mathcal{C}(A)$，即 $A^Tu &#x3D; 0, v &#x3D; Ax$， 则</p>
-<p>$$<br>\langle u, v\rangle &#x3D; \langle u, Ax\rangle &#x3D; \langle A^Tu, x\rangle &#x3D; 0<br>$$</p>
-<p>因此 $\mathcal{N}(A^T) &#x3D; \mathcal{C}(A)^\perp$。$\square$</p>
+<p>$$<br>
+\dim\mathcal{N}(A^T) + \dim\mathcal{C}(A) = n<br>
+$$</p>
+<p>若 $u\in \mathcal{N}(A^T), v\in \mathcal{C}(A)$，即 $A^Tu = 0, v = Ax$， 则</p>
+<p>$$<br>
+\langle u, v\rangle = \langle u, Ax\rangle = \langle A^Tu, x\rangle = 0<br>
+$$</p>
+<p>因此 $\mathcal{N}(A^T) = \mathcal{C}(A)^\perp$。$\square$</p>
 
 </details>
-
-<p><strong>定理 5.</strong>(最小二乘法) $Ax &#x3D; \beta$ 的最小二乘解 $\Leftrightarrow$ $A^TAx &#x3D; A^T\beta$ 的解。</p>
+<p><strong>定理 5.</strong>(最小二乘法) $Ax = \beta$ 的最小二乘解 $\Leftrightarrow$ $A^TAx = A^T\beta$ 的解。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>考虑 $\mathbb{R}^n &#x3D; \mathcal{N}(A^T) \oplus \mathcal{C}(A)$，可知 $\beta &#x3D; \beta_c + \beta_n$。其中 $Ax &#x3D; \beta_c$ 有解。</p>
+<p>考虑 $\mathbb{R}^n = \mathcal{N}(A^T) \oplus \mathcal{C}(A)$，可知 $\beta = \beta_c + \beta_n$。其中 $Ax = \beta_c$ 有解。</p>
 <p>然后有</p>
-<p>$$<br>A^T\beta_n &#x3D; A^T(\beta - \beta_c) &#x3D; A^T(\beta - Ax) &#x3D; 0 \<br>\Leftrightarrow A^T\beta &#x3D; A^TAx<br>$$</p>
+<p>$$<br>
+A^T\beta_n = A^T(\beta - \beta_c) = A^T(\beta - Ax) = 0 \<br>
+\Leftrightarrow A^T\beta = A^TAx<br>
+$$</p>
 <p>想要证明最小，只需考虑</p>
-<p>$$<br>||Ax’ - \beta|| &#x3D; ||\beta_n + (\beta_c - Ax)||\geq ||\beta_n||<br>$$</p>
-<p>这是因为 $(\beta_c - Ax’)\in \mathcal{N}(A^T)\perp$，因此和 $\langle\beta_c - Ax’, \beta_n\rangle &#x3D; 0$。于是上面的解就是最小的解。$\square$</p>
+<p>$$<br>
+||Ax’ - \beta|| = ||\beta_n + (\beta_c - Ax)||\geq ||\beta_n||<br>
+$$</p>
+<p>这是因为 $(\beta_c - Ax’)\in \mathcal{N}(A^T)\perp$，因此和 $\langle\beta_c - Ax’, \beta_n\rangle = 0$。于是上面的解就是最小的解。$\square$</p>
 
 </details>
-
-<h2><span id="习题">习题</span></h2><div class="note info"><p>若 $A, B$ 正交，且 $|A| + |B| &#x3D; 0$，求证 $A + B$ 不可逆。</p>
+<h2><span id="习题">习题</span></h2>
+<div class="note info"><p>若 $A, B$ 正交，且 $|A| + |B| = 0$，求证 $A + B$ 不可逆。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>不妨设 $|A| &#x3D; 1, |B| &#x3D; -1$。</p>
+<p>不妨设 $|A| = 1, |B| = -1$。</p>
 <p>那么</p>
-<p>$$<br>\begin{aligned}<br>|A^T||A+B| &#x3D; |I + A^TB| \\<br>|B^T||A+B| &#x3D; |B^TA + I| &#x3D; |I + A^TB| &#x3D; |A^T||A+B|<br>\end{aligned}<br>$$</p>
-<p>因此 $|A + B| &#x3D; -|A+B|$，可知 $|A+B| &#x3D; 0$，不可逆。$\square$</p>
-
+<p>$$<br>
+\begin{aligned}<br>
+|A^T||A+B| = |I + A^TB| \\<br>
+|B^T||A+B| = |B^TA + I| = |I + A^TB| = |A^T||A+B|<br>
+\end{aligned}<br>
+$$</p>
+<p>因此 $|A + B| = -|A+B|$，可知 $|A+B| = 0$，不可逆。$\square$</p>
 </details></div>
-
-<h1><span id="矩阵的相抵与相似">矩阵的相抵与相似</span></h1><p>相似变换下有一些不变量，比如中所周知的行列式。还有一个是矩阵的迹。</p>
-<p><strong>定义</strong>(Trace) $\mathrm{tr}(A) &#x3D; \sum a_{ii}$。</p>
-<p><strong>引理 1.</strong> $\mathrm{tr}(AB) &#x3D; \mathrm{tr}(BA)$。</p>
+<h1><span id="矩阵的相抵与相似">矩阵的相抵与相似</span></h1>
+<p>相似变换下有一些不变量，比如中所周知的行列式。还有一个是矩阵的迹。</p>
+<p><strong>定义</strong>(Trace) $\mathrm{tr}(A) = \sum a_{ii}$。</p>
+<p><strong>引理 1.</strong> $\mathrm{tr}(AB) = \mathrm{tr}(BA)$。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>$$<br>\begin{aligned}<br>    \mathrm{tr}(AB) &amp;&#x3D; \sum_{t&#x3D;1}^n AB_{tt} \\<br>                    &amp;&#x3D; \sum_{t&#x3D;1}^n \sum_{i&#x3D;1}^n A_{ti} B_{it} \\<br>                    &amp;&#x3D; \sum_{i&#x3D;1}^n \sum_{t&#x3D;1}^n B_{it} A_{ti} \\<br>                    &amp;&#x3D; \mathrm{tr}(BA)<br>\end{aligned}<br>$$</p>
+<p>$$<br>
+\begin{aligned}<br>
+\mathrm{tr}(AB) &amp;= \sum_{t=1}^n AB_{tt} \\<br>
+&amp;= \sum_{t=1}^n \sum_{i=1}^n A_{ti} B_{it} \\<br>
+&amp;= \sum_{i=1}^n \sum_{t=1}^n B_{it} A_{ti} \\<br>
+&amp;= \mathrm{tr}(BA)<br>
+\end{aligned}<br>
+$$</p>
 
 </details>
-
 <p><strong>定理 2.</strong> 相似变换保迹。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>$$<br>\mathrm{tr}(P^{-1}AP) &#x3D; \mathrm{tr}((AP)P^{-1}) &#x3D; \mathrm{tr}(A)<br>$$</p>
+<p>$$<br>
+\mathrm{tr}(P^{-1}AP) = \mathrm{tr}((AP)P^{-1}) = \mathrm{tr}(A)<br>
+$$</p>
 <p>注意只能交换前后两部分。</p>
 
 </details>
-
 <p>利用迹可以做一些简单的推导。</p>
-<div class="note info"><p>若 $AB - BA &#x3D; A$，那么 $A$ 不可逆。</p>
+<div class="note info"><p>若 $AB - BA = A$，那么 $A$ 不可逆。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>反证，若 $A$ 可逆，那么 </p>
-<p>$$<br>B - A^{-1}BA &#x3D; I<br>$$</p>
+<p>反证，若 $A$ 可逆，那么</p>
+<p>$$<br>
+B - A^{-1}BA = I<br>
+$$</p>
 <p>两边取 $\mathrm{tr}$ 导出矛盾。</p>
-
 </details></div>
-
 <p>注意这里我们引入迹还有一个作用是计算特征多项式。</p>
 <p>关于矩阵相似我们有如下结论：</p>
 <p><strong>命题 3.</strong> 若 $A, B$ 在实数域下不相似，那么其在复数域下也不相似。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>若 $(P+iQ)A &#x3D; B(P+iQ)$，可以推出 $PA &#x3D; BP, QA &#x3D; BQ$。问题是 $P, Q$ 不一定可逆。</p>
-<p>考虑 $F(\lambda) &#x3D; |P - \lambda Q|$，因为 $Q$ 非零，此多项式非零。所以必然存在一个 $\lambda$ 使得 $P + \lambda Q$ 可逆，此时 $A, B$ 通过这个实矩阵相似，矛盾。</p>
+<p>若 $(P+iQ)A = B(P+iQ)$，可以推出 $PA = BP, QA = BQ$。问题是 $P, Q$ 不一定可逆。</p>
+<p>考虑 $F(\lambda) = |P - \lambda Q|$，因为 $Q$ 非零，此多项式非零。所以必然存在一个 $\lambda$ 使得 $P + \lambda Q$ 可逆，此时 $A, B$ 通过这个实矩阵相似，矛盾。</p>
 
 </details>
-
 <blockquote>
 <p><strong>Remark.</strong> 注意这个把逆矩阵乘过去的操作，这个操作在证明相似性的时候似乎比较有用。</p>
 </blockquote>
-<p><strong>命题 4.</strong> $A$ 的相似等价类中只有自己当且仅当 $A &#x3D; xI$。</p>
+<p><strong>命题 4.</strong> $A$ 的相似等价类中只有自己当且仅当 $A = xI$。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>任取一可逆矩阵都有 $AP &#x3D; PA$，因此 $A &#x3D; xI$。这个结论在上半学期证明过了。</p>
+<p>任取一可逆矩阵都有 $AP = PA$，因此 $A = xI$。这个结论在上半学期证明过了。</p>
 
 </details>
-
 <p>接下来是一些特征值、特征向量的结论。上课的时候的视角比较偏几何，这里我们再用一般的观点讨论一次。</p>
 <p><strong>定理 5.</strong> 代数重数小于等于几何重数。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>取 $V_\lambda$ 的一组基 $a_1, …, a_r$，将其扩充成整个子空间的基 $a_1, …, a_r, a_{r+1}, …, a_n$。</p>
-<p>取 $P &#x3D; (a_1, …, a_r, a_{r+1}, …, a_n)$，有</p>
-<p>$$<br>P^{-1}AP &#x3D; \begin{pmatrix} \lambda I &amp; B \\  &amp; C \end{pmatrix}<br>$$</p>
+<p>取 $P = (a_1, …, a_r, a_{r+1}, …, a_n)$，有</p>
+<p>$$<br>
+P^{-1}AP = \begin{pmatrix} \lambda I &amp; B \\  &amp; C \end{pmatrix}<br>
+$$</p>
 <p>矩阵相似保特征多项式，而上面这个矩阵显然可以看出来 $\lambda$ 至少有 $r$ 重。</p>
 
 </details>
-
-<p><strong>命题 6.</strong> 矩阵特征多项式的 $n-i$ 次项为 $(-1)^i$ 乘上所有的 $i$ 阶主子式之和。特别的 $[\lambda^{n-1}]F(\lambda) &#x3D; \mathrm{tr}(A)$。</p>
-<div class="note info"><p>若 $\mathrm{rank}(A) &#x3D; 1$ 且 $A^2\ne 0$，求证 $A$ 有一个非零特征值。</p>
+<p><strong>命题 6.</strong> 矩阵特征多项式的 $n-i$ 次项为 $(-1)^i$ 乘上所有的 $i$ 阶主子式之和。特别的 $[\lambda^{n-1}]F(\lambda) = \mathrm{tr}(A)$。</p>
+<div class="note info"><p>若 $\mathrm{rank}(A) = 1$ 且 $A^2\ne 0$，求证 $A$ 有一个非零特征值。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>显然 $0$ 是至少 $n-1$ 重根。</p>
-<p>设 $A &#x3D; (\lambda - a)\lambda^{n - 1}$，那么 $a$ &#x3D; $\mathrm{tr}(A)$。</p>
-<p>由于 $\mathrm{rank}(A) &#x3D; 1$，$A$ 可以写成 $\alpha \beta^T$，$A^2\ne 0\Rightarrow \alpha (\beta^T\alpha)\beta^T &#x3D; \langle\alpha, \beta\rangle A\ne 0$，因此 $\mathrm{tr}(A) &#x3D; \mathrm{\beta^T\alpha}\ne 0$，该特征值非零。</p>
-
+<p>设 $A = (\lambda - a)\lambda^{n - 1}$，那么 $a$ = $\mathrm{tr}(A)$。</p>
+<p>由于 $\mathrm{rank}(A) = 1$，$A$ 可以写成 $\alpha \beta^T$，$A^2\ne 0\Rightarrow \alpha (\beta^T\alpha)\beta^T = \langle\alpha, \beta\rangle A\ne 0$，因此 $\mathrm{tr}(A) = \mathrm{\beta^T\alpha}\ne 0$，该特征值非零。</p>
 </details></div>
-
 <p>这个结论本来是习题，但是看起来非常重要，所以端到前面来。</p>
 <div class="note info"><p>若复数域下，$\lambda_1, …, \lambda_n$ 是 $A$ 的特征根，$f$ 是一个多项式。</p>
-<p>证明 $|f(A)| &#x3D; \prod f(\lambda_i)$</p>
+<p>证明 $|f(A)| = \prod f(\lambda_i)$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>设</p>
-<p>$$<br>f(x) &#x3D; c\prod(x - a_i)<br>$$</p>
+<p>$$<br>
+f(x) = c\prod(x - a_i)<br>
+$$</p>
 <p>且有</p>
-<p>$$<br>F(x) &#x3D; \prod(x - \lambda_i) &#x3D; |\lambda I - A|<br>$$</p>
-<p>那么 </p>
-<p>$$<br>|f(A)| &#x3D; c_1^n\prod|A - a_iI| &#x3D; c_1\prod (-1)^n F(a_i) &#x3D; c_1^n\prod \prod (\lambda_j - a_i) &#x3D; \prod f(\lambda_j)<br>$$</p>
+<p>$$<br>
+F(x) = \prod(x - \lambda_i) = |\lambda I - A|<br>
+$$</p>
+<p>那么</p>
+<p>$$<br>
+|f(A)| = c_1^n\prod|A - a_iI| = c_1\prod (-1)^n F(a_i) = c_1^n\prod \prod (\lambda_j - a_i) = \prod f(\lambda_j)<br>
+$$</p>
 <p>等式成立。</p>
-
 </details>
-
 <p>证明 $f(\lambda_1), …, f(\lambda_n)$ 是 $f(A)$ 的特征根。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>令</p>
-<p>$$<br>g(x) &#x3D; \lambda - f(x)<br>$$</p>
+<p>$$<br>
+g(x) = \lambda - f(x)<br>
+$$</p>
 <p>那么</p>
-<p>$$<br>|\lambda I - f(A)| &#x3D; |g(A)| &#x3D; \prod g(\lambda_i) &#x3D; \prod (\lambda - f(\lambda_i))<br>$$</p>
+<p>$$<br>
+|\lambda I - f(A)| = |g(A)| = \prod g(\lambda_i) = \prod (\lambda - f(\lambda_i))<br>
+$$</p>
 <p>于是得证。</p>
-
 </details></div>
-
 <p><strong>命题 7.</strong> 幂等矩阵可对角化。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>假设 $v$ 是特征向量，那么</p>
-<p>$$<br>Av^2 &#x3D; Av \rightarrow \lambda^2 &#x3D; \lambda<br>$$</p>
-<p>特征值只有 $0, 1$。而幂等矩阵满足 $\mathrm{rank}(A) + \mathrm{rank}(I - A) &#x3D; n$，所以 $\mathbb{R}^n &#x3D; \mathcal{N}(A) \oplus \mathcal{N}(I - A)  &#x3D; V_0\oplus V_1$，可对角化。</p>
+<p>$$<br>
+Av^2 = Av \rightarrow \lambda^2 = \lambda<br>
+$$</p>
+<p>特征值只有 $0, 1$。而幂等矩阵满足 $\mathrm{rank}(A) + \mathrm{rank}(I - A) = n$，所以 $\mathbb{R}^n = \mathcal{N}(A) \oplus \mathcal{N}(I - A)  = V_0\oplus V_1$，可对角化。</p>
 
 </details>
-
 <blockquote>
-<p><strong>Remark.</strong> 这种满足某一多项式的矩阵可对角化的证明一般是：特征值是多项式的根，然后用 Sylvester 不等式的各种推论可以得到 $\mathbb{R}^n &#x3D; \bigoplus V_{\lambda_i}$</p>
+<p><strong>Remark.</strong> 这种满足某一多项式的矩阵可对角化的证明一般是：特征值是多项式的根，然后用 Sylvester 不等式的各种推论可以得到 $\mathbb{R}^n = \bigoplus V_{\lambda_i}$</p>
 </blockquote>
-<p>这也意味着对于幂等矩阵，$\mathrm{tr}(A) &#x3D; \mathrm{rank}(A)$。</p>
+<p>这也意味着对于幂等矩阵，$\mathrm{tr}(A) = \mathrm{rank}(A)$。</p>
 <p>同理可以推出非零幂零矩阵不可对角化，因为其特征值只有 $0$，且解空间不是 $\mathbb{R}^n$。</p>
 <p>全 $1$ 矩阵可对角化，其特征值只有 $1, n$（不难自行计算）。且解空间维数加起来恰好是 $n$。</p>
 <p>对合矩阵可对角化，其特征值只有 $\pm 1$。</p>
@@ -606,34 +687,57 @@
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>设 $A$ 由 $a_0, …, a_{n - 1}$ 生成，令</p>
-<p>$$<br>f(x) &#x3D; a_0 + a_1x + a_2x^2 + … + a_{n - 1}x^{n - 1}<br>$$</p>
+<p>$$<br>
+f(x) = a_0 + a_1x + a_2x^2 + … + a_{n - 1}x^{n - 1}<br>
+$$</p>
 <p>令 $E$ 为 $n$ 阶循环位移矩阵 $(\varepsilon_n, \varepsilon_1, …, \varepsilon_{n - 1})$。则有</p>
-<p>$$<br>A &#x3D; f(E)<br>$$</p>
+<p>$$<br>
+A = f(E)<br>
+$$</p>
 <p>那么有 $f(\omega_n^0), f(\omega_n^1), …, f(\omega_n^{n - 1})$ 是 $A$ 的特征值。且注意到</p>
-<p>$$<br>A\begin{pmatrix}<br>    1 \\<br>    \omega_n^{i} \\<br>    \vdots \\<br>    \omega_n^{i(n - 1)}<br>\end{pmatrix} &#x3D; \begin{pmatrix}<br>    f(\omega_n^i) \\<br>    \omega_n^{i} f(\omega_n^i) \\<br>    \vdots \\<br>    \omega_{n}^{i(n - 1)}f(\omega_n^i)<br>\end{pmatrix}<br>$$</p>
+<p>$$<br>
+A\begin{pmatrix}<br>
+1 \\<br>
+\omega_n^{i} \\<br>
+\vdots \\<br>
+\omega_n^{i(n - 1)}<br>
+\end{pmatrix} = \begin{pmatrix}<br>
+f(\omega_n^i) \\<br>
+\omega_n^{i} f(\omega_n^i) \\<br>
+\vdots \\<br>
+\omega_{n}^{i(n - 1)}f(\omega_n^i)<br>
+\end{pmatrix}<br>
+$$</p>
 <p>这样我们找到了一组向量，拼起来之后得到的 $P$ 是范德蒙德矩阵（傅里叶矩阵）。因此复数域下所有循环矩阵都可以被傅里叶矩阵对角化。</p>
 
 </details>
-
 <blockquote>
 <p><strong>Remark.</strong> 这个是 FFT 的原理。</p>
 </blockquote>
-<h2><span id="实对称矩阵的对角化">实对称矩阵的对角化</span></h2><p>这是接下来的一个重点。</p>
+<h2><span id="实对称矩阵的对角化">实对称矩阵的对角化</span></h2>
+<p>这是接下来的一个重点。</p>
 <p><strong>定理 1.</strong> 实对称矩阵的特征值都是实数。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>取一个特征值 $\lambda$ 和它对应的特征向量 $v$，有 </p>
-<p>$$<br>(\lambda I - A)v &#x3D; 0<br>$$</p>
-<p>复数域下，一个向量为零向量当且仅当 $\langle\bar v, v\rangle &#x3D; 0$。因此</p>
-<p>$$<br>\begin{aligned}<br>\overline{(\lambda I - A)v}^T(\lambda I - A)v &amp;&#x3D; 0 \\<br>\bar v^T(\bar \lambda I - A)(\lambda I - A)v &amp;&#x3D; 0 \\<br>\bar v^T(\lambda I - A)(\bar \lambda I - A)v &amp;&#x3D; 0<br>\end{aligned}<br>$$</p>
-<p>这推出 $Av &#x3D; \bar \lambda v$，也就是 $\lambda &#x3D; \bar \lambda$，必为实数。</p>
+<p>取一个特征值 $\lambda$ 和它对应的特征向量 $v$，有</p>
+<p>$$<br>
+(\lambda I - A)v = 0<br>
+$$</p>
+<p>复数域下，一个向量为零向量当且仅当 $\langle\bar v, v\rangle = 0$。因此</p>
+<p>$$<br>
+\begin{aligned}<br>
+\overline{(\lambda I - A)v}^T(\lambda I - A)v &amp;= 0 \\<br>
+\bar v^T(\bar \lambda I - A)(\lambda I - A)v &amp;= 0 \\<br>
+\bar v^T(\lambda I - A)(\bar \lambda I - A)v &amp;= 0<br>
+\end{aligned}<br>
+$$</p>
+<p>这推出 $Av = \bar \lambda v$，也就是 $\lambda = \bar \lambda$，必为实数。</p>
 
 </details>
-
 <blockquote>
 <p><strong>Remark.</strong> 上面的这个证明手法可以套到其他正规矩阵上面去，证明一些有用的结论比如：</p>
 <ul>
-<li>斜对称矩阵的特征值为 0 或者纯虚数。$\lambda + \bar\lambda &#x3D; 0$。</li>
+<li>斜对称矩阵的特征值为 0 或者纯虚数。$\lambda + \bar\lambda = 0$。</li>
 <li>如果 $\lambda$ 是正规矩阵 $H$ 的特征值，那么 $\bar \lambda$ 是 $H^*$（共轭转置）的特征值。</li>
 </ul>
 </blockquote>
@@ -642,130 +746,167 @@
 </summary>
 <p><strong>必要性</strong> 相似变换保特征值，上三角矩阵特征值为对角元，均为实数。</p>
 <p><strong>必要性</strong> 对矩阵大小归纳，取一个特征根和对应的特征向量 $v_1$，将 $v_1$ 扩充成一组基，Schmidt 正交化并单位化得到 $\eta_1, …, \eta_n$。</p>
-<p>令 $P &#x3D; (\eta_1, …, \eta_n)$，那么</p>
-<p>$$<br>P^{-1}AP &#x3D; \begin{pmatrix}<br>    \lambda &amp; \alpha \\<br>            &amp; B<br>\end{pmatrix}<br>$$</p>
+<p>令 $P = (\eta_1, …, \eta_n)$，那么</p>
+<p>$$<br>
+P^{-1}AP = \begin{pmatrix}<br>
+\lambda &amp; \alpha \\<br>
+&amp; B<br>
+\end{pmatrix}<br>
+$$</p>
 <p>$B$ 的特征值仍然全是实数，由归纳假设其可正交上三角化。那么取</p>
-<p>$$<br>T &#x3D; \begin{pmatrix} 1 &amp;  \\  &amp; P’ \end{pmatrix}P<br>$$</p>
+<p>$$<br>
+T = \begin{pmatrix} 1 &amp;  \\  &amp; P’ \end{pmatrix}P<br>
+$$</p>
 <p>$A$ 可被 $T$ 上三角化，显然 $T$ 正交。</p>
 
 </details>
-
 <p><strong>定理 3.</strong> 实对称矩阵可以正交对角化。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>套用定理 2 的证明。对称性可以直接得到 $\alpha &#x3D; 0$。</p>
+<p>套用定理 2 的证明。对称性可以直接得到 $\alpha = 0$。</p>
 
 </details>
-
 <p>事实上可以实数域上正交对角化的矩阵都是对称的。</p>
 <p>可以用对角化来放一些行列式相关的不等式。</p>
 <div class="note info"><p>$A$ 为斜对称矩阵，求证</p>
-<p>$$<br>\det \begin{pmatrix} 2I &amp; A \\ A &amp; 2I \end{pmatrix}\geq 2^{2n}<br>$$</p>
+<p>$$<br>
+\det \begin{pmatrix} 2I &amp; A \\ A &amp; 2I \end{pmatrix}\geq 2^{2n}<br>
+$$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>$2I$ 和 $A$ 可交换，于是 </p>
-<p>$$<br>\mathrm{LHS} &#x3D; |4I - A^2| &#x3D; 4^n |I - \frac 14 A^2|<br>$$</p>
+<p>$2I$ 和 $A$ 可交换，于是</p>
+<p>$$<br>
+\mathrm{LHS} = |4I - A^2| = 4^n |I - \frac 14 A^2|<br>
+$$</p>
 <p>先考虑求后面的行列式的所有特征值。只需要求 $A$ 的特征值。可以证明，斜对称矩阵的特征值为纯虚数（或 0）。</p>
-<p>于是 </p>
-<p>$$<br>\mathrm{LHS} &#x3D; 4^n \prod (1 + ib_i)(1 - ib_i) &#x3D; 4^n \prod (1 + b_i^2) \geq 4^n<br>$$</p>
-<p>取等当且仅当特征值全是 0，即 $A &#x3D; 0$。</p>
-
+<p>于是</p>
+<p>$$<br>
+\mathrm{LHS} = 4^n \prod (1 + ib_i)(1 - ib_i) = 4^n \prod (1 + b_i^2) \geq 4^n<br>
+$$</p>
+<p>取等当且仅当特征值全是 0，即 $A = 0$。</p>
 </details></div>
-
 <div class="note info"><p>矩阵 $A$ 的特征值均为非负实数，且 $A$ 的主对角元均为 1。求证 $|A| \leq 1$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>有</p>
-<p>$$<br>\begin{aligned}<br>    |A| &amp;&#x3D; \prod \lambda_i \\<br>        &amp;\leq \left(\frac{1}n\left(\sum \lambda_i\right)\right)^n \\<br>        &amp;&#x3D; \left(\frac 1n\mathrm{tr}(A)\right)^n \\<br>        &amp;&#x3D; 1<br>\end{aligned}<br>$$</p>
-
+<p>$$<br>
+\begin{aligned}<br>
+|A| &amp;= \prod \lambda_i \\<br>
+&amp;\leq \left(\frac{1}n\left(\sum \lambda_i\right)\right)^n \\<br>
+&amp;= \left(\frac 1n\mathrm{tr}(A)\right)^n \\<br>
+&amp;= 1<br>
+\end{aligned}<br>
+$$</p>
 </details></div>
-
-<h2><span id="习题">习题</span></h2><div class="note info"><p>求证 $A_{s\times n}$ 的秩为 $r$ 当且仅当存在 $s\times r$ 的列满秩矩阵 $B$ 和 $r\times n$ 的行满秩矩阵使得 $A &#x3D; BC$。</p>
+<h2><span id="习题">习题</span></h2>
+<div class="note info"><p>求证 $A_{s\times n}$ 的秩为 $r$ 当且仅当存在 $s\times r$ 的列满秩矩阵 $B$ 和 $r\times n$ 的行满秩矩阵使得 $A = BC$。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p><strong>充分性.</strong> 求 $A$ 的合同标准型。</p>
-<p>$$<br>A &#x3D; P\mathrm{diag}(1, …, 1, 0, …, 0) Q<br>$$</p>
+<p>$$<br>
+A = P\mathrm{diag}(1, …, 1, 0, …, 0) Q<br>
+$$</p>
 <p>将 $P$ 前 $r$ 列分块出来，$Q$ 的前 $r$ 行分块出来，得到</p>
-<p>$$<br>A &#x3D; (P_1 ~ P_2) \mathrm{diag}(1, …, 1, 0, …, 0)\begin{pmatrix}Q_1\\Q_2\end{pmatrix} &#x3D; P_1Q_1<br>$$</p>
+<p>$$<br>
+A = (P_1 ~ P_2) \mathrm{diag}(1, …, 1, 0, …, 0)\begin{pmatrix}Q_1\\Q_2\end{pmatrix} = P_1Q_1<br>
+$$</p>
 <p>显然 $P_1$ 列满秩，$Q_1$ 行满秩，因为 $P, Q$ 可逆。</p>
 <p><strong>必要性.</strong> 用 Sylvester 不等式证明即可。</p>
-
 </details></div>
-
 <div class="note info"><p>$A$ 是一个秩为 $r$ 实对称矩阵，求证 $A$ 的每一个 $r$ 阶主子式都同号（若非 $0$）。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>做合同消元，得到</p>
-<p>$$<br>A &#x3D; P\mathrm{diag}(a_1, …, a_r, 0, …, 0)P^{T}<br>$$</p>
+<p>$$<br>
+A = P\mathrm{diag}(a_1, …, a_r, 0, …, 0)P^{T}<br>
+$$</p>
 <p>用 Binet Cauchy 公式提取主子式，发现是 $\prod a_i \times C^2$，其中 $C$ 是 $P$ 的某一个 $r$ 阶子式，这里懒得写了。$\square$</p>
-
 </details>
-
 <blockquote>
 <p><strong>Remark.</strong> 想要分析主子式，有一个好用的东西是 Binet Cauchy。这需要我们把矩阵拆开。一个非常好用的拆法式合同消元，因为这样你拆成了三项，中间那一项形式很简单，在 Binet Cauchy 的时候中间的子式只能是第 $r$ 个顺序主子式。</p>
 <p>另外我感觉方阵下面合同消元严格优于矩阵相抵。</p>
 </blockquote></div>
-
 <div class="note info"><p>若 $A$ 的特征值为 $\lambda_1, …, \lambda_n$，求 $A^*$（伴随矩阵）的特征值。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>三类情况，可逆、$\mathrm{rank}$ 为 $n - 1$，其他。第一个和第三个 trivial，只考虑第二个。</p>
 <p>首先 $A^*$ 解空间维数为 $n - 1$，因此 $0$ 是一个 $n-1$ 重根。假设</p>
-<p>$$<br>F(\lambda) &#x3D; \lambda^{n-1}(\lambda - a)<br>$$</p>
-<p>那么（不妨设 $\lambda_n &#x3D; 0$）</p>
-<p>$$<br>a &#x3D; \mathrm{tr}(A^*) &#x3D; \sum A_{ii} &#x3D; [x](-1)^{n-1}|\lambda I - A| &#x3D; \prod_{i&#x3D;1}^{n-1}\lambda_i<br>$$</p>
-
+<p>$$<br>
+F(\lambda) = \lambda^{n-1}(\lambda - a)<br>
+$$</p>
+<p>那么（不妨设 $\lambda_n = 0$）</p>
+<p>$$<br>
+a = \mathrm{tr}(A^*) = \sum A_{ii} = [x](-1)^{n-1}|\lambda I - A| = \prod_{i=1}^{n-1}\lambda_i<br>
+$$</p>
 </details></div>
-
 <div class="note info"><p>求下列矩阵的特征根：</p>
-<p>$$<br>\begin{pmatrix}<br>    A &amp; A^m \\<br>    A^m &amp; A<br>\end{pmatrix}<br>$$</p>
+<p>$$<br>
+\begin{pmatrix}<br>
+A &amp; A^m \\<br>
+A^m &amp; A<br>
+\end{pmatrix}<br>
+$$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>显然 $\lambda I - A$ 和 $A^m$ 可交换，于是上述矩阵的特征多项式实际上是</p>
-<p>$$<br>|(\lambda I - A)^2 - A^{2m}| &#x3D; |\lambda I - A - A^m||\lambda I - A + A^m|<br>$$</p>
+<p>$$<br>
+|(\lambda I - A)^2 - A^{2m}| = |\lambda I - A - A^m||\lambda I - A + A^m|<br>
+$$</p>
 <p>用上一题结论，可以知道其特征值为 $\lambda_i \pm \lambda_i^m$。</p>
-
 </details></div>
-
-<div class="note info"><p>(Gersgorin 圆盘定理) 定义 $D_i(A) &#x3D; \{z\in \mathbb{C} | |z - a_{ii}| \leq \sum\limits_{j\ne i} |a_{ij}|\}$</p>
+<div class="note info"><p>(Gersgorin 圆盘定理) 定义 $D_i(A) = \{z\in \mathbb{C} | |z - a_{ii}| \leq \sum\limits_{j\ne i} |a_{ij}|\}$</p>
 <p>求证 $A$ 的每个特征值都属于某一个 Gersgorin 圆盘。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>取一个特征值 $\lambda$ 和其对应的特征向量 $v$。有 $Av &#x3D; \lambda v$，单独观察分量有</p>
-<p>$$<br>\lambda v_i &#x3D; \sum_{j&#x3D;1}^n a_{ij}v_j<br>$$</p>
+<p>取一个特征值 $\lambda$ 和其对应的特征向量 $v$。有 $Av = \lambda v$，单独观察分量有</p>
+<p>$$<br>
+\lambda v_i = \sum_{j=1}^n a_{ij}v_j<br>
+$$</p>
 <p>若令 $v_i$ 为模长最大的分量，则有</p>
-<p>$$<br>|\lambda - a_{ii}| &#x3D; \left|\sum_{j\ne i} a_{ij}\frac{v_i}{v_j}\right|\leq \sum_{j\ne i} |a_{ij}|<br>$$</p>
+<p>$$<br>
+|\lambda - a_{ii}| = \left|\sum_{j\ne i} a_{ij}\frac{v_i}{v_j}\right|\leq \sum_{j\ne i} |a_{ij}|<br>
+$$</p>
 <p>得证。</p>
-
 </details>
-
 <p>这个定理可以用来估计特征值的范围。</p></div> 
-
 <div class="note info"><p>证明：可交换的实对称矩阵矩阵可以同时对角化。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
 <p>$A$ 为数量矩阵的情况是平凡的。先考虑 $A$ 不是数量矩阵，即 $A$ 有不同特征值。</p>
 <p>假设 $P^{-1}AP$ 对角。那么 $P^{-1}AP$ 和 $P^{-1}BP$ 可交换。那么此时必然有</p>
-<p>$$<br>P^{-1}BP &#x3D; \mathrm{diag}(B_1, …, B_k)<br>$$</p>
+<p>$$<br>
+P^{-1}BP = \mathrm{diag}(B_1, …, B_k)<br>
+$$</p>
 <p>而且 $B_1, …, B_k$ 均为实对称矩阵。假设 $B_i$ 可以被 $P_i$ 对角化，那么 $A, B$ 可以被 $P\mathrm{diag(P_1, …, P_k)}$ 对角化。</p>
-
 </details></div>
-
-<h1><span id="矩阵的合同">矩阵的合同</span></h1><p><strong>定理 1.</strong>(惯性定理) 合同规范型唯一。</p>
+<h1><span id="矩阵的合同">矩阵的合同</span></h1>
+<p><strong>定理 1.</strong>(惯性定理) 合同规范型唯一。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p>关键是证明正惯性指数相同。也就是若两个满秩矩阵的正惯性指数不相同，那么他们不合同。</p>
 <p>考虑二次型</p>
-<p>$$<br>\begin{aligned}<br>    Y &#x3D; y_1^2 + \cdots + y_p^2 - y_{p + 1}^2 - \cdots - y_r^2 \\<br>    Z &#x3D; z_1^2 + \cdots + z_q^2 - z_{q + 1}^2 - \cdots - z_r^2 \\<br>\end{aligned}<br>$$</p>
+<p>$$<br>
+\begin{aligned}<br>
+Y = y_1^2 + \cdots + y_p^2 - y_{p + 1}^2 - \cdots - y_r^2 \\<br>
+Z = z_1^2 + \cdots + z_q^2 - z_{q + 1}^2 - \cdots - z_r^2 \\<br>
+\end{aligned}<br>
+$$</p>
 <p>若 $p &gt; q$，我们证明不存在一个正交替换使得这两个东西相等。</p>
 <p>反证。若存在正交替换，那么有</p>
-<p>$$<br>\begin{cases}<br>    z_1 &#x3D; \sum a_{1i}y_i \\<br>    z_2 &#x3D; \sum a_{2i}y_i \\<br>    \vdots<br>    z_q &#x3D; \sum a_{qi}y_i \\<br>\end{cases}<br>$$</p>
-<p>取 $z_1, …, z_q &#x3D; 0$ 由于 $p &gt; q$，原方程有非零解，设为 $b_1, …, b_p$。</p>
-<p>取 $(y_1, …, y_r) &#x3D; (b_1, …, b_p, 0, …, 0)$，那么 $Y &gt; 0$，而 $Z \leq 0$，不相等，矛盾。</p>
+<p>$$<br>
+\begin{cases}<br>
+z_1 = \sum a_{1i}y_i \\<br>
+z_2 = \sum a_{2i}y_i \\<br>
+\vdots<br>
+z_q = \sum a_{qi}y_i \\<br>
+\end{cases}<br>
+$$</p>
+<p>取 $z_1, …, z_q = 0$ 由于 $p &gt; q$，原方程有非零解，设为 $b_1, …, b_p$。</p>
+<p>取 $(y_1, …, y_r) = (b_1, …, b_p, 0, …, 0)$，那么 $Y &gt; 0$，而 $Z \leq 0$，不相等，矛盾。</p>
 
 </details>
-
-<h2><span id="正定矩阵">正定矩阵</span></h2><p>矩阵正定的几个条件</p>
+<h2><span id="正定矩阵">正定矩阵</span></h2>
+<p>矩阵正定的几个条件</p>
 <p><strong>定理 1-1.</strong> 矩阵正定当且仅当其合同于 $I$。</p>
 <p><em>显然。</em></p>
 <p><strong>定理 1-2.</strong> 矩阵正定当且仅当其所有特征值均为正数。</p>
@@ -775,79 +916,73 @@
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p><strong>必要性.</strong> 取 $(v_1, …, v_k, …)$ 可以提取左上角。因此每个左上角的行列式即顺序主子式大于 $0$。</p>
-<p><strong>充分性.</strong> 对矩阵大小归纳。有 </p>
-<p>$$<br>\begin{pmatrix} A &amp; \beta \\ \beta^T &amp; a_{nn} \end{pmatrix} \simeq \begin{pmatrix} A &amp;  \\  &amp; a_{nn}-\beta A^{-1}\beta^T \end{pmatrix}<br>$$</p>
+<p><strong>充分性.</strong> 对矩阵大小归纳。有</p>
+<p>$$<br>
+\begin{pmatrix} A &amp; \beta \\ \beta^T &amp; a_{nn} \end{pmatrix} \simeq \begin{pmatrix} A &amp;  \\  &amp; a_{nn}-\beta A^{-1}\beta^T \end{pmatrix}<br>
+$$</p>
 <p>顺序主子式均大于 $0$ 可以推出 $A$ 正定，$a_{nn}-\beta^T A^{-1}\beta &gt; 0$，然后任取一个 $v$ 代入，显然你会达到 $v^TAv + v_n^2(a_{nn}-\beta^T A^{-1}\beta) &gt; 0$。因此这个 $n+1$ 阶矩阵也正定。</p>
 
 </details>
-
-<p><strong>命题 2.</strong> 若 $A$ 正定，那么存在唯一的正定矩阵 $C$ 使得 $A &#x3D; C^2$。</p>
+<p><strong>命题 2.</strong> 若 $A$ 正定，那么存在唯一的正定矩阵 $C$ 使得 $A = C^2$。</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
 <p><strong>存在性.</strong> 将 $A$ 对角化，所有特征值开根就得到了 $C$。</p>
-<p><strong>唯一性.</strong> 懒得写了。显然 $C_1^2, C_2^2$ 有相同的特征值，而 $C_1, C_2$ 都正定，所以 $C_1, C_2$ 有相同的特征值。然后随便说两句就可以知道 $C_1 &#x3D; C_2$。</p>
+<p><strong>唯一性.</strong> 懒得写了。显然 $C_1^2, C_2^2$ 有相同的特征值，而 $C_1, C_2$ 都正定，所以 $C_1, C_2$ 有相同的特征值。然后随便说两句就可以知道 $C_1 = C_2$。</p>
 
 </details>
-
-<p><strong>命题 3.</strong> $A$ 半正定当且仅当存在实对称矩阵 $C$ 使得 $A &#x3D; C^2$。</p>
+<p><strong>命题 3.</strong> $A$ 半正定当且仅当存在实对称矩阵 $C$ 使得 $A = C^2$。</p>
 <p><strong>命题 4.</strong> $A$ 正定，$B$ 实对称，则存在 $C$ 使得 $C^TAC$ 和 $C^TBC$ 都是对角矩阵。</p>
 <details class="note "><summary><p>Proof(Sketch).</p>
 </summary>
 <p>首先将 $A$ 合同消元成 $I$，然后将 $C^TBC$ 对角化，两个矩阵乘起来。</p>
 
 </details>
-
-<h2><span id="习题">习题</span></h2><div class="note info"><p>求证一个二次型可以因式分解为两个齐次线性多项式的乘积当且仅当：</p>
+<h2><span id="习题">习题</span></h2>
+<div class="note info"><p>求证一个二次型可以因式分解为两个齐次线性多项式的乘积当且仅当：</p>
 <ol>
 <li>其秩为 $1$。</li>
-<li>其秩为 $2$ 且正惯性指数为 $1$。（符号差为 $0$）<details class="note "><summary><p>Solution.</p>
+<li>其秩为 $2$ 且正惯性指数为 $1$。（符号差为 $0$）</li>
+</ol>
+<details class="note "><summary><p>Solution.</p>
 </summary>
-<p><strong>必要性.</strong> </p>
+<p><strong>必要性.</strong></p>
 <ol>
-<li>秩为 $1$，那么存在一个变量替换 $y_1 &#x3D; \sum a_ix_i$ 使得原二次型变成 $\pm y_1^2$，那么分解方案是显然的。</li>
+<li>秩为 $1$，那么存在一个变量替换 $y_1 = \sum a_ix_i$ 使得原二次型变成 $\pm y_1^2$，那么分解方案是显然的。</li>
 <li>若秩为 $2$，且正惯性指数为 $1$，那么存在变量替换使得二次型变成 $y_1^2 - y_2^2$，也就是 $(y_1 + y_2)(y_1 - y_2)$，于是得到了分解方案。</li>
 </ol>
 <p><strong>充分性.</strong></p>
-<p>假设原二次型被分解为 $(\sum a_ix_i)(\sum b_ix_i)$，那么 </p>
+<p>假设原二次型被分解为 $(\sum a_ix_i)(\sum b_ix_i)$，那么</p>
 <ol>
 <li>若 $(a_1, …, a_n)$ 和 $(b_1, …, b_n)$ 线性相关，那么原二次型合同于 $y_1^2 - y_2^2$。</li>
-</ol></details></li>
 </ol>
-
-
+</details>
 <blockquote>
 <p><strong>Remark.</strong> 在考虑这种题的时候除了从矩阵观点，可以直接从原来的二次型出发来看。实际上惯性定理的证明也体现了这一点。</p>
 </blockquote></div>
-
-<div class="note info"><p>$A$ 正定，$B$ 半正定，求证 $|A+B|\geq |A| + |B|$，取等当且仅当 $B &#x3D; 0$</p>
+<div class="note info"><p>$A$ 正定，$B$ 半正定，求证 $|A+B|\geq |A| + |B|$，取等当且仅当 $B = 0$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>若 $A &#x3D; I$，$B$ 对角，那么显然成立。 </p>
+<p>若 $A = I$，$B$ 对角，那么显然成立。</p>
 <p>否则可以用命题 $4$ 转化成上述情况。</p>
-
 </details></div>
-
 <div class="note info"><p>若 $A$ 正定，那么 $|A|\leq \prod a_{ii}$</p>
 <details class="note "><summary><p>Solution(Sketch)_.</p>
 </summary>
 <p>对矩阵大小归纳。</p>
-
 </details></div>
-
 <div class="note info"><p>对于任意实矩阵，证明</p>
-<p>$$<br>|C|^2 \leq \prod_{i&#x3D;1}^n \sum_{j&#x3D;1}^n (c_{ij}^2)<br>$$</p>
+<p>$$<br>
+|C|^2 \leq \prod_{i=1}^n \sum_{j=1}^n (c_{ij}^2)<br>
+$$</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>如果 $|C| &#x3D; 0$ 那么就非常弱智。</p>
-<p>令 $A &#x3D; C^TC$，$A$ 正定，发现乘积式里面的东西刚好是 $A$ 的对角线。套用上题结论即可证明。</p>
-
+<p>如果 $|C| = 0$ 那么就非常弱智。</p>
+<p>令 $A = C^TC$，$A$ 正定，发现乘积式里面的东西刚好是 $A$ 的对角线。套用上题结论即可证明。</p>
 </details></div>
-
-<div class="note info"><p>(极分解定理) 对于任意可逆矩阵 $A$ 证明存在唯一的正交矩阵 $T$ 和正交矩阵 $S_1, S_2$ 使得 $A &#x3D; TS_1 &#x3D; S_2T$。</p>
+<div class="note info"><p>(极分解定理) 对于任意可逆矩阵 $A$ 证明存在唯一的正交矩阵 $T$ 和正交矩阵 $S_1, S_2$ 使得 $A = TS_1 = S_2T$。</p>
 <details class="note "><summary><p>Solution.</p>
 </summary>
-<p>显然 $A^TA$ 正定，那么存在 $S_1^2 &#x3D; A^TA$。令 $T &#x3D; (A^T)^{-1}S_1$，不难验证 $T$ 正交。</p>
-
+<p>显然 $A^TA$ 正定，那么存在 $S_1^2 = A^TA$。令 $T = (A^T)^{-1}S_1$，不难验证 $T$ 正交。</p>
 </details></div>
     </div>
 
