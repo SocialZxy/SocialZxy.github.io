@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in Plane Polar Coordinates Christoffel Symbols">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tensor Analysis (3) Tensor Calculus">
+<meta property="og:url" content="http://example.com/2024/03/04/TensorAnal3TensorCalc/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in Plane Polar Coordinates Christoffel Symbols">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-03-04T09:59:32.000Z">
+<meta property="article:modified_time" content="2024-03-04T11:59:57.693Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Notes">
+<meta property="article:tag" content="Basic">
+<meta property="article:tag" content="Tensor Analysis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/03/04/TensorAnal3TensorCalc/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/03/04/TensorAnal3TensorCalc/","path":"2024/03/04/TensorAnal3TensorCalc/","title":"Tensor Analysis (3) Tensor Calculus"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Tensor Analysis (3) Tensor Calculus | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Conservation Laws</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Newton’s Law in Plane Polar Coordinates</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Christoffel Symbols</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">18</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/03/04/TensorAnal3TensorCalc/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Tensor Analysis (3) Tensor Calculus | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Tensor Analysis (3) Tensor Calculus
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-03-04 17:59:32 / Modified: 19:59:57" itemprop="dateCreated datePublished" datetime="2024-03-04T17:59:32+08:00">2024-03-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。<del>就当是学物理了。</del></p>
+<blockquote>
+<p>之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。</p>
+</blockquote>
+<!-- toc -->
+
+<ul>
+<li><a href="#notation">Notation</a></li>
+<li><a href="#conservation-laws">Conservation Laws</a></li>
+<li><a href="#newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</a></li>
+<li><a href="#christoffel-symbols">Christoffel Symbols</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="notation">Notation</span></h1><p>书中记号非常混乱，疑似是在试图缝合每种主义的优点。</p>
+<p>所有向量用粗体字母表示，例如 $\boldsymbol{x}$。标量则用正常斜体表示。</p>
+<p>对于时间 $t$ 求导采用 Newton’s Notation，即</p>
+<p>$$<br>\dot{\boldsymbol{x}} &#x3D; \frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t}<br>$$</p>
+<p>求偏导采用 Leibniz’s Notation 和一种不知名的记号（一种形似 Legendre 发明的偏导记号的东西）。如下面的式子表示 $x^i$ 对 $u^j$ 求偏导：</p>
+<p>$$<br>\frac{\partial x^i}{\partial u^j} &#x3D; x^i_{, j}<br>$$</p>
+<p>RHS 可以简单地表示连续求两次偏导</p>
+<p>$$<br>x^k_{, ij} &#x3D; \frac{\partial^2 x^k}{\partial i \partial j}<br>$$</p>
+<p>我们仍然接受 Einstein Summation Convention。</p>
+<p>考虑实际情况，所有函数均假设在 $\mathbb{R}^n$ 上有连续的偏导数。</p>
+<h1><span id="conservation-laws">Conservation Laws</span></h1><p>直接从微积分的角度推导守恒定律，回忆求导法则对于向量仍然成立，因此</p>
+<p>$$<br>\boldsymbol{f}\cdot\dot{\boldsymbol{x}} &#x3D; m\ddot{\boldsymbol{x}}\dot{x} &#x3D; (\frac 12 m \dot{\boldsymbol{x}}^2)’ &#x3D; \dot{k}<br>$$</p>
+<p>两边乘 $\mathrm{d}t$ 得到<strong>动能定理</strong>。</p>
+<p>$$<br>\boldsymbol{x}\times\boldsymbol{f} &#x3D; m\boldsymbol{x}\times\ddot{\boldsymbol{x}} &#x3D; (\boldsymbol{x}\times m\dot{\boldsymbol{x}})’ &#x3D; \dot{\boldsymbol{I}}_O<br>$$</p>
+<p>两边乘 $\mathrm{d}t$ 得到<strong>角动能定理</strong>。（这里需要注意 $\dot{\boldsymbol{x}}\times\dot{\boldsymbol{x}} &#x3D; \boldsymbol{0}$）</p>
+<p>若存在势能函数 $E_p(\boldsymbol{x})$ 使得 $\boldsymbol{f}\cdot\dot{\boldsymbol{x}} &#x3D; -\dot{E_p}$，称 $\boldsymbol{f}$ 为保守力，此时有<strong>能量守恒</strong></p>
+<p>$$<br>k + E_p &#x3D; constant<br>$$</p>
+<h1><span id="newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</span></h1><div class="note info"><p>书上这里讲了极坐标下的特例，并写了一般形式作为对照。我们这里尝试只推导一般形式，极坐标形式可以自行模拟。</p>
+</div>
+
+<p>已知牛顿定律在 $\boldsymbol{e}_1, …, \boldsymbol{e}_n$ 下的形式，出于推导其他坐标系（比如极坐标）下牛顿定律形式的需要，假定现在我们引入了 $n$ 个新变元 $u^1, …, u^n$（均为关于时间 $t$ 的函数），设</p>
+<p>$$<br>\boldsymbol{x} &#x3D; \hat{\boldsymbol{x}}(u^j) &#x3D; \hat{x}^i(u^j)\boldsymbol{e}_i<br>$$</p>
+<p>此时为了推导速度的表达式，我们需要对位矢关于 $t$ 求导，根据链式法则</p>
+<p>$$<br>\boldsymbol{v} &#x3D; \dot{\boldsymbol{x}} &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^i} \dot{u}^i<br>$$</p>
+<p>此时令</p>
+<p>$$<br>\boldsymbol{g}_i &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^i} &#x3D; \frac{\partial x^j}{\partial u^i}\boldsymbol{e}_j<br>$$</p>
+<p>容易想象，在极坐标系下这里你会得到 $\boldsymbol{g}_r &#x3D; \cos\theta \boldsymbol{e}_x + \sin\theta \boldsymbol{e}_y, \boldsymbol{g}_\theta &#x3D; r(-\sin\theta\boldsymbol{e}_x + \cos\theta\boldsymbol{e}_y)$，也就是一个径向向量和一个切向向量。</p>
+<p>如果这个变换是一个良定义的坐标变换，应当要求它是一个一一映射，根据隐函数存在定理需要满足<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)">[1]</span></a></sup></p>
+<p>$$<br>\frac{D(x_1, …, x_n)}{D(u^1, …, u^n)} &#x3D; J(\boldsymbol{g}_1, …, \boldsymbol{g}_n)\ne 0<br>$$</p>
+<p>故此时 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是平面的一组基。（事实上条件可以略放松一点，可以在测度为 $0$ 的点集上违反这个条件，如极坐标下原点处 $J &#x3D; 0$，此时 $\boldsymbol{g}$ 并不是一组基，但可以忽略不计）</p>
+<p>由式 $(8)$ 立即得到此时速度 $\boldsymbol{v}$ 在此坐标系下的分量 $v^i$ 是</p>
+<p>$$<br>v^i &#x3D; \dot{u}^j<br>$$</p>
+<p>也就是说</p>
+<p>$$<br>\boldsymbol{v} &#x3D; v^i\boldsymbol{g}_i<br>$$</p>
+<p>求出 $\boldsymbol{g}_i$ 的 reciprocal base vector $\boldsymbol{g}^i$，定义 $\boldsymbol{v}$ 的 <strong>Physical Component</strong> 为</p>
+<p>$$<br>\boldsymbol{v}^{(i)} &#x3D; \boldsymbol{v}\cdot\bar{\boldsymbol{g}}^i &#x3D; \frac{v}{||\boldsymbol{g}^i||}<br>$$</p>
+<blockquote>
+<p>注意这里求解 reciprocal base vector 的 motivation 是我们已经有了一个在 $\boldsymbol{g}$ 下的坐标，而分量的值一定是 $\boldsymbol{v}$ 和某个向量的点乘结果，结合上一章可以知道这里应该取 reciprocal base vector。</p>
+</blockquote>
+<p>如果是在极坐标下，此时你应该求得</p>
+<p>$$<br>v^{(r)} &#x3D; \dot{r}, v^{(\theta)} &#x3D; r\dot{\theta}<br>$$</p>
+<p>符合自然坐标系下速度分解的结果。</p>
+<h1><span id="christoffel-symbols">Christoffel Symbols</span></h1><div class="note warning"><p><strong>Motivation.</strong> 尝试推导加速度的表达式，直接求导得到</p>
+<p>$$<br>\boldsymbol{a} &#x3D; \dot{\boldsymbol{v}} &#x3D; \dot{v}^i\boldsymbol{g}_i + v^i\dot{\boldsymbol{g}}_i<br>$$</p>
+<p>此时我们想要得到 $\boldsymbol{g_i}$ 下的坐标，因此不希望出现 $\dot{\boldsymbol{g}}_i$。故进行如下讨论。</p>
+</div>
+
+<p>直接计算 $\dot{\boldsymbol{g}}_i$ 得 <sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。">[2]</span></a></sup></p>
+<p>$$<br>\dot{\boldsymbol{g}}_i &#x3D; \frac{\partial \boldsymbol{g}_i}{\partial u^j} \dot{u}^j &#x3D; v^j \boldsymbol{g}_{i ,j}<br>$$</p>
+<p>根据我们作的连续偏导假设，有</p>
+<p>$$<br>\boldsymbol{g}_{i, j} &#x3D; \boldsymbol{x}_{, ij} &#x3D; \boldsymbol{x}_{, ji} &#x3D; \boldsymbol{g}_{j, i}<br>$$</p>
+<p>现在希望求 $\boldsymbol{g}_{i, j}$ 在 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 下的坐标。换言之，我们需要求出一组系数 $\Gamma_{ij}^1, …, \Gamma_{ij}^n$ 使得</p>
+<p>$$<br>\boldsymbol{g}_{i, j} &#x3D; \Gamma_{ij}^k\boldsymbol{g}_k<br>$$</p>
+<p>这些 $\Gamma_{ij}^k$ 称为 <strong>Christoffel Symbol</strong>。此时</p>
+<p>$$<br>\dot{\boldsymbol{g}}_i &#x3D; v^j\Gamma_{ij}^k\boldsymbol{g}_k<br>$$</p>
+<p>代入式 $(15)$ 得到</p>
+<p>$$<br>a^k &#x3D; \dot{v}^k + v^iv^j\Gamma_{ij}^k<br>$$</p>
+<p>式 $(17)$ 启发我们先求出 $\boldsymbol{g}_{i, j}$ 在 $\boldsymbol{e}_1, …, \boldsymbol{e}_n$ 下的表示，然后将基反演为 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$。<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。">[3]</span></a></sup></p>
+<p>$$<br>\begin{aligned}<br>    \boldsymbol{g}_{ij} &amp;&#x3D; x^p_{, ij}\boldsymbol{e}^p \\<br>                        &amp;&#x3D; x^p_{, ij}u^{k}_{, p}\boldsymbol{g}_k<br>\end{aligned}<br>$$</p>
+<p>求解需要用到逆映射存在定理，做法是解方程组 <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)">[1]</span></a></sup>。如果你和我一样对多元微积分不够熟悉，可能会对这个变换感到迷惑。这时候你也可以根据 $\boldsymbol{g}$ 和 $\boldsymbol{e}$ 之间的关系进行矩阵求逆，暴力反演。对于原书上的这个比较简洁的形式我们简单补充一些书上没有的推导。</p>
+<details class="note info"><summary><p><strong>Derivation</strong></p>
+</summary>
+<p>记 </p>
+<p>$$<br>\boldsymbol{G} &#x3D; \begin{pmatrix}<br>    \boldsymbol{g}_1 \\<br>    \vdots \\<br>    \boldsymbol{g}_n<br>\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n), \boldsymbol{I} &#x3D; \begin{pmatrix}<br>    \boldsymbol{e}_1 \\<br>    \vdots \\<br>    \boldsymbol{e}_n<br>\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n)<br>$$</p>
+<p>那么有 </p>
+<p>$$<br>\boldsymbol{G} &#x3D; \begin{pmatrix}<br>    \frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{u^1} \\<br>    \vdots &amp; &amp; \vdots \\<br>    \frac{\partial x_1}{u^n} &amp; \cdots &amp; \frac{\partial x_n}{u^n}<br>\end{pmatrix} \boldsymbol{E} &#x3D; \boldsymbol{J}^T \boldsymbol{E}<br>$$</p>
+<p>两边取转置并反解得到</p>
+<p>$$<br>\boldsymbol{G}^T\boldsymbol{J}^{-1} &#x3D; \boldsymbol{E}^T<br>$$</p>
+<p>由于映射是良定义的，$\det \boldsymbol{J}\ne 0$，由逆映射存在定理，此时 $u^j$ 可以被表示成 $x_i$ 的函数，并且可以求出偏导。具体地，我们有</p>
+<p>$$<br>\begin{cases}<br>    x_1 &#x3D; x_1(u^1, …, u^n) \\<br>    \vdots \\<br>    x_n &#x3D; x_n(u^1, …, u^n)<br>\end{cases}<br>$$</p>
+<p>所有式子两边对 $x_i$ 求偏导得到关于 $(\partial u^j &#x2F; \partial x_i)$ 的线性方程组，写成矩阵形式即</p>
+<p>$$<br>\begin{pmatrix}<br>    0 \\<br>    \vdots \\<br>    1_i \\<br>    \vdots \\<br>    0<br>\end{pmatrix} &#x3D; \begin{pmatrix}<br>    \frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_1}{\partial u^n} \\<br>    \vdots &amp; &amp; \vdots \\<br>    \frac{\partial x_n}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{\partial u^n}<br>\end{pmatrix} \begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix} &#x3D; \boldsymbol{J}\begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots \\<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix}<br>$$</p>
+<p>反解得到</p>
+<p>$$<br>\begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots \\<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix} &#x3D; \boldsymbol{J}^{-1} \begin{pmatrix}<br>    0 \\<br>    \vdots \\<br>    1_i \\<br>    \vdots \\<br>    0<br>\end{pmatrix}<br>$$</p>
+<p>两边同时点乘 $\boldsymbol{G}^T$ 得到</p>
+<p>$$<br>\frac{\partial u^k}{\partial x_i}\boldsymbol{g}_k &#x3D; \boldsymbol{e}_i<br>$$</p>
+<p>得证。</p>
+
+</details>
+
+<p>对比系数可知</p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; x^ p_{, ij} u^ k_{, p}<br>$$</p>
+<p>得到了 $\Gamma$ 之后自然可以求得 $\boldsymbol{a}$ 在自然坐标系下的分解形式：</p>
+<p>$$<br>a^{(i)} &#x3D; (\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq}) &#x2F; ||\boldsymbol{g}^i||<br>$$</p>
+<p>如果是在平面极坐标下，你应当得到 $\Gamma_{r\theta}^{\theta} &#x3D; r^{-1}, \Gamma_{\theta\theta}^r &#x3D; -r$，其余 $\Gamma$ 均为 $0$。带入后得到</p>
+<p>$$<br>\begin{align}<br>a^{(r)} &amp;&#x3D; \ddot{r} - r\dot{\theta}^2 \\<br>a^{(\theta)} &amp;&#x3D; r\ddot{\theta} + 2\dot{r}\dot{\theta}<br>\end{align}<br>$$</p>
+<p>和熟知的结果相符。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Notes/" rel="tag"># Notes</a>
+              <a href="/tags/Basic/" rel="tag"># Basic</a>
+              <a href="/tags/Tensor-Analysis/" rel="tag"># Tensor Analysis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/02/22/WindowsVscoqInstall/" rel="prev" title="Windows 下 VsCoq 配置踩坑记录（基于 wsl）">
+                  <i class="fa fa-angle-left"></i> Windows 下 VsCoq 配置踩坑记录（基于 wsl）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

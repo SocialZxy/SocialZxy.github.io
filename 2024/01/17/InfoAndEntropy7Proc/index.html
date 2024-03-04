@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。   Information, Loss and Noise">
+    <meta name="description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。    Information, Loss and Noise">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Information and Entropy (7) Processes">
 <meta property="og:url" content="http://example.com/2024/01/17/InfoAndEntropy7Proc/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。   Information, Loss and Noise">
+<meta property="og:description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。    Information, Loss and Noise">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png">
 <meta property="article:published_time" content="2024-01-17T08:10:39.000Z">
@@ -141,7 +141,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">13</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -243,11 +243,14 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 在上一节的基础上继续讨论一些通信过程的性质。</p>
 <!-- toc -->
+
 <ul>
 <li><a href="#information-loss-and-noise">Information, Loss and Noise</a></li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
+
 <p>我们讨论的处理过程具有如下特点：</p>
 <ul>
 <li><strong>Discrete.</strong> 输入是一组互斥事件集，每时每刻只会有一个发生，输出是另一个互斥事件集。</li>
@@ -258,61 +261,42 @@
 </ul>
 <p>大概是总结了之前的 Communication System 的特点。</p>
 <p>下面几节感觉很平凡，均为常识内容，我们直接跳到第三节。</p>
-<h1><span id="information-loss-and-noise">Information, Loss and Noise</span></h1>
-<p>和上一节相同，我们定义输入的信息量为</p>
-<p>$$<br>
-I = \sum p(A_i)\log\left(\frac 1{p(A_i)}\right)<br>
-$$</p>
+<h1><span id="information-loss-and-noise">Information, Loss and Noise</span></h1><p>和上一节相同，我们定义输入的信息量为</p>
+<p>$$<br>I &#x3D; \sum p(A_i)\log\left(\frac 1{p(A_i)}\right)<br>$$</p>
 <p>输出的信息量为</p>
-<p>$$<br>
-J = \sum p(B_i)\log\left(\frac 1{p(B_i)}\right)<br>
-$$</p>
+<p>$$<br>J &#x3D; \sum p(B_i)\log\left(\frac 1{p(B_i)}\right)<br>$$</p>
 <p>然后上一节还记述了对输入的不确定度的期望</p>
-<p>$$<br>
-L = \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(A_i | B_j)}\right)<br>
-$$</p>
+<p>$$<br>L &#x3D; \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(A_i | B_j)}\right)<br>$$</p>
 <p>这个值称为 <strong>loss</strong>，相应的，对输出的不确定度</p>
-<p>$$<br>
-N = \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(B_j | A_i)}\right)<br>
-$$</p>
+<p>$$<br>N &#x3D; \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(B_j | A_i)}\right)<br>$$</p>
 <p>称为 <strong>noise</strong>。</p>
-<p>假设 $W$ 是输出端可以识别到输入端变化的最大速率，那么</p>
-<p>$$<br>
-C = WM_{max}<br>
-$$</p>
+<p>假设 $W$ 是输出端可以识别到输入端变化的最大速率，那么 </p>
+<p>$$<br>C &#x3D; WM_{max}<br>$$</p>
 <p>称为这个过程的 <strong>capacity</strong>。</p>
 <p>上一节我们已经推导过了</p>
-<p>$$<br>
-M = I - L = J - N<br>
-$$</p>
+<p>$$<br>M &#x3D; I - L &#x3D; J - N<br>$$</p>
 <p>因此有</p>
-<p>$$<br>
-J = I - L + N<br>
-$$</p>
+<p>$$<br>J &#x3D; I - L + N<br>$$</p>
 <p>或者简明地用下面的这个图来表示这个 discrete memoryless process 中的信息流动</p>
-<p><img src="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png" alt></p>
+<p><img src="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png"></p>
 <div class="note info"><p><strong>原论文中的记号</strong> 在 Shannon 的原论文中记号和这里不太一样，简单记录一下：</p>
 <ul>
 <li>输入的概率分布称为 $x$，输出的概率分布称为 $y$。</li>
 <li>$H(x)\leftarrow I, H(y)\leftarrow J, H_y(x)\leftarrow L, H_x(y)\leftarrow N, R \leftarrow M$。</li>
 </ul>
 </div>
+
 <div class="note info"><p><strong>Example.</strong> 回忆我们在第 4 节中提到的 Hamming Code，在推导纠错码长度下界的过程中我们利用码距得到了</p>
-<p>$$<br>
-2^n \times m \leq 2^m<br>
-$$</p>
+<p>$$<br>2^n \times m \leq 2^m<br>$$</p>
 <p>接下来我们从信息熵的角度推导这个下界。</p>
-<p>要求总是能够检查错误，也就是 $L = 0$，即</p>
-<p>$$<br>
-I + N = J<br>
-$$</p>
-<p>这里的输入信息量只能是原来的 $01$ 串的信息量，即 $n$，而 noise 只可能是反转 $m$ 个位置之一，也就是噪声的熵为 $N = \log_2 m$。输出是一个长度为 $m$ 的串，但是信息熵未必是 $m$，因为显然这里 $2^m$ 种情况不是都能取到的。</p>
+<p>要求总是能够检查错误，也就是 $L &#x3D; 0$，即 </p>
+<p>$$<br>I + N &#x3D; J<br>$$</p>
+<p>这里的输入信息量只能是原来的 $01$ 串的信息量，即 $n$，而 noise 只可能是反转 $m$ 个位置之一，也就是噪声的熵为 $N &#x3D; \log_2 m$。输出是一个长度为 $m$ 的串，但是信息熵未必是 $m$，因为显然这里 $2^m$ 种情况不是都能取到的。</p>
 <p>于是有</p>
-<p>$$<br>
-I + N = n + \log_2 m = J \leq m \Rightarrow n + \log_2 m \leq m<br>
-$$</p>
+<p>$$<br>I + N &#x3D; n + \log_2 m &#x3D; J \leq m \Rightarrow n + \log_2 m \leq m<br>$$</p>
 <p>即上述不等式取对数的形式。</p>
 </div>
+
 <hr>
 <p>可能这个项目就到这里为止了。后面全是统计力学，量子力学之类的东西，不想看了。</p>
 
