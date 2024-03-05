@@ -19,19 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in Plane Polar Coordinates Christoffel Symbols">
+    <meta name="description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensor Analysis (3) Tensor Calculus">
 <meta property="og:url" content="http://example.com/2024/03/04/TensorAnal3TensorCalc/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in Plane Polar Coordinates Christoffel Symbols">
+<meta property="og:description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-04T09:59:32.000Z">
-<meta property="article:modified_time" content="2024-03-04T11:59:57.693Z">
+<meta property="article:modified_time" content="2024-03-05T07:14:22.376Z">
 <meta property="article:author" content="King Strange">
-<meta property="article:tag" content="Notes">
-<meta property="article:tag" content="Basic">
-<meta property="article:tag" content="Tensor Analysis">
 <meta name="twitter:card" content="summary">
 
 
@@ -116,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Conservation Laws</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Newton’s Law in Plane Polar Coordinates</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Christoffel Symbols</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Notation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Conservation Laws</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Newton’s Law in General Coordinates</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Christoffel Symbols</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Computation of the Christoffel Symbols</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">A Change of Coordinates</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -142,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -205,9 +202,32 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-03-04 17:59:32 / Modified: 19:59:57" itemprop="dateCreated datePublished" datetime="2024-03-04T17:59:32+08:00">2024-03-04</time>
+      <time title="Created: 2024-03-04 17:59:32" itemprop="dateCreated datePublished" datetime="2024-03-04T17:59:32+08:00">2024-03-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-05 15:14:22" itemprop="dateModified" datetime="2024-03-05T15:14:22+08:00">2024-03-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Tensor-Analysis/" itemprop="url" rel="index"><span itemprop="name">Tensor Analysis</span></a>
+        </span>
     </span>
 
   
@@ -228,15 +248,17 @@
 <ul>
 <li><a href="#notation">Notation</a></li>
 <li><a href="#conservation-laws">Conservation Laws</a></li>
-<li><a href="#newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</a></li>
+<li><a href="#newtons-law-in-general-coordinates">Newton’s Law in General Coordinates</a></li>
 <li><a href="#christoffel-symbols">Christoffel Symbols</a></li>
+<li><a href="#computation-of-the-christoffel-symbols">Computation of the Christoffel Symbols</a></li>
+<li><a href="#a-change-of-coordinates">A Change of Coordinates</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
 <h1><span id="notation">Notation</span></h1><p>书中记号非常混乱，疑似是在试图缝合每种主义的优点。</p>
-<p>所有向量用粗体字母表示，例如 $\boldsymbol{x}$。标量则用正常斜体表示。</p>
+<p>所有向量用粗斜体字母表示，例如 $\boldsymbol{x}$。标量则用正常斜体表示。二阶张量用粗正体表示，如 $\mathbf{T}$。</p>
 <p>对于时间 $t$ 求导采用 Newton’s Notation，即</p>
 <p>$$<br>\dot{\boldsymbol{x}} &#x3D; \frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t}<br>$$</p>
 <p>求偏导采用 Leibniz’s Notation 和一种不知名的记号（一种形似 Legendre 发明的偏导记号的东西）。如下面的式子表示 $x^i$ 对 $u^j$ 求偏导：</p>
@@ -252,7 +274,7 @@
 <p>两边乘 $\mathrm{d}t$ 得到<strong>角动能定理</strong>。（这里需要注意 $\dot{\boldsymbol{x}}\times\dot{\boldsymbol{x}} &#x3D; \boldsymbol{0}$）</p>
 <p>若存在势能函数 $E_p(\boldsymbol{x})$ 使得 $\boldsymbol{f}\cdot\dot{\boldsymbol{x}} &#x3D; -\dot{E_p}$，称 $\boldsymbol{f}$ 为保守力，此时有<strong>能量守恒</strong></p>
 <p>$$<br>k + E_p &#x3D; constant<br>$$</p>
-<h1><span id="newtons-law-in-plane-polar-coordinates">Newton’s Law in Plane Polar Coordinates</span></h1><div class="note info"><p>书上这里讲了极坐标下的特例，并写了一般形式作为对照。我们这里尝试只推导一般形式，极坐标形式可以自行模拟。</p>
+<h1><span id="newtons-law-in-general-coordinates">Newton’s Law in General Coordinates</span></h1><div class="note info"><p>书上这里讲了极坐标下的特例，并写了一般形式作为对照。我们这里尝试只推导一般形式，极坐标形式可以自行模拟。</p>
 </div>
 
 <p>已知牛顿定律在 $\boldsymbol{e}_1, …, \boldsymbol{e}_n$ 下的形式，出于推导其他坐标系（比如极坐标）下牛顿定律形式的需要，假定现在我们引入了 $n$ 个新变元 $u^1, …, u^n$（均为关于时间 $t$ 的函数），设</p>
@@ -264,7 +286,7 @@
 <p>容易想象，在极坐标系下这里你会得到 $\boldsymbol{g}_r &#x3D; \cos\theta \boldsymbol{e}_x + \sin\theta \boldsymbol{e}_y, \boldsymbol{g}_\theta &#x3D; r(-\sin\theta\boldsymbol{e}_x + \cos\theta\boldsymbol{e}_y)$，也就是一个径向向量和一个切向向量。</p>
 <p>如果这个变换是一个良定义的坐标变换，应当要求它是一个一一映射，根据隐函数存在定理需要满足<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)">[1]</span></a></sup></p>
 <p>$$<br>\frac{D(x_1, …, x_n)}{D(u^1, …, u^n)} &#x3D; J(\boldsymbol{g}_1, …, \boldsymbol{g}_n)\ne 0<br>$$</p>
-<p>故此时 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是平面的一组基。（事实上条件可以略放松一点，可以在测度为 $0$ 的点集上违反这个条件，如极坐标下原点处 $J &#x3D; 0$，此时 $\boldsymbol{g}$ 并不是一组基，但可以忽略不计）</p>
+<p>故此时 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是平面的一组基，称为 $u^j-$坐标系的 cellar base vector。（事实上条件可以略放松一点，可以在测度为 $0$ 的点集上违反这个条件，如极坐标下原点处 $J &#x3D; 0$，此时 $\boldsymbol{g}$ 并不是一组基，但可以忽略不计）</p>
 <p>由式 $(8)$ 立即得到此时速度 $\boldsymbol{v}$ 在此坐标系下的分量 $v^i$ 是</p>
 <p>$$<br>v^i &#x3D; \dot{u}^j<br>$$</p>
 <p>也就是说</p>
@@ -322,7 +344,72 @@
 <p>如果是在平面极坐标下，你应当得到 $\Gamma_{r\theta}^{\theta} &#x3D; r^{-1}, \Gamma_{\theta\theta}^r &#x3D; -r$，其余 $\Gamma$ 均为 $0$。带入后得到</p>
 <p>$$<br>\begin{align}<br>a^{(r)} &amp;&#x3D; \ddot{r} - r\dot{\theta}^2 \\<br>a^{(\theta)} &amp;&#x3D; r\ddot{\theta} + 2\dot{r}\dot{\theta}<br>\end{align}<br>$$</p>
 <p>和熟知的结果相符。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。<a href="#fnref:3" rev="footnote"> ↩</a></span></li></ol></div></div>
+<p>回收一下标题。若已知 $\boldsymbol{f}$ 在 $\boldsymbol{g_1}, …, \boldsymbol{g}_n$ 下的分解式为</p>
+<p>$$<br>\boldsymbol{f} &#x3D; f^i\boldsymbol{g}_i<br>$$</p>
+<p>而根据牛顿定律</p>
+<p>$$<br>\boldsymbol{f} &#x3D; m\boldsymbol{a} &#x3D; m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})\boldsymbol{g}_i<br>$$</p>
+<p>由于 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是一组基，我们可以得到</p>
+<p>$$<br>f^i &#x3D; m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})<br>$$</p>
+<h1><span id="computation-of-the-christoffel-symbols">Computation of the Christoffel Symbols</span></h1><p>上面的利用逆映射存在定理解方程的步骤中，我们的系数矩阵是 $\boldsymbol{J}$，然而熟知 $\boldsymbol{J}$ 求逆的过程是求解 reciprocal base vector 的过程。受此启发我们猜测可以用 roof base vector 来计算 Christoffel Symbol。</p>
+<div class="note info"><p><strong>Theorem 1.</strong></p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; \boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j}<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{align}<br>    \boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j} &amp;&#x3D; \Gamma^p_{ij}\boldsymbol{g}^k\cdot\boldsymbol{g}_p \\<br>                                                 &amp;&#x3D; \Gamma^p_{ij}\delta_{kp} \\<br>                                                 &amp;&#x3D; \Gamma^k_{ij}<br>\end{align}<br>$$</p>
+
+</details></div>
+
+<p>另外一个计算公式更加复杂。</p>
+<div class="note info"><p><strong>Theorem 2.</strong></p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; \frac 12 g^{kp}(g_{ip, j} + g_{jp, i} - g_{ij, p})<br>$$</p>
+<p>其中 $g^{ij} &#x3D; \boldsymbol{g}^i \cdot\boldsymbol{g}^j, g_{ij} &#x3D; \boldsymbol{g}_i \cdot\boldsymbol{g}_j$</p>
+</div>
+
+<p>推这个式子的 Motivation 大概是在于如果给定的坐标系是一个正交坐标系（极坐标、柱坐标、球坐标等），那么我们期望有一个更简单的形式。因此我们从 $\boldsymbol{g}_i\cdot\boldsymbol{g}_j$ 出发，如果是正交坐标系，那么就是 $0$。</p>
+<p><strong>Proof.</strong> 尝试对 $\boldsymbol{g}_i\cdot\boldsymbol{g}_j$ 求偏导，以产生 Gamma</p>
+<p>$$<br>\begin{aligned}<br>g_{ij, k} &amp;&#x3D; (\boldsymbol{g}_i\cdot\boldsymbol{g}_j)_{, k} \\<br>&amp;&#x3D; \boldsymbol{g}_{i, j}\cdot\boldsymbol{g}_j + \boldsymbol{g}_i\cdot\boldsymbol{g}_{j, k} \\<br>&amp;&#x3D; \Gamma_{ij}^p \boldsymbol{g}_p\cdot\boldsymbol{g}_j + \Gamma_{jk}^p\boldsymbol{g}_p\cdot\boldsymbol{g}_i \\<br>&amp;&#x3D; \Gamma_{ij}^p g_{pj} + \Gamma_{jk}^p g_{pi}<br>\end{aligned}<br>$$</p>
+<p>此时希望下标唯一，因此做轮换</p>
+<p>$$<br>\begin{align}<br>    g_{jk, i} &amp;&#x3D; \Gamma_{jk}^pg_{pi} + \Gamma_{ki}^pg_{pj} \\<br>    g_{ki, j} &amp;&#x3D; \Gamma_{ki}^pg_{pj} + \Gamma_{ij}^pg_{pk} \\<br>\end{align}<br>$$</p>
+<p>进行一些配凑，得到 </p>
+<p>$$<br>\begin{align}<br>    \frac 12 (g_{ij, k} + g_{ki, j} - g_{jk, i}) &#x3D; \Gamma_{ij}^pg_{pk}<br>\end{align}<br>$$</p>
+<p>此时希望提取一个 $k$。</p>
+<div class="note info"><p><strong>Lemma 1.</strong></p>
+<p>$$<br>g_{ij}g^{jk} &#x3D; \delta_i^k<br>$$</p>
+</div>
+
+<p>这里需要注意到 $g_{ij}$ 是恒等张量 $\mathbf{I}$ 的 cellar component，$g^{ij}$ 是 $\mathbf{I}$ 的 roof component，而 $\delta_i^j$ 是 $\mathbf{I}$ 的 mixed component（这个自己算一手就行）<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="参见 [上一集中 A Second Order Tensor Has Four Sets of Components in General](../../../../2023/11/22/TensorAnal2GBTN/#a-second-order-tensor-has-four-sets-of-components-in-general)">[4]</span></a></sup>。定理的形式类似于一个矩阵乘法，由于之前没有证过，这里证一手。</p>
+<div class="note info"><p><strong>Lemma 2.</strong></p>
+<p>考虑 second order tensor $\mathbf{S}, \mathbf{T}$，有</p>
+<p>$$<br>(\mathbf{ST})_i^{\cdot k} &#x3D; T_{ij}S^{jk}<br>$$</p>
+<p>即张量乘法对应的 component 也是矩阵乘法的形式。当然对于其他类型的 component 大概也有一样的结论。</p>
+</div>
+
+<p>$\forall \boldsymbol{v}$，将 $\boldsymbol{v}$ 在 $\boldsymbol{g}_i$ 下分解</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{T}\boldsymbol{v} &amp;&#x3D; v^i\mathbf{T}\boldsymbol{g}_i\\<br>                         &amp;&#x3D; v^iT_{ij}\boldsymbol{g}^j<br>\end{aligned}<br>$$</p>
+<p>继续算 $\mathbf{S}(\mathbf{T}\boldsymbol{v})$，有</p>
+<p>$$<br>\begin{aligned}<br>    \mathbf{ST}(\boldsymbol{v}) &amp;&#x3D; v^iT_{ij}\mathbf{S}\boldsymbol{g}^j \\<br>                                &amp;&#x3D; v^iT_{ij}S^{jk}\boldsymbol{g}_k \\<br>                                &amp;&#x3D; v^i(T_{ij}S^{jk})g_k<br>\end{aligned}<br>$$</p>
+<p>因此 $(\mathbf{ST})_i^{\cdot k} &#x3D; T_{ij}S^{jk}$。</p>
+<p>这里取 $\mathbf{S} &#x3D;  \mathbf{T} &#x3D; \mathbf{I}$，得到 Lemma 1 成立。</p>
+<p>两边同时作用 $g^{kq}$ 求和即可用 $\delta_p^q$ 其中一项，得到</p>
+<p>$$<br>\Gamma^q_{ij} &#x3D; \frac 12 g^{kq}(g_{ij, k} + g_{ki, j} - g_{jk, i})<br>$$</p>
+<p>最后置换一下 dummy variable 即得到</p>
+<p>$$<br>\Gamma^k_{ij} &#x3D; \frac 12 g^{pk}(g_{ij, p} + g_{pi, j} - g_{jp, i})<br>$$</p>
+<h1><span id="a-change-of-coordinates">A Change of Coordinates</span></h1><p>现在我们已经有了在 $u^j-$坐标系下的结果，如果想要知道在 $\widetilde{u}^{j}-$坐标系下的结果，需要做坐标变换。</p>
+<p>$$<br>\widetilde{\boldsymbol{g}}_i &#x3D; A^j_i \boldsymbol{g}_j<br>$$</p>
+<p>由于 $\boldsymbol{g}_i$ 和 $\widetilde{\boldsymbol{g}}_i$ 的定义都是偏导给出的，$A^j_i$ 此时有简单的封闭形式。</p>
+<p>$$<br>\widetilde{\boldsymbol{g}}_i &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^j} \frac{\partial u^j}{\partial \widetilde{u}^i} &#x3D; \frac{\partial u^j}{\partial \widetilde{u}^i}\boldsymbol{g}_j<br>$$</p>
+<p>于是</p>
+<p>$$<br>A^j_i &#x3D; \frac{\partial u^j}{\partial \widetilde{u}^i}<br>$$</p>
+<p>这个式子有显然的对称性，即 </p>
+<p>$$<br>(A^{-1})^j_i &#x3D; \frac{\partial \widetilde{u}^i}{\partial u^j}<br>$$</p>
+<p>回忆我们在<a href="../../../../2023/11/22/TensorAnal2GBTN/#change-of-basis">上一集 Change of Basis</a>中给出的结果，将式 $(54)$ 中的结果代入，立即得到向量和张量的坐标变换公式。这里不做赘述。</p>
+<p>本节中的 Christoffel Symbol 也可以进行坐标变换。我们使用 Theorem 1 进行计算，有</p>
+<p>$$<br>\begin{align}<br>\widetilde{\Gamma}_{jk}^i &amp;&#x3D; \widetilde{\boldsymbol{g}}^i\cdot\widetilde{\boldsymbol{g}}_{j, k} \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot\frac{\partial}{\partial \widetilde{u}^k}\left(\frac{\partial u^q}{\partial \widetilde{u}^j}\boldsymbol{g}_q\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial u^r}\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\Gamma_{qr}^s\boldsymbol{g}_s\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \frac{\partial \widetilde{u}^i}{\partial u^p}<br>   \left(\frac{\partial^2 u^p}{\partial \widetilde{u}^j\partial\widetilde{u}^k} + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial u^r}{\partial \widetilde{u}^k}\Gamma_{qr}^p\right)<br>\end{align}<br>$$</p>
+<p>此处由于第一项的存在，$\Gamma$ 并不具有什么线性性，因此不是某个三阶张量的分量式。</p>
+<p>如果这里你是从 Cartesian 坐标换到任意的 $\boldsymbol{g}$，那么由于 Cartesian 坐标系的标准正交基的坐标向量全是常数，$\Gamma$ 全都是 0，第二项直接消失了，此时得到 </p>
+<p>$$<br>\Gamma_{jk}^i&#x3D;\frac{\partial u^i}{\partial x^p}<br>   \frac{\partial^2 x^p}{\partial u^j\partial u^k}<br>$$</p>
+<p>和式 $(29)$ 的结果相符。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">参见 <a href="../../../../2023/11/22/TensorAnal2GBTN/#a-second-order-tensor-has-four-sets-of-components-in-general">上一集中 A Second Order Tensor Has Four Sets of Components in General</a><a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>
 
     
@@ -330,11 +417,6 @@
     
 
     <footer class="post-footer">
-          <div class="post-tags">
-              <a href="/tags/Notes/" rel="tag"># Notes</a>
-              <a href="/tags/Basic/" rel="tag"># Basic</a>
-              <a href="/tags/Tensor-Analysis/" rel="tag"># Tensor Analysis</a>
-          </div>
 
         
 
