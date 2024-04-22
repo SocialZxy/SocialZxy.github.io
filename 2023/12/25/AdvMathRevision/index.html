@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（上）。    微分中值定理 洛必达法则 Darboux 定理 杂题   解析几何 二次曲面的形状判定   多元函数微分学 简单点集拓扑 多元函数的极限与连续性 偏导数 全微分 方向导数 梯度 中值定理 泰勒公式 隐函数存在定理 逆映射存在定理 极值">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 高等数学 A I（期末）">
+<meta property="og:url" content="http://example.com/2023/12/25/AdvMathRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（上）。    微分中值定理 洛必达法则 Darboux 定理 杂题   解析几何 二次曲面的形状判定   多元函数微分学 简单点集拓扑 多元函数的极限与连续性 偏导数 全微分 方向导数 梯度 中值定理 泰勒公式 隐函数存在定理 逆映射存在定理 极值">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://s2.loli.net/2023/12/27/ZwQbv5fKGztUnp7.png">
+<meta property="article:published_time" content="2023-12-25T08:51:50.000Z">
+<meta property="article:modified_time" content="2024-03-26T14:02:52.944Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Differential Calculus">
+<meta property="article:tag" content="Analytic geometry">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://s2.loli.net/2023/12/27/ZwQbv5fKGztUnp7.png">
+
+
+<link rel="canonical" href="http://example.com/2023/12/25/AdvMathRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/12/25/AdvMathRevision/","path":"2023/12/25/AdvMathRevision/","title":"Revision | 高等数学 A I（期末）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 高等数学 A I（期末） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">微分中值定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">洛必达法则</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">Darboux 定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">杂题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">解析几何</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">二次曲面的形状判定</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">多元函数微分学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">简单点集拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">多元函数的极限与连续性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">偏导数 全微分</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">方向导数 梯度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">中值定理 泰勒公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.6.</span> <span class="nav-text">隐函数存在定理 逆映射存在定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.7.</span> <span class="nav-text">极值</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/AdvMathRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 高等数学 A I（期末） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 高等数学 A I（期末）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-25 16:51:50" itemprop="dateCreated datePublished" datetime="2023-12-25T16:51:50+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-26 22:02:52" itemprop="dateModified" datetime="2024-03-26T22:02:52+08:00">2024-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（上）。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86">微分中值定理</a><ul>
+<li><a href="#%E6%B4%9B%E5%BF%85%E8%BE%BE%E6%B3%95%E5%88%99">洛必达法则</a></li>
+<li><a href="#darboux-%E5%AE%9A%E7%90%86">Darboux 定理</a></li>
+<li><a href="#%E6%9D%82%E9%A2%98">杂题</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%A3%E6%9E%90%E5%87%A0%E4%BD%95">解析几何</a><ul>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E9%9D%A2%E7%9A%84%E5%BD%A2%E7%8A%B6%E5%88%A4%E5%AE%9A">二次曲面的形状判定</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E5%BE%AE%E5%88%86%E5%AD%A6">多元函数微分学</a><ul>
+<li><a href="#%E7%AE%80%E5%8D%95%E7%82%B9%E9%9B%86%E6%8B%93%E6%89%91">简单点集拓扑</a></li>
+<li><a href="#%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD%E6%80%A7">多元函数的极限与连续性</a></li>
+<li><a href="#%E5%81%8F%E5%AF%BC%E6%95%B0-%E5%85%A8%E5%BE%AE%E5%88%86">偏导数 全微分</a></li>
+<li><a href="#%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0-%E6%A2%AF%E5%BA%A6">方向导数 梯度</a></li>
+<li><a href="#%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86-%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F">中值定理 泰勒公式</a></li>
+<li><a href="#%E9%9A%90%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86-%E9%80%86%E6%98%A0%E5%B0%84%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86">隐函数存在定理 逆映射存在定理</a></li>
+<li><a href="#%E6%9E%81%E5%80%BC">极值</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="微分中值定理">微分中值定理</span></h1><p><strong>约定</strong> 共有三个，以下函数均在 $[a, b]$ 连续，在 $(a, b)$ 可导，出现在分母时均默认非零。</p>
+<p><strong>定理 1.</strong>(Rolle) 若 $f(a)&#x3D;f(b)$</p>
+<p>$$<br>\exists \xi \in (a, b). f’(\xi) &#x3D; 0<br>$$</p>
+<p><strong>定理 2.</strong>(Lagrange)</p>
+<p>$$<br>\exists \xi \in (a, b). f’(\xi) &#x3D; \frac{f(a) - f(b)}{a - b}<br>$$</p>
+<p><strong>定理 3.</strong>(Cauchy) </p>
+<p>$$<br>\exists \xi \in (a, b). \frac{f’(\xi)}{g’(\xi)} &#x3D; \frac{f(a)-f(b)}{g(a) - g(b)}<br>$$</p>
+<p>其中 Rolle 定理是三个定理的基础。Lagrange 定理是最常用的形式。Cauchy 定理应用似乎只有用于证明洛必达法则和泰勒公式。</p>
+<blockquote>
+<p><strong>Proof Sketch 1.</strong> 根据最大最小值定理和费马定理，只需证明存在非端点的极值点。若端点同时是最大值和最小值那么函数是常函数，否则最大值或者最小值不在端点。</p>
+<p><strong>Proof Sketch 2.</strong> 构造函数，给 $f$ 减去一条直线即可，再用罗尔定理</p>
+<p><strong>Proof Sketch 3.</strong> 构造函数再用罗尔定理。</p>
+<p>$$<br>H(x) &#x3D; (f(x) - f(a))(g(b) - g(a)) - (f(a) - f(b))(g(x) - g(a))<br>$$</p>
+</blockquote>
+<p>Lagrange 定理可以导出如下重要命题，此命题是不定积分加常数的依据。</p>
+<p><strong>命题 4.</strong> $f’(x) \equiv 0 \Leftrightarrow f(x) \equiv f(a)$。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>根据 Lagrange 定理，对于任意 $x\in (a, b]$ 都有</p>
+<p>$$<br>\exists \xi. f(x) &#x3D; f(a) + (x - a) f’(\xi)<br>$$</p>
+<p>而 $f’(\xi)\equiv 0$，因此 $f(x) \equiv f(a)$。$\square$</p>
+
+</details>
+
+<p>事实上在实际问题当中我们经常是构造函数然后使用罗尔定理，但是构造函数的方法不一定很明显。像上面拉格朗日中值定理的 Proof Sketch 中的借助几何直观的构造不一定能够完成。因此我们给出一个比较去智慧化的证明。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>现要证明</p>
+<p>$$<br>\exists \xi. f’(\xi) - \frac{f(b) - f(a)}{b - a} &#x3D; 0<br>$$</p>
+<p>根据罗尔定理我们只需要证明如下函数有两个零点。</p>
+<p>$$<br>f(x) - \frac{f(b) - f(a)}{b - a}x + C<br>$$</p>
+<p>根据 $\xi$ 可能的范围和出于这两个零点应当尽可能平凡的猜测，这个零点应当就是 $a, b$。代入之后可以得到关于 $C$ 的方程，事实上你可以发现他们确实也是同解的。</p>
+
+</details>
+
+<p>当然罗尔定理有如下广义形式。</p>
+<p><strong>定理 1-1.</strong> 若 $f(x)$ 在 $\mathbb{R}$ 上可导且 $\lim\limits_{x\rightarrow \infty} f(x) &#x3D; l$，那么存在 $\xi$，$f’(\xi) &#x3D; 0$。</p>
+<blockquote>
+<p>一种证明方法是寻找 $f(a) &#x3D; f(b)$ 的点，然后做一些讨论，比较初等，下面我们给出一个比较阴间的证明。</p>
+</blockquote>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>考虑构造函数</p>
+<p>$$<br>F(x) &#x3D; \begin{cases}<br>    f(\tan x), &amp; -\frac \pi 2 &lt; x &lt; \frac \pi 2 \\<br>    l &amp; x &#x3D; \pm \frac \pi 2<br>\end{cases}<br>$$</p>
+<p>可以证明 $F(x)$ 满足罗尔定理的条件，于是存在 $-\frac \pi 2 &lt; \xi &lt; \frac \pi 2$ 使得 $F’(\xi) &#x3D; 0$。</p>
+<p>$$<br>F’(\xi) &#x3D; \frac{f’(\xi)}{\cos^2 \xi} \Rightarrow f’(\xi) &#x3D; 0<br>$$</p>
+<p>$\square$</p>
+
+</details>
+
+<h2><span id="洛必达法则">洛必达法则</span></h2><p><strong>定理 5.</strong>(L’Hospital) 设函数 $f(x), g(x)$ 在某点 $x_0$ 的邻域内可导，且 $f(x_0) &#x3D; g(x_0) &#x3D; 0$，若 $\lim\limits_{x\rightarrow x_0}\dfrac{f’(x)}{g’(x)}$ 存在，$\lim\limits_{x\rightarrow x_0}\dfrac{f’(x)}{g’(x)}$ 也存在，且这两个极限相等。</p>
+<blockquote>
+<p>只需要在分子分母上同时配一个 $-0$ i.e. $-f(x)$ 和 $-g(x)$，然后用 Cauchy 中值定理即可。</p>
+</blockquote>
+<p>这是 $\frac 00$ 型未定式上的洛必达法则，此外还有 $\frac \infty \infty$ 型未定式上的洛必达法则，证明难度是 $\frac 00$ 上的形式的完全上位。</p>
+<p><strong>定理 6.</strong>(L’Hospital) 设函数 $f(x), g(x)$ 在某点 $x_0$ 的邻域内可导，且 $\lim\limits_{x\rightarrow x_0}f(x) &#x3D; \lim\limits_{x\rightarrow x_0} g(x) &#x3D; \infty$，若 $\lim\limits_{x\rightarrow x_0}\dfrac{f’(x)}{g’(x)}$ 存在，$\lim\limits_{x\rightarrow x_0}\dfrac{f’(x)}{g’(x)}$ 也存在，且这两个极限相等。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>设 $\lim\limits_{x\rightarrow x_0}\dfrac{f’(x)}{g’(x)} &#x3D; A$，我们要证明</p>
+<p>$$<br>\lim_{x\rightarrow x_0}\left|\frac{f(x)}{g(x)} - A\right| &#x3D; 0<br>$$</p>
+<p>对于一个 $x_1 &gt; x$，进行一些放缩</p>
+<p>$$<br>\begin{aligned}<br> &amp;\left|\frac{f(x)}{g(x)} - A\right| \\<br>&#x3D;&amp;\left|\frac{f(x) - f(x_1)}{g(x)} - A + \frac{f(x_1)}{g(x)}\right| \\<br>\leq&amp;\left|\frac{f(x) - f(x_1)}{g(x)} - A\right| + \left|\frac{f(x_1)}{g(x)}\right| \\<br>\leq&amp; \left|\frac{g(x)}{g(x) - g(x_1)}\right|{\color{blue}\left|\frac{f(x) - f(x_1)}{g(x) - g(x_1)} - A\right|} + |A|\left|\frac{g(x_1)}{g(x)}\right| + \left|\frac{f(x_1)}{g(x)}\right|<br>\end{aligned}<br>$$</p>
+<p>对蓝色的部分用中值定理，变成</p>
+<p>$$<br>\leq \left|\frac{g(x)}{g(x) - g(x_1)}\right|{\color{blue}\left|\frac{f’(\xi)}{g’(\xi)} - A\right|} + |A|\left|\frac{g(x_1)}{g(x)}\right| + \left|\frac{f(x_1)}{g(x)}\right|<br>$$</p>
+<p>现在式子中第一项是有界乘无穷小，后面两项是无穷小。但是变量有两个，不是很直观，需要用 $\varepsilon-\delta$ 语言详细讨论一下，简便起见下面只写右极限，左边对称。</p>
+<p>$\forall \varepsilon &gt; 0$，我们有</p>
+<p>$$<br>\lim_{x\rightarrow x_0} \frac{f(x)}{g(x)} &#x3D; A \Rightarrow \exists \delta &gt; 0. \forall x_0 &lt; x &lt; x_0 + \delta, \left|\frac{f’(x)}{g’(x)} - A\right| \leq \frac {\varepsilon} 4<br>$$</p>
+<p>取 $x_1 &#x3D; \frac{x_0 + \delta}{2}$，由于 $f(x), g(x)\rightarrow \infty$</p>
+<p>$$<br>\begin{aligned}<br>\exists \delta_1. \forall x_0 &lt; x &lt; \min(x_1, x_0 + \delta_1). \qquad<br>    &amp; \left|\frac{g(x)}{g(x) - g(x_1)}\right| &lt; \frac 43 \\<br>    \wedge\quad &amp; |A|\left|\frac{g(x_1)}{g(x)}\right| &lt; \frac \varepsilon 3 \\<br>    \wedge\quad &amp; \left|\frac{f(x_1)}{g(x)}\right| &lt; \frac \varepsilon 3<br>\end{aligned}<br>$$</p>
+<p>因此当 $x_0 &lt; x &lt; x_0 + \delta_1$ 时</p>
+<p>$$<br>\left|\frac{f(x)}{g(x)} - A\right| &lt; \varepsilon<br>$$</p>
+<p>因此原极限确实是 $A$。$\square$</p>
+
+</details>
+
+<blockquote>
+<p><strong>Hint.</strong> 使用加一项减一项，然后用绝对值三角不等式放缩。</p>
+</blockquote>
+<p>其余的情况也就是 $x\rightarrow \infty$ 的只需要构造 $F(x) &#x3D; f(\frac 1x)$，然后补全可去间断点就可以规约到上面两个已经证明的情况。</p>
+<h2><span id="darboux-定理">Darboux 定理</span></h2><p>Darboux 定理是导函数的中值定理。</p>
+<p><strong>定理 7.</strong>(Darboux) $f(x)\in D[x, y]$，对于任意介于 $f’(a)$ 和 $f’(b)$ 之间的 $\eta$，都存在一个 $\xi$ 使得 $f’(\xi) &#x3D; \eta$。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>只需要证明 $\eta &#x3D; 0$ 的情况，其他情况可以加一个一次函数来变化到此情况。</p>
+<p>不妨设 $f’(a) &lt; 0 &lt; f’(b)$，其他情况对称。根据费马定理只需要证明存在一个非端点的极小值。</p>
+<p>根据导数定义，这两个确实都不是极小值。$\square$</p>
+
+</details>
+
+<h2><span id="杂题">杂题</span></h2><div class="note info"><p><strong>Problem 1</strong> 求</p>
+<p>$$<br>\lim_{n\rightarrow \infty} n(\arctan(\ln(n + 1)) - \arctan(\ln(n)))<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>对括号里面的东西用拉格朗日中值定理，得到原极限其实等于</p>
+<p>$$<br>\lim_{n\rightarrow \infty} n\ln\left(\frac{n + 1}{n}\right)\frac{1}{1+\xi^2}\\<br>\quad\text{where}\quad \xi \in (\ln(n), \ln(n + 1))<br>$$</p>
+<p>前面是 $\mathrm{e}$ 的定义，后面是一个无穷小，因此原极限等于 $0$。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Problem 2</strong> f(x) 在 $[a, b]$ 二阶可导， $f(a) &#x3D; f(b) &#x3D; 0$。</p>
+<p>证明 $\forall x\in (a, b). \exists \xi \in (a, b). f(x) &#x3D; \frac 12 f’’(\xi)(x-a)(x-b)$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>即证明</p>
+<p>$$<br>\exists \xi. f’’(\xi) - \frac{2f(x)}{(x - a)(x - b)} &#x3D; 0<br>$$</p>
+<p>注意这里的 $x$ 是一个定值而非变量。构造一个函数</p>
+<p>$$<br>g(t) &#x3D; f’(t) - \frac{2f(x)}{(x - a)(x - b)}t + C<br>$$</p>
+<p>现在要证明 $g’(t)$ 可以取到 $0$，只需要证明 $g(t)$ 在两处相等即可。通过取恰当的 $C$，变为 $g(x)$ 有两个零点。构造一个函数</p>
+<p>$$<br>h(t) &#x3D; f(t) - \frac{f(x)}{(x - a)(x - b)}t^2 + Ct + D<br>$$</p>
+<p>只需要给出恰当的 $C, D$ 使得 $h(t)$ 有三个零点。我们构造</p>
+<p>$$<br>H(t) &#x3D; f(t) - \frac{f(x)(t - a)(t - b)}{(x - a)(x - b)}<br>$$</p>
+<p>$H(t)$ 有三个零点 $a, x, b$，且符合上述形式。因此原结论成立。$\square$</p>
+<blockquote>
+<p><strong>Remark.</strong> 其实最后这一步有一点智慧了。如果想不到，可以考虑上面我们给出的拉格朗日中值定理的去智慧化的证明，用待定系数法把 $C, D$ 都解出来。很明显这里你需要猜测三个零点分别是 $a, b, t$。</p>
+</blockquote>
+
+</details></div>
+
+<div class="note info"><p><strong>Problem 3</strong> $f(x)$ 在 $x &#x3D; a$ 处有二阶导。证明</p>
+<p>$$<br>\lim_{h\rightarrow 0} \frac{f(x+h) + f(x - h) - 2f(h)}{h^2}<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>展开至二阶小量，带 Peano 余项。</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里二阶导不一定连续，所以说最后肯定是带 Peano 余项而不是 Lagrange 余项。</p>
+</blockquote>
+
+</details></div>
+
+<div class="note info"><p><strong>Problem 4.</strong> $f(x)$ 在 $a$ 附近二阶导连续且非零，由拉格朗日中值定理，存在函数 $\theta(h)\in(0, 1)$ 使得 $\forall h.$</p>
+<p>$$<br>f(a + h) - f(a) &#x3D; hf’(x + h\theta(h))<br>$$</p>
+<p>证明 $\lim\limits_{h\rightarrow 0} \theta(h) &#x3D; \frac 12$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>考虑用什么办法可以把 $f’(x + h\theta(h))$ 里面的 $\theta(h)$ 捞出来？</p>
+
+</details>
+
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>两边都展开至二阶小量，带 Lagrange 余项。</p>
+<p>$$<br>hf’(a) + \frac 12 h^2 f’’(a + \xi_1(h)) &#x3D; hf’(a) + h^2\theta(h)f’’(a + \xi_2(h))<br>$$</p>
+<p>化简一下得到</p>
+<p>$$<br>\theta(h) &#x3D; \frac 12 \frac{f’’(a + \xi_1(h))}{f’’(a + \xi_2(h))}<br>$$</p>
+<p>两边取 $\lim$，根据连续性即得到原结论。$\square$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Problem 5-1.</strong> $f(x)$ 在 $\mathbb{R}$ 上有 $n$ 阶导数，且 $|f(x)|\leq A, |f^{(n)}(x)|\leq B$，求证 $f^{(i)}(x)$ 有界。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>对于任意的 $x$，我们将 $f(x + 1), f(x + 2), …, f(x + n)$ 在 $x$ 处泰勒展开，带拉个朗日余项。</p>
+<p>$$<br>f(x + i) &#x3D; f(x) + if’(x + i) + \cdots + \frac{i^n}{n!}f^{(n)}(x)<br>$$</p>
+<p>将已知有界的部分全部摆在右边，就得到了 $n - 1$ 个关于 $f(x)$ $1\sim n - 1$ 阶导数的线性方程组。其系数矩阵为 $1, …, n$ 生成的范德蒙德行列式，记为 $V$。</p>
+<p>那么有</p>
+<p>$$<br>\begin{pmatrix}<br>    f’(x) \\<br>    f’’(x) \\<br>    \vdots \\<br>    f^{(n)}(x)<br>\end{pmatrix} &#x3D; V^{-1}b<br>$$</p>
+<p>其中 $b$ 的每一维都有界，于是 $f^{(i)}(x)$ 也都有界。$\square$</p>
+
+</details>
+
+<p><strong>Problem 5-2.</strong> 具体地，当 $n &#x3D; 2$ 时，可以证明 $\sqrt{AB}$ 是一个比较好的上界。</p>
+<details class="note "><summary><p>Solution(Sketch).</p>
+</summary>
+<p>取 $f\left(x + \sqrt{\dfrac AB}\right)$ 在 $x$ 处的泰勒展开。</p>
+
+</details>
+
+<p><strong>Problem 5-3.</strong> 关于有界性我们还可以进行一些讨论。</p>
+<p>如果 $f(x)$ 在 $(a, b)$ 可导，但无界。可以证明 $f’(x)$ 也无界。</p>
+<blockquote>
+<p><strong>Proof Sketch.</strong> 取一个点，将其他点在此点处泰勒展开，带拉格朗日余项。</p>
+</blockquote>
+<p>但是逆命题不一定成立。可以找到反例：</p>
+<details class="note "><summary><p>Example.</p>
+</summary>
+<p>$$<br>f(x) &#x3D; \sqrt x, x\in(0, 1)<br>$$</p>
+<p>显然导函数无界，但是该函数有界。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Problem 6</strong> 求证若 $\lim\limits_{x\rightarrow +\infty} f’(x) &#x3D; 0$，则 $\lim\limits_{x\rightarrow \infty} \dfrac{f(x)}{x} &#x3D; 0$。</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>用 $\varepsilon-\delta$ 语言验证。对于任意的 $\varepsilon &gt; 0$，我们有</p>
+<p>$$<br>\lim_{x\rightarrow +\infty} f’(x) &#x3D; 0 \Rightarrow \exists \delta_0. \forall x &gt; \delta_0, |f’(x)| &lt; \frac \varepsilon 2<br>$$</p>
+<p>取一 $x_0 &gt; \delta_0$，对于 $x &gt; x_0$</p>
+<p>$$<br>\begin{aligned}<br>    &amp;\left|\frac{f(x)}x\right| \\<br>    &lt; &amp;\left|\frac{f(x) - f(x_0)}{x - x_0}\right| + \left|\frac{f(x_0)}{x - x_0}\right|<br>    &#x3D; &amp;\left|f’(\xi)\right| + \left|\frac{f(x_0)}{x - x_0}\right|<br>\end{aligned}<br>$$</p>
+<p>其中 $\xi\in (x_0, x)$，$f’(\xi) &lt; \frac \varepsilon 2$。而显然存在 $\delta$ 使得 $\left|\dfrac{f(x_0)}{x - x_0}\right| &lt; \frac{\varepsilon}{2}$，因此 $x &gt; \max(\delta, \delta_0)$ 时 $\left|\dfrac{f(x)}x\right| &lt; \epsilon$，极限确实是 0。$\square$</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这东西很类似于某种 $\infty &#x2F; \infty$ 的洛必达，但是不完全一样，所以其证明可能会给你一些启发。</p>
+</blockquote></div>
+
+<h1><span id="解析几何">解析几何</span></h1><p>基本上都是送分。只有少量要点。</p>
+<h2><span id="二次曲面的形状判定">二次曲面的形状判定</span></h2><p>下面的讨论规定标准型二次曲面如何产生。</p>
+<p>对于二次项，可以通过合同变换，化成规范型。</p>
+<p>剩下的一次项，若和二次项同时出现，那么可以平移吃掉一次项。</p>
+<p>如果出现两个没有二次项的一次项，通过合同变换，可以变为一个一次项。</p>
+<p>一次项和常数项同时出现，则可以平移吃掉常数项。</p>
+<p>综合下来，按照秩，正惯性指数，是否有额外的一次项，常数项符号分类讨论，得到如下几种标准型及其形状：</p>
+<table>
+<thead>
+<tr>
+<th align="center">编号</th>
+<th align="center">标准型</th>
+<th align="center">形状</th>
+<th align="center">简要解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">$x^2 + y^2 + z^2 &#x3D; 1$</td>
+<td align="center">球面</td>
+<td align="center">欧几里得距离相同。</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">$x^2 + y^2 - z^2 &#x3D; 0$</td>
+<td align="center">圆锥面</td>
+<td align="center">水平截面圆半径等于纵截距的绝对值。</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">$x^2 + y^2 - z^2 &#x3D; 1$</td>
+<td align="center">单叶双曲面</td>
+<td align="center">换元（旋转体） $r^2 &#x3D; x^2 + y^2$ 得双曲线。</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">$x^2 + y^2 - z^2 &#x3D; -1$</td>
+<td align="center">双叶双曲面</td>
+<td align="center">同理，但注意焦点在 $z$ 轴上。</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">$x^2 + y^2 &#x3D; 1$</td>
+<td align="center">圆柱</td>
+<td align="center">显然。</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">$x^2 + y^2 - z &#x3D; 0$</td>
+<td align="center">抛物面</td>
+<td align="center">换元（旋转体） $r^2 &#x3D; x^2 + y^2$ 的抛物线。</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">$x^2 - y^2 &#x3D; 1$</td>
+<td align="center">双曲柱面</td>
+<td align="center">显然。</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">$x^2 - y^2 - z &#x3D; 0$</td>
+<td align="center">双曲抛物面（马鞍面）</td>
+<td align="center">观察诸横截面。</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">$x^2 - y &#x3D; 0$</td>
+<td align="center">抛物柱面</td>
+<td align="center">显然。</td>
+</tr>
+</tbody></table>
+<p>九种二次曲面的图像如下</p>
+<p><img src="https://s2.loli.net/2023/12/27/ZwQbv5fKGztUnp7.png" alt="Figure 1. 标准型二次曲面的图像"></p>
+<h1><span id="多元函数微分学">多元函数微分学</span></h1><h2><span id="简单点集拓扑">简单点集拓扑</span></h2><p>在欧几里得空间 $\mathbb{R}^n$ 上定义如下概念：</p>
+<p><strong>定义 1.</strong>(距离) $d(P, Q) &#x3D; ||\overrightarrow{PQ}||$</p>
+<p><strong>定义 2.</strong>(邻域) $U(P, r) &#x3D; \{Q \in \mathbb{R}^n | d(P, Q) &lt; r\}$，也称为开球。</p>
+<p>给定集合 $E$，$\mathbb{R}^n$ 中的点可以分为三类：</p>
+<ul>
+<li><strong>内点</strong> $\{P \in \mathbb{R}^n | \exists r. U(P, r) \subset E \}$。</li>
+<li><strong>外点</strong> $\{P \in \mathbb{R}^n | \exists r. U(P, r) \cap E &#x3D; \varnothing \}$。</li>
+<li><strong>边界</strong> Otherwise。记为 $\partial E$。</li>
+</ul>
+<p>$\partial E \subset E$ 称 $E$ 为<strong>闭集</strong>，$E$ 中只有内点称为<strong>开集</strong>。注意很多集合非开也非闭，$\varnothing$ 和 $\mathbb{R}^n$ 既是开集也是闭集。</p>
+<p>$E$ 中任意两点可以被连续的曲线连接称为连通，连通开集称为区域。这一点不严谨，水平有限我们暂时也没办法补全。</p>
+<p><strong>命题 1.</strong> 开集的补是闭集。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>不难证明取补之后，内点和外点对换，边界保持。$\partial \mathbb{R}^n \setminus E &#x3D; \partial E \in \mathbb{R}^n \setminus E$，因此是闭集。$\square$</p>
+
+</details>
+
+<p><strong>命题 2.</strong> $U_i$ 为开集，则 $\bigcup\limits_{i&#x3D;1}^{\infty} u_i$ 开。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>取 $P \in \bigcup\limits_{i&#x3D;1}^{\infty} u_i$，因为 $U_i$ 均开，$P$ 为某个个集合 $U_j$ 的内点，因此存在 $\delta, U(P, \delta)\in U_j \subset \bigcup\limits_{i&#x3D;1}^{\infty} u_i$，因此 $P$ 为并集的内点。符合开集的定义。$\square$</p>
+
+</details>
+
+<blockquote>
+<p>注意无穷多个开集交集不一定开。比如取两条不平行直线，其他 $U$ 均是包含交点的开集，最后交集为单点，是闭集。</p>
+</blockquote>
+<p><strong>命题 3.</strong> $\bar E &#x3D; E \cup \partial E$，$\bar E$ 为闭集。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>由命题 3 只需要证明其其补为开集，也就是外点构成的集合为开集。若 $P$ 为外点，存在 $r$ 使得 $U(P, r) \cap E &#x3D; \varnothing$。我们证明 $U(P, r)$ 中的点均为外点。</p>
+<p>考虑 $Q\in U(P, r)$，令 $r’ &#x3D; ||PQ||$，范数满足三角形不等式，因此 $U(Q, r-r’)\in U(P, r)$，可知 $U(Q, r-r’) \cap E &#x3D; \varnothing$，$Q$ 为内点。$\square$</p>
+
+</details>
+
+<p><strong>命题 4.</strong> $E\subset F$，$F$ 为闭集，则 $\bar E \subset F$。</p>
+<p>这个命题的意义是闭包是包含一个集合的最小闭集。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>显然内点都必须属于 $F$，而若 $x\in \partial E$ 但 $x\notin F$，可知 $x\in \partial F$，这与 $F$ 闭矛盾。$\square$</p>
+
+</details>
+
+<p><strong>命题 5.</strong> $\overline{A\cup B} &#x3D; \bar A \cup \bar B$。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$\supset$. $A\subset A\cup B \Rightarrow A \subset \overline{A\cup B}$，由命题 5 可知 $\bar A\subset \overline{A\cup B}$。同理 $\bar B \subset \overline{A\cup B}$。于是 $\overline{A\cup B} \supset \bar A \cup \bar B$。</p>
+<p>$\subset$. $A\cup B \subset \bar A \cup \bar B$，由命题 5 可知 $\overline{A\cup B} \subset \bar A \cup \bar B$。</p>
+<p>综上 $\overline{A\cup B} &#x3D; \bar A \cup \bar B$。$\square$</p>
+
+</details>
+
+<p>有一个反直觉的反例：$A$ 连通 $\not\Rightarrow \bar A$ 连通。</p>
+<details class="note "><summary><p>反例.</p>
+</summary>
+<p>$$<br>\left\{\left(x, \sin\left(\frac 1x\right)\right) \middle| x &gt; 0 \right\}<br>$$</p>
+
+</details>
+
+<h2><span id="多元函数的极限与连续性">多元函数的极限与连续性</span></h2><p>基本上是把单元函数中极限和连续的定义（用 $\epsilon-\delta$ 语言写，邻域换成上面的定义）直接照搬。诸四则运算法则</p>
+<p>在证明极限的时候可能需要一些放缩（夹逼准则）。</p>
+<div class="note info"><p><strong>Problem 1</strong><br>$$<br>f(x, y) &#x3D; \frac{x\sin y}{\sqrt{x^2 + y^2}}<br>$$</p>
+<p>求 $\lim\limits_{(x, y)\rightarrow(0, 0)} f(x, y)$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>&amp;\left|\frac{x\sin y}{\sqrt{x^2 + y^2}}\right|\\<br>\leq &amp;\left|\frac{xy}{\sqrt{x^2 + y^2}}\right| \\<br>\leq &amp;\left|\frac{x^2 + y^2}{2\sqrt{x^2 + y^2}}\right| \qquad (\text{GM-SM Inequality}) \\<br>&#x3D; &amp;\left|\frac 12\sqrt{x^2 + y^2}\right| \\<br>\rightarrow 0 ((x, y) \rightarrow (0, 0))<br>\end{aligned}<br>$$</p>
+
+</details></div>
+
+<p>此外还有一个常见的处理方法是极坐标换元。</p>
+<div class="note info"><p>求</p>
+<p>$$<br>L&#x3D;\lim_{(x, y)\rightarrow (0, 0)} (x^2 + y^2)\mathrm{e}^{-|x|-|y|}<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>极坐标换元得</p>
+<p>$$<br>\begin{aligned}<br>    L &amp;&#x3D; \lim_{r\rightarrow 0^{+}} r^2\mathrm{e}^{-r(|\sin x| + |\cos x|)} \\<br>      &amp;\leq \lim_{r\rightarrow 0^{+}} r^2\mathrm{e}^{-r} \\<br>      &amp;&#x3D; 0<br>\end{aligned}</p>
+<p>根据夹逼准则，$L &#x3D; 0$。<br>$$</p>
+
+</details></div>
+
+<p>证明极限不存在仍然采用多路趋近的方法，需要注意累次极限的存在性和极限的存在性无关。</p>
+<div class="note info"><p>求证下列极限不存在</p>
+<p>$$<br>\lim_{(x, y)\rightarrow (0, 0)} \frac{x^2y}{x^4 + y^2}<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>从 $y&#x3D;kx$ 和 $y &#x3D; x^2$ 趋近，发现极限不同。$\square$</p>
+
+</details></div>
+
+<p><strong>性质.</strong>(有界闭区域上连续函数的性质) 有界性、最值性、介值性。</p>
+<h2><span id="偏导数-全微分">偏导数 全微分</span></h2><p>注意求一个复杂函数在给定点处的偏导数时可以先代入数字。</p>
+<div class="note info"><p>$$<br>z &#x3D; \arctan\frac{(x-2)y+y^2}{xy+(x-2)^2y^3}<br>$$</p>
+<p>求 $\frac{\partial z}{\partial y}(2, 0)$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>你肯定不会想要先求偏导然后代入数字。</p>
+
+</details></div>
+
+<p><em><em>定理</em>.</em>* 两个二阶混合偏导数若连续，则相等。</p>
+<p><em>证略。</em></p>
+<p>$$<br>\Delta z &#x3D; A\Delta x + B\Delta y + o(\rho)<br>$$</p>
+<p>记为</p>
+<p>$$<br>\mathrm{d}z &#x3D; A\mathrm{d}x + B\mathrm{d}y<br>$$</p>
+<p><strong>定理 1.</strong> 可微 $\Rightarrow$ 连续。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$\rho\rightarrow 0$ 时 $\Delta x, \Delta y \rightarrow 0$，因此</p>
+<p>$$<br>\Delta z &#x3D; A\Delta x + B\Delta y + o(\rho) \rightarrow 0<br>$$</p>
+<p>$\square$</p>
+
+</details>
+
+<p><strong>定理 2.</strong> 函数可微 $\Rightarrow$ 偏导存在。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\frac{\partial z}{\partial x} &#x3D; \lim_{\Delta x\rightarrow 0}\frac{\Delta z}{\Delta x} &#x3D; \lim_{\Delta x\rightarrow 0}\frac{A\Delta x + o(\rho)}{\Delta x} &#x3D; A<br>$$</p>
+<p>其他变元同理。$\square$</p>
+
+</details>
+
+<p><strong>定理 3.</strong> 偏导存在且连续 $\Rightarrow$ 可微。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>\Delta z &amp;&#x3D; f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0, y_0) \\<br>&amp;&#x3D; f(x_0 + \Delta x, y_0 + \Delta y) - f(x_0, y_0 + Delta y) + f(x_0, y_0 + Delta y) - f(x_0, y_0) \\<br>&amp;&#x3D; \frac{\partial f}{\partial x}(x_0 + \theta_0\Delta x, y_0 + \Delta y)\Delta x + \frac{\partial f}{\partial y}(x_0, y_0 + \theta_2\Delta y)\Delta y\\<br>&#x3D;&amp; \frac{\partial f}{\partial x}(x_0, y_0)\Delta x + \frac{\partial f}{\partial y}(x_0, y_0)\Delta y + {\color{blue} \alpha_1\Delta x + \alpha_2\Delta y}<br>\end{aligned}<br>$$</p>
+<p>其中</p>
+<p>$$<br>\begin{aligned}<br>\alpha_1 &amp;&#x3D; \frac{\partial f}{\partial x}(x_0 + \theta_0\Delta x, y_0 + \Delta y) - \frac{\partial f}{\partial x}(x_0, y_0)\Delta x \\<br>\alpha_2 &amp;&#x3D; \frac{\partial f}{\partial y}(x_0, y_0 + \theta_2\Delta y)\Delta y - \frac{\partial f}{\partial y}(x_0, y_0)\Delta y<br>\end{aligned}<br>$$</p>
+<p>通过连续性可以证明蓝色部分为 $o(\rho)$。$\square$</p>
+
+</details>
+
+<p>链式法则仍然成立。</p>
+<p>高阶全微分可以简单地写作如下形式：</p>
+<p>$$<br>\mathrm{d}^n &#x3D; (\frac{\partial}{\partial x}\mathrm{d}x + \frac{\partial}{\partial y}\mathrm{d}y)^n<br>$$</p>
+<p>证明不可微可以分为下面两类：</p>
+<ul>
+<li>偏导不存在，必然不可微。</li>
+<li>不连续，必然不可微。</li>
+<li>偏导存在，则证明<br>$$<br>0\ne \lim_{\rho\rightarrow 0} \frac{f(x, y) - \partial_x f\Delta x - \partial_y f \Delta y}{\rho}<br>$$</li>
+</ul>
+<h2><span id="方向导数-梯度">方向导数 梯度</span></h2><p>梯度定义为</p>
+<p>$$<br>\nabla f &#x3D; \left(\frac{\partial}{\partial x}, \frac{\partial}{\partial y}\right)<br>$$</p>
+<p>沿 $\vec l$ 的方向导数定义为（$\vec l$ 的方向余弦为 $(\cos \alpha, \cos\beta)$）</p>
+<p>$$<br>\frac{\partial f}{\partial \vec l}&#x3D;\lim_{t\rightarrow 0}\frac{f(x + t\cos\alpha, y + t\cos\beta) - f(x, y)}{t}<br>$$</p>
+<p>在可微的条件下，很显然（用微分估计一下立即得到）</p>
+<p>$$<br>\frac{\partial f}{\partial \vec l} &#x3D; (\cos \alpha, \cos\beta) \cdot \nabla f<br>$$</p>
+<h2><span id="中值定理-泰勒公式">中值定理 泰勒公式</span></h2><p>在上一节建立的方向导数和偏导数的关系之下，我们发现这两个东西就是在多元函数定义域上拉出一条线，然后变成单元的中值定理和泰勒公式。</p>
+<p>泰勒公式的唯一性仍然成立，故导出了如下的计算技巧：对于对于乘积式，先计算因子的展开式，然后乘起来。</p>
+<p>有一个重要的应用如下。</p>
+<p><strong>命题.</strong> 函数 $f(u, v)$ 满足 $\partial_u \equiv 0$，那么存在 $F(v)$ 使得 $f(u, v) \equiv F(v)$。</p>
+<details class="note "><summary><p>Proof Sketch.</p>
+</summary>
+<p>拉格朗日中值定理。</p>
+
+</details>
+
+<p>可以推出两条三角换元性质：</p>
+<details class="note "><summary><p>info.</p>
+</summary>
+<p>$x\partial_x f(x, y) + y\partial_y f(x, y) &#x3D; 0\Rightarrow f(r\cos\theta, r\sin\theta) &#x3D; F(\theta)$</p>
+
+</details>
+
+<details class="note "><summary><p>info.</p>
+</summary>
+<p>$x\partial_x f(x, y) - y\partial_y f(x, y) &#x3D; 0\Rightarrow f(r\cos\theta, r\sin\theta) &#x3D; F(r)$</p>
+
+</details>
+
+<h2><span id="隐函数存在定理-逆映射存在定理">隐函数存在定理 逆映射存在定理</span></h2><p>不想记忆任何结论，完全模拟一元微积分学中隐函数求导、反函数求导的操作，利用一阶微分形式不变性解方程。</p>
+<h2><span id="极值">极值</span></h2><p>讨论一下如何记忆极值的充分条件。首先我们将 $f(x + \Delta x, y + \Delta y) - f(x, y)$ 展开到二阶小量，带拉格朗日余项，发现它是</p>
+<p>$$<br>\begin{aligned}<br>&amp;\partial_{xx}(x + \theta\Delta x, y + \theta\Delta y)\Delta x^2 \\<br>+&amp;2\partial_{xy}(x + \theta\Delta x, y + \theta\Delta y)\Delta x\Delta y \\<br>+&amp;\partial_{yx}(x + \theta\Delta x, y + \theta\Delta y)\Delta y^2 \\<br>\end{aligned}<br>$$</p>
+<p>我们令</p>
+<p>$$<br>\begin{aligned}<br>A &#x3D; \partial_{xx}(x, y) \\<br>B &#x3D; \partial_{xy}(x, y) \\<br>C &#x3D; \partial_{yy}(x, y)<br>\end{aligned}<br>$$</p>
+<p>根据偏导连续性，一个小邻域内的正负性可以用 $A, B, C$ 模拟。那么上面的式子是一个关于 $x, y$ 的二次型，它的矩阵表示为（这个矩阵称为 Hessian，可以拓展到多维）</p>
+<p>$$<br>\begin{pmatrix}<br>    A &amp; B \\<br>    B &amp; C<br>\end{pmatrix}<br>$$</p>
+<p>极大值即要求这个矩阵负定，极小值要求这个矩阵正定。根据线性代数知识，我们需要讨论顺序主子式的正负性。</p>
+<ul>
+<li>若 $AC - B^2 &gt; 0$<ul>
+<li>若 $A &gt; 0$，正定，得到极小值。</li>
+<li>若 $A &lt; 0$，负定，得到极大值。</li>
+</ul>
+</li>
+<li>若 $AC - B^2 &lt; 0$<ul>
+<li>矩阵一定不定，得到鞍点。</li>
+</ul>
+</li>
+<li>若 $AC - B^2 &#x3D; 0$，需要看更高阶小量，暂时无法判断。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Differential-Calculus/" rel="tag"># Differential Calculus</a>
+              <a href="/tags/Analytic-geometry/" rel="tag"># Analytic geometry</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/12/19/LinearAlgeRevision/" rel="prev" title="Revision | 线性代数 A（期末）">
+                  <i class="fa fa-angle-left"></i> Revision | 线性代数 A（期末）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/12/27/AgdaInductionWithPatternMatching/" rel="next" title="Agda 定义中带 with 的函数的归纳：with inspect 和 ⊥ 的使用">
+                  Agda 定义中带 with 的函数的归纳：with inspect 和 ⊥ 的使用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
