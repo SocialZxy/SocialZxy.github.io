@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（下）。 预计将计算作为重点，先快速拉一边前面级数的证明，然后开始算题。    级数审敛 正项级数 任意项级数 函数项级数 审敛法 和函数性质   幂级数   泰勒级数 广义积分，含参变量的积分 傅里叶级数 题目 &amp; 注意点">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 高等数学 A II（期末）">
+<meta property="og:url" content="http://example.com/2024/06/04/AdvMathRevision2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（下）。 预计将计算作为重点，先快速拉一边前面级数的证明，然后开始算题。    级数审敛 正项级数 任意项级数 函数项级数 审敛法 和函数性质   幂级数   泰勒级数 广义积分，含参变量的积分 傅里叶级数 题目 &amp; 注意点">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-04T11:19:00.000Z">
+<meta property="article:modified_time" content="2024-06-10T14:19:27.212Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Series">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/04/AdvMathRevision2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/06/04/AdvMathRevision2/","path":"2024/06/04/AdvMathRevision2/","title":"Revision | 高等数学 A II（期末）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 高等数学 A II（期末） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">级数审敛</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">正项级数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">任意项级数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">函数项级数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.1.</span> <span class="nav-text">审敛法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">1.3.2.</span> <span class="nav-text">和函数性质</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">幂级数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">泰勒级数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">广义积分，含参变量的积分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">傅里叶级数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">题目 &amp; 注意点</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/04/AdvMathRevision2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 高等数学 A II（期末） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 高等数学 A II（期末）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-06-04 19:19:00" itemprop="dateCreated datePublished" datetime="2024-06-04T19:19:00+08:00">2024-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-06-10 22:19:27" itemprop="dateModified" datetime="2024-06-10T22:19:27+08:00">2024-06-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（下）。</p>
+<p>预计将计算作为重点，先快速拉一边前面级数的证明，然后开始算题。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%BA%A7%E6%95%B0%E5%AE%A1%E6%95%9B">级数审敛</a><ul>
+<li><a href="#%E6%AD%A3%E9%A1%B9%E7%BA%A7%E6%95%B0">正项级数</a></li>
+<li><a href="#%E4%BB%BB%E6%84%8F%E9%A1%B9%E7%BA%A7%E6%95%B0">任意项级数</a></li>
+<li><a href="#%E5%87%BD%E6%95%B0%E9%A1%B9%E7%BA%A7%E6%95%B0">函数项级数</a><ul>
+<li><a href="#%E5%AE%A1%E6%95%9B%E6%B3%95">审敛法</a></li>
+<li><a href="#%E5%92%8C%E5%87%BD%E6%95%B0%E6%80%A7%E8%B4%A8">和函数性质</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B9%82%E7%BA%A7%E6%95%B0">幂级数</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B3%B0%E5%8B%92%E7%BA%A7%E6%95%B0">泰勒级数</a></li>
+<li><a href="#%E5%B9%BF%E4%B9%89%E7%A7%AF%E5%88%86%E5%90%AB%E5%8F%82%E5%8F%98%E9%87%8F%E7%9A%84%E7%A7%AF%E5%88%86">广义积分，含参变量的积分</a></li>
+<li><a href="#%E5%82%85%E9%87%8C%E5%8F%B6%E7%BA%A7%E6%95%B0">傅里叶级数</a></li>
+<li><a href="#%E9%A2%98%E7%9B%AE-%E6%B3%A8%E6%84%8F%E7%82%B9">题目 &amp; 注意点</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="级数审敛">级数审敛</span></h1><p>将柯西收敛原理作为判断极限是否存在的基本理论。</p>
+<div class="note info"><p><strong>Theorem 1（柯西收敛原理）.</strong> 序列 ${a_n}$ 收敛的充要条件是</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists N) (\forall n, m \geq N) |a_n - a_m| &lt; \varepsilon<br>$$</p>
+</div>
+
+<p>必要性显然，充分性需要用 Bolzano-Weierstrass 定理，这里不详细证明。</p>
+<p>级数收敛定义为其部分和序列收敛。</p>
+<div class="note info"><p><strong>Theorem 2.</strong> $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 收敛蕴含</p>
+<p>$$<br>\lim_{n\rightarrow \infty} a_n &#x3D; 0<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>有 $a_n &#x3D; S_n - S_{n - 1}$，两边取 $\lim\limits_{n\rightarrow \infty}$ 后得证。$\square$</p>
+
+</details></div>
+
+<p>从柯西收敛定理得到最原始的审敛法：</p>
+<div class="note info"><p><strong>Theorem 3.</strong> 下述条件蕴含 $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 收敛：</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists N) (\forall n \geq N, p \geq 1) \left|\sum_{i&#x3D;n+1}^{n+p}a_i\right| &lt; \varepsilon<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>trivial.</p>
+
+</details>
+</div>
+
+<p>逻辑上将上述定理取反得到级数发散的充分条件是</p>
+<p>$$<br>(\exists \epsilon &gt; 0) (\forall N) (\exists n \geq N, p \geq 1) \left|\sum_{i&#x3D;n+1}^{n+p}a_i \right| \geq \varepsilon<br>$$</p>
+<div class="note warning"><p><strong>Example 1.</strong> 调和级数是发散的。这是因为</p>
+<p>$$<br>(\forall N) \sum_{n&#x3D;N + 1}^{N + N} \frac 1n \geq \sum_{n&#x3D;N + 1}^{N + N} \frac{1}{2N} &#x3D; \frac 12<br>$$</p>
+<p>用经典裂项方法可以说明</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} \frac 1{n^2}<br>$$</p>
+<p>是收敛的。</p>
+</div>
+
+<div class="note info"><p><strong>收敛级数的性质</strong></p>
+<ol>
+<li><p>若 $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 和 $\sum\limits_{n&#x3D;1}^{\infty} b_n$ 收敛，那么</p>
+<p> $$<br> \sum\limits_{n&#x3D;1}^{\infty} \lambda a_n + \mu b_n<br> $$</p>
+<p> 收敛。<em>（直接用柯西收敛原理验证即可）</em></p>
+</li>
+<li><p>改变前缀的有限项不会影响级数的敛散性。<em>（并不影响柯西收敛原理的验证过程）</em></p>
+</li>
+<li><p>收敛级数任意加括号仍然收敛于原来的和。<em>（加括号之后的部分和序列是原来部分和序列的子列）</em></p>
+<p>注意“拆括号”后级数不一定收敛。</p>
+</li>
+</ol>
+</div>
+
+<h2><span id="正项级数">正项级数</span></h2><p>本节一切级数默认为正项级数。此时部分和序列单调，注意单调有界数列收敛，因此正项级数收敛的充要条件是部分和有界。</p>
+<p>回顾上述收敛序列的性质，我们特别提到了不能拆括号，但是对于正向级数则可以：你总是可以得到 $S_n$ 小于等于加括号后序列的某个部分和，进而有上界。</p>
+<div class="note info"><p><strong>Theorem 1（比较判别法）.</strong> $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 和 $\sum\limits_{n&#x3D;1}^{\infty} b_n$ 满足 </p>
+<p>$$<br>(\forall n)a_n \leq b_n<br>$$</p>
+<p>那么</p>
+<ul>
+<li>$\sum\limits_{n&#x3D;1}^{\infty} a_n$ 发散蕴含 $\sum\limits_{n&#x3D;1}^{\infty} b_n$ 发散。</li>
+<li>$\sum\limits_{n&#x3D;1}^{\infty} b_n$ 收敛蕴含 $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 收敛。</li>
+</ul>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>这两个是逆否命题，只需要证明第二条。若 $\sum\limits_{n&#x3D;1}^{\infty} b_n$ 收敛那么其部分和有上界 $M$，该上界也可以控制 $a_n$ 的前缀和。$\square$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 2.</strong> $\sum\limits_{n&#x3D;1}^{\infty} a_n$ 和 $\sum\limits_{n&#x3D;1}^{\infty} b_n$ 满足</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \frac {u_n}{v_n} &#x3D; h<br>$$</p>
+<p>那么</p>
+<ul>
+<li>若 $0\leq h &lt; \infty$，$\sum\limits_{n&#x3D;1}^{\infty} v_n$ 收敛蕴含 $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 收敛。</li>
+<li>若 $0 &lt; h\leq \infty$，$\sum\limits_{n&#x3D;1}^{\infty} u_n$ 发散蕴含 $\sum\limits_{n&#x3D;1}^{\infty} v_n$ 发散。</li>
+</ul>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>分类使用比较判别法即可。$\square$</p>
+
+</details></div>
+
+<p>至此我们可以验证 $p$ 级数（$\sum\limits_{n&#x3D;1}^{\infty} \frac{1}{n^p}$）的收敛性。</p>
+<p>当 $p \leq 1$ 时和调和级数比较，均发散。</p>
+<p>当 $p &gt; 1$ 时我们将项按 $\log_2$ 分类加括号，得到</p>
+<p>$$<br>\begin{align}<br>\sum_{n&#x3D;1}^{\infty} \frac{1}{n^p} &amp;&#x3D; \sum_{k&#x3D;1}^{\infty} \left(\sum_{i&#x3D;2^{k-1}}^{2^k - 1} \frac{1}{i^p}\right) \\<br>&amp; \leq \sum_{k&#x3D;1}^{\infty} \frac{2^{k-1}}{2^{(k-1)p}} \\<br>&amp;&#x3D; \sum_{k&#x3D;1}^{\infty} \frac{1}{2^p}<br>\end{align}<br>$$</p>
+<p>因此收敛。</p>
+<p>下面两个定理通过与几何级数 $\sum\limits_{n&#x3D;1}^{\infty} \frac 1{q^n}$ 对比得到。</p>
+<div class="note info"><p><strong>Theorem 3（达朗贝尔）.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 满足</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \frac{u_{n + 1}}{u_n} &#x3D; l<br>$$</p>
+<p>那么 $l &lt; 1$ 级数收敛，$l &gt; 1$ 级数发散，$l&#x3D;1$ 可能收敛可能发散。</p>
+</div>
+
+<div class="note info"><p><strong>Theorem 4（柯西）.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 满足</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \sqrt[n]{u_n} &#x3D; l<br>$$</p>
+<p>那么 $l &lt; 1$ 级数收敛，$l &gt; 1$ 级数发散，$l&#x3D;1$ 可能收敛可能发散。</p>
+</div>
+
+<p>其中 $l&#x3D;1$ 的例子是：所有的 $p$ 级数均满足 $l&#x3D;1$，但是 $p\leq 1$ 时级数发散，$p &gt; 1$ 时级数收敛。</p>
+<p>将级数与 $p$ 级数对比可以得到（证明仍然是没有难度的，这里不写）</p>
+<div class="note info"><p><strong>Theorem 5（拉比）.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 满足</p>
+<p>$$<br>\lim_{n\rightarrow \infty} n\left(\frac{u_n}{u_{n+1}} - 1\right) &#x3D; R<br>$$</p>
+<p>那么 $R &gt; 1$ 级数收敛，$R &lt; 1$ 级数发散，$R&#x3D;1$ 可能收敛可能发散。</p>
+</div>
+
+<p>熟知积分是估计部分和上下界的一个常见方法，我们容易推导出如下定理：</p>
+<div class="note info"><p><strong>Theorem 6（积分判别法）.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 满足存在 $f(n)$ 单调递减且 $f(n) &#x3D; u_n$，那么无穷级数</p>
+<p>$$<br>\sum_{i&#x3D;1}^n u_n<br>$$</p>
+<p>收敛当且仅当无穷积分</p>
+<p>$$<br>\int_{1}^{\infty} f(x)\mathrm{d}x<br>$$</p>
+<p>收敛。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>显然有如下不等式：</p>
+<p>$$<br>\int_{2}^{A} f(x)\mathrm{d}x \leq \sum\limits_{n&#x3D;1}^{\lceil A \rceil} u_n \leq \int_{1}^{\lceil A \rceil + 1} f(x)\mathrm{d}x<br>$$</p>
+<p>用前后半部分比较分别得到充分条件和必要条件。$\square$</p>
+
+</details></div>
+
+<h2><span id="任意项级数">任意项级数</span></h2><div class="note info"><p><strong>Theorem 1（莱布尼兹）.</strong> 对于交错级数 $\sum\limits_{n&#x3D;1}^{\infty} (-1)^n u_n\quad(u_n &gt; 0)$，若 $u_n$ 单调趋于 0，则级数收敛。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>考虑直接用柯西收敛原理，容易证明如下观察：</p>
+<p>$$<br>\begin{align}<br>(1) &amp; ~~m \geq n \rightarrow \min(S_n, S_{n+1}) \leq S_m \leq \max(S_n, S_{n+1}) \\<br>(2) &amp; ~~\lim_{n\rightarrow\infty} |S_n - S_{n + 1}| &#x3D; 0<br>\end{align}<br>$$</p>
+<p>有这两个观察之后直接用柯西收敛原理验证即可。$\square$</p>
+
+</details></div>
+
+<p>之前研究了正项级数审敛，受此启发我们定义：</p>
+<div class="note success"><p><strong>Definition 1（绝对收敛，条件收敛）.</strong> 对于任意项级数 $\sum\limits_{n&#x3D;1}^{\infty} u_n$：</p>
+<p>若将其每一项取绝对值得到的 $\sum\limits_{n&#x3D;1}^{\infty} |u_n|$ 收敛，称其<strong>绝对收敛</strong>。</p>
+<p>若 $\sum\limits_{n&#x3D;1}^{\infty} |u_n|$ 不收敛但是 $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 收敛，称其<strong>条件收敛</strong>。</p>
+</div>
+
+<p>很明显绝对收敛比条件收敛更强：用柯西收敛原理验证时，有</p>
+<p>$$<br>\left\vert\sum_{i&#x3D;n+1}^{n+p} u_n \right\vert \leq \sum_{i&#x3D;n+1}^{n+p} |u_n|<br>$$</p>
+<div class="note info"><p><strong>Proposition 2.</strong> 绝对收敛级数的正负项分别收敛，且该级数的和等于正项和加负项和。</p>
+</div>
+
+<div class="note info"><p><strong>Proposition 3.</strong> 绝对收敛的级数重排之后仍然绝对收敛。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>考虑任意一个前缀，其总能找到重排之前的一个前缀，包含其中所有的项，因此其和具有上界（为重排前的和数）。</p>
+
+</details></div>
+
+<p>我们定义：求和算子 $\sum$（$a_n \mapsto \sum\limits_{i&#x3D;1}^n a_n$），差分算子 $\Delta$（$a_n\mapsto a_n - a_{n-1}$），位移算子 $\vartheta$（$a_n \mapsto a_{n-1}$）<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里规定一个 padding 是 $a_0 = 0$。">[1]</span></a></sup>，那么下面的式子模仿分部积分，即所谓的阿贝尔变换：</p>
+<p>$$<br>\sum u\cdot\Delta v &#x3D; u\cdot v - \sum(\vartheta v)\cdot\Delta u<br>$$</p>
+<p>用这个变换可以证明下面两个判别法：</p>
+<div class="note info"><p><strong>Theorem 4（Dirichlet）.</strong> 若 $a_n$ 单调趋于 0，$\sum\limits_{n&#x3D;1}^{\infty} b_n$ 的前缀和序列有界，那么 </p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} a_nb_n<br>$$</p>
+<p>收敛。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>用柯西收敛原理验证，直接对式子做阿贝尔变换即可，可以推出</p>
+<p>$$<br>|\sum_{n&#x3D;l}^r a_nb_n| &lt; \sup B_n (2|a_l| + |a_r|)<br>$$</p>
+<p>$\square$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 5（Abel）.</strong> 若 $a_n$ 单调有界，$\sum\limits_{n&#x3D;1}^{\infty} b_n$ 收敛，那么</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} a_nb_n<br>$$</p>
+<p>收敛。</p>
+<details class="note "><summary><p>Proof(Sketch)</p>
+</summary>
+<p>$a_n$ 单调有界所有有极限，将所有 $a_n$ 减去该极限，然后用 Theorem 4 即可。</p>
+
+</details></div>
+
+<h2><span id="函数项级数">函数项级数</span></h2><p>从逻辑上来讲 $\lim$ 和 $\forall$ 是不能交换位置的。所以说下面两个事情是不一样的：</p>
+<ul>
+<li>一个函数列，每一个点上的函数值都收敛到定值。</li>
+<li>这个函数列收敛到某一个函数。</li>
+</ul>
+<p>形式化地，我们定义</p>
+<div class="note success"><p><strong>Definition 1（一致收敛）.</strong> 对于一个函数列 ${f_n(x)}$，若存在一个函数 $f(x)$ 使得</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists N) (\forall n &gt; N) \max(|f(x) - f_n(x)|) &lt; \varepsilon<br>$$</p>
+<p>记作 $f_n(x) \rightrightarrows f(x)$</p>
+</div>
+
+<p>逻辑上将其取反得到函数列不一致收敛的定义：</p>
+<p>$$<br>(\exists \varepsilon &gt; 0) (\forall N) (\exists n &gt; N) \max(|f(x) - f_n(x)|) \geq \varepsilon<br>$$</p>
+<p>若函数一致收敛到 $f(x)$，那么它一定点点收敛到 $f(x)$</p>
+<div class="note warning"><p><strong>Example.</strong> 考虑函数列 $f_n(x) &#x3D; x^n(1-x^n)$，那么 ${f_n(x)}$ 在 $(0, 1)$ 上不一致收敛，但在 $(0, a)$ 上一致收敛（$0&lt;a&lt;1$）。这里直接验证就行了，我们就不证明了。</p>
+</div>
+
+<p>实际上可以把式 $(26)$ 写得具体一点，有下面两个充分条件：</p>
+<div class="note info"><p><strong>Proposition 1.</strong> 函数列 $f_n(x)$ 在集合 $D$ 上点点收敛到 $f(x)$，若存在点列 $x_n\in D$ 和常数 $l$，使得</p>
+<p>$$<br>(\exists N) (\forall n &gt; N) |f_n(x_n) - f(x_n)| \geq l<br>$$</p>
+<p>则 $f_n(x)$ 不一致收敛。</p>
+</div>
+
+<div class="note info"><p><strong>Proposition 2.</strong> 函数列 $f_n(x)$ 在集合 $D$ 上点点收敛到 $f(x)$，若存在点列 $x_n\in D$ 和常数 $l$，使得</p>
+<p>$$<br>\lim_{n\rightarrow \infty} (f_n(x_n) - f(x_n)) &gt; 0<br>$$</p>
+<p>则 $f_n(x)$ 不一致收敛。</p>
+</div>
+
+<p>这里验证一下一致收敛的线性性。</p>
+<p>已知</p>
+<p>$$<br>f_n(x) \rightrightarrows f(x), g_n(x)\rightrightarrows g(x)<br>$$</p>
+<p>那么</p>
+<p>$$<br>\begin{align}<br>&amp;\max|\alpha f_n(x) + \beta g_n(x) - \alpha f(x) - \beta g(x)| \\<br>&lt;&amp; |\alpha|\max|f_n(x) - f(x)| + |\beta|\max|g_n(x)- g(x)|)<br>\end{align}<br>$$</p>
+<p>均可以被 $\varepsilon$ 控制，说明一致收敛也是线性的。</p>
+<p>对于函数项级数，称其一致收敛若其部分和序列一致收敛。可以用柯西收敛原理判定，形式很简单，这里不写。</p>
+<h3><span id="审敛法">审敛法</span></h3><p>自然地有下面的判别法：</p>
+<div class="note info"><p><strong>Theorem 3（M 判别法）.</strong> 若存在数列 $a_n$，$|u_n(x)| &lt; a_n$，$\sum\limits_{n&#x3D;1}^{\infty} a_n$ 收敛，则 $\sum\limits_{n&#x3D;1}^{\infty} u_n(x)$ 一致收敛。</p>
+</div>
+
+<p>这里相当于证明了函数项级数某种“绝对一致收敛”的性质，非常强。下面是几个稍微弱一些的情况：</p>
+<div class="note info"><p><strong>Theorem 4（Dirichlet）.</strong> 若 $\sum\limits_{n&#x3D;1}^{\infty} a_n(x)$ 和 $\sum\limits_{n&#x3D;1}^{\infty} b_n(x)$ 满足以下条件：</p>
+<ol>
+<li>$a_n(x)$ 逐点单调，$a_n(x)\rightrightarrows 0$。</li>
+<li>$b_n(x)$ 的前缀和一致有界。</li>
+</ol>
+<p>那么 $\sum\limits_{n&#x3D;1}^{\infty} a_n(x)b_n(x)$ 一致收敛。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>和任意项级数中的一样证明，注意 $B_n$ 一致有上界，$a_n$ 一致收敛于 0，所以没有问题。$\square$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 5（Abel）.</strong> 若 $\sum\limits_{n&#x3D;1}^{\infty} a_n(x)$ 和 $\sum\limits_{n&#x3D;1}^{\infty} b_n(x)$ 满足以下条件：</p>
+<ol>
+<li>$a_n(x)$ 逐点单调，一致有界。</li>
+<li>$\sum\limits_{n&#x3D;1}^{\infty} b_n(x)$ 一致收敛。</li>
+</ol>
+<p>那么 $\sum\limits_{n&#x3D;1}^{\infty} a_n(x)b_n(x)$ 一致收敛。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>注意这里不能从 Theorem 4 直接推过来了，因此考虑用阿贝尔变换重推。假设 $\sup |a_n| &#x3D; M$。</p>
+<p>$$<br>\begin{align}<br>\left|\sum_{i&#x3D;l}^r a_nb_n\right| &#x3D;&amp; \left|B_r(x) a_r(x) - B_{l - 1}(x) a_{l - 1}(x) - \sum_{i&#x3D;l}^{r}(a_{i}(x) - a_{i-1}(x))B_{i-1}(x)\right| \\<br>&#x3D;&amp;\left|(B_r(x) - B_l(x))a_r(x) - \sum_{i&#x3D;l}^r (a_i(x) - a_{i-1}(x))(B_i(x) - B_{l-1}(x))\right| \\<br>\end{align}<br>$$</p>
+<p>由于 $B_n(x)$ 收敛，考虑对 $B$ 用柯西准则，$(\exists N) (\forall N \leq l &lt; r) B_r(x)-B_{l-1}(x) &lt; \frac{\varepsilon}{4M}$，那么 $(34)$ 式可以放缩为（使用若干次三角不等式）</p>
+<p>$$<br>\leq \frac{\varepsilon}{4M}(2|a_r|+|a_l|)<br>$$</p>
+<p>$\square$</p>
+
+</details></div>
+
+<h3><span id="和函数性质">和函数性质</span></h3><div class="note info"><p><strong>Theorem 1.</strong> 若 $\sum\limits_{n&#x3D;1}^{\infty} u_n(x)$ 一致收敛到 $S(x)$，且每个 $u_n(x)$ 都连续，那么 $S(x)$ 连续。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>对于每一个点 $x_0$ 验证 $S(x)$ 在 $x_0$ 连续。</p>
+<p>$$<br>\begin{align}<br>|S(x_0) - S(x)| &amp;\leq |S(x_0) - S_n(x_0)| + |S_n(x_0) - S_n(x)| + |S_n(x) - S(x)|<br>\end{align}<br>$$</p>
+<p>我们要证明的是</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists \delta &gt; 0) (\forall x \in (x_0-\delta, x_0 + \delta)) |S(x_0) - S(x)| &lt; \varepsilon<br>$$</p>
+<p>只需要 </p>
+<p>$$<br>\begin{aligned}<br>&amp;(\forall \varepsilon &gt; 0) (\exists \delta &gt; 0) (\forall x \in (x_0-\delta, x_0 + \delta)) \\<br>&amp;|S(x_0) - S_n(x_0)| + |S_n(x_0) - S_n(x)| + |S_n(x) - S(x)| &lt; \varepsilon<br>\end{aligned}<br>$$</p>
+<p>由于 $S_n(x)\rightrightarrows S(x)$，可以找到一个 $n$ 使得 $S(t) - S_n(t)$ 小于 $\frac{\varepsilon}{3}$，由于所有的 $u_n$ 连续，可以找到一个 $\delta$ 使得中间项小于 $\frac{\varepsilon}{3}$。因此 $(38)$ 是成立的。</p>
+
+</details></div>
+
+<p>这个性质可用于反证不一致收敛。</p>
+<div class="note warning"><p><strong>Example.</strong> $\sum\limits_{n&#x3D;1}^{\infty} x^{n+1} - x^n$ 在 $[0, 1]$ 不一致收敛。这是因为它点点收敛到</p>
+<p>$$<br>S(x) &#x3D; \begin{cases}<br>    x &amp; x\ne 1 \\<br>    0 &amp; x &#x3D; 1<br>\end{cases}<br>$$</p>
+<p>不连续。</p>
+</div>
+
+<div class="note info"><p><strong>Theorem 2.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n(x)$ 一致收敛到 $S(x)$，且 $u_n(x)$ 均连续，那么 $S(x)$ 可积</p>
+<p>$$<br>\int_a^b S(x)\mathrm{d}x &#x3D; \sum\limits_{n&#x3D;1}^{\infty} \int_a^b u_n(x)\mathrm{d}x<br>$$</p>
+<blockquote>
+<p><strong>Hint.</strong> 这个定理其实是在说输入可以推出<em>等号右边的级数收敛，而且可以用左边计算</em>。</p>
+</blockquote>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>根据一直连续的定义有</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists N) (\forall n &gt; N) -\frac{\varepsilon}{b-a}&lt;S(x)- \sum_{i&#x3D;1}^n u_i(x) &lt; \frac{\varepsilon}{b-a}<br>$$</p>
+<p>对于该不等式，从 $a$ 积分到 $b$ 保持不等性，因此</p>
+<p>$$<br>(\forall \varepsilon &gt; 0) (\exists N) (\forall n &gt; N) -\varepsilon &lt;\int_a^b S(x)\mathrm{d}x- \sum_{i&#x3D;1}^n \int_a^b u_i(x)\mathrm{d}x &lt; \varepsilon<br>$$</p>
+<p>已知条件可以推出 $S(x)$ 连续，因此可积，所以上式依无穷级数收敛的定义等价于 $(40)$ 式。<br>$\square$</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 3.</strong> $\sum\limits_{n&#x3D;1}^{\infty} u_n(x)$ 点点收敛到 $S(x)$，$u_n(x)$ 均可导，导函数连续，$\sum\limits_{n&#x3D;1}^{\infty} u’_n(x)$ 一致收敛，那么 $S(x)$ 可导，导函数连续。</p>
+<p>$$<br>S’(x) &#x3D; \sum\limits_{n&#x3D;1}^{\infty} u’_n(x)<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>假设 $u’_n(x)$ 一致收敛到 $T(x)$，依 Theorem 2 有 $T(x)$ 可逐项积分，即 </p>
+<p>$$<br>(\forall x_0) \int_0^{x_0} T(x)\mathrm{d}x &#x3D; \sum\limits_{n&#x3D;1}^{\infty} \int_0^{x_0} u_n(x_0)\mathrm{d}x<br>$$</p>
+<p>根据微积分基本定理以及点点收敛的性质</p>
+<p>$$<br>(\forall x_0) \int_0^{x_0} T(x)\mathrm{d}x + S(0) &#x3D; S(x_0)<br>$$</p>
+<p>等号左边的函数可导，且导数是 $T(x_0)$，所以 $S(x)$ 在每一点都可导，导函数是 $T(x)$。<br>$\square$</p>
+
+</details></div>
+
+<p>值得一提的是可导和连续都是局部性质，所以说一直连续在全局上不成立可能也可以推出在任意一点都可导、导函数连续。</p>
+<div class="note warning"><p><strong>Example.</strong> $\sum\limits_{n&#x3D;1}^{\infty} \frac{(-1)^n}n \exp(-nx)$ 在 $(0, +\infty)$ 上都可导，导函数连续。</p>
+<p>首先在每一个点上这个函数都是交错级数，且逐点单调递减，根据莱布尼兹判别法，其点点收敛。</p>
+<p>现要证明对于任意的 $x_0 &gt; 0$，$S(x)$ 在 $x_0$ 可导且导函数连续。这里问题是 $\sum\limits_{n&#x3D;1}^{\infty} (-1)^n \exp(-nx)$ 在 $(0, +\infty)$ 不一致收敛，但是在任意的 $[a, +\infty)$ 都一致收敛（这里 $a &gt; 0$）。只需取 $a &#x3D; \frac {x_0} 2$，即可证明在 $x_0$ 点可导。</p>
+</div>
+
+<h2><span id="幂级数">幂级数</span></h2><p>形如 $\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$ 的级数，或者平移得到的形式。不失一般性地，我们只考虑前面所说的这种形式。</p>
+<p>幂级数的特点是它的收敛于一个关于原点“比较对称”的区域。形式化地</p>
+<div class="note info"><p><strong>Theorem 1.</strong> 若 $\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$ 在 $x&#x3D;x_0$ 时收敛，那么 $\forall x, |x| &lt; |x_0|$ 则其绝对收敛。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$ 在 $x&#x3D;x_0$ 时收敛蕴含</p>
+<p>$$<br>\lim_{n\rightarrow \infty} a_nx_0^n &#x3D; 0<br>$$</p>
+<p>即 $a_nx_0^n$ 有界，假设 $|a_nx_0^n| &lt; M$。</p>
+<p>那么 </p>
+<p>$$<br>|a_nx^n| &lt; M \left|\frac{x}{x_0}\right|^n<br>$$</p>
+<p>放缩以后是一个几何级数，根据比较判别法 $\sum\limits_{n&#x3D;1}^{\infty} |a_nx^n|$ 收敛。$\square$</p>
+
+</details></div>
+
+<p>换言之存在一个非负数 $R$，使得 $-R &lt; x &lt; R$ 时幂级数收敛，$|x| &gt; R$ 时幂级数发散，$|x|&#x3D;R$ 时可能收敛可能发散。$R$ 称为<strong>收敛半径</strong>，$(-R, R)$ 称为<strong>收敛区间</strong>，考虑 Border Cases 的实际收敛范围称为<strong>收敛域</strong>。</p>
+<p>有一些简单的办法来确定这个 $R$，方法类似于之前的达朗贝尔判别法和柯西判别法，这里一并写出：</p>
+<div class="note info"><p><strong>Theorem 2.</strong> 对于幂级数 $\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$，若 </p>
+<p>$$<br>\lim_{x\rightarrow \infty} \left|\frac{a_{n+1}}{a_n}\right| &#x3D; l<br>$$</p>
+<p>或者 </p>
+<p>$$<br>\lim_{x\rightarrow \infty} \sqrt[n]{|a^n|} &#x3D; l<br>$$</p>
+<p>那么幂级数收敛半径为 $\frac 1l$。（这里 $l$ 可以取 $\infty$ 或者 $0$，其导数和你直觉上的一样）</p>
+<p><em>非常显然，证明略。</em></p>
+</div>
+
+<div class="note info"><p><strong>Theorem 3（幂级数的内闭一致收敛性）.</strong> 对于幂级数 $\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$，收敛半径为 $R$，则 </p>
+<ol>
+<li>对于任意的 $0 &lt; b &lt; R$，该幂级数在 $[-b, b]$ 一致收敛。</li>
+<li>若其在 $R$ 处收敛，那么幂级数在 $[0, R]$ 一致收敛。</li>
+<li>若其在 $-R$ 处收敛，那么幂级数在 $[-R, 0]$ 一致收敛。</li>
+</ol>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>证明均考虑阿贝尔判别法，对于第一条，使用</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} a_nx^n &#x3D; \sum\limits_{n&#x3D;1}^{\infty} \frac{x^n}{((b+R)&#x2F;2)^n} \cdot a_n ((b+R)&#x2F;2)^n<br>$$</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} a_nx^n &#x3D; \sum\limits_{n&#x3D;1}^{\infty} \frac{x^n}{R^n} \cdot a_n R^n<br>$$</p>
+<p>前一项逐点单调，一致有上界 $1$，后面一项收敛（因为是常函数，所以一致收敛），根据阿贝尔判别法 $\sum\limits_{n&#x3D;1}^{\infty} a_nx^n$ 收敛。$\square$</p>
+
+</details></div>
+
+<p>利用内闭一致收敛性，根据 1.3.2 节的诸定理，可以推出幂级数和函数的局部性质：在收敛域内任意一点都连续，逐项从 $0$ 积分到 $x$（$-R&lt;x&lt;R$）还是收敛。</p>
+<p>对于可导性这一点可能还需要一些额外的推导。</p>
+<p>我们要对于任意的 $|x| &lt; R$ 证明 $\sum\limits_{n&#x3D;1}^{\infty} na_nx^{n-1}$ 也收敛。取 $m &#x3D; \dfrac{|x|+R}{2}$，那么显然存在一个 $N, n &gt; N$ 时 $|nx^{n-1}| &lt; |m|^n$，$\sum\limits_{n&#x3D;1}^{\infty} a_nm^n$ 收敛，于是根据 $M$ 判别法逐项求导之后也收敛。</p>
+<p>上面的推导蕴含了逐项求导和积分之后收敛半径均不会变小，由于求导和积分互为逆运算，求导和积分之后幂级数的收敛半径实际上<strong>不变</strong>。这也蕴含着一个幂级数在收敛半径内<strong>无穷阶可导</strong>。</p>
+<h1><span id="泰勒级数">泰勒级数</span></h1><p>简便起见我们只讨论麦克劳林级数（在 $0$ 将函数展开成幂级数）。下面的结论展示了麦克劳林展开的唯一性：</p>
+<div class="note info"><p><strong>Theorem 1.</strong> 若在某包含 $0$ 的区间内，下面的幂级数收敛到函数 $f(x)$：</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} a_nx^n<br>$$</p>
+<p>那么必然有 </p>
+<p>$$<br>a_n &#x3D; \frac{f^{(n)}(0)}{n!}<br>$$</p>
+</div>
+
+<p>这个唯一性蕴含着函数 $f(x)$ 可以展开到幂级数的充分必要条件是 $f(x)$ 无穷阶可导。</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} \frac{f^{(n)(x)}}{n!}x^n<br>$$</p>
+<p>收敛到 $f(x)$。将这个式子写开得到</p>
+<p>$$<br>\lim_{n\rightarrow \infty} f(x) - \sum_{i&#x3D;1}^n \frac{f^{(i)(x)}}{i!}x^i &#x3D; 0<br>$$</p>
+<p>注意 $\lim$ 里面的式子实际上是泰勒展开的余项 $R_n(x)$ 的形式。因此函数可以展开成幂级数当且仅当余项收敛到 $0$。这也给出了求泰勒级数收敛半径的算法。</p>
+<p>回忆余项可以写成拉格朗日余项的形式，即</p>
+<p>$$<br>R_n(x) &#x3D; \frac{f’(\xi)(\xi-x_0)^n}{n!}<br>$$</p>
+<div class="note warning"><p><strong>Example.</strong> </p>
+<p>$$<br>e^x &#x3D; \sum\limits_{n&#x3D;1}^{\infty} \frac{x^n}{n!}<br>$$</p>
+<p>收敛半径为 $(-\infty, \infty)$，因为取定任何一个 $x\in (-\infty, \infty)$，拉格朗日余项中的大头都是 $n!$。</p>
+<p>$\sin(x)$ 和 $\cos(x)$ 的展开式的收敛半径也是 $(-\infty, \infty)$，理由同上。</p>
+</div>
+
+<div class="note warning"><p><strong>Example.</strong> $\ln(1+x)$，$\arctan(x)$ 的展开式需要通过求导和积分得到。</p>
+</div>
+
+<p>一个比较困难的是证明牛顿二项式</p>
+<p>$$<br>(1+x)^a &#x3D; \sum_{n&#x3D;0}^\infty \frac{a^{\underline{n}}}{n!}x^n<br>$$</p>
+<p>的收敛半径是 $1$。</p>
+<p>首先证明大于 $1$ 的时候级数发散，此时只需要用比值审敛法：</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \frac{u_{n+1}}{u_n} &#x3D; \lim_{n\rightarrow \infty} \frac{n-a}{n+1}x &#x3D; x<br>$$</p>
+<p>若 $x &gt; 1$ 级数发散。所以收敛半径 $R\leq 1$。</p>
+<p>要证明该级数确实是原函数的展开式，我们需要引入一个新的余项。</p>
+<div class="note info"><p><strong>Lemma 2（柯西余项）.</strong> </p>
+<p>$$<br>(\forall x)(\exists \theta \in (0, 1)) R_n(x) &#x3D; \frac{f^{(n+1)}(x_0 + \theta x)(1-\theta)^n(x-x_0)^{n+1}}{n!}<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>做辅助函数</p>
+<p>$$<br>F(x, t) &#x3D; f(x) - \sum_{i&#x3D;0}^n \frac{f^{(i)}(t)}{i!}(x-t)^i<br>$$</p>
+<p>注意 $F(x, x_0) &#x3D; R_n(x), F(x, x) &#x3D; 0$。</p>
+<p>根据拉格朗日中值定理</p>
+<p>$$<br>(\exists \theta \in(0, 1)) F(x, x) - F(x, x_0) &#x3D; (x-x_0)\partial_2 F(x, x_0 + \theta(x-x_0))<br>$$</p>
+<p>简单计算可以知道</p>
+<p>$$<br>\frac{\partial}{\partial t} F(x, t) &#x3D; -\frac{f^{(n+1)}}{n!}(x-t)^n<br>$$</p>
+<p>直接代入上式得到</p>
+<p>$$<br>(\exists \theta \in(0, 1)) F(x, x) - F(x, x_0) &#x3D; -(x-x_0)\partial_2\frac{f^{(n+1)}}{n!}(x-x_0 - \theta(x-x_0))^n<br>$$</p>
+<p>化简即得到式 $(60)$。$\square$</p>
+
+</details></div>
+
+<p>对于牛顿二项式，带入这个公式得到：</p>
+<p>$$<br>\begin{align}<br>R_n(x) &amp;&#x3D; \frac{a^{\underline{n+1}}}{n!}(1+\theta x)^{a-n-1}(1-\theta)^nx^{n+1} \\<br>&amp;&#x3D; \frac{a^{\underline{n+1}}}{n!}x^{n+1}\cdot(1+x)^{a-1}\cdot\left(\frac{1-\theta}{1+\theta x}\right)^n<br>\end{align}<br>$$</p>
+<p>当 $|x| &lt; 1$ 时，用比值审敛法可以判断</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} \frac{a^{\underline{n+1}}}{n!}x^{n+1}<br>$$</p>
+<p>绝对收敛，因此 $\frac{a^{\underline{n+1}}}{n!}x^{n+1}$ 收敛到 $0$，$(1+x)^{a-1} &lt; \max(2^{a-1}, 1)$ 有界，$1-\theta &lt; 1+\theta x$ 因此</p>
+<p>$$<br>\left(\frac{1-\theta}{1+\theta x}\right)^n<br>$$</p>
+<p>收敛到 0，综上 $(66)$ 式是一个有界两乘上两个无穷小，所以收敛到 $0$，得证。$\square$</p>
+<h1><span id="广义积分含参变量的积分">广义积分，含参变量的积分</span></h1><p>广义积分的各种判别法比较唐，和级数里面没什么区别。</p>
+<p>我们直接快进到含参变量的积分的性质。</p>
+<div class="note info"><p><strong>Theorem 1.</strong> 若 $f(x, y)$ 在 $[a, b]\times[c, d]$ 上连续，那么</p>
+<p>$$<br>F(y) &#x3D; \int_a^b f(x, y) \mathrm{d}x<br>$$</p>
+<p>在 $[c, d]$ 上连续。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>直接计算 $|F(y) - F(y + \Delta y)|$：</p>
+<p>$$<br>\begin{align}<br>|F(y) - F(y + \Delta y)| &amp;&#x3D; \left|\int_a^b (f(x, y) - f(x, y + \Delta y))\mathrm{d} x\right|<br>\end{align}<br>$$</p>
+<p>由于 $f(x, y)$ 连续，所以存在 $\delta$ 使得 $\Delta y &lt; \delta$ 时，$f(x, y) - f(x, y + \Delta y) &lt; \epsilon &#x2F; (b - a)$。</p>
+<blockquote>
+<p>Hint. 这一步用了闭区间上连续函数一定一致连续，但是高等数学 A 不讲一致连续，所以这个证明是没有给的。</p>
+</blockquote>
+<p>放缩一下这个积分就可以得到 $\lim_{\Delta y\rightarrow 0} F(y) - F(y + \Delta y) &#x3D; 0$。<br>$\square$</p>
+
+</details></div>
+
+<p>上述定理相当于 $\lim$ 和 $\int$ 可以交换位置。</p>
+<div class="note info"><p><strong>Theorem 2.</strong> $f(x, y)$ 在 $[a, b]\times [c, d]$ 连续，那么 </p>
+<p>$$<br>g(y) &#x3D; \int_a^b f(x, y)\mathrm{d} x<br>$$</p>
+<p>在 $[c, d]$ 可积，且可以交换积分顺序。</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>重积分一章的重积分等于累次积分蕴含了这个定理。$\square$</p>
+
+</details></div>
+
+<p>上述定理相当于 $\int$ 和 $\int$ 可以交换位置。这东西为定积分计算提供了另一个方向。</p>
+<div class="note warning"><p><strong>Example.</strong> 求</p>
+<p>$$<br>\int_0^1 \frac{x^2-x}{\ln x}<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>注意到原积分等于</p>
+<p>$$<br>\int_0^1 \mathrm{d}x\int_1^2 x^y \mathrm{d}y<br>$$</p>
+<p>交换积分顺序可求解。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>Theorem 3.</strong> $f(x, y)$ 在 $[a, b]\times [c, d]$ 上连续，$f_y(x, y)$ 在 $[a, b]\times [c, d]$ 连续，那么 </p>
+<p>$$<br>g’(y) &#x3D; \int_a^b f_y(x, y)\mathrm{d} x<br>$$</p>
+<details class="note "><summary><p>Proof(Sketch).</p>
+</summary>
+<p>积上去，交换积分顺序，然后导下来即可。$\square$</p>
+
+</details></div>
+
+<p>上述定理相当于 $\int$ 和 $\dfrac{\partial}{\partial y}$ 可以交换位置。到这里我们可以推导变上下限广义积分的求导公式，首先有一个引理：</p>
+<div class="note info"><p><strong>Lemma.</strong> </p>
+<p>$$<br>\frac \partial {\partial y}F(u(y), v(y), y) &#x3D; F_1(u(y), v(y), y)u’(y) + F_2(u(y), v(y), y)v’(y) + F_3(u(y), v(y), y)<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>直接对 $F(u(y), v(y), y)$ 求全微分即可。$\square$</p>
+
+</details></div>
+
+<p>那么有 </p>
+<p>$$<br>\frac \partial {\partial y} \int_{u(y)}^{v(y)} f(x, y)\mathrm{d}x &#x3D; f(v(y), y)v’(y) - f(u(y), y)u’(y) + \int_{u(y)}^{v(y)} f_y(x, y)\mathrm{d}x<br>$$</p>
+<p>含参变量的广义积分之于广义积分相当于函数项级数之于任意项级数。因此有类似的阿贝尔判别法和狄利克雷判别法。我们之前说了阿贝尔变换是离散的分部积分，因此这里的证明还是可以直接套用，只需将阿贝尔变换改成分部积分。</p>
+<div class="note info"><p><strong>Theorem 4.</strong> $f(x, y)$ 在 $[a, +\infty)\times [c, d]$ 连续，那么 </p>
+<ol>
+<li>$g(y) &#x3D; \int_a^\infty f(x, y)\mathrm{d}x$ 在 $[c, d]$ 连续。</li>
+<li>$g(y) &#x3D; \int_a^\infty f(x, y)\mathrm{d}x$ 在 $[c, d]$ 可积，且可交换积分号。</li>
+</ol>
+<p><em>证法和前面没什么区别，所以不证明。</em></p>
+</div>
+
+<div class="note info"><p><strong>Theorem 5.</strong> $f(x, y)$ 和 $f_y(x, y)$ 在 $[a, +\infty]\times [c, d]$ 连续，且 </p>
+<p>$$<br>g(y) &#x3D; \int_a^\infty f(x, y)\mathrm{d}x<br>$$</p>
+<p>在每一点成立（点点收敛）</p>
+<p>$$<br>\int_a^\infty f_y(x, y)\mathrm{d} x<br>$$</p>
+<p>一致收敛，那么 $g(y)$ 可微。</p>
+<p>$$<br>g’(y) &#x3D; \int_a^\infty f_y(x, y)\mathrm{d} x<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>$\square$</p>
+
+</details></div>
+
+<p>介绍两个重要的广义积分。</p>
+<div class="note success"><p><strong>$\Gamma$ 函数</strong> </p>
+<p>$$<br>\Gamma(a) &#x3D; \int_0^\infty x^{a-1} e^{-x}\mathrm{d}x<br>$$</p>
+<p>用分部积分容易求出</p>
+<p>$$<br>\Gamma(a+1)&#x3D;a\Gamma(a)<br>$$</p>
+<p>还有两个初值：</p>
+<ul>
+<li>$\Gamma(1) &#x3D; 1$ （直接积分）</li>
+<li>$\Gamma(0.5) &#x3D; \sqrt \pi$（换元之后用正态分布的结果）</li>
+</ul>
+<p>取 $t &gt; 0$，换元 $y&#x3D;tx$ 得到</p>
+<p>$$<br>\Gamma(a) &#x3D; t^a\int_0^\infty y^{a-1}e^{-ty}\mathrm{d}y<br>$$</p>
+<p>相当于实数域上面的阶乘函数。</p>
+</div>
+
+<div class="note success"><p><strong>$B$ 函数</strong></p>
+<p>$$<br>B(p, q) &#x3D; \int_0^1 x^{p-1}(1-x)^{q-1}\mathrm{d}x<br>$$</p>
+<p>这里有一个神秘的换元，若令 $x &#x3D; \frac{t}{t+1}$，那么 </p>
+<p>$$<br>B(p, q) &#x3D; \int_0^1 \frac{t^{p-1}}{(1+t)^{p+q}}\mathrm{d}t<br>$$</p>
+<p>现在我们计算一个重要的恒等式</p>
+<p>$$<br>\begin{align}<br>    B(p, q)\Gamma(p+q) &amp;&#x3D; \int_{0}^\infty x^{p+q-1}e^{-x}\mathrm{d}x\int_0^\infty \frac{y^{p-1}}{(1+y)^{p+q}}\mathrm{d}y \\<br>    &amp;&#x3D; \int_0^\infty \mathrm{d}y \cdot y^{p-1} \frac{\Gamma(p+q)}{(1+y)^{p+q}} \\<br>    &amp;&#x3D; \int_0^\infty \mathrm{d}y \cdot y^{p-1} \int_0^\infty x^{p+q-1}e^{-x(y+1)}\mathrm{d}x \\<br>    &amp;&#x3D; \int_0^\infty \mathrm{d}x \cdot x^{p+q-1}e^{-x}\int_0^\infty y^{p-1}e^{-xy}\mathrm{d}y \\<br>    &amp;&#x3D; \int_0^\infty \mathrm{d}x \cdot x^{p+q-1}e^{-x}\frac{\Gamma(p)}{x^p} \\<br>    &amp;&#x3D; \Gamma(p)\Gamma(q)<br>\end{align}<br>$$</p>
+<p>中间有若干不加证明的交换积分顺序，这里不管。总之我们得到了</p>
+<p>$$<br>B(p, q) &#x3D; \frac{\Gamma(p)\Gamma(q)}{\Gamma(p+q)}<br>$$</p>
+<p>类似于某种组合数。</p>
+<p>此外换元 $x&#x3D;\sin^2 x$ 可以得到</p>
+<p>$$<br>B(p, q) &#x3D; \int_0^{\pi &#x2F; 2} \sin^{2p-1}(x)\cos^{2q-1}(x)\mathrm{d}x<br>$$</p>
+<p>用这个式子可以快速计算三角函数 $\sin^n(x)\cos^m(x)$ 积分（先化成 Beta，然后换成 Gamma）。</p>
+</div>
+
+<h1><span id="傅里叶级数">傅里叶级数</span></h1><p>这一章没什么重要的推导，全是算，所以不写了。</p>
+<h1><span id="题目-amp-注意点">题目 &amp; 注意点</span></h1><p>标签分为：</p>
+<ul>
+<li>H(<strong>H</strong>int)：书上带提示 &#x2F; 前一小问，不看可能不会做。</li>
+<li>U(<strong>U</strong>nsolved)：不会做。</li>
+<li>C(<strong>C</strong>alculate)：计算错误。</li>
+<li>O(<strong>O</strong>pen)：我不知道我算的对不对</li>
+</ul>
+<div class="note warning"><p><strong>Problem 1[H].</strong> 级数 $\sum\limits_{n&#x3D;1}^{\infty} u_n$ 收敛，证明</p>
+<p>$$<br>\lim_{n\rightarrow \infty} nu_n &#x3D; 0<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>用柯西收敛原理求 $n$ 项的和，可以证明下面三个式子：</p>
+<p>$$<br>\begin{align}<br>    &amp; \lim_{n\rightarrow \infty} nu_{2n} &#x3D; 0 \\<br>    &amp; \lim_{n\rightarrow \infty} nu_{2n+1} &#x3D; 0 \\<br>    &amp; \lim_{n\rightarrow \infty} nu_{2n-1} &#x3D; 0<br>\end{align}<br>$$</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 2[U].</strong> 判断 $\sum\limits_{n&#x3D;1}^{\infty} \frac{e^nn!}{n^n}$ 的敛散性。</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>$$<br>\frac{u_{n+1}}{u_n} &#x3D; \frac{e}{\left(1+\frac{1}{n}\right)^n} &gt; 1<br>$$</p>
+<p>数列是单增的，不可能收敛。</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 3[H].</strong> 若 $\sum\limits_{n&#x3D;1}^{\infty} a^2_n$ 收敛，求证下面的级数也收敛：</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} \frac{|a_n|}{n}<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>Cauchy-Schwatz 不等式：</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{m} \frac{|a_n|}{n} \leq \sqrt{\left(\sum_{n&#x3D;1}^m a_n^2\right)\left(\sum_{n&#x3D;1}^m \frac 1{n^2}\right)}<br>$$</p>
+<p>$S_n$ 有上界。</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 4[U].</strong> $u_n$ 单调趋于 0，判断下面级数的收敛性：</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} u_n\cos n\omega<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>$\omega &#x3D; 2k\pi$ 时无法判断，否则我们有一个经典的 Trick：</p>
+<p>$$<br>\begin{align}<br>    \sum_{i&#x3D;1}^n \cos i\omega &amp;&#x3D; \frac{1}{\sin \omega&#x2F;2}\left(\sum_{i&#x3D;1}\cos i\omega \sin \omega&#x2F;2\right) \\<br>    &amp;&#x3D; \frac{1}{2\sin\omega&#x2F;2}\left(\sum_{i&#x3D;1}^n \sin\left((i+\frac 12)\omega\right) - \sin\left((i-\frac 12)\omega\right) \right) \\<br>    &amp;&#x3D; \frac{1}{2\sin\omega&#x2F;2}\left(\sin \frac{2n+1}{2}\omega - \sin \frac 12\omega \right)<br>\end{align}<br>$$</p>
+<p>有界，根据狄利克雷判别法该级数收敛。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个题告诉我们三角函数级数求和的做法。</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 5[H].</strong> 判断下面级数的收敛性（收敛？绝对收敛？条件收敛？）：</p>
+<p>$$<br>\sum\limits_{n&#x3D;1}^{\infty} (-1)^n \frac{(2n-1)!!}{(2n)!!}<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>这里是交错级数，首先需要证明</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \frac{(2n-1)!!}{(2n)!!} &#x3D; 0<br>$$</p>
+<p>设 $u_n$ 为通项，实际上 </p>
+<p>$$<br>u_n &#x3D; \frac{2n-1}{2n}\prod_{i&#x3D;1}^{n-1} \frac{2i-1}{2i} &#x3D; \frac 1{2n} \prod_{i&#x3D;1}^{n-1}\frac{2i+1}{2i}<br>$$</p>
+<p>我们知道 $\frac{2i-1}{2i} &lt; \frac{2i}{2i+1}$，所以 </p>
+<p>$$<br>\frac{2n}{2n-1}u_n &lt; \frac 1{2n \cdot u_n} \Rightarrow u_n &lt; \sqrt{\frac{2n-1}{4n^2}} \rightarrow 0 (n\rightarrow \infty)<br>$$</p>
+<p>所以说该交错级数收敛，然后 </p>
+<p>$$<br>n\left(\frac{u_n}{u_{n+1}}-1\right) &#x3D; \frac 12 &lt; 1<br>$$</p>
+<p>根据拉比判别法，级数不条件收敛。</p>
+<p>当然还有另外一种启发性更好的做法，事实上你也可以用和 $(106)\Rightarrow (107)$ 类似的思路推出</p>
+<p>$$<br>2u_n &gt; \frac{1}{u_n 2n}<br>$$</p>
+<p>也就是</p>
+<p>$$<br>u_n &gt; \frac{1}{2\sqrt n}<br>$$</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> $(107)$ 式和 $(110)$ 式告诉我们 </p>
+<p>$$<br>    \frac{(2n-1)!!}{(2n)!!} &#x3D; \Theta\left(\frac{1}{\sqrt n}\right)<br>$$</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 6[H].</strong> 证明下面的函数列在 $(0, 1)$ 不一致收敛：</p>
+<p>$$<br>f_n(x) &#x3D; \frac{\sin x^n}{3+x^n}<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>考虑取点列</p>
+<p>$$<br>x_n &#x3D; \sqrt[n]{\frac{n-1}{n}}<br>$$</p>
+
+</details></div>
+
+<p>注意求幂级数和函数要先求收敛域。</p>
+<div class="note warning"><p><strong>Problem 7[C].</strong> 求下列幂级数的和函数</p>
+<p>$$<br>\sum_{i&#x3D;1}^{\infty} \frac{x^n}{n(n+1)}<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>首先求到收敛域为 $[-1, 1]$，然后考虑这时候你肯定想要提出一个 $\frac 1x$ 然后求两次导，所以这里对 $x\quad\mathrm{v.s.}\quad 0$ 分类讨论。</p>
+<p>$x &#x3D; \pm 1$ 的时候求导之后的级数又不收敛了，所以这里也需要分类讨论。最后得到答案是</p>
+<p>$$<br>\begin{cases}<br>    \dfrac{(1-x)\ln(1-x)+x}{x} &amp; 0 &lt; |x| &lt; 1 \\<br>    0 &amp; x&#x3D;0 \\<br>    1-2\ln 2 &amp; x &#x3D; -1 \\<br>    1 &amp; x&#x3D;1<br>\end{cases}<br>$$</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 8[H].</strong> 求证</p>
+<p>$$<br>\ln \sec \frac \pi n &#x3D; O(n^{-2})<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>$$<br>\ln \sec \frac \pi n &#x3D; O\left(\ln \sec^2 \frac \pi n\right) &#x3D; O\left(\ln \left(1 + \tan^2 \frac \pi n\right)\right)<br>$$</p>
+<p>后面显然，不写了。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 比较判别法可以改成 $a_n &#x3D; O(b_n) \Rightarrow \cdots$。</p>
+<p>用这个可以推出 $\sum\limits_{n&#x3D;1}^{\infty} \ln\sec \pi &#x2F; n$ 收敛。</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 9[O].</strong> 判断下面瑕积分的收敛性：</p>
+<p>$$<br>\int_0^1 \frac{\ln x}{1-x}\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Solution.</p>
+</summary>
+<p>我们的做法是拆成两半看。对于</p>
+<p>$$<br>\int_0^m \frac{\ln x}{1-x}\mathrm{d}x<br>$$</p>
+<p>有 $\frac1{1-x}$ 单调有界，$\int_0^m \ln x$ 收敛，根据阿贝尔判别法其收敛。</p>
+<p>另一半我们取绝对值用比较判别法</p>
+<p>$$<br>\left|\frac{\ln x}{1-x}\right| &lt; \left|\frac{1-\frac 1x}{1-x}\right|<br>$$</p>
+<p>并且 </p>
+<p>$$<br>\int_m^1 \frac 1x \mathrm{d}x<br>$$</p>
+<p>收敛。因此上面的积分收敛。但实际上这里就很唐了，因为 $\frac{\ln x}{1-x}$ 在 $1$ 附近根本就不是无界的。所以说后面那一步可能没什么必要。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个题告诉我们可能要注意一下假的瑕点。</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 10[H].</strong> 积分两则。</p>
+<p>$$<br>\int_0^\infty \frac{1+x^2}{1+x^4}\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>换元 $t &#x3D; x - \frac 1x$，然后能做了。</p>
+
+</details>
+
+<p>$$<br>\int_0^\infty \frac{1}{1+x^4} \mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>换元 $t &#x3D; \frac 1x$，得到原积分等于 </p>
+<p>$$<br>\int_0^\infty \frac{t^2}{1+t^4}\mathrm{d}t<br>$$</p>
+<p>所以有</p>
+<p>$$<br>2I &#x3D; \int_0^\infty \frac{1+t^2}{1+t^4}\mathrm{d}t<br>$$</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这鸡巴谁想得到啊。</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 11[U].</strong> 求 </p>
+<p>$$<br>I(r) &#x3D; \int_0^\pi \ln(1-2r\cos x+r^2)\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>考虑先求 $I’(r)$。</p>
+<p>$$<br>\begin{align}<br>    I’(r) &amp;&#x3D; \int_0^\pi \frac{-2\cos x + 2r}{1-2r\cos x + r^2}\mathrm{d}x \\<br>          &amp;&#x3D; \int_0^\pi \frac 1r\left(1+\frac{r^2-1}{1-2r\cos x+r^2}\right)\mathrm{d}x \\<br>          &amp;&#x3D; \frac \pi r + \frac{r^2-1}{r} \int_0^\pi \frac{\mathrm{d}x}{1-2r\cos x + r^2}<br>\end{align}<br>$$</p>
+<p>对于剩下的积分，我们直接做万能代换：</p>
+<p>$$<br>\int_0^\pi \frac{\mathrm{d}x}{1-2r\cos x + r^2} &#x3D; \int_0\infty \frac{2\mathrm{d}t}{(1+r)^2t^2 + (1-r)^2}<br>$$</p>
+<p>积出来是某种 $\arctan$。这里你最后可以算出 $I’(r) &#x3D; 0$，所以 $I(r) &#x3D; I(0) &#x3D; 0$。</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 12[H, C].</strong> 计算 </p>
+<p>$$<br>g(a) &#x3D; \int_0^\infty \frac{\arctan ax}{\tan x}\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>先算 $g’(a)$。</p>
+<p>$$<br>g’(a) &#x3D; \int_0^{\infty} \frac{1}{1+a^2\tan^2 x}\mathrm{d}x<br>$$</p>
+<p>这里做三角换元 $t &#x3D; \tan x$。</p>
+<p>$$<br>g’(a) &#x3D; \int_0^{\infty} \frac{1}{(1+a^2t^2)(1+t^2)}\mathrm{d}x<br>$$</p>
+<p>这里你可能需要分 $a^2 \mathrm{\quad v.s. \quad} 1$ 讨论，但是很幸运的是答案都和直接裂项一样，你可以得到 </p>
+<p>$$<br>g’(a) &#x3D; \frac \pi 2 \frac 1 {1+|a|}<br>$$</p>
+<p>当然这里我们推荐对 $a$ 的符号分类讨论，而不是使用绝对值。我们申明上面的式子是分类讨论之后求得，然后用绝对值合并的。积分之后得到</p>
+<p>$$<br>g(x) &#x3D; \mathrm{sgn}(x)\ln(1+|x|)<br>$$</p>
+<p>这个式子同样是分类讨论之后合并的。<strong>不要尝试直接积分！</strong></p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 13[H, C].</strong> 计算 </p>
+<p>$$<br>I&#x3D;\int_0^1 \frac{\arctan(x)}{x\sqrt{1+x^2}}\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>注意到</p>
+<p>$$<br>\frac{\arctan(x)}{x} &#x3D; \int_0^1 \frac{1}{1+x^2y^2}\mathrm{d}y<br>$$</p>
+<p>所以</p>
+<p>$$<br>\begin{align}<br>    I&amp;&#x3D;\int_0^1\mathrm{d}y\int_0^1\frac{1}{(1+x^2y^2)\sqrt{1+x^2}}\mathrm{d}x \\<br>    &amp;&#x3D;\int_0^1\mathrm{d}y\int_0^{\pi&#x2F;2}\frac 1{1+y^2\sin^2t}\mathrm{d}t &amp; \text{substitute $x &#x3D; \sin t$}\\<br>    &amp;&#x3D;\int_0^1\mathrm{d}y\int_0^{\pi&#x2F;2}\frac{1}{1+y^2 + x^2}\mathrm{d}x &amp; \text{substitute $x &#x3D; \tan t$}\\<br>    &amp;&#x3D;\int_0^1 \frac{1}{\sqrt{1+y^2}}\mathrm{d}y \\<br>    &amp;&#x3D;\ln(1+\sqrt 2)<br>\end{align}<br>$$</p>
+<p>另一种做法是令</p>
+<p>$$<br>g(t) &#x3D; \int_0^1 \frac{\arctan(tx)}{x\sqrt{1+x^2}}\mathrm{d}x<br>$$</p>
+<p>显然 $g(0) &#x3D; 0$，那么我们求 </p>
+<p>$$<br>\int_0^1 \frac{\partial}{\partial t}g(t)\mathrm{d}t<br>$$</p>
+<p>式子是和上面一样的。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个题的 Trick 是将式子的局部展开成某个积分，或者换成某一个能在一个点上对上的含参积分。</p>
+</blockquote></div>
+
+<div class="note warning"><p><strong>Problem 14[O].</strong> $f(x)$ 在 $[a, b]$ 连续，证明 </p>
+<p>$$<br>(\forall c, a &lt; c &lt; b) \lim_{h\rightarrow 0}\frac 1h \int_a^c f(x+h)-f(x)\mathrm{d}x &#x3D;  f(c) - f(a)<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>简单变换一下知道</p>
+<p>$$<br>LHS &#x3D; \frac 1h\left(\int_c^{c+h}f(x)\mathrm{d}x - \int_a^{a+h}f(x)\mathrm{d}x\right)<br>$$</p>
+<p>然后按照积分中值定理和连续性直接证毕。$\square$</p>
+
+</details></div>
+
+<div class="note warning"><p><strong>Problem 15[U].</strong> 求 </p>
+<p>$$<br>\int_0^\infty \frac{\sin x}{x}\mathrm{d}x<br>$$</p>
+<details class="note "><summary><p>Hint.</p>
+</summary>
+<p>我们设</p>
+<p>$$<br>g(t) &#x3D; \int_0^\infty e^{-tx} \frac{\sin x}{x}\mathrm{d}x<br>$$</p>
+<p>答案是 $g(0)$，先求 $g’(t)$，这里没什么难度，答案是</p>
+<p>$$<br>g’(t) &#x3D; -\frac{1}{1+t^2}<br>$$</p>
+<p>所以说 </p>
+<p>$$<br>g(t) &#x3D; -\arctan(t) + C<br>$$</p>
+<p>这里需要确定常数 $C$，而我们有</p>
+<p>$$<br>|g(t)| &lt; \int_0^\infty e^{-tx}\left|\frac{\sin x}{x}\right|\mathrm{d}x &lt; \int_0^\infty e^{-tx}\mathrm{d}x &#x3D; \frac 1t<br>$$</p>
+<p>所以</p>
+<p>$$<br>\lim_{t\rightarrow \infty} g(t) &#x3D; 0<br>$$</p>
+<p>这确定了 $C &#x3D; \pi &#x2F; 2$，于是 $I &#x3D; \pi&#x2F;2$。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个题的 Trick 是给积分配一个收敛的因子。</p>
+<p>在求解含参变量积分的过程中，我们先求导后积分，为了确定常数 $C$，我们使用了无穷远处的夹逼。</p>
+</blockquote></div>
+
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里规定一个 padding 是 $a_0 = 0$。<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Series/" rel="tag"># Series</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/04/21/AIFundations/" rel="prev" title="Revision | AI 基础（期中）">
+                  <i class="fa fa-angle-left"></i> Revision | AI 基础（期中）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
