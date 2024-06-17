@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 上一章中我们提到了传输信息的过程中有涉及到 Setup 和 Outcome 两个过程，对应的是对信息的编码和解码。 这一章我们主要谈编码。 然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。    Symbol Space Size Use of Spare Capacity Binary Coded Decimal（BCD） Genetic Code Telephone">
+    <meta name="description" content="Abstract. 上一章中我们提到了传输信息的过程中有涉及到 Setup 和 Outcome 两个过程，对应的是对信息的编码和解码。 这一章我们主要谈编码。 然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。   Symbol Space Size Use of Spare Capacity  Binary Coded Decimal（BCD） Genetic Code Telephone">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Infomation and Entropy (2) Codes">
 <meta property="og:url" content="http://example.com/2023/11/19/InfoAndEntropy2Codes/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 上一章中我们提到了传输信息的过程中有涉及到 Setup 和 Outcome 两个过程，对应的是对信息的编码和解码。 这一章我们主要谈编码。 然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。    Symbol Space Size Use of Spare Capacity Binary Coded Decimal（BCD） Genetic Code Telephone">
+<meta property="og:description" content="Abstract. 上一章中我们提到了传输信息的过程中有涉及到 Setup 和 Outcome 两个过程，对应的是对信息的编码和解码。 这一章我们主要谈编码。 然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。   Symbol Space Size Use of Spare Capacity  Binary Coded Decimal（BCD） Genetic Code Telephone">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-11-19T12:43:21.000Z">
 <meta property="article:modified_time" content="2024-01-17T08:09:58.165Z">
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -243,10 +243,10 @@
 <p>这一章我们主要谈编码。</p>
 <p>然而这一章还是非常宝宝巴士，知识基本上是初赛的真子集。</p>
 <!-- toc -->
-
 <ul>
 <li><a href="#symbol-space-size">Symbol Space Size</a></li>
-<li><a href="#use-of-spare-capacity">Use of Spare Capacity</a><ul>
+<li><a href="#use-of-spare-capacity">Use of Spare Capacity</a>
+<ul>
 <li><a href="#binary-coded-decimalbcd">Binary Coded Decimal（BCD）</a></li>
 <li><a href="#genetic-code">Genetic Code</a></li>
 <li><a href="#telephone-area-codes">Telephone Area Codes</a></li>
@@ -255,40 +255,42 @@
 </ul>
 </li>
 <li><a href="#extension-of-codes">Extension of Codes</a></li>
-<li><a href="#fixed-length-and-variable-length-codes">Fixed-Length and Variable-Length Codes</a><ul>
+<li><a href="#fixed-length-and-variable-length-codes">Fixed-Length and Variable-Length Codes</a>
+<ul>
 <li><a href="#morse-code">Morse Code</a></li>
 </ul>
 </li>
 <li><a href="#detail-ascii">Detail: ASCII</a></li>
-<li><a href="#detail-integer-codes">Detail: Integer Codes</a><ul>
+<li><a href="#detail-integer-codes">Detail: Integer Codes</a>
+<ul>
 <li><a href="#binary-code">Binary Code</a></li>
 <li><a href="#gray-code">Gray Code</a></li>
 <li><a href="#2s-complement">2’s Complement</a></li>
-<li><a href="#signmagnitude">Sign&#x2F;Magnitude</a></li>
+<li><a href="#signmagnitude">Sign/Magnitude</a></li>
 <li><a href="#1s-complement">1’s Complement</a></li>
 </ul>
 </li>
-<li><a href="#detail-the-genetic-code-ip-addresses-ip-addresses">Detail: The Genetic Code &#x2F; IP Addresses &#x2F; IP Addresses</a></li>
+<li><a href="#detail-the-genetic-code-ip-addresses-ip-addresses">Detail: The Genetic Code / IP Addresses / IP Addresses</a></li>
 </ul>
 <!-- tocstop -->
-
 <span id="more"></span>
-
 <p>一些常见的编码。</p>
 <ul>
 <li>Letters: BCD, EBCDIC, ASCII, Unicode, Morse Code</li>
 <li>Integer: Binary, Gray, 2’s complement（二进制补码）</li>
 <li>Numbers: Floating-Point</li>
-<li>……</li>
+<li>…</li>
 </ul>
-<h1><span id="symbol-space-size">Symbol Space Size</span></h1><p>即字符集大小。依次考虑下面几种：</p>
+<h1><span id="symbol-space-size">Symbol Space Size</span></h1>
+<p>即字符集大小。依次考虑下面几种：</p>
 <ul>
 <li>$2^t, t \in \mathbb{N}$，使用 $t$ 个 bit。</li>
 <li>有限，将其 ceil 到最近的一个 $2^t$，然后用 $t$ 个 bit。但是容易发现这样会剩下一些空间（spare capacity），关于这部分我们下一节进行讨论。</li>
 <li>可数无穷大，可以直接编码标号。</li>
 <li>不可数无穷大，并没有什么办法来做精确的编码。一个必要的过程是离散化（discretization），将某种层面上近似相等的对象视为同一个，然后进行编码。注意离散化的过程是不可逆的，所以没法还原。但是可用的 bit 越多，就能得到越精确的近似。</li>
 </ul>
-<h1><span id="use-of-spare-capacity">Use of Spare Capacity</span></h1><p>这五个作用英文非常直观，但是翻译到中文反而不知道怎么处理，所以直接保留。</p>
+<h1><span id="use-of-spare-capacity">Use of Spare Capacity</span></h1>
+<p>这五个作用英文非常直观，但是翻译到中文反而不知道怎么处理，所以直接保留。</p>
 <ul>
 <li>Ignore（忽略）</li>
 <li>Map to other values（映射到其他值）</li>
@@ -297,46 +299,68 @@
 <li>Common Abbreviations（通用缩写？）</li>
 </ul>
 <p>以下面五个东西为例。第五个好像没有涉及到，它的意思是，比如说在压缩完所有小写字母之后空间还有剩余，那么可以用剩余中的一个来表示 “the” 之类的高频词。</p>
-<h2><span id="binary-coded-decimalbcd">Binary Coded Decimal（BCD）</span></h2><p>四位当一位，A~F 都没有用到。直接 ignore 掉自然是一种办法，但是对于这六个编码我们可以想到其他几种平凡的处理方法：</p>
+<h2><span id="binary-coded-decimalbcd">Binary Coded Decimal（BCD）</span></h2>
+<p>四位当一位，A~F 都没有用到。直接 ignore 掉自然是一种办法，但是对于这六个编码我们可以想到其他几种平凡的处理方法：</p>
 <ul>
 <li>检查错误。如果出现了 A~F 表明出现了 transmission error。</li>
 <li>近似到 9（map to other values）</li>
 <li>忽略第一位，用来存储 2~7，这使得编码带上一定的简并性（map to other values）</li>
 </ul>
-<h2><span id="genetic-code">Genetic Code</span></h2><p>熟知 64 个密码子和氨基酸的对应关系不是双射的（map to other values），这样提升了编码的简并性。</p>
+<h2><span id="genetic-code">Genetic Code</span></h2>
+<p>熟知 64 个密码子和氨基酸的对应关系不是双射的（map to other values），这样提升了编码的简并性。</p>
 <p>同时有起始子和终止子（Control Codes）。</p>
-<h2><span id="telephone-area-codes">Telephone Area Codes</span></h2><p>感性理解就是他知道 Telephone Area Code 这个东西以后还会有扩充，所以在编码时预留了一些位置（Reserve for future expansion）。</p>
-<h2><span id="ip-address">IP Address</span></h2><p>Reserve for future expansion。</p>
-<h2><span id="ascii">ASCII</span></h2><p>里面有很多控制字符，如 <code>\n, \t, \b</code> 之类（Control Codes）。</p>
-<h1><span id="extension-of-codes">Extension of Codes</span></h1><p>很多编码被设计之初都被用来表示一些简单的东西，但是随着编码的发展它可能会被拓展，造成一些设计之初没有考虑到的偏差。</p>
+<h2><span id="telephone-area-codes">Telephone Area Codes</span></h2>
+<p>感性理解就是他知道 Telephone Area Code 这个东西以后还会有扩充，所以在编码时预留了一些位置（Reserve for future expansion）。</p>
+<h2><span id="ip-address">IP Address</span></h2>
+<p>Reserve for future expansion。</p>
+<h2><span id="ascii">ASCII</span></h2>
+<p>里面有很多控制字符，如 <code>\n, \t, \b</code> 之类（Control Codes）。</p>
+<h1><span id="extension-of-codes">Extension of Codes</span></h1>
+<p>很多编码被设计之初都被用来表示一些简单的东西，但是随着编码的发展它可能会被拓展，造成一些设计之初没有考虑到的偏差。</p>
 <p>例如 ASCII 码（最初设计来用在打孔纸带上）中有下面两组例子：</p>
 <ul>
 <li>NUL（0000000）和 DEL（1111111），NUL 最开始是被忽略的，DEL 最开始单纯表示删除，在现在的操作系统中对这两个的处理方法出现了差异。</li>
 <li>CR 和 LF，也就是我们熟悉的 <code>\r\n</code> 的问题。</li>
 </ul>
-<h1><span id="fixed-length-and-variable-length-codes">Fixed-Length and Variable-Length Codes</span></h1><p>各有其优点。</p>
+<h1><span id="fixed-length-and-variable-length-codes">Fixed-Length and Variable-Length Codes</span></h1>
+<p>各有其优点。</p>
 <p>定长编码可以方便地支持串行传输。</p>
 <p>为了避免读错位，可以在相邻字符之间插入 1~2 个 stop bit（0），这样如果解码方读到了一个他原本期望是 stop bit 的 1，他就知道自己错位了，然后就可以尝试重新同步。</p>
-<h2><span id="morse-code">Morse Code</span></h2><p>经典的变长编码。</p>
+<h2><span id="morse-code">Morse Code</span></h2>
+<p>经典的变长编码。</p>
 <p>解码方可以通过 · 和 - 之间的间隔大小识别一个符号的终止。</p>
-<h1><span id="detail-ascii">Detail: ASCII</span></h1><p>7 位的定长编码。</p>
+<h1><span id="detail-ascii">Detail: ASCII</span></h1>
+<p>7 位的定长编码。</p>
 <p>从 0x80 到 0xFF 的部分在不同的系统中有不同的用处。</p>
 <p>事实上现在的字符集是非常大的（参考汉字），所以一般都是用 2 byte 来存储信息，比如说 unicode。</p>
-<h1><span id="detail-integer-codes">Detail: Integer Codes</span></h1><p>称最高位为 MSB（most significant bit），最低位为 LSB（least significant bit）。</p>
+<h1><span id="detail-integer-codes">Detail: Integer Codes</span></h1>
+<p>称最高位为 MSB（most significant bit），最低位为 LSB（least significant bit）。</p>
 <p>下面是一些例子。</p>
-<h2><span id="binary-code">Binary Code</span></h2><p>直接的二进制编码</p>
-<h2><span id="gray-code">Gray Code</span></h2><p>编码无符号整数，满足 $\mathrm{popcount}(G(i)\oplus G(i+1)) &#x3D; 1$。</p>
+<h2><span id="binary-code">Binary Code</span></h2>
+<p>直接的二进制编码</p>
+<h2><span id="gray-code">Gray Code</span></h2>
+<p>编码无符号整数，满足 $\mathrm{popcount}(G(i)\oplus G(i+1)) = 1$。</p>
 <p>构造方法是归纳，先构造 $n-1$ 位的格雷码 $G_{n - 1}$，然后令</p>
-<p>$$<br>G_n &#x3D; 0G_{n-1} + 1\overline{G_{n-1}}<br>$$</p>
-<h2><span id="2s-complement">2’s Complement</span></h2><p>即补码，没什么好说的。</p>
+<p>$$<br>
+G_n = 0G_{n-1} + 1\overline{G_{n-1}}<br>
+$$</p>
+<h2><span id="2s-complement">2’s Complement</span></h2>
+<p>即补码，没什么好说的。</p>
 <p>为什么是取反后 $+1$？考虑如下事实（位数为 $S$）：</p>
-<p>$$<br>\neg x &#x3D; （2^S - 1) - x<br>$$</p>
+<p>$$<br>
+\neg x = （2^S - 1) - x<br>
+$$</p>
 <p>在 $\mathcal{Z}_{2^S}$ 下面表示一个数的相反数，有</p>
-<p>$$<br>-x \equiv 2^S - x &#x3D; \neg x + 1 \pmod {2^S}<br>$$</p>
-<h2><span id="signx2fmagnitude">Sign&#x2F;Magnitude</span></h2><p>取 MSB 作为符号位，后面用 Binary Code。</p>
-<h2><span id="1s-complement">1’s Complement</span></h2><p>反码。</p>
+<p>$$<br>
+-x \equiv 2^S - x = \neg x + 1 \pmod {2^S}<br>
+$$</p>
+<h2><span id="signmagnitude">Sign/Magnitude</span></h2>
+<p>取 MSB 作为符号位，后面用 Binary Code。</p>
+<h2><span id="1s-complement">1’s Complement</span></h2>
+<p>反码。</p>
 <p>容易发现后面两个实际上非常垃圾，代数上性质没有补码好，而且会有 $+0$ 和 $-0$。事实上也没有什么应用场景。</p>
-<h1><span id="detail-the-genetic-code-x2f-ip-addresses-x2f-ip-addresses">Detail: The Genetic Code &#x2F; IP Addresses &#x2F; IP Addresses</span></h1><p>没什么东西，不看了。</p>
+<h1><span id="detail-the-genetic-code-ip-addresses-ip-addresses">Detail: The Genetic Code / IP Addresses / IP Addresses</span></h1>
+<p>没什么东西，不看了。</p>
 
     </div>
 

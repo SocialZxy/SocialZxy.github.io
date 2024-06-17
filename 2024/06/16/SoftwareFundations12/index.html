@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 软件科学基础的复习笔记。 课程网站是 https:&#x2F;&#x2F;xiongyingfei.github.io&#x2F;SF&#x2F;2024&#x2F;，参考资料是 Software Fundations 的 Vol. 1 和 Vol. 2。   Polymorphism and High-Order Functions The Curry-Howard Correspondence, Inductively D">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 软件科学基础">
+<meta property="og:url" content="http://example.com/2024/06/16/SoftwareFundations12/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 软件科学基础的复习笔记。 课程网站是 https:&#x2F;&#x2F;xiongyingfei.github.io&#x2F;SF&#x2F;2024&#x2F;，参考资料是 Software Fundations 的 Vol. 1 和 Vol. 2。   Polymorphism and High-Order Functions The Curry-Howard Correspondence, Inductively D">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-06-16T11:10:38.000Z">
+<meta property="article:modified_time" content="2024-06-17T08:23:31.735Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Logic">
+<meta property="article:tag" content="Coq">
+<meta property="article:tag" content="PL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/06/16/SoftwareFundations12/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/06/16/SoftwareFundations12/","path":"2024/06/16/SoftwareFundations12/","title":"Revision | 软件科学基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 软件科学基础 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Polymorphism and High-Order Functions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">The Curry-Howard Correspondence, Inductively Defined Propositions</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Simple Imperative Programs</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Automation</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">Hoare Logic</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">Small-Step Operational Semantics</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">Simply Typed Lambda Calculus</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">Typing Mutable References</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">9.</span> <span class="nav-text">Subtyping</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/06/16/SoftwareFundations12/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 软件科学基础 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 软件科学基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-06-16 19:10:38" itemprop="dateCreated datePublished" datetime="2024-06-16T19:10:38+08:00">2024-06-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-06-17 16:23:31" itemprop="dateModified" datetime="2024-06-17T16:23:31+08:00">2024-06-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 软件科学基础的复习笔记。</p>
+<p>课程网站是 <a target="_blank" rel="noopener" href="https://xiongyingfei.github.io/SF/2024/%EF%BC%8C%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99%E6%98%AF">https://xiongyingfei.github.io/SF/2024/，参考资料是</a> <a target="_blank" rel="noopener" href="https://softwarefoundations.cis.upenn.edu/">Software Fundations</a> 的 Vol. 1 和 Vol. 2。</p>
+<!-- toc -->
+<ul>
+<li><a href="#polymorphism-and-high-order-functions">Polymorphism and High-Order Functions</a></li>
+<li><a href="#the-curry-howard-correspondence-inductively-defined-propositions">The Curry-Howard Correspondence, Inductively Defined Propositions</a></li>
+<li><a href="#simple-imperative-programs">Simple Imperative Programs</a></li>
+<li><a href="#automation">Automation</a></li>
+<li><a href="#hoare-logic">Hoare Logic</a></li>
+<li><a href="#small-step-operational-semantics">Small-Step Operational Semantics</a></li>
+<li><a href="#simply-typed-lambda-calculus">Simply Typed Lambda Calculus</a></li>
+<li><a href="#typing-mutable-references">Typing Mutable References</a></li>
+<li><a href="#subtyping">Subtyping</a></li>
+</ul>
+<!-- tocstop -->
+<span id="more"></span>
+<h1><span id="polymorphism-and-high-order-functions">Polymorphism and High-Order Functions</span></h1>
+<p><strong>多态和隐式参数声明</strong></p>
+<p>如下两种方法可以定义多态的列表：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> list (X : <span class="keyword">Type</span>) : <span class="keyword">Type</span> := </span><br><span class="line">  | <span class="type">nil</span></span><br><span class="line">  | <span class="type">cons</span> (x : X) (l : list X).</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> list : <span class="keyword">Type</span> -&gt; <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span> : <span class="keyword">forall</span> X : <span class="keyword">Type</span>, list X </span><br><span class="line">  | <span class="type">cons</span> : <span class="keyword">forall</span> X : X -&gt; list X -&gt; list X.</span><br></pre></td></tr></table></figure>
+<p>将 <code>(X : Type)</code> 直接写在 type constructor 相当于是要求在每一个 data constructor 前面都加上 <code>X</code>。</p>
+<p>用如下的方法可以将 <code>X</code> 声明为 nil 的隐式参数：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Arguments</span> nil &#123;X&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> list&#x27; &#123;X : <span class="keyword">Type</span>&#125; : <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span>&#x27;</span><br><span class="line">  | <span class="type">cons</span>&#x27; (x : X) (l : list&#x27;)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">Inductive</span> list&#x27; : <span class="keyword">Type</span> -&gt; <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span>&#x27; &#123;X : <span class="keyword">Type</span>&#125; : list&#x27; X</span><br><span class="line">  | <span class="type">cons</span>&#x27; &#123;X : <span class="keyword">Type</span>&#125; (x : X) (l : list&#x27;) : list&#x27; X</span><br></pre></td></tr></table></figure>
+<p>这样一来在推不出来 nil 类型的时候和强行给 nil 传参的时候会报错：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Fail <span class="keyword">Definition</span> mynil := nil.</span><br><span class="line">Fail <span class="keyword">Definition</span> mynil := nil nat.</span><br></pre></td></tr></table></figure>
+<p>但是可以通过手动标注类型或者使用 <code>@</code> 来临时禁用隐式参数：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> mynil : list nat :=  nil.</span><br><span class="line"><span class="keyword">Definition</span> mynil := @nil nat.</span><br></pre></td></tr></table></figure>
+<p>这里有一个很重要的东西是，<code>X</code> 不一定要是一个 <code>Type</code>，还可以是 nat，比如说下面这个东西定义了固定长度的列表。此时的 <code>list n</code> 称为一个 <strong>dependent type</strong>，它是 <code>nat</code> 和 <code>nat -&gt; Type</code> 的 generalised sum type 的一个元素。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> list : nat -&gt; <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span> : list <span class="number">0</span></span><br><span class="line">  | <span class="type">cons</span> (n : nat) (l : list n) : list (S n)</span><br></pre></td></tr></table></figure>
+<p>回忆我们在学 Agda 的 Internal Verification 的时候<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="https://zhenjiang888.github.io/FP/2023/slides/ch20_internal.pdf，Page 11.">[1]</span></a></sup>，有如下的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data Σ &#123;ℓ ℓ&#x27;&#125; (A : Set ℓ) (B : A → Set ℓ&#x27;) : Set (ℓ ⊔ ℓ&#x27;) where</span><br><span class="line">  _,_ : (a : A) → (b : B a) → Σ A B</span><br></pre></td></tr></table></figure>
+<p>用这个东西来解释的话，就是 <code>list n = ( n , list ) ∈ Σ nat list</code></p>
+<hr>
+<p><strong>Lambda Calculus, Church Numeral</strong></p>
+<p>一个 Lambda 表达式的语法如下：</p>
+<p>$$<br>
+\begin{align}<br>
+t :=~ &amp; x &amp; \text{variable} \\<br>
+&amp; \lambda x. t &amp; \text{abstraction} \\<br>
+&amp; t~ t &amp; \text{application}<br>
+\end{align}<br>
+$$</p>
+<p>只有下面两种推导规则：</p>
+<ul>
+<li><strong>Alpha Renaming</strong> 将变量改名。$\lambda x. x$ 可以改成 $\lambda y.y$ 实际上改名规则有点复杂，这里不写。</li>
+<li><strong>Beta Reduction</strong> 函数调用。$(\lambda x. t_1) ~t_2 \longrightarrow [x\mapsto t_2] t_1$</li>
+</ul>
+<p>可以写出 Bool 类值的 Lambda 表达式（Church Boolean）</p>
+<p>$$<br>
+\begin{align}<br>
+tru &amp;= \lambda t. \lambda f. t \\<br>
+fls &amp;= \lambda t. \lambda f. f<br>
+\end{align}<br>
+$$</p>
+<p>这里两个参数的意思是你要将构造子作为参数传进来。同时下面的函数的功能是求两个 Church Boolean 的与：</p>
+<p>$$<br>
+and = \lambda b. \lambda c. b~c~fls<br>
+$$</p>
+<blockquote>
+<p>这里 $c$ 和 $fls$ 作为参数传给了 $b$，当 $b$ 为 true 时返回 $c$，否则将返回 $fls$。</p>
+</blockquote>
+<p>可以写出自然数的 Church Numerals。</p>
+<p>$$<br>
+\begin{align}<br>
+c_0 &amp;= \lambda s. \lambda z. z \\<br>
+c_1 &amp;= \lambda s. \lambda z. s ~ z \\<br>
+c_2 &amp;= \lambda s. \lambda z. s (s ~ z) \\<br>
+\cdots \\<br>
+scc &amp;= \lambda n. \lambda s. \lambda z. s (n~s~z)<br>
+\end{align}<br>
+$$</p>
+<p>在 Coq 中我们可以翻译成如下的代码：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> cnat := <span class="keyword">forall</span> X : <span class="keyword">Type</span>, (X -&gt; X) -&gt; X -&gt; X.</span><br><span class="line"><span class="keyword">Definition</span> zero : cnat := <span class="keyword">fun</span> (X : <span class="keyword">Type</span>) (f : X -&gt; X) (x : X) =&gt; x.</span><br><span class="line"><span class="keyword">Definition</span> scc (n : cnat) : cnat := </span><br><span class="line">  <span class="keyword">fun</span> (X : <span class="keyword">Type</span>) (f : X -&gt; X) (x : X) =&gt; f (n X f x)</span><br></pre></td></tr></table></figure>
+<p>接下来我们来定义各种运算。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> plus (n m : cnat) : cnat :=</span><br><span class="line">  <span class="keyword">fun</span> (X : <span class="keyword">Type</span>) (f : X -&gt; X) (x : X) =&gt; n X f (m X f x).</span><br><span class="line"></span><br><span class="line"><span class="keyword">Definition</span> mult (n m : cnat) : cnat :=</span><br><span class="line">  <span class="keyword">fun</span> (X : <span class="keyword">Type</span>) (f : X -&gt; X) (x : X) =&gt; n X (m X f) x.</span><br></pre></td></tr></table></figure>
+<p>定义指数运算稍微有一点棘手，这里你需要注意到传给 Church Numeral 的类型不一定非要是 <code>X</code>。</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> exp (n m : cnat) : cnat :=</span><br><span class="line">  <span class="keyword">fun</span> (X : <span class="keyword">Type</span>) (f : X -&gt; X) (x : X) =&gt;</span><br><span class="line">    m (X -&gt; X) (<span class="keyword">fun</span> g : (X -&gt; X) =&gt; n X g) f x.</span><br></pre></td></tr></table></figure>
+<p>下面的 Y Combinator 用于在 Lambda Calculus 中实现递归</p>
+<p>$$<br>
+Y = \lambda f. (\lambda x. f~(x~x)) (\lambda x. f~(x~x))<br>
+$$</p>
+<p>简单计算一下发现</p>
+<p>$$<br>
+\begin{align}<br>
+Y~f &amp;= (\lambda x. f~(x~x)) (\lambda x. f~(x~x)) \\<br>
+&amp;= f~((\lambda x. f~(x~x))~(\lambda x. f~(x~x))) \\<br>
+&amp;= f~(Y~f)<br>
+\end{align}<br>
+$$</p>
+<h1><span id="the-curry-howard-correspondence-inductively-defined-propositions">The Curry-Howard Correspondence, Inductively Defined Propositions</span></h1>
+<p>指的是命题对应类型，证明对应值的同构关系。具体地有下表：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Logic side</th>
+<th style="text-align:center">Programming side</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">universal quantification</td>
+<td style="text-align:center">generalised product type</td>
+</tr>
+<tr>
+<td style="text-align:center">existential quantification</td>
+<td style="text-align:center">generalised sum type</td>
+</tr>
+<tr>
+<td style="text-align:center">implication</td>
+<td style="text-align:center">function type</td>
+</tr>
+<tr>
+<td style="text-align:center">conjunction</td>
+<td style="text-align:center">product type</td>
+</tr>
+<tr>
+<td style="text-align:center">disjunction</td>
+<td style="text-align:center">sum type</td>
+</tr>
+<tr>
+<td style="text-align:center">true formula</td>
+<td style="text-align:center">unit type</td>
+</tr>
+<tr>
+<td style="text-align:center">false formula</td>
+<td style="text-align:center">bottom type</td>
+</tr>
+</tbody>
+</table>
+<p>在 Coq 中，对于一个定理</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Theorem</span> name : content.</span><br><span class="line"><span class="keyword">Proof</span>.</span><br><span class="line">  <span class="comment">(* your proof *)</span></span><br><span class="line"><span class="keyword">Qed</span>.</span><br></pre></td></tr></table></figure>
+<p>这里 <code>Theorem</code> 实际上是 <code>Definition</code> 的一个别名，<code>content</code> 是这里的 <code>name</code> 的类型，Proof 和 Qed 之间的东西实际上是在构造这个类型的一个值，这个值称为该定理的一个 Proof Object。</p>
+<p>因为 Coq 里面的证明风格很命令式，所以这里你可能不能直观地感受到这个 Curry Howard Correspondence。而在 Agda 里面这个则更明显一点。</p>
+<p>Coq 中，诸逻辑用语的定义实际上如下：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> and (P Q : <span class="keyword">Prop</span>) : <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">conj</span> : P -&gt; Q -&gt; and P Q.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> or (P Q : <span class="keyword">Prop</span>) : <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">or_introl</span> : P -&gt; or P Q</span><br><span class="line">  | <span class="type">or_intror</span> : Q -&gt; or P Q.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> ex &#123;A : <span class="keyword">Type</span>&#125; (P : A -&gt; <span class="keyword">Prop</span>) : <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">ex_intros</span> : <span class="keyword">forall</span> x : A, P x -&gt; ex P</span><br><span class="line">  <span class="keyword">where</span> <span class="string">&quot;&#x27;exists&#x27; x , p&quot;</span> := (ex (<span class="keyword">fun</span> x =&gt; p)).</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> True : <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">I</span> : True.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> False : <span class="keyword">Prop</span> := .</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> eq &#123;X : <span class="keyword">Type</span>&#125; (x : X) : X -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">eq_refl</span> : eq x x.</span><br></pre></td></tr></table></figure>
+<p>我们以 <code>or</code> 和 <code>exists</code> 为例简单说一下这个东西怎么解析。</p>
+<ul>
+<li>我们之前已经提到了直接在 type constructor 后面加的 <code>(P Q : Prop)</code> 意思是每一个 data constructor 都需要带上这两个参数。</li>
+<li>那么这里的 <code>or_introl</code> 这个 data constructor 实际上意思是，传入两个类型 <code>P, Q</code>（命题 $P, Q$），并传入一个 <code>P</code> 类型的值（命题 $P$ 的证明）就可以得到一个 <code>or P Q</code> 类型的值（$P\vee Q$ 的证明）。<code>or_intror</code> 同理。</li>
+</ul>
+<p>对于 <code>exists</code>，这里面有一个 forall 可能不是很好理解，但是</p>
+<ul>
+<li>我们之前提到了 <code>ex_intros : forall x : A, P x -&gt; ex P</code> 这个写法等价于 <code>ex_intros (x : A) : P x -&gt; ex P</code>。</li>
+<li>那么这里的 <code>ex_intros</code> 读入一个 <code>A -&gt; Prop</code> 函数 <code>P</code>（一个谓词 $P$），一个 <code>A</code> 类型的 <code>x</code>（论域中的一个具体值 $x$），一个 <code>P x</code> 类型的值（命题 $P~x$ 的一个证明），就可以得到一个 <code>exists x, P x</code> 类型的值（$\exists x, P~x$ 的证明）</li>
+</ul>
+<details class="note warning"><summary><p>这一段话不一定对</p>
+</summary>
+<p><code>forall</code> 的本质是什么？</p>
+<p>从上面的表格当中我们看到 forall 在 Programming Side 对应的是 generalised producted type。下面我们来解释一下 generalised producted type 是什么东西。对于人类来说 sum type 和 product type 都是理解的，前者是可以具有成分类型中任何一种，后者是一个 tuple。</p>
+<p>我们还是考虑第一节中提到的 generalised sigma type，也就是 exists。在 Agda 下的代码为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data Σ &#123;ℓ ℓ&#x27;&#125; (A : Set ℓ) (B : A → Set ℓ&#x27;) : Set (ℓ ⊔ ℓ&#x27;) where</span><br><span class="line">  _,_ : (a : A) → (b : B a) → Σ A B</span><br></pre></td></tr></table></figure>
+<p>sum type 即表示任意一个单独的 <code>a , b</code> 都是 <code>Σ A B</code> 的一个值（$\exists x\in A, B~x$ 的一个证明）。</p>
+<p>而 product 的意思是，这里你必须给出一个大小为 $\mathrm{card}(A)$ 的 tuple：</p>
+<p>$$<br>
+((x_0, B~x_0), (x_1, B~x_1), …) \in \Pi(A, B)<br>
+$$</p>
+<p>那么由于集合中元素都是互异的，这里你想要在程序中写出这个 tuple 一个可操作的方法是写一个单射<br>
+$$<br>
+\begin{align}<br>
+\begin{matrix}<br>
+f : &amp; A &amp; \rightarrow &amp; \mathrm{Prop} \\<br>
+&amp; x &amp;   \mapsto   &amp;      y\color{red}{\in B (x)}<br>
+\end{matrix}<br>
+\end{align}<br>
+$$</p>
+<p>你发现我们这里怎么也没法用正常的映射写法精确的描述这个函数的类型，所以我在 mapsto 后面加上了红色的类型。这个函数在类型论里面叫做 Dependent Function Type，就是直接定义成这样子的，跳过了中间经过 tuple 的思考。</p>
+<p>这就表明 forall 修饰的命题的 Proof Object 应当形如</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">fun</span> x : A =&gt; ... <span class="comment">(* which should have type `B x` *)</span></span><br></pre></td></tr></table></figure>
+<p>于是根据 Functional Extensionality Axiom 可以知道下面两个定义等价：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">constructor</span> (x : A) : something</span><br><span class="line"><span class="built_in">constructor</span> : <span class="keyword">forall</span> x : A, something</span><br></pre></td></tr></table></figure>
+</details>
+<p>于是，常见的 Tactics 本质上是：</p>
+<ul>
+<li><strong>split.</strong> 本质上是增加一个 <code>conj</code>，并将要传入的两个参数作为两个 Goal。</li>
+<li><strong>destruct.</strong> 本质上是添加一个 <code>match</code> 来匹配所有的构造子。</li>
+<li><strong>apply.</strong> 声称结果必然是某一个函数的输出，转而寻找一个输入使得输出具有该类型。</li>
+</ul>
+<p>一些常见的结论的本质是：</p>
+<ul>
+<li><strong>ex_falso</strong> 一个空的 match 的返回值可以被推导出任何类型。</li>
+</ul>
+<hr>
+<p>可以用 <code>Inductive</code> 定义一系列命题。下面定义的东西是一个经典的命题：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> ev : nat-&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">ev_0</span> : ev <span class="number">0</span></span><br><span class="line">  | <span class="type">ev_SS</span> (n : nat) (H : ev n) : ev (S (S n)).</span><br></pre></td></tr></table></figure>
+<p>不妨自行用上面的 Curry Howard Correspondence 来解释这两个 data constructor 是什么意思，这里不赘述。</p>
+<hr>
+<p>现在我们考虑定义结构归纳法的命题，并写出其 Proof Object。这里本质上是你的 Proof Object 中可以有递归函数（<code>fix</code>）。</p>
+<p>作为例子我们考虑下面的<strong>Peano 自然数递归</strong>，其应当具有类型：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> nat_ind_type : <span class="keyword">Type</span> :=</span><br><span class="line">  <span class="keyword">forall</span> P : nat -&gt; <span class="keyword">Prop</span>,</span><br><span class="line">    P <span class="number">0</span> -&gt;</span><br><span class="line">    (<span class="keyword">forall</span> n : nat, P n -&gt; P (S n)) -&gt;</span><br><span class="line">    <span class="keyword">forall</span> n : nat, P n.</span><br></pre></td></tr></table></figure>
+<p>显然下面的东西是一个具有该类型的值：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> nat_ind : nat_ind_type :=</span><br><span class="line">  <span class="keyword">fun</span> (P : nat -&gt; <span class="keyword">Prop</span>) =&gt; </span><br><span class="line">    <span class="keyword">fun</span> P0 : (P <span class="number">0</span>) =&gt;</span><br><span class="line">      <span class="keyword">fun</span> PS : (<span class="keyword">forall</span> n : nat, P n -&gt; P (S n)) =&gt;</span><br><span class="line">        <span class="built_in">fix</span> f (n : nat) =&gt;</span><br><span class="line">          <span class="keyword">match</span> n <span class="built_in">with</span></span><br><span class="line">          | <span class="type">0</span> =&gt; P0</span><br><span class="line">          | <span class="type">S</span> n&#x27; =&gt; PS n (f n&#x27;)</span><br><span class="line">          <span class="keyword">end</span>.</span><br></pre></td></tr></table></figure>
+<p>因此我们证明了整数的结构归纳法是对的。</p>
+<hr>
+<p>接下来是经典的三个问题。</p>
+<ul>
+<li>
+<p><strong>什么时候我们会输入命题，输出命题？</strong></p>
+<p>考虑一些作用到 <code>Prop</code> 上的 type constructor。比如说 <code>or</code> 就是读入两个命题，生成一个命题。</p>
+</li>
+<li>
+<p><strong>什么时候我们会输入证明，输出证明？</strong></p>
+<p>考虑经典的 data contructor <code>ev_SS</code>，就是输入了 <code>ev n</code> 的证明然后输出了 <code>ev (S (S n))</code> 的证明。</p>
+</li>
+<li>
+<p><strong>什么时候我们会输入命题，输出证明？</strong></p>
+<p>考虑那几个将命题作为显式参数输入的命题逻辑公式，比如</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> and_comm (P Q : <span class="keyword">Prop</span>) : (P /\ Q) -&gt; (Q /\ P)</span><br><span class="line">  := <span class="comment">(* omitted. *)</span>.</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>注意 coq 屏蔽了输入一个证明，输出一个命题。Informally 这是因为我们得到的结论不应当随着证明的方法变化而变化。</p>
+<h1><span id="simple-imperative-programs">Simple Imperative Programs</span></h1>
+<p>我们定义了一个简单的命令式语言 IMP。这个语言没有很严格的类型系统，包含以下要素：</p>
+<ul>
+<li>自然数和布尔值，算数和逻辑运算。</li>
+<li>变量（英文大写字母），赋值（<code>Assign</code>），包含一个内存池（用一个 Total Map 表出，称为状态）。</li>
+<li>基本的程序结构：顺序执行（<code>Seq</code>），条件（<code>If</code>），循环（<code>While</code>）</li>
+</ul>
+<p>为了节约篇幅我们这里并不写出这种语言的 BNF，你可以根据下面的语义定义自动补全一下。</p>
+<p>考虑如何建模语义。一个直观的想法是建模成函数，比如说定义：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Fixpoint</span> aeval (a : aexp) : nat :=</span><br><span class="line">  <span class="keyword">match</span> a <span class="built_in">with</span></span><br><span class="line">  | <span class="type">ANum</span> n =&gt; n</span><br><span class="line">  | <span class="type">APlus</span> a1 a2 =&gt; (aeval a1) + (aeval a2)</span><br><span class="line">  | <span class="type">AMinus</span> a1 a2 =&gt; (aeval a1) - (aeval a2)</span><br><span class="line">  | <span class="type">AMult</span> a1 a2 =&gt; (aeval a1) * (aeval a2)</span><br></pre></td></tr></table></figure>
+<p>或者建模成关系，比如定义</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> aevalR : aexp -&gt; nat -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">E_ANum</span> (n : nat) : aeval (ANum n) n </span><br><span class="line">  | <span class="type">...</span></span><br></pre></td></tr></table></figure>
+<p>表示一个 aexp 求值之后得到 $n$。在最顶层，我们定义了一个关系 <code>st =[ prog ]=&gt; st'</code> 表示对状态 <code>st</code> 执行程序 <code>prog</code> 之后得到 <code>st'</code>。抽象地，有如下几条推导规则：</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{}{\texttt{st =[ skip ]=&gt; st}} &amp; \color{blue}{\text{(E_Skip)}} \\<br>
+\\<br>
+\dfrac{\texttt{aeval st a = n}}{\texttt{st =[ x := a ]=&gt; (x !-&gt; a ; st)}} &amp; \color{blue}{\text{(E_Ass)}} \\<br>
+\\<br>
+\dfrac{\texttt{st =[ c1 ]=&gt; st1}\quad\texttt{st1 =[ c2 ]=&gt; st2}}{\texttt{st =[ c1 ; c2 ]=&gt; st2}} &amp; \color{blue}{\text{(E_Seq)}} \\<br>
+\\<br>
+\dfrac{\begin{matrix}<br>
+\texttt{beval st b = true} \\<br>
+\texttt{st =[ c1 ]=&gt; st’}<br>
+\end{matrix}}{\texttt{st =[ if b then c1 else c2 ]=&gt; st’}} &amp; \color{blue}{\text{(E_IfTrue)}}\\<br>
+\\<br>
+\dfrac{\begin{matrix}<br>
+\texttt{beval st b = false} \\<br>
+\texttt{st =[ c2 ]=&gt; st’}<br>
+\end{matrix}}{\texttt{st =[ if b then c1 else c2 ]=&gt; st’}} &amp; \color{blue}{\text{(E_IfFalse)}} \\<br>
+\\<br>
+\dfrac{\begin{matrix}<br>
+\texttt{beval st b = true} \\<br>
+\texttt{st =[ c ]=&gt; st’} \\<br>
+\texttt{st’ =[ while b do c end ]=&gt; st’‘}<br>
+\end{matrix}}{\texttt{st =[ while b do c end ]=&gt; st’'}} &amp; \color{blue}{\text{(E_WhileTrue)}} \\<br>
+\\<br>
+\dfrac{\texttt{beval st b = false}}{\texttt{st =[ while b do c ]=&gt; st}} &amp; \color{blue}{\text{(E_WhileFalse)}}<br>
+\end{matrix}<br>
+$$</p>
+<h1><span id="automation">Automation</span></h1>
+<p>除了各种 exxx 之外可以采用如下的方式来智能化地证明：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Ltac</span> find_rwd :=</span><br><span class="line">  <span class="keyword">match</span> goal <span class="built_in">with</span></span><br><span class="line">    H0: ?P ?E,</span><br><span class="line">    H1: <span class="keyword">forall</span> x, ?P x-&gt; ?E = ?R,</span><br><span class="line">    H2: ?P ?X</span><br><span class="line">  |<span class="type">- _</span> =&gt; <span class="built_in">rewrite</span> (H1 X H2)</span><br><span class="line"> <span class="keyword">end</span>.</span><br></pre></td></tr></table></figure>
+<p>这里 <code>?P</code> 可以匹配某一个谓词，<code>?E</code> 可以匹配某个式子，在你加的分支足够多的时候是可以匹配上唯一的前提的。<code>|-</code> 匹配要证明的式子，<code>=&gt;</code> 后面是执行的操作。</p>
+<h1><span id="hoare-logic">Hoare Logic</span></h1>
+<p>Hoare Logic 用 Hoare 三元组来描述程序的性质，$\{P\} c \{Q\}$ 表示一开始 $P$ 成立，执行 $c$ 之后 $Q$ 成立。</p>
+<p>Hoare Logic 的规则如下</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{}{\{P\} \texttt{skip} \{P\}} &amp; \color{blue}{\text{(Skip)}} \\<br>
+\\<br>
+\dfrac{}{\{[a/x] P\} \texttt{x := a} \{P\}} &amp; \color{blue}{\text{(Assign)}} \\<br>
+\\<br>
+\dfrac{\{P\} \texttt{c1} \{R\}\quad \{R\} \texttt{c2} \{Q\}}{\{P\} \texttt{c1; c2} \{Q\}} &amp; \color{blue}{\text{(Seq)}} \\<br>
+\\<br>
+\dfrac{\{P \wedge b\} \texttt{c1} \{Q\} \quad \{P \wedge\neg b\} \texttt{c2} \{Q\}}{\{P\} \texttt{if b then c1 else c2} \{Q\}} &amp; \color{blue}{\text{(If)}} \\<br>
+\\<br>
+\dfrac{P_1\rightarrow P_2\quad Q_2\rightarrow Q_1\quad \{P_2\} \texttt{c} \{Q_2\}}{\{P_1\} \texttt{c} \{Q_1\}} &amp; \color{blue}{\text{(Consequence)}} \\<br>
+\\<br>
+\dfrac{\{P \wedge b\} \texttt{c} \{P\}}{\{P\} \texttt{while b do c end} \{P \wedge \neg b\}} &amp; \color{blue}{\text{(While)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>注意 Asgn 的写法是在前提中置换，所以说下面这个 Hoare triple 是不合法的：</p>
+<p>$$<br>
+\{ True \} \texttt{ X := a } \{ X = a \}<br>
+$$</p>
+<p>反例是 $a = X + 1$。</p>
+<p>注意在 If 当中 $b$ 是一个 bool 值，前件中的 $b$ 是从 bool 值提升来的命题（成立若 $b$ 为 true）。</p>
+<hr>
+<p>在模型论的观点下研究 Hoare Logic 的语义，考虑用上文定义的 IMP，将几条规则证明成定理。</p>
+<p>在 Coq 当中定义 Hoare triple $P, Q$ 是关于状态的命题，也就是</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> Assertion := state -&gt; <span class="keyword">Prop</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">Definition</span> assert_implies (P Q : Assertion) : <span class="keyword">Prop</span> :=</span><br><span class="line">  <span class="keyword">forall</span> st, P st -&gt; Q st</span><br><span class="line"></span><br><span class="line"><span class="keyword">Notation</span> <span class="string">&quot;P -&gt;&gt; Q&quot;</span> := (assert_implies P Q)</span><br><span class="line">                     (<span class="built_in">at</span> level <span class="number">80</span>) : hoare_spec_scope.</span><br></pre></td></tr></table></figure>
+<p>那么可以用 IMP 用关系建模的语义来定义合法的 Hoare triple：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> valid_hoare_triple (P : Assertion) (c : com) (Q : Assertion) : <span class="keyword">Prop</span> :=</span><br><span class="line">  <span class="keyword">forall</span> st st&#x27;,</span><br><span class="line">    st =[ c ]=&gt; st&#x27; -&gt; P st -&gt; Q st</span><br><span class="line"></span><br><span class="line"><span class="keyword">Notation</span> <span class="string">&quot;&#123;&#123; P &#125;&#125; c &#123;&#123; Q &#125;&#125;&quot;</span> :=</span><br><span class="line">  (valid_hoare_triple P c Q) (<span class="built_in">at</span> level <span class="number">90</span>, c custom com <span class="built_in">at</span> level <span class="number">99</span>)</span><br><span class="line">  : hoare_spec_scope.</span><br></pre></td></tr></table></figure>
+<p>然后容易验证所有的 Hoare Logic 规则都成立。</p>
+<p>此外可以证明死循环可以推出任何后条件。这称为 Hoare Logic 的部分正确性，即允许写错误的代码，如果写了死循环那么可以推出任何条件。</p>
+<p>如果在语言中加入下面的语句，也可以写出对应的 Hoare 规则：</p>
+<ul>
+<li>
+<p><code>if b then c</code> 相当于 <code>if b then c else skip</code>，不需要额外的规则。</p>
+</li>
+<li>
+<p><code>repeat c until b</code> 相当于 <code>c; while !b do c</code>，不需要额外的规则。</p>
+</li>
+<li>
+<p><code>assume b</code></p>
+<p>$$<br>
+\dfrac{\texttt{beval st b = true}}{ \texttt{st =[ assume b ]=&gt; st} }<br>
+$$</p>
+<p>这句话的意思是在 $b$ 为真的时候 <code>assume b</code> 等价于 <code>skip</code>，其余时候程序会卡在这一句不能往后执行（stuck），行为上相当于 <code>while true</code>，能够推出任何后条件。其 Hoare 规则为</p>
+<p>$$<br>
+\dfrac{}{\{P\} \texttt{assume b} \{P\wedge b\}}<br>
+$$</p>
+</li>
+<li>
+<p><code>assert b</code> 当 $b$ 不成立时，程序崩溃（crash / error），在一个 error 的状态上不能得到任何结论。其 Hoare 规则为</p>
+<p>$$<br>
+\dfrac{}{\{P \wedge b\} \texttt{assert b} \{P\}}<br>
+$$</p>
+</li>
+</ul>
+<hr>
+<p>现在可以通过霍尔规则，用称为 Decorated Program 的风格推导大段程序的正确性。</p>
+<p>比如要推导</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  &#123;&#123; X &lt;= 3 &#125;&#125;</span><br><span class="line">while X &lt;= 2 do</span><br><span class="line">  X := X + 1</span><br><span class="line">end</span><br><span class="line">  &#123;&#123; X = 3 &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>其 Decorated Program 如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">  &#123;&#123; X &lt;= 3 &#125;&#125;</span><br><span class="line">while X &lt;= 2 do</span><br><span class="line">    &#123;&#123; X &lt;= 3 /\ X &lt;= 2 &#125;&#125; -&gt;&gt;</span><br><span class="line">    &#123;&#123; X + 1 &lt;= 3 &#125;&#125;</span><br><span class="line">  X := X + 1</span><br><span class="line">    &#123;&#123; X &lt;= 3 &#125;&#125;</span><br><span class="line">end</span><br><span class="line">  &#123;&#123; X &lt;= 3 /\ ~(X &lt;= 2) &#125;&#125; -&gt;&gt;</span><br><span class="line">  &#123;&#123; X = 3 &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>将 Hoare 规则改成 Decorated Program，有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">// Skip</span><br><span class="line">&#123;&#123; P &#125;&#125; skip &#123;&#123; P &#125;&#125;</span><br><span class="line"></span><br><span class="line">// Seq</span><br><span class="line">&#123;&#123; P &#125;&#125; c1; &#123;&#123; R &#125;&#125; c2 &#123;&#123; Q &#125;&#125;</span><br><span class="line"></span><br><span class="line">// Consequence</span><br><span class="line">&#123;&#123; P &#125;&#125; -&gt;&gt; &#123;&#123; P&#x27; &#125;&#125;</span><br><span class="line"></span><br><span class="line">// Assign</span><br><span class="line">&#123;&#123; P [X |-&gt; a] &#125;&#125;</span><br><span class="line">  X := a </span><br><span class="line">&#123;&#123; P &#125;&#125;</span><br><span class="line"></span><br><span class="line">// If</span><br><span class="line">&#123;&#123; P &#125;&#125;</span><br><span class="line">if b then </span><br><span class="line">  &#123;&#123; P /\ b &#125;&#125;</span><br><span class="line">  c1</span><br><span class="line">  &#123;&#123; Q &#125;&#125;</span><br><span class="line">else </span><br><span class="line">  &#123;&#123; P /\ ~b &#125;&#125;</span><br><span class="line">  c2</span><br><span class="line">  &#123;&#123; Q &#125;&#125;</span><br><span class="line">end</span><br><span class="line">&#123;&#123; Q &#125;&#125;</span><br><span class="line"></span><br><span class="line">// While</span><br><span class="line">&#123;&#123; P &#125;&#125;</span><br><span class="line">while b do</span><br><span class="line">  &#123;&#123; P /\ b &#125;&#125;</span><br><span class="line">  c </span><br><span class="line">  &#123;&#123; P &#125;&#125;</span><br><span class="line">end</span><br><span class="line">&#123;&#123; P /\ ~b &#125;&#125;</span><br></pre></td></tr></table></figure>
+<p>一个困难的点是，如何获得 while 的循环不变式 $P$。PPT 上面的例子都比较显然，只需要把变量之间的关系往上套就行了。</p>
+<hr>
+<div class="note success"><p><strong>Definition（最弱前条件）.</strong> $P$ 是 $\texttt{c}\{Q\}$ 的最弱前条件若</p>
+<ol>
+<li>$\{P\} \texttt{c} \{Q\}$</li>
+<li>$\forall P’. \{P’\} \texttt{c} \{Q\} \rightarrow (P’ \rightarrow P)$</li>
+</ol>
+<p>记为 $wp(c, Q)$。</p>
+</div>
+<div class="note success"><p><strong>Definition（最强后条件）.</strong> $Q$ 是 $\{P\}\texttt{c}$ 的最弱前条件若</p>
+<ol>
+<li>$\{P\} \texttt{c} \{Q\}$</li>
+<li>$\forall Q’. \{P\} \texttt{c} \{Q’\} \rightarrow (Q \rightarrow Q’)$</li>
+</ol>
+<p>记为 $sp(P, c)$。</p>
+</div>
+<p>sp 和 wp 都可以递归地计算，但是式子略微复杂，所以我不想写。wp 有一个很精妙的构造（注意前条件是一个 <code>Assertion</code>，即 <code>state -&gt; Prop</code>）：</p>
+<p>$$<br>
+wp(c, Q) = \lambda st. \forall st’, \texttt{st =[ c ]=&gt; st’} \rightarrow Q~st’<br>
+$$</p>
+<p>还有一个我上课想到的不一定正确的 sp 的构造（imformally 可以证明是对的）</p>
+<p>$$<br>
+sp(c, Q) = \lambda st’. \exists st, \texttt{st =[ c ]=&gt; st’} \wedge P~st<br>
+$$</p>
+<p>可以证明一个重要的 Hoare triple</p>
+<p>$$<br>
+\{wp(\texttt{while b do c endl}, Q) \wedge b\} \texttt{c} \{wp(\texttt{while b do c endl}, Q)\}<br>
+$$</p>
+<p>也就是说最弱前条件是循环不变式。</p>
+<hr>
+<p>现在我们将 Hoare Logic 看作一个形式系统，验证其</p>
+<ol>
+<li>Soundness，在 IMP 模型下，Hoare Logic 是正确的。（这里前面已经证明了）</li>
+<li>Completeness，所有在 IMP 模型下的 valide hoare triple 都可以被 Hoare 规则推出。</li>
+</ol>
+<p>唯一的难点是 Seq 和 While 的证明。这里我们均可以用 wp 作为中间条件。比如说对于 While，你可以先证明</p>
+<p>$$<br>
+\{wp(\texttt{while b do c end}, Q)\} \texttt{while b do c end} \{Q\}<br>
+$$</p>
+<p>这里用到了重要的 Hoare triple $(26)$。然后根据最弱前条件的定义和 Hoare Consequence 得证。</p>
+<p>可以证明 Hoare Logic 是不可判定的。因为停机问题可以规约到 Hoare triple 的判定：</p>
+<p>$$<br>
+\{\mathrm{True}\} \texttt{c} \{\mathrm{False}\}<br>
+$$</p>
+<h1><span id="small-step-operational-semantics">Small-Step Operational Semantics</span></h1>
+<p>小步法语义，简而言之就是对于程序的 AST，每次选择中序遍历的第一个叶子进行 evaluate。语义建模成关系，称为</p>
+<p>$$<br>
+x / st \longrightarrow y / st’<br>
+$$</p>
+<p>意为程序 $x$，变量的状态为 $st$ 展开一步得到 $y$，变量状态为 $st’$。比如说对于</p>
+<p>$$<br>
+\texttt{if b then c1 else c2}<br>
+$$</p>
+<p>重复执行 $\longrightarrow$ 的过程中，我们将首先一直对 $b$ 进行单步地求值（每次算一次运算的结果）直到它变成 true 或者 false，此时中序遍历到的第一个节点就是根。然后如果是 true，那么根将被化为 $\texttt{c1}$，反之同理。IMP 的小步法语义形式化定义如下</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> cstep : (com * state) -&gt; (com * state) -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">CS_AsgnStep</span> : <span class="keyword">forall</span> st i a1 a1&#x27;,</span><br><span class="line">      a1 / st --&gt;a a1&#x27; -&gt;</span><br><span class="line">      &lt;&#123; i := a1 &#125;&gt; / st --&gt; &lt;&#123; i := a1&#x27; &#125;&gt; / st</span><br><span class="line">  | <span class="type">CS_Asgn</span> : <span class="keyword">forall</span> st i (n : nat),</span><br><span class="line">      &lt;&#123; i := n &#125;&gt; / st --&gt; &lt;&#123; skip &#125;&gt; / (i !-&gt; n ; st)</span><br><span class="line">  | <span class="type">CS_SeqStep</span> : <span class="keyword">forall</span> st c1 c1&#x27; st&#x27; c2,</span><br><span class="line">      c1 / st --&gt; c1&#x27; / st&#x27; -&gt;</span><br><span class="line">      &lt;&#123; c1 ; c2 &#125;&gt; / st --&gt; &lt;&#123; c1&#x27; ; c2 &#125;&gt; / st&#x27;</span><br><span class="line">  | <span class="type">CS_SeqFinish</span> : <span class="keyword">forall</span> st c2,</span><br><span class="line">      &lt;&#123; skip ; c2 &#125;&gt; / st --&gt; c2 / st</span><br><span class="line">  | <span class="type">CS_IfStep</span> : <span class="keyword">forall</span> st b1 b1&#x27; c1 c2,</span><br><span class="line">      b1 / st --&gt;b b1&#x27; -&gt;</span><br><span class="line">      &lt;&#123; <span class="keyword">if</span> b1 <span class="keyword">then</span> c1 <span class="keyword">else</span> c2 <span class="keyword">end</span> &#125;&gt; / st</span><br><span class="line">      --&gt;</span><br><span class="line">      &lt;&#123; <span class="keyword">if</span> b1&#x27; <span class="keyword">then</span> c1 <span class="keyword">else</span> c2 <span class="keyword">end</span> &#125;&gt; / st</span><br><span class="line">  | <span class="type">CS_IfTrue</span> : <span class="keyword">forall</span> st c1 c2,</span><br><span class="line">      &lt;&#123; <span class="keyword">if</span> true <span class="keyword">then</span> c1 <span class="keyword">else</span> c2 <span class="keyword">end</span> &#125;&gt; / st --&gt; c1 / st</span><br><span class="line">  | <span class="type">CS_IfFalse</span> : <span class="keyword">forall</span> st c1 c2,</span><br><span class="line">      &lt;&#123; <span class="keyword">if</span> false <span class="keyword">then</span> c1 <span class="keyword">else</span> c2 <span class="keyword">end</span> &#125;&gt; / st --&gt; c2 / st</span><br><span class="line">  | <span class="type">CS_While</span> : <span class="keyword">forall</span> st b1 c1,</span><br><span class="line">      &lt;&#123; while b1 <span class="built_in">do</span> c1 <span class="keyword">end</span> &#125;&gt; / st</span><br><span class="line">      --&gt;</span><br><span class="line">      &lt;&#123; <span class="keyword">if</span> b1 <span class="keyword">then</span> c1; while b1 <span class="built_in">do</span> c1 <span class="keyword">end</span> <span class="keyword">else</span> skip <span class="keyword">end</span> &#125;&gt; / st</span><br><span class="line"></span><br><span class="line">  <span class="keyword">where</span> <span class="string">&quot; t &#x27;/&#x27; st &#x27;--&gt;&#x27; t&#x27; &#x27;/&#x27; st&#x27; &quot;</span> := (cstep (t,st) (t&#x27;,st&#x27;)).</span><br></pre></td></tr></table></figure>
+<p>这里我们省略了 <code>--&gt;a</code> 和 <code>--&gt;b</code> 之类的东西，这两个东西意思是对一个 nat 表达式或者一个 bool 表达式单步展开。</p>
+<p>在此基础上定义任意多步执行的关系</p>
+<p>$$<br>
+st \longrightarrow_* st’<br>
+$$</p>
+<p>有</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{}{st\longrightarrow_* st} &amp; \color{blue}{\text{(multi-refl)}} \\<br>
+\\<br>
+\dfrac{st \longrightarrow st_1\quad st_1{\longrightarrow_<em>} st_2}{st{\longrightarrow_</em>} st_2} &amp; \color{blue}{\text{(multi-step)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>在小步法语义中我们主要关注三个性质：</p>
+<ul>
+<li><strong>determinstic</strong> $(x \longrightarrow y \wedge x \longrightarrow z) \rightarrow y = z$。</li>
+<li><strong>strong progress</strong> $\forall x, \mathrm{value}(x) \vee (\exists y, x\longrightarrow y)$。</li>
+<li><strong>normal form</strong> $~\exists t, x \longrightarrow t$。可以证明 $\mathrm{normal~form} = \mathrm{value}$。</li>
+<li><strong>normalizing</strong> $\forall t, \exists t’, t {\longrightarrow_*}t’ \wedge \mathrm{normalform}(t’)$</li>
+</ul>
+<p>上面三个性质是好的，我们总是希望我们的编程语言有上面的性质。但是一般的语言总是存在卡住的项，比如说你在 if 的判断条件里面加入了不是 Bool 的东西。因此我们引入 Type system 来防止这一点。</p>
+<p>定义</p>
+<p>$$<br>
+\vdash v \in T<br>
+$$</p>
+<p>表示在类型系统下 $v$ 具有类型 $T$。</p>
+<p>然后可以定义一系列推导规则，这个不是很重要。仅以 if 为例，我们定义</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{\vdash a \in \texttt{Bool}\quad \vdash b\in T \quad \vdash c \in T}{\vdash \texttt{if a then b else c end}\in T} &amp; \color{blue}{\text{(T_if)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>之后我们可以将 strong progress 改为 <strong>progress</strong>：</p>
+<p>$$<br>
+\forall t~T, \vdash t\in T \rightarrow \mathrm{value}(t)\vee \exists t’, t\longrightarrow t’<br>
+$$</p>
+<p>并且有一个新的性质是 <strong>preservation</strong>：</p>
+<p>$$<br>
+\forall t~t’~T, \vdash t\in T \rightarrow t\longrightarrow t’\rightarrow \vdash t\in T’<br>
+$$</p>
+<h1><span id="simply-typed-lambda-calculus">Simply Typed Lambda Calculus</span></h1>
+<p>我们定义 STLC 表达式的语法：</p>
+<p>$$<br>
+\begin{aligned}<br>
+t =~ &amp; \texttt{$x$} &amp; \color{blue}{\text{(variable)}} \\<br>
+&amp; \texttt{$\lambda x$ : $T$, }t &amp; \color{blue}{\text{(abstraction)}} \\<br>
+&amp; \textit{t t} &amp; \color{blue}{\text{(application)}} \\<br>
+&amp; \mathtt{true} &amp; \color{blue}{\text{(constant)}} \\<br>
+&amp; \mathtt{false} &amp; \color{blue}{\text{(constant)}} \\<br>
+&amp; \texttt{if $t$ then $t$ else $t$} &amp; \color{blue}{\text{(conditional)}} \\<br>
+T =~ &amp; \texttt{Bool} \\<br>
+&amp; T \rightarrow T<br>
+\end{aligned}<br>
+$$</p>
+<p>可以用小步法定义 STLC 的语义。注意现在的 STLC 是一种纯函数式语言，所以在小步法定义的时候不会带上一个 $st$ 作为状态。视常量和裸露的 abstraction 为 value。那么规则如下：</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{\mathrm{value}(v_2)}{(\lambda x : T_2, t_1)~ v_2 \longrightarrow [x := v_2] t_1}&amp; \color{blue}{\text{(ST_AppAbs)}} \\<br>
+\\<br>
+\dfrac{t_1 \longrightarrow t_1’}{t_1~t_2 \longrightarrow t_1’~t_2} &amp; \color{blue}{\text{(ST_App1)}}<br>
+\\<br>
+\dfrac{t_2 \longrightarrow t_2’}{t_1~t_2 \longrightarrow t_1~t_2’} &amp; \color{blue}{\text{(ST_App2)}} \\<br>
+\\<br>
+\dfrac{t_1 \longrightarrow t_2}{\texttt{if $t_1$ then $t_2$ else $t_3$}\longrightarrow \texttt{if $t_1’$ then $t_2$ else $t_3$}} &amp; \color{blue}{\text{(ST_If)}} \\<br>
+\\<br>
+\dfrac{}{\texttt{if true then $t_2$ else $t_3$}\longrightarrow t_2} &amp; \color{blue}{\text{(ST_IfTrue)}}\\<br>
+\\<br>
+\dfrac{}{\texttt{if false then $t_2$ else $t_3$}\longrightarrow t_3} &amp; \color{blue}{\text{(ST_IfFalse)}}\\<br>
+\end{matrix}<br>
+$$</p>
+<p>上面涉及到了 $[x := v_2]$ 这样的改名操作。这个操作的意义是将所有的自由变量 $x$ 修改为 $v_2$。举例来说</p>
+<p>$$<br>
+[x := y](\lambda x, x) = \lambda x, x<br>
+$$</p>
+<p>这是因为 $x$ 在此处是约束变量。</p>
+<p>这里并不涉及 Alpha Renaming，因为在 Coq 里面太难实现。因此需要注意，这样的一条规则和上面的语法是不相容的：</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{t_1\longrightarrow t_1’}{\lambda x : T, t_1 \longrightarrow \lambda x : T, t_2} &amp; \color{gray}{\text{(ST_Abs)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>如果加上你就可以得到</p>
+<p>$$<br>
+\lambda y : \texttt{Bool}, ((\lambda x : \texttt{Bool}, (\lambda y : \texttt{Bool}, x)), y) \longrightarrow \lambda y : \texttt{Bool}, (\lambda y, y)<br>
+$$</p>
+<p>而在原来的系统里面，这东西按照 Functional Extensionality，行为上相当于</p>
+<p>$$<br>
+\lambda y : \texttt{Bool}, (\lambda z : \texttt{Bool}, y)<br>
+$$</p>
+<p>到现在为止你的表达式还是可以随便乱写的，因此需要加上类型系统。</p>
+<p>$$<br>
+\Gamma \vdash t\in T<br>
+$$</p>
+<p>表示在上下文 $\Gamma$（用一个从变量名到类型的映射给出，表示变量名 $x$ 具有类型 $\Gamma x$，$\varepsilon$ 为空映射）下，表达式 $t$ 具有类型 $t$。</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{\Gamma x = T_1}{\Gamma \vdash x \in T_1} &amp; \color{blue}{\text{(T_Var)}} \\<br>
+\dfrac{x \mapsto t_2; \Gamma \vdash t_1\in T_1}{\Gamma \vdash \lambda x : T_2, T_1 \in T_2\rightarrow T_1} &amp; \color{blue}{\text{(T_Abs)}} \\<br>
+\\<br>
+\dfrac{\Gamma \vdash t_1 \in T_2\rightarrow T_1\quad \Gamma\vdash t_2\in T_2}{\Gamma \vdash t_1~t_2\in T_1} &amp; \color{blue}{\text{(T_App)}} \\<br>
+\\<br>
+\dfrac{}{\Gamma \vdash \texttt{true} \in \texttt{Bool}} &amp; \color{blue}{\text{(T_True)}} \\<br>
+\\<br>
+\dfrac{}{\Gamma \vdash \texttt{false} \in \texttt{Bool}} &amp; \color{blue}{\text{(T_False)}} \\<br>
+\\<br>
+\dfrac{\Gamma\vdash  t_1 \in \texttt{Bool}\quad \Gamma\vdash  t_2 \in T_1\quad \Gamma \vdash t_3\in T_1}{\Gamma \vdash \texttt{if $t_1$ then $t_2$ else $t_3$ end} \in T_1 } &amp; \color{blue}{\text{(T_If)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>可以证明 STLC 有如下性质：</p>
+<div class="note info"><p><strong>Progress</strong></p>
+<p>$$<br>
+\forall t~T, \varepsilon \vdash t \in T \rightarrow (\mathrm{value}(t) \vee \exists t’, t\longrightarrow t’)<br>
+$$</p>
+</div>
+<div class="note info"><p><strong>Weakening</strong></p>
+<p>$$<br>
+\forall \Gamma~t~T, \varepsilon \vdash t\in T \rightarrow \Gamma \vdash t \in T<br>
+$$</p>
+<p>这里前件蕴含着 $t$ 里面没有自由变元。</p>
+</div>
+<div class="note info"><p><strong>Substitution preserves typing</strong></p>
+<p>$$<br>
+\forall \Gamma~x~U~t~v~T, x\mapsto U; \Gamma \vdash t\in T \rightarrow \varepsilon \vdash v\in U \rightarrow \Gamma\vdash [x:=v]t\in T<br>
+$$</p>
+</div>
+<div class="note info"><p><strong>Preservation</strong></p>
+<p>$$<br>
+\forall t~t’~T, \varepsilon \vdash t\in T \rightarrow t\longrightarrow t’ \rightarrow \varepsilon \vdash t’\in T<br>
+$$</p>
+</div>
+<div class="note info"><p><strong>Unique Type</strong></p>
+<p>$$<br>
+\forall \Gamma~t~T~T’, \Gamma \vdash t \in T\rightarrow\Gamma \vdash t\in T’\rightarrow T=T’<br>
+$$</p>
+<p>这个性质重要度实际上不高，因为后面引入子类之后就失效了。但是在这里还是可以说明表达式到 Type 有函数关系。</p>
+</div>
+<p>此外可以向语言中添加 nat，let … in …，Pairs，Unit，Sums，Lists，Fix，Records 等成分。</p>
+<p>这里直接将 fix 的行为定义出来的原因是 fix 的类型是无穷阶的递归类型，在 STLC 中无法写出。</p>
+<p>经典的操作是用 fix 写递归：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">fact = \self : Nat -&gt; Nat,</span><br><span class="line">  \x : Nat,</span><br><span class="line">    <span class="keyword">if</span> x = <span class="number">0</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> x * (self (pred x))</span><br><span class="line"></span><br><span class="line"><span class="built_in">fix</span> fact</span><br></pre></td></tr></table></figure>
+<p>在小步法求值的过程中，我们顺次展开 fix 和带入 n，以求 3 的阶乘为例</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  <span class="built_in">fix</span> fact <span class="number">3</span></span><br><span class="line">--&gt; </span><br><span class="line">  fact (<span class="built_in">fix</span> fact) <span class="number">3</span></span><br><span class="line">--&gt; </span><br><span class="line">  \x : Nat, <span class="keyword">if</span> x = <span class="number">0</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> x * (<span class="built_in">fix</span> fact) (pred x) <span class="number">3</span></span><br><span class="line">--&gt;</span><br><span class="line">  <span class="keyword">if</span> <span class="number">3</span> = <span class="number">0</span> <span class="keyword">then</span> <span class="number">1</span> <span class="keyword">else</span> <span class="number">3</span> * (<span class="built_in">fix</span> fact) <span class="number">2</span></span><br><span class="line">--&gt; </span><br><span class="line">  <span class="number">3</span> * (<span class="built_in">fix</span> fact) <span class="number">2</span></span><br><span class="line">--&gt; </span><br><span class="line">  ......</span><br></pre></td></tr></table></figure>
+<p>$(49)$ 指出程序到类型之间存在函数关系，因此我们可以写出一个 Typechecker。由于类型检查可以失败，所以说我们最好用 Maybe Monad 写一个 Monadic Typechecker</p>
+<p>在 Coq 中写</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Notation</span> <span class="string">&quot; x &lt;- e1 ;; e2&quot;</span> := (<span class="keyword">match</span> e1 <span class="built_in">with</span></span><br><span class="line">                              | <span class="type">Some</span> x =&gt; e2</span><br><span class="line">                              | <span class="type">None</span> =&gt; None</span><br><span class="line">                              <span class="keyword">end</span>)</span><br><span class="line">                             (<span class="built_in">right</span> associativity, <span class="built_in">at</span> level <span class="number">60</span>).</span><br><span class="line"><span class="keyword">Notation</span> <span class="string">&quot; &#x27;return&#x27; e &quot;</span></span><br><span class="line">  := (Some e) (<span class="built_in">at</span> level <span class="number">60</span>).</span><br><span class="line"><span class="keyword">Notation</span> <span class="string">&quot; &#x27;fail&#x27; &quot;</span></span><br><span class="line">  := None.</span><br></pre></td></tr></table></figure>
+<p>回忆在 Haskell 里面</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">e1</span> &gt;&gt;= (\x -&gt; e2) = <span class="keyword">do</span> x &lt;- e1</span><br><span class="line">                       e2</span><br></pre></td></tr></table></figure>
+<p>其中在 Maybe Monad 里面有</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title">return</span> :: a -&gt; m a </span><br><span class="line"><span class="title">return</span> = pure</span><br><span class="line"></span><br><span class="line">(&gt;&gt;=) :: <span class="type">Maybe</span> a -&gt; (a -&gt; <span class="type">Maybe</span> b) -&gt; <span class="type">Maybe</span> b </span><br><span class="line"><span class="type">Nothing</span> &gt;&gt;= _ = <span class="type">Nothing</span></span><br><span class="line">(<span class="type">Just</span> x) &gt;&gt;= f = f x</span><br></pre></td></tr></table></figure>
+<p>和上面的定义是极其类似的。</p>
+<p>那么以 Pair 的类型检查为例，可以像下面这样写：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Fixpoint</span> type_check (Gamma : context) (t : tm) : option ty :=</span><br><span class="line">  <span class="keyword">match</span> t <span class="built_in">with</span></span><br><span class="line">  <span class="comment">(* ... *)</span></span><br><span class="line">  | <span class="type">&lt;&#123; (x</span>, y) &#125;&gt; =&gt; T1 &lt;- type_check x ;;</span><br><span class="line">                    T2 &lt;- type_check y ;;</span><br><span class="line">                    <span class="keyword">return</span> &lt;&#123;&#123; T1 * T2 &#125;&#125;&gt;</span><br><span class="line">  | <span class="type">&lt;&#123; x</span>.fst &#125;&gt; =&gt; T1 &lt;- type_check x ;;</span><br><span class="line">                   <span class="keyword">match</span> T1 <span class="built_in">with</span> </span><br><span class="line">                   | <span class="type">&lt;&#123;&#123; T1</span> * T2 &#125;&#125;&gt; =&gt; <span class="keyword">return</span> T1</span><br><span class="line">                   | <span class="type">_</span> =&gt; <span class="built_in">fail</span></span><br><span class="line">                   <span class="keyword">end</span></span><br><span class="line">  | <span class="type">&lt;&#123; x</span>.snd &#125;&gt; =&gt; <span class="comment">(* ... *)</span></span><br></pre></td></tr></table></figure>
+<h1><span id="typing-mutable-references">Typing Mutable References</span></h1>
+<p>为了编码指针和引用，我们增加一些项：</p>
+<p>$$<br>
+\begin{aligned}<br>
+t = ~ &amp; … &amp; \\<br>
+&amp; \texttt{ref } t &amp; \color{blue}{\text{(allocation)}} \\<br>
+&amp; !t &amp; \color{blue}{\text{(dereference)}} \\<br>
+&amp; t := t &amp; \color{blue}{\text{(assignment)}} \\<br>
+&amp; \texttt{loc } n &amp; \color{blue}{\text{(location)}}<br>
+\end{aligned}<br>
+$$</p>
+<p>注意引入指针之后 STLC 不再是纯函数式语言，所以在描述小步法的时候要带上内存池 $st$。几条规则如下：</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{t_1 / st \longrightarrow t_1’ / st’}{\texttt{ref }t_1/st\longrightarrow \texttt{ref }t_1’/st’} &amp; \color{blue}{\text{(ST_Ref)}} \\<br>
+\\<br>
+\dfrac{}{\texttt{ref } v / st\longrightarrow \texttt{loc } |st| / st, v} &amp; \color{blue}{\text{(ST_RefValue)}} \\<br>
+\\<br>
+\dfrac{t_1 / st \longrightarrow t_1’ / st’}{!t_1 / st \longrightarrow !t_1’ / st’} &amp; \color{blue}{\text{(ST_Deref)}} \\<br>
+\\<br>
+\dfrac{l &lt; |st|}{!(\texttt{loc } l) / st \longrightarrow st_l / st} &amp; \color{blue}{\text{(ST_DerefLoc)}} \\<br>
+\\<br>
+\dfrac{t_1 / st \longrightarrow t_1’ / st’}{t_1 := t_2 /st\longrightarrow t_1’ := t_2 /st’} &amp; \color{blue}{\text{(ST_Assign1)}} \\<br>
+\\<br>
+\dfrac{t_2 / st \longrightarrow t_2’ / st’}{t_1 := t_2 /st\longrightarrow t_1 := t_2’ /st’} &amp; \color{blue}{\text{(ST_Assign1)}} \\<br>
+\\<br>
+\dfrac{l &lt; |st|}{\texttt{loc }l := v / st \longrightarrow \texttt{unit} [l := v]st}&amp; \color{blue}{\text{(ST_Assign)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>注意你不一定能推导出内存池中每一位的类型，比如对于</p>
+<p>$$<br>
+st = [\lambda x : \texttt{Nat}, (!(\texttt{loc }1)) x, \lambda x : \texttt{Nat}, (!(\texttt{loc }0)) x]<br>
+$$</p>
+<p>你无法知道 $st_0$ 和 $st_1$ 分别是什么类型。但是程序中不会出现 <code>loc</code>，所以类型检查时我们不需要试图知道地址的类型。只需要定义</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{\Gamma \vdash t_1 \in T_1}{\Gamma \vdash \texttt{ref }t_1\in \texttt{Ref } T_1} &amp; \color{blue}{\text{(T_Ref)}} \\<br>
+\\<br>
+\dfrac{\Gamma \vdash t_1 \in \texttt{Ref } T_1}{\Gamma \vdash !t_1 \in T_1} &amp; \color{blue}{\text{(T_Deref)}} \\<br>
+\\<br>
+\dfrac{\Gamma \vdash t_1 \in \texttt{Ref }T_2\quad\Gamma \vdash t_2\in T_2}{\Gamma \vdash t_1:=t_2\in \texttt{Unit}} &amp; \color{blue}{\text{(T_Assign)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>但是在求值过程中会产生 <code>loc</code>，因此为了证明 Progress 和 Preservation 你不得不知道每一位是什么类型。所以说这里我们只能弱化 Progress 和 Preservation，只证明你能推出 $st$ 每一位的类型时，这两个性质成立。具体地，我们定义数组 $ST$ 存储 $st$ 对应位上的类型。此时对于一个表达式，$\Gamma$ 和 $ST$ 将共同决定其类型，记作 $\Gamma; ST \vdash t \in T$。称 $ST$ 对于 $st$ 是 well-typed，若他们长度相等并且所有的 $st_i$ 都可以推出类型 $ST_i$。</p>
+<p>于是我们可以推到 loc 的类型：</p>
+<p>$$<br>
+\begin{matrix}<br>
+\dfrac{l &lt; |ST|}{\Gamma; ST\vdash \texttt{loc }l \in \texttt{Ref } ST_l} &amp; \color{blue}{\text{(ST_Loc)}}<br>
+\end{matrix}<br>
+$$</p>
+<p>注意 well-typed 的 $ST$ 不是唯一的：</p>
+<p>$$<br>
+st = [!(\texttt{loc} 0)]<br>
+$$</p>
+<p>对于任意的 $ST$ 都是 well-typed 的。</p>
+<p>然后 preservation 和 progress 的定义在 Coq 下面是</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Theorem</span> preservation : <span class="keyword">forall</span> ST t t&#x27; T st st&#x27;,</span><br><span class="line">  empty ; ST |<span class="type">- t</span> \<span class="built_in">in</span> T-&gt;</span><br><span class="line">  store_well_typed ST st-&gt;</span><br><span class="line">  t/st --&gt; t&#x27;/st&#x27; -&gt;</span><br><span class="line">  <span class="built_in">exists</span> ST&#x27;,</span><br><span class="line">    extends ST&#x27; ST /\</span><br><span class="line">    empty; ST&#x27; |<span class="type">- t</span>&#x27; \<span class="built_in">in</span> T /\</span><br><span class="line">    store_well_typed ST&#x27; st&#x27;.</span><br><span class="line"></span><br><span class="line"><span class="keyword">Theorem</span> <span class="built_in">progress</span> : <span class="keyword">forall</span> ST t T st,</span><br><span class="line">  empty ; ST |<span class="type">- t</span> \<span class="built_in">in</span> T -&gt;</span><br><span class="line">  store_well_typed ST st -&gt;</span><br><span class="line">  (value t \/ <span class="built_in">exists</span> t&#x27; st&#x27;, t / st --&gt; t&#x27; / st&#x27;).</span><br></pre></td></tr></table></figure>
+<p>第 6 行的谓词 extends 判定 $ST$ 是否是 $ST’$ 的前缀。</p>
+<hr>
+<p>有了引用之后我们无需 fix 也可以编写递归。方法是把函数存到内存里面去。下面的东西将一个阶乘函数存在了内存池的末尾，并返回 $n!$：</p>
+<p>$$<br>
+\begin{aligned}<br>
+&amp;(\lambda r : (\texttt{Ref } \texttt{Nat}\rightarrow \texttt{Nat}), \\<br>
+&amp;\quad r := (\lambda n : \texttt{Nat}, \texttt{if $n=0$ then $1$ else $n \times (!r)(n - 1)$}); \\<br>
+&amp;\quad (!r)) \\<br>
+&amp;(\lambda n : \texttt{Nat}, 0)~n<br>
+\end{aligned}<br>
+$$</p>
+<p>在 evaluate 这个语句的时候，首先调用 $\mathrm{ST\_App2}$ 开一个 $\texttt{Nat}\rightarrow\texttt{Nat}$ 的新内存，然后向 lambda abstraction 中带入这个地址，并将该地址上的值修改为递归调用自己的阶乘函数，然后返回这个函数。</p>
+<hr>
+<p>有了引用、Record、let in 之后我们可以模拟封装，注意对象内部的变量只能用成员函数访问。对于这个类</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">counter</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> c;</span><br><span class="line">    <span class="built_in">counter</span>() &#123; c = <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">i</span><span class="params">()</span> </span>&#123; c++; <span class="keyword">return</span> c; &#125;</span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">d</span><span class="params">()</span> </span>&#123; c--; <span class="keyword">return</span> c; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以这样模拟：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> newcounter = \<span class="keyword">_</span> : Unit,</span><br><span class="line">  <span class="keyword">let</span> c = ref <span class="number">0</span> <span class="built_in">in</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">let</span> incc = \<span class="keyword">_</span>: Unit, (c := succ (!c); !c) <span class="built_in">in</span></span><br><span class="line">  <span class="keyword">let</span> decc = \<span class="keyword">_</span>: Unit, (c := pred (!c); !c) <span class="built_in">in</span></span><br><span class="line">  &#123;i = incc, d = decc&#125;</span><br><span class="line"><span class="built_in">in</span> ...</span><br></pre></td></tr></table></figure>
+<p>那么下面的代码（写在 <code>...</code> 后面即可）</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> c1 = newcounter unit <span class="built_in">in</span></span><br><span class="line"><span class="keyword">let</span> c2 = newcounter unit <span class="built_in">in</span></span><br><span class="line"><span class="keyword">let</span> r1 = ci.i unit <span class="built_in">in</span> <span class="keyword">let</span> r1 = c1.i unit <span class="built_in">in</span></span><br><span class="line"><span class="keyword">let</span> r2 = c2.i unit <span class="built_in">in</span> <span class="keyword">let</span> r2 = c2.i unit <span class="built_in">in</span></span><br><span class="line">r2</span><br></pre></td></tr></table></figure>
+<p>返回值是 $2$。</p>
+<p>需要注意 <code>let x = A in B</code> 相当于</p>
+<p>$$<br>
+(\lambda x : \mathrm{type}(A), B)~A<br>
+$$</p>
+<p>行为上，会首先彻底展开 $A$，然后把 $B$ 中所有 $x$ 换成 $A$。</p>
+<p>如果不写第一个 <code>\_: Unit</code>，就会导致 <code>let c = ref 0 in ...</code> 在最开始被展开，此时 <code>c = ref 0</code> 将被彻底展开（开一个新内存 <code>l</code>），然后下面的所有 <code>c</code> 将被换成 <code>loc l</code>，变成单例模式，返回 $4$。</p>
+<p>如果在此基础上不写第二个 <code>\_: Unit</code>，展开完第一段代码第 $2$ 行之后 <code>(c := succ (!c); !c)</code> 被彻底展开，变成常数 $1$。之后调用 <code>i</code> 只是调用这个常数，因此返回 $1$。</p>
+<h1><span id="subtyping">Subtyping</span></h1>
+<div class="note info"><p><strong>Liskov 替换原则</strong> 如果在任意使用 T 类型的值的场合都可以传入 S 类型的任意值，那么 S 是 T 的子类。</p>
+</div>
+<p>$S$ 是 $T$ 的子类记为 $S &lt;: T$。</p>
+<p>有两个注意点。对于两个函数类型 $S_1\rightarrow T_1 &lt;: S_2\rightarrow T_2$。将 $S_2$ 类型的值传入一个 $S_2\rightarrow T_2$ 是函数类型的一个使用场合，Liskov 原则表明此处可以使用 $S_1\rightarrow T_1$ 类型的函数。也就是任意的 $S_2$ 类的值都可以传入 $S_1\rightarrow T_1$ 类型的函数。$S_2$ 是 $S_1$ 的子类是这里的一个充分条件。</p>
+<p>这里子部分与整体子类关系相反，称为逆变式（contravariance），对应为了提供容器而存在的类型（输入类型）；而子部分与整体关系相同，称为协变式（convariance），对应为了提供值而存在的类型（输出类型）。</p>
+<p>对于引用 $\texttt{Ref }T$ 的子部分 $T$，有</p>
+<ul>
+<li>$T$ 是输入类型：<code>a := b</code>。</li>
+<li>$T$ 是输出类型：<code>!a</code>。</li>
+</ul>
+<p>因此引用的子类推导关系是</p>
+<p>$$<br>
+\frac{S &lt;: T\quad T &lt;: S}{\texttt{Ref }S &lt;: \texttt{Ref }T}<br>
+$$</p>
+<p>增加 $\texttt{Top}$ 表示所有类型的父类。这样可以做到父子类直接有不同的结构，比如说可以构造一条链：</p>
+<p>$$<br>
+\texttt{Top}\rightarrow\texttt{Top} &lt;: (\texttt{Top}\rightarrow\texttt{Top})\rightarrow\texttt{Top} &lt;: \cdots<br>
+$$</p>
+<p>注意这里所有的推导都是充分的。即使子类是一个偏序关系，你也没有很好的办法证明两个类是不可比的。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">https://zhenjiang888.github.io/FP/2023/slides/ch20_internal.pdf，Page 11.<a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Logic/" rel="tag"># Logic</a>
+              <a href="/tags/Coq/" rel="tag"># Coq</a>
+              <a href="/tags/PL/" rel="tag"># PL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/11/ProgrammingRevision/" rel="prev" title="Revision | 程序设计实习">
+                  <i class="fa fa-angle-left"></i> Revision | 程序设计实习
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

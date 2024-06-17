@@ -134,7 +134,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -145,7 +145,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">15</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -243,7 +243,6 @@
 <p>配置时间和环境：2024. 2. 22，本地环境为 Windows 11 22621.3155，vscode 1.86.2，wsl 发行版为 Ubuntu 22.04，但是感觉未必需要对着配置。</p>
 <p><strong>Keywords.</strong> 环境配置, wsl, WSL_E_CONSOLE, Coq, VsCoq, opam。</p>
 <!-- toc -->
-
 <ul>
 <li><a href="#%E5%AE%89%E8%A3%85-wsl">安装 WSL</a></li>
 <li><a href="#%E5%AE%89%E8%A3%85-coq-prover">安装 Coq Prover</a></li>
@@ -251,9 +250,7 @@
 <li><a href="#%E9%85%8D%E7%BD%AE-vscoq">配置 VsCoq</a></li>
 </ul>
 <!-- tocstop -->
-
 <span id="more"></span>
-
 <p>首先作者不是原教旨主义者所以不会用 Emacs，于是考虑配一个 VsCoq</p>
 <details class="note danger"><summary><p>坑 1.</p>
 </summary>
@@ -261,8 +258,8 @@
 <p>据说 opam 2.2 之后会支持 windows，但是哥们享受不到了。</p>
 
 </details>
-
-<h1><span id="安装-wsl">安装 WSL</span></h1><p>考虑电脑上装一个 wsl，然后用 vscode 的远程连接插件连上去。</p>
+<h1><span id="安装-wsl">安装 WSL</span></h1>
+<p>考虑电脑上装一个 wsl，然后用 vscode 的远程连接插件连上去。</p>
 <p>首先开始菜单搜索「启用或关闭 windows 功能」，在里面勾选</p>
 <ul>
 <li>适用于 Linux 的 Windows 子系统</li>
@@ -276,10 +273,8 @@
 <p>接下来应当把 wsl 版本调至 2，否则会寄。</p>
 
 </details>
-
 <p>打开 windows terminal，依次运行以下命令：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wsl <span class="literal">--set-default-version</span> <span class="number">2</span></span><br><span class="line">wsl <span class="literal">--update</span></span><br><span class="line">wsl <span class="literal">--install</span> <span class="literal">-d</span> Ubuntu<span class="literal">-22</span>.<span class="number">04</span></span><br></pre></td></tr></table></figure>
-
 <p>这样会安装 Ubuntu 22.04。</p>
 <p>如果不加后两个参数会安装某个 Ubuntu，经过 <code>lsb_release -a</code> 发现好像也是 22.04。</p>
 <p>接下来在 vscode 中安装扩展 WSL，<code>Ctrl + Shift + p</code> 后输入 <code>WSL: Connect to WSL</code>，理论上可以连接到刚才下的 Ubuntu。</p>
@@ -291,62 +286,52 @@
 <p>此时以任意方法打开旧版命令行界面，在左上角属性中将其禁用即可。</p>
 
 </details>
-
 <p>接下来所有命令均在 Ubuntu 中执行（在 windows terminal 中打开一个 ubuntu 的终端，或者在连接到 wsl 的 vscode 中开启终端）。</p>
-<h1><span id="安装-coq-prover">安装 Coq Prover</span></h1><p>这一步没什么坑，直接运行</p>
+<h1><span id="安装-coq-prover">安装 Coq Prover</span></h1>
+<p>这一步没什么坑，直接运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo snap install coq-prover</span><br></pre></td></tr></table></figure>
-
 <p>即可。</p>
 <p>其实有一个，prover 只有一个 o，有傻逼不会英语拼错了。</p>
-<h1><span id="安装-opam">安装 Opam</span></h1><p>接下来的配置过程中需要用到 Opam。按照<a target="_blank" rel="noopener" href="https://opam.ocaml.org/doc/Install.html">官网</a>的指示依次执行</p>
+<h1><span id="安装-opam">安装 Opam</span></h1>
+<p>接下来的配置过程中需要用到 Opam。按照<a target="_blank" rel="noopener" href="https://opam.ocaml.org/doc/Install.html">官网</a>的指示依次执行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">add-apt-repository ppa:avsm/ppa</span><br><span class="line">apt update</span><br><span class="line">apt install opam</span><br></pre></td></tr></table></figure>
-
 <p>即可。接下来需要初始化。</p>
 <details class="note danger"><summary><p>坑 4</p>
 </summary>
 <p>注意 opam 的源本来是在国外的，接下来你需要下载大量的包，如果不换源后续安装过程极卡。</p>
 
 </details>
-
 <p>这里我们使用了 <a target="_blank" rel="noopener" href="https://mirrors.sjtug.sjtu.edu.cn/docs/git/opam-repository.git">SJTU 提供的国内镜像</a>，可以在初始化时直接使用该源，运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opam init default https://mirrors.sjtug.sjtu.edu.cn/git/opam-repository.git</span><br></pre></td></tr></table></figure>
-
 <p>如果你忘了换源，直接运行了</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opam init</span><br></pre></td></tr></table></figure>
-
-<p>也可以再运行 </p>
+<p>也可以再运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">opam repo set-url default https://mirrors.sjtug.sjtu.edu.cn/git/opam-repository.git --all --set-default</span><br></pre></td></tr></table></figure>
-
 <p>来切换。</p>
-<h1><span id="配置-vscoq">配置 VsCoq</span></h1><p>首先在 vscode 中安装扩展 VsCoq。接下来依<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=maximedenes.vscoq">插件说明页</a>的说明，依次运行两个下载命令：</p>
+<h1><span id="配置-vscoq">配置 VsCoq</span></h1>
+<p>首先在 vscode 中安装扩展 VsCoq。接下来依<a target="_blank" rel="noopener" href="https://marketplace.visualstudio.com/items?itemName=maximedenes.vscoq">插件说明页</a>的说明，依次运行两个下载命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">opam pin add coq 8.18.0</span><br><span class="line">opam install vscoq-language-server</span><br></pre></td></tr></table></figure>
-
 <p>这会在 ubuntu 上安装 language server，接下来为了让 vscode 找到这个 server，你需要运行</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">which vscoqtop</span><br></pre></td></tr></table></figure>
-
 <details class="note danger"><summary><p>坑 5.</p>
 </summary>
 <p>如果此时没有输出（即失败），可能是没有刷新。运行</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">eval</span> $(opam <span class="built_in">env</span>)</span><br></pre></td></tr></table></figure>
-
 <p>然后重试。</p>
 
 </details>
-
 <p>此时你将得到一个类似于</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/home/$USERNAME$/.opam/default/bin/vscoqtop</span><br></pre></td></tr></table></figure>
-
 <p>的输出，将其<strong>完整地复制下来</strong>，填入 VsCoq 的 Extension Setting 中，<code>VsCoq: Path</code> 的值。</p>
 <details class="note danger"><summary><p>坑 6.（舍友踩的）</p>
 </summary>
 <p>有人在 Windows 下配环境变量配习惯了，把路径复制到 <code>../bin</code> 就停了。但是此时必须要完整地复制全部内容。</p>
 
 </details>
-
 <p>然后预计就能跑了。为了测试你可以下载 <a target="_blank" rel="noopener" href="https://softwarefoundations.cis.upenn.edu/lf-current/index.html">Logical Fundations</a>，然后打开里面的 <code>Basics.v</code>，理论上将会看到如下分栏的界面：</p>
-<p><img src="https://s2.loli.net/2024/02/22/lIPOrAgUkusC6fz.png"></p>
+<p><img src="https://s2.loli.net/2024/02/22/lIPOrAgUkusC6fz.png" alt></p>
 <p>然后可以凭手感写几个前面的作业，有 FP 基础的话不需要读书读下上下文就能写。此时光标放在某个句号后面，右侧边栏就会进入 proof mode，并显示这个句号后面的 goal，举例来说：</p>
-<p><img src="https://s2.loli.net/2024/02/22/ihLKEHcsxlUnCZk.png"></p>
+<p><img src="https://s2.loli.net/2024/02/22/ihLKEHcsxlUnCZk.png" alt></p>
 <p>然后看起来基本上能用了。</p>
 
     </div>
