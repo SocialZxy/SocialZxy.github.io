@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 软件科学基础的复习笔记。 课程网站是 https:&#x2F;&#x2F;xiongyingfei.github.io&#x2F;SF&#x2F;2024&#x2F;，参考资料是 Software Fundations 的 Vol. 1 和 Vol. 2。   Polymorphism and High-Order Functions The Curry-Howard Correspondence, Inductively D">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-16T11:10:38.000Z">
-<meta property="article:modified_time" content="2024-06-17T08:23:31.735Z">
+<meta property="article:modified_time" content="2024-06-17T13:45:25.050Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Logic">
 <meta property="article:tag" content="Coq">
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-17 16:23:31" itemprop="dateModified" datetime="2024-06-17T16:23:31+08:00">2024-06-17</time>
+      <time title="Modified: 2024-06-17 21:45:25" itemprop="dateModified" datetime="2024-06-17T21:45:25+08:00">2024-06-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -254,7 +254,7 @@
 <p><strong>多态和隐式参数声明</strong></p>
 <p>如下两种方法可以定义多态的列表：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> list (X : <span class="keyword">Type</span>) : <span class="keyword">Type</span> := </span><br><span class="line">  | <span class="type">nil</span></span><br><span class="line">  | <span class="type">cons</span> (x : X) (l : list X).</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> list : <span class="keyword">Type</span> -&gt; <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span> : <span class="keyword">forall</span> X : <span class="keyword">Type</span>, list X </span><br><span class="line">  | <span class="type">cons</span> : <span class="keyword">forall</span> X : X -&gt; list X -&gt; list X.</span><br></pre></td></tr></table></figure>
-<p>将 <code>(X : Type)</code> 直接写在 type constructor 相当于是要求在每一个 data constructor 前面都加上 <code>X</code>。</p>
+<p>将 <code>(X : Type)</code> 直接写在 type constructor 相当于是要求在每一个 data constructor 前面都加上 <code>(X : Type)</code>。</p>
 <p>用如下的方法可以将 <code>X</code> 声明为 nil 的隐式参数：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Arguments</span> nil &#123;X&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">Inductive</span> list&#x27; &#123;X : <span class="keyword">Type</span>&#125; : <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span>&#x27;</span><br><span class="line">  | <span class="type">cons</span>&#x27; (x : X) (l : list&#x27;)</span><br><span class="line">  </span><br><span class="line"><span class="keyword">Inductive</span> list&#x27; : <span class="keyword">Type</span> -&gt; <span class="keyword">Type</span> :=</span><br><span class="line">  | <span class="type">nil</span>&#x27; &#123;X : <span class="keyword">Type</span>&#125; : list&#x27; X</span><br><span class="line">  | <span class="type">cons</span>&#x27; &#123;X : <span class="keyword">Type</span>&#125; (x : X) (l : list&#x27;) : list&#x27; X</span><br></pre></td></tr></table></figure>
 <p>这样一来在推不出来 nil 类型的时候和强行给 nil 传参的时候会报错：</p>
@@ -421,11 +421,33 @@ $$</p>
 <p>不妨自行用上面的 Curry Howard Correspondence 来解释这两个 data constructor 是什么意思，这里不赘述。</p>
 <hr>
 <p>现在我们考虑定义结构归纳法的命题，并写出其 Proof Object。这里本质上是你的 Proof Object 中可以有递归函数（<code>fix</code>）。</p>
-<p>作为例子我们考虑下面的<strong>Peano 自然数递归</strong>，其应当具有类型：</p>
+<p>对于 Inductive Type 的递归，作为例子我们考虑下面的<strong>Peano 自然数递归</strong>，其应当具有类型：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> nat_ind_type : <span class="keyword">Type</span> :=</span><br><span class="line">  <span class="keyword">forall</span> P : nat -&gt; <span class="keyword">Prop</span>,</span><br><span class="line">    P <span class="number">0</span> -&gt;</span><br><span class="line">    (<span class="keyword">forall</span> n : nat, P n -&gt; P (S n)) -&gt;</span><br><span class="line">    <span class="keyword">forall</span> n : nat, P n.</span><br></pre></td></tr></table></figure>
+<p>这个 ind_type 生成的方法是，对于每一个 data constructor，都给定从参数上谓词 $P$ 成立推导构造之后谓词 $P$ 成立。</p>
 <p>显然下面的东西是一个具有该类型的值：</p>
 <figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> nat_ind : nat_ind_type :=</span><br><span class="line">  <span class="keyword">fun</span> (P : nat -&gt; <span class="keyword">Prop</span>) =&gt; </span><br><span class="line">    <span class="keyword">fun</span> P0 : (P <span class="number">0</span>) =&gt;</span><br><span class="line">      <span class="keyword">fun</span> PS : (<span class="keyword">forall</span> n : nat, P n -&gt; P (S n)) =&gt;</span><br><span class="line">        <span class="built_in">fix</span> f (n : nat) =&gt;</span><br><span class="line">          <span class="keyword">match</span> n <span class="built_in">with</span></span><br><span class="line">          | <span class="type">0</span> =&gt; P0</span><br><span class="line">          | <span class="type">S</span> n&#x27; =&gt; PS n (f n&#x27;)</span><br><span class="line">          <span class="keyword">end</span>.</span><br></pre></td></tr></table></figure>
 <p>因此我们证明了整数的结构归纳法是对的。</p>
+<p>对于 inductively defined propositions，如果直接套用上面的归纳类型定义方式，这里 <code>P</code> 的类型就应当类似于</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">P : IndProp -&gt; <span class="keyword">Prop</span></span><br></pre></td></tr></table></figure>
+<p>这是一个关于证明（注意 <code>P</code> 的输入是一个 <code>IndProp</code> 类型的值，即一个证明）的谓词。但实际上你根本不用在乎证明满足什么性质，只要证出来就好了，所以 inductive propositions 的归纳类型是用下面的方法单独定义的。</p>
+<p>对于 inductive propositions 的结构归纳法，我们是希望辅助推导这样的结论：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forall</span> P : Arg -&gt; <span class="keyword">Prop</span>,                  <span class="comment">(* 1 *)</span></span><br><span class="line">  <span class="keyword">forall</span> arg : Arg, IndProp arg -&gt; P arg <span class="comment">(* 2 *)</span></span><br></pre></td></tr></table></figure>
+<p>不妨假设 IndProp 有几个构造子</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> IndProp : Arg -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">Constructor1</span> (arg1 : Arg1) : IndProp (SomeF1 arg1) -&gt; IndProp (SomeF arg2)</span><br><span class="line">  | <span class="type">...</span></span><br></pre></td></tr></table></figure>
+<p>这里的 <code>Arg1</code> 是某个类型，<code>SomeF</code> 是某个 <code>Arg1 -&gt; Arg</code> 的函数，那么你需要在 <code>(* 1 *)</code> 和 <code>(* 2 *)</code> 之间加上：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forall</span> arg1 : Arg1, IndProp (SomeF1 arg1) -&gt; P (SomeF1 arg1) -&gt; P (SomeF2 arg1)</span><br></pre></td></tr></table></figure>
+<p>言下之意就是，在 <code>(* 2 *)</code> 中你希望证明的这个蕴含关系的前提的证明是由 <code>arg1</code> 这些参数用某种方式组合（<code>SomeF2</code>），用 <code>Constructor1</code> 这个构造子构造出来的，并且 <code>IndProp -&gt; P</code> 在子结构上也成立（<code>IndProp (SomeF1 arg1)</code>），那么 <code>P</code> 必须要在 <code>SomeF2</code> 这种组合上面成立。</p>
+<p>以 <code>ev</code> 为例，其定义为</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> ev : nat -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">ev_0</span> : ev <span class="number">0</span></span><br><span class="line">  | <span class="type">ev_SS</span> <span class="keyword">forall</span> n : nat, ev n -&gt; ev (S (S n)).</span><br></pre></td></tr></table></figure>
+<p>于是 <code>ev_ind</code> 希望辅助推导 <code>forall n : nat, ev n -&gt; P n</code>，其类型应当是：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forall</span> P : nat -&gt; <span class="keyword">Prop</span>,</span><br><span class="line">  <span class="comment">(* insert something *)</span></span><br><span class="line">  <span class="keyword">forall</span> n : nat, ev n -&gt; P n</span><br></pre></td></tr></table></figure>
+<p>观察 <code>ev</code> 的两个构造子的形状，可以发现在 <code>(* insert something *)</code> 的部分插入合适的东西之后应该得到：</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">forall</span> P : nat -&gt; <span class="keyword">Prop</span>,</span><br><span class="line">  P <span class="number">0</span> -&gt;</span><br><span class="line">  (<span class="keyword">forall</span> n : nat, ev n -&gt; P n -&gt; P (S (S n))) -&gt;</span><br><span class="line">  <span class="keyword">forall</span> n : nat, ev n -&gt; P n</span><br></pre></td></tr></table></figure>
+<p>另一个比较有意思的东西是 <code>eq_ind</code>。考虑 <code>eq</code> 的定义</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Inductive</span> eq (X : <span class="keyword">Type</span>) (n : X) : X -&gt; <span class="keyword">Prop</span> :=</span><br><span class="line">  | <span class="type">eq_refl</span> : eq n n</span><br></pre></td></tr></table></figure>
+<p>按照上面的推法应该写出</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">Definition</span> eq_ind_type : <span class="keyword">Type</span> :=</span><br><span class="line">  <span class="keyword">forall</span> (X : <span class="keyword">Type</span>) (n : X) (X -&gt; <span class="keyword">Prop</span>),</span><br><span class="line">    P n -&gt; (<span class="keyword">forall</span> m, n = m -&gt; P m)</span><br></pre></td></tr></table></figure>
+<p>这给出了 <code>rewrite</code> 的本质：<code>rewrite n m</code> 时，把除了 $m$ 以外的地方都看成谓词 <code>P</code> 的表达式。</p>
 <hr>
 <p>接下来是经典的三个问题。</p>
 <ul>
