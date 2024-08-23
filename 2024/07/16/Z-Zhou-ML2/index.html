@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶 SVM 基本模型 软间隔 模型求解 核函数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning (2)（支持向量机）">
+<meta property="og:url" content="http://example.com/2024/07/16/Z-Zhou-ML2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶 SVM 基本模型 软间隔 模型求解 核函数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-07-16T08:18:03.000Z">
+<meta property="article:modified_time" content="2024-08-23T03:35:17.065Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="SVM">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/07/16/Z-Zhou-ML2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/07/16/Z-Zhou-ML2/","path":"2024/07/16/Z-Zhou-ML2/","title":"Machine Learning (2)（支持向量机）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Machine Learning (2)（支持向量机） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">SVM</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">基本模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">软间隔</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">模型求解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">核函数</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/16/Z-Zhou-ML2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Machine Learning (2)（支持向量机） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Machine Learning (2)（支持向量机）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-07-16 16:18:03" itemprop="dateCreated datePublished" datetime="2024-07-16T16:18:03+08:00">2024-07-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-23 11:35:17" itemprop="dateModified" datetime="2024-08-23T11:35:17+08:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E5%AD%90kkt-%E6%9D%A1%E4%BB%B6%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6">预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶</a></li>
+<li><a href="#svm">SVM</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B">基本模型</a></li>
+<li><a href="#%E8%BD%AF%E9%97%B4%E9%9A%94">软间隔</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3">模型求解</a></li>
+<li><a href="#%E6%A0%B8%E5%87%BD%E6%95%B0">核函数</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="预备知识拉格朗日乘子kkt-条件拉格朗日对偶">预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶</span></h1><details class="note danger"><summary><p><strong>没什么用的东西</strong></p>
+</summary>
+<p>下面两个结论从带约束函数极值问题的角度引入拉格朗日乘子和 KKT 条件，实际上用这个逻辑推出的拉格朗日乘子和 KKT 条件对你求解规划问题和理解 SVM 的 SMO 算法没有帮助甚至有阻碍（但是对复习数分高代可能有帮助）。而在下一节中叙述的从对偶理论导出的 KKT 条件则是有用的，这两个东西只是结果形式一样而已。</p>
+<details class="note "><summary><p>懒得喷</p>
+</summary>
+<p>这两天的学习让我切实地意识到了国内的一些书籍和网络博客（暂时特指面向技术人员的 AI 博客）有多么不靠谱。</p>
+<p>在写一个东西的证明时常常喜欢引入一些无关的东西，然后后面的证明当中根本不用。最常见的是证明拉格朗日乘子的时候先引入 Hessian，证明时却完全不用，或者索性不证。证明过程没有严格的数学推导，全是一些低维的几何直观和特例，因此常常因为其直觉错误所以得到一些荒谬的结论。各种专有的名词也常常是混用的，让人很摸不着头脑。</p>
+<p>今后进行搜索时，但凡内容不全是技术而涉及一点数学，就应当屏蔽来自未刊载的低质量结果。原论文通常靠谱地多，但是读起来工程量太大，读综述文章应该是一个比较好的选择。</p>
+
+</details>
+
+<div class="note info"><p><strong>Theorem 1.</strong> 考虑条件极值问题</p>
+<p>$$<br>\begin{align}<br>    \min~ &amp; f(\boldsymbol{x}) \\<br>    \text{s.t. } &amp; g_i(\boldsymbol{x}) &#x3D; 0 &amp; i &#x3D; 1, …, m<br>\end{align}<br>$$</p>
+<p>定义拉格朗日函数</p>
+<p>$$<br>L(\boldsymbol{x}, \boldsymbol{\lambda}) &#x3D; f(\boldsymbol{x}) + \sum_{i&#x3D;1}^m \lambda_i g(\boldsymbol{x})<br>$$</p>
+<p>原函数在条件下取极值的必要条件（同时是驻点的充要条件）是</p>
+<p>$$<br>\frac{\partial L}{\partial \boldsymbol{x}} &#x3D; \boldsymbol{0}, \frac{\partial L}{\partial \boldsymbol{\lambda}} &#x3D; \boldsymbol{0}<br>$$</p>
+</div>
+
+<blockquote>
+<p>如果你可以接受“忽略二阶小量”这种阴间表述，那么你可以参考博客<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="[Lagrange 乘數法 | 線代啟示錄](https://ccjou.wordpress.com/2012/05/30/lagrange-%e4%b9%98%e6%95%b8%e6%b3%95/)">[1]</span></a></sup>，否则可以看下面我写的正确性未知的推导。</p>
+</blockquote>
+<p>设曲面 $C_i &#x3D; \{\boldsymbol{x} | g_i(\boldsymbol{x}) &#x3D; 0\}, C &#x3D; \cap_{i&#x3D;1}^m C_i$，若 $\boldsymbol{x}\in C, \boldsymbol{x} + \boldsymbol{\varepsilon}\in C$，则对于任意的 $i$ 都有</p>
+<p>$$<br>0 &#x3D; g_i(\boldsymbol{x} + \boldsymbol{\varepsilon}) - g_i(\boldsymbol{x}) &#x3D; \varepsilon^T\nabla g_i(\boldsymbol{x}) + O(||\boldsymbol{\varepsilon}||^2)<br>$$</p>
+<p>换言之</p>
+<p>$$<br>\boldsymbol{\varepsilon}^T\nabla g_i(\boldsymbol{x}) &#x3D; O(||\boldsymbol{\varepsilon}||^2)<br>$$</p>
+<p>考虑子空间 $V &#x3D; \langle\nabla g_1(\boldsymbol{x}), …, \nabla g_m(\boldsymbol{x})\rangle$，欧氏空间中有 $\mathbb{R}^n &#x3D; V \oplus V^\perp$，那么我们假设</p>
+<p>$$<br>\boldsymbol{\varepsilon} &#x3D; \boldsymbol{\varepsilon}_v + \boldsymbol{\varepsilon}_\perp \text{ where } \boldsymbol{\varepsilon}_v \in V,  \boldsymbol{\varepsilon}_\perp \in V^\perp<br>$$</p>
+<p>那么有 $\boldsymbol{\varepsilon}_v^T\nabla g_i(x) &#x3D; O(||\boldsymbol{\varepsilon}||^2)$，由于 $||\nabla g_i(\boldsymbol{x})||$ 是常量，这里必然有 $||\boldsymbol{\varepsilon}_v|| &#x3D; O(||\boldsymbol{\varepsilon}||^2)$，进一步可以推出 $||\boldsymbol{\varepsilon}_\perp|| &#x3D; \Theta ||\varepsilon||$。</p>
+<p>$\boldsymbol{x}$ 若是 $f(\boldsymbol{x})$ 在约束下的一个驻点，就必然有任取向量列 $\boldsymbol{\varepsilon}_1, \boldsymbol{\varepsilon}_2, …$，且</p>
+<p>$$<br>\lim_{n\rightarrow \infty} ||\boldsymbol{\varepsilon}_n|| &#x3D; 0<br>$$</p>
+<p>都有 </p>
+<p>$$<br>\lim_{n\rightarrow \infty} \frac{f(\boldsymbol{x} + \boldsymbol{\varepsilon}_n) - f(\boldsymbol{x})}{||\boldsymbol{\varepsilon}_n||} &#x3D; 0<br>$$</p>
+<p>分子展开成二阶小量，并将 $\boldsymbol{\varepsilon}_n$ 做直和分解得到</p>
+<p>$$<br>\lim_{n\rightarrow \infty}\frac{\boldsymbol{\varepsilon}_{n\perp}^T\nabla f(\boldsymbol{x}) + \boldsymbol{\varepsilon}_{nv}^T\nabla f(\boldsymbol{x}) + O(||\boldsymbol{\varepsilon}_n||^2)}{||\boldsymbol{\varepsilon}_n||} &#x3D; 0<br>$$</p>
+<p>观察上面的式子的长度关系并回忆 $\boldsymbol{\varepsilon}_n$ 的任意性，可以发现你必须有</p>
+<p>$$<br>\forall \boldsymbol{\varepsilon}\in V^\perp, \boldsymbol{\varepsilon}^T\nabla f(\boldsymbol{x}) &#x3D; 0<br>$$</p>
+<blockquote>
+<p>这里我们偷偷使用了 $\boldsymbol{\varepsilon}_\perp$ 可以取到所有的方向，严格证明考虑使用隐函数存在性定理，这里跳过。</p>
+</blockquote>
+<p>因此 $\nabla f(\boldsymbol{x})\in V$，换言之存在 $\lambda_1, …, \lambda_m$ 使得 </p>
+<p>$$<br>\nabla f(\boldsymbol{x}) + \sum_{i&#x3D;1}^m \lambda_i \nabla g_i(\boldsymbol{x}) &#x3D; 0<br>$$</p>
+<p>反过来看，上面的推导都是充分必要的。</p>
+<p>这蕴含着 $\frac{\partial L}{\partial \boldsymbol{x}} &#x3D; \boldsymbol{0}$，同时你还要求 $\boldsymbol{x}$ 都是 $C$ 上的点，这等价于 $\frac{\partial L}{\partial \boldsymbol{\lambda}} &#x3D; \boldsymbol{0}$。$\square$</p>
+<p>考虑不等式约束条件，必要条件则是</p>
+<div class="note info"><p><strong>Theorem 2.</strong> 考虑条件极值问题</p>
+<p>$$<br>\begin{align}<br>    \min~ &amp; f(\boldsymbol{x}) \\<br>    \text{s.t. } &amp; g_i(\boldsymbol{x}) \leq 0 &amp; i &#x3D; 1, …, m<br>\end{align}<br>$$</p>
+<p>类似地定义拉格朗日函数，那么最优解相当于在满足如下条件时优化 $L$：</p>
+<p>$$<br>\begin{cases}<br>    \frac{\partial L}{\partial \boldsymbol{x}} &#x3D; \boldsymbol{0} \\<br>    g_i(\boldsymbol{x}) \leq 0 \\<br>    {\lambda}_i \geq 0 \\<br>    g_i(\boldsymbol{x})\lambda_i &#x3D; 0<br>\end{cases}<br>$$</p>
+</div>
+
+<p>这里我们不打算重新写一遍严格证明，只给出一个大概的框架：</p>
+<p>对于一个极值点 $\boldsymbol{x}$</p>
+<ul>
+<li>若 $g_i(\boldsymbol{x}) &lt; 0$，那么此时必有 $\lambda_i &#x3D; 0$（根据条件 $4$），此时称 $i$ 是 interior 的。</li>
+<li>否则有 $g_i(\boldsymbol{x}) &#x3D; 0$，此时称 $i$ 是 boundary 的。</li>
+</ul>
+<p>我们对 $m$ 个条件是 interior &#x2F; boundary 的分类，拆成 $2^m$ 个优化问题。</p>
+<p>单独考虑一个优化问题，我们发现它规约到只保留 boundary 的 $i$ 的等式约束问题，可以用拉格朗日乘子法解决。但是此时 $\nabla f(\boldsymbol{x})$ 必须指向可行域外部，也就是必须有 $\lambda_i &gt; 0$ 全部成立，否则这个解一定是只在边界上最优，在全局上并不最优。（严格证明时，可能考虑将上述证明过程中取边界上的点列改成取边界上的点列来得到 $\nabla f$ 是 $\nabla g$ 的线性组合，然后取可行域内部的点列来得到 $\lambda_i$ 的符号）</p>
+<p>另外此时你发现满足约束条件时 $L(\boldsymbol{x}, \boldsymbol{\lambda}) &#x3D; f(\boldsymbol{x})$，所以说结论确实是对的。</p>
+</details>
+
+<details class="note "><summary><p>未知正确性的批话</p>
+</summary>
+<p>我严重怀疑书上和绝大部分资料中常见的说法：</p>
+<blockquote>
+<p>一个有约束的优化问题相当于对其拉格朗日函数的无约束优化问题。</p>
+</blockquote>
+<p>是错误的。我们考虑这个优化问题：</p>
+<p>$$<br>\begin{matrix}<br>    \min &amp; xy \\<br>    \text{s.t.} x - y &#x3D; 0<br>\end{matrix}<br>$$</p>
+<p>其拉格朗日函数为</p>
+<p>$$<br>L(x, y, \lambda) &#x3D; xy + \lambda(x-y)<br>$$</p>
+<p>它的 Hessian 总是不是正定的，这个函数根本没有极值点，但是有一个驻点是 $(0, 0, 0)$。</p>
+<p>似乎下面提到的拉格朗日对偶理论和拉格朗日乘子只是一种长得很像的东西，实际上根本不是一回事。</p>
+
+</details>
+
+<p>考虑标准型的优化问题</p>
+<p>$$<br>\begin{matrix}<br>    \min &amp; f(\boldsymbol{x}) \\<br>    \text{s.t.} &amp; y_i(\boldsymbol{x}) \leq 0 \\<br>    &amp; h_i(\boldsymbol{x}) &#x3D; 0<br>\end{matrix}<br>$$</p>
+<p>其中 $f(\boldsymbol{x})$ 定义域为 $\mathcal{D}$。其最优解为 $f^*$。</p>
+<p>定义广义拉格朗日函数</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}, \boldsymbol{\nu}) &#x3D; f(\boldsymbol{x}) + \boldsymbol{\lambda}^T\boldsymbol{y}(\boldsymbol{x}) + \boldsymbol{\nu}^T\boldsymbol{h}(\boldsymbol{x})<br>$$</p>
+<blockquote>
+<p>这里的 $\boldsymbol{\lambda}$ 和 $\boldsymbol{\nu}$ 称为对偶变量，感性理解起来其相当于某种 regularization parameter 来惩罚违反的限制。</p>
+</blockquote>
+<p>定义拉格朗日对偶函数</p>
+<p>$$<br>g(\boldsymbol{\lambda}, \boldsymbol{\nu}) &#x3D; \inf_{\boldsymbol{x}\in\mathcal{D}} \mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}, \boldsymbol{\nu})<br>$$</p>
+<p>考察拉格朗日函数各项符号立即得到当 $\boldsymbol{\lambda}\geq \boldsymbol{0}$ 时</p>
+<p>$$<br>f^* \geq f(\bar{\boldsymbol{x}}) \geq \mathcal{L}(\bar{\boldsymbol{x}}, \boldsymbol{\lambda}, \boldsymbol{\nu}) \geq g(\boldsymbol{\lambda}, \boldsymbol{\nu})<br>$$</p>
+<p>可以看到 $g$ 给出了 $f^*$ 的下界，于是我们可以讨论最紧的下界是多少。下面的优化问题称为原问题的对偶问题</p>
+<p>$$<br>\begin{matrix}<br>    \max &amp; g(\boldsymbol{\lambda}, \boldsymbol{\nu}) \\<br>    \text{s.t.} &amp; \boldsymbol{\lambda} \geq \boldsymbol{0}<br>\end{matrix}<br>$$</p>
+<p>对偶问题和原问题不总是等价的，但是我们有如下的引理：</p>
+<div class="note info"><p><strong>Lemma(Slater, 1950).</strong> 凸优化问题的原问题和对偶问题有相同的最优值（strong duality）。</p>
+</div>
+
+<p>证明还没看，先相信。</p>
+<p>如果一个问题有 strong duality，那么有 </p>
+<p>$$<br>\begin{align}<br>    f(\boldsymbol{x}^*) &amp;&#x3D; g(\boldsymbol{\lambda}^*, \boldsymbol{\nu}^*) \\<br>    &amp;&#x3D; \inf_{x\in\mathcal{D}} \mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}^*, \boldsymbol{\nu}^*) \\<br>    &amp;\leq \mathcal{L}(\boldsymbol{x}^*, \boldsymbol{\lambda}^*, \boldsymbol{\nu}^*) \\<br>    &amp;\leq f(\boldsymbol{x}^*)<br>\end{align}<br>$$</p>
+<p>这说明两个不等号都必须取等，因此有<strong>互补松弛条件（Complementary slackness）</strong></p>
+<p>$$<br>\lambda_iy_i(\boldsymbol{x}) &#x3D; 0<br>$$</p>
+<p>如果一个问题满足 strong duality，那么以下条件合起来构成对偶问题的 KKT 条件：</p>
+<ul>
+<li><strong>驻点条件</strong> $\partial \mathcal{L} &#x2F; \partial \boldsymbol{x} &#x3D; 0$；</li>
+<li><strong>原始可行性</strong> $y_i(\boldsymbol{x})\leq 0, h_i(\boldsymbol{x}) &#x3D; 0$；</li>
+<li><strong>对偶可行性</strong> $\boldsymbol{\lambda}\geq \boldsymbol{0}$；</li>
+<li><strong>互补松弛性</strong> $\lambda_iy_i(\boldsymbol{x}) &#x3D; 0$。</li>
+</ul>
+<p>这是原问题的最优解满足的必要条件。</p>
+<h1><span id="svm">SVM</span></h1><h2><span id="基本模型">基本模型</span></h2><p>考虑找一个超平面将正负类样本分开。用其他点到超平面的距离最大值来度量划分的好坏。令 $\boldsymbol{w}$ 为超平面的法向量，$b$ 为偏置（超平面到原点的距离），那么这个平面将正负类（正类记 $y_i &#x3D; 1$，负类记 $y_i &#x3D; -1$）完全分开即要求</p>
+<p>$$<br>y_i(\boldsymbol{w}_i^T\boldsymbol{x}_i + b) \geq 1<br>$$</p>
+<p>点到超平面的距离为</p>
+<p>$$<br>\frac{|\boldsymbol{w}^T\boldsymbol{x}+b|}{||\boldsymbol{w}||}<br>$$</p>
+<p>约束条件保证了所有点到超平面的距离大于 $1&#x2F;||\boldsymbol{w}||$。因此我们最大化这个量来得到最好的超平面。SVM 本质上相当于下面的规划问题：</p>
+<p>$$<br>\begin{matrix}<br>  \min &amp;\frac 12 ||\boldsymbol{w}||^2 \\<br>  \text{s.t.} &amp; y_i(\boldsymbol{w}^T\boldsymbol{x}_i + b)\geq 1<br>\end{matrix}<br>$$</p>
+<p>方便起见定义</p>
+<p>$$<br>f(\boldsymbol{x}) &#x3D; \boldsymbol{w}^T\boldsymbol{x} + b<br>$$</p>
+<p>发现存在一部分向量到平面的距离恰好为 $1&#x2F;||\boldsymbol{w}||$，这些向量称为<strong>支持向量</strong>。</p>
+<h2><span id="软间隔">软间隔</span></h2><p>实际情况中可能不能完美地将样本点分开，于是考虑将“违反限制”的多少加入目标函数当中。取惩罚系数 $C &gt; 0$ 和损失函数 $\mathcal{L}$，优化</p>
+<p>$$<br>\frac 12 ||\boldsymbol{w}||^2 + C\sum_{i&#x3D;1}^m\mathcal{L}(y_if(\boldsymbol{x}_i))<br>$$</p>
+<p>其中 $\mathcal{L}(x)$ 可以取 </p>
+<ul>
+<li><strong>0&#x2F;1 Loss</strong> $(1-\mathrm{sgn}(x - 1)) &#x2F; 2$。</li>
+<li><strong>Hinge Loss</strong> $\max(0, 1 - x)$。</li>
+<li><strong>Exponential Loss</strong> $\exp(-x)$。</li>
+<li><strong>Logistic Loss</strong> $\log(1+\exp(-x))$。</li>
+</ul>
+<p>原来的问题相当于 $C&#x3D;\infty$ 的特例。四个损失函数中只有 Hinge Loss 是对规划问题友好的。考虑优化</p>
+<p>$$<br>\frac 12 ||\boldsymbol{w}||^2 + C\sum_{i&#x3D;1}^m\max(0, 1-y_if(\boldsymbol{x}_i))<br>$$</p>
+<p>这里 Hinge Loss 之于 0&#x2F;1 Loss 有点类似于 Sparse Recovery 当中的 1 范数之于 0 范数，我们可以使用类似的技术，添加变量 $\xi_i &gt; 0$，优化</p>
+<p>$$<br>\begin{matrix}<br>    \min &amp; \frac 12 ||\boldsymbol{w}||^2 + C\sum_{i&#x3D;1}^m\xi_i \\<br>    \text{s.t.} &amp; -\xi_i \leq 0 \\<br>                &amp;  1-y_if(\boldsymbol{x}_i)-\xi_i\leq 0<br>\end{matrix}<br>$$</p>
+<h2><span id="模型求解">模型求解</span></h2><p>上面的问题是一个凸二次规划，但是有更高效的做法。</p>
+<p>凸二次规划满足 strong duality，所以我们转而求解对偶问题。考察拉格朗日函数</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{w}, b, \boldsymbol{\xi}, \boldsymbol{\alpha}, \boldsymbol{\mu}) &#x3D; \frac 12 ||\boldsymbol{w}||^2 + C\sum_{i&#x3D;1}^m\xi_i + \sum_{i&#x3D;1}^m\alpha_i(1-y_i(\boldsymbol{w}^T\boldsymbol{x}_i+b)-\xi_i)-\mu_i\xi_i<br>$$</p>
+<p>对偶问题的目标为</p>
+<p>$$<br>g(\boldsymbol{\alpha}, \boldsymbol{\mu}) &#x3D; \inf \mathcal{L}(\boldsymbol{w}, b, \boldsymbol{\xi}, \boldsymbol{\alpha}, \boldsymbol{\mu})<br>$$</p>
+<p>固定对偶变量之后的拉格朗日函数是凸的，所以其唯一驻点对应的函数值就是其下确界，驻点和对偶变量范围的条件合计起来为</p>
+<p>$$<br>\begin{cases}<br>    &amp;\boldsymbol{w} - \sum_{i&#x3D;1}^m\alpha_iy_i\boldsymbol{x}_i &#x3D; \boldsymbol{0} \\<br>    &amp;\sum_{i&#x3D;1}^m \alpha_iy_i &#x3D; 0 \\<br>    &amp;\alpha_i + \mu_i &#x3D; C \\<br>    &amp;\alpha_i, \mu_i \geq 0 \\<br>\end{cases}<br>$$</p>
+<p>用等式条件可以消掉原来的变量，目标函数变成：</p>
+<p>$$<br>\sum_{u-1}^m \alpha_i - \frac 12\sum_{1\leq i, j \leq m} \alpha_i\alpha_j y_iy_j\boldsymbol{x}_i^T\boldsymbol{x}_j<br>$$</p>
+<p>现在目标函数不包含 $\boldsymbol{w}$，条件 $(1)$ 没有用，将 $(3), (4)$ 整合，得到对偶问题的一个比较简洁的形式：</p>
+<p>$$<br>\begin{matrix}<br>    \max &amp; \sum\limits_{u-1}^m \alpha_i - \dfrac 12\sum\limits_{1\leq i, j \leq m} \alpha_i\alpha_j y_iy_j\boldsymbol{x}_i^T\boldsymbol{x}_j \\<br>    \text{s.t.} &amp; \sum\limits_{i&#x3D;1}^m \alpha_iy_i &#x3D; 0 \\<br>                &amp; 0\leq \alpha_i\leq C<br>\end{matrix}<br>$$</p>
+<p>求解这个优化问题以后，可以用驻点条件得到 $\boldsymbol{w}$，然后代价是关于 $b$ 的凸函数，可以用二分之类的算法得到。</p>
+<p>要解决这个问题，可以使用 SMO 算法：每次选择两个 $\alpha_i, \alpha_j$，固定其他的量，然后优化这两个量。</p>
+<h2><span id="核函数">核函数</span></h2><p>对于非线性可分数据，我们可以考虑将其打到高维空间。这个映射记为 $\phi(\boldsymbol{x})$。此时我们可能需要高维空间中的距离，即求解 </p>
+<p>$$<br>\phi(\boldsymbol{x})^T\phi(\boldsymbol{y})<br>$$</p>
+<p>这里我们定义</p>
+<div class="note success"><p><strong>Definition 1(Kernel Function).</strong> $\kappa(\cdot, \cdot)$ 是<strong>核函数（Kernel）</strong>若存在映射 $\phi$ 使得 $\kappa(\boldsymbol{x}, \boldsymbol{y}) &#x3D; \langle\phi(\boldsymbol{x}), \phi(\boldsymbol{y})\rangle$</p>
+</div>
+
+<p>这样定义核函数导致你不常能拿到映射 $\phi$，但是基于下面的定义：</p>
+<div class="note success"><p><strong>Definition 2(Positive Definite Kernel)</strong> 称 $\kappa$ 是<strong>正定（Positive Definite）</strong>的，若对于任意的 $x_1, …, x_m$ 都有矩阵</p>
+<p>$$<br>\begin{pmatrix}<br>    \kappa(x_1, x_1) &amp; \cdot &amp; \kappa(x_1, x_m) \\<br>    \vdots &amp; &amp; \vdots \\<br>    \kappa(x_m, x_1) &amp; \cdot &amp; \kappa(x_m, x_m) \\<br>\end{pmatrix}<br>$$</p>
+<p>正定。</p>
+</div>
+
+<p>有如下的 Kernel Trick<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond, 34">[2]</span></a></sup>：如果你的一个算法用到了一个正定核 $\kappa_1$，那么可以换成另一个正定核 $\kappa_2$。</p>
+<p>比如说对于 LDA，我们可以只用核定义 $S_b, S_w$，得到 KLDA，实现某些非线性回归。</p>
+<p>在 SVM 中我们疑似只用到了欧氏距离这个核，于是可以换成别的核函数，从而解决非线性可分的问题。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;"><a target="_blank" rel="noopener" href="https://ccjou.wordpress.com/2012/05/30/lagrange-%e4%b9%98%e6%95%b8%e6%b3%95/">Lagrange 乘數法 | 線代啟示錄</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">Learning with Kernels: Support Vector Machines, Regularization, Optimization, and Beyond, 34<a href="#fnref:2" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SVM/" rel="tag"># SVM</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/01/Z-Zhou-ML1/" rel="prev" title="Machine Learning (1)（模型选择、线性模型、决策树）">
+                  <i class="fa fa-angle-left"></i> Machine Learning (1)（模型选择、线性模型、决策树）
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/08/19/Schreier-Sims/" rel="next" title="The Schreier-Sims Algorithm">
+                  The Schreier-Sims Algorithm <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

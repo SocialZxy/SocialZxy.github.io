@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文是周志华《机器学习》的学习笔记，从中摘要一些没见过或者有意思的东西。 每次卡住了就开一篇新文章。    绪论 模型评估与选择 线性模型 决策树 神经网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Machine Learning (1)（模型选择、线性模型、决策树）">
+<meta property="og:url" content="http://example.com/2024/07/01/Z-Zhou-ML1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文是周志华《机器学习》的学习笔记，从中摘要一些没见过或者有意思的东西。 每次卡住了就开一篇新文章。    绪论 模型评估与选择 线性模型 决策树 神经网络">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/PRcurve.png">
+<meta property="og:image" content="http://example.com/picture/Bias_and_variance_contributing_to_total_error.svg">
+<meta property="article:published_time" content="2024-07-01T02:47:52.000Z">
+<meta property="article:modified_time" content="2024-07-18T13:56:46.624Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="LDA">
+<meta property="article:tag" content="Decision Trees">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/PRcurve.png">
+
+
+<link rel="canonical" href="http://example.com/2024/07/01/Z-Zhou-ML1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/07/01/Z-Zhou-ML1/","path":"2024/07/01/Z-Zhou-ML1/","title":"Machine Learning (1)（模型选择、线性模型、决策树）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Machine Learning (1)（模型选择、线性模型、决策树） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">绪论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">模型评估与选择</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">线性模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">决策树</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">神经网络</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/01/Z-Zhou-ML1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Machine Learning (1)（模型选择、线性模型、决策树） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Machine Learning (1)（模型选择、线性模型、决策树）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-07-01 10:47:52" itemprop="dateCreated datePublished" datetime="2024-07-01T10:47:52+08:00">2024-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-07-18 21:56:46" itemprop="dateModified" datetime="2024-07-18T21:56:46+08:00">2024-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是周志华《机器学习》的学习笔记，从中摘要一些没见过或者有意思的东西。</p>
+<p>每次卡住了就开一篇新文章。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%BB%AA%E8%AE%BA">绪论</a></li>
+<li><a href="#%E6%A8%A1%E5%9E%8B%E8%AF%84%E4%BC%B0%E4%B8%8E%E9%80%89%E6%8B%A9">模型评估与选择</a></li>
+<li><a href="#%E7%BA%BF%E6%80%A7%E6%A8%A1%E5%9E%8B">线性模型</a></li>
+<li><a href="#%E5%86%B3%E7%AD%96%E6%A0%91">决策树</a></li>
+<li><a href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="绪论">绪论</span></h1><p>在一个多分类问题中，一个损失函数 $L(x, y)$ 被称为 Homogeneous 的，若其满足</p>
+<p>$$<br>\forall x, \sum_i L(x, i) &#x3D; 1<br>$$</p>
+<div class="note info"><p><strong>Theorem 1.1(No Free Lunch, Wolpert 1996).</strong> 假设真实的目标函数服从均匀分布，对于 Homogeneous 的损失函数 $\mathcal{L}(\cdot, \cdot)$，任何机器学习算法具有相同的期望泛化性能。</p>
+<p>形式化地，此时我们要用一个机器学习算法来拟合 $f : \mathcal{X}\rightarrow \mathbb{Z}&#x2F;n\mathbb{Z}$，我们的训练集是 $X\subseteq \mathcal{X}$，机器学习算法 $\mathfrak{L}_a$ 可以抽象为经过训练集的训练之后，其以 $P(h | \mathcal{X}, \mathfrak{L}_a)$ 的概率产生函数 $h$。此时该算法的期望泛化性能为</p>
+<p>$$<br>\sum_f P(f) \sum_h P(h | \mathcal{X}, \mathfrak{L}_a) \sum_{\boldsymbol{x}\in \mathcal{X}\setminus X} P(\boldsymbol{x})\mathcal{L}(h(\boldsymbol{x}), f(\boldsymbol{x}))<br>$$</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>直接进行简单的推导即可：</p>
+<p>$$<br>\begin{align}<br>    &amp;\sum_f P(f) \sum_h P(h | \mathcal{X}, \mathfrak{L}_a) \sum_{\boldsymbol{x}\in \mathcal{X}\setminus X} P(\boldsymbol{x}) \mathcal{L}(h(\boldsymbol{x}), f(\boldsymbol{x})) \\<br>    &#x3D;&amp;\sum_{\boldsymbol{x}\in \mathcal{X}\setminus X} P(\boldsymbol{x}) \sum_h P(h | \mathcal{X}, \mathfrak{L}_a) \sum_f P(f) \mathcal{L}(h(\boldsymbol{x}), f(\boldsymbol{x})) \\<br>    &#x3D;&amp;\sum_{\boldsymbol{x}\in \mathcal{X}\setminus X} P(\boldsymbol{x}) \sum_h P(h | \mathcal{X}, \mathfrak{L}_a) \frac{1}{n} \\<br>    &#x3D;&amp;\frac 1n \sum_{\boldsymbol{x}\in \mathcal{X}\setminus X} P(\boldsymbol{x})<br>\end{align}<br>$$</p>
+<p>$(4)\Rightarrow (5)$ 用到 $f$ 的均匀分布性质和 $\mathcal{L}$ 的 homogeneous 性质，跳过了枚举 $f(\boldsymbol{x})$ 的值然后交换求和顺序一步。$\square$</p>
+
+</details></div>
+
+<p>这个定理的实际上没有什么道理，因为现实中 $f$ 并非服从均匀分布。从寓意上来讲这个定理告诉我们谈论算法的优劣必须考虑具体的问题。</p>
+<h1><span id="模型评估与选择">模型评估与选择</span></h1><p>小数据集上一个比较有道理的数据集划分方法：Bootstrapping。</p>
+<blockquote>
+<p>对于一个大小为 $m$ 的初始数据集，做 $m$ 次均匀采样得到训练集，未被采到的划入验证集。</p>
+</blockquote>
+<p>简单分析可以知道这个相当于一个 $\frac{1}{\mathrm{e}}$ 大小验证集的划分，但是每一个元素都有机会出现在训练集中。多次做 Bootstrapping 可以得到多个训练集&#x2F;验证集，可以用于集成学习。但是需要注意这个做法改变了初始数据集的分布，可能引入估计偏差。</p>
+<hr>
+<p>上学期 AI 基础学 Object Detection 的时候有一个很神秘的精度率-召回率图：</p>
+<p><img src="/../picture/PRcurve.png"></p>
+<p>当时不知道此图如何得到，现在简述一下。</p>
+<p>这个图是模型进行一次预测之后得到的，目的是为了调整分类为正类的阈值。将阈值设定为不同的值，可以得到不同的精度率和召回率。将这些数据描点连线即可得到上述图表。</p>
+<p>得到了这个图之后模型的比较可以基于如下方法：</p>
+<ul>
+<li><strong>严格优于：</strong> $A$ 模型的曲线完全包络了 $B$ 模型的曲线。</li>
+<li><strong>$F_1$：</strong> 比较关键字为精度率和召回率的调和平均。</li>
+<li><strong>$F_\beta$：</strong> 比较关键字为精度率和召回率依次带上权重 $\beta^2, 1$ 的加权调和平均。</li>
+</ul>
+<p>另一种图是召回率 $\frac{TP}{TP+FN}$ - 假阳性率 $\frac{FP}{FP+TN}$ 图（ROC 图），简单计算可以发现阈值从小到大增长的过程中这会是一个从 $(0, 0)$ 到 $(1, 1)$ 的曲线。如果两个算法的 ROC 图之间出现了包含关系，那么可以断言一者完全由于另一者，否则一个比较科学的方法是比较曲线下面积（AUC）。</p>
+<hr>
+<p>下面介绍几个所谓的比较检验法。我们不能知道一个模型的泛化误差，但是假设测试集是从数据中均匀采样得到的，那么我们可以从测试误差估计泛化误差。</p>
+<p><strong>Binomial Test.</strong> 假设一个模型的泛化误差为 $\varepsilon$，测试集大小为 $m$，那么该模型被测出具有测试误差 $\hat{\varepsilon}$ 的概率为</p>
+<p>$$<br>P(\hat{\varepsilon}; \varepsilon) &#x3D; \binom{m}{\hat{\varepsilon}m}\varepsilon^{\hat{\varepsilon}m}(1-\varepsilon)^{m-\hat{\varepsilon}m}<br>$$</p>
+<p>接下来我们试图放缩 $\varepsilon$ 的上界：即假设 $\varepsilon &lt; \varepsilon_0$。则对于指定的容错率 $\delta$，我们可以找到</p>
+<p>$$<br>\bar{\varepsilon} &#x3D; \min\left\{\varepsilon ~\Bigg| \sum_{i&#x3D;\varepsilon m + 1}^m \binom{m}{i}\varepsilon_0^i(1-\varepsilon_0)^{m-i} &lt; \delta \right\}<br>$$</p>
+<p>若 $\hat{\varepsilon} &gt; \bar{\varepsilon}$ 则可以说有 $1-\delta$ 的把握认为 $\varepsilon &lt; \varepsilon_0$ 成立。</p>
+<blockquote>
+<p><strong>Remark.</strong> 这段话是书上写的，我并不是很认同， 因为我算了一下总感觉哪个不等号的方向反过来了，他写的 Binomial Test 和正常的 Binomial Test 也不是很像。要么是我哪里看错了。</p>
+</blockquote>
+<p><strong>$t$-Test</strong>、<strong>McNemar Test</strong>、<strong>Friedman Test</strong>、<strong>Nemenyi Test</strong></p>
+<p>这部分涉及到一些 $\chi^2$ 分布、$t$ 分布的使用，但是因为我对这两个东西完全不熟悉，所以先跳过这一节的推导，停留在会查表格的程度。</p>
+<p>查表格只是一些琐碎的工作，这里不写。</p>
+<hr>
+<p><strong>Bias-Variance Decomposition</strong></p>
+<p>假设 $D$ 是一个数据集 $\boldsymbol{x}\in D$ 是某一个训练样本，$y_D$ 是其在数据集中的标注。$y$ 为其真实标记（这里 $y_D\ne y$，表示标注错误），$f(\cdot; D)$ 是算法在 $D$ 上拟合到的函数，$\bar f(\boldsymbol{x}) &#x3D; \mathbb{E}_{D} (f(\boldsymbol{x}; D))$。</p>
+<p>假设 $y_D$ 是 $y$ 添加随机噪声 $\varepsilon$ 得到的，其中 $\mathbb{E}[\varepsilon] &#x3D; 0, \mathrm{D}[\varepsilon] &#x3D; \sigma^2$，$y$ 和 $\varepsilon$ 独立。学习算法和误差无关，即 $f$ 和 $\varepsilon$ 独立。现在考察数据集上的期望误差：</p>
+<p>$$<br>\begin{align}<br>    \mathbb{E}_{D, \boldsymbol{x}}[(y_D - f(\boldsymbol{x}; D))^2] &amp;&#x3D; \mathbb{E}_{D, \boldsymbol{x}}[y_D^2] - 2\mathbb{E}_{D, \boldsymbol{x}}[y_D f(\boldsymbol{x}; D)] + \mathbb{E}[f(\boldsymbol{x}; D)^2]<br>\end{align}<br>$$</p>
+<p>现在逐项化简。</p>
+<p>$$<br>\begin{align}<br>    \mathbb{E}_{D, \boldsymbol{x}}[y_D^2] &amp;&#x3D; \mathbb{E}_{D, \boldsymbol{x}}[(y + \varepsilon)^2] \\<br>                                            &amp;&#x3D; \mathbb{E}_{D, \boldsymbol{x}}[y^2] + 2\mathbb{E}[y]\mathbb{E}[\varepsilon] + \sigma^2 &amp; \color{blue}{\text{($y$ and $\varepsilon$ are independent)}} \\<br>                                            &amp;&#x3D; \mathbb{E}_{\boldsymbol{x}}[y^2] + \sigma^2\\<br>    \mathbb{E}_{D, \boldsymbol{x}}[y_D f(\boldsymbol{x}; D)]<br>    &amp;&#x3D; \mathbb{E}_{D, \boldsymbol{x}}[yf(\boldsymbol{x}; D)] + \mathbb{E}_{D, \boldsymbol{x}}[\varepsilon f(\boldsymbol{x}; D)] \\<br>    &amp;&#x3D; \mathbb{E}_{D, \boldsymbol{x}}[yf(\boldsymbol{x}; D)] &amp; \color{blue}{\text{($f$ and $\varepsilon$ are independent)}} \\<br>    \mathbb{E}_{D, \boldsymbol{x}}[f(\boldsymbol{x}; D)^2]<br>    &amp;&#x3D; \mathrm{D}_{D, \boldsymbol{x}}[f(\boldsymbol{x}; D)] + \mathbb{E}_{D, \boldsymbol{x}}[f(\boldsymbol{x}; D)]^2 \\<br>    &amp;&#x3D; \mathrm{D}_{D, \boldsymbol{x}}[f(\boldsymbol{x}; D)] + \mathbb{E}_{\boldsymbol{x}}[\bar{f}(\boldsymbol{x})]^2<br>\end{align}<br>$$</p>
+<p>加起来不难得到</p>
+<p>$$<br>\mathbb{E}_{D, \boldsymbol{x}}[(y_D - f(\boldsymbol{x}; D))^2] &#x3D; \underbrace{\mathbb{E}_{D, \boldsymbol{x}}[(\bar{f}(\boldsymbol{x})-y)^2]}_{bias^2} + \underbrace{\mathrm{D}_{D, \boldsymbol{x}}[f(\boldsymbol{x}; D)]}_{variance} + \underbrace{\sigma^2}_{noise}<br>$$</p>
+<blockquote>
+<p>书上的推导有一些跳步导致很难看懂，所以我们换了一种做法。</p>
+</blockquote>
+<p>感性理解，起来，模型越复杂，拟合效果越好（bias 越小），但鲁棒性越差（variance 越大），这导致总的训练效果存在一均衡点<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="图片来源：[Bias–variance tradeoff - Wikipedia](https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff)">[1]</span></a></sup>：</p>
+<p><img src="/../picture/Bias_and_variance_contributing_to_total_error.svg"></p>
+<h1><span id="线性模型">线性模型</span></h1><p><strong>LDA, 1936</strong></p>
+<p>假设现在欧式空间中有两类、若干数据点，现在要做一条直线，使得两类投影到该直线上之后，区分地尽量开。</p>
+<blockquote>
+<p>到这里给人的感觉就有一点像分类版本的 PCA，在后面给出做法之后我们会发现两者确实很类似。</p>
+</blockquote>
+<p>量化考虑这一件事情。区分的尽量开可以有两个指标：</p>
+<ul>
+<li>异类点之间的距离尽量大。</li>
+<li>同类点的方差尽量小。</li>
+</ul>
+<p>我们考虑定义下面几个量：</p>
+<ul>
+<li><p>$X_i$ 表示第 $i$ 类点的集合。</p>
+</li>
+<li><p>$\boldsymbol{\mu}_i$ 表示第 $i$ 类点的均值。</p>
+</li>
+<li><p>$\Sigma_i$ 表示第 $i$ 类点的协方差矩阵。这个概念有点陌生，我们稍作解释。</p>
+<div class="note success"><p>$\Sigma_i$ 是一个阶数为空间维数的矩阵，它的计算方法为</p>
+<p>$$<br>\Sigma_i &#x3D; \sum_{\boldsymbol{x}\in X_i} (\boldsymbol{x} - \boldsymbol{\mu}_i)(\boldsymbol{x} - \boldsymbol{\mu}_i)^T<br>$$</p>
+<p>可以用这个矩阵计算这些向量投影到一个子空间 $W$ 上之后的协方差矩阵。假设 $W$ 有一组标准正交基 $\boldsymbol{w}_1, …, \boldsymbol{w}_r$，令 $\mathbf{W} &#x3D; (\boldsymbol{w}_1, …, \boldsymbol{w_r})$，那么显然有</p>
+<p>$$<br>\Sigma’_i &#x3D; \mathbf{W}^T \Sigma_i \mathbf{W}<br>$$</p>
+<p>而可以用协方差矩阵推知方差：</p>
+<p>$$<br>D_i &#x3D; \mathrm{tr}(\Sigma_i)<br>$$</p>
+</div></li>
+</ul>
+<p>LDA 假设 $\Sigma_i$ 均满秩，其最大化</p>
+<p>$$<br>J &#x3D; \frac{||\boldsymbol{w}^T\boldsymbol{\mu}_0 - \boldsymbol{w}^T\boldsymbol{\mu}_1||^2}{\boldsymbol{w}^T(\Sigma_0 + \Sigma_1)\boldsymbol{w}}<br>$$</p>
+<p>我们定义 $\mathbf{S}_w &#x3D; \Sigma_0 + \Sigma_1, \mathbf{S}_b &#x3D;  (\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)(\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)^T$ 来简化上式的形式。观察这两个矩阵的形式，$\mathbf{S}_w$ 是正定的，$\mathbf{S}_b$ 是半正定的，并且是投影。我们现在要最大化</p>
+<p>$$<br>J &#x3D; \frac{\boldsymbol{w}^T\mathbf{S}_b\boldsymbol{w}}{\boldsymbol{w}^T\mathbf{S}_w\boldsymbol{w}}<br>$$</p>
+<div class="note info"><p><strong>Claim.</strong> 当</p>
+<p>$$<br>\boldsymbol{w} &#x3D; \mathbf{S}_w^{-1}(\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)<br>$$</p>
+<p>时，原优化问题取到最优。</p>
+</div>
+
+<p>书上有基于拉格朗日乘子法的推导，但是很遗憾我们对矩阵求导并不熟悉，因此我们考虑纯线性代数推法。</p>
+<details class="note "><summary><p><strong>Derivation.</strong></p>
+</summary>
+<p>上面的式子是齐次式，所以下面的讨论中我们将在合理的地方忽略向量的长度。</p>
+<p>注意 $\mathbf{S}_w$ 是正定矩阵，因此存在正定矩阵 $\mathbf{C}$ 使得 $\mathbf{S}_w &#x3D; \mathbf{C}^T\mathbf{C}$。令</p>
+<p>$$<br>\boldsymbol{w_1} &#x3D; \mathbf{C}\boldsymbol{w}, \mathbf{S_1}_b &#x3D; (\mathbf{C}^{T})^{-1}\mathbf{S}_b\mathbf{C}^{-1}<br>$$</p>
+<p>那么原式变成了</p>
+<p>$$<br>J &#x3D; \frac{\boldsymbol{w_1}^{T}\mathbf{S_1}_b\boldsymbol{w_1}’}{||\boldsymbol{w_1}||^2}<br>$$</p>
+<p>这个式子很经典，它的最大值是 $\mathbf{S_1}_b$ 的最大特征值，$\boldsymbol{w_1}$ 取特征向量时取等。</p>
+<p>$\dim \mathrm{Im~}\mathbf{S_1}_b &#x3D; 1$，因此想要得到这个特征值的特征向量，只能在像空间里面找，我们让它乘上一个向量 $\boldsymbol{v}$：</p>
+<p>$$<br>\mathbf{S_1}_b\boldsymbol{v} &#x3D; \mathbf{C}^{-1}(\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)\color{red}{(\boldsymbol{\mu}_0 - \boldsymbol{\mu_1})^T\mathbf{C}^{-1}\boldsymbol{v}}<br>$$</p>
+<p>注意红色部分是标量，因此 $\mathbf{C}^{-1}(\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)$ 是特征向量（你可以验证这一点，将其带入上式，根据 $\mathbf{S}_w$ 的正定性立即得到红色部分不是 $0$），即原最优化问题的解。还原到 $\boldsymbol{w}$ 一侧得到</p>
+<p>$$<br>\boldsymbol{w} &#x3D; \mathbf{S}_w^{-1}(\boldsymbol{\mu}_0 - \boldsymbol{\mu}_1)<br>$$</p>
+<p>时原问题最优。</p>
+
+</details>
+
+<blockquote>
+<p>这个做法有点太 Adhoc 了。所谓的拉乘做法是添加分母为 $0$ 的条件然后最大化分子。对 $\boldsymbol{w}$ 求偏导之后得到 $\mathbf{S}_b\boldsymbol{w} &#x3D; \lambda \mathbf{S}_w\boldsymbol{w}$，后面也需要注意到 $\mathbf{S}_b$ 的像是一维的。</p>
+</blockquote>
+<p>考虑 $k$ 分类的 LDA，我们定义 </p>
+<p>$$<br>\mathbf{S}_w &#x3D; \sum_{i&#x3D;1}^k \Sigma_i, \mathbf{S}_b &#x3D; \sum_{i&#x3D;1}^k |X_i|(\boldsymbol{\mu_i} - \boldsymbol{\mu})(\boldsymbol{\mu}_i - \boldsymbol{\mu})^T<br>$$</p>
+<p>这里 $\boldsymbol{\mu}$ 是全局重心。现最大化</p>
+<p>$$<br>\frac{\mathrm{tr}(\mathbf{W}^T\mathbf{S}_b\mathbf{W})}{\mathrm{tr}(\mathbf{W}^T\mathbf{S}_w\mathbf{W})}<br>$$</p>
+<p><strong>Claim.</strong> 当且仅当 $\mathbf{W}$ 每一列都为 $\mathbf{S}_w^{-1}\mathbf{S}_b$ 的最大特征值的特征向量时（至少有一列不是 $0$）取最大值。</p>
+<details class="note "><summary><p><strong>Proof.</strong></p>
+</summary>
+<p>将 $\mathbf{W}$ 写成分块矩阵 $(\boldsymbol{w}_1, …, \boldsymbol{w}_r)$，那么目标等于</p>
+<p>$$<br>\frac{\sum \boldsymbol{w}_i^{T}\mathbf{S}_b \boldsymbol{w}_i}{\sum \boldsymbol{w}_i^{T}\mathbf{S}_w \boldsymbol{w}_i}<br>$$</p>
+<p>注意 $\lambda$ 是最大的特征值，那么首先将整个空间分解成特征子空间的直和 $V &#x3D; \bigoplus V_{\lambda_i}$，然后将向量 $\boldsymbol{w}$ 分解成不同特征值的特征向量的和 $\boldsymbol{w} &#x3D; \sum \boldsymbol{w}_i$。于是</p>
+<p>$$<br>\frac{\boldsymbol{w}^T \mathbf{S}_b \boldsymbol{w}}{\boldsymbol{w}^T \mathbf{S}_w \boldsymbol{w}} &#x3D; \frac{\lambda_i\boldsymbol{w}^T \mathbf{S}_w \boldsymbol{w}}{\boldsymbol{w}^T \mathbf{S}_w \boldsymbol{w}} \leq \lambda<br>$$</p>
+<p>取等仅当 $\boldsymbol{w}\in V_\lambda$。用这个式子对目标放缩即得到答案。$\square$</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 早这么算就屁事没有了。</p>
+</blockquote>
+<p>如果 $\boldsymbol{w}_1, \cdot, \boldsymbol{w}_r$ 取 $V_\lambda$ 的标准正交基，本质上这里相当于将整个空间用 $\mathbf{W}$ 投影到 $V_\lambda$ 里，实现了数据的保持类别区别的降维。</p>
+<hr>
+<p><strong>二分类构造多分类</strong></p>
+<p>三种方法。</p>
+<ul>
+<li><strong>OvO</strong>，学习 $\binom n2$ 个二分类（两两之间），最后输出通过投票产生。</li>
+<li><strong>OvR</strong>，学习 $n$ 个二分类（一个和其他），最后输出选置信度最大的。</li>
+<li><strong>RvR</strong>，学习 $m$ 组，每一组中将一部分编为正类，一部分编为负类，得到每一类在这 $m$ 次分类中得到的结果 $r_1, …, r_m$。最后输出测试结果 $r$ 在 $r_1, …, r_m$ 中的最近邻（汉明或者欧式）</li>
+</ul>
+<hr>
+<p><strong>类别不平衡处理</strong></p>
+<p>假设正例个数有 $m_+$ 个，反例个数有 $m_-$ 个。</p>
+<ul>
+<li><p><strong>rescaling</strong> 基于数据集从实际情况无偏采样得到的假设，只需</p>
+<p>$$<br>\frac y{1-y} &gt; \frac{m_+}{m_-}<br>$$</p>
+<p>即认为是正类。对比原来的式子，只需要给 log odds 乘上 $m_-&#x2F;m_+$ 即可。</p>
+<p>这个做法的问题是其假设不一定对。</p>
+</li>
+<li><p><strong>undersampling</strong> 丢掉多的类。</p>
+<p>为了防止丢失信息最好进行集成学习。</p>
+</li>
+<li><p><strong>oversampling</strong> 对于少的类进行反复采样。</p>
+<p>如果简单地重复采样会导致过拟合。可以考虑插一下值。</p>
+</li>
+</ul>
+<h1><span id="决策树">决策树</span></h1><p><strong>基本算法</strong></p>
+<p>首先考虑信息都是 Category 的情况。</p>
+<p>粗略来说就是每次选择一个可以继续分割的节点，选择一个最优的属性，创建儿子节点。</p>
+<p>一个节点 $u$ 上样本的集合为 $S_u$，其中有 $k_u$ 个类别的样本，第 $i$ 类占比为 $p_{ui}$，其信息熵记为</p>
+<p>$$<br>\mathrm{Ent}(u) &#x3D; -\sum_{i&#x3D;1}^{k_u} p_{ui}\log p_{ui}<br>$$</p>
+<p>熟知这东西越大表明集合越混乱。</p>
+<p>假设按照属性 $a$ 划分之后产生的儿子集合为 $\mathrm{son}(u, a)$，那么下面的量（称为<strong>信息增益</strong>）可以作为比较标准：</p>
+<p>$$<br>\mathrm{Gain}(u, a) &#x3D; \mathrm{Ent}(u) - \sum_{v\in\mathrm{son}(u, a)} \frac{|S_v|}{|S_u|}\mathrm{Ent}(v)<br>$$</p>
+<p>这个指标导致算法倾向于选择属性较多的类（比如说如果引入一个“编号”类，它会直接去选择编号这一属性），会导致过拟合。所以我们引入一个因子来平衡这个东西：</p>
+<p>$$<br>\mathrm{IV}(u, a) &#x3D; -\sum_{v\in \mathrm{son}(u, a)} \frac{|S_v|}{|S_u|}\log\frac{|S_v|}{|S_u|}<br>$$</p>
+<p>新的比较标准（称为<strong>信息增益率</strong>）如下</p>
+<p>$$<br>\mathrm{GainRatio}(u, a) &#x3D; \frac{\mathrm{Gain}(u, a)}{\mathrm{IV}(u, a)}<br>$$</p>
+<p>实践中发现加入这个量之后会偏好取值较少的类，只能加一些启发式的算法比如先选出信息增益高于平均值的，然后选增益率最大的。</p>
+<p>此外还有一个可以衡量集合混乱程度的东西，称为基尼值（组合意义是 uniform sample 两个样本，类别不一致的概率）：</p>
+<p>$$<br>\mathrm{Gini}(u) &#x3D; 1 - \sum_{i&#x3D;1}^{k_u} p_{ui}^2<br>$$</p>
+<p>因此下面的<strong>基尼指数</strong>也可以作为比较标准：</p>
+<p>$$<br>\mathrm{GiniIndex}(u, a) &#x3D; -\sum_{v\in\mathrm{son}(u, a)} \frac{|S_v|}{|S_u|}\mathrm{Gini}(v)<br>$$</p>
+<hr>
+<p><strong>剪枝</strong></p>
+<p>防止过拟合。用验证集来估计模型的泛化能力。一般有两种：</p>
+<ul>
+<li><strong>Prepruning.</strong> 在要进行一次划分的时候做验证，观察准确率是不是掉了，如果掉了就放弃划分。</li>
+<li><strong>Postpruning.</strong> 训练完之后按深度从大到小考察每个节点，如果放弃划分验证准确率变高了就放弃划分。</li>
+</ul>
+<hr>
+<p><strong>连续值</strong></p>
+<p>显然你只能考虑将节点上的样本的连续值拿出来排序，然后取相邻两个数的中位点 &#x2F; 某一个数作为划分的阈值，每次把节点裂成两个。</p>
+<p>然后你发现目标函数（信息熵 &#x2F; 基尼指数）关于这个决策点都没有什么好性质，可能既不凸也不单调，最极端的情况只需要考虑正类和反例总和为偶数，且间隔排列的情况，严格来说似乎没有优于枚举的做法。但是如果你的特征选的非常好的话应该不会有这种极端情况，此时可能至少模拟退火之类的局部搜索算法是能用的。</p>
+<p>只考虑单变量的决策树只能用一个锯齿来拟合分类边界，想要拟合斜线可以考虑对于多个变量，考虑一个线性的式子作为分类依据：</p>
+<p>$$<br>\sum_{i&#x3D;1}^t \omega_i v_i + \beta \leq 0<br>$$</p>
+<p>参数是 $\omega_i, \beta$（其实 $\beta$ 换成 $1$ 也没什么问题）。同样的这个东西不凸也不单调，用梯度下降来优化绝对是没有什么道理的，但是局部搜索可能能用。</p>
+<h1><span id="神经网络">神经网络</span></h1><p>关于 MLP、反向传播的内容是众所周知的，直接跳过。</p>
+<p>至少有一个隐藏层的 MLP 是 Universal Approxiator 这个事实很有意思，但是我暂时不会证明。</p>
+<p>怎么这一章全是批话，看了跟没看一样。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">图片来源：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff">Bias–variance tradeoff - Wikipedia</a><a href="#fnref:1" rev="footnote"> ↩</a></span></li></ol></div></div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/LDA/" rel="tag"># LDA</a>
+              <a href="/tags/Decision-Trees/" rel="tag"># Decision Trees</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/06/16/SoftwareFundations12/" rel="prev" title="Revision | 软件科学基础">
+                  <i class="fa fa-angle-left"></i> Revision | 软件科学基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/07/16/Z-Zhou-ML2/" rel="next" title="Machine Learning (2)（支持向量机）">
+                  Machine Learning (2)（支持向量机） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

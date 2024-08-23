@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。    Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation o">
+    <meta name="description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Tensor Analysis (3) Tensor Calculus">
 <meta property="og:url" content="http://example.com/2024/03/04/TensorAnal3TensorCalc/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。    Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation o">
+<meta property="og:description" content="Abstract. 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。就当是学物理了。  之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。     Notation Conservation Laws Newton’s Law in General Coordinates Christoffel Symbols Computation">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-03-04T09:59:32.000Z">
 <meta property="article:modified_time" content="2024-03-05T07:14:22.376Z">
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -239,11 +239,12 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。<s>就当是学物理了。</s></p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 一些多元微积分的内容，严格来说和 Tensor 关系不大，和 Vector 关系比较大。<del>就当是学物理了。</del></p>
 <blockquote>
 <p>之前看过一次这一章，实际上没怎么看懂，写的东西很不得要领，于是删了重写。</p>
 </blockquote>
 <!-- toc -->
+
 <ul>
 <li><a href="#notation">Notation</a></li>
 <li><a href="#conservation-laws">Conservation Laws</a></li>
@@ -253,343 +254,160 @@
 <li><a href="#a-change-of-coordinates">A Change of Coordinates</a></li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
-<h1><span id="notation">Notation</span></h1>
-<p>书中记号非常混乱，疑似是在试图缝合每种主义的优点。</p>
+
+<h1><span id="notation">Notation</span></h1><p>书中记号非常混乱，疑似是在试图缝合每种主义的优点。</p>
 <p>所有向量用粗斜体字母表示，例如 $\boldsymbol{x}$。标量则用正常斜体表示。二阶张量用粗正体表示，如 $\mathbf{T}$。</p>
 <p>对于时间 $t$ 求导采用 Newton’s Notation，即</p>
-<p>$$<br>
-\dot{\boldsymbol{x}} = \frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t}<br>
-$$</p>
+<p>$$<br>\dot{\boldsymbol{x}} &#x3D; \frac{\mathrm{d}\boldsymbol{x}}{\mathrm{d}t}<br>$$</p>
 <p>求偏导采用 Leibniz’s Notation 和一种不知名的记号（一种形似 Legendre 发明的偏导记号的东西）。如下面的式子表示 $x^i$ 对 $u^j$ 求偏导：</p>
-<p>$$<br>
-\frac{\partial x^i}{\partial u^j} = x^i_{, j}<br>
-$$</p>
+<p>$$<br>\frac{\partial x^i}{\partial u^j} &#x3D; x^i_{, j}<br>$$</p>
 <p>RHS 可以简单地表示连续求两次偏导</p>
-<p>$$<br>
-x^k_{, ij} = \frac{\partial^2 x^k}{\partial i \partial j}<br>
-$$</p>
+<p>$$<br>x^k_{, ij} &#x3D; \frac{\partial^2 x^k}{\partial i \partial j}<br>$$</p>
 <p>我们仍然接受 Einstein Summation Convention。</p>
 <p>考虑实际情况，所有函数均假设在 $\mathbb{R}^n$ 上有连续的偏导数。</p>
-<h1><span id="conservation-laws">Conservation Laws</span></h1>
-<p>直接从微积分的角度推导守恒定律，回忆求导法则对于向量仍然成立，因此</p>
-<p>$$<br>
-\boldsymbol{f}\cdot\dot{\boldsymbol{x}} = m\ddot{\boldsymbol{x}}\dot{x} = (\frac 12 m \dot{\boldsymbol{x}}^2)’ = \dot{k}<br>
-$$</p>
+<h1><span id="conservation-laws">Conservation Laws</span></h1><p>直接从微积分的角度推导守恒定律，回忆求导法则对于向量仍然成立，因此</p>
+<p>$$<br>\boldsymbol{f}\cdot\dot{\boldsymbol{x}} &#x3D; m\ddot{\boldsymbol{x}}\dot{x} &#x3D; (\frac 12 m \dot{\boldsymbol{x}}^2)’ &#x3D; \dot{k}<br>$$</p>
 <p>两边乘 $\mathrm{d}t$ 得到<strong>动能定理</strong>。</p>
-<p>$$<br>
-\boldsymbol{x}\times\boldsymbol{f} = m\boldsymbol{x}\times\ddot{\boldsymbol{x}} = (\boldsymbol{x}\times m\dot{\boldsymbol{x}})’ = \dot{\boldsymbol{I}}_O<br>
-$$</p>
-<p>两边乘 $\mathrm{d}t$ 得到<strong>角动能定理</strong>。（这里需要注意 $\dot{\boldsymbol{x}}\times\dot{\boldsymbol{x}} = \boldsymbol{0}$）</p>
-<p>若存在势能函数 $E_p(\boldsymbol{x})$ 使得 $\boldsymbol{f}\cdot\dot{\boldsymbol{x}} = -\dot{E_p}$，称 $\boldsymbol{f}$ 为保守力，此时有<strong>能量守恒</strong></p>
-<p>$$<br>
-k + E_p = constant<br>
-$$</p>
-<h1><span id="newtons-law-in-general-coordinates">Newton’s Law in General Coordinates</span></h1>
-<div class="note info"><p>书上这里讲了极坐标下的特例，并写了一般形式作为对照。我们这里尝试只推导一般形式，极坐标形式可以自行模拟。</p>
+<p>$$<br>\boldsymbol{x}\times\boldsymbol{f} &#x3D; m\boldsymbol{x}\times\ddot{\boldsymbol{x}} &#x3D; (\boldsymbol{x}\times m\dot{\boldsymbol{x}})’ &#x3D; \dot{\boldsymbol{I}}_O<br>$$</p>
+<p>两边乘 $\mathrm{d}t$ 得到<strong>角动能定理</strong>。（这里需要注意 $\dot{\boldsymbol{x}}\times\dot{\boldsymbol{x}} &#x3D; \boldsymbol{0}$）</p>
+<p>若存在势能函数 $E_p(\boldsymbol{x})$ 使得 $\boldsymbol{f}\cdot\dot{\boldsymbol{x}} &#x3D; -\dot{E_p}$，称 $\boldsymbol{f}$ 为保守力，此时有<strong>能量守恒</strong></p>
+<p>$$<br>k + E_p &#x3D; constant<br>$$</p>
+<h1><span id="newtons-law-in-general-coordinates">Newton’s Law in General Coordinates</span></h1><div class="note info"><p>书上这里讲了极坐标下的特例，并写了一般形式作为对照。我们这里尝试只推导一般形式，极坐标形式可以自行模拟。</p>
 </div>
+
 <p>已知牛顿定律在 $\boldsymbol{e}_1, …, \boldsymbol{e}_n$ 下的形式，出于推导其他坐标系（比如极坐标）下牛顿定律形式的需要，假定现在我们引入了 $n$ 个新变元 $u^1, …, u^n$（均为关于时间 $t$ 的函数），设</p>
-<p>$$<br>
-\boldsymbol{x} = \hat{\boldsymbol{x}}(u^j) = \hat{x}^i(u^j)\boldsymbol{e}_i<br>
-$$</p>
+<p>$$<br>\boldsymbol{x} &#x3D; \hat{\boldsymbol{x}}(u^j) &#x3D; \hat{x}^i(u^j)\boldsymbol{e}_i<br>$$</p>
 <p>此时为了推导速度的表达式，我们需要对位矢关于 $t$ 求导，根据链式法则</p>
-<p>$$<br>
-\boldsymbol{v} = \dot{\boldsymbol{x}} = \frac{\partial \boldsymbol{x}}{\partial u^i} \dot{u}^i<br>
-$$</p>
+<p>$$<br>\boldsymbol{v} &#x3D; \dot{\boldsymbol{x}} &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^i} \dot{u}^i<br>$$</p>
 <p>此时令</p>
-<p>$$<br>
-\boldsymbol{g}_i = \frac{\partial \boldsymbol{x}}{\partial u^i} = \frac{\partial x^j}{\partial u^i}\boldsymbol{e}_j<br>
-$$</p>
-<p>容易想象，在极坐标系下这里你会得到 $\boldsymbol{g}_r = \cos\theta \boldsymbol{e}_x + \sin\theta \boldsymbol{e}<em>y, \boldsymbol{g}</em>\theta = r(-\sin\theta\boldsymbol{e}_x + \cos\theta\boldsymbol{e}_y)$，也就是一个径向向量和一个切向向量。</p>
+<p>$$<br>\boldsymbol{g}_i &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^i} &#x3D; \frac{\partial x^j}{\partial u^i}\boldsymbol{e}_j<br>$$</p>
+<p>容易想象，在极坐标系下这里你会得到 $\boldsymbol{g}_r &#x3D; \cos\theta \boldsymbol{e}_x + \sin\theta \boldsymbol{e}_y, \boldsymbol{g}_\theta &#x3D; r(-\sin\theta\boldsymbol{e}_x + \cos\theta\boldsymbol{e}_y)$，也就是一个径向向量和一个切向向量。</p>
 <p>如果这个变换是一个良定义的坐标变换，应当要求它是一个一一映射，根据隐函数存在定理需要满足<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)">[1]</span></a></sup></p>
-<p>$$<br>
-\frac{D(x_1, …, x_n)}{D(u^1, …, u^n)} = J(\boldsymbol{g}_1, …, \boldsymbol{g}_n)\ne 0<br>
-$$</p>
-<p>故此时 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是平面的一组基，称为 $u^j-$坐标系的 cellar base vector。（事实上条件可以略放松一点，可以在测度为 $0$ 的点集上违反这个条件，如极坐标下原点处 $J = 0$，此时 $\boldsymbol{g}$ 并不是一组基，但可以忽略不计）</p>
+<p>$$<br>\frac{D(x_1, …, x_n)}{D(u^1, …, u^n)} &#x3D; J(\boldsymbol{g}_1, …, \boldsymbol{g}_n)\ne 0<br>$$</p>
+<p>故此时 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是平面的一组基，称为 $u^j-$坐标系的 cellar base vector。（事实上条件可以略放松一点，可以在测度为 $0$ 的点集上违反这个条件，如极坐标下原点处 $J &#x3D; 0$，此时 $\boldsymbol{g}$ 并不是一组基，但可以忽略不计）</p>
 <p>由式 $(8)$ 立即得到此时速度 $\boldsymbol{v}$ 在此坐标系下的分量 $v^i$ 是</p>
-<p>$$<br>
-v^i = \dot{u}^j<br>
-$$</p>
+<p>$$<br>v^i &#x3D; \dot{u}^j<br>$$</p>
 <p>也就是说</p>
-<p>$$<br>
-\boldsymbol{v} = v^i\boldsymbol{g}_i<br>
-$$</p>
+<p>$$<br>\boldsymbol{v} &#x3D; v^i\boldsymbol{g}_i<br>$$</p>
 <p>求出 $\boldsymbol{g}_i$ 的 reciprocal base vector $\boldsymbol{g}^i$，定义 $\boldsymbol{v}$ 的 <strong>Physical Component</strong> 为</p>
-<p>$$<br>
-\boldsymbol{v}^{(i)} = \boldsymbol{v}\cdot\bar{\boldsymbol{g}}^i = \frac{v}{||\boldsymbol{g}^i||}<br>
-$$</p>
+<p>$$<br>\boldsymbol{v}^{(i)} &#x3D; \boldsymbol{v}\cdot\bar{\boldsymbol{g}}^i &#x3D; \frac{v}{||\boldsymbol{g}^i||}<br>$$</p>
 <blockquote>
 <p>注意这里求解 reciprocal base vector 的 motivation 是我们已经有了一个在 $\boldsymbol{g}$ 下的坐标，而分量的值一定是 $\boldsymbol{v}$ 和某个向量的点乘结果，结合上一章可以知道这里应该取 reciprocal base vector。</p>
 </blockquote>
 <p>如果是在极坐标下，此时你应该求得</p>
-<p>$$<br>
-v^{®} = \dot{r}, v^{(\theta)} = r\dot{\theta}<br>
-$$</p>
+<p>$$<br>v^{(r)} &#x3D; \dot{r}, v^{(\theta)} &#x3D; r\dot{\theta}<br>$$</p>
 <p>符合自然坐标系下速度分解的结果。</p>
-<h1><span id="christoffel-symbols">Christoffel Symbols</span></h1>
-<div class="note warning"><p><strong>Motivation.</strong> 尝试推导加速度的表达式，直接求导得到</p>
-<p>$$<br>
-\boldsymbol{a} = \dot{\boldsymbol{v}} = \dot{v}^i\boldsymbol{g}_i + v^i\dot{\boldsymbol{g}}_i<br>
-$$</p>
+<h1><span id="christoffel-symbols">Christoffel Symbols</span></h1><div class="note warning"><p><strong>Motivation.</strong> 尝试推导加速度的表达式，直接求导得到</p>
+<p>$$<br>\boldsymbol{a} &#x3D; \dot{\boldsymbol{v}} &#x3D; \dot{v}^i\boldsymbol{g}_i + v^i\dot{\boldsymbol{g}}_i<br>$$</p>
 <p>此时我们想要得到 $\boldsymbol{g_i}$ 下的坐标，因此不希望出现 $\dot{\boldsymbol{g}}_i$。故进行如下讨论。</p>
 </div>
+
 <p>直接计算 $\dot{\boldsymbol{g}}_i$ 得 <sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。">[2]</span></a></sup></p>
-<p>$$<br>
-\dot{\boldsymbol{g}}_i = \frac{\partial \boldsymbol{g}_i}{\partial u^j} \dot{u}^j = v^j \boldsymbol{g}_{i ,j}<br>
-$$</p>
+<p>$$<br>\dot{\boldsymbol{g}}_i &#x3D; \frac{\partial \boldsymbol{g}_i}{\partial u^j} \dot{u}^j &#x3D; v^j \boldsymbol{g}_{i ,j}<br>$$</p>
 <p>根据我们作的连续偏导假设，有</p>
-<p>$$<br>
-\boldsymbol{g}_{i, j} = \boldsymbol{x}_{, ij} = \boldsymbol{x}_{, ji} = \boldsymbol{g}_{j, i}<br>
-$$</p>
+<p>$$<br>\boldsymbol{g}_{i, j} &#x3D; \boldsymbol{x}_{, ij} &#x3D; \boldsymbol{x}_{, ji} &#x3D; \boldsymbol{g}_{j, i}<br>$$</p>
 <p>现在希望求 $\boldsymbol{g}_{i, j}$ 在 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 下的坐标。换言之，我们需要求出一组系数 $\Gamma_{ij}^1, …, \Gamma_{ij}^n$ 使得</p>
-<p>$$<br>
-\boldsymbol{g}_{i, j} = \Gamma_{ij}^k\boldsymbol{g}_k<br>
-$$</p>
+<p>$$<br>\boldsymbol{g}_{i, j} &#x3D; \Gamma_{ij}^k\boldsymbol{g}_k<br>$$</p>
 <p>这些 $\Gamma_{ij}^k$ 称为 <strong>Christoffel Symbol</strong>。此时</p>
-<p>$$<br>
-\dot{\boldsymbol{g}}_i = v^j\Gamma_{ij}^k\boldsymbol{g}_k<br>
-$$</p>
+<p>$$<br>\dot{\boldsymbol{g}}_i &#x3D; v^j\Gamma_{ij}^k\boldsymbol{g}_k<br>$$</p>
 <p>代入式 $(15)$ 得到</p>
-<p>$$<br>
-a^k = \dot{v}^k + v^iv^j\Gamma_{ij}^k<br>
-$$</p>
+<p>$$<br>a^k &#x3D; \dot{v}^k + v^iv^j\Gamma_{ij}^k<br>$$</p>
 <p>式 $(17)$ 启发我们先求出 $\boldsymbol{g}_{i, j}$ 在 $\boldsymbol{e}_1, …, \boldsymbol{e}_n$ 下的表示，然后将基反演为 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$。<sup id="fnref:3"><a href="#fn:3" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。">[3]</span></a></sup></p>
-<p>$$<br>
-\begin{aligned}<br>
-\boldsymbol{g}_{ij} &amp;= x^p_{, ij}\boldsymbol{e}^p \\<br>
-&amp;= x^p_{, ij}u^{k}_{, p}\boldsymbol{g}_k<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    \boldsymbol{g}_{ij} &amp;&#x3D; x^p_{, ij}\boldsymbol{e}^p \\<br>                        &amp;&#x3D; x^p_{, ij}u^{k}_{, p}\boldsymbol{g}_k<br>\end{aligned}<br>$$</p>
 <p>求解需要用到逆映射存在定理，做法是解方程组 <sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)">[1]</span></a></sup>。如果你和我一样对多元微积分不够熟悉，可能会对这个变换感到迷惑。这时候你也可以根据 $\boldsymbol{g}$ 和 $\boldsymbol{e}$ 之间的关系进行矩阵求逆，暴力反演。对于原书上的这个比较简洁的形式我们简单补充一些书上没有的推导。</p>
 <details class="note info"><summary><p><strong>Derivation</strong></p>
 </summary>
-<p>记</p>
-<p>$$<br>
-\boldsymbol{G} = \begin{pmatrix}<br>
-\boldsymbol{g}_1 \\<br>
-\vdots \\<br>
-\boldsymbol{g}_n<br>
-\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n), \boldsymbol{I} = \begin{pmatrix}<br>
-\boldsymbol{e}_1 \\<br>
-\vdots \\<br>
-\boldsymbol{e}_n<br>
-\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n)<br>
-$$</p>
-<p>那么有</p>
-<p>$$<br>
-\boldsymbol{G} = \begin{pmatrix}<br>
-\frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{u^1} \\<br>
-\vdots &amp; &amp; \vdots \\<br>
-\frac{\partial x_1}{u^n} &amp; \cdots &amp; \frac{\partial x_n}{u^n}<br>
-\end{pmatrix} \boldsymbol{E} = \boldsymbol{J}^T \boldsymbol{E}<br>
-$$</p>
+<p>记 </p>
+<p>$$<br>\boldsymbol{G} &#x3D; \begin{pmatrix}<br>    \boldsymbol{g}_1 \\<br>    \vdots \\<br>    \boldsymbol{g}_n<br>\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n), \boldsymbol{I} &#x3D; \begin{pmatrix}<br>    \boldsymbol{e}_1 \\<br>    \vdots \\<br>    \boldsymbol{e}_n<br>\end{pmatrix} \in \mathbb{M}_{n\times 1}(\mathbb{R}^n)<br>$$</p>
+<p>那么有 </p>
+<p>$$<br>\boldsymbol{G} &#x3D; \begin{pmatrix}<br>    \frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{u^1} \\<br>    \vdots &amp; &amp; \vdots \\<br>    \frac{\partial x_1}{u^n} &amp; \cdots &amp; \frac{\partial x_n}{u^n}<br>\end{pmatrix} \boldsymbol{E} &#x3D; \boldsymbol{J}^T \boldsymbol{E}<br>$$</p>
 <p>两边取转置并反解得到</p>
-<p>$$<br>
-\boldsymbol{G}^T\boldsymbol{J}^{-1} = \boldsymbol{E}^T<br>
-$$</p>
+<p>$$<br>\boldsymbol{G}^T\boldsymbol{J}^{-1} &#x3D; \boldsymbol{E}^T<br>$$</p>
 <p>由于映射是良定义的，$\det \boldsymbol{J}\ne 0$，由逆映射存在定理，此时 $u^j$ 可以被表示成 $x_i$ 的函数，并且可以求出偏导。具体地，我们有</p>
-<p>$$<br>
-\begin{cases}<br>
-x_1 = x_1(u^1, …, u^n) \\<br>
-\vdots \\<br>
-x_n = x_n(u^1, …, u^n)<br>
-\end{cases}<br>
-$$</p>
-<p>所有式子两边对 $x_i$ 求偏导得到关于 $(\partial u^j / \partial x_i)$ 的线性方程组，写成矩阵形式即</p>
-<p>$$<br>
-\begin{pmatrix}<br>
-0 \\<br>
-\vdots \\<br>
-1_i \\<br>
-\vdots \\<br>
-0<br>
-\end{pmatrix} = \begin{pmatrix}<br>
-\frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_1}{\partial u^n} \\<br>
-\vdots &amp; &amp; \vdots \\<br>
-\frac{\partial x_n}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{\partial u^n}<br>
-\end{pmatrix} \begin{pmatrix}<br>
-\frac{\partial u^1}{\partial x_i} \\<br>
-\vdots<br>
-\frac{\partial u^n}{\partial x_i}<br>
-\end{pmatrix} = \boldsymbol{J}\begin{pmatrix}<br>
-\frac{\partial u^1}{\partial x_i} \\<br>
-\vdots \\<br>
-\frac{\partial u^n}{\partial x_i}<br>
-\end{pmatrix}<br>
-$$</p>
+<p>$$<br>\begin{cases}<br>    x_1 &#x3D; x_1(u^1, …, u^n) \\<br>    \vdots \\<br>    x_n &#x3D; x_n(u^1, …, u^n)<br>\end{cases}<br>$$</p>
+<p>所有式子两边对 $x_i$ 求偏导得到关于 $(\partial u^j &#x2F; \partial x_i)$ 的线性方程组，写成矩阵形式即</p>
+<p>$$<br>\begin{pmatrix}<br>    0 \\<br>    \vdots \\<br>    1_i \\<br>    \vdots \\<br>    0<br>\end{pmatrix} &#x3D; \begin{pmatrix}<br>    \frac{\partial x_1}{u^1} &amp; \cdots &amp; \frac{\partial x_1}{\partial u^n} \\<br>    \vdots &amp; &amp; \vdots \\<br>    \frac{\partial x_n}{u^1} &amp; \cdots &amp; \frac{\partial x_n}{\partial u^n}<br>\end{pmatrix} \begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix} &#x3D; \boldsymbol{J}\begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots \\<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix}<br>$$</p>
 <p>反解得到</p>
-<p>$$<br>
-\begin{pmatrix}<br>
-\frac{\partial u^1}{\partial x_i} \\<br>
-\vdots \\<br>
-\frac{\partial u^n}{\partial x_i}<br>
-\end{pmatrix} = \boldsymbol{J}^{-1} \begin{pmatrix}<br>
-0 \\<br>
-\vdots \\<br>
-1_i \\<br>
-\vdots \\<br>
-0<br>
-\end{pmatrix}<br>
-$$</p>
+<p>$$<br>\begin{pmatrix}<br>    \frac{\partial u^1}{\partial x_i} \\<br>    \vdots \\<br>    \frac{\partial u^n}{\partial x_i}<br>\end{pmatrix} &#x3D; \boldsymbol{J}^{-1} \begin{pmatrix}<br>    0 \\<br>    \vdots \\<br>    1_i \\<br>    \vdots \\<br>    0<br>\end{pmatrix}<br>$$</p>
 <p>两边同时点乘 $\boldsymbol{G}^T$ 得到</p>
-<p>$$<br>
-\frac{\partial u^k}{\partial x_i}\boldsymbol{g}_k = \boldsymbol{e}_i<br>
-$$</p>
+<p>$$<br>\frac{\partial u^k}{\partial x_i}\boldsymbol{g}_k &#x3D; \boldsymbol{e}_i<br>$$</p>
 <p>得证。</p>
 
 </details>
+
 <p>对比系数可知</p>
-<p>$$<br>
-\Gamma_{ij}^k = x^ p_{, ij} u^ k_{, p}<br>
-$$</p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; x^ p_{, ij} u^ k_{, p}<br>$$</p>
 <p>得到了 $\Gamma$ 之后自然可以求得 $\boldsymbol{a}$ 在自然坐标系下的分解形式：</p>
-<p>$$<br>
-a^{(i)} = (\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq}) / ||\boldsymbol{g}^i||<br>
-$$</p>
-<p>如果是在平面极坐标下，你应当得到 $\Gamma_{r\theta}^{\theta} = r^{-1}, \Gamma_{\theta\theta}^r = -r$，其余 $\Gamma$ 均为 $0$。带入后得到</p>
-<p>$$<br>
-\begin{align}<br>
-a^{®} &amp;= \ddot{r} - r\dot{\theta}^2 \\<br>
-a^{(\theta)} &amp;= r\ddot{\theta} + 2\dot{r}\dot{\theta}<br>
-\end{align}<br>
-$$</p>
+<p>$$<br>a^{(i)} &#x3D; (\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq}) &#x2F; ||\boldsymbol{g}^i||<br>$$</p>
+<p>如果是在平面极坐标下，你应当得到 $\Gamma_{r\theta}^{\theta} &#x3D; r^{-1}, \Gamma_{\theta\theta}^r &#x3D; -r$，其余 $\Gamma$ 均为 $0$。带入后得到</p>
+<p>$$<br>\begin{align}<br>a^{(r)} &amp;&#x3D; \ddot{r} - r\dot{\theta}^2 \\<br>a^{(\theta)} &amp;&#x3D; r\ddot{\theta} + 2\dot{r}\dot{\theta}<br>\end{align}<br>$$</p>
 <p>和熟知的结果相符。</p>
 <p>回收一下标题。若已知 $\boldsymbol{f}$ 在 $\boldsymbol{g_1}, …, \boldsymbol{g}_n$ 下的分解式为</p>
-<p>$$<br>
-\boldsymbol{f} = f^i\boldsymbol{g}_i<br>
-$$</p>
+<p>$$<br>\boldsymbol{f} &#x3D; f^i\boldsymbol{g}_i<br>$$</p>
 <p>而根据牛顿定律</p>
-<p>$$<br>
-\boldsymbol{f} = m\boldsymbol{a} = m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})\boldsymbol{g}_i<br>
-$$</p>
+<p>$$<br>\boldsymbol{f} &#x3D; m\boldsymbol{a} &#x3D; m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})\boldsymbol{g}_i<br>$$</p>
 <p>由于 $\boldsymbol{g}_1, …, \boldsymbol{g}_n$ 是一组基，我们可以得到</p>
-<p>$$<br>
-f^i = m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})<br>
-$$</p>
-<h1><span id="computation-of-the-christoffel-symbols">Computation of the Christoffel Symbols</span></h1>
-<p>上面的利用逆映射存在定理解方程的步骤中，我们的系数矩阵是 $\boldsymbol{J}$，然而熟知 $\boldsymbol{J}$ 求逆的过程是求解 reciprocal base vector 的过程。受此启发我们猜测可以用 roof base vector 来计算 Christoffel Symbol。</p>
+<p>$$<br>f^i &#x3D; m(\ddot{u}^i + \dot{u}^p\dot{u}^q\Gamma^i_{pq})<br>$$</p>
+<h1><span id="computation-of-the-christoffel-symbols">Computation of the Christoffel Symbols</span></h1><p>上面的利用逆映射存在定理解方程的步骤中，我们的系数矩阵是 $\boldsymbol{J}$，然而熟知 $\boldsymbol{J}$ 求逆的过程是求解 reciprocal base vector 的过程。受此启发我们猜测可以用 roof base vector 来计算 Christoffel Symbol。</p>
 <div class="note info"><p><strong>Theorem 1.</strong></p>
-<p>$$<br>
-\Gamma_{ij}^k = \boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j}<br>
-$$</p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; \boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j}<br>$$</p>
 <details class="note "><summary><p>Proof.</p>
 </summary>
-<p>$$<br>
-\begin{align}<br>
-\boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j} &amp;= \Gamma^p_{ij}\boldsymbol{g}^k\cdot\boldsymbol{g}_p \\<br>
-&amp;= \Gamma^p_{ij}\delta_{kp} \\<br>
-&amp;= \Gamma^k_{ij}<br>
-\end{align}<br>
-$$</p>
+<p>$$<br>\begin{align}<br>    \boldsymbol{g}^k \cdot \boldsymbol{g}_{i, j} &amp;&#x3D; \Gamma^p_{ij}\boldsymbol{g}^k\cdot\boldsymbol{g}_p \\<br>                                                 &amp;&#x3D; \Gamma^p_{ij}\delta_{kp} \\<br>                                                 &amp;&#x3D; \Gamma^k_{ij}<br>\end{align}<br>$$</p>
+
 </details></div>
+
 <p>另外一个计算公式更加复杂。</p>
 <div class="note info"><p><strong>Theorem 2.</strong></p>
-<p>$$<br>
-\Gamma_{ij}^k = \frac 12 g^{kp}(g_{ip, j} + g_{jp, i} - g_{ij, p})<br>
-$$</p>
-<p>其中 $g^{ij} = \boldsymbol{g}^i \cdot\boldsymbol{g}^j, g_{ij} = \boldsymbol{g}_i \cdot\boldsymbol{g}_j$</p>
+<p>$$<br>\Gamma_{ij}^k &#x3D; \frac 12 g^{kp}(g_{ip, j} + g_{jp, i} - g_{ij, p})<br>$$</p>
+<p>其中 $g^{ij} &#x3D; \boldsymbol{g}^i \cdot\boldsymbol{g}^j, g_{ij} &#x3D; \boldsymbol{g}_i \cdot\boldsymbol{g}_j$</p>
 </div>
+
 <p>推这个式子的 Motivation 大概是在于如果给定的坐标系是一个正交坐标系（极坐标、柱坐标、球坐标等），那么我们期望有一个更简单的形式。因此我们从 $\boldsymbol{g}_i\cdot\boldsymbol{g}_j$ 出发，如果是正交坐标系，那么就是 $0$。</p>
 <p><strong>Proof.</strong> 尝试对 $\boldsymbol{g}_i\cdot\boldsymbol{g}_j$ 求偏导，以产生 Gamma</p>
-<p>$$<br>
-\begin{aligned}<br>
-g_{ij, k} &amp;= (\boldsymbol{g}_i\cdot\boldsymbol{g}_j)_{, k} \\<br>
-&amp;= \boldsymbol{g}_{i, j}\cdot\boldsymbol{g}_j + \boldsymbol{g}_i\cdot\boldsymbol{g}_{j, k} \\<br>
-&amp;= \Gamma_{ij}^p \boldsymbol{g}_p\cdot\boldsymbol{g}_j + \Gamma_{jk}^p\boldsymbol{g}_p\cdot\boldsymbol{g}_i \\<br>
-&amp;= \Gamma_{ij}^p g_{pj} + \Gamma_{jk}^p g_{pi}<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>g_{ij, k} &amp;&#x3D; (\boldsymbol{g}_i\cdot\boldsymbol{g}_j)_{, k} \\<br>&amp;&#x3D; \boldsymbol{g}_{i, j}\cdot\boldsymbol{g}_j + \boldsymbol{g}_i\cdot\boldsymbol{g}_{j, k} \\<br>&amp;&#x3D; \Gamma_{ij}^p \boldsymbol{g}_p\cdot\boldsymbol{g}_j + \Gamma_{jk}^p\boldsymbol{g}_p\cdot\boldsymbol{g}_i \\<br>&amp;&#x3D; \Gamma_{ij}^p g_{pj} + \Gamma_{jk}^p g_{pi}<br>\end{aligned}<br>$$</p>
 <p>此时希望下标唯一，因此做轮换</p>
-<p>$$<br>
-\begin{align}<br>
-g_{jk, i} &amp;= \Gamma_{jk}^pg_{pi} + \Gamma_{ki}^pg_{pj} \\<br>
-g_{ki, j} &amp;= \Gamma_{ki}^pg_{pj} + \Gamma_{ij}^pg_{pk} \\<br>
-\end{align}<br>
-$$</p>
-<p>进行一些配凑，得到</p>
-<p>$$<br>
-\begin{align}<br>
-\frac 12 (g_{ij, k} + g_{ki, j} - g_{jk, i}) = \Gamma_{ij}^pg_{pk}<br>
-\end{align}<br>
-$$</p>
+<p>$$<br>\begin{align}<br>    g_{jk, i} &amp;&#x3D; \Gamma_{jk}^pg_{pi} + \Gamma_{ki}^pg_{pj} \\<br>    g_{ki, j} &amp;&#x3D; \Gamma_{ki}^pg_{pj} + \Gamma_{ij}^pg_{pk} \\<br>\end{align}<br>$$</p>
+<p>进行一些配凑，得到 </p>
+<p>$$<br>\begin{align}<br>    \frac 12 (g_{ij, k} + g_{ki, j} - g_{jk, i}) &#x3D; \Gamma_{ij}^pg_{pk}<br>\end{align}<br>$$</p>
 <p>此时希望提取一个 $k$。</p>
 <div class="note info"><p><strong>Lemma 1.</strong></p>
-<p>$$<br>
-g_{ij}g^{jk} = \delta_i^k<br>
-$$</p>
+<p>$$<br>g_{ij}g^{jk} &#x3D; \delta_i^k<br>$$</p>
 </div>
+
 <p>这里需要注意到 $g_{ij}$ 是恒等张量 $\mathbf{I}$ 的 cellar component，$g^{ij}$ 是 $\mathbf{I}$ 的 roof component，而 $\delta_i^j$ 是 $\mathbf{I}$ 的 mixed component（这个自己算一手就行）<sup id="fnref:4"><a href="#fn:4" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="参见 [上一集中 A Second Order Tensor Has Four Sets of Components in General](../../../../2023/11/22/TensorAnal2GBTN/#a-second-order-tensor-has-four-sets-of-components-in-general)">[4]</span></a></sup>。定理的形式类似于一个矩阵乘法，由于之前没有证过，这里证一手。</p>
 <div class="note info"><p><strong>Lemma 2.</strong></p>
 <p>考虑 second order tensor $\mathbf{S}, \mathbf{T}$，有</p>
-<p>$$<br>
-(\mathbf{ST})_i^{\cdot k} = T_{ij}S^{jk}<br>
-$$</p>
+<p>$$<br>(\mathbf{ST})_i^{\cdot k} &#x3D; T_{ij}S^{jk}<br>$$</p>
 <p>即张量乘法对应的 component 也是矩阵乘法的形式。当然对于其他类型的 component 大概也有一样的结论。</p>
 </div>
+
 <p>$\forall \boldsymbol{v}$，将 $\boldsymbol{v}$ 在 $\boldsymbol{g}_i$ 下分解</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{T}\boldsymbol{v} &amp;= v^i\mathbf{T}\boldsymbol{g}_i\\<br>
-&amp;= v^iT_{ij}\boldsymbol{g}^j<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{T}\boldsymbol{v} &amp;&#x3D; v^i\mathbf{T}\boldsymbol{g}_i\\<br>                         &amp;&#x3D; v^iT_{ij}\boldsymbol{g}^j<br>\end{aligned}<br>$$</p>
 <p>继续算 $\mathbf{S}(\mathbf{T}\boldsymbol{v})$，有</p>
-<p>$$<br>
-\begin{aligned}<br>
-\mathbf{ST}(\boldsymbol{v}) &amp;= v^iT_{ij}\mathbf{S}\boldsymbol{g}^j \\<br>
-&amp;= v^iT_{ij}S^{jk}\boldsymbol{g}_k \\<br>
-&amp;= v^i(T_{ij}S^{jk})g_k<br>
-\end{aligned}<br>
-$$</p>
-<p>因此 $(\mathbf{ST})_i^{\cdot k} = T_{ij}S^{jk}$。</p>
-<p>这里取 $\mathbf{S} =  \mathbf{T} = \mathbf{I}$，得到 Lemma 1 成立。</p>
+<p>$$<br>\begin{aligned}<br>    \mathbf{ST}(\boldsymbol{v}) &amp;&#x3D; v^iT_{ij}\mathbf{S}\boldsymbol{g}^j \\<br>                                &amp;&#x3D; v^iT_{ij}S^{jk}\boldsymbol{g}_k \\<br>                                &amp;&#x3D; v^i(T_{ij}S^{jk})g_k<br>\end{aligned}<br>$$</p>
+<p>因此 $(\mathbf{ST})_i^{\cdot k} &#x3D; T_{ij}S^{jk}$。</p>
+<p>这里取 $\mathbf{S} &#x3D;  \mathbf{T} &#x3D; \mathbf{I}$，得到 Lemma 1 成立。</p>
 <p>两边同时作用 $g^{kq}$ 求和即可用 $\delta_p^q$ 其中一项，得到</p>
-<p>$$<br>
-\Gamma^q_{ij} = \frac 12 g^{kq}(g_{ij, k} + g_{ki, j} - g_{jk, i})<br>
-$$</p>
+<p>$$<br>\Gamma^q_{ij} &#x3D; \frac 12 g^{kq}(g_{ij, k} + g_{ki, j} - g_{jk, i})<br>$$</p>
 <p>最后置换一下 dummy variable 即得到</p>
-<p>$$<br>
-\Gamma^k_{ij} = \frac 12 g^{pk}(g_{ij, p} + g_{pi, j} - g_{jp, i})<br>
-$$</p>
-<h1><span id="a-change-of-coordinates">A Change of Coordinates</span></h1>
-<p>现在我们已经有了在 $u^j-$坐标系下的结果，如果想要知道在 $\widetilde{u}^{j}-$坐标系下的结果，需要做坐标变换。</p>
-<p>$$<br>
-\widetilde{\boldsymbol{g}}_i = A^j_i \boldsymbol{g}_j<br>
-$$</p>
+<p>$$<br>\Gamma^k_{ij} &#x3D; \frac 12 g^{pk}(g_{ij, p} + g_{pi, j} - g_{jp, i})<br>$$</p>
+<h1><span id="a-change-of-coordinates">A Change of Coordinates</span></h1><p>现在我们已经有了在 $u^j-$坐标系下的结果，如果想要知道在 $\widetilde{u}^{j}-$坐标系下的结果，需要做坐标变换。</p>
+<p>$$<br>\widetilde{\boldsymbol{g}}_i &#x3D; A^j_i \boldsymbol{g}_j<br>$$</p>
 <p>由于 $\boldsymbol{g}_i$ 和 $\widetilde{\boldsymbol{g}}_i$ 的定义都是偏导给出的，$A^j_i$ 此时有简单的封闭形式。</p>
-<p>$$<br>
-\widetilde{\boldsymbol{g}}_i = \frac{\partial \boldsymbol{x}}{\partial u^j} \frac{\partial u^j}{\partial \widetilde{u}^i} = \frac{\partial u^j}{\partial \widetilde{u}^i}\boldsymbol{g}_j<br>
-$$</p>
+<p>$$<br>\widetilde{\boldsymbol{g}}_i &#x3D; \frac{\partial \boldsymbol{x}}{\partial u^j} \frac{\partial u^j}{\partial \widetilde{u}^i} &#x3D; \frac{\partial u^j}{\partial \widetilde{u}^i}\boldsymbol{g}_j<br>$$</p>
 <p>于是</p>
-<p>$$<br>
-A^j_i = \frac{\partial u^j}{\partial \widetilde{u}^i}<br>
-$$</p>
-<p>这个式子有显然的对称性，即</p>
-<p>$$<br>
-(A^{-1})^j_i = \frac{\partial \widetilde{u}^i}{\partial u^j}<br>
-$$</p>
+<p>$$<br>A^j_i &#x3D; \frac{\partial u^j}{\partial \widetilde{u}^i}<br>$$</p>
+<p>这个式子有显然的对称性，即 </p>
+<p>$$<br>(A^{-1})^j_i &#x3D; \frac{\partial \widetilde{u}^i}{\partial u^j}<br>$$</p>
 <p>回忆我们在<a href="../../../../2023/11/22/TensorAnal2GBTN/#change-of-basis">上一集 Change of Basis</a>中给出的结果，将式 $(54)$ 中的结果代入，立即得到向量和张量的坐标变换公式。这里不做赘述。</p>
 <p>本节中的 Christoffel Symbol 也可以进行坐标变换。我们使用 Theorem 1 进行计算，有</p>
-<p>$$<br>
-\begin{align}<br>
-\widetilde{\Gamma}_{jk}^i &amp;= \widetilde{\boldsymbol{g}}^i\cdot\widetilde{\boldsymbol{g}}_{j, k} \\<br>
-&amp;= \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot\frac{\partial}{\partial \widetilde{u}^k}\left(\frac{\partial u^q}{\partial \widetilde{u}^j}\boldsymbol{g}_q\right) \\<br>
-&amp;= \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>
-\left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial \widetilde{u}^k}\right) \\<br>
-&amp;= \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>
-\left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial u^r}\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>
-&amp;= \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>
-\left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\Gamma_{qr}^s\boldsymbol{g}_s\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>
-&amp;= \frac{\partial \widetilde{u}^i}{\partial u^p}<br>
-\left(\frac{\partial^2 u^p}{\partial \widetilde{u}^j\partial\widetilde{u}^k} + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial u^r}{\partial \widetilde{u}^k}\Gamma_{qr}^p\right)<br>
-\end{align}<br>
-$$</p>
+<p>$$<br>\begin{align}<br>\widetilde{\Gamma}_{jk}^i &amp;&#x3D; \widetilde{\boldsymbol{g}}^i\cdot\widetilde{\boldsymbol{g}}_{j, k} \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot\frac{\partial}{\partial \widetilde{u}^k}\left(\frac{\partial u^q}{\partial \widetilde{u}^j}\boldsymbol{g}_q\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial \boldsymbol{g}_q}{\partial u^r}\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \left(\frac{\partial \widetilde{u}^i}{\partial u^p}\boldsymbol{g}^p\right)\cdot<br>   \left(\frac{\partial^2 u^q}{\partial \widetilde{u}^j\partial\widetilde{u}^k}\boldsymbol{g}_q + \frac{\partial u^q}{\partial \widetilde{u}^j}\Gamma_{qr}^s\boldsymbol{g}_s\frac{\partial u^r}{\partial \widetilde{u}^k}\right) \\<br>&amp;&#x3D; \frac{\partial \widetilde{u}^i}{\partial u^p}<br>   \left(\frac{\partial^2 u^p}{\partial \widetilde{u}^j\partial\widetilde{u}^k} + \frac{\partial u^q}{\partial \widetilde{u}^j}\frac{\partial u^r}{\partial \widetilde{u}^k}\Gamma_{qr}^p\right)<br>\end{align}<br>$$</p>
 <p>此处由于第一项的存在，$\Gamma$ 并不具有什么线性性，因此不是某个三阶张量的分量式。</p>
-<p>如果这里你是从 Cartesian 坐标换到任意的 $\boldsymbol{g}$，那么由于 Cartesian 坐标系的标准正交基的坐标向量全是常数，$\Gamma$ 全都是 0，第二项直接消失了，此时得到</p>
-<p>$$<br>
-\Gamma_{jk}^i=\frac{\partial u^i}{\partial x^p}<br>
-\frac{\partial^2 x^p}{\partial u^j\partial u^k}<br>
-$$</p>
+<p>如果这里你是从 Cartesian 坐标换到任意的 $\boldsymbol{g}$，那么由于 Cartesian 坐标系的标准正交基的坐标向量全是常数，$\Gamma$ 全都是 0，第二项直接消失了，此时得到 </p>
+<p>$$<br>\Gamma_{jk}^i&#x3D;\frac{\partial u^i}{\partial x^p}<br>   \frac{\partial^2 x^p}{\partial u^j\partial u^k}<br>$$</p>
 <p>和式 $(29)$ 的结果相符。</p>
 <div id="footnotes"><hr><div id="footnotelist"><ol style="list-style: none; padding-left: 0; margin-left: 40px"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">1.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">李忠, 周建萤. 高等数学（第三版）上册. 北京大学出版社 (2023.6): (356-370)<a href="#fnref:1" rev="footnote"> ↩</a></span></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">2.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">$\boldsymbol{g}_{i, j}$ 实际上表示 $\boldsymbol{g}_i$ 对 $u^j$ 求偏导（参见 Notations），并不是新定义得符号。<a href="#fnref:2" rev="footnote"> ↩</a></span></li><li id="fn:3"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">3.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">这里的 $u^k_{, p}$ 表示 $u^k$ 对 $x_p$ 求偏导。<a href="#fnref:3" rev="footnote"> ↩</a></span></li><li id="fn:4"><span style="display: inline-block; vertical-align: top; padding-right: 10px; margin-left: -40px">4.</span><span style="display: inline-block; vertical-align: top; margin-left: 10px;">参见 <a href="../../../../2023/11/22/TensorAnal2GBTN/#a-second-order-tensor-has-four-sets-of-components-in-general">上一集中 A Second Order Tensor Has Four Sets of Components in General</a><a href="#fnref:4" rev="footnote"> ↩</a></span></li></ol></div></div>
     </div>

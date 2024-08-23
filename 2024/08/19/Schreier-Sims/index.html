@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文将浅谈计算群论中的 Schreier-Sims 算法，该算法的核心思想是将群 $G$ 的信息表示为一列正规子群 $1 &#x3D; G_1 \subset G_2 \subset \cdots \subset G_k &#x3D; G$，通过 $G_i$ 在 $G_{i+1}$ 中的截面，回答一些重要的问题如某元素是否在群当中、某给定生成元的有限群的阶数是多少等。 本文的第">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Schreier-Sims Algorithm">
+<meta property="og:url" content="http://example.com/2024/08/19/Schreier-Sims/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文将浅谈计算群论中的 Schreier-Sims 算法，该算法的核心思想是将群 $G$ 的信息表示为一列正规子群 $1 &#x3D; G_1 \subset G_2 \subset \cdots \subset G_k &#x3D; G$，通过 $G_i$ 在 $G_{i+1}$ 中的截面，回答一些重要的问题如某元素是否在群当中、某给定生成元的有限群的阶数是多少等。 本文的第">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-08-19T08:38:36.000Z">
+<meta property="article:modified_time" content="2024-08-23T09:00:49.086Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Group Theory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/08/19/Schreier-Sims/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/08/19/Schreier-Sims/","path":"2024/08/19/Schreier-Sims/","title":"The Schreier-Sims Algorithm"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>The Schreier-Sims Algorithm | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">声明与记号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">截面（Transversal）和稳定子集合的生成元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基和强生成集</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">基本定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">简单应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">构造子群链的通俗算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">求基和强生成集（未完成）</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/19/Schreier-Sims/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="The Schreier-Sims Algorithm | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          The Schreier-Sims Algorithm
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-19 16:38:36" itemprop="dateCreated datePublished" datetime="2024-08-19T16:38:36+08:00">2024-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-23 17:00:49" itemprop="dateModified" datetime="2024-08-23T17:00:49+08:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文将浅谈计算群论中的 Schreier-Sims 算法，该算法的核心思想是将群 $G$ 的信息表示为一列正规子群 $1 &#x3D; G_1 \subset G_2 \subset \cdots \subset G_k &#x3D; G$，通过 $G_i$ 在 $G_{i+1}$ 中的截面，回答一些重要的问题如某元素是否在群当中、某给定生成元的有限群的阶数是多少等。</p>
+<p>本文的第二节介绍该算法使用的重要技术截面（Transversal）和 Schreier 引理，第三节介绍该算法的核心技术 BSGS，但是很遗憾我们暂时没能看懂如何求解一组 BSGS，只能给出一类大多数应用问题的简单快速的下替算法（参见第 3.3 节）。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E4%B8%8E%E8%AE%B0%E5%8F%B7">声明与记号</a></li>
+<li><a href="#%E6%88%AA%E9%9D%A2transversal%E5%92%8C%E7%A8%B3%E5%AE%9A%E5%AD%90%E9%9B%86%E5%90%88%E7%9A%84%E7%94%9F%E6%88%90%E5%85%83">截面（Transversal）和稳定子集合的生成元</a></li>
+<li><a href="#%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86">基和强生成集</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">基本定义</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8">简单应用</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%AD%90%E7%BE%A4%E9%93%BE%E7%9A%84%E9%80%9A%E4%BF%97%E7%AE%97%E6%B3%95">构造子群链的通俗算法</a></li>
+<li><a href="#%E6%B1%82%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86%E6%9C%AA%E5%AE%8C%E6%88%90">求基和强生成集（未完成）</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="声明与记号">声明与记号</span></h1><p>考虑作为计算问题的实际性，本文中所有集合均假设为有限集。</p>
+<p>本文需要用到群在集合上的作用相关的概念，读者想必知之甚详，本节仅作统一记号之用。</p>
+<p>在本文中，群 $G$ 给出了集合 $\Omega$ 上的右作用。其中群中元素 $g$ 作用在 $\alpha$ 上记作 $\alpha^g$。</p>
+<p>元素 $\alpha$ 的轨道 $\mathrm{Orb}_G(\alpha) &#x3D; \{\alpha^g : g \in G\}$，简写作 $\alpha^G$。</p>
+<p>元素 $\alpha$ 的稳定子 $\mathrm{Stab}_G(\alpha) &#x3D; \{g \in G : \alpha^g &#x3D; \alpha\}$，简写作 $G_\alpha$。</p>
+<p>所谓的 Caley 定理揭示了在群 $G$ 有限时，其一定同构于 $\Omega &#x3D; \{1, 2, …, n\}$ 上的置换群。在实现时不妨暂时只考虑这种情形。</p>
+<h1><span id="截面transversal和稳定子集合的生成元">截面（Transversal）和稳定子集合的生成元</span></h1><p>著名的轨道-稳定子定理指出：</p>
+<div class="note info"><p><strong>Theorem 1（轨道-稳定子）.</strong> 下列映射</p>
+<p>$$<br>\begin{matrix}<br>\phi : &amp; G_x \backslash G &amp;\rightarrow &amp;x^G \\<br>       &amp; G_x g &amp; \mapsto &amp; x^g<br>\end{matrix}<br>$$</p>
+<p>为双射，结合拉格朗日定理导出</p>
+<p>$$<br>|G| &#x3D; |x^G||G_x|<br>$$</p>
+<p><em>证明可以参见任意一本抽象代数书籍。</em></p>
+</div>
+
+<p>给定子群 $H\subset G$，对于群 $G$ 的一个陪集分解</p>
+<p>$$<br>G &#x3D; \sqcup_{x} xH<br>$$</p>
+<p>针对这个分解，我们取出每个 $xH$ 的代表元，引出如下定义：</p>
+<div class="note success"><p><strong>Difinition 2（右截面）.</strong> 下面的序列 $u_1, …, u_k$ 称为子群 $H$ 的截面，若</p>
+<ol>
+<li>$1\in \{u_1, …, u_k\}$。</li>
+<li>$G &#x3D; \sqcup_{i&#x3D;1}^k Hx_i$，而 $u_i\in Hx_i$。</li>
+</ol>
+<p>定义 $\bar x$ 表示使得 $x\in Hu_i$ 的元素 $u_i$。</p>
+</div>
+
+<p>而双射 $(1)$ 自然地导出了 $G_x$ 的截面，我们只需要求出 $x^G$ 中所有的元素是如何到达的即可。下面的算法给出了求 $G_x$ 的一个右截面的方式：</p>
+<div class="note warning"><p><strong>Algorithm 3（OrbitTransversal）.</strong> 求稳定子的右截面。</p>
+<p><strong>输入：</strong> $\alpha \in \Omega, X &#x3D; [x_1, …, x_r], G &#x3D; \langle X\rangle$。</p>
+<p><strong>输出：</strong> $OT &#x3D; \{(\gamma, u_\gamma) : \gamma \in \alpha^G, \alpha^{u_\gamma} &#x3D; \gamma\}$。${u_\gamma}$ 即为 $G_x$ 的右截面。</p>
+<ol>
+<li>$OT \leftarrow \{\alpha, 1\}$</li>
+<li><strong>for</strong> $(\gamma, u_\gamma) \in OT, x\in X$ <strong>do if</strong> $\gamma^x \notin \mathrm{Proj}_1(OT)$</li>
+<li>$\qquad$ <strong>then</strong> $OT\leftarrow OT \sqcup {(\gamma^x, u_\gamma x)}$</li>
+<li><strong>return</strong> $OT$</li>
+</ol>
+</div>
+
+<p>我们发现稳定子集合的大小可能是天文数字（考虑定义一个作用在黑白染色上的置换群，$\chi_1$ 即只有第一位涂黑的涂色方案的稳定子集合大小为 $(n-1)!$）。所幸的是一些结果能够帮助我们利用其右截面求出其生成元。</p>
+<div class="note info"><p><strong>Lemma 4（Schreier）.</strong> 设 $G &#x3D; \langle X \rangle$，$H$ 是 $G$ 的子群，$U$ 是 $H$ 的右截面。定义集合</p>
+<p>$$<br>Y &#x3D; \{ ux\overline{ux}^{-1} : x\in X, u \in U \}<br>$$</p>
+<p>那么 $H &#x3D; \langle Y \rangle$。</p>
+<details class="note "><summary><p>Proof.</p>
+</summary>
+<p>先证明 $H \subset \langle Y \rangle$。对于 $h\in H$，将其拆成 $X$ 中元素的乘积 $x_1x_2\cdots x_k$，其中 $x_i\in X \cap X^{-1}$。</p>
+<p>定义 $u_0 &#x3D; 1, u_i &#x3D; \overline{x_1\cdots x_i}$，容易知道 $u_i\in U$。那么</p>
+<p>$$<br>h &#x3D; (u_0xu_1^{-1})(u_1xu_2^{-1})\cdots(u_{k-1}xu_k^{-1})<br>$$</p>
+<p>根据 $u_i$ 的定义有 $x_1\cdots x_{i-1}&#x3D;hu_{i-1}$，于是 $x_1\cdots x_i &#x3D; h’u_i &#x3D; hu_{i-1}x_i$，可知 $u_i$ 和 $u_{i-1}x_i$ 属于相同的陪集，换言之 $u_i &#x3D; \overline{u_i} &#x3D; \overline{u_{i-1}x_i}$。于是</p>
+<p>$$<br>h &#x3D; (u_0x\overline{u_0x}^{-1})\cdots(u_{k-1}x\overline{u_{k-1}x}^{-1})\in \langle Y\rangle<br>$$</p>
+<p>$Y$ 的定义自然决定了它是 $H$ 的子集，于是 $\langle Y \rangle &#x3D; H$。$\square$</p>
+
+</details></div>
+
+<p>于是自然有如下算法。</p>
+<div class="note warning"><p><strong>Algorithm 5（OrbitTransversalStabilizer）.</strong> 求稳定子的生成元。</p>
+<p><strong>输入：</strong> $\alpha \in \Omega, X &#x3D; [x_1, …, x_r], G &#x3D; \langle X\rangle$。</p>
+<p><strong>输出：</strong> $OT, Y$，含义同上方。</p>
+<ol>
+<li>$OT \leftarrow \{\alpha, 1\}, Y \leftarrow \{1\}$</li>
+<li><strong>for</strong> $(\gamma, u_\gamma) \in OT, x\in X$ <strong>do if</strong> $\gamma^x \notin \mathrm{Proj}_1(OT)$</li>
+<li>$\qquad$ <strong>then</strong> $OT\leftarrow OT \sqcup \{(\gamma^x, u_\gamma x)\}$</li>
+<li>$\qquad$ <strong>else</strong> $Y\leftarrow Y \sqcup \{u_\gamma x u_{\gamma^x}^{-1}\}$</li>
+<li><strong>return</strong> $OT, Y$</li>
+</ol>
+</div>
+
+<h1><span id="基和强生成集">基和强生成集</span></h1><p>本算法的核心是将 $G$ 的信息归结为一个正规子群列 $\{1\} &#x3D; G_1\subset\cdots\subset G_k &#x3D; G$。如群 $G$ 的阶可以由下面的式子给出</p>
+<p>$$<br>|G| &#x3D; \prod_{i&#x3D;1}^{k-1} |G_{i+1} : G_i|<br>$$</p>
+<p>自然地，$G_i$ 的大小是不受控制的，但是上面我们已经得到了若干求解稳定子集合的生成元的方法，因此考虑从稳定子的方向去构造这一列子群。</p>
+<h2><span id="基本定义">基本定义</span></h2><div class="note success"><p><strong>Definition 6（基与强生成集）.</strong> 给定 $S$ 使得 $G &#x3D; \langle S\rangle$ 和 $B &#x3D; [\beta_1, …, \beta_k]$ 代表 $\Omega$ 中一列互不相同的元素，对于 $1\leq i\leq k+1$ 我们定义</p>
+<p>$$<br>\begin{aligned}<br>    G^{(i)} &amp;&#x3D; G_{\beta_1, …, \beta_{i-1}} \quad (G^{(1)} &#x3D; G) \\<br>    S^{(i)} &amp;&#x3D; S \cap G^{(i)} \\<br>    H^{(i)} &amp;&#x3D; \langle S^{(i)}\rangle \\<br>    \Delta^{(i)} &amp;&#x3D; \beta_i^{H^{(i)}} \\<br>    U^{(i)} &amp;&#x3D; \{u_{\gamma}^{(i)} : \gamma \in \Delta^{(i)}\}<br>\end{aligned}<br>$$</p>
+<p>不难注意到 $H^{(i)}$ 总是 $G^{(i)}$ 的子群。给定 $B, S$，$S^{(i)}$ 可以直接求出。其余可以用 Orbit Transversal 求出。</p>
+<p>称 $B$ 为 $G$ 的<strong>基（base）</strong>，如果 $G^{(k+1)} &#x3D; 1$。此时显然 $G^{(i)}$ 是 $G$ 的正规列。</p>
+<p>称 $S$ 为 $G$ 的<strong>强生成集（strong generating set）</strong>，如果 $\forall i, G^{(i)} &#x3D; H^{(i)}$。</p>
+<p>$(B, S)$ 合称 BSGS。</p>
+</div>
+
+<h2><span id="简单应用">简单应用</span></h2><p>给定 BSGS 和截面序列 $U^{(i)}$，很多问题诸如判定一个元素是否属于 $G$，求 $G$ 的阶数都迎刃而解。这是因为根据上述定义，$U^{(i)}$ 给出了 $G^{(i)}$ 关于子群  $G^{(i+1)}$ 的右陪集分解。因此实际上 $G$ 中的每个元素可以被逐渐拆解到递降的子群当中，从而得到一个唯一的表示</p>
+<p>$$<br>g &#x3D; u^{(1)}_{\gamma_1}\cdots u^{(k)}_{\gamma_k}<br>$$</p>
+<p>显而易见 $G$ 的阶即是 $\prod_{i&#x3D;1}^k |U^{(k)}|$，而下面的算法给出判定 $g\in \mathrm{Sym}(\Omega)$ 是否属于 $G$ 的方式。</p>
+<div class="note warning"><p><strong>Algorithm 7（Strip）.</strong> 判定 $g$ 是否属于群 $G$。</p>
+<p><strong>Input.</strong> $g$，BSGS $(B, S)$，截面序列 $[U^{(i)}]$，轨道序列 $[\Delta^{(i)}]$</p>
+<p><strong>Output.</strong> 标准分解序列 $u_1, …, u_k$，残余量 $h$。$g\in G$ 当且仅当返回 $h&#x3D;1$。</p>
+<ol>
+<li>$h\leftarrow g, U \leftarrow []$</li>
+<li><strong>for</strong> $i &#x3D; 1, …, k$ <strong>do</strong></li>
+<li>$\qquad$ $\gamma_i \leftarrow \beta^h$</li>
+<li>$\qquad$ <strong>if</strong> $\gamma_i \notin \Delta^{(i)}$ <strong>then return</strong> $U, h$</li>
+<li>$\qquad$ $x \leftarrow u_{\gamma_i}$</li>
+<li>$\qquad$ $U\leftarrow x ~{::}~ U$</li>
+<li>$\qquad$ $h\leftarrow hx^{-1}$</li>
+<li><strong>return</strong> $U, x$</li>
+</ol>
+</div>
+
+<p>给定 $(B, S)$，下面的递归算法可以判断其是否是 BSGS：</p>
+<div class="note warning"><p><strong>Algorithm 8（Schreier-Sims-Test）.</strong> 判断 $(B, S)$ 是否是 BSGS。</p>
+<p><strong>Input.</strong> $B, S, \Delta^{(i)}$。</p>
+<p><strong>Output.</strong> true（若是 BSGS），false（若不是）。</p>
+<ol>
+<li><strong>if not</strong> $\textrm{Schreier-Sims-Test}(B \setminus \beta_1, S\cap G_{\beta_1}, [\Delta^{(i)} : i &gt; 1])$</li>
+<li>$\qquad$ <strong>then return</strong> false</li>
+<li>$\Delta, Y \leftarrow \textrm{OrbitTransversalStabilizer}(\beta_1, S)$</li>
+<li><strong>for</strong> $y\in Y$ <strong>do</strong></li>
+<li>$\qquad$ $U, h &#x3D; \textrm{Strip}(y, B \setminus \beta_1, S\cap G_{\beta_1}, [\Delta^{(i)} : i &gt; 1])$</li>
+<li>$\qquad$ <strong>if</strong> $h\ne 1$ <strong>then return</strong> false</li>
+<li><strong>return</strong> true</li>
+</ol>
+</div>
+
+<h2><span id="构造子群链的通俗算法">构造子群链的通俗算法</span></h2><p>在大多数简单的应用中我们无须正式求出 $B, S$，只需要令 $B &#x3D; \Omega$ 并得到相关的信息如截面 $U^{(i)}$，每个稳定子群 $H^{(i)}$ 的生成元（无需是 $S^{(i)}$）。此时存在一个简单的低复杂度算法。</p>
+<p>现在给定了 $G &#x3D; \langle S\rangle$，增量地将 $S$ 中的每一个元素插入其中，并维护上述截面和生成元的变化。</p>
+<p>当将 $g$ 插入 $H^{(i)}$ 时，对于当前截面 $u^{(i)}$，我们用 $x &#x3D; u^{(i)}_*g$ 去尝试更新截面。如果 $u^{(i)}_*g$ 已经在轨道中（通过 $\gamma$ 到达），Schreier Lemma 指出 $u^{(i)}g\gamma^{-1}$ 为 $H^{(i+1)}$ 的元素，因此递归将其插入 $H^{(i + 1)}$。否则它生成了一个新的截面，此时应当枚举 $H^{(i)}$ 的生成元 $g’$ 尝试用 $xg’$ 更新截面。</p>
+<p>这里的算法实际上是 OrbitTransversalStabilizer 的 dfs 版本，直接给出该算法的 C++ 实现如下</p>
+<details class="note "><summary><p><strong>Implementation in C++</strong></p>
+</summary>
+<p>本代码通过了 <a target="_blank" rel="noopener" href="https://loj.ac/p/177">LibreOJ #177. 生成子群阶数</a>，略去了高精度整数和置换定义的部分。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">generatingSet</span> &#123;</span><br><span class="line">    <span class="keyword">private</span>:</span><br><span class="line">    <span class="type">int</span> beta, tot, size;</span><br><span class="line">    permutation generator[N * <span class="number">2</span>], transversal[N];</span><br><span class="line">    <span class="type">bool</span> orbit[N];</span><br><span class="line">    generatingSet *succ;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">generatingSet</span>(<span class="type">int</span> _size = <span class="number">0</span>, <span class="type">int</span> _beta = <span class="number">0</span>, generatingSet *suc = <span class="literal">NULL</span>) &#123;</span><br><span class="line">        succ = suc, beta = _beta, tot = <span class="number">0</span>, size = _size;</span><br><span class="line">        <span class="built_in">memset</span>(orbit, <span class="number">0</span>, <span class="built_in">sizeof</span>(orbit)); orbit[beta] = <span class="literal">true</span>; transversal[beta] = <span class="built_in">permutation</span>(size);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">int</span> <span class="title">getOrbitIndex</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= size; i++) <span class="keyword">if</span>(orbit[i]) res++;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="type">bool</span> <span class="title">strip</span><span class="params">(permutation g)</span> <span class="type">const</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> gamma = g[beta];</span><br><span class="line">        <span class="keyword">if</span>(!orbit[gamma]) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">return</span> succ == <span class="literal">NULL</span> || succ-&gt;<span class="built_in">strip</span>(g * transversal[gamma].<span class="built_in">inv</span>());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">orbitTransversalStabilizer</span><span class="params">(permutation g)</span> </span>&#123;</span><br><span class="line">        <span class="type">int</span> gamma = g[beta];</span><br><span class="line">        <span class="keyword">if</span>(orbit[gamma]) &#123;</span><br><span class="line">            <span class="keyword">if</span>(succ) succ-&gt;<span class="built_in">insert</span>(g * transversal[gamma].<span class="built_in">inv</span>());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            orbit[gamma] = <span class="literal">true</span>, transversal[gamma] = g;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= tot; i++) <span class="built_in">orbitTransversalStabilizer</span>(g * generator[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="type">void</span> <span class="title">insert</span><span class="params">(permutation g)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">strip</span>(g)) <span class="keyword">return</span>;</span><br><span class="line">        generator[++tot] = g;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= size; i++) </span><br><span class="line">            <span class="keyword">if</span>(orbit[i]) <span class="built_in">orbitTransversalStabilizer</span>(transversal[i] * g);</span><br><span class="line">    &#125;</span><br><span class="line">&#125; H[N];</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    ios::<span class="built_in">sync_with_stdio</span>(<span class="number">0</span>);</span><br><span class="line">    cin.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    cout.<span class="built_in">tie</span>(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="type">int</span> n, m;</span><br><span class="line">    cin &gt;&gt; n &gt;&gt; m;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        H[i] = <span class="built_in">generatingSet</span>(n, i, i == <span class="number">1</span>? <span class="literal">NULL</span> : (H + i - <span class="number">1</span>));</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= m; i++) &#123;</span><br><span class="line">        permutation x;</span><br><span class="line">        x.<span class="built_in">read</span>(n);</span><br><span class="line">        H[n].<span class="built_in">insert</span>(x);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Int ans = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= n; i++) </span><br><span class="line">        ans = ans * H[i].<span class="built_in">getOrbitIndex</span>();</span><br><span class="line">     ans.<span class="built_in">print</span>();</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<p>分析各函数调用的次数可以知道该算法的复杂度至多是 $O(n^5)$ 的。</p>
+<h2><span id="求基和强生成集未完成">求基和强生成集（未完成）</span></h2><p>存在一个增量构造基和强生成集的 $\tilde{O}(n^8)$ 算法，不是很实际，先搁置。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Group-Theory/" rel="tag"># Group Theory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/07/16/Z-Zhou-ML2/" rel="prev" title="Machine Learning (2)（支持向量机）">
+                  <i class="fa fa-angle-left"></i> Machine Learning (2)（支持向量机）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

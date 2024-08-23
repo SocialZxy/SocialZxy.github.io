@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。   基本概念 命题的形式化  相关定义 合式公式 一些代表性句子的形式化方法 公式的解释和普遍有效性   等值和推理演算  等值公式 范式，Skolem 标准型  $\exists-$前束范式 Skolem 标准型   基本推理公式 推理规则">
+    <meta name="description" content="Abstract. 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。    基本概念 命题的形式化 相关定义 合式公式 一些代表性句子的形式化方法 公式的解释和普遍有效性   等值和推理演算 等值公式 范式，Skolem 标准型 $\exists-$前束范式 Skolem 标准型   基本推理公式 推理规则">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数理逻辑 (2) 谓词逻辑">
 <meta property="og:url" content="http://example.com/2024/01/25/Logic2Pred/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。   基本概念 命题的形式化  相关定义 合式公式 一些代表性句子的形式化方法 公式的解释和普遍有效性   等值和推理演算  等值公式 范式，Skolem 标准型  $\exists-$前束范式 Skolem 标准型   基本推理公式 推理规则">
+<meta property="og:description" content="Abstract. 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。    基本概念 命题的形式化 相关定义 合式公式 一些代表性句子的形式化方法 公式的解释和普遍有效性   等值和推理演算 等值公式 范式，Skolem 标准型 $\exists-$前束范式 Skolem 标准型   基本推理公式 推理规则">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-01-25T08:41:35.000Z">
 <meta property="article:modified_time" content="2024-06-08T06:21:45.972Z">
@@ -128,18 +128,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">25</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -241,20 +241,18 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。</p>
 <!-- toc -->
+
 <ul>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%91%BD%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96">基本概念 命题的形式化</a>
-<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%91%BD%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96">基本概念 命题的形式化</a><ul>
 <li><a href="#%E7%9B%B8%E5%85%B3%E5%AE%9A%E4%B9%89">相关定义</a></li>
 <li><a href="#%E5%90%88%E5%BC%8F%E5%85%AC%E5%BC%8F">合式公式</a></li>
 <li><a href="#%E4%B8%80%E4%BA%9B%E4%BB%A3%E8%A1%A8%E6%80%A7%E5%8F%A5%E5%AD%90%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%96%B9%E6%B3%95">一些代表性句子的形式化方法</a></li>
 <li><a href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E8%A7%A3%E9%87%8A%E5%92%8C%E6%99%AE%E9%81%8D%E6%9C%89%E6%95%88%E6%80%A7">公式的解释和普遍有效性</a></li>
 </ul>
 </li>
-<li><a href="#%E7%AD%89%E5%80%BC%E5%92%8C%E6%8E%A8%E7%90%86%E6%BC%94%E7%AE%97">等值和推理演算</a>
-<ul>
+<li><a href="#%E7%AD%89%E5%80%BC%E5%92%8C%E6%8E%A8%E7%90%86%E6%BC%94%E7%AE%97">等值和推理演算</a><ul>
 <li><a href="#%E7%AD%89%E5%80%BC%E5%85%AC%E5%BC%8F">等值公式</a></li>
-<li><a href="#%E8%8C%83%E5%BC%8Fskolem-%E6%A0%87%E5%87%86%E5%9E%8B">范式，Skolem 标准型</a>
-<ul>
+<li><a href="#%E8%8C%83%E5%BC%8Fskolem-%E6%A0%87%E5%87%86%E5%9E%8B">范式，Skolem 标准型</a><ul>
 <li><a href="#exists-%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F">$\exists-$前束范式</a></li>
 <li><a href="#skolem-%E6%A0%87%E5%87%86%E5%9E%8B">Skolem 标准型</a></li>
 </ul>
@@ -265,10 +263,10 @@
 </li>
 </ul>
 <!-- tocstop -->
+
 <span id="more"></span>
-<h1><span id="基本概念-命题的形式化">基本概念 命题的形式化</span></h1>
-<h2><span id="相关定义">相关定义</span></h2>
-<p>以下面两个命题为例。</p>
+
+<h1><span id="基本概念-命题的形式化">基本概念 命题的形式化</span></h1><h2><span id="相关定义">相关定义</span></h2><p>以下面两个命题为例。</p>
 <ul>
 <li>我是傻逼。</li>
 <li>接受礼物不等于我同意。</li>
@@ -277,14 +275,18 @@
 <div class="note success"><p><strong>Definition 1.</strong> 命题中表示思维对象的词，称为<strong>个体词</strong>或<strong>个体常项</strong>。</p>
 <p>如果其指代对象是不定的，称为<strong>个体变项</strong>或者<strong>个题变元</strong>。</p>
 </div>
+
 <div class="note success"><p><strong>Definition 2.</strong> 个体变项变化的范围称为<strong>论域</strong>，记作 $D$。一般默认论域是包含一切事物的最广的类<sup id="fnref:1"><a href="#fn:1" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="书上这里写的是集合，但是笔者觉得这里写集合存在一些问题，所以写作类。实际上我也并不打算深入追究这个基本的问题，只想看一看上层建筑。">[1]</span></a></sup>。</p>
 </div>
+
 <div class="note success"><p><strong>Definition 3.</strong> 从论域到真假的映射 $P : D \rightarrow \{T, F\}$ 称为<strong>谓词</strong>。当然也存在<strong>多元谓词</strong>，用映射的形式来表达就是 $P^n : D^n \rightarrow \{T, F\}$。</p>
 </div>
+
 <p>可以定义论域之间的<strong>函数</strong>，和习见的定义相同，$F : D \rightarrow D’$。注意和谓词不同的是，这里 $D’$ 不一定要是 $\{T, F\}$。</p>
 <div class="note success"><p><strong>Definition 4.</strong> 对个体词所加的约束限制称为<strong>量词</strong>。</p>
 <p>有两个最通用的量词，是<strong>全称量词</strong> $\forall$ 和<strong>存在量词</strong> $\exists$。从语义上来说，$(\forall x) P(x)$ 为真当且仅当对于论域中所有的 $x$ 都有 $P(x)$ 为真，$(\exists x) P(x)$ 为真当且仅当论域中至少有一个 $x$ 使得 $P(x)$ 为真。</p>
 </div>
+
 <div class="note warning"><p><strong>Example.</strong> 我们形式化两句话。</p>
 <ul>
 <li>一切物质都是运动的。这句话结构类似于 $(\forall x) P(x)$。根据 $\forall$ 的优先级也可以写成 $\forall x (P(x))$，出于简便也可以写成 $(x) (P(x))$。</li>
@@ -292,13 +294,11 @@
 </ul>
 <p>这里的符号优先级很奇怪但是比较琐碎，这里不做讨论，我们一般会加括号到没有歧义为止，等到后续讨论语法的时候再细说。</p>
 </div>
+
 <p>受量词约束的变元称为<strong>约束变元</strong>，否则称为<strong>自由变元</strong>。量词约束的范围称为量词的<strong>辖域</strong>。以下面这个命题为例</p>
-<p>$$<br>
-(\forall \varepsilon)((\exists \delta) P(\varepsilon, \delta))<br>
-$$</p>
+<p>$$<br>(\forall \varepsilon)((\exists \delta) P(\varepsilon, \delta))<br>$$</p>
 <p>这里 $P(\varepsilon, \delta)$ 是 $(\exists \delta)$ 的辖域，$((\exists \delta) P(\varepsilon, \delta))$ 是 $(\forall \varepsilon)$ 的辖域。</p>
-<h2><span id="合式公式">合式公式</span></h2>
-<p>合式公式的构成方式不是唯一的，只需其语义有意义，含义唯一，下面给出一种方式。</p>
+<h2><span id="合式公式">合式公式</span></h2><p>合式公式的构成方式不是唯一的，只需其语义有意义，含义唯一，下面给出一种方式。</p>
 <div class="note success"><p><strong>Definition.</strong> 只有如下的式子才是合式公式（下文中出现的 $A, B$ 默认是合式公式，可以随时忽略最外层匹配的括号）：</p>
 <ul>
 <li>命题常项，命题变项和不含联结词的谓词是合式公式。</li>
@@ -307,26 +307,24 @@ $$</p>
 <li>$x$ 是 $A$ 中的自由变元，那么 $(\forall x) (A)$ 和 $(\exists x) (A)$ 是合式公式。</li>
 </ul>
 </div>
+
 <p>合式公式中的约束变量是 dummy variable。即</p>
-<p>$$<br>
-(\forall x) P(x) = (\forall y) P(y)<br>
-$$</p>
+<p>$$<br>(\forall x) P(x) &#x3D; (\forall y) P(y)<br>$$</p>
 <p>此外你可以看出全称量词 $\forall$ 是合取词 $\wedge$ 的推广，$\exists$ 是析取词 $\vee$ 的推广。换言之如果论域是有限域，那么 $(\forall x) P(x)$ 可以展开成 $P(x_1) \wedge \cdots \wedge P(x_n)$ 类似物。在考虑一个谓词公式的时候，我们常考虑其在所谓的 $\{1, 2\}$ 域上的展开形式来初步判断其正确性。</p>
-<h2><span id="一些代表性句子的形式化方法">一些代表性句子的形式化方法</span></h2>
-<div class="note warning"><p><strong>Example 1.</strong> 所有满足 $P$ 的 $x$ 都满足 $Q$。（比如所有有理数都是实数）</p>
+<h2><span id="一些代表性句子的形式化方法">一些代表性句子的形式化方法</span></h2><div class="note warning"><p><strong>Example 1.</strong> 所有满足 $P$ 的 $x$ 都满足 $Q$。（比如所有有理数都是实数）</p>
 <details class="note "><summary><p>Answer.</p>
 </summary>
-<p>$$<br>
-(\forall x) (P(x) \rightarrow Q(x))<br>
-$$</p>
+<p>$$<br>(\forall x) (P(x) \rightarrow Q(x))<br>$$</p>
+
 </details></div>
+
 <div class="note warning"><p><strong>Example 2.</strong> 有的满足 $P$ 的 $x$ 也满足 $Q$。（比如有的实数是有理数）</p>
 <details class="note "><summary><p>Answer.</p>
 </summary>
-<p>$$<br>
-(\exists x) (P(x) \wedge Q(x))<br>
-$$</p>
+<p>$$<br>(\exists x) (P(x) \wedge Q(x))<br>$$</p>
+
 </details></div>
+
 <div class="note warning"><p><strong>Example 3.</strong> 对于 Peano 自然数，形式化如下语句：</p>
 <ul>
 <li>每个数有且仅有一个后继。</li>
@@ -339,30 +337,27 @@ $$</p>
 <details class="note "><summary><p>Answer.</p>
 </summary>
 <p>每个数有且仅有一个后继：</p>
-<p>$$<br>
-(\forall x) ((\exists y) (y = \mathrm{suc}(x) \wedge (\forall z) (z = \mathrm{suc}(x) \rightarrow y = z)))<br>
-$$</p>
+<p>$$<br>(\forall x) ((\exists y) (y &#x3D; \mathrm{suc}(x) \wedge (\forall z) (z &#x3D; \mathrm{suc}(x) \rightarrow y &#x3D; z)))<br>$$</p>
 <p>不存在一个数的后继是 $0$：</p>
-<p>$$<br>
-\neg (\exists x)(\mathrm{suc}(x) = 0)<br>
-$$</p>
+<p>$$<br>\neg (\exists x)(\mathrm{suc}(x) &#x3D; 0)<br>$$</p>
 <p>除 $0$ 外，每个数有且仅有一个前驱：</p>
-<p>$$<br>
-(\forall x)(x \ne 0 \rightarrow (\exists y)(y = \mathrm{pre}(x) \wedge (\forall z)(z = \mathrm{pre}(x) \rightarrow y = z)))<br>
-$$</p>
+<p>$$<br>(\forall x)(x \ne 0 \rightarrow (\exists y)(y &#x3D; \mathrm{pre}(x) \wedge (\forall z)(z &#x3D; \mathrm{pre}(x) \rightarrow y &#x3D; z)))<br>$$</p>
+
 </details>
+
 <p>实际上这三句话可以拿来作为自然数的三条公理。</p></div>
+
 <div class="note warning"><p><strong>Example 4.</strong> $f(x)$ 在 $x_0$ 处连续。（用 $\varepsilon-\delta$ 语言表示）</p>
 <details class="note "><summary><p>Answer.</p>
 </summary>
-<p>$$<br>
-(\forall \varepsilon) (\varepsilon &gt; 0 \rightarrow (\exists \delta) (\delta &gt; 0 \wedge (\forall x) (|x - x_0| &lt; \delta \rightarrow |f(x) - f(x_0)| &lt; \varepsilon)))<br>
-$$</p>
+<p>$$<br>(\forall \varepsilon) (\varepsilon &gt; 0 \rightarrow (\exists \delta) (\delta &gt; 0 \wedge (\forall x) (|x - x_0| &lt; \delta \rightarrow |f(x) - f(x_0)| &lt; \varepsilon)))<br>$$</p>
+
 </details></div>
-<h2><span id="公式的解释和普遍有效性">公式的解释和普遍有效性</span></h2>
-<p>在谓词逻辑下解释一个公式需要给定所有命题变项、自由个体变项、谓词和函数的真值。</p>
+
+<h2><span id="公式的解释和普遍有效性">公式的解释和普遍有效性</span></h2><p>在谓词逻辑下解释一个公式需要给定所有命题变项、自由个体变项、谓词和函数的真值。</p>
 <div class="note success"><p><strong>Definition.</strong> 如果一个谓词公式在任意解释下都为真，那么称之为<strong>普遍有效</strong>的。如果其在某一解释下可为真，则称其为<strong>可满足</strong>的。否则称为<strong>不可满足</strong>的。</p>
 </div>
+
 <div class="note warning"><p><strong>Example.</strong> 下面的几个谓词公式都是普遍有效的。</p>
 <ol>
 <li>$(\forall x) (P(x) \vee \neg P(x))$</li>
@@ -370,97 +365,68 @@ $$</p>
 <li>$(\forall x) P(x) \vee (\forall x) Q(x) \rightarrow (\forall x) (P(x) \vee Q(x))$</li>
 </ol>
 </div>
+
 <p>任给一个逻辑公式，判定它是否是一个普遍有效的逻辑公式是 NPC 的，参见 the Church-Turing thesis</p>
-<h1><span id="等值和推理演算">等值和推理演算</span></h1>
-<h2><span id="等值公式">等值公式</span></h2>
-<p>将谓词公式代入命题逻辑中的等值式，显然还是成立。因此这部分的公式我们不谈。</p>
+<h1><span id="等值和推理演算">等值和推理演算</span></h1><h2><span id="等值公式">等值公式</span></h2><p>将谓词公式代入命题逻辑中的等值式，显然还是成立。因此这部分的公式我们不谈。</p>
 <div class="note info"><p><strong>Theorem 1.</strong> 否定型等值式：</p>
-<p>$$<br>
-\begin{aligned}<br>
-\neg (\forall x) P(x) = (\exists x) \neg P(x) \\<br>
-\neg (\exists x) P(x) = (\forall x) \neg P(x)<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    \neg (\forall x) P(x) &#x3D; (\exists x) \neg P(x) \\<br>    \neg (\exists x) P(x) &#x3D; (\forall x) \neg P(x)<br>\end{aligned}<br>$$</p>
 <p>证明只需要看 $\forall, \exists$ 的定义，故略去。</p>
 </div>
+
 <p>在有限论域上把量词展开，可以发现这实质上就是 De Morgan 律。</p>
 <div class="note danger"><p>预告一下下方有混乱邪恶记号出现。</p>
 </div>
+
 <p>接下来是一些量词对联结词的分配律。</p>
 <div class="note info"><p><strong>Theorem 2.1.</strong> 假设 $\Lambda$ 是全称量词或者存在量词，$\odot$ 是合取词或者析取词，那么</p>
-<p>$$<br>
-(\Lambda x) (P(x) \odot q) = (\Lambda x) P(x) \odot q<br>
-$$</p>
+<p>$$<br>(\Lambda x) (P(x) \odot q) &#x3D; (\Lambda x) P(x) \odot q<br>$$</p>
 <p>证明只需要考虑对解释中 $q$ 的真值分类讨论，然后考虑别的东西，故略去。</p>
 </div>
+
 <p>根据 $\rightarrow$ 的定义可以得到</p>
-<p>$$<br>
-\begin{aligned}<br>
-(\forall x) (P(x) \rightarrow q) = (\exists x) P(x) \rightarrow q \\<br>
-(\forall x) (q \rightarrow P(x)) = q \rightarrow (\forall x) P(x)<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    (\forall x) (P(x) \rightarrow q) &#x3D; (\exists x) P(x) \rightarrow q \\<br>    (\forall x) (q \rightarrow P(x)) &#x3D; q \rightarrow (\forall x) P(x)<br>\end{aligned}<br>$$</p>
 <p>之类的东西，对于量词是 $\exists$ 的时候也是同理。</p>
 <div class="note info"><p><strong>Theorem 2.2.</strong> $\forall$ 对 $\wedge$ 分配，$\exists$ 对 $\vee$ 分配。</p>
-<p>$$<br>
-\begin{aligned}<br>
-(\forall x) (P(x) \wedge Q(x)) = (\forall x) P(x) \wedge (\forall x) Q(x) \\<br>
-(\exists x) (P(x) \vee   Q(x)) = (\exists x) P(x) \vee   (\exists x) Q(x)<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    (\forall x) (P(x) \wedge Q(x)) &#x3D; (\forall x) P(x) \wedge (\forall x) Q(x) \\<br>    (\exists x) (P(x) \vee   Q(x)) &#x3D; (\exists x) P(x) \vee   (\exists x) Q(x)<br>\end{aligned}<br>$$</p>
 <p>注意 $\forall$ 对 $\vee$ 是不分配的，$\exists$ 一侧同理。</p>
 </div>
+
 <div class="note info"><p><strong>Theorem 2.3.</strong> 通过变量易名也可实现量词的分配</p>
-<p>$$<br>
-\begin{aligned}<br>
-(\forall x) (\forall y) (P(x) \wedge Q(y)) = (\forall x) P(x) \wedge (\forall x) Q(x) \\<br>
-(\exists x) (\exists y) (P(x) \vee   Q(y)) = (\exists x) P(x) \vee   (\exists x) Q(x)<br>
-\end{aligned}<br>
-$$</p>
+<p>$$<br>\begin{aligned}<br>    (\forall x) (\forall y) (P(x) \wedge Q(y)) &#x3D; (\forall x) P(x) \wedge (\forall x) Q(x) \\<br>    (\exists x) (\exists y) (P(x) \vee   Q(y)) &#x3D; (\exists x) P(x) \vee   (\exists x) Q(x)<br>\end{aligned}<br>$$</p>
 <blockquote>
 <p>Hint. 这里的证明可以从右边推到左边，利用式 $(2)$ 做变量易名后用 Theorem 2.1 进行分配。</p>
 </blockquote>
 </div>
-<h2><span id="范式skolem-标准型">范式，Skolem 标准型</span></h2>
-<div class="note success"><p><strong>Definition.</strong> 假设 $\Lambda_1, …, \Lambda_n$ 是量词，$x_1, …, x_n$ 是个体变元，$M(x_1, …, x_n)$ 是不含量词的合适公式。称形如</p>
-<p>$$<br>
-(\Lambda_1 x_1) \cdots (\Lambda_n x_n) M(x_1, …, x_n)<br>
-$$</p>
+
+<h2><span id="范式skolem-标准型">范式，Skolem 标准型</span></h2><div class="note success"><p><strong>Definition.</strong> 假设 $\Lambda_1, …, \Lambda_n$ 是量词，$x_1, …, x_n$ 是个体变元，$M(x_1, …, x_n)$ 是不含量词的合适公式。称形如</p>
+<p>$$<br>(\Lambda_1 x_1) \cdots (\Lambda_n x_n) M(x_1, …, x_n)<br>$$</p>
 <p>的合式公式为<strong>前束范式</strong>，其中 $M$ 称为<strong>母式</strong>。</p>
 </div>
+
 <div class="note info"><p><strong>Theorem.</strong> 所有谓词公式都可以化为与之等值的前束范式。</p>
 <blockquote>
 <p>存在一个显然的不断使用分配律的构造性证明，这里不写。</p>
 <p>注意前束范式并不唯一。</p>
 </blockquote>
 </div>
+
 <p>在证明的过程中，我们可能并不需要「等值」的变换，只需要一个「同普遍有效」的变换，或从归结法的角度出发，只需要一个「同不可满足」的变换。（到了后面从语法角度研究的阶段，我们可能会把这种要求称为“可证等价”<sup id="fnref:2"><a href="#fn:2" rel="footnote"><span class="hint--top hint--error hint--medium hint--rounded hint--bounce" aria-label="Ref: https://www.math.pku.edu.cn/teachers/linzq/teaching/ml/slides/ml-4_2.pdf">[2]</span></a></sup>），因此导出下面两种范式。有一个名词是 <strong>Skolem 标准型</strong>，不同的资料中既有指代第一种的又有指代第二种的，让人感到非常傻逼，所以我们暂时采用下面的区分方法。</p>
-<h3><span id="exists-前束范式">$\exists-$前束范式</span></h3>
-<p>如果一个前束范式满足 $\exists$ 均在 $\forall$ 前面，至少有一个 $\exists$，且母式中没有自由变量，那么称其为 $\exists-$前束的。</p>
+<h3><span id="exists-前束范式">$\exists-$前束范式</span></h3><p>如果一个前束范式满足 $\exists$ 均在 $\forall$ 前面，至少有一个 $\exists$，且母式中没有自由变量，那么称其为 $\exists-$前束的。</p>
 <p>我们从一个关键定理及一个构造来讲这件事情。</p>
 <div class="note info"><p><strong>Theorem.</strong> 任意一个前束范式 $A$ 都可以化为一个 $\exists-$前束范式 $B$，满足 $A$ 普遍有效当且仅当 $B$ 普遍有效。</p>
 <details class="note "><summary><p>Construction.</p>
 </summary>
 <p>首先所有的自由变量用 $\forall$ 来约束。接下来通过下面的构造来得到 $B$。</p>
 <ol start="0">
-<li>
-<p>如果一个式子自身就是 $\exists-$前束的，那么不需要再做任何变换。</p>
+<li><p>如果一个式子自身就是 $\exists-$前束的，那么不需要再做任何变换。</p>
 </li>
-<li>
-<p>如果一个前束范式 $A(x_1, …, x_n)$ 的第一个量词不是 $\exists$，那么引入个体变项 $x_0$ 和谓词变项 $G(x)$，下式和它同普遍有效：</p>
-<p>$$<br>
-(\exists x_0) ((G(x_0) \vee \neg G(x_0)) \wedge A(x_1, …, x_n))<br>
-$$</p>
+<li><p>如果一个前束范式 $A(x_1, …, x_n)$ 的第一个量词不是 $\exists$，那么引入个体变项 $x_0$ 和谓词变项 $G(x)$，下式和它同普遍有效：</p>
+<p>$$<br>(\exists x_0) ((G(x_0) \vee \neg G(x_0)) \wedge A(x_1, …, x_n))<br>$$</p>
 </li>
-<li>
-<p>如果一个前束范式形如</p>
-<p>$$<br>
-(\exists x_1) \cdots (\exists x_i) (\forall y) P(x_1, …, x_i, y, x_{i+1}, x_n)<br>
-$$</p>
+<li><p>如果一个前束范式形如</p>
+<p>$$<br>(\exists x_1) \cdots (\exists x_i) (\forall y) P(x_1, …, x_i, y, x_{i+1}, x_n)<br>$$</p>
 <p>其中 $P$ 是一个前束范式，$x_1, …, x_i, y$ 前面均没有量词，那么引入个体变项 $z$ 和 $i + 1$ 元谓词变项 $S$ 下式和它同普遍有效</p>
-<p>$$<br>
-(\exists x_1) \cdots (\exists x_i) ((\exists y) (P(x_1, …, x_i, y, x_{i+1}, x_n) \wedge \neg S(x_1, …, x_i, y)) \vee (\forall z) S(x_1, …, x_i, z))<br>
-$$</p>
+<p>$$<br>(\exists x_1) \cdots (\exists x_i) ((\exists y) (P(x_1, …, x_i, y, x_{i+1}, x_n) \wedge \neg S(x_1, …, x_i, y)) \vee (\forall z) S(x_1, …, x_i, z))<br>$$</p>
 <p>接下来可以将 $(\exists y)$，$P$ 中的量词和 $(\forall z)$ 依次前置，得到一个前束范式，其中最后一个量词是 $(\forall z)$，这相当于把 $(\forall y)$ 搬到了最后面。</p>
 </li>
 </ol>
@@ -468,59 +434,43 @@ $$</p>
 <p>上面三条构造方法中只有 2 的证明比较复杂。主播已经想通了是为什么了，但是不想写了。</p>
 </blockquote>
 <p>重复使用 1, 2 可以将所有的 $\forall$ 搬到最后。</p>
+
 </details></div>
-<h3><span id="skolem-标准型">Skolem 标准型</span></h3>
-<p>一个只含有 $\forall$ 的前束范式称为 <strong>Skolem 标准型</strong>。</p>
+
+<h3><span id="skolem-标准型">Skolem 标准型</span></h3><p>一个只含有 $\forall$ 的前束范式称为 <strong>Skolem 标准型</strong>。</p>
 <div class="note info"><p><strong>Theorem.</strong> 任意谓词公式 $A$ 可以化成一个 Skolem 标准型 $B$，$A$ 和 $B$ 同不可满足。</p>
 <details class="note "><summary><p>Construction.</p>
 </summary>
 <p>首先化为前束范式，接下来：</p>
 <ol start="0">
-<li>
-<p>已经是 Skolem 标准型的式子无需变化。</p>
+<li><p>已经是 Skolem 标准型的式子无需变化。</p>
 </li>
-<li>
-<p>如果第一个量词是 $\exists x$，那么直接扔掉 $\exists$ 即可。</p>
+<li><p>如果第一个量词是 $\exists x$，那么直接扔掉 $\exists$ 即可。</p>
 </li>
-<li>
-<p>如果前束范式形如</p>
-<p>$$<br>
-(\forall x_1) \cdots (\forall x_i) (\exists y) P(x_1, …, x_i, y)<br>
-$$</p>
-<p>将 $y$ 替换为一个未在 $P$ 中出现过的函数 $f: D^i \rightarrow D$，即</p>
-<p>$$<br>
-(\forall x_1) \cdots (\forall x_i) P(x_1, …, x_i, f(x_1, …, x_i))<br>
-$$</p>
+<li><p>如果前束范式形如</p>
+<p>$$<br>(\forall x_1) \cdots (\forall x_i) (\exists y) P(x_1, …, x_i, y)<br>$$</p>
+<p>将 $y$ 替换为一个未在 $P$ 中出现过的函数 $f: D^i \rightarrow D$，即 </p>
+<p>$$<br>(\forall x_1) \cdots (\forall x_i) P(x_1, …, x_i, f(x_1, …, x_i))<br>$$</p>
 <p>这个公式和原来的公式同不可满足。</p>
 <blockquote>
 <p>这里你可以理解为对于任意的 $x_1, …, x_i$ 存在 $y$，那么 $y$ 依赖于前面 $x$ 的选取，因此我们用一个函数来表达这种依赖关系。</p>
 </blockquote>
 </li>
 </ol>
+
 </details></div>
-<h2><span id="基本推理公式">基本推理公式</span></h2>
-<div class="note info"><p><strong>基本的推理公式</strong></p>
-<p>$$<br>
-\begin{aligned}<br>
-(1) &amp; (\forall x) P(x) \vee (\forall x) Q(x) \Rightarrow (\forall x)(P(x) \vee Q(x)) \\<br>
-(2) &amp; (\exists x) (P(x) \wedge Q(x)) \Rightarrow (\exists x) P(x) \wedge (\exists x) Q(x) \\<br>
-(3) &amp; (\forall x) (P(x) \rightarrow Q(x)) \Rightarrow (\forall x) P(x) \rightarrow (\forall x) Q(x) \\<br>
-(4) &amp; (\exists x) (P(x) \rightarrow Q(x)) \Rightarrow (\exists x) P(x) \rightarrow (\exists x) Q(x) \\<br>
-(5) &amp; (\forall x) (P(x) \rightarrow Q(x)) \wedge (\forall x) (Q(x) \rightarrow R(x)) \Rightarrow (\forall x) (P(x) \rightarrow R(x)) \\<br>
-(6) &amp; (\forall x) (P(x) \rightarrow Q(x)) \wedge P(a) \Rightarrow Q(a) \\<br>
-(7) &amp; (\forall x) (\forall y) P(x, y) \Rightarrow (\exists x) (\forall y) P(x, y) \\<br>
-(8) &amp; (\exists x) (\forall y) P(x, y) \Rightarrow (\forall y) (\exists x) P(x, y)<br>
-\end{aligned}<br>
-$$</p>
+
+<h2><span id="基本推理公式">基本推理公式</span></h2><div class="note info"><p><strong>基本的推理公式</strong></p>
+<p>$$<br>\begin{aligned}<br>    (1) &amp; (\forall x) P(x) \vee (\forall x) Q(x) \Rightarrow (\forall x)(P(x) \vee Q(x)) \\<br>    (2) &amp; (\exists x) (P(x) \wedge Q(x)) \Rightarrow (\exists x) P(x) \wedge (\exists x) Q(x) \\<br>    (3) &amp; (\forall x) (P(x) \rightarrow Q(x)) \Rightarrow (\forall x) P(x) \rightarrow (\forall x) Q(x) \\<br>    (4) &amp; (\exists x) (P(x) \rightarrow Q(x)) \Rightarrow (\exists x) P(x) \rightarrow (\exists x) Q(x) \\<br>    (5) &amp; (\forall x) (P(x) \rightarrow Q(x)) \wedge (\forall x) (Q(x) \rightarrow R(x)) \Rightarrow (\forall x) (P(x) \rightarrow R(x)) \\<br>    (6) &amp; (\forall x) (P(x) \rightarrow Q(x)) \wedge P(a) \Rightarrow Q(a) \\<br>    (7) &amp; (\forall x) (\forall y) P(x, y) \Rightarrow (\exists x) (\forall y) P(x, y) \\<br>    (8) &amp; (\exists x) (\forall y) P(x, y) \Rightarrow (\forall y) (\exists x) P(x, y)<br>\end{aligned}<br>$$</p>
 <p>这些式子均不难从语义上说明。</p>
 </div>
+
 <p>注意这些推理一般都是不可逆的。</p>
-<h2><span id="推理规则">推理规则</span></h2>
-<ol>
+<h2><span id="推理规则">推理规则</span></h2><ol>
 <li><strong>全称量词消去.</strong> $(\forall x) P(x) \Rightarrow P(y)$</li>
 <li><strong>全称量词引入.</strong> $y$ 是自由变项，则 $P(y) \Rightarrow (\forall x) P(x)$</li>
-<li><strong>存在量词消去.</strong> $(\exists x) P(x) \Rightarrow P©$，$c$ 是个体常项。</li>
-<li><strong>存在量词引入.</strong> $P© \Rightarrow (\exists x) P(x)$</li>
+<li><strong>存在量词消去.</strong> $(\exists x) P(x) \Rightarrow P(c)$，$c$ 是个体常项。</li>
+<li><strong>存在量词引入.</strong> $P(c) \Rightarrow (\exists x) P(x)$</li>
 </ol>
 <p>命题逻辑中的推理规则仍然适用。</p>
 <p>此外归结法仍然是可以操作的。还是将右边的取反引入到左边然后证明前提不可满足。可以将所有的前提都化为 Skolem 标准型然后取母式做归结，因为我们说过这两个式子是同不可满足的。</p>
