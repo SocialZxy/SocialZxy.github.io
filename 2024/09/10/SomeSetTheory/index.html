@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 因为本学期的离散数学课程讲了一些集合论但是留了很多悬念，所以将暑假时候学习的一些集合论笔记整理之后发出。本篇笔记参考 李文威，代数学方法（第一卷）基础架构，高等教育出版社（2019） 的第一章，刨去了 1.5 Grothendieck 宇宙 一节，因为我也没有看懂。    ZFC 公理 序结构 超穷递归 基数">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些集合论内容的笔记">
+<meta property="og:url" content="http://example.com/2024/09/10/SomeSetTheory/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 因为本学期的离散数学课程讲了一些集合论但是留了很多悬念，所以将暑假时候学习的一些集合论笔记整理之后发出。本篇笔记参考 李文威，代数学方法（第一卷）基础架构，高等教育出版社（2019） 的第一章，刨去了 1.5 Grothendieck 宇宙 一节，因为我也没有看懂。    ZFC 公理 序结构 超穷递归 基数">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-09-10T12:27:09.000Z">
+<meta property="article:modified_time" content="2024-09-11T14:28:21.298Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Set Theory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/09/10/SomeSetTheory/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/09/10/SomeSetTheory/","path":"2024/09/10/SomeSetTheory/","title":"一些集合论内容的笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一些集合论内容的笔记 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">ZFC 公理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">序结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">超穷递归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">基数</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/10/SomeSetTheory/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一些集合论内容的笔记 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一些集合论内容的笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-10 20:27:09" itemprop="dateCreated datePublished" datetime="2024-09-10T20:27:09+08:00">2024-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-11 22:28:21" itemprop="dateModified" datetime="2024-09-11T22:28:21+08:00">2024-09-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 因为本学期的离散数学课程讲了一些集合论但是留了很多悬念，所以将暑假时候学习的一些集合论笔记整理之后发出。本篇笔记参考 <em>李文威，代数学方法（第一卷）基础架构，高等教育出版社（2019）</em> 的第一章，刨去了 <em>1.5 Grothendieck 宇宙</em> 一节，因为我也没有看懂。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#zfc-%E5%85%AC%E7%90%86">ZFC 公理</a></li>
+<li><a href="#%E5%BA%8F%E7%BB%93%E6%9E%84">序结构</a></li>
+<li><a href="#%E8%B6%85%E7%A9%B7%E9%80%92%E5%BD%92">超穷递归</a></li>
+<li><a href="#%E5%9F%BA%E6%95%B0">基数</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="zfc-公理">ZFC 公理</span></h1><p>在公理化的集合论中，一切的物件都是集合，集合之间定义了一个二元谓词 $\in$ 用以一个集合是否是另一个集合中的元素。用下面的公理系统定义出集合之后，可以在上层定义常见的谓词或者二元运算诸如 $\subset, \cap, \cup, \setminus$ 等等。不交集合的并写作 $\sqcup$，可能不是很常见，特此声明。这些东西的定义即使充分地形式化也相当符合日常习惯，因此省略不写。</p>
+<p>本节中我们所有的公理用尽可能清晰的自然语言叙述，因为形式化的工作是琐碎且降低直观性的。</p>
+<p><strong>A1（外延公理）.</strong> 两集合相等当且仅当其有相同的元素。</p>
+<p><strong>A2（配对公理）.</strong> 对于任意的 $x, y$，存在一个集合 $\{x, y\}$，其元素恰好为 $x$ 和 $y$。这里需要一些形式化：</p>
+<p>$$<br>\forall x. \forall y. \exists \{x, y\}. \forall a. a\in \{x, y\}\rightarrow a &#x3D; x\vee a &#x3D; y<br>$$</p>
+<p><strong>A3（分离公理模式）.</strong> 给定谓词 $P$，则对于任意集合 $X$ 都存在 $Y &#x3D; \{u\in X : P(u)\}$。</p>
+<p><strong>A4（并集公理）.</strong> 对于任意集合 $X$，存在相应的并集</p>
+<p>$$<br>\cup_{v\in X}v :&#x3D; \{u : \exists v\in X, u\in v\}<br>$$</p>
+<p><strong>A5（幂集公理）.</strong> 对于任意集合 $X$，存在其幂集</p>
+<p>$$<br>P(x) :&#x3D; \{x : x\subset X\}<br>$$</p>
+<p><strong>A6（无穷公理）.</strong> 存在归纳集 $X$。因为其并非显式列举的，我们被迫用一阶语言来描述这个集合 $X$ 的存在性。</p>
+<p>$$<br>\exists X. (\exists \varnothing. \varnothing \in X) \wedge (\forall y. y\in X \rightarrow y \cup \{y\}\in X)<br>$$</p>
+<p><strong>A7（替换公理模式）.</strong> 给定函数 $F: X\rightarrow Y$ 和集合 $X$，存在集合</p>
+<p>$$<br>F(X) &#x3D; \{F(X) : x\in X\}<br>$$</p>
+<p><strong>A8（正则公理）.</strong> 任意非空集存在对于关系 $\in$ 极小的元。</p>
+<p>下一条公理是可选的。</p>
+<p><strong>A9（选择公理）.</strong> $X$ 的所有元素均非空，则存在选择函数。用一阶语言来描述就是</p>
+<p>$$<br>\exists g. (g : X \rightarrow \cup_{x\in X} x) \wedge (x\in X, g(x)\in x)<br>$$</p>
+<p>集中对于上述公理中的一些可能的问题做一些解释。</p>
+<ul>
+<li><p><strong>A3</strong> 和 <strong>A7</strong> 被称为公理模式，类似于 C++ 中的模板：以 <strong>A3</strong> 为例，每提供一个谓词 $P$，产生一条分离公理。（虽然我没有理解为什么书中要特别强调这一点）</p>
+</li>
+<li><p>上述“函数”均可以由一阶语言定义，本质是是满足下述条件的二元谓词 $\varphi$：</p>
+<p>$$<br>\forall x. \exists !y. \varphi(x, y)<br>$$</p>
+<p>因此没有循环论证。</p>
+</li>
+<li><p><strong>A2</strong> 没有要求 $x\ne y$。如果取 $x &#x3D; y$，相当于对于任意元素，可以在外面加一层大括号。</p>
+</li>
+</ul>
+<p>在上述公理体系下可以定义一些简单的结构。</p>
+<div class="note success"><p><strong>定义 1.1（空集）.</strong> 给定任意集合 $S$，定义空集</p>
+<p>$$<br>\varnothing :&#x3D; \{u \in S : u\ne u\}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.2.</strong> 空集是存在的，且无关乎 $S$ 的选取。</p>
+<p><strong>证明.</strong> 空集的存在性由集合的存在性（<strong>A6</strong>）给出。唯一性由 <strong>A1</strong> 可以推出，中途需要用到 ex falso quodlibet。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.3（二元组）.</strong> 对于元素 $x, y$，定义二元组</p>
+<p>$$<br>(x, y) :&#x3D; \{x, \{x, y\}\}<br>$$</p>
+<p>这个集合依据配对公理存在。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.4（笛卡尔积）.</strong> 对于集合 $X, Y$，定义其笛卡尔积</p>
+<p>$$<br>X\times Y &#x3D; \{(x, y) : x\in X, y\in Y\}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.5.</strong> 笛卡尔积 $(x, y)$ 是集合。</p>
+<p><strong>证明.</strong> 定义一个从 $Y$ 到所有二元组二元组的映射 $F$：</p>
+<p>$$<br>F : y\mapsto (x_0, y)<br>$$</p>
+<p>根据替换公理模式存在第一维是 $x_0$，第二维遍历 $y$ 的有序对集合 $S_{x_0}$。根据并集公理</p>
+<p>$$<br>\cup_{x\in X} S_{x}<br>$$</p>
+<p>存在，这实际上就是 $X\times Y$。</p>
+</div>
+
+<p>对于一些对象构成的、无法用 ZFC 公理生成的总体，称为<strong>真类</strong>。</p>
+<div class="note info"><p><strong>定理 1.6.</strong> 所有集合构成真类。</p>
+<p><strong>证明.</strong> 若所有集合构成集合 $\mathbf{Set}$，那么根据分离公理模式，下面的集合存在：</p>
+<p>$$<br>S :&#x3D; \{x \in \mathbf{Set} : x\notin x\}<br>$$</p>
+<p>此时无论 $S$ 是否属于自身都将导出矛盾。</p>
+</div>
+
+<h1><span id="序结构">序结构</span></h1><div class="note success"><p><strong>定义 2.1（偏序集）.</strong> 一个偏序集系指一个集合 $P$ 和其上定义的一个二元关系 $\leq$，满足</p>
+<ol>
+<li>（自反性）$\forall x\in P. x \leq x$；</li>
+<li>（传递性）$\forall x, y, z\in P. x\leq y \wedge y\leq z \rightarrow x\leq z$；</li>
+<li>（反对称性）$\forall x, y\in P. x\leq y \wedge y\leq x \rightarrow x &#x3D; y$。</li>
+</ol>
+<p>仅满足 $(1), (2)$ 的集合称为<strong>预序集</strong>。若偏序集中任两元素均可比大小，称为<strong>全序集</strong>。</p>
+</div>
+
+<p>今后我们通常将二元关系省略不写，直接称 $P$ 是偏序集。$\leq$ 的定义可以从上下文看出。</p>
+<div class="note success"><p><strong>定义 2.2.</strong> $P\rightarrow Q$ 的函数 $f$ 称为<strong>保序</strong>的，若满足</p>
+<p>$$<br>\forall x, y\in P, x\leq y \rightarrow f(x)\leq f(y)<br>$$</p>
+<p>若 $\phi$ 为预序集 $P, Q$ 间的双射，且其自身和其逆都保序，则称 $\phi$ 为 $P, Q$ 间的同构。预序集在同构意义下的等价类称为序型。</p>
+</div>
+
+<p>针对预序集可以定义极大小元、上下界、上下确界等概念，均与直观想象的一致，这里默认读者已经知道。</p>
+<div class="note success"><p><strong>定义 2.3（良序集）.</strong> $P$ 是全序集，且任意 $P$ 的非空子集都有极小元，则 $P$ 称为良序集。</p>
+</div>
+
+<p>良序集的每一个集合都自带一个选择函数（选出极小元），因此很多从良序性质出发的定理无需依靠选择公理即可证明。</p>
+<div class="note info"><p><strong>引理 2.4.</strong> $P$ 为良序集，$\phi$ 为一严格递增的函数，则有 </p>
+<p>$$<br>\forall x. \phi(x)\geq x<br>$$</p>
+<p>这同时蕴含：</p>
+<ol>
+<li>$P$ 没有非平凡的自同构。</li>
+<li>不存在 $P$ 到 $P_{&lt;x} :&#x3D; \{y\in P : y &lt; x\}$（称为 $P$ 的一个前段）的同构。</li>
+</ol>
+<p><strong>证明.</strong> 定义违反限制的集合</p>
+<p>$$<br>S :&#x3D; \{x\in P, \phi(x) &lt; x\}<br>$$</p>
+<p>若 $S$ 不是空集，由于 $P$ 良序，$S$ 有极小元 $x$。此时无论 $\phi(x)$ 是否属于 $x$ 均导出矛盾，因此总断言成立。后面两条子断言的证明是习题难度，因此不写证明。</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.5（传递集）.</strong> 若 $\alpha$ 为集合且 $\alpha \subset P(\alpha)$，则称 $\alpha$ 是传递集。（形象地说，就是 $\forall x. x\in \alpha \rightarrow x \subset\alpha$）</p>
+</div>
+
+<p>此时“传递”这个词出现了歧义（2.5 和 2.1.2）。我们在描述 2.5 中定义的传递集时，必然完整的写出“传递集”三个字。其余时候提到的传递性都是某偏序集中二元关系具有的性质。</p>
+<div class="note success"><p><strong>定义 2.6（序数）.</strong> $\alpha$ 为传递集，且与 $\in$ 构成良序集，则称 $\alpha$ 为序数。</p>
+</div>
+
+<p>$\varnothing$ 依照定义就是序数。此外显然 $\alpha$ 是序数则 $\alpha\sqcup \{\alpha\}$ 是序数。前几个序数依次是</p>
+<p>$$<br>\varnothing, \{\varnothing\}, \{\varnothing, \{\varnothing\}\}, …<br>$$</p>
+<p>当然上面说的“前”和序数的枚举都不是显然的。先证明以下引理</p>
+<div class="note info"><p><strong>引理 2.6.</strong> </p>
+<ol>
+<li>$\alpha$ 是序数，$\beta\in \alpha$，那么 $\beta$ 是序数；</li>
+<li>$\alpha, \beta$ 都是序数，$\alpha \subsetneq \beta$ 则 $\alpha \in \beta$；</li>
+<li>$\alpha, \beta$ 都是序数，则 $\alpha\subset \beta \vee\beta\subset \alpha$。</li>
+</ol>
+<p><strong>证明.</strong></p>
+<ol>
+<li><p>$\beta$ 的良序性可以直接从 $\alpha$ 的良序性导出。难点是证明 $\beta$ 也是传递集。考虑 $x\in \beta$，要证明 $x\subset \beta$，即</p>
+<p>$$<br>\forall y\in x. y\in \beta<br>$$</p>
+<p>$\alpha$ 的传递性给出 $x, y, \beta\in \alpha$，而 $\alpha$ 的良序性（具体地，是 $\in$ 的传递性）给出了上述欲证明的关系。</p>
+</li>
+<li><p>我们断言 $\alpha &#x3D; \min \beta \setminus \alpha$。简便起见将 RHS 记为 $\gamma$。</p>
+<p>$\alpha \subset \gamma$：考虑 $x\in \alpha$，显然 $x\ne \gamma$，那么显然 $x\in \gamma$ 或者 $\gamma \in x$，因为 $\alpha$ 为良序，任意两元素都可比。我们只需要排除 $\gamma \in x$。若 $\gamma\in x$，那么 $\gamma\in \alpha$（$\in$ 的传递性），这与 $\gamma &#x3D; \min  \color{red}{\beta\setminus \alpha}$ 矛盾。</p>
+<p>$\gamma \subset \alpha$：考虑 $x\in \gamma$，由于 $\gamma$ 是极小元，有 $\gamma \notin \beta\setminus \alpha$。另外 $\gamma \in \beta$（$\beta$ 是传递集），只能是 $x\in \alpha$。</p>
+</li>
+<li><p>令 $\gamma &#x3D; \alpha\cap \beta$。只需要证明 $\gamma &#x3D; \alpha \vee\gamma &#x3D; \beta$。</p>
+<p>使用反证法，假设 $\gamma \ne \alpha \wedge \gamma \ne \beta$。此时有 $\gamma \subsetneq \alpha \wedge \gamma \subsetneq \alpha$，根据本引理第二条断言，$\gamma \in \alpha \cap \beta &#x3D; \gamma$，导出矛盾。</p>
+</li>
+</ol>
+</div>
+
+<p>序数类简记为 $\mathbf{On}$，稍后再证明 $\mathbf{On}$ 是真类。由于 $\in$ 已经成为序数类上非常自然的二元关系，接下来将 $\in$ 都记作 $&lt;$。</p>
+<p>引理自然导出</p>
+<div class="note info"><p><strong>定理 2.7.</strong> </p>
+<ol>
+<li>$&lt;$ 定义了 $\mathbf{On}$ 上的全序。序数 $\alpha$ 无非是 $\{\beta : \beta &lt; \alpha\}$。</li>
+<li>$C$ 为序数构成的非空类，则 $\inf C :&#x3D; \cap C$ 是序数，必有 $\inf C\in C$。另有 $\alpha\cup \{\alpha\} &#x3D; \inf \{\beta : \beta &gt; \alpha\}$。</li>
+<li>$S$ 为序数构成的非空集，则 $\sup C :&#x3D; \cup S$ 是序数。</li>
+</ol>
+</div>
+
+<p>根据 2.7.2 定义序数 $\alpha$ 的后继为 $\alpha + 1 :&#x3D; \alpha \cup \{\alpha\}$。对于 $\alpha$，若不存在 $\beta$ 使得 $\alpha &#x3D; \beta + 1$，则称 $\alpha$ 为极限序数。$0$ 依照定义成为极限序数。最小的非零极限序数记为 $\omega$（形象地理解，$\omega &#x3D; \mathbb{N}$），$&lt;\omega$ 的序数成为有限序数。</p>
+<div class="note info"><p><strong>命题 2.8.</strong> $\mathbf{On}$ 是真类。</p>
+<p><strong>证明.</strong> 若其为集合，则根据 2.7.3 有 $\sup \mathbf{On} + 1$ 是序数，且有</p>
+<p>$$<br>\sup \mathbf{On} + 1 &gt; \sup \mathbf{On} \geq \sup \mathbf{On} + 1<br>$$</p>
+<p>从而导出矛盾。</p>
+</div>
+
+<h1><span id="超穷递归">超穷递归</span></h1><p>很多问题在允许使用归纳法的情况下会变得容易，然而常见的整数归纳法直接施加于序数，容易引发可数性相关的问题。因此需要为序数类定制专门的归纳法。</p>
+<div class="note info"><p><strong>定理 3.1（超穷归纳法）.</strong> 假设 $C$ 为序数构成的类，满足</p>
+<ol>
+<li>$0\in C$；</li>
+<li>$\alpha \in C \rightarrow \alpha + 1 \in C$；</li>
+<li>$\alpha$ 为极限序数，$(\forall \beta &lt; \alpha. \beta \in C) \rightarrow \alpha \in C$。</li>
+</ol>
+<p>那么 $C &#x3D; \mathbf{On}$。</p>
+<p><strong>证明.</strong> 定理 2.7.2 实际上保证了 $&lt;$ 成为 $\mathbf{On}$ 上的良序（任意非空子集 $S$ 的极小元为 $\inf S$）。于是我们可以取 $\alpha$ 为 $\mathbf{On}\setminus C$ 的极小元，无论 $\alpha$ 是 $0$，非零极限序数或是后继均导出矛盾。</p>
+</div>
+
+<p>归纳时也可以给上述条件均添加 $&lt;\theta$。上述定理同时保证了归纳定义形式的序列的存在唯一性。据此可以证明一系列重要结论。</p>
+<div class="note info"><p><strong>定理 3.2.</strong> 任意良序集 $P$ 都同构于唯一的序数 $\alpha$。</p>
+<p><strong>证明.</strong> 递归地定义一列 $a$，其中 $a_0 :&#x3D; \min(P)$，而</p>
+<p>$$<br>a_\alpha :&#x3D; \begin{cases}<br>    \min(P \setminus \{a_\beta : \beta &lt; \alpha\}) &amp; \{a_\beta : \beta &lt; \alpha\} \subsetneq P \\<br>    P &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<blockquote>
+<p>这里其他情况取 $P$ 的用意是 $P$ 一定不是自身的元素，此时可以成功区分前半段和后半段。</p>
+</blockquote>
+<p>则类 $C &#x3D; \{\theta : a_\theta &#x3D; P\}$ 必然非空。否则 $\alpha \mapsto a_\alpha$ 给出了 $\mathbf{On}$ 到 $P$ 的单射。$a(\mathbf{On}) &#x3D; \{x \in P : \exists y \in \mathbf{On}. a_y &#x3D; x\}$ 是集合（根据 <strong>A3</strong>），$\mathbf{On} &#x3D; a^{-1}(a(\mathbf{On}))$ 是集合（根据 <strong>A7</strong>），导出矛盾。</p>
+<p>取 $\theta$ 为 $C$ 的极小元，$a_\alpha \mapsto \alpha$ 就是同构映射。唯一性由任意集合没有到其前段的非平凡同构给出（两个序数之间存在前段关系）。</p>
+</div>
+
+<div class="note info"><p><strong>定理 3.3（Zermelo 良序定理）.</strong> 任意集合 $S$ 可以被赋予良序（即同构于某个序数 $P$）。</p>
+<p><strong>证明.</strong> 选择公理给出了 $P(S)$ 的选择函数 $F$。接下来递归定义</p>
+<p>$$<br>a_\alpha :&#x3D; \begin{cases}<br>    F(S\setminus \{a\beta : \beta &lt; \alpha\}) &amp; \{a_\beta : \beta &lt; \alpha\} \subsetneq S \\<br>    S &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>这个序列类似于上一条定理给出了 $S$ 到某序数 $\theta$ 的同构。</p>
+</div>
+
+<p>这个定理也可以推导选择公理，因为良序可以给出选择函数。</p>
+<div class="note info"><p><strong>定理 3.4（Zorn 引理）.</strong> $P$ 为非空偏序集，若 $P$ 每个链都有上界，则 $P$ 有极大元。</p>
+<p><strong>证明.</strong> 假设 $P$ 没有极大元，就相当于对于任意元素 $x$，$\{y\in P : x &lt; y\}$ 都是非空集合。考虑 $2^P$ 上的选择函数 $F$，递归定义 </p>
+<p>$$<br>a_\alpha :&#x3D; \begin{cases}<br>    F(\{y\in P : \alpha &lt; y\}) &amp; \alpha &#x3D; \alpha’ + 1 \\<br>    \mathrm{UpperBound}(\{a_\beta : \beta &lt; \alpha\}) &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>对于第二行额外做一些说明：该上界一定不在原集合中，否则与 $a_\alpha &lt; a_{\alpha + 1}$ 矛盾。这给出了 $\mathbf{On}$ 到 $P$ 的双射，用类似于定理 3.2 的手法可以说明这导出了矛盾。</p>
+</div>
+
+<h1><span id="基数">基数</span></h1><div class="note success"><p><strong>定义 4.1.</strong> 若存在 $X \xrightarrow\sim Y$ 则记 $|X| &#x3D; |Y|$。若存在 $X\hookrightarrow Y$ 则记 $|X| \leq |Y|$。若 $|X|\leq |Y|\wedge \neg |X| &#x3D; |Y|$ 记 $|X| &lt; |Y|$。</p>
+</div>
+
+<p>注意我们现在只定义了一种“基数比较”，也就是两个二元谓词 $|\cdot| &#x3D; |\cdot|$ 和 $|\cdot|\leq |\cdot|$。$|\cdot|$ 的定义将在若干个定理之后给出。</p>
+<div class="note info"><p><strong>定理 4.2.</strong> $|X|\leq |Y|\wedge |Y|\leq |X|\rightarrow |X| &#x3D; |Y|$。</p>
+<p><strong>证明.</strong> 假设 $f : X \hookrightarrow Y, g : Y \hookrightarrow X$，首先用 $g$ 将 $Y$ 嵌入 $X$ 中，然后不失一般性地假设 $Y \subset X, g &#x3D; \mathrm{Id}_y$。构造子集链</p>
+<p>$$<br>X_0 &#x3D; X, Y_0 &#x3D; Y, X_{n + 1} &#x3D; f(X_n), Y_{n + 1} &#x3D; f(Y_n)<br>$$</p>
+<p>显然有</p>
+<p>$$<br>X_0 \supset Y_0 \supset X_1 \supset Y_2 \supset \cdots<br>$$</p>
+<p>定义 </p>
+<p>$$<br>\Phi(x) &#x3D; \begin{cases}<br>    f(x) &amp; \exists n, x \in X_n\setminus Y_n \\<br>    x &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>可以验证 $\Phi$ 确实是双射。</p>
+</div>
+
+<blockquote>
+<p>上述构造可能显得匪夷所思，因此我们简单做一些点评。需要注意下方的语言都是不严谨不形式化的，但或许有助于理解上述证明的思路。我们假定读者理解图论中的基本概念。</p>
+<p>从整体角度来看，一个集合到自己的单射可以感性地变成一些环和链（若 $f(x) &#x3D; y$，则加一条单向边 $x\rightarrow y$。函数的定义保证了每个点出度恰好为 $1$，单射的定义保证了每个点入度至多为 $1$）。此时对于每一个整体的环或者链，统一的定义双射中这些元素应当如何被映射（是被映射到 $x$ 还是 $f(x)$）。</p>
+<ul>
+<li>对于环，无论如何选择都无妨，只需保证一个环上的选择是统一的。</li>
+<li>有下面三种链<ul>
+<li>没有起点的链（可能出现于集合不可数的情况），只需保证选择是统一的。</li>
+<li>起点在 $X\setminus Y$ 中的链。只能定义为 $f(x)$，否则起点对应的值不在 $Y$ 中。</li>
+<li>起点在 $Y$ 中的链，只能定义为 $x$，否则起点没有原像。</li>
+</ul>
+</li>
+</ul>
+<p>考虑如何区分后两种链。我们发现如果 $x \in X \setminus Y$，那么一定有 $f(x) \in f(X)\setminus f(Y)$。这表明一整条链中的元素是否在这种补集当中的属性都是相同的。而且这里无需担心可数性的问题，因为链一定是可数的。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 4.3（Cantor）.</strong> 对于任意集合 $X$ 有 $|X| &lt; |P(X)|$。</p>
+<p><strong>证明.</strong> $X \hookrightarrow P(X)$ 是显然的。而对任意的映射 $\varphi : X \rightarrow P(X)$ 均可以找到</p>
+<p>$$<br>\{x \in X : x\notin \varphi(X)\} \notin \varphi(X)<br>$$</p>
+<p>因此 $\varphi$ 一定不是满射。</p>
+</div>
+
+<div class="note success"><p><strong>定义 4.4.</strong> 序数 $\kappa$ 被称为基数若 $\forall \lambda &lt; \kappa, |\lambda| &lt; |\kappa|$。</p>
+</div>
+
+<p>可以看到有限序数都是基数，极限序数 $\omega$ 也是基数，而 $\omega + 1$ 并非基数（希尔伯特旅馆）。</p>
+<div class="note info"><p><strong>定理 4.5.</strong> 对于任意集合 $X$，存在最小的序数 $\alpha(X)$ 使得 $|X| &#x3D; |\alpha(X)|$。</p>
+<p><strong>证明.</strong> Zermelo 良序定理给出了这个双射。因此这个序数是存在的。取类 $C_X$ 为 $|X| &#x3D; |\alpha|$ 的所有序数 $\alpha$ 构成的类，此类一定非空。那么 $\alpha(X) &#x3D; \inf C_X$。</p>
+</div>
+
+<p>立即推出任意集合 $|X|, |Y|$ 必然满足 $|X|\leq |Y| \vee |Y|\leq |X|$。现在可以定义单独的势符号 $|\cdot|$ 为 $|X| :&#x3D; \alpha(X)$，此符号与上面的几个谓词是相容的。</p>
+<div class="note info"><p><strong>引理 4.6.</strong> 对于任意序数 $\alpha$ 总是存在基数 $\kappa &gt; \alpha$；$S$ 是由基数构成的集合，则 $\sup S$ 是基数。</p>
+<p><strong>证明.</strong> 令 $\kappa &#x3D; \alpha(P(\alpha))$，则容易证明 $\kappa &gt; \alpha$。</p>
+<p>若 $\sup S$ 不是基数，可以考虑 $\beta &lt; \sup S$，$|\beta| &#x3D; |\sup S|$。由于 $\sup S$ 是上确界，必然存在 $x\in S, \beta &lt; x$。则 $|\beta|\leq |x| \leq |\sup S| &#x3D; \beta$，中间必须全部取等。于是 $|\beta| &#x3D; |x|$，与 $x$ 是基数矛盾。</p>
+</div>
+
+<div class="note success"><p><strong>定义 4.7.</strong> 递归定义</p>
+<p>$$<br>\aleph_\alpha :&#x3D; \begin{cases}<br>    \omega &amp; \alpha &#x3D; 0 \\<br>    \text{大于 $\aleph_{\alpha’}$ 的最小基数} &amp; \alpha &#x3D; \alpha’ + 1 \\<br>    \sup_{\beta &lt; \alpha} &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+</div>
+
+<p>容易证明 $|\mathbb{N}| &#x3D; |\mathbb{Q}| &#x3D; \aleph_0$。</p>
+<div class="note info"><p><strong>定理 4.8.</strong> $|\mathbb{R}| &#x3D; |2^{\aleph_0}|$。</p>
+<p><strong>证明.</strong></p>
+<ul>
+<li>$|\mathbb{R}| \leq 2^{\aleph_0}$：每个实数对应一个戴德金分割，戴德金分割正是 $P(\mathbb{Q})$ 中的元素。</li>
+<li>$|2^{\aleph_0}|\leq |\mathbb{R}|$：任意一个函数 $f: \mathbb{N}\rightarrow 2$ 对应了一个 $[0, 1)$ 之间的三进制小数<br>$$<br>\sum_{i&#x3D;0}^{\infty} f(i)3^{-i-1}<br>$$</li>
+</ul>
+</div>
+
+<p>关于基数还有一些有意思的关系式，因为属于课程内容，所以我们暂时憋着不发。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Set-Theory/" rel="tag"># Set Theory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/07/ODE1PrimaryTricks/" rel="prev" title="常微分方程 (1) 初等积分法">
+                  <i class="fa fa-angle-left"></i> 常微分方程 (1) 初等积分法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本系列是柳彬，常微分方程，北京大学出版社（2021）的阅读笔记。 因为第一章没有什么具体的内容所以直接略过，我们对其中提到的“微分方程的几何直观”简单做一个省流，然后直接进入第二章 初等积分法。显然这里需要做大量的实践，但本文仅总结抽象的方法，如果需要实践材料可以回到原书或者参见任意一本习题集。    微分方程的几何直观 恰当方程 变量分离方程 一阶线性微分方程 积分因子 一阶">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常微分方程 (1) 初等积分法">
+<meta property="og:url" content="http://example.com/2024/09/07/ODE1PrimaryTricks/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本系列是柳彬，常微分方程，北京大学出版社（2021）的阅读笔记。 因为第一章没有什么具体的内容所以直接略过，我们对其中提到的“微分方程的几何直观”简单做一个省流，然后直接进入第二章 初等积分法。显然这里需要做大量的实践，但本文仅总结抽象的方法，如果需要实践材料可以回到原书或者参见任意一本习题集。    微分方程的几何直观 恰当方程 变量分离方程 一阶线性微分方程 积分因子 一阶">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/SlopeField.png">
+<meta property="article:published_time" content="2024-09-07T03:26:34.000Z">
+<meta property="article:modified_time" content="2024-09-10T12:11:50.355Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="ODE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/SlopeField.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/07/ODE1PrimaryTricks/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/09/07/ODE1PrimaryTricks/","path":"2024/09/07/ODE1PrimaryTricks/","title":"常微分方程 (1) 初等积分法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>常微分方程 (1) 初等积分法 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">微分方程的几何直观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">恰当方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">变量分离方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">一阶线性微分方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">积分因子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">一阶隐式微分方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">微分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">参数法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">应用举例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">等角轨线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">Riccati 方程</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/ODE1PrimaryTricks/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="常微分方程 (1) 初等积分法 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常微分方程 (1) 初等积分法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-09-07 11:26:34" itemprop="dateCreated datePublished" datetime="2024-09-07T11:26:34+08:00">2024-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-10 20:11:50" itemprop="dateModified" datetime="2024-09-10T20:11:50+08:00">2024-09-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/ODE/" itemprop="url" rel="index"><span itemprop="name">ODE</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本系列是<em>柳彬，常微分方程，北京大学出版社（2021）</em>的阅读笔记。</p>
+<p>因为第一章没有什么具体的内容所以直接略过，我们对其中提到的“微分方程的几何直观”简单做一个省流，然后直接进入第二章 <em>初等积分法</em>。显然这里需要做大量的实践，但本文仅总结抽象的方法，如果需要实践材料可以回到原书或者参见任意一本习题集。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82">微分方程的几何直观</a></li>
+<li><a href="#%E6%81%B0%E5%BD%93%E6%96%B9%E7%A8%8B">恰当方程</a></li>
+<li><a href="#%E5%8F%98%E9%87%8F%E5%88%86%E7%A6%BB%E6%96%B9%E7%A8%8B">变量分离方程</a></li>
+<li><a href="#%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">一阶线性微分方程</a></li>
+<li><a href="#%E7%A7%AF%E5%88%86%E5%9B%A0%E5%AD%90">积分因子</a></li>
+<li><a href="#%E4%B8%80%E9%98%B6%E9%9A%90%E5%BC%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">一阶隐式微分方程</a><ul>
+<li><a href="#%E5%BE%AE%E5%88%86%E6%B3%95">微分法</a></li>
+<li><a href="#%E5%8F%82%E6%95%B0%E6%B3%95">参数法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B">应用举例</a><ul>
+<li><a href="#%E7%AD%89%E8%A7%92%E8%BD%A8%E7%BA%BF">等角轨线</a></li>
+<li><a href="#riccati-%E6%96%B9%E7%A8%8B">Riccati 方程</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="微分方程的几何直观">微分方程的几何直观</span></h1><p>考虑一阶微分方程</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; f(x, y)<br>$$</p>
+<p>其中 $f(x, y)$ 是区域 $G$ 上的连续函数。</p>
+<div class="note success"><p><strong>定义 1.1.</strong> 在区域 $G$ 中每一点 $P$ 上可以作一段以 $f(P)$ 为斜率的小线段 $l(P)$。$l(P)$ 称为该方程在 $P$ 处的<strong>线素</strong>。区域 $G$ 连同其上所有线素称为该方程的<strong>线素场</strong>。</p>
+</div>
+
+<p>下面的定理比较显然。</p>
+<div class="note info"><p><strong>定理 1.2.</strong> 连续可微曲线 $\Gamma &#x3D; \{(x, y) : y &#x3D; \psi(x), x \in J\}$ 满足 $\psi(x), x\in J$ 是该方程的解的充分必要条件是曲线上每一点处的切线与该点处的线素场重合。</p>
+</div>
+
+<p>下图是 wolframalpha 绘制的方程 $x\mathrm{d}x + y\mathrm{d}y &#x3D; 0$ 的线素场（<a target="_blank" rel="noopener" href="https://www.wolframalpha.com/input?i2d=true&i=xdx+++ydy+=+0">link</a>），可以直观地看到解曲线的形状大致是圆形。</p>
+<p><img src="/../picture/SlopeField.png"></p>
+<h1><span id="恰当方程">恰当方程</span></h1><div class="note success"><p><strong>定义 2.1.</strong> 下面的形式称为一阶微分方程的<strong>对称形式</strong>：</p>
+<p>$$<br>P(x, y)\mathrm{d}x + Q(x, y)\mathrm{d}y &#x3D; 0<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 注意将 $\mathrm{d}x, \mathrm{d}y$ 随意的乘除之后和原来的微分方程等价不是一件显然成立的事情。但是之后的讨论表明这确实是一个合法的操作。</p>
+</blockquote>
+<div class="note success"><p><strong>定义 2.2.</strong> 若存在连续可微函数 $\Phi(x, y)$ 使得</p>
+<p>$$<br>\mathrm{d}\Phi(x, y) &#x3D; P(x, y)\mathrm{d}x + Q(x, y)\mathrm{d}y<br>$$</p>
+<p>则称方程 $(2)$ 是<strong>恰当方程</strong>或者<strong>全微分方程</strong>。此时</p>
+<p>$$<br>\Phi(x, y) &#x3D; c<br>$$</p>
+<p>称为该方程的<strong>通积分</strong>。</p>
+</div>
+
+<p>此时如果 $\Phi(x, y)$ 确定了隐函数 $y &#x3D; u(x)$（实际上也可以确定 $x &#x3D; v(y)$，因为形式是对称的。不失一般性地，我们只讨论 $y$ 是 $x$ 的函数的情况）。我们可以证明 $u(x)$ 确实是方程</p>
+<p>$$<br>y’ &#x3D; -\frac{P(x, y)}{Q(x, y)}<br>$$</p>
+<p>的一个解，因为事实上</p>
+<p>$$<br>\Phi(x, u(x)) &#x3D; c<br>$$</p>
+<p>可以推出（两边对 $x$ 求导，由链式法则）</p>
+<p>$$<br>\frac{\partial \Phi}{\partial x}(x, u(x)) + \frac{\partial \Phi}{\partial y}(x, u(x))u’(x) &#x3D; 0<br>$$</p>
+<p>解出 $u’(x)$，综合 $\Phi$ 满足式 $(3)$ 得到</p>
+<p>$$<br>u’(x) &#x3D; -\frac{\frac{\partial \Phi}{\partial x}(x, u(x))}{\frac{\partial \Phi}{\partial y}(x, u(x))} &#x3D; -\frac{P(x, u(x))}{Q(x, u(x))}<br>$$</p>
+<p>反过来，如果某个 $u(x)$ 是方程 $(5)$ 的解，那么恰当方程的条件直接给出式 $(7)$，而 $(7)\Rightarrow (6)$ 是微分中值定理的经典应用，得到 $\Phi$ 确实是通积分。</p>
+<p>至此，我们说明了如果方程 $(5)$ 对应的对称形式是恰当方程，或者 $P, Q$ 同时乘上某个函数之后是恰当方程，那么 $\mathrm{d}x$ 和 $\mathrm{d}y$ 确实可以随意地乘除（全微分方程和原来的微分方程等价）。今后我们将混用这两种形式。</p>
+<p>现在的 Big Problem 变成如何判断一个全微分方程是否为恰当方程。众所周知的关于二阶偏导交换顺序的结论和曲线曲线积分与路径无关的结论不难推出如下结果：</p>
+<div class="note info"><p><strong>定理 2.3.</strong> 若 $P(x, y), Q(x, y)$ 为单连通区域 $D\subset \mathbb{R}^2$ 上的连续函数，且一阶偏导数 $\frac{\partial P}{\partial y}, \frac{\partial Q}{\partial x}$ 也连续。那么 $(3)$ 成为恰当方程的充分必要条件是</p>
+<p>$$<br>\frac{\partial P}{\partial y} &#x3D; \frac{\partial Q}{\partial x}<br>$$</p>
+<p>因为此时下面的式子就是该方程的通积分</p>
+<p>$$<br>\Phi(x, y) &#x3D; \int_{(x_0, y_0)}^{(x, y)} P(x, y)\mathrm{d}x + Q(x, y)\mathrm{d}y &#x3D; c<br>$$</p>
+<p>其中 $(x_0, y_0)$ 为 $D$ 中一点，第二类曲线积分的曲线取 $D$ 中任意一条分段光滑曲线。</p>
+</div>
+
+<p>实践中求通积分时常用的手法有：</p>
+<ol>
+<li><p>将积分曲线取作两段平行于坐标轴的线段，即</p>
+<p>$$<br>\Phi(x, y) &#x3D; \int_{x_0}^xP(t, y)\mathrm{d}t + \int_{y_0}^y Q(x_0, s)\mathrm{d}s<br>$$</p>
+<p>这个做法也可以描述为将 $\Phi(x, y)$ 视作对 $x$ 求偏导之后恰为 $P(x, y)$ 的部分和一个只和 $y$ 有关的部分，然后逐步求解。</p>
+</li>
+<li><p>直接观察。</p>
+</li>
+</ol>
+<h1><span id="变量分离方程">变量分离方程</span></h1><p>若一个方程可以写成</p>
+<p>$$<br>P_1(x)P_2(y)\mathrm{d}x + Q_1(x)Q_2(y)\mathrm{d}y &#x3D; 0<br>$$</p>
+<p>那么此方程为变量分离方程，容易看出 $P_2(y)Q_1(x)$ 非零的时候可以两边同时除掉，然后得到一个恰当方程。</p>
+<div class="note warning"><p><strong>例子.</strong> 若函数 $f(x, y)$ 满足 $f(tx, ty) &#x3D; t^nf(x, y)$，那么称 $f$ 为 $n$ 次齐次函数。若 $M(x, y), N(x, y)$ 都是 $n$ 次齐次函数，那么 </p>
+<p>$$<br>M(x, y)\mathrm{d}x + N(x, y)\mathrm{d}y &#x3D; 0<br>$$</p>
+<p>称为 $n$ 次齐次方程。下面给出该方程的解法。</p>
+<hr>
+<p>令 $y &#x3D; ux$ 得到</p>
+<p>$$<br>M(x, ux)\mathrm{d}x + N(x, ux)x\mathrm{d}u + N(x, ux)u\mathrm{d}x &#x3D; 0<br>$$</p>
+<p>稍作化简，利用 $M, N$ 的齐次性质得到</p>
+<p>$$<br>x^n(M(1, u)+uN(1, u))\mathrm{d}x + x^{n+1}N(1, u)\mathrm{d}u<br>$$</p>
+<p>是变量分离方程。接下来只需要讨论</p>
+<p>$$<br>x^{n+1}(M(1, u)+uN(1, u)) &#x3D; 0<br>$$</p>
+<p>的解是否是原方程的解，然后对 $(15)$ 作积分即可。</p>
+</div>
+
+<h1><span id="一阶线性微分方程">一阶线性微分方程</span></h1><p>下面的方程称为一阶<strong>线性微分方程</strong></p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} + p(x)y &#x3D; q(x)<br>$$</p>
+<p>若 $q(x) &#x3D; 0$，那么称为一阶齐次线性微分方程。从对称形式开始</p>
+<p>$$<br>(p(x)y - q(x))\mathrm{d}x + \mathrm{d}y &#x3D; 0<br>$$</p>
+<p>齐次方程是变量分离方程，变换后直接积分可以得到</p>
+<p>$$<br>\ln |y| + \int_{x_0}^x p(t)\mathrm{d}t &#x3D; c<br>$$</p>
+<p>于是</p>
+<p>$$<br>y &#x3D; \pm e^c \mathrm{e}^{-\int_{x_0}^x p(t)\mathrm{d}t} &#x3D; c_1\mathrm{e}^{-\int_{x_0}^x p(t)\mathrm{d}t}<br>$$</p>
+<p>其中 $c_1\ne 0$，而显然 $y&#x3D;0$ 也是解，所以事实上范围是 $c_1$ 为任意实数。</p>
+<p>接下来考虑非齐次方程，两边乘上 $\mathrm{e}^{\int_{x_0}^x p(t)\mathrm{d}t}$ 得到</p>
+<p>$$<br>\mathrm{d}\mathrm{e}^{\int_{x_0}^x p(t)\mathrm{d}t}y &#x3D; \mathrm{e}^{\int_{x_0}^x p(t)\mathrm{d}t}q(x)\mathrm{d}x<br>$$</p>
+<p>于是</p>
+<p>$$<br>y &#x3D; \mathrm{e}^{-\int_{x_0}^x p(t)\mathrm{d}t}(c + \int_{x_0}^x\mathrm{e}^{\int_{x_0}^sp(t)\mathrm{d}t}q(s)\mathrm{d}s)<br>$$</p>
+<p>上述变形都是充分必要的，所以通解给出了原方程的所有解。不难发现</p>
+<div class="note info"><p><strong>定理 4.1.</strong> 上述方程满足如下性质：</p>
+<ol>
+<li>齐次方程的解或者恒为 $0$，或者恒不为 $0$。</li>
+<li>齐次方程的通解是 $\mathbb{R}$ 上的线性空间。</li>
+<li>非齐次方程的解的存在区间和 $p(x), q(x)$ 有定义的范围一致。</li>
+<li>非齐次方程的通解是一个 $\mathbb{R}$ 上的线性流形 $\boldsymbol{x} + \mathcal{A}$，其中 $\boldsymbol{x}$ 是一个特解，$\mathcal{A}$ 是其对应齐次方程的通解。</li>
+<li>非齐次方程的初值问题的解是存在且唯一的。</li>
+</ol>
+</div>
+
+<h1><span id="积分因子">积分因子</span></h1><p>对于非恰当的对称形式，我们希望找到一个非零的 $\mu(x, y)$ 使得</p>
+<p>$$<br>\mu(x, y)P(x, y)\mathrm{d}x + \mu(x, y) Q(x, y)\mathrm{d}y &#x3D; 0<br>$$</p>
+<p>是恰当方程，根据定理 2.3 这就是</p>
+<p>$$<br>P(x, y)\frac{\partial \mu}{\partial y} - Q(x, y)\frac{\partial \mu}{\partial x} &#x3D; \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)\mu(x, y)<br>$$</p>
+<p>然后求偏微分方程 $(24)$ 的求解并不比原方程的求解简单。但有下面的特殊情况：</p>
+<div class="note info"><p><strong>定理 5.1.</strong> $(24)$ 有一个只依赖于 $x$ 的解的充分必要条件是</p>
+<p>$$<br>G &#x3D; -\frac{\dfrac{\partial Q}{\partial x} - \dfrac{\partial P}{\partial x}}{Q(x, y)}<br>$$</p>
+<p>只依赖于 $x$。其中一个解是</p>
+<p>$$<br>\mu(x) &#x3D; \mathrm{e}^{\int_{x_0}^x G(t)\mathrm{d}t}<br>$$</p>
+<p>对称地，对于 $y$ 有类似的结果，我们省略不写，相信读者可以自动洞察其中的奥秘。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>需要注意的是 $\mu$ 只依赖 $x$ 时 $(24)$ 将退化为常微分方程，其无非是</p>
+<p>$$<br>\mu’ &#x3D; G\mu<br>$$</p>
+<p>容易解出 $\mu(x) &#x3D; \mathrm{e}^{\int_{x_0}^x G(t)\mathrm{d}t}$ 是其中一个解。此时充分性和必要性都只是一些琐碎的验证工作。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>定理 5.2.</strong> 给定 $\phi(x, y)$，$(23)$ 有形如 $\mu(\phi(x, y))$ 形的积分因子当且仅当</p>
+<p>$$<br>\frac{\frac{\partial P}{\partial y} - \frac{\partial Q}{\partial x}}{Q\frac{\partial \phi}{\partial x} - P\frac{\partial \phi}{\partial y}} &#x3D; f(\phi(x, y))<br>$$</p>
+<p>其中 $f$ 是某个一元连续函数。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>必要性只需要代入验证，发现实际上</p>
+<p>$$<br>f(x) &#x3D; \frac{\mu’(x)}{\mu(x)}<br>$$</p>
+<p>反过来带入 $\mu(x, y) &#x3D; \mathrm{e}^{\int_{x_0}^{\phi(x, y)} f(t)\mathrm{d}t}$，发现确实成立。</p>
+
+</details></div>
+
+<p>至此可以简单讨论几类微分方程的解法。</p>
+<div class="note warning"><p><strong>例子 5.1.</strong> 解方程</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; \frac{ax+by+c}{mx+ny+l}<br>$$</p>
+<details class="note "><summary><p><strong>解法.</strong></p>
+</summary>
+<ul>
+<li>若 $(a, b)$ 和 $(m, n)$ 线性无关，那么存在一种换元可以吃掉 $c, l$ 变成齐次方程；</li>
+<li>否则可以分离常数，然后换元 $u &#x3D; mx + ny$ 得到一个分离变量方程。</li>
+</ul>
+
+</details></div>
+
+<div class="note warning"><p><strong>例子 5.2（Bernoulli 方程）.</strong> 解方程</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} + p(x)y &#x3D; q(x)y^n<br>$$</p>
+<p>其中 $n\ne 0, 1$。</p>
+<details class="note "><summary><p><strong>解法.</strong></p>
+</summary>
+<p>先忽略平凡解 $y&#x3D;0$，然后等式两边除掉 $y^n$，得到</p>
+<p>$$<br>y^{-n}\frac{\mathrm{d}y}{\mathrm{d}x} + p(x)y^{1-n} &#x3D; q(x)<br>$$</p>
+<p>换元 $u &#x3D; y^{1-n}$ 即可。</p>
+
+</details></div>
+
+<h1><span id="一阶隐式微分方程">一阶隐式微分方程</span></h1><p>考虑 $F(x, y, y’) &#x3D; 0$，也就是 $y’$ 不方便写成 $f(x, y)$ 的情况。</p>
+<h2><span id="微分法">微分法</span></h2><p>假设成功地从 $F$ 中解出了 $y$。</p>
+<p>$$<br>y &#x3D; f(x, p), p &#x3D; \frac{\mathrm{d}y}{\mathrm{d}x}<br>$$</p>
+<p>那么 </p>
+<p>$$<br>p &#x3D; \frac{\mathrm{d}f(x, p)}{\mathrm{d}x} &#x3D; \frac{\partial y}{\partial x} + \frac{\partial f}{\partial p}\frac{\mathrm{d}p}{\mathrm{d}x}<br>$$</p>
+<p>也就是</p>
+<p>$$<br>\frac{\partial f}{\partial p}p’ &#x3D; p - \frac{\partial y}{\partial x}<br>$$</p>
+<p>为一阶方程，是容易求解的。</p>
+<div class="note warning"><p><strong>例子 6.1.1（Clairaut 方程）.</strong> 解方程</p>
+<p>$$<br>y &#x3D; xp + f(p), p &#x3D; \frac{\mathrm{d}y}{\mathrm{d}x}<br>$$</p>
+<p>其中 $f’’(p)\ne 0$。</p>
+<details class="note "><summary><p><strong>解法.</strong></p>
+</summary>
+<p>直接套入上述形式得到</p>
+<p>$$<br>(x + f’(p))p’ &#x3D; 0<br>$$</p>
+<ul>
+<li><p>若 $p’ &#x3D; 0$，则 $p &#x3D; c$，通解为 $y &#x3D; cx + f(c)$。</p>
+</li>
+<li><p>若 $x + f’(p) &#x3D; 0$，那么得到另一个解</p>
+<p>$$<br>x &#x3D; -f’(p), y &#x3D; -pf’(p) + f(p)<br>$$</p>
+<p>这是一条曲线 $\Gamma$ 的参数形式。假设可以从 $x &#x3D; -f’(p)$ 中恢复出 $p &#x3D; u(x)$，那么有</p>
+<p>$$<br>\Gamma : y &#x3D; xu(x) + f(u(x))<br>$$</p>
+<p>接下来简单论述本方程和曲线 $\Gamma$ 的一些性质。首先求出 $y$ 对 $x$ 的二阶导</p>
+<p>$$<br>y’’ &#x3D; \frac{\mathrm{d}p}{\mathrm{d}x} &#x3D; -\frac{1}{f’’(p)}\ne 0<br>$$</p>
+<p>于是 $\Gamma$ 并非直线，但是该曲线在点 $x_0$ 处的切线方程为：</p>
+<p>$$<br>y - x_0u(x_0)-f(u(x_0)) &#x3D; u(x_0)(x - x_0)<br>$$</p>
+<p>也就是</p>
+<p>$$<br>y &#x3D; u(x_0)+f(u(x_0))<br>$$</p>
+<p>恰好是某一个通解。因此曲线 $\Gamma$ 的任意一点处均有 Clairaut 方程的两个解。</p>
+</li>
+</ul>
+
+</details></div>
+
+<h2><span id="参数法">参数法</span></h2><p>考虑曲面 $F(x, y, p) &#x3D; 0$ 的参数形式：</p>
+<p>$$<br>\begin{cases}<br>   x &#x3D; x(u, v) \\<br>   y &#x3D; y(u, v) \\<br>   p &#x3D; p(u, v) &#x3D; \frac{\mathrm{d}y}{\mathrm{d}x}<br>\end{cases}<br>$$</p>
+<p>那么有 $\mathrm{d}y &#x3D; p\mathrm{d}x$。展开得到</p>
+<p>$$<br>y_{,u}\mathrm{d}u + y_{,v}\mathrm{d}v &#x3D; p(u, v)(x_{,u}\mathrm{d}u + x_{,v}\mathrm{d}v)<br>$$</p>
+<p>于是原方程的求解归结为显式微分方程 $(44)$ 的求解，解出 $u, v$ 的参数形式后表示 $x, y$ 的参数形式。</p>
+<p>同时这个做法告诉你如果方程中不出现 $y$ 或者不出现 $x$ 应当如何处理。</p>
+<h1><span id="应用举例">应用举例</span></h1><h2><span id="等角轨线">等角轨线</span></h2><p>给定由方程</p>
+<p>$$<br>\Phi(x, y, c) &#x3D; 0<br>$$</p>
+<p>确定的以 $c$ 为参数的曲线族，求另一个曲线族</p>
+<p>$$<br>\Psi(x, y, k) &#x3D; 0<br>$$</p>
+<p>满足其中每一条曲线和 $(45)$ 中每一条曲线相交成定角 $\alpha\in \left(-\frac \pi 2, \frac \pi 2\right]$。此时 $(46)$ 称为 $(45)$ 的<strong>等角轨线族</strong>；若 $\alpha &#x3D; \frac \pi 2$ 称为<strong>正交轨线族</strong>。</p>
+<p>先进行一些通用的推导。首先有</p>
+<p>$$<br>\begin{cases}<br>   \Phi(x, y, c) &#x3D; 0 \\<br>   \Phi_{, x}(x, y, c)\mathrm{d}x + \Phi_{, y}(x, y, c)\mathrm{d}y &#x3D; 0<br>\end{cases}<br>$$</p>
+<p>从中第一行中还原出 $c$，然后代入第二行中得到</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{\Phi_{, x}(x, y, c(x, y))}{\Phi_{, y}(x, y, c(x, y))}<br>$$</p>
+<p>简便起见，将 RHS 记作 $H(x, y)$，即曲线族 $(45)$ 在 $(x, y)$ 点的斜率。那么曲线族 $(46)$ 的计算归结为求解下面两个微分方程之一：</p>
+<p>$$<br>\tan \alpha &#x3D; \frac{y’ - H(x, y)}{1+y’H(x, y)}<br>$$</p>
+<p>若 $\alpha \ne \frac{\pi}{2}$，或者当 $\alpha &#x3D; \frac{\pi}{2}$ 时</p>
+<p>$$<br>y’ &#x3D; -\frac 1 {H(x, y)}<br>$$</p>
+<div class="note warning"><p><strong>例子 7.1.1.</strong> 求抛物线族 $y &#x3D; cx^2$ 的正交曲线族。</p>
+<details class="note "><summary><p><strong>求解.</strong></p>
+</summary>
+<p>首先利用下列方程解出原曲线族在每一点处的斜率 $H(x, y)$：</p>
+<p>$$<br>\begin{cases}<br>   y &#x3D; cx^2 \\<br>   y’ &#x3D; 2cx<br>\end{cases} \color{blue} \Rightarrow y’ &#x3D; \frac{2y}{x}<br>$$</p>
+<p>故正交曲线族需要满足</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{x}{2y}<br>$$</p>
+<p>这是一个简单的分离变量方程，解出</p>
+<p>$$<br>x^2 + 2y^2 &#x3D; k^2<br>$$</p>
+<p>为同心椭圆族。</p>
+
+</details></div>
+
+<h2><span id="riccati-方程">Riccati 方程</span></h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ODE/" rel="tag"># ODE</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/08/19/Schreier-Sims/" rel="prev" title="The Schreier-Sims Algorithm">
+                  <i class="fa fa-angle-left"></i> The Schreier-Sims Algorithm
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/09/10/SomeSetTheory/" rel="next" title="一些集合论内容的笔记">
+                  一些集合论内容的笔记 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

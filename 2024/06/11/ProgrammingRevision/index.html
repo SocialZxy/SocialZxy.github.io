@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 程序设计实习（实验班）复习笔记。 其实也没什么好看的，看着玩玩。本文所有定理均不证。    随机算法概述 概率不等式 C++ 随机库 采样 哈希   距离度量 相似度量 欧氏空间 格点离散化 四分树 WSPD Spanner Tree Embedding     降维 JL">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-06-11T05:19:24.000Z">
-<meta property="article:modified_time" content="2024-06-11T15:50:54.395Z">
+<meta property="article:modified_time" content="2024-09-06T13:52:49.266Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Random Algorithm">
 <meta name="twitter:card" content="summary">
@@ -129,18 +129,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">25</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -203,9 +203,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-06-11 13:19:24 / Modified: 23:50:54" itemprop="dateCreated datePublished" datetime="2024-06-11T13:19:24+08:00">2024-06-11</time>
+      <time title="Created: 2024-06-11 13:19:24" itemprop="dateCreated datePublished" datetime="2024-06-11T13:19:24+08:00">2024-06-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-09-06 21:52:49" itemprop="dateModified" datetime="2024-09-06T21:52:49+08:00">2024-09-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -447,8 +453,7 @@
 <p>在 $n$ 维空间中随机取 $m$ 个高斯向量 $\boldsymbol{w}_1, …, \boldsymbol{w}_m$（每一维标准差为 $1$，均值为 $0$），不归一化。</p>
 <p>每个向量正交投射到 $\langle \boldsymbol{w}_1, …, \boldsymbol{w}_m \rangle$，然后取坐标 $&#x2F;\sqrt m$。换言之就是随机一个 $n\times m$ 的正态矩阵 $A$，然后直接乘 $A&#x2F;\sqrt m$。</p>
 <p>首先容易证明这时候模长是无偏估计。</p>
-<p>$$<br>\begin{align}</p>
-<p>&amp;\sum_{i&#x3D;1}^m \langle \boldsymbol{w}<em>i, \boldsymbol{v} \rangle^2 \\<br>&#x3D;&amp; \sum</em>{i&#x3D;1}^m \sum_{j&#x3D;1}^n (w_{ij} v_j)^2 \\<br>&#x3D;&amp; \sum_{j&#x3D;1}^n v_j^2 \sum_{i&#x3D;1}^n w_{ij}^2 \\<br>&#x3D;&amp; \sum_{j&#x3D;1}^n v_j^2<br>\end{align}<br>$$</p>
+<p>$$<br>\begin{align}<br>&amp;\sum_{i&#x3D;1}^m \langle \boldsymbol{w}<em>i, \boldsymbol{v} \rangle^2 \\<br>&#x3D;&amp; \sum</em>{i&#x3D;1}^m \sum_{j&#x3D;1}^n (w_{ij} v_j)^2 \\<br>&#x3D;&amp; \sum_{j&#x3D;1}^n v_j^2 \sum_{i&#x3D;1}^n w_{ij}^2 \\<br>&#x3D;&amp; \sum_{j&#x3D;1}^n v_j^2<br>\end{align}<br>$$</p>
 <p>最后一步基于 $w_{ij}$ 的均值和标准差。</p>
 <p>$$<br>\mathrm{Pr}\left(|\hat x - \hat y|^2\in(1\pm\varepsilon)|x-y|^2\right)\geq 1-\exp(O(\varepsilon^2m))<br>$$</p>
 <p>这里如果数据集是有限的，只需要一步 Union Bound 就可以约束住所有点的误差，但是如果数据集是某个线性空间，有 JL 结论的子空间版本：</p>
