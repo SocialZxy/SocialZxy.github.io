@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 本文首先总结了    声明和记号 一致性定理的证明 完备性定理的证明 直觉主义逻辑：如何证明去掉反证法的系统是不完备的？">
+    <meta name="description" content="Abstract. 本文讨论了几个形式系统的语法和语义之间联系的问题，包括证明    声明和记号 一致性定理的证明 完备性定理的证明 直觉主义逻辑：如何证明去掉反证法的系统是不完备的？">
 <meta property="og:type" content="article">
 <meta property="og:title" content="一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑">
 <meta property="og:url" content="http://example.com/2024/09/19/CompletenessOfND/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 本文首先总结了    声明和记号 一致性定理的证明 完备性定理的证明 直觉主义逻辑：如何证明去掉反证法的系统是不完备的？">
+<meta property="og:description" content="Abstract. 本文讨论了几个形式系统的语法和语义之间联系的问题，包括证明    声明和记号 一致性定理的证明 完备性定理的证明 直觉主义逻辑：如何证明去掉反证法的系统是不完备的？">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/Spnpvdashpsi.png">
 <meta property="article:published_time" content="2024-09-19T14:11:51.000Z">
-<meta property="article:modified_time" content="2024-09-22T08:17:24.128Z">
+<meta property="article:modified_time" content="2024-09-22T08:26:31.411Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Logic">
 <meta name="twitter:card" content="summary">
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-22 16:17:24" itemprop="dateModified" datetime="2024-09-22T16:17:24+08:00">2024-09-22</time>
+      <time title="Modified: 2024-09-22 16:26:31" itemprop="dateModified" datetime="2024-09-22T16:26:31+08:00">2024-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,7 +238,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文首先总结了</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文讨论了几个形式系统的语法和语义之间联系的问题，包括证明</p>
 <!-- toc -->
 
 <ul>
@@ -315,14 +315,14 @@
 </ul>
 </div>
 
-<p>接下来的工作就很简单了，我们有了 $2^n$ 种 $\phi_1\cdots\phi_n, \Gamma\vdash\psi$，只需要将 $\Gamma$ 消去即可。</p>
+<p>上面两条引理扫除了证明工作的绝大部分障碍，现有 $2^n$ 种 $\phi_1\cdots\phi_n, \Gamma\vdash\psi$，只需要将 $\Gamma$ 消去即可。</p>
 <div class="note info"><p><strong>引理 3.3.</strong> 对于命题集合 $S$，若 $S, \phi \vdash \psi$ 且 $S, \neg\phi \vdash \psi$，那么 $S\vdash\psi$。</p>
 <p><strong>证明.</strong></p>
 <p><img src="/../picture/Spnpvdashpsi.png"></p>
 </div>
 
 <p>读者不妨自行思考如何基于此引理从 $\phi_1\cdots\phi_n, \Gamma\vdash\psi$ 导出 $\phi_1\cdots\phi_n\vdash\psi$。</p>
-<h1><span id="直觉主义逻辑如何证明去掉反证法的系统是不完备的">直觉主义逻辑：如何证明去掉反证法的系统是不完备的？</span></h1><p>我们都知道在 Coq 中不能证明 $\neg\neg P \rightarrow P$（Double Negation Elimination，简称 DNE）或者几个等价的命题，如反证法，排中律，Pierce 律等（参见 <a target="_blank" rel="noopener" href="https://softwarefoundations.cis.upenn.edu/lf-current/Logic.html">Logic in Coq - Software Fundations Vol 1.</a>）。这表明直觉主义的形式系统是不完备的，但是如何证明这一点？</p>
+<h1><span id="直觉主义逻辑如何证明去掉反证法的系统是不完备的">直觉主义逻辑：如何证明去掉反证法的系统是不完备的？</span></h1><p>我们都知道在 Coq 中不能证明 $\neg\neg P \rightarrow P$（Double Negation Elimination，简称 DNE）或者几个等价的命题，如反证法，排中律，Pierce 律等（参见 <a target="_blank" rel="noopener" href="https://softwarefoundations.cis.upenn.edu/lf-current/Logic.html">Logic in Coq - Software Fundations Vol 1.</a>）。与 Coq 类似的，排中律独立的形式系统称为直觉主义的。那么应当如何证明某个形式系统中无法证明一条结论？</p>
 <p>简单考虑自然演绎系统去掉 RAA 组成的形式系统，并尝试证明在其中不能证明 Double Negation Eliminatation。</p>
 <p>若只从语法的角度切入这个问题，可以想象的证明方法只有枚举一切的证明树，其难度可想而知。因此我们必须将语义和语法结合起来，于是不难想象这样一条证明路线：</p>
 <ul>
@@ -348,6 +348,8 @@
 <p>虽然 Kripke’s Model 比布尔代数稍微抽象一些，但是本定理的证明仍然同布尔代数语义的版本一样简单，所以这里省略不写。至此我们已经可以尝试证明系统不能推出 DNE：</p>
 <div class="note info"><p><strong>定理 4.3.</strong> </p>
 <p>$$<br>\not\vdash_i ((P\rightarrow \bot)\rightarrow \bot)\rightarrow P<br>$$</p>
+<p>并且</p>
+<p>$$<br>\not\vdash_i (((P\rightarrow\bot)\rightarrow\bot)\rightarrow P) \rightarrow\bot<br>$$</p>
 <p><strong>证明.</strong> 反之假设 $\vdash_i ((P\rightarrow\bot)\rightarrow\bot)\rightarrow P$。完备性定理指出此时有</p>
 <p>$$<br>\vDash_i ((P\rightarrow\bot)\rightarrow\bot)\rightarrow P<br>$$</p>
 <p>然而我们令 $W &#x3D; \{\varnothing, {P}\}, V &#x3D; \mathrm{Id}_W$，可以从左到右地验证下表：</p>
@@ -359,6 +361,7 @@
 <th align="center">$P\rightarrow\bot$</th>
 <th align="center">$(P\rightarrow \bot)\rightarrow \bot$</th>
 <th align="center">$((P\rightarrow\bot)\rightarrow\bot)\rightarrow P$</th>
+<th align="center">$\mathrm{DEM}\rightarrow\bot$</th>
 </tr>
 </thead>
 <tbody><tr>
@@ -367,6 +370,7 @@
 <td align="center">NO</td>
 <td align="center">YES</td>
 <td align="center">NO</td>
+<td align="center">NO</td>
 </tr>
 <tr>
 <td align="center">$\{P\}$</td>
@@ -374,9 +378,10 @@
 <td align="center">NO</td>
 <td align="center">YES</td>
 <td align="center">YES</td>
+<td align="center">NO</td>
 </tr>
 </tbody></table>
-<p>注意第二行给出 $(W, V, \varnothing)\not\Vdash ((P\rightarrow\bot)\rightarrow\bot)\rightarrow P$，矛盾。明所欲证。</p>
+<p>注意第二行给出 $(W, V, \varnothing)\not\Vdash ((P\rightarrow\bot)\rightarrow\bot)\rightarrow P$，矛盾。上表同样表明 DNE 不能被证伪。明所欲证。</p>
 </div>
 
 <blockquote>
