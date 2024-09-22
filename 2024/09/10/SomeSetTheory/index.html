@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 因为本学期的离散数学课程讲了一些集合论但是留了很多悬念，所以将暑假时候学习的一些集合论笔记整理之后发出。本篇笔记参考 李文威，代数学方法（第一卷）基础架构，高等教育出版社（2019） 的第一章，刨去了 1.5 Grothendieck 宇宙 一节，因为我也没有看懂。    ZFC 公理 序结构 超穷递归 基数">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-09-10T12:27:09.000Z">
-<meta property="article:modified_time" content="2024-09-11T14:55:59.492Z">
+<meta property="article:modified_time" content="2024-09-22T05:38:08.389Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Set Theory">
 <meta name="twitter:card" content="summary">
@@ -129,13 +129,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">27</span>
+          <span class="site-state-item-count">28</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">10</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
@@ -211,7 +211,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-11 22:55:59" itemprop="dateModified" datetime="2024-09-11T22:55:59+08:00">2024-09-11</time>
+      <time title="Modified: 2024-09-22 13:38:08" itemprop="dateModified" datetime="2024-09-22T13:38:08+08:00">2024-09-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -219,7 +219,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Discrete-Math/" itemprop="url" rel="index"><span itemprop="name">Discrete Math</span></a>
         </span>
     </span>
 
@@ -265,15 +269,24 @@
 <p>$$<br>\exists g. (g : X \rightarrow \cup_{x\in X} x) \wedge (x\in X, g(x)\in x)<br>$$</p>
 <p>集中对于上述公理中的一些可能的问题做一些解释。</p>
 <ul>
-<li><p><strong>A3</strong> 和 <strong>A7</strong> 被称为公理模式，类似于 C++ 中的模板：以 <strong>A3</strong> 为例，每提供一个谓词 $P$，产生一条分离公理。（虽然我没有理解为什么书中要特别强调这一点）</p>
+<li><p><strong>A3</strong> 和 <strong>A7</strong> 被称为公理模式，类似于 C++ 中的模板：以 <strong>A3</strong> 为例，每提供一个谓词 $P$，产生一条分离公理。这是因为在一阶逻辑中，量词不能作用在谓词上。所以我们被迫定义无穷条公理模式。</p>
 </li>
-<li><p>上述“函数”均可以由一阶语言定义，本质是是满足下述条件的二元谓词 $\varphi$：</p>
+<li><p>分离公理中的”函数“可以由一阶语言定义，本质是是满足下述条件的二元谓词 $\varphi$：</p>
 <p>$$<br>\forall x. \exists !y. \varphi(x, y)<br>$$</p>
 <p>因此没有循环论证。</p>
 </li>
 <li><p><strong>A2</strong> 没有要求 $x\ne y$。如果取 $x &#x3D; y$，相当于对于任意元素，可以在外面加一层大括号。</p>
 </li>
 </ul>
+<p>关于 <strong>A9</strong> 我们再额外做一些说明。</p>
+<div class="note danger"><p>选择公理事实上断言了一个集合（选择函数 $F$）的存在性，但是没有进行显示构造。</p>
+<p>但是并非所有的选择问题都要用到选择函数。例如：</p>
+<ul>
+<li>你现在有一个 &#x2F; 有限个集合（这里“有限”没有严格定义，我们不严格地说成可以对集合个数做归纳），现在要构造选择函数。这个选择函数的存在性证明可以由 <strong>A8 正则公理</strong>给出。</li>
+<li>你现在有“无限多的”集合，即使每个集合当中的元素都是有限的，也需要选择公理才能拿到选择函数。你可以试着想象几条可能的路径，但会发现都有问题。</li>
+</ul>
+</div>
+
 <p>在上述公理体系下可以定义一些简单的结构。</p>
 <div class="note success"><p><strong>定义 1.1（空集）.</strong> 给定任意集合 $S$，定义空集</p>
 <p>$$<br>\varnothing :&#x3D; \{u \in S : u\ne u\}<br>$$</p>
@@ -506,6 +519,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/09/19/CompletenessOfND/" rel="next" title="一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑">
+                  一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
