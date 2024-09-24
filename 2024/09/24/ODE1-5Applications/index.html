@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文讨论几个拥有前置知识初等积分法之后可以解决的问题。解决问题的过程中用到了一些建模技巧和神秘手法，具有一些学习价值。此外后面几个关于生态的模型导出的结果是富有趣味和现实意义的，可供消遣。    等角轨线 Riccati 方程 人口模型 Volterra 系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常微分方程（1.5）应用举例">
+<meta property="og:url" content="http://example.com/2024/09/24/ODE1-5Applications/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文讨论几个拥有前置知识初等积分法之后可以解决的问题。解决问题的过程中用到了一些建模技巧和神秘手法，具有一些学习价值。此外后面几个关于生态的模型导出的结果是富有趣味和现实意义的，可供消遣。    等角轨线 Riccati 方程 人口模型 Volterra 系统">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/VolterraFigure.png">
+<meta property="article:published_time" content="2024-09-24T14:19:20.000Z">
+<meta property="article:modified_time" content="2024-09-24T14:25:30.552Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="ODE">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/VolterraFigure.png">
+
+
+<link rel="canonical" href="http://example.com/2024/09/24/ODE1-5Applications/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/09/24/ODE1-5Applications/","path":"2024/09/24/ODE1-5Applications/","title":"常微分方程（1.5）应用举例"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>常微分方程（1.5）应用举例 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">等角轨线</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Riccati 方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">人口模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Volterra 系统</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">29</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/24/ODE1-5Applications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="常微分方程（1.5）应用举例 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常微分方程（1.5）应用举例
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-09-24 22:19:20 / Modified: 22:25:30" itemprop="dateCreated datePublished" datetime="2024-09-24T22:19:20+08:00">2024-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/ODE/" itemprop="url" rel="index"><span itemprop="name">ODE</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文讨论几个拥有前置知识初等积分法之后可以解决的问题。解决问题的过程中用到了一些建模技巧和神秘手法，具有一些学习价值。此外后面几个关于生态的模型导出的结果是富有趣味和现实意义的，可供消遣。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AD%89%E8%A7%92%E8%BD%A8%E7%BA%BF">等角轨线</a></li>
+<li><a href="#riccati-%E6%96%B9%E7%A8%8B">Riccati 方程</a></li>
+<li><a href="#%E4%BA%BA%E5%8F%A3%E6%A8%A1%E5%9E%8B">人口模型</a></li>
+<li><a href="#volterra-%E7%B3%BB%E7%BB%9F">Volterra 系统</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="等角轨线">等角轨线</span></h1><p>给定由方程</p>
+<p>$$<br>\Phi(x, y, c) &#x3D; 0<br>$$</p>
+<p>确定的以 $c$ 为参数的曲线族，求另一个曲线族</p>
+<p>$$<br>\Psi(x, y, k) &#x3D; 0<br>$$</p>
+<p>满足其中每一条曲线和 $(45)$ 中每一条曲线相交成定角 $\alpha\in \left(-\frac \pi 2, \frac \pi 2\right]$。此时 $(46)$ 称为 $(45)$ 的<strong>等角轨线族</strong>；若 $\alpha &#x3D; \frac \pi 2$ 称为<strong>正交轨线族</strong>。</p>
+<p>先进行一些通用的推导。首先有</p>
+<p>$$<br>\begin{cases}<br>   \Phi(x, y, c) &#x3D; 0 \\<br>   \Phi_{, x}(x, y, c)\mathrm{d}x + \Phi_{, y}(x, y, c)\mathrm{d}y &#x3D; 0<br>\end{cases}<br>$$</p>
+<p>从中第一行中还原出 $c$，然后代入第二行中得到</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{\Phi_{, x}(x, y, c(x, y))}{\Phi_{, y}(x, y, c(x, y))}<br>$$</p>
+<p>简便起见，将 RHS 记作 $H(x, y)$，即曲线族 $(45)$ 在 $(x, y)$ 点的斜率。那么曲线族 $(46)$ 的计算归结为求解下面两个微分方程之一：</p>
+<p>$$<br>\tan \alpha &#x3D; \frac{y’ - H(x, y)}{1+y’H(x, y)}<br>$$</p>
+<p>若 $\alpha \ne \frac{\pi}{2}$，或者当 $\alpha &#x3D; \frac{\pi}{2}$ 时</p>
+<p>$$<br>y’ &#x3D; -\frac 1 {H(x, y)}<br>$$</p>
+<div class="note warning"><p><strong>例子 1.1.</strong> 求抛物线族 $y &#x3D; cx^2$ 的正交曲线族。</p>
+<details class="note "><summary><p><strong>求解.</strong></p>
+</summary>
+<p>首先利用下列方程解出原曲线族在每一点处的斜率 $H(x, y)$：</p>
+<p>$$<br>\begin{cases}<br>   y &#x3D; cx^2 \\<br>   y’ &#x3D; 2cx<br>\end{cases} \color{blue} \Rightarrow y’ &#x3D; \frac{2y}{x}<br>$$</p>
+<p>故正交曲线族需要满足</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{x}{2y}<br>$$</p>
+<p>这是一个简单的分离变量方程，解出</p>
+<p>$$<br>x^2 + 2y^2 &#x3D; k^2<br>$$</p>
+<p>为同心椭圆族。</p>
+
+</details></div>
+
+<h1><span id="riccati-方程">Riccati 方程</span></h1><p>形如</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; a(x)y^2 + b(x)y + c(x)<br>$$</p>
+<p>其中 $a, b, c$ 是某区间上的连续函数，$a(x)\not\equiv 0$。有定理</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 当 $a(x)\equiv a_0, b(x)\equiv 0, c(x) &#x3D; c_0x^m$ 时，当且仅当 $m &#x3D; 0, -2, \frac{-4k}{2k+1}, \frac{-4k}{2k-1}$ 时可以用初等积分法求解。</p>
+</div>
+
+<p>我们现在的技术不足以证明必要性。但是对于充分性的前两种情况，需要知道当 $m&#x3D;0$ 时方程是分离变量的，当 $m&#x3D;-2$ 时换元 $u&#x3D;xy$ 后得到的方程是分离变量的。</p>
+<p>所幸这个方程在知道至少一个解之后可以方便地求解。</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 若已知 $\phi(x)$ 是 $y’ &#x3D; a(x)y^2 + b(x)y + c(x)$ 的解，那么其它解可以通过解 Bernoulli 方程 </p>
+<p>$$<br>y’ &#x3D; a(x)y^2 + (2\phi(x)a(x)+b(x))y<br>$$</p>
+<p>推得。（事实上这里的 $y$ 解出另一个解和 $\phi(x)$ 的差）</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>已知条件指出</p>
+<p>$$<br>\phi’(x) &#x3D; a(x)\phi^2(x) + b(x)\phi(x) + c(x)<br>$$</p>
+<p>假设 $\psi(x)$ 也是解，即 </p>
+<p>$$<br>\psi’(x) &#x3D; a(x)\psi^2(x) + b(x)\psi(x) + c(x)<br>$$</p>
+<p>将两式做差得到</p>
+<p>$$<br>(\psi(x) - \phi(x))’ &#x3D; a(x)(\psi(x) +\phi(x))(\psi(x) - \phi(x)) + b(x)(\psi(x) - \phi(x))<br>$$</p>
+<p>可知任意两个解的差值 $\psi(x) - \phi(x)$ 满足下列微分方程：</p>
+<p>$$<br>y’ &#x3D; a(x)(y + 2\phi(x))y + b(x)y<br>$$</p>
+<p>也就是</p>
+<p>$$<br>y’ &#x3D; a(x)y^2 + (2\phi(x)a(x) + b(x))y<br>$$</p>
+<p>这是一个 Bernoulli 方程，可以简单地求解。</p>
+
+</details></div>
+
+<p>我们求解一下这个 Bernoulli 方程，顺带复习简单微分方程的解法，依照惯用手法两边除掉 $y^2$ 并换元 $u &#x3D; y^{-1}$：</p>
+<p>$$<br>u’(x) + (2\phi(x)a(x)+b(x))u(x) + a(x) &#x3D; 0<br>$$</p>
+<p>然后用经典手法两边乘上 $\exp\left(\int_{x_0}^x2\phi(t)a(t)+b(t)\mathrm{d}t\right)$ 后换元 $v &#x3D; \exp\left(\int_{x_0}^x 2\phi(t)a(t)+b(t) \mathrm{d}t\right) u(x)$ 得到 </p>
+<p>$$<br>v’(x) + a(x)\exp\left(\int_{x_0}^x 2\phi(t)a(t)+b(t) \mathrm{d}t\right) &#x3D; 0<br>$$</p>
+<p>解出</p>
+<p>$$<br>v(x) &#x3D; c - \int_{x_0}^x a(t)\exp\left(\int_{x_0}^t 2a(s)\phi(s)+b(s)\mathrm{d}s\right)\mathrm{d}t<br>$$</p>
+<p>进而</p>
+<p>$$<br>y &#x3D; \exp\left(\int_{x_0}^x 2\phi(t)a(t)+b(t) \mathrm{d}t\right)\left(c - \int_{x_0}^x a(t)\exp\left(\int_{x_0}^t 2a(s)\phi(s)+b(s)\mathrm{d}s\right)\mathrm{d}t\right)<br>$$</p>
+<div class="note info"><p><strong>定理 2.3.</strong> 若 $\phi_1(x), \phi_2(x)$ 是 $y’ &#x3D; a(x)y^2 + b(x)y + c(x)$ 的解，那么该方程的任意解 $y$ 均满足</p>
+<p>$$<br>\frac{y - \phi_1(x)}{y - \phi_2(x)} &#x3D; c\exp\left(\int_{x_0}^x a(t)(\phi_2(t) - \phi_1(t))\mathrm{d}t\right)<br>$$</p>
+<p>其中 $c$ 是常数，取值范围在诸解的公共存在区间中。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>已知 Ricatti 方程的两个解的差值可以用一个 Bernoulli 方程表示：</p>
+<p>$$<br>(y - \phi_i(x))’ &#x3D; a(x)(y - \phi_i(x))^2 + (2\phi(x)a(x) + b(x))(y - \phi_i(x))<br>$$</p>
+<p>现在我们尝试用这个关系式比较对称地构造欲证明等式的左侧，发现：</p>
+<p>$$<br>\left(\ln \frac{y - \phi_1(x)}{y - \phi_2(x)}\right)’ &#x3D; a(x)(\phi_2(x) - \phi_1(x))<br>$$</p>
+<p>解出 </p>
+<p>$$<br>\frac{y - \phi_1(x)}{y - \phi_2(x)} &#x3D; c\exp\left(\int_{x_0}^x a(t)(\phi_2(t) - \phi_1(t))\mathrm{d}t\right)<br>$$</p>
+
+</details></div>
+
+<blockquote>
+<p>我怀疑书上这里错了一个符号。</p>
+</blockquote>
+<div class="note info"><p><strong>推论 7.2.4.</strong> 假设 $\phi_1(x), \phi_2(x), \phi_3(x)$ 是原方程的三个不同解，那么方程任意解满足</p>
+<p>$$<br>\frac{y - \phi_1(x)}{y - \phi_2(x)} \big{&#x2F;} \frac{\phi_3(x) - \phi_1(x)}{\phi_3(x) - \phi_2(x)} &#x3D; c<br>$$</p>
+</div>
+
+<h1><span id="人口模型">人口模型</span></h1><p>基于下面两个基本假设对种群数量进行建模：</p>
+<ul>
+<li>不存在迁入迁出。</li>
+<li>每个个体具有相同死亡或繁殖机会。</li>
+</ul>
+<p>记当前种群数量为 $N(t)$。</p>
+<p>附加假设单位时间出生率减去死亡率恒定为 $r$，有如下关系式</p>
+<p>$$<br>N(t + \Delta t) &#x3D; N(t) + rN(t)\Delta t<br>$$</p>
+<p>采用一个同名的连续函数来拟合这个 $N(t)$，并令 $\Delta t\rightarrow 0$ 立即得到</p>
+<p>$$<br>N’(t) &#x3D; rN(t)<br>$$</p>
+<p>配上边界条件，这表明 $N(t) &#x3D; N_0\exp r(t-t_0)$。这正是众所周知的 J 型增长曲线，称为 <strong>Malthus 模型</strong>。</p>
+<p>然而事实上种群数量净增长率可能是一个和种群数量负相关的函数，于是附加假设 $r(t) &#x3D; r_0 - r_1N(t)$，则</p>
+<p>$$<br>N’(t) &#x3D; (r_0 - r_1N(t))N(t)<br>$$</p>
+<p>解得</p>
+<p>$$<br>N(t) &#x3D; \frac{Cr_0\mathrm{e}^{r_0(t-t_0)}}{1+Cr_1\mathrm{e}^{r_0(t-t_0)}}<br>$$</p>
+<p>配上初值条件 $N(t_0) &#x3D; N_0$ 解出 $C &#x3D; \frac{N_0}{r_0-N_0r_1}$，带入得到</p>
+<p>$$<br>N(t) &#x3D; \frac{N_0r_0\mathrm{e}^{r_0(t-t_0)}}{r_0+N_0(r_1\mathrm{e}^{r_0(t-t_0)}-1)}<br>$$</p>
+<p>这正是所谓的 Logistic 曲线，也就是 S 型增长曲线。其有一条渐近线</p>
+<p>$$<br>\lim_{t\rightarrow +\infty} N(t) &#x3D; \frac{r_0}{r_1}<br>$$</p>
+<h1><span id="volterra-系统">Volterra 系统</span></h1><p>本节考虑两类捕食关系的物种，假设 </p>
+<ul>
+<li>A 只以 B 为食</li>
+<li>B 食物充足</li>
+</ul>
+<p>进一步假设两物种的增长率关于另一者都是线性的，于是 </p>
+<p>$$<br>\frac{\mathrm{d}x}{\mathrm{d}t} &#x3D; (-a + by)x, \frac{\mathrm{d}y}{\mathrm{d}t} &#x3D; (c - dx)y<br>$$</p>
+<p>先消去参数 $t$。</p>
+<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; \frac{(c-dx)y}{(-a+by)x}<br>$$</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里直接乘除方程的理论依据是</p>
+<ol>
+<li>方程的解是存在的。</li>
+<li>解 $x &#x3D; x(t)$ 的反函数存在。</li>
+<li>链式法则。</li>
+</ol>
+</blockquote>
+<p>解出</p>
+<p>$$<br>dx + by - c\ln x - a\ln y &#x3D; C<br>$$</p>
+<p><img src="/../picture/VolterraFigure.png"></p>
+<p>令 $F(x, y) &#x3D; dx + by - c\ln x-a\ln y$，求 $F(x, y)$ 的前两阶导数</p>
+<p>$$<br>\frac{\partial F}{\partial x} &#x3D; d - \frac{c}{x},<br>\frac{\partial F}{\partial y} &#x3D; b - \frac{a}{y},<br>\frac{\partial^2 F}{\partial x^2} &#x3D; \frac{c}{x^2},<br>\frac{\partial^2 F}{\partial y^2} &#x3D; \frac{a}{y^2},<br>\frac{\partial^2 F}{\partial x\partial y} &#x3D; 0<br>$$</p>
+<p>发现 $F(x, y)$ 的 Hessian 总是正定，于是对于绝大多数 $C$，$F(x, y) &#x3D; C$ 是凸曲线。</p>
+<p>其次我们发现最低点总是 $F(x, y) &#x3D; C$ 所围成区域 $\mathcal{D}(C)$（i.e. ${(x, y) : F(x, y)\leq C}$）的内点。于是可以取完全包含于 $\mathcal{D}(C)$ 的开圆，在开圆中可以接一个矩形，表明存在某个 $\varepsilon &gt; 0, || (x’(t), y’(t)) || &gt; \varepsilon$ 总是成立。</p>
+<p>经过一些琐碎的讨论（可能需要结合初值问题解的唯一性）可以证明本方程所有的解都是周期解（当然有一个平凡的常数解 $x \equiv \frac{c}{d}, y \equiv \frac{a}{b}$）。</p>
+<blockquote>
+<p><strong>Remark.</strong> 本人的做法路径为取 $P &#x3D; \left(\frac{c}{d}, \frac{a}{b}\right)$ 为一基准点，令 $\theta$ 为 $P$ 到 $(x(t), y(t))$ 的极角（由于曲线的凸性，这里将存在一个以 $2\pi$ 周期内的一一对应），然后证明 $\mathrm{d}\theta &#x2F; \mathrm{d}t$ 有大于 $0$ 的下界（类似于证明 $\inf ||(x’(t), y’(t))|| &gt; 0$），进而显然存在 $t$，$\theta &#x3D; 2\pi$。此后只需用存在唯一性定理验证周期性确实成立即可。</p>
+<p>至此我们还没有学过存在唯一性定理的严格表述，因此这是一个可能的漏洞。</p>
+</blockquote>
+<p>现在假设 $T_C$ 是常数 $C$ 对应解的周期。我们将计算此时种群数量的期望值，简单计算发现用广义积分计算和用一周期计算等价。于是我们对原始方程稍作变形后两边同时从 $0$ 积到 $T_K$，得到：</p>
+<p>$$<br>\int_0^{T_C}\frac{\mathrm{d}x}{x} &#x3D; \int_0^{T_C} (-a+by)\mathrm{d}x<br>$$</p>
+<p>化简得到</p>
+<p>$$<br>\frac{1}{T_C}\int_0^{T_C} y(t)\mathrm{d}t &#x3D; \frac{a}{b}<br>$$</p>
+<p>另一边同理，不再抄写。</p>
+<p>最后考虑一个趣味问题，如果此时同时对两边做一个外加的小捕捉操作，使得方程组变成下式，两种群的种群数量期望值如何变化？</p>
+<p>$$<br>\frac{\mathrm{d}x}{\mathrm{d}t} &#x3D; (-a - \varepsilon + by)x, \frac{\mathrm{d}y}{\mathrm{d}t} &#x3D; (c - \varepsilon - dx)y<br>$$</p>
+<p>重新计算可以知道</p>
+<p>$$<br>\mathbb{E}(x) &#x3D; \frac{c - \varepsilon}{d}, \mathbb{E}(y) &#x3D; \frac{a + \varepsilon}{b}<br>$$</p>
+<p>可知捕食者期望数量减少，被捕食者期望数量增加。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ODE/" rel="tag"># ODE</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/19/CompletenessOfND/" rel="prev" title="一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑">
+                  <i class="fa fa-angle-left"></i> 一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

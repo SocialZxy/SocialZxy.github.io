@@ -28,7 +28,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/SlopeField.png">
 <meta property="article:published_time" content="2024-09-07T03:26:34.000Z">
-<meta property="article:modified_time" content="2024-09-10T12:11:50.355Z">
+<meta property="article:modified_time" content="2024-09-24T14:20:24.508Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="ODE">
 <meta name="twitter:card" content="summary">
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">微分方程的几何直观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">恰当方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">变量分离方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">一阶线性微分方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">积分因子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">一阶隐式微分方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">微分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">参数法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">应用举例</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.1.</span> <span class="nav-text">等角轨线</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">7.2.</span> <span class="nav-text">Riccati 方程</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">微分方程的几何直观</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">恰当方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">变量分离方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">一阶线性微分方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">积分因子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">一阶隐式微分方程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">微分法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">参数法</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,7 +131,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">28</span>
+          <span class="site-state-item-count">29</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -213,7 +213,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-10 20:11:50" itemprop="dateModified" datetime="2024-09-10T20:11:50+08:00">2024-09-10</time>
+      <time title="Modified: 2024-09-24 22:20:24" itemprop="dateModified" datetime="2024-09-24T22:20:24+08:00">2024-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,11 +251,6 @@
 <li><a href="#%E4%B8%80%E9%98%B6%E9%9A%90%E5%BC%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">一阶隐式微分方程</a><ul>
 <li><a href="#%E5%BE%AE%E5%88%86%E6%B3%95">微分法</a></li>
 <li><a href="#%E5%8F%82%E6%95%B0%E6%B3%95">参数法</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BA%94%E7%94%A8%E4%B8%BE%E4%BE%8B">应用举例</a><ul>
-<li><a href="#%E7%AD%89%E8%A7%92%E8%BD%A8%E7%BA%BF">等角轨线</a></li>
-<li><a href="#riccati-%E6%96%B9%E7%A8%8B">Riccati 方程</a></li>
 </ul>
 </li>
 </ul>
@@ -448,33 +443,8 @@
 <p>$$<br>y_{,u}\mathrm{d}u + y_{,v}\mathrm{d}v &#x3D; p(u, v)(x_{,u}\mathrm{d}u + x_{,v}\mathrm{d}v)<br>$$</p>
 <p>于是原方程的求解归结为显式微分方程 $(44)$ 的求解，解出 $u, v$ 的参数形式后表示 $x, y$ 的参数形式。</p>
 <p>同时这个做法告诉你如果方程中不出现 $y$ 或者不出现 $x$ 应当如何处理。</p>
-<h1><span id="应用举例">应用举例</span></h1><h2><span id="等角轨线">等角轨线</span></h2><p>给定由方程</p>
-<p>$$<br>\Phi(x, y, c) &#x3D; 0<br>$$</p>
-<p>确定的以 $c$ 为参数的曲线族，求另一个曲线族</p>
-<p>$$<br>\Psi(x, y, k) &#x3D; 0<br>$$</p>
-<p>满足其中每一条曲线和 $(45)$ 中每一条曲线相交成定角 $\alpha\in \left(-\frac \pi 2, \frac \pi 2\right]$。此时 $(46)$ 称为 $(45)$ 的<strong>等角轨线族</strong>；若 $\alpha &#x3D; \frac \pi 2$ 称为<strong>正交轨线族</strong>。</p>
-<p>先进行一些通用的推导。首先有</p>
-<p>$$<br>\begin{cases}<br>   \Phi(x, y, c) &#x3D; 0 \\<br>   \Phi_{, x}(x, y, c)\mathrm{d}x + \Phi_{, y}(x, y, c)\mathrm{d}y &#x3D; 0<br>\end{cases}<br>$$</p>
-<p>从中第一行中还原出 $c$，然后代入第二行中得到</p>
-<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{\Phi_{, x}(x, y, c(x, y))}{\Phi_{, y}(x, y, c(x, y))}<br>$$</p>
-<p>简便起见，将 RHS 记作 $H(x, y)$，即曲线族 $(45)$ 在 $(x, y)$ 点的斜率。那么曲线族 $(46)$ 的计算归结为求解下面两个微分方程之一：</p>
-<p>$$<br>\tan \alpha &#x3D; \frac{y’ - H(x, y)}{1+y’H(x, y)}<br>$$</p>
-<p>若 $\alpha \ne \frac{\pi}{2}$，或者当 $\alpha &#x3D; \frac{\pi}{2}$ 时</p>
-<p>$$<br>y’ &#x3D; -\frac 1 {H(x, y)}<br>$$</p>
-<div class="note warning"><p><strong>例子 7.1.1.</strong> 求抛物线族 $y &#x3D; cx^2$ 的正交曲线族。</p>
-<details class="note "><summary><p><strong>求解.</strong></p>
-</summary>
-<p>首先利用下列方程解出原曲线族在每一点处的斜率 $H(x, y)$：</p>
-<p>$$<br>\begin{cases}<br>   y &#x3D; cx^2 \\<br>   y’ &#x3D; 2cx<br>\end{cases} \color{blue} \Rightarrow y’ &#x3D; \frac{2y}{x}<br>$$</p>
-<p>故正交曲线族需要满足</p>
-<p>$$<br>\frac{\mathrm{d}y}{\mathrm{d}x} &#x3D; -\frac{x}{2y}<br>$$</p>
-<p>这是一个简单的分离变量方程，解出</p>
-<p>$$<br>x^2 + 2y^2 &#x3D; k^2<br>$$</p>
-<p>为同心椭圆族。</p>
+<p>下一篇文章我们谈一些截至目前可以解决的实际问题。</p>
 
-</details></div>
-
-<h2><span id="riccati-方程">Riccati 方程</span></h2>
     </div>
 
     
