@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 离散数学与结构作业出了一个题考察对哥德尔不完备定理的深度理解，但是他上课实在是讲得过于粗糙，于是我们被迫完整阅读一遍相关理论。参考资料是 Dirk van Dalen, Logic and Structure(Fifth Edition), Springer(2013) Chapter 8 Godel’s Theorem。    原始递归函数 部分递归函数 递归可枚举集合 名词">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理">
+<meta property="og:url" content="http://example.com/2024/10/07/GodelTheorem/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 离散数学与结构作业出了一个题考察对哥德尔不完备定理的深度理解，但是他上课实在是讲得过于粗糙，于是我们被迫完整阅读一遍相关理论。参考资料是 Dirk van Dalen, Logic and Structure(Fifth Edition), Springer(2013) Chapter 8 Godel’s Theorem。    原始递归函数 部分递归函数 递归可枚举集合 名词">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-10-07T09:05:47.000Z">
+<meta property="article:modified_time" content="2024-10-09T14:01:53.735Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Logic">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/10/07/GodelTheorem/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/10/07/GodelTheorem/","path":"2024/10/07/GodelTheorem/","title":"【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">原始递归函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">部分递归函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">递归可枚举集合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">名词对照表</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/07/GodelTheorem/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-10-07 17:05:47" itemprop="dateCreated datePublished" datetime="2024-10-07T17:05:47+08:00">2024-10-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-10-09 22:01:53" itemprop="dateModified" datetime="2024-10-09T22:01:53+08:00">2024-10-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Discrete-Math/" itemprop="url" rel="index"><span itemprop="name">Discrete Math</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 离散数学与结构作业出了一个题考察对哥德尔不完备定理的深度理解，但是他上课实在是讲得过于粗糙，于是我们被迫完整阅读一遍相关理论。参考资料是 <a target="_blank" rel="noopener" href="https://link.springer.com/book/10.1007/978-1-4471-4558-5">Dirk van Dalen, Logic and Structure(Fifth Edition), Springer(2013)</a> Chapter 8 Godel’s Theorem。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%9F%E5%A7%8B%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0">原始递归函数</a></li>
+<li><a href="#%E9%83%A8%E5%88%86%E9%80%92%E5%BD%92%E5%87%BD%E6%95%B0">部分递归函数</a></li>
+<li><a href="#%E9%80%92%E5%BD%92%E5%8F%AF%E6%9E%9A%E4%B8%BE%E9%9B%86%E5%90%88">递归可枚举集合</a></li>
+<li><a href="#%E5%90%8D%E8%AF%8D%E5%AF%B9%E7%85%A7%E8%A1%A8">名词对照表</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="原始递归函数">原始递归函数</span></h1><p>考虑自然数集合。我们希望从一系列初始的函数开始，通过复合与拼接、递归构造一系列可以高速计算的数值函数。当然作为数理逻辑研究，我们必须给出准确的定义。</p>
+<p>首先给出初始函数的定义。初始函数包含如下形式的函数：</p>
+<ul>
+<li><strong>常函数</strong> $C_m^k$，其中 $C_m^k(n_0, …, n_{k-1}) &#x3D; m$；</li>
+<li><strong>后继</strong> $S$，其中 $S(n) &#x3D; n + 1$；</li>
+<li><strong>投影函数</strong> $P_i^k$，其中 $P_i^k(n_0, …, n_k) &#x3D; n_i$。</li>
+</ul>
+<p>现在考虑一类函数 $\mathcal{F}$，我们称：</p>
+<ul>
+<li><p>$\mathcal{F}$ <strong>对复合封闭</strong>，如果 $g, h_0, …, h_{p-1}\in \mathcal{F}$，那么 $f\in \mathcal{F}$，其中 $f(\vec{n}) &#x3D; g(h_0(\vec{n}), …, h_{p-1}(\vec{n}))$。</p>
+</li>
+<li><p>$\mathcal{F}$ <strong>对原始递归封闭</strong>，如果 $g, h\in\mathcal{F}$，那么 $f\in\mathcal{F}$，其中</p>
+<p>$$<br>\begin{cases}<br>  f(0, \vec{n}) &#x3D; g(\vec{n}) \\<br>  f(m + 1, \vec{n}) &#x3D; h(f(m, \vec{n}), \vec{n}, m)<br>\end{cases}<br>$$</p>
+</li>
+</ul>
+<div class="note success"><p><strong>定义 1.1（原始递归函数类）</strong> 原始递归函数类定义为包含初始函数、对复合和原始递归封闭的最小类。</p>
+</div>
+
+<div class="note warning"><p><strong>例子 1.2.</strong> 考虑用原始递归函数定义加法，可以形象地写作</p>
+<p>$$<br>\begin{cases}<br>    x + 0 &#x3D; x\\<br>    x + (y + 1) &#x3D; (x + y) + 1<br>\end{cases}<br>$$</p>
+<p>也可以精确写作</p>
+<p>$$<br>\begin{cases}<br>    +(0, x) &#x3D; P_0^1(x) \\<br>    +(y + 1, x) &#x3D; S(P_0^3(+(y, x), P_0^2(x, y), P_1^2(x, y)))<br>\end{cases}<br>$$</p>
+<p>其他简单操作如乘法、截断减法、阶乘也都是原始递归的，如果学过 FP 那么写起来就像回家了一样。简便起见，以后我们将采用形象的写法。</p>
+</div>
+
+<p>至此已经可以验证一些显然的结论，如</p>
+<div class="note info"><p><strong>引理 1.3.</strong> 如果 $f$ 是原始递归函数，那么</p>
+<ul>
+<li>$g$ 也是原始递归函数，其中 $g(x_0, …, x_{n - 1}, z_0, …, z_{k - 1}) &#x3D; f(x_0, …, f_{n - 1})$。</li>
+<li>将某一维代入另一维（i.e. $f(x_0, …, x_{n - 1})[x_i &#x2F; x_j]$ 或者直观写作 $f(x_0, …, x_i, …, x_i, …, x_{n - 1})$）也是原始递归函数。</li>
+<li>将变量顺序循环排列得到的也是原始递归函数。</li>
+</ul>
+<details class="note "><summary><p><strong>证明</strong></p>
+</summary>
+<p>只需灵活应用复合封闭和投影函数即可。</p>
+
+</details></div>
+
+<p>对于一个 $k$ 元关系 $A\subset \mathbb{N}^k$，定义其特征函数 $K_A : \mathbb{N}^K\rightarrow \{0, 1\}$ 为满足 $\vec{n}\in A \Leftrightarrow K_A(\vec{n}) &#x3D; 1$ 的函数。</p>
+<div class="note success"><p><strong>定义 1.4（原始递归关系）.</strong> 称一个关系 $R$ 是原始递归的，若其特征函数是原始递归函数。</p>
+</div>
+
+<p>下面诸引理和引理 1.3 的证明同样初等：</p>
+<div class="note info"><p><strong>引理 1.5.</strong> 原始递归关系对于以下操作封闭：</p>
+<ul>
+<li><strong>交并补</strong>、<strong>有界量词</strong>（如 $\exists y\leq C$）。</li>
+<li><strong>原始递归替换</strong>。即 $f_0, …, f_{n-1}$ 是原始递归关系，$R$ 是原始递归关系，那么 $S(\vec{x}) &#x3D; R(f_0(\vec{x}), …, f_{n - 1}(\vec{x}))$ 是原始递归关系。</li>
+</ul>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>Trivial.</p>
+
+</details></div>
+
+<div class="note info"><p><strong>引理 1.6.</strong> 原始递归函数对模式匹配封闭。即如果 $R_1, …, R_p$ 是两两互斥的原始递归谓词（一元关系），并且 $\forall x (R_1(x)\vee \cdots\vee R_p(x))$，那么给定原始递归函数 $g_1, …, g_p$，有</p>
+<p>$$<br>f(\vec{x}) &#x3D; \begin{cases}<br>    g_1(\vec{x}) &amp; R_1(\vec{x}) \\<br>    \vdots \\<br>    g_p(\vec{x}) &amp; R_p(\vec{x})<br>\end{cases}<br>$$</p>
+<p>亦是原始递归函数。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>注意 </p>
+<p>$$<br>f(\vec{x}) &#x3D; \sum_{i&#x3D;1}^p g_i(\vec{x})K_{R_i}(\vec{x})<br>$$</p>
+<p>是原始递归函数的复合。</p>
+
+</details></div>
+
+<p>我们定义有界最小值 $(\mu y &lt; m) R(\vec{x}, y)$ 表示最小的满足 $R(\vec{x}, y)$ 的 $y$，如果不存在则置为 $m$。容易发现</p>
+<div class="note info"><p><strong>引理 1.7.</strong> 有界最小值作用于原始递归关系得到的函数是原始递归的。</p>
+</div>
+
+<p>初等数论的一套基本函数都是原始递归的，此理论对于后面哥德尔不完备定理的证明（哥德尔配数部分）而言至关重要，兹简单说明：</p>
+<ul>
+<li><p><strong>素性测试谓词</strong></p>
+<p>$$<br>Prime(x) \Leftrightarrow \forall y \leq x (\forall z \leq x ((yz &#x3D; x)\rightarrow (y &#x3D; 1\vee z &#x3D; 1)))<br>$$</p>
+</li>
+<li><p><strong>整除关系</strong></p>
+<p>$$<br>x | y \Leftrightarrow \exists z \leq y (xz &#x3D; y)<br>$$</p>
+</li>
+<li><p><strong>提取一个素数的指数</strong></p>
+<p>$$<br>\alpha(p) &#x3D; (\mu y\leq x) [p^y | x \wedge \neg p^{y + 1} | x]<br>$$</p>
+</li>
+<li><p><strong>第 $n$ 个素数</strong></p>
+<p>$$<br>\begin{cases}<br>  p(0) &#x3D; 2 \\<br>  p(n + 1) &#x3D; (\mu x \leq p(n)^{n + 2})(Prime(x) \wedge x &gt; p(n))<br>\end{cases}<br>$$</p>
+<blockquote>
+<p>Remark. 这里用到的 $p(n)^{n + 2}$ 是一个非常宽松但不算直观的上界，只需要考虑初等数论经典证明中的</p>
+<p>$$<br>\forall i\leq n \left(\neg p(i) | \prod_{i&#x3D;0}^n p(n) + 1\right)<br>$$</p>
+</blockquote>
+</li>
+</ul>
+<p>这些理论将被用于定义有限序列的编码，这可以被简单地形式化为（用 $\langle n_0, …, n_{k-1}\rangle$ 表示序列 $n_0, …, n_{k-1}$ 的编码）：</p>
+<p>$$<br>\langle \cdot, …, \cdot \rangle : {n_0, …, n_{k - 1}} \mapsto \prod_{i&#x3D;1}^k p_{i - 1}^{n_{i - 1} \color{red}{ + 1}}<br>$$</p>
+<p>并且可以附加一些原始递归的函数，来对序列编码进行操作：</p>
+<ul>
+<li><p>$Seq(n)$ 检验 $n$ 是否是一个编码数：</p>
+<p>$$<br>Seq(n) :&#x3D; n\ne 0 \wedge\forall p \leq n \forall q\leq n ((Prime(p) \wedge Prime(q) \wedge p &lt; q \wedge q | n) \rightarrow p | n)<br>$$</p>
+</li>
+<li><p>$lth(n)$ 返回编码数对应序列的长度：</p>
+<p>$$<br>lth(n) :&#x3D; (\mu x \leq n + 1) [\neg p(x) | n]<br>$$</p>
+</li>
+<li><p>$(n)_i$ 为投影（取对应序列的第 $i$ 位）。只需要提取指数即可。</p>
+</li>
+<li><p>$n * m$ 为序列拼接：</p>
+<p>$$<br>n * m :&#x3D; n * \prod_{i&#x3D;0}^{lth(m) - 1} p_{lth(n) + i}^{(m)_i + 1}<br>$$</p>
+</li>
+</ul>
+<p>对于一个函数，可以用值过程函数（course-of-value function）来展示其求值过程。</p>
+<p>$$<br>\begin{cases}<br>\bar{f}(0, \vec{x}) &#x3D; 1 \\<br>\bar{f}(y + 1, \vec{x}) &#x3D; \bar{f}(y, \vec{x})p_y^{f(y, \vec{x}) + 1}<br>\end{cases}<br>$$</p>
+<p>显然值过程函数也是原始递归的。顺带一提 course-of-value 是做函数式动态规划时的一个经典而直接的 trick。这是因为在进行原始递归时访问先前的结果，得到的还是原始递归函数，形式化地：</p>
+<div class="note info"><p><strong>定理 1.8.</strong> 若 $g$ 是原始递归函数，且 $f$ 满足</p>
+<p>$$<br>f(y, \vec{x}) &#x3D; g(\bar{f}(y, \vec{x}), y, \vec{x})<br>$$</p>
+<p>那么 $f$ 也是原始递归的。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>可以发现 $\vec{f}$ 是原始递归函数，$f$ 本身无非是再经过一次复合得到的结果。</p>
+
+</details></div>
+
+<p>但很遗憾原始递归函数并不是一个完备的集合。</p>
+<div class="note info"><p><strong>定理 1.9.</strong> 存在一个良定义的函数，它不是原始递归的。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>首先，将原始递归函数编码成自然数。这一步一定是可行的，因为结构归纳地看，原始递归函数无非是复合或是原始递归的产物，只需将这两种构造看成字符串，然后编码字符串即可，解码工作也是可以进行的。</p>
+<p>现在称编码为 $x$ 的原始递归函数为 $f_x$，那么函数 $D(x) &#x3D; f_x(x) + 1$ 是良定义的。但 $D$ 不可能是原始递归的，否则假设其编码为 $n$ 即 $D &#x3D; f_n$，但 $D(n) &#x3D; f_n(n) + 1 \ne f_n(n)$，这导出矛盾。明所欲证。</p>
+
+</details>
+
+<blockquote>
+<p>Remark. 上述证明使用的技巧正是众所周知的对角线法。</p>
+</blockquote></div>
+
+<p>将此定理的证明推而广之，我们知道函数 $F(x, y) :&#x3D; f_x(y)$ 一定也不是原始递归的。换言之，原始递归函数集合并非<strong>递归可枚举的</strong>，这个概念将在今后的章节中反复出现。</p>
+<h1><span id="部分递归函数">部分递归函数</span></h1><p>我们之前谈到没有一个有效的算法能够枚举原始递归函数。现在我们用所谓的部分递归函数来扩充我们能表示的函数范围。部分函数顾名思义就是定义域并非是 $\mathbb{N}^k$ 状的向量全体，而是其中的一部分（参考所谓的 partial map &#x2F; total map）。</p>
+<blockquote>
+<p>Remark. 此处的英文术语写作 partial recursive functions，原书中已经澄清了这是一个历史遗留的不便于理解的术语，然而直接按照 partial, recursive function 翻译又过于拗口，于是还是直译成部分递归函数。</p>
+</blockquote>
+<p>在本节中，我们将精确地描述什么是“算法”。我们使用的技巧是直接将算法视为某种抽象的机器在操作一个有限长度的向量。一个算法将有一个标号，接下来我们同时定义编码的方式和抽象机作用于向量的语义建模成的关系。</p>
+<div class="note success"><p><strong>记号 2.1.</strong> 记 $\{e\}(\vec{x})\simeq y$ 若标号为 $e$ 的抽象机在 $\vec{x}$ 上运行得到结果 $y$。</p>
+</div>
+
+<p>某一抽象机很有可能在一个输入上是不停机的，此时称此 $\{e\}(\vec{x})$ 发散，否则称其收敛。</p>
+<div class="note success"><p><strong>定义 2.2.</strong> 递归定义 $\{e\}(\vec{x})\simeq y$ 的语义如下：</p>
+<ol>
+<li>$\{\langle 0, n, q\rangle\}(m_0, …, m_{n-1}) \simeq q$（常函数）</li>
+<li>$\{\langle 1, n, i\rangle\}(m_0, …, m_{n-1}) \simeq m_i$（投影函数）</li>
+<li>$\{\langle 2, n, i\rangle\}(m_0, …, m_{n-1}) \simeq m_i + 1$（后继函数）</li>
+<li>$\{\langle 3, n + 4\rangle\}(p, q, r, s, m_0, …, m_{n - 1}) \simeq p$ 若 $r&#x3D;s$；$\{\langle 3, n + 4\rangle\}(p, q, r, s, m_0, …, m_{n-1})\simeq q$ 若 $r\ne s$（选择函数）</li>
+<li>$\{\langle 4, n, b, c_0, …, c_{k-1}\rangle\}(m_0, …, m_{n-1})\simeq p$ 若存在 $q_0, …, q_{k-1}$ 使得 $\{c_i\}(q_i)$ 且 $\{b\}(q_1, …, q_k) \simeq p$（复合函数）</li>
+<li>$\{\langle 5, n + 2\rangle\}(p, q, m_0, …, m_{n-1})\simeq S_n^1(p, q)$（这里 $S$ 函数我们稍后说明其含义，本条类似于 Curry 化）</li>
+<li>$\{\langle 6, n + 1\rangle\}(b, m_0, …, m_{n-1})\simeq p$ 若 $\{b\}(m_0, …, m_{n-1}) \simeq p$（通用函数）</li>
+</ol>
+</div>
+
+<p>这个关系之所以被称为部分递归函数，是因为</p>
+<ol>
+<li>它确实是一个函数关系（见下方引理 2.3）；</li>
+<li>他并非定义在普遍的定义域上（存在不停机的抽象机）；</li>
+<li>它是归纳定义的。尤其注意本条，因为使用此归纳定义的函数完成递归任务是一件高度非平凡的事情。</li>
+</ol>
+<div class="note info"><p><strong>引理 2.3.</strong> 上述关系是函数关系，即 $\{e\}(\vec{x})\simeq y \wedge \{e\}(\vec{x})\simeq z \rightarrow y&#x3D;z$。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>只需施归纳于 $e$ 即可。</p>
+
+</details></div>
+
+<p>接下来我们可能会将此类部分函数简单地记作一个希腊字母如 $\varphi$ 等。另外对于具体地抽象机 $e$ 和输入 $\vec{x}$，我们用 $\{e\}(\vec{x})$ 来表示对应的 $y$。此外，我们区分以下称呼：</p>
+<ol>
+<li>部分递归函数，指 $\{e\}$；</li>
+<li>抽象机，指 $e$ 对应的机器；</li>
+<li>编码，指 $e$。</li>
+</ol>
+<div class="note success"><p><strong>定义 2.4.</strong> </p>
+<ol>
+<li>若 $\varphi$ 满足 $\exists y, \varphi(\vec{x}) &#x3D; y$，那么称此部分函数在 $\vec{x}$ 收敛，反之称其发散。</li>
+<li>若一个部分函数在其定义域上（即 $\mathbb{N}^n$）均收敛，那么称其是完全的。</li>
+<li>完全的部分递归函数称为递归函数。</li>
+<li>一个关系是递归的若其特征函数是递归函数。</li>
+</ol>
+</div>
+
+<p>在上方的归纳定义中第五条和第七条尤其重要，巧妙应用这两个函数可以实现分支判断、递归等操作。作为例子，我们来求编码 $e$ 使得</p>
+<p>$$<br>\{e\}(\vec{x}) &#x3D; \begin{cases}<br>  \{e_1\}(\vec{x}) &amp; g_1(\vec x) &#x3D; g_2(\vec x) \\<br>  \{e_2\}(\vec{x}) &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<details class="note "><summary><p><strong>答案.</strong></p>
+</summary>
+<p>首先考虑 </p>
+<p>$$<br>\varphi(\vec{x}) &#x3D; \begin{cases}<br>  e_1 &amp; g_1(\vec x) &#x3D; g_2(\vec x) \\<br>  e_2 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>显然这就是</p>
+<p>$$<br>\varphi(\vec{x}) &#x3D; \{\langle 3, 4\rangle\}(e_1, e_2, g_1(\vec{x}), g_2(\vec{x}))<br>$$</p>
+<p>换言之</p>
+<p>$$<br>\varphi &#x3D; \langle 4, n, \langle 3, 4\rangle, \langle 1, n, e_1\rangle, \langle 1, n, e_2\rangle, g_1, g_2\rangle<br>$$</p>
+<p>然后注意</p>
+<p>$$<br>\{e\}(\vec{x}) &#x3D; \{6, n+1\}(\varphi(\vec{x}), x)<br>$$</p>
+<p>也就是</p>
+<p>$$<br>e &#x3D; \langle 4, n, \langle 6, n + 1\rangle, \varphi, \langle 1, n, 0\rangle, …, \langle 1, n, n-1\rangle\rangle<br>$$</p>
+
+</details>
+
+<p>接下来的一个定理给出上述 $S_n^m$ 函数的定义，我们指出部分递归函数的 Curry 化是原始递归的。</p>
+<div class="note info"><p><strong>定理 2.5（$S_n^m$ 定理）.</strong> 对于任意的 $m, n$，存在一个原始递归函数 $S_n^m$ 使得</p>
+<p>$$<br>\{ S_n^m(e, x_0, …, x_{m-1})\}(x_m, …, x_{n-1}) &#x3D; \{e\}(\vec{x})<br>$$</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>施归纳于 $m$。首先证明 $S_n^1$ 是原始递归函数。这是因为 </p>
+<p>$$<br>S_n^1(e, y) &#x3D; \langle 4, (e)_1 - 1, e, \langle 0, (e)_1 - 1, y\rangle, \langle 1, (e)_1 - 1, 0\rangle, …, \langle 1, (e)_1 - 1, (e)_1 - 2\rangle \rangle<br>$$</p>
+<p>上式中所有的操作都是先前已经定义的原始递归函数，因此 $S_n^1$ 确实是原始递归的。</p>
+<p>若 $S_n^m$ 是原始递归函数，那么 $S_n^{m + 1}$ 也是原始递归函数：只需对 $S_n^m$ 应用一次上式即可。</p>
+
+</details></div>
+
+<p>我们先前已经定义了一个分支选择函数，现在我们还希望函数的性质能够再好一些，即可以递归。这样一来，我们便能实现绝大部分习见的算法。回忆在 Lambda 演算当中 $Y$ 组合子的性质：</p>
+<p>$$<br>Y f &#x3D; f (Y f)<br>$$</p>
+<p>倘若能够找到一个这样的 $Y$，我们便可用相似的手法定义本套理论中的递归。事实上 $Y$ 不仅是存在的，而且是原始递归的。形式化地有下列定理：</p>
+<div class="note info"><p><strong>定理 2.6（递归定理）.</strong> 存在一个原始递归函数 $rc$ 使得</p>
+<p>$$<br>\{rc(e)\}(\vec{x}) &#x3D; \{e\}(rc(e), x)<br>$$</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>我们定义</p>
+<p>$$<br>\varphi(m, e, \vec{x}) &#x3D; \{e\}(S_{n + 2}^2(m, m, e), \vec{x})<br>$$</p>
+<p>此函数的编码正是</p>
+<p>$$<br>\begin{aligned}<br>&amp;\langle 4, (e)_1 + 2, e \\<br>&amp; \quad \langle 4, (e)_1 + 2, \langle5, 2\rangle, \\<br>&amp; \quad \quad \langle 4, (e)_1 + 2, \langle 5, 2\rangle, \\<br>&amp; \quad \quad \quad \langle1, (e)_1 + 2, 0\rangle, \\<br>&amp; \quad \quad \quad \langle1, (e)_1 + 2, 1\rangle \\<br>&amp; \quad \quad \rangle \\<br>&amp; \quad \quad \langle 1, (e)_1 + 2, 1\rangle \\<br>&amp; \quad \rangle \\<br>&amp; \quad \langle 1, (e)_1 + 2, 2\rangle, \\<br>&amp; \quad \vdots \\<br>&amp; \quad \langle 1, (e)_1 + 2, (e)_1 + 1\rangle \\<br>&amp;\rangle<br>\end{aligned}<br>$$</p>
+<p>确实是一个原始递归函数。假设这个编码是 $p$，我们定义 </p>
+<p>$$<br>rc(e) &#x3D; S_{n + 2}^2(p, p, e)<br>$$</p>
+<p>则</p>
+<p>$$<br>\begin{align}<br>\{rc(e)\}(\vec{x}) &amp;&#x3D; \{S_{n + 2}^2(p, p, e)\}(\vec{x}) \\<br>&amp;&#x3D; \{p\}(p, e, \vec{x}) \\<br>&amp;&#x3D; \{e\}(S_{n + 2}^2(p, p, e), \vec{x}) \\<br>&amp;&#x3D; \{e\}(rc(e), \vec{x})<br>\end{align}<br>$$</p>
+
+</details>
+
+<p><strong>推论 2.7.</strong> 对于任意的 $e$ 都存在一个 $n$ 使得 $\{n\}(\vec{x}) &#x3D; \{e\}(n, \vec{x})$。</p>
+<p><strong>推论 2.8.</strong> 如果 $\{e\}$ 是原始递归的，则方程 $\{f(e)\}(\vec{x}) &#x3D; \{e\}(f(e), \vec{x})$ 的解也是原始递归的。</p></div>
+
+<p>仿造 FP 中打造递归函数的手法（即多传入一个 self 的参数，然后套上 $Y$ 组合子），我们这里也可以对常见的递归函数写出其编码。但我们默认读者熟悉 FP 里面的这样一套东西，所以此处不写。因此 </p>
+<div class="note info"><p><strong>定理 2.9.</strong> 若 $f$ 是递归的，那么 $\varphi(\vec{x}) &#x3D; \mu y [f(y, \vec{x}) &#x3D; 0]$ 是部分递归函数。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>实现此函数只需要一层递归，套用递归定理即可。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>定理 2.10.</strong> 递归函数对原始递归封闭。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>原始递归无非是一次分支判断加上递归，而这两种操作在前文中均有提及。</p>
+
+</details></div>
+
+<p>进而</p>
+<div class="note info"><p><strong>定理 2.11.</strong> 所有原始递归函数都是递归的。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>初始函数被定义 2.2 的前三条包含，复合操作被定义 2.2 的第五条包含，原始递归封闭性由定理 2.10 给出。</p>
+
+</details></div>
+
+<p>而反过来，事实上部分递归函数无非是原始递归函数加上至多一次最小化。有下面的定理：</p>
+<div class="note info"><p><strong>定理 2.12（标准型定理）.</strong> 存在一个原始递归的谓词 $T$ 满足</p>
+<p>$$<br>\{e\}(\vec{x}) &#x3D; ((\mu z) T(e, \langle\vec{x}\rangle, z))_0<br>$$</p>
+</div>
+
+<blockquote>
+<p>我们并不打算详细证明这个定理，只对其主旨进行阐释：</p>
+<p>这里的 $z$ 是某种对计算过程的编码，比如每一步由何函数调用何参数（可能是子计算过程的结果）得到何结果。我们可以构造一个原始递归谓词 $C(z)$ 来检验 $z$ 是否确实是某个计算过程的编码。然后 $T$ 无非是</p>
+<p>$$<br>  C(z) \wedge e &#x3D; (z)_2 \wedge \langle x\rangle &#x3D; (z)_1<br>$$</p>
+<p>状物，自然也是原始递归的。事实上你可以发现证明的复杂性主要来自计算过程的编码方式问题和 $C$ 的描述，无非是一些繁杂琐碎的工作。</p>
+</blockquote>
+<h1><span id="递归可枚举集合">递归可枚举集合</span></h1><p>本节形式化几个数理逻辑中常见但先前从未说明的概念，如递归可枚举性、可判定性等。</p>
+<div class="note success"><p><strong>定义 3.1.</strong> </p>
+<ol>
+<li>一个集合（也就是一元关系）称为（递归）可判定的，若它是递归的（参见前一节定义 2.4）。</li>
+<li>一个集合是递归可枚举的，如果它是某一个部分递归函数的定义域。</li>
+<li>集合 $W_e^k &#x3D; \{ \vec{x}\in \mathbb{N}^k : \exists y (\{e\}(\vec{x}) &#x3D; y)\}$ 是递归可枚举集合定义给出的相等集合。称 $e$ 是 $W_e^k$ 的 RE 指标。由于 $e$ 本身蕴含了输入元数 $k$，我们今后将直接简写 $W_e$。</li>
+</ol>
+<p>接下来我们将以 $\varphi(\vec{x})\downarrow$ 称 $\varphi(\vec{x})$ 收敛，类似地以 $\varphi(\vec{x})\uparrow$ 称 $\varphi(\vec{x})$ 发散。</p>
+</div>
+
+<p>可以直观地认为递归可枚举就是被抽象机接受的集合。但是这里的定义可能和术语的意思有些出入，直观地看“递归可枚举”应当是某种值域而非上方所说的定义域。事实上，有下面的定理：</p>
+<div class="note info"><p><strong>定理 3.2.</strong> 下面的说法等价：（$A\subseteq \mathbb{N}$）</p>
+<ol>
+<li>存在部分递归函数 $\varphi$ 使得 $A &#x3D; Dom(\varphi)$；</li>
+<li>存在部分递归函数 $\varphi$ 使得 $A &#x3D; Ran(\varphi)$；</li>
+<li>存在递归的关系 $R$ 使得 $A &#x3D; \{x : \exists y R(x, y)\}$。</li>
+</ol>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<ul>
+<li><p>$(1)\Rightarrow (2)$。只需要构造一个定义域和值域一致的函数即可，类似于 $\psi(x) &#x3D; x \cdot C_1(\varphi(x))$。</p>
+</li>
+<li><p>$(2)\Rightarrow (3)$。假设 $\varphi &#x3D; \{g\}$，将 $R$ 定义为</p>
+<p>$$<br>R(x, y) &#x3D; T(g, (y)_0, (y)_1) \wedge x &#x3D; (y)_{1, 0}<br>$$</p>
+<blockquote>
+<p>Remark. 这里的 $y$ 编码了一个有序对（输入和计算过程），$T$ 取自标准型定理。</p>
+</blockquote>
+</li>
+<li><p>$(3)\Rightarrow (1)$。令 $\varphi(x) &#x3D; \mu y R(x, y)$ 即可。</p>
+</li>
+</ul>
+
+</details></div>
+
+<p>这里的第 $3$ 条将抽象的定义域、值域变成了一个递归的关系，</p>
+<h1><span id="名词对照表">名词对照表</span></h1><p>此处诸术语的中文翻译来源于笔者对所阅数理逻辑科普材料的记忆，因此可能与专业译名有出入，兹列出对照表以供参考：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>翻译</strong></th>
+<th align="center"><strong>原词</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">原始递归函数</td>
+<td align="center">primitive recursive functions</td>
+</tr>
+<tr>
+<td align="center">初始函数</td>
+<td align="center">initial function</td>
+</tr>
+<tr>
+<td align="center">类</td>
+<td align="center">class</td>
+</tr>
+<tr>
+<td align="center">$k$ 元关系</td>
+<td align="center">$k$-nary relation</td>
+</tr>
+<tr>
+<td align="center">有界量词</td>
+<td align="center">bounded quantification</td>
+</tr>
+<tr>
+<td align="center">有界最小值</td>
+<td align="center">bounded minimization</td>
+</tr>
+<tr>
+<td align="center">值过程函数</td>
+<td align="center">course-of-value function</td>
+</tr>
+<tr>
+<td align="center">递归可枚举</td>
+<td align="center">recursively enumerable</td>
+</tr>
+<tr>
+<td align="center">部分递归函数</td>
+<td align="center">partial recursive functions</td>
+</tr>
+<tr>
+<td align="center">抽象机</td>
+<td align="center">abstract machine</td>
+</tr>
+<tr>
+<td align="center">RE 指标</td>
+<td align="center">RE index</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Logic/" rel="tag"># Logic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/09/24/ODE1-5Applications/" rel="prev" title="常微分方程（1.5）应用举例">
+                  <i class="fa fa-angle-left"></i> 常微分方程（1.5）应用举例
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
