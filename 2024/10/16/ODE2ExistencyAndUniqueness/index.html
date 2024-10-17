@@ -19,29 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。    Information, Loss and Noise">
+    <meta name="description" content="Abstract. 【Under Construction】    工具">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Information and Entropy (7) Processes">
-<meta property="og:url" content="http://example.com/2024/01/17/InfoAndEntropy7Proc/index.html">
+<meta property="og:title" content="常微分方程 (2) 解的存在性和唯一性">
+<meta property="og:url" content="http://example.com/2024/10/16/ODE2ExistencyAndUniqueness/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 在上一节的基础上继续讨论一些通信过程的性质。    Information, Loss and Noise">
+<meta property="og:description" content="Abstract. 【Under Construction】    工具">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png">
-<meta property="article:published_time" content="2024-01-17T08:10:39.000Z">
-<meta property="article:modified_time" content="2024-01-22T05:34:25.511Z">
+<meta property="article:published_time" content="2024-10-16T06:11:14.000Z">
+<meta property="article:modified_time" content="2024-10-16T14:09:53.730Z">
 <meta property="article:author" content="King Strange">
+<meta property="article:tag" content="ODE">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png">
 
 
-<link rel="canonical" href="http://example.com/2024/01/17/InfoAndEntropy7Proc/">
+<link rel="canonical" href="http://example.com/2024/10/16/ODE2ExistencyAndUniqueness/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/01/17/InfoAndEntropy7Proc/","path":"2024/01/17/InfoAndEntropy7Proc/","title":"Information and Entropy (7) Processes"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/10/16/ODE2ExistencyAndUniqueness/","path":"2024/10/16/ODE2ExistencyAndUniqueness/","title":"常微分方程 (2) 解的存在性和唯一性"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Information and Entropy (7) Processes | Stellary's Notes</title>
+<title>常微分方程 (2) 解的存在性和唯一性 | Stellary's Notes</title>
   
 
 
@@ -115,7 +114,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Information, Loss and Noise</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -197,7 +196,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/17/InfoAndEntropy7Proc/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/10/16/ODE2ExistencyAndUniqueness/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
@@ -210,12 +209,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Information and Entropy (7) Processes | Stellary's Notes">
+      <meta itemprop="name" content="常微分方程 (2) 解的存在性和唯一性 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Information and Entropy (7) Processes
+          常微分方程 (2) 解的存在性和唯一性
         </h1>
 
         <div class="post-meta-container">
@@ -225,15 +224,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2024-01-17 16:10:39" itemprop="dateCreated datePublished" datetime="2024-01-17T16:10:39+08:00">2024-01-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-01-22 13:34:25" itemprop="dateModified" datetime="2024-01-22T13:34:25+08:00">2024-01-22</time>
+      <time title="Created: 2024-10-16 14:11:14 / Modified: 22:09:53" itemprop="dateCreated datePublished" datetime="2024-10-16T14:11:14+08:00">2024-10-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -245,11 +238,7 @@
         </span>
           , 
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/Information-and-Entropy/" itemprop="url" rel="index"><span itemprop="name">Information and Entropy</span></a>
+          <a href="/categories/Notes/ODE/" itemprop="url" rel="index"><span itemprop="name">ODE</span></a>
         </span>
     </span>
 
@@ -262,64 +251,88 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 在上一节的基础上继续讨论一些通信过程的性质。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 【Under Construction】</p>
 <!-- toc -->
 
 <ul>
-<li><a href="#information-loss-and-noise">Information, Loss and Noise</a></li>
+<li><a href="#%E5%B7%A5%E5%85%B7">工具</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<p>我们讨论的处理过程具有如下特点：</p>
+<h1><span id="工具">工具</span></h1><div class="note info"><p><strong>引理 1.1（Gronwall 不等式）.</strong> 假设 $f(x), g(x)$ 在区间 $[a, b]$ 上连续，$g(x)\geq 0$，$c$ 是常数，则 </p>
+<p>$$<br>f(x)\leq c + \int_a^x g(s)f(s)\mathrm{d}x<br>$$</p>
+<p>蕴含</p>
+<p>$$<br>f(x) \leq \mathrm{e}^{\int_a^x g(s)\mathrm{d}s}<br>$$</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>考虑 </p>
+<p>$$<br>\Phi(x) &#x3D; \int_a^x g(s)f(s)\mathrm{d}s<br>$$</p>
+<p>有 </p>
+<p>$$<br>\Phi’(x) &#x3D; g(x)f(x) \leq g(x)(c + \Phi(x))<br>$$</p>
+<p>即</p>
+<p>$$<br>\Phi’(x) - g(x)\Phi(x) \leq cg(x)<br>$$</p>
+<p>对左边进行配凑</p>
+<p>$$<br>[\mathrm{e}^{-\int_a^x g(s)\mathrm{d}s} \Phi(x)]’ \leq cg(x)\mathrm{e}^{-\int_a^x g(s)\mathrm{d}s}<br>$$</p>
+<p>此时对两边同时从 $a$ 积分到 $x$ 得到</p>
+<p>$$<br>\mathrm{e}^{-\int_a^x g(s)\mathrm{d}s}\Phi(x) \leq \int_a^x cg(s)\mathrm{e}^{-\int_a^s g(t)\mathrm{d}t}\mathrm{d}s &#x3D; c(1 - \mathrm{e}^{-\int_a^x g(s)\mathrm{d}s})<br>$$</p>
+<p>最终</p>
+<p>$$<br>f(x) \leq c + \Phi(x) \leq c + c(\mathrm{e}^{\int_a^xg(s)\mathrm{d}s} - 1) &#x3D; c\mathrm{e}^{\int_a^xg(s)\mathrm{d}s}<br>$$</p>
+<p>明所欲证。</p>
+
+</details>
+
+<blockquote>
+<p><strong>Remark.</strong> 对于更一般的情况（将 $c$ 换成 $h(x)$），可以放缩到 $(7)$ 式前半部分的程度，若 $h(x)$ 单调递增，则可以放缩到与本定理类似的结果。</p>
+</blockquote></div>
+
+<div class="note success"><p><strong>定义 1.2.</strong> $\Lambda$ 是一个无限集，$I\subseteq R$，$\{f_\alpha\}_{\alpha\in\Lambda}$ 是定义在 $I$ 上的一族函数。</p>
 <ul>
-<li><strong>Discrete.</strong> 输入是一组互斥事件集，每时每刻只会有一个发生，输出是另一个互斥事件集。</li>
-<li><strong>Finite.</strong> 上述两个事件集均为有限集。</li>
-<li><strong>Memoryless.</strong> 当前输出只取决于当前输入，和之前的输入没有关系。</li>
-<li><strong>Nondeterministic.</strong> 对于相同的输入可能输出不同的结果（“噪声”）。</li>
-<li><strong>Lossy.</strong> 从输出中无法反推输入。</li>
-</ul>
-<p>大概是总结了之前的 Communication System 的特点。</p>
-<p>下面几节感觉很平凡，均为常识内容，我们直接跳到第三节。</p>
-<h1><span id="information-loss-and-noise">Information, Loss and Noise</span></h1><p>和上一节相同，我们定义输入的信息量为</p>
-<p>$$<br>I &#x3D; \sum p(A_i)\log\left(\frac 1{p(A_i)}\right)<br>$$</p>
-<p>输出的信息量为</p>
-<p>$$<br>J &#x3D; \sum p(B_i)\log\left(\frac 1{p(B_i)}\right)<br>$$</p>
-<p>然后上一节还记述了对输入的不确定度的期望</p>
-<p>$$<br>L &#x3D; \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(A_i | B_j)}\right)<br>$$</p>
-<p>这个值称为 <strong>loss</strong>，相应的，对输出的不确定度</p>
-<p>$$<br>N &#x3D; \sum_{j}\sum_{i} p(A_i, B_j) \log\left(\frac 1{p(B_j | A_i)}\right)<br>$$</p>
-<p>称为 <strong>noise</strong>。</p>
-<p>假设 $W$ 是输出端可以识别到输入端变化的最大速率，那么 </p>
-<p>$$<br>C &#x3D; WM_{max}<br>$$</p>
-<p>称为这个过程的 <strong>capacity</strong>。</p>
-<p>上一节我们已经推导过了</p>
-<p>$$<br>M &#x3D; I - L &#x3D; J - N<br>$$</p>
-<p>因此有</p>
-<p>$$<br>J &#x3D; I - L + N<br>$$</p>
-<p>或者简明地用下面的这个图来表示这个 discrete memoryless process 中的信息流动</p>
-<p><img src="https://s2.loli.net/2024/01/17/cylBEjFNZv4MAdC.png"></p>
-<div class="note info"><p><strong>原论文中的记号</strong> 在 Shannon 的原论文中记号和这里不太一样，简单记录一下：</p>
-<ul>
-<li>输入的概率分布称为 $x$，输出的概率分布称为 $y$。</li>
-<li>$H(x)\leftarrow I, H(y)\leftarrow J, H_y(x)\leftarrow L, H_x(y)\leftarrow N, R \leftarrow M$。</li>
+<li><p>称 $\{f_\alpha\}_{\alpha\in\Lambda}$ 在 $I$ 上<strong>一致有界</strong>，若存在常数 $M$ 使得</p>
+<p>$$<br>|f_{\alpha}(x)|\leq M, \forall \alpha\in \Lambda, \forall x \in I<br>$$</p>
+</li>
+<li><p>称 $\{f_\alpha\}_{\alpha\in\Lambda}$ 在 $I$ 上<strong>等度连续</strong>，若对于任意的 $\varepsilon$，都存在 $\delta$ 使得对于任意的 $x, y\in I, |x-y| &lt; \delta$ 和 $\alpha\in \Lambda$ 都有</p>
+<p>$$<br>|f_\alpha(x) - f_\alpha(y)| &lt; \varepsilon<br>$$</p>
+</li>
 </ul>
 </div>
 
-<div class="note info"><p><strong>Example.</strong> 回忆我们在第 4 节中提到的 Hamming Code，在推导纠错码长度下界的过程中我们利用码距得到了</p>
-<p>$$<br>2^n \times m \leq 2^m<br>$$</p>
-<p>接下来我们从信息熵的角度推导这个下界。</p>
-<p>要求总是能够检查错误，也就是 $L &#x3D; 0$，即 </p>
-<p>$$<br>I + N &#x3D; J<br>$$</p>
-<p>这里的输入信息量只能是原来的 $01$ 串的信息量，即 $n$，而 noise 只可能是反转 $m$ 个位置之一，也就是噪声的熵为 $N &#x3D; \log_2 m$。输出是一个长度为 $m$ 的串，但是信息熵未必是 $m$，因为显然这里 $2^m$ 种情况不是都能取到的。</p>
-<p>于是有</p>
-<p>$$<br>I + N &#x3D; n + \log_2 m &#x3D; J \leq m \Rightarrow n + \log_2 m \leq m<br>$$</p>
-<p>即上述不等式取对数的形式。</p>
+<div class="note info"><p><strong>引理 1.3（Ascoli-Arzelà）</strong>. 若 $\Lambda$ 可数，$\{f_\alpha\}_{\alpha\in\Lambda}$ 在 $[a, b]$ 上一致有界、等度连续，则其有在 $[a, b]$ 上一致收敛的子列。</p>
 </div>
 
-<hr>
-<p>可能这个项目就到这里为止了。后面全是统计力学，量子力学之类的东西，不想看了。</p>
+<p>本引理类似于函数上的 Bolzano-Weierstrass 定理。不难想象证明路径大致为：证明存在一个在 $\mathbb{Q} \cap [a, b]$ 上一致收敛的子列 $\Rightarrow$ 用一致连续性推广到整个 $[a, b]$。我们引入下面两个一般性的结果：</p>
+<div class="note info"><p><strong>引理 1.4.</strong> 若 $\Lambda$ 可数，$\{f_\alpha\}_{\alpha\in\Lambda}$ 在 $E\subset \mathbb{R}$ 一致有界，则对于任意的可数点列 $\{x_m\}$，都存在一个子列使得 $\{f_{\alpha_k}(x_m)\}$ 均收敛（$\forall m$）。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>$\{f_\alpha(x_1)\}_{\alpha\in\Lambda}$ 是有界的，根绝 Bolzano-Weierstrass 定理存在一个收敛子列</p>
+<p>$$<br>f_{11}(x_1), f_{12}(x_1), …, f_{1n}(x_1), …<br>$$</p>
+<p>即函数列 $f_{11}, …, f_{1n}, …$ 在 $x_1$ 上收敛。现在 $f_{11}(x_2), …, f_{1n}(x_2), …$ 也有界，于是有收敛子列：</p>
+<p>$$<br>f_{21}(x_2), f_{22}(x_2), …, f_{2n}(x_2), …<br>$$</p>
+<p>重复此过程，得到可数个函数列</p>
+<p>$$<br>\begin{align}<br>&amp;f_{11}, f_{21}, …, f_{1n}, … \\<br>&amp;f_{21}, f_{22}, …, f_{2n}, … \\<br>&amp;…<br>\end{align}<br>$$</p>
+<p>满足 $f_{i1}, …, f_{in}, …$ 在 $x_1, …, x_i$ 上收敛。遂取 $f_{11}, f_{22}, …, f_{nn}, …$，发现其在 $\{x_m\}$ 上都收敛。</p>
+
+</details></div>
+
+<div class="note info"><p><strong>引理 1.5.</strong> $\{f_\alpha(x_1)\}_{\alpha\in\Lambda}$ 在紧集 $E$ 上等度连续，且存在稠密子集 $E_0\subset E$ 使得 $\{f_n\}$ 在此子集上点点收敛，则 $\{f_n\}$ 在 $E$ 上一致收敛。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>即证明 $\forall \varepsilon$，存在 $N$ 使得 $\forall n, m &gt; N$ 都有 $|f_n(x) - f_m(x)| &lt; \varepsilon$。</p>
+<p>现在固定 $\varepsilon$，等度连续性指出对于任意的 $x$ 都存在 $\delta$ 使得若 $|y-x| &lt; \delta$ 则 $|f_n(y) - f_n(x)| &lt; \varepsilon &#x2F; 3$。我们用 $U(x, \delta)$ 表示 $\{y : |y - x| &lt; \delta\}$。那么由于 $E_0$ 是稠密的</p>
+<p>$$<br>E \subseteq \bigcup_{x\in E_0} U(x, \delta)<br>$$</p>
+<p>由于 $E$ 是紧集，$\{U(x, \delta)\}_{x\in E_0}$ 是其开覆盖，必然存在一个有限子覆盖</p>
+<p>$$<br>E\subseteq \bigcup_{i&#x3D;1}^k U(x_i, \delta)<br>$$</p>
+<p>由于 $\{f_n\}$ 在 $E_0$ 上点点收敛，对于任意的 $x_i$ 都存在 $N$ 使得 $n, m &gt; N$ 时都有 $|f_n(x_i) - f_m(x_i)| &lt; \varepsilon &#x2F; 3$。鉴于现在 $x_i$ 只有有限个，存在一个最大的 $N$ 使得对于所有的 $x_i$ 此条件都满足。现在有若 $x\in U(x_i, \delta)$，则</p>
+<p>$$<br>|f_n(x) - f_m(x)|\leq |f_n(x) - f_n(x_i)| + |f_n(x_i) - f_m(x_i)| + |f_m(x_i) - f_m(x)| &lt; \varepsilon<br>$$</p>
+<p>明所欲证。</p>
+
+</details></div>
+
+<p>$\mathbb{Q}$ 的定义保证 $\mathbb{Q} \cap [a, b]$ 是一个 $[a, b]$ 上的可数稠密子集，有限覆盖定理保证了 $[a, b]$ 是紧集。因此上方两引理立即推出 Ascoli-Arzelà 引理成立。</p>
+<blockquote>
+<p><strong>Remark.</strong> 上方证明加一些琐碎的修改即可导出结论对于开区间 $(a, b)$ 也成立。</p>
+</blockquote>
 
     </div>
 
@@ -328,19 +341,19 @@
     
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ODE/" rel="tag"># ODE</a>
+          </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2024/01/15/InfoAndEntropy6Commu/" rel="prev" title="Information and Entropy (6) Communication">
-                  <i class="fa fa-angle-left"></i> Information and Entropy (6) Communication
+                <a href="/2024/10/07/GodelTheorem/" rel="prev" title="【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理">
+                  <i class="fa fa-angle-left"></i> 【Under Construction】一些逻辑话题：递归论初步与哥德尔不完备定理
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2024/01/22/Logic1Basic/" rel="next" title="数理逻辑 (1) 命题逻辑">
-                  数理逻辑 (1) 命题逻辑 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>

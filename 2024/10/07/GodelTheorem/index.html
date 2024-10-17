@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 离散数学与结构作业出了一个题考察对哥德尔不完备定理的深度理解，但是他上课实在是讲得过于粗糙，于是我们被迫完整阅读一遍相关理论。参考资料是 Dirk van Dalen, Logic and Structure(Fifth Edition), Springer(2013) Chapter 8 Godel’s Theorem。    原始递归函数 部分递归函数 递归可枚举集合 名词">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-10-07T09:05:47.000Z">
-<meta property="article:modified_time" content="2024-10-09T14:01:53.735Z">
+<meta property="article:modified_time" content="2024-10-09T14:48:41.512Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Logic">
 <meta name="twitter:card" content="summary">
@@ -129,7 +129,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-count">31</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -173,6 +173,9 @@
             </li>
             <li class="links-of-blogroll-item">
               <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
             </li>
         </ul>
       </div>
@@ -229,7 +232,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-10-09 22:01:53" itemprop="dateModified" datetime="2024-10-09T22:01:53+08:00">2024-10-09</time>
+      <time title="Modified: 2024-10-09 22:48:41" itemprop="dateModified" datetime="2024-10-09T22:48:41+08:00">2024-10-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -504,7 +507,9 @@
 
 </details></div>
 
-<div class="note info"><p><strong>定理 2.10.</strong> 递归函数对原始递归封闭。</p>
+<div class="note info"><p><strong>定理 2.10.</strong> 递归函数对原始递归封闭。即若 $g, h$ 都是递归的，那么 </p>
+<p>$$<br>\begin{cases}<br>  f(0, \vec{x}) &#x3D; g(\vec{x}) \\<br>  f(y + 1, \vec{x}) &#x3D; h(f(y, \vec{x}), \vec{x}, y)<br>\end{cases}<br>$$</p>
+<p>也是递归的。</p>
 <details class="note "><summary><p><strong>证明.</strong></p>
 </summary>
 <p>原始递归无非是一次分支判断加上递归，而这两种操作在前文中均有提及。</p>
@@ -534,7 +539,7 @@
 <div class="note success"><p><strong>定义 3.1.</strong> </p>
 <ol>
 <li>一个集合（也就是一元关系）称为（递归）可判定的，若它是递归的（参见前一节定义 2.4）。</li>
-<li>一个集合是递归可枚举的，如果它是某一个部分递归函数的定义域。</li>
+<li>一个集合是递归可枚举的，如果它是某一个部分递归函数的定义域。$A$ 是递归可枚举的简称“$A$ RE”。</li>
 <li>集合 $W_e^k &#x3D; \{ \vec{x}\in \mathbb{N}^k : \exists y (\{e\}(\vec{x}) &#x3D; y)\}$ 是递归可枚举集合定义给出的相等集合。称 $e$ 是 $W_e^k$ 的 RE 指标。由于 $e$ 本身蕴含了输入元数 $k$，我们今后将直接简写 $W_e$。</li>
 </ol>
 <p>接下来我们将以 $\varphi(\vec{x})\downarrow$ 称 $\varphi(\vec{x})$ 收敛，类似地以 $\varphi(\vec{x})\uparrow$ 称 $\varphi(\vec{x})$ 发散。</p>
@@ -564,7 +569,63 @@
 
 </details></div>
 
-<p>这里的第 $3$ 条将抽象的定义域、值域变成了一个递归的关系，</p>
+<p>定理 3.2 中，第 $1$ 条即是原始的定义，第 $2$ 条符合直观想象，第 $3$ 条将抽象的定义域、值域变成了一个递归的关系，而先前我们已经研究过了递归的关系的诸多封闭性，这帮助我们导出下面的结论：</p>
+<p>特别地，我们可以证明一个递归的集合 $A$ 一定是递归可枚举的，因为它是下述函数的定义域：</p>
+<p>$$<br>\mu y [K_A(\vec{x}) &#x3D; y \wedge y \ne 0]<br>$$</p>
+<div class="note info"><p><strong>定理 3.3.</strong> </p>
+<ol>
+<li>若 $A, B$ 都 RE，那么 $A \cap B$，$A\cup B$ 也 RE。</li>
+<li>若 $R(x, \vec{y})$ RE，那么 $\exists x R(x, \vec{y})$ 也 RE。本条指出 RE 集合的“投影”也 RE。</li>
+<li>若 $R(x, \vec{y})$ RE，$\varphi$ 部分递归，那么 $R(\varphi(\vec{y}, \vec{z}), \vec{y})$ 也 RE。</li>
+<li>若 $R(x, \vec{y})$ RE，那么 $\exists x &lt; z R(x, \vec{y})$ 和 $\forall x &lt; z R(x, \vec{y})$ 也 RE。</li>
+</ol>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<ol>
+<li><p>我们以 $A\cap B$ 为例说明这个情形是容易证明的。</p>
+<p>$A, B$ RE 换言之存在递归的关系使得 $\vec{y}\in A \Leftrightarrow \exists x, R_A(x, \vec{y})$，且 $\vec{y}\in B \Leftrightarrow \exists x, R_B(x, \vec{y})$。</p>
+<p>用一个数编码有序对立即得到</p>
+<p>$$<br>\vec{y}\in A\cap B \Leftrightarrow \exists x (R_A((x)_0, \vec{y})\wedge R_B((x)_1, \vec{y}))<br>$$</p>
+<p>递归的关系对于 $\wedge$ 是封闭的，上式契合 $A\cap B$ RE 的等价定义。</p>
+</li>
+<li><p>等价定义给出递归的关系 $S$ 满足 $R(x, \vec{y}) \Leftrightarrow \exists z S(z, x, \vec{y})$。于是</p>
+<p>$$<br>\begin{aligned}<br> \exists x R(x, \vec{y}) &amp;\Leftrightarrow \exists x \exists z S(z, x, \vec{y}) \\<br>                     &amp;\Leftrightarrow \exists x S((x)_0, (x)_1, \vec{y})<br>\end{aligned}<br>$$</p>
+<p>符合等价定义。</p>
+</li>
+<li><p>假设 $R(x, \vec{y})$ 是 $\psi(x, \vec{y})$ 的定义域，那么 $R(\varphi(\vec{y}, \vec{z}), \vec{y})$ 无非是 $\psi(\varphi(\vec{y}, \vec{z}), \vec{y})$ 的定义域。</p>
+</li>
+<li><p>加上有界全称量词无非是在某一个递归的函数外面套上一层原始递归，因此还是 RE 的。</p>
+<p>加上有界存在量词和加上存在量词区别不大，无非是增加一个 $(x)_0 &lt; z \wedge …$。</p>
+</li>
+</ol>
+
+</details></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h1><span id="名词对照表">名词对照表</span></h1><p>此处诸术语的中文翻译来源于笔者对所阅数理逻辑科普材料的记忆，因此可能与专业译名有出入，兹列出对照表以供参考：</p>
 <table>
 <thead>
@@ -639,6 +700,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2024/10/16/ODE2ExistencyAndUniqueness/" rel="next" title="常微分方程 (2) 解的存在性和唯一性">
+                  常微分方程 (2) 解的存在性和唯一性 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
