@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. ICS 期中复习笔记。    机器级编程 处理器体系结构 SEQ SEQ+ PIPE- PIPE   优化程序性能 存储器层次结构 存储技术">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 计算机系统小常识">
+<meta property="og:url" content="http://example.com/2024/11/03/ICSRevision1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. ICS 期中复习笔记。    机器级编程 处理器体系结构 SEQ SEQ+ PIPE- PIPE   优化程序性能 存储器层次结构 存储技术">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/SEQ.jpg">
+<meta property="og:image" content="http://example.com/picture/PIPE-.jpg">
+<meta property="og:image" content="http://example.com/picture/PIPE.png">
+<meta property="og:image" content="http://example.com/picture/PIPE_D.png">
+<meta property="og:image" content="http://example.com/picture/PIPE_Ctrl.png">
+<meta property="og:image" content="http://example.com/picture/polydependency.jpg">
+<meta property="article:published_time" content="2024-11-03T12:47:44.000Z">
+<meta property="article:modified_time" content="2024-11-03T12:57:07.163Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Assembly">
+<meta property="article:tag" content="Architecture">
+<meta property="article:tag" content="Program Optimization">
+<meta property="article:tag" content="Cache">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/SEQ.jpg">
+
+
+<link rel="canonical" href="http://example.com/2024/11/03/ICSRevision1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/11/03/ICSRevision1/","path":"2024/11/03/ICSRevision1/","title":"Revision | 计算机系统小常识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 计算机系统小常识 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">机器级编程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">处理器体系结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">SEQ</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">SEQ+</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">PIPE-</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">PIPE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">优化程序性能</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">存储器层次结构</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">存储技术</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/03/ICSRevision1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 计算机系统小常识 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 计算机系统小常识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-11-03 20:47:44 / Modified: 20:57:07" itemprop="dateCreated datePublished" datetime="2024-11-03T20:47:44+08:00">2024-11-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> ICS 期中复习笔记。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9C%BA%E5%99%A8%E7%BA%A7%E7%BC%96%E7%A8%8B">机器级编程</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%99%A8%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84">处理器体系结构</a><ul>
+<li><a href="#seq">SEQ</a></li>
+<li><a href="#seq">SEQ+</a></li>
+<li><a href="#pipe-">PIPE-</a></li>
+<li><a href="#pipe">PIPE</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BC%98%E5%8C%96%E7%A8%8B%E5%BA%8F%E6%80%A7%E8%83%BD">优化程序性能</a></li>
+<li><a href="#%E5%AD%98%E5%82%A8%E5%99%A8%E5%B1%82%E6%AC%A1%E7%BB%93%E6%9E%84">存储器层次结构</a><ul>
+<li><a href="#%E5%AD%98%E5%82%A8%E6%8A%80%E6%9C%AF">存储技术</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="机器级编程">机器级编程</span></h1><p><strong>寄存器</strong></p>
+<table>
+<thead>
+<tr>
+<th>四字</th>
+<th>双字</th>
+<th>字</th>
+<th>字节</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>%rax</td>
+<td>%eax</td>
+<td>%ax</td>
+<td>%al</td>
+</tr>
+<tr>
+<td>%rbx</td>
+<td>%ebx</td>
+<td>%bx</td>
+<td>%bl</td>
+</tr>
+<tr>
+<td>%rcx</td>
+<td>%ecx</td>
+<td>%cx</td>
+<td>%cl</td>
+</tr>
+<tr>
+<td>%rdx</td>
+<td>%edx</td>
+<td>%dx</td>
+<td>%dl</td>
+</tr>
+<tr>
+<td>%rsi</td>
+<td>%esi</td>
+<td>%si</td>
+<td>%sil</td>
+</tr>
+<tr>
+<td>%rdi</td>
+<td>%edi</td>
+<td>%di</td>
+<td>%dil</td>
+</tr>
+<tr>
+<td>%rbp</td>
+<td>%ebp</td>
+<td>%bp</td>
+<td>%bpl</td>
+</tr>
+<tr>
+<td>%rsp</td>
+<td>%esp</td>
+<td>%sp</td>
+<td>%spl</td>
+</tr>
+<tr>
+<td>%r8 - %r15</td>
+<td>%r8d - %r15d</td>
+<td>%r8w - %r15w</td>
+<td>%r8b - %r15b</td>
+</tr>
+</tbody></table>
+<center>表 1.1：寄存器表</center>
+
+<ol>
+<li>%rbx, %rbp， %r12 - %r15 是被调用者保存寄存器，其余除了 %rsp 外是调用者保存寄存器。</li>
+<li>对于寄存器的修改：对于生成 1、2 字节数字的指令，保持剩下的字节不变。生成 4 字节的指令会将高位置为零。</li>
+</ol>
+<hr>
+<p><strong>数据传送指令</strong>：</p>
+<ol>
+<li><p>常规的 <code>movq</code> 只能以 32 位补码的立即数作为源；<code>movabsq</code> 能传送任意 64 位立即数，只能以寄存器作为目标。</p>
+</li>
+<li><p><code>movzxx</code> 用于将数据做零扩展之后传送到目标，但是没有 <code>movltq</code> 指令，参见<strong>寄存器</strong>部分的第 2 条。</p>
+</li>
+<li><p><code>movsxx</code> 将数据符号扩展后传送，特别地 <code>cltq</code> 将 %eax 符号扩展到 %rax。其效果等同于 movslq %eax, %rax，但是编码更短。</p>
+</li>
+<li><p>条件传送只能使用 16 位，32 位，64 位的源和目的值。只能传到寄存器，汇编器会根据参数分析长度。</p>
+</li>
+<li><p>和指针有关的语句采用条件传送时要格外注意内存错误，比方说如下代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">long</span> <span class="title">cread</span><span class="params">(<span class="type">long</span> *xp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> xp? (*xp : <span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>并不能翻译成</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">cread:</span><br><span class="line">	movq (%rdi), %rax</span><br><span class="line">	testq %rdi, %rdi</span><br><span class="line">	movl $0, %rdx</span><br><span class="line">	cmove %rdi, %rax</span><br><span class="line">	ret</span><br></pre></td></tr></table></figure>
+
+<p>因为这样传入 NULL 第 2 行会访问 0 地址而出错。</p>
+</li>
+</ol>
+<hr>
+<p><strong>算术和逻辑操作</strong></p>
+<ol>
+<li><p><code>leaq</code> 不设置条件码。</p>
+</li>
+<li><p>有 <code>INC</code>，<code>DEC</code> 指令用于加减 1，<code>NEG</code> 用于取负。</p>
+</li>
+<li><p>有如下几个特殊指令提供给 128 位整数操作：</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>效果</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>imulq S</code></td>
+<td>R[%rdx] : R[%rax] &#x3D; S * R[%rax]</td>
+<td>有符号全乘法</td>
+</tr>
+<tr>
+<td><code>mulq</code></td>
+<td>R[%rdx] : R[%rax] &#x3D; S * R[%rax]</td>
+<td>无符号全乘法</td>
+</tr>
+<tr>
+<td><code>cqto</code></td>
+<td>R[%rdx] : R[%rax] &#x3D; R[%rax]</td>
+<td>符号扩展 %rax</td>
+</tr>
+<tr>
+<td><code>idivq</code></td>
+<td>R[%rdx] &#x3D; R[%rdx] : R[%rax] mod S<br>R[%rax] &#x3D; R[%rdx] : R[%rax] &#x2F; S</td>
+<td>有符号除法</td>
+</tr>
+<tr>
+<td><code>divq</code></td>
+<td>R[%rdx] &#x3D; R[%rdx] : R[%rax] mod S<br>R[%rax] &#x3D; R[%rdx] : R[%rax] &#x2F; S</td>
+<td>无符号出发</td>
+</tr>
+</tbody></table>
+<center>表 1.2：特殊算术操作表</center></li>
+</ol>
+<hr>
+<p><strong>条件码</strong></p>
+<p>注意 <code>cmp</code> 相当于无目标的 <code>sub</code>，<code>test</code> 相当于无目标的 <code>and</code>。下面默写跳转条件和条件码之间的对应关系：</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>同义名</th>
+<th>条件码</th>
+<th>解释（操作数 vs. 被操作数）</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>e</td>
+<td>z</td>
+<td>·<code>ZF</code></td>
+<td>相等 &#x2F; 零</td>
+</tr>
+<tr>
+<td>ne</td>
+<td>nz</td>
+<td><code>~ZF</code></td>
+<td>不等 &#x2F; 非零</td>
+</tr>
+<tr>
+<td>s</td>
+<td></td>
+<td><code>SF</code></td>
+<td>负</td>
+</tr>
+<tr>
+<td>ns</td>
+<td></td>
+<td><code>~SF</code></td>
+<td>非负</td>
+</tr>
+<tr>
+<td>g</td>
+<td>nle</td>
+<td><code>~(SF^OF) &amp; ~ZF</code></td>
+<td>大于</td>
+</tr>
+<tr>
+<td>ge</td>
+<td>nl</td>
+<td><code>~(SF^OF)</code></td>
+<td>大于等于</td>
+</tr>
+<tr>
+<td>l</td>
+<td>nge</td>
+<td><code>SF^OF</code></td>
+<td>小于</td>
+</tr>
+<tr>
+<td>le</td>
+<td>ng</td>
+<td><code>(SF^OF) | ~ZF</code></td>
+<td>小于等于</td>
+</tr>
+<tr>
+<td>a</td>
+<td>nbe</td>
+<td><code>~CF &amp; ~ZF</code></td>
+<td>无符号大于</td>
+</tr>
+<tr>
+<td>ae</td>
+<td>nb</td>
+<td><code>~CF</code></td>
+<td>无符号大于等于</td>
+</tr>
+<tr>
+<td>b</td>
+<td>nae</td>
+<td><code>CF</code></td>
+<td>无符号小于</td>
+</tr>
+<tr>
+<td>be</td>
+<td>na</td>
+<td><code>CF | ZF</code></td>
+<td>无符号小于等于</td>
+</tr>
+</tbody></table>
+<center>表 1.3：条件码的对应关系</center>
+
+<ol>
+<li>移位操作会将最后一个移出的位放在 CF，不改变 OF。</li>
+<li><code>inc</code>，<code>dec</code> 会改变 SF、OF，不改变 CF。</li>
+<li><code>set</code> 指令用于根据条件码给一个字节赋值。</li>
+</ol>
+<hr>
+<p><strong>运行时栈</strong></p>
+<ol>
+<li><p>每个栈帧从下到上（注意栈顶是低地址）依次是保存寄存器、局部变量、参数（编号从顶往下递增）。</p>
+</li>
+<li><p><code>call</code> 指令除了直接跳转之外，还可以 <code>call *Operand</code> 以间接寻址（其中 Operand 是 <code>Imm(Ra, Ri, s)</code> 格式）。</p>
+</li>
+<li><p>每种数据类型必须对齐到其大小的倍数。</p>
+<p>若使用了 SSE 指令，栈帧边界必须是 16 的倍数。</p>
+</li>
+<li><p>用 %rbp（帧指针）来处理变长栈帧（函数中开变长数组）。<code>leave</code> 指令相当于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movq %rbp, %rsp</span><br><span class="line">popq %rbp       # %rbp 是调用者保存，理应被备份在上方。</span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<p><strong>指针类型解读</strong></p>
+<p>从名称开始，优先结合括号，然后结合解引用。比如说 <code>int *f(int *);</code> 声明的是一个函数，传入一个 <code>int*</code> 返回一个 <code>int*</code>。<code>int (*f)(int*)</code> 才是指向输入 <code>int*</code> 返回 <code>int</code> 的函数的指针。</p>
+<hr>
+<p><strong>*浮点代码</strong></p>
+<p>讨论基于 AVX 指令集，且只讨论基础的部分。</p>
+<ol>
+<li><p>寄存器名为 %ymm0 - %ymm15，均为256 位寄存器（称为 YMM 寄存器），其低 128 位（称为 XMM 寄存器）名称为 %xmm。%ymm0 为返回值，%ymm0 - %ymm7 用于传参，所有 XMM 寄存器均为调用者保存。</p>
+<p>寄存器中保存的值可以视为标量或者矢量。在标量操作中，只会使用 %xmm 寄存器的低 64 &#x2F; 32 位。</p>
+</li>
+<li><p><strong>传送指令</strong> <code>vmov</code> 系指令</p>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>vmovss</code></td>
+<td>在 XMM 寄存器和内存间传送单精度浮点数标量</td>
+</tr>
+<tr>
+<td><code>vmovsd</code></td>
+<td>在 XMM 寄存器和内存间传送双精度浮点数标量</td>
+</tr>
+<tr>
+<td><code>vmovaps</code></td>
+<td>在 XMM 寄存器之间传送单精度浮点数</td>
+</tr>
+<tr>
+<td><code>vmovapd</code></td>
+<td>在 XMM 寄存器之间传送双精度浮点数</td>
+</tr>
+</tbody></table>
+<p>注意 <code>vmovaps/d</code> 中的 <code>a</code> 表示对齐，若操作数地址不是对 16 位对其会出现异常。但是在寄存器之间的操作不存在不对齐。</p>
+<p><strong>转换指令</strong> <code>vcvt</code> 系指令</p>
+<p>在后面加上：<code>t</code>（Truncation，截断的缩写），<code>ss</code> 单精度浮点数 &#x2F; <code>sd</code> 双精度浮点数，<code>2</code>（to 的简称），<code>si</code> 有符号整数 &#x2F; <code>siq</code> 有符号长整数得到将浮点数截断、向零舍入后转成整形的指令。其源操作数为 XMM 寄存器或内存，目标为寄存器。如 <code>vcvttss2siq</code> 表示将单精度浮点数截断后转成 <code>long long</code>。</p>
+<p>在后面加上 <code>si</code>，<code>2</code>，<code>ss</code> &#x2F; <code>sd</code>，<code>q?</code>（是否为长整数）得到将整数转换为浮点数的结果。其源操作数有两个，第一个为内存或寄存器，第二个为 XMM 寄存器（此源不影响低位，可以忽略），目标为 XMM 寄存器。</p>
+<p><code>vcvtss2sd</code> 将单精度转为双精度，但不知为何 GCC 生成如下代码（回忆 %xmm 寄存器保存的值可以看作包装好的矢量）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vunpck1ps %xmm0, %xmm0, %xmm0  # [s3, s2, s1, s0], [d3, d2, d1, d0] -&gt; [s1, d1, s0, d0]</span><br><span class="line">vcvtps2pd %xmm0, %xmm0         # [*, *, s1, s0] -&gt; [double(s1), double(s0)]</span><br></pre></td></tr></table></figure>
+
+<p><code>vcvtsd2ss</code> 将双精度转为单精度，但不知为何 GCC 生成如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">vmovddup %xmm0, %xmm0    # [*, x0] -&gt; [x0, x0]</span><br><span class="line">vcvtpd2psx %xmm0, %xmm0  # [x1, x0] -&gt; [0, 0, x1, x0]</span><br></pre></td></tr></table></figure>
+
+<p><strong>运算指令</strong> 算术运算包含 <code>vadd</code>，<code>vsub</code>，<code>vmul</code>，<code>vdiv</code>，<code>vmax</code>，<code>vmin</code>，<code>sqrt</code>（后接 <code>ss</code> &#x2F; <code>sd</code> 指明精度），对于二元运算，第一个操作数可以是 XMM 寄存器或者内存，第二个操作数必须是 XMM 寄存器。逻辑运算包含 <code>vxor, vand</code>（后接 <code>ps</code> &#x2F; <code>pd</code> 指明精度）。此外 <code>vucomi</code>（后接 <code>ss</code> &#x2F; <code>sd</code> 指明精度）用于比较浮点数，其作用类似于 <code>cmp</code>。条件码包含 <code>ZF, CF</code> 以及 <code>PF</code>（奇偶标志位，在整数操作中标记最低字节中 $1$ 个数是否为偶数，不常用），规则如下（<code>vucomiss S1, S2</code>，基于 $S_2 - S_1$）：</p>
+<table>
+<thead>
+<tr>
+<th>序关系</th>
+<th>ZF</th>
+<th>CF</th>
+<th>PF</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>无序</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>$S_2&lt; S_1$</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>$S_2 &#x3D; S_1$</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>$S_2 &gt; S_1$</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody></table>
+<p>由于比大小时 <code>ZF</code>，<code>CF</code> 的行为类似于无符号整数操作，跳转使用 <code>ja</code>，<code>jb</code>。判断无序（存在 NaN）<code>jp</code> 等。</p>
+</li>
+<li><p>浮点常量必须事先定义并存储在 Text 区。比如</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">.LC2:</span><br><span class="line">	.long 0xcccccccd</span><br><span class="line">	.long 0x3ffccccc</span><br></pre></td></tr></table></figure>
+
+<p><code>.long</code> 是汇编伪指令，指明一个四比特的值，上述值给出了 double 类型的 $1.8$。</p>
+</li>
+</ol>
+<h1><span id="处理器体系结构">处理器体系结构</span></h1><p>在下文的图片中，灰底圆角框表示组合电路，白底圆框表示线路名，蓝底方框表示特殊电路，白底方框表示寄存器。虚线表示一位，细线表示四位数据，粗线表示八字节数据。</p>
+<h2><span id="seq">SEQ</span></h2><p><img src="/../picture/SEQ.jpg"></p>
+<p>线路概览：</p>
+<ul>
+<li><strong>取指</strong> icode，ifun，rA，rB，valC，valP</li>
+<li><strong>译码</strong> valA，valB</li>
+<li><strong>执行</strong> valE</li>
+<li><strong>访存</strong> valM</li>
+<li><strong>写回</strong></li>
+<li><strong>更新 PC</strong></li>
+</ul>
+<hr>
+<p>指令运行跟踪：</p>
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>cmovXX rA, rB</th>
+<th>irmovq V, rB</th>
+<th>rmmovq rA, D(rB)</th>
+<th>mrmovq D(rB), rA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取指</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_1[PC + 1]$<br>valP &#x3D; PC + 2</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_1[PC + 1]$<br>valC &#x3D; $M_8[PC + 2]$<br>valP &#x3D; PC + 10</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_1[PC + 1]$<br>valC &#x3D; $M_8[PC + 2]$<br>valP &#x3D; PC + 10</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_1[PC + 1]$<br>valC &#x3D; $M_8[PC + 2]$<br>valP &#x3D; PC + 10</td>
+</tr>
+<tr>
+<td>译码</td>
+<td>valA &#x3D; R[rA]</td>
+<td></td>
+<td>valA &#x3D; R[rA]<br>valB &#x3D; R[rB]</td>
+<td>valB &#x3D; R[rB]</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>valE &#x3D; valA + 0<br>Cnd &#x3D; Cond(CC, ifun)</td>
+<td>valE &#x3D; valC + 0</td>
+<td>valE &#x3D; valC + valB</td>
+<td>valE &#x3D; valC + valB</td>
+</tr>
+<tr>
+<td>访存</td>
+<td></td>
+<td></td>
+<td>M[valE] &#x3D; valA</td>
+<td>valM &#x3D; M[valE]</td>
+</tr>
+<tr>
+<td>写回 (dst_E)</td>
+<td>if(Cnd) R[rB] &#x3D; valE</td>
+<td>R[rB] &#x3D; valE</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>写回 (dst_M)</td>
+<td></td>
+<td></td>
+<td></td>
+<td>R[rA] &#x3D; valM</td>
+</tr>
+<tr>
+<td>更新 PC</td>
+<td>PC &#x3D; valP</td>
+<td>PC &#x3D; valP</td>
+<td>PC &#x3D; valP</td>
+<td>PC &#x3D; valP</td>
+</tr>
+</tbody></table>
+<center>表 2.1：mov 系指令</center>
+
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>OPq rA, rB</th>
+<th>pushq rA</th>
+<th>popq rA</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取指</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_2[PC + 1]$<br>valP &#x3D; PC + 2</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_2[PC + 1]$<br>valP &#x3D; PC + 2</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>rA : rB &#x3D; $M_2[PC + 1]$<br>valP &#x3D; PC  + 2</td>
+</tr>
+<tr>
+<td>译码</td>
+<td>valA &#x3D; R[rA]<br>valB &#x3D; R[rB]</td>
+<td>valA &#x3D; R[rA]<br>valB &#x3D; R[%rsp]</td>
+<td>valA &#x3D; R[%rsp]<br>valB &#x3D; R[%rsp]</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>valE &#x3D; valA OP valB<br>set CC</td>
+<td>valE &#x3D; valB - 8</td>
+<td>valE &#x3D; valB + 8</td>
+</tr>
+<tr>
+<td>访存</td>
+<td></td>
+<td>M[valE] &#x3D; valA</td>
+<td>valM &#x3D; M[valA]</td>
+</tr>
+<tr>
+<td>写回 (dst_E)</td>
+<td>R[rB] &#x3D; valE</td>
+<td>R[%rsp] &#x3D; valE</td>
+<td>R[%rsp] &#x3D; valE</td>
+</tr>
+<tr>
+<td>写回 (dst_M)</td>
+<td></td>
+<td></td>
+<td>R[rA] &#x3D; valM</td>
+</tr>
+<tr>
+<td>更新 PC</td>
+<td>PC &#x3D; valP</td>
+<td>PC &#x3D; valP</td>
+<td>PC &#x3D; valP</td>
+</tr>
+</tbody></table>
+<center>表 2.2：OPq 和栈操作</center>
+
+<table>
+<thead>
+<tr>
+<th>阶段</th>
+<th>jXX Dest</th>
+<th>call Dest</th>
+<th>ret</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>取指</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>valC &#x3D; $M_8[PC + 1]$<br>valP &#x3D; PC + 9</td>
+<td>icode : ifun &#x3D; $M_1[PC]$<br>valC &#x3D; $M_8[PC + 1]$<br>valP &#x3D; PC + 9</td>
+<td>icode : ifun &#x3D; $M_1[PC]$</td>
+</tr>
+<tr>
+<td>译码</td>
+<td></td>
+<td>valB &#x3D; R[%rsp]</td>
+<td>valA &#x3D; R[%rsp]<br>valB &#x3D; R[%rsp]</td>
+</tr>
+<tr>
+<td>执行</td>
+<td>Cnd &#x3D; Cond(CC, ifun)</td>
+<td>valE &#x3D; valB - 8</td>
+<td>valE &#x3D; valB + 8</td>
+</tr>
+<tr>
+<td>访存</td>
+<td></td>
+<td>M[valE] &#x3D; valP</td>
+<td>valM &#x3D; M[valA]</td>
+</tr>
+<tr>
+<td>写回（dst_E）</td>
+<td></td>
+<td>R[%rsp] &#x3D; valE</td>
+<td>R[%rsp] &#x3D; valE</td>
+</tr>
+<tr>
+<td>写回（dst_M）</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>更新 PC</td>
+<td>PC &#x3D; Cnd? valC : valP</td>
+<td>PC &#x3D; valC</td>
+<td>PC &#x3D; valM</td>
+</tr>
+</tbody></table>
+<center>表 2.3：控制系指令</center>
+
+<p>根据上表对一些蓝色格子（无法用 HCL 写出）做解释，并写几个重点灰色格子的 HCL。</p>
+<ol>
+<li><p><strong>取指</strong> Instruction Memory 在读入指令不合法时会通过 <code>imem_error</code> 信号传递信号给状态码，并假装去除了 nop。</p>
+<p>Align 单元根据读入的后 9 字节以及 <code>need_regids</code> 信号来将数据装入 <code>rA</code>，<code>rB</code>，<code>valC</code>。如果指令不需要寄存器，则 <code>rA = rB = F</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> need_regids = icode in &#123; IRRMOVQ, IOPQ, IPUSHQ, IPOPQ, IIRMOVQ, IRMMOVQ, IMRMOVQ &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>PC Increment 单元根据 <code>need_valC</code> 和 <code>need_regids</code> 信号决定 PC 的增加量（给出 <code>valP</code>）。<code>need_valC</code> 的 HCL 和上面类似，这里不写。</p>
+</li>
+<li><p><strong>译码、写回</strong> 考察 <code>dstE</code>，<code>dstM</code>，<code>srcA</code>，<code>srcB</code> 四个信号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">word srcA = [</span><br><span class="line">    icode in &#123; IRRMOVQ, IRMMOVQ, IOPQ, IPUSHQ &#125; : rA;</span><br><span class="line">    icode in &#123; IPOPQ, IRET &#125; : RRSP;</span><br><span class="line">    <span class="number">1</span> : RNONE;</span><br><span class="line">];</span><br><span class="line">word srcB = [</span><br><span class="line">    icode in &#123; IOPQ, IRMMOVQ, IMRMOVQ &#125; : rB;</span><br><span class="line">    icode ib &#123; IPUSHQ, IPOPQ, IRET, ICALL &#125; : RRSP;</span><br><span class="line">    <span class="number">1</span> : RNONE</span><br><span class="line">];</span><br><span class="line">word dstE = [</span><br><span class="line">    icode in &#123; IRRMOVQ &#125; &amp;&amp; Cnd : rB;</span><br><span class="line">    icode in &#123; IOPQ, IIRMOVQ &#125; : rB;</span><br><span class="line">    icode in &#123; IPUSHQ, IPOPQ, IRET, ICALL &#125; : RRSP;</span><br><span class="line">    <span class="number">1</span> : RNONE;</span><br><span class="line">];</span><br><span class="line">word dstM = [</span><br><span class="line">    icode in &#123; IMRMOVQ, IPOPQ &#125; : rA;</span><br><span class="line">    <span class="number">1</span> : RNONE;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>注意 <code>popq</code> 指令同时使用了 <code>dstE</code> 和 <code>dstM</code>，为了避免冲突我们令写入时 <code>dstM</code> 的优先级更高，这导致 <code>popq %rsp</code> 后 rsp 中是内存里的值。同时观察处理器结构可以知道 <code>pushq %rsp</code> 会将 rsp 原来的值存入。</p>
+</li>
+<li><p><strong>执行</strong> 需要考察 <code>SetCC, aluA, aluB, alufun</code> 四个信号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">word aluA = [</span><br><span class="line">    icode in &#123; IOPQ, IRRMOVQ &#125; : valA;</span><br><span class="line">    icode in &#123; IMRMOVQ, IRMMOVQ, IIRMOVQ &#125; : valC;</span><br><span class="line">    icode in &#123; ICALL, IPUSHQ &#125; : <span class="number">-8</span>;</span><br><span class="line">    icode in &#123; IPOPQ, IRET &#125; : <span class="number">8</span>;</span><br><span class="line">];</span><br><span class="line">word aluB = [</span><br><span class="line">    icode in &#123; IRRMOVQ, IIRMOVQ &#125; : <span class="number">0</span>;</span><br><span class="line">    icode in &#123; IOPQ, ICALL, IPUSHQ, IPOPQ, IRET, IMRMOVQ, IRMMOVQ &#125; : rB;</span><br><span class="line">];</span><br><span class="line">word SetCC = icode in &#123; IOPQ &#125;;</span><br><span class="line">word alufun = [</span><br><span class="line">    icode == IOPQ : ifun;</span><br><span class="line">    <span class="number">1</span> : ALUADD;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>访存</strong> 需要考察 <code>mem_addr, mem_data, mem_read, mem_write</code> 四个信号</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">word mem_addr = [</span><br><span class="line">    icode in &#123; IRMMOVQ, IMRMOVQ, IPUSHQ, ICALL &#125; : valE;</span><br><span class="line">    icode in &#123; IPOPQ, IRET &#125; : valA;</span><br><span class="line">];</span><br><span class="line">word mem_data = [</span><br><span class="line">    icode in &#123; IRMMOVQ, IPUSHQ &#125; : valA;</span><br><span class="line">    icode in &#123; ICALL &#125; : valP;</span><br><span class="line">];</span><br><span class="line">word mem_read = icode in &#123; IMRMOVQ, IPOPQ, IRET &#125;;</span><br><span class="line">word mem_write = icode in &#123; IRMMOVQ, IPUSHQ, ICALL &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>此时如果访存地址错误，Data Memory 会给出信号 <code>dmem_error</code>，结合此前的 <code>imem_error</code> 和 <code>instr_valid</code>，可以更新状态码，考察信号 <code>State</code>：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">word Stat = [</span><br><span class="line">    imem_error || dmem_error : SADR;</span><br><span class="line">    !instr_valid : SINS;</span><br><span class="line">    icode = IHALT : SHALT;</span><br><span class="line">    <span class="number">1</span> : SAOK;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>更新 PC</strong> 考察信号 <code>new_pc</code></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">word new_pc = [</span><br><span class="line">    icode == ICALL : valC;</span><br><span class="line">    icode == IJXX &amp;&amp; Cnd : valC;</span><br><span class="line">    icode == IRET : valM;</span><br><span class="line">    <span class="number">1</span> : valP;</span><br><span class="line">];</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2><span id="seq">SEQ+</span></h2><p>对电路进行重定时，将 PC 计算从周期末尾移动到周期开头：引入寄存器 <code>pIcode, pCnd, pValM, pValC, pValP</code>。然后将 <code>new_pc</code> 改为组合电路，直接输出 <code>PC</code>。</p>
+<h2><span id="pipe-">PIPE-</span></h2><p>插入流水线寄存器。每周期通过 <code>Select PC</code> 信号预测下一周期执行的指令，每周期发射一条。</p>
+<p>现在每一个信号前面需要加上阶段性标识。直接从流水线寄存器中取出的信号前面加对应的大写字母，经过计算之后的前面加对应的小写字母。</p>
+<p><img src="/../picture/PIPE-.jpg"></p>
+<p>注意一些细节：</p>
+<ol>
+<li><code>valP</code> 产生后共有两种去向：用于决定下一个 PC，和写入内存（仅 <code>call</code> 指令），然而大部分情况下决定下一个 PC 就在 <code>F</code> 阶段，除开 <code>IJXX</code> 指令要拖到执行阶段完成后才知道，但 <code>IJXX</code> 也不会使用 <code>valA</code>；写入内存时不会使用 <code>valA</code>，因此后面的周期都没有 <code>valP</code> 寄存器，只有 <code>valA</code> 寄存器。</li>
+<li><code>srcA</code> 和 <code>srcB</code> 看似没有输出口（即使到了 PIPE 的设计图中也不会有输出口），这是一个伏笔，留下这两个寄存器是为了进行加载转发以避免加载使用冒险。</li>
+<li>这个流水线设计有问题，因为没有控制逻辑，对流水线冒险无能为力。</li>
+</ol>
+<hr>
+<p><strong>分支预测策略</strong></p>
+<p>除开控制系指令外的指令，显然直接预测 valP。对于其他指令：</p>
+<ul>
+<li><code>jXX</code> 指令，我们选择总是跳转（预测 <code>valC</code>）。</li>
+<li><code>call</code> 指令，自然预测 <code>valC</code>。</li>
+<li><code>ret</code> 指令，不做任何预测，直接暂停处理指令。</li>
+</ul>
+<p>我们预先说明一下流水线寄存器模块的模式，通过两个单位信号 Stall 和 Bubble 来控制：</p>
+<ul>
+<li>Normal，正常输入输出。</li>
+<li>Stalling，锁存。</li>
+<li>Bubble，在时钟上升沿将寄存值置为 <code>nop</code> 状。</li>
+</ul>
+<p>若 Stall 和 Bubble 同时是 1 会发生错误。</p>
+<h2><span id="pipe">PIPE</span></h2><p>加入控制逻辑（未画出）和转发线</p>
+<p><img src="/../picture/PIPE.png" alt="PIPE"></p>
+<p>我们将分阶段写 HCL。只有取指和译码阶段会有额外的电路要写（其余都只是在原来的信号前面加标识流水线阶段的前缀），此外还有一套控制逻辑要写。</p>
+<hr>
+<p><strong>取指阶段</strong> 有 <code>icode</code>，<code>ifun</code>，<code>instr_valid</code>，<code>needregids</code>，<code>needvalC</code> 等指令，是平凡的，着重考虑 <code>f_pc</code>（由组合电路 Select PC 给出）， <code>f_predPC</code>（由组合电路 Predict PC 给出）和 <code>f_stat</code>（由 Stat 给出）三个信号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">word f_pc = [</span><br><span class="line">    M_icode == IJXX &amp;&amp; !M_Cnd : M_valA  <span class="comment">// mispredicted branch</span></span><br><span class="line">    W_icode == IRET : W_valM            <span class="comment">// return address</span></span><br><span class="line">    <span class="number">1</span> : F_predPC</span><br><span class="line">];</span><br><span class="line">word f_predPC = [</span><br><span class="line">    f_icode in &#123; IJXX, ICALL &#125; : f_valC;</span><br><span class="line">    <span class="number">1</span> : f_valP;</span><br><span class="line">];</span><br><span class="line">word f_stat = [</span><br><span class="line">    imem_error : SADR;</span><br><span class="line">    !instr_valid : SINS;</span><br><span class="line">    icode == IHALT : SHLT;</span><br><span class="line">    <span class="number">1</span> : SAOK;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>译码阶段</strong></p>
+<p><img src="/../picture/PIPE_D.png"></p>
+<p>下方四个信号仅仅是在 SEQ 的基础上加上前缀 <code>D_</code> 和 <code>d_</code>。着重考察 <code>d_valA</code> 和 <code>d_valB</code>。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">word d_valA = [</span><br><span class="line">    D_icode in &#123; ICALL, IJXX &#125; : D_valP;</span><br><span class="line">    d_srcA == e_dstE : e_valE; <span class="comment">// forwarded from e_dstE to deal with conditional mov operations</span></span><br><span class="line">    d_srcA == M_dstM : m_valM;</span><br><span class="line">    d_srcA == M_dstE : M_valE;</span><br><span class="line">    d_srcA == W_dstM : W_valM;</span><br><span class="line">    d_srcA == W_dstE : W_valE;</span><br><span class="line">    <span class="number">1</span> : d_rvalA;</span><br><span class="line">];</span><br><span class="line">word d_valB = [</span><br><span class="line">    d_srcB == e_dstE : e_valE;</span><br><span class="line">    d_srcB == M_dstM : m_valM;</span><br><span class="line">    d_srcB == M_dstE : M_valE;</span><br><span class="line">    d_srcB == W_dstM : W_valM;</span><br><span class="line">    d_srcB == W_dstE : W_valE;</span><br><span class="line">    <span class="number">1</span> : d_rvalB;</span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+
+<p>注意代码前后顺序不能交换，因为最后寄存器中的值必然是流水线中最浅的，其次 <code>valE</code> 和 <code>valM</code> 之间存在优先级。</p>
+<p>注意 <code>valE</code> 是从 <code>e_dstE</code> 转发来的，因为存在条件转发。</p>
+<hr>
+<p><strong>控制逻辑</strong></p>
+<p>收集控制的条件：</p>
+<ul>
+<li>当有一条 <code>ret</code> 指令在通过流水线，需要将下一条指令 stall 在 <code>F</code> 阶段。</li>
+<li>当发生加载 &#x2F; 使用冒险（运算的操作数需要从上一条指令内存中取出），必须将运算操作 Stall 一轮。我们会将前后两条指令分别传到执行和译码阶段时处理这件事情。</li>
+<li>当分支预测错误，必须 Bubble 掉已经执行的错误指令。</li>
+<li>当发生异常，必须 Stall 住写回阶段，持续 Bubble 访存阶段。</li>
+</ul>
+<p><img src="/../picture/PIPE_Ctrl.png"></p>
+<p>因此从下往上写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">bool</span> F_stall = E_icode in &#123; IMRMOVQ, IPOPQ &#125; &amp;&amp; E_dstM in &#123; d_srcA, d_srcB &#125; || IRET in &#123; D_icode, E_icode, M_icode &#125;;</span><br><span class="line"><span class="type">bool</span> D_stall = E_icode in &#123; IMRMOVQ, IPOPQ &#125; &amp;&amp; E_dstM in &#123; d_srcA, d_srcB &#125;;</span><br><span class="line"><span class="type">bool</span> D_bubble = (E_icode == IJXX &amp;&amp; !e_Cnd) || </span><br><span class="line">        (IRET in &#123; D_icode, E_icode, M_icode &#125; &amp;&amp; !( E_icode in &#123; IMRMOVQ, IPOPQ &#125; &amp;&amp; E_dstM in &#123; d_srcA, d_srcB &#125;));</span><br><span class="line"><span class="type">bool</span> E_bubble = (E_icode == IJXX &amp;&amp; !e_Cnd) || (E_icode in &#123; IMRMOVQ, IPOPQ &#125; &amp;&amp; E_dstM in &#123; d_srcA, d_srcB &#125;);</span><br><span class="line"><span class="type">bool</span> M_bubble = m_stat in &#123; SADR, SINS, SHLT &#125; || W_stat in &#123; SADR, SINS, SHLT &#125;;</span><br><span class="line"><span class="type">bool</span> W_stall = W_stat in &#123; SADR, SINS, SHLT &#125;;</span><br></pre></td></tr></table></figure>
+
+<p>有以下注意点：</p>
+<ol>
+<li>状态在下一个时钟上升沿开始生效。因此在 <code>ret</code> 指令在流水线上运行时需要考虑当前阶段是不是 <code>ret</code>。</li>
+<li>译码阶段不能同时 Stall（以处理加载使用冒险）和 Bubble（以处理 <code>ret</code>），Stall 的优先级更高。（但这里真的会寄吗？？）</li>
+<li>在执行阶段可以知道分支预测是否错误，下一个周期错误预测的指令将依次传到执行、译码阶段。</li>
+</ol>
+<p>实际上对于加载使用冒险，可以从访存阶段转发到执行阶段，但这里需要知道执行阶段的 <code>srcA</code> 和 <code>srcB</code>，这回收了之前的伏笔。</p>
+<p>我们没有处理多周期指令（复杂运算 &#x2F; cache miss 等）。</p>
+<h1><span id="优化程序性能">优化程序性能</span></h1><p><strong>编译器优化</strong></p>
+<p>只对代码进行安全的优化。有两类不会优化的情况：</p>
+<ol>
+<li><p><strong>内存别名使用</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">twiddle1</span><span class="params">(<span class="type">long</span> *xp, <span class="type">long</span> *yp)</span> &#123;</span><br><span class="line">    *xp += *yp;</span><br><span class="line">    *xp += *yp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不会被优化成</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">twiddle2</span><span class="params">(<span class="type">long</span> *xp, <span class="type">long</span> *yp)</span> &#123;</span><br><span class="line">    *xp += <span class="number">2</span> * *yp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为必须考虑 <code>*xp = *yp</code> 的情况，即便你可以论证这种情况不会出现，编译器也无法推出。</p>
+</li>
+<li><p><strong>函数副作用</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">func1</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> f() + f() + f() + f();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不会被优化成</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">long</span> <span class="title function_">func2</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">4</span> * f();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>因为 <code>f</code> 可能有副作用，调用次数直接影响程序行为。编译器不会尝试判断函数是否有副作用。</p>
+<p>但是如果给 <code>f</code> 加上 <code>inline</code> 标签，就会直接把代码中的 <code>f</code> 替换成函数内部的代码，这时即便 <code>f</code> 有副作用，也可以尝试进一步优化。</p>
+</li>
+</ol>
+<hr>
+<p><strong>程序性能表示</strong></p>
+<p>引入<strong>每元素的周期数（Cycles Per Element，CPE）</strong>。对于一个计算，其处理 $n$ 个元素，我们将得到其运行的总周期数是关于 $n$ 的线性函数 $kn + b$，这里 $k$ 就称为该计算的 CPE。CPE 可以在<em>参考机</em>上完成测量。</p>
+<hr>
+<p><strong>消除循环的低效率</strong></p>
+<p>对于循环中需要执行多次但是结果不变的数，可以在进循环之前计算，这样可以明显提高 CPE。特别地如果这种数的计算是类似于 <code>strlen</code> 的线性函数，若不提前计算复杂度会变大。</p>
+<hr>
+<p><strong>减少过程调用</strong></p>
+<p>过程调用会带来额外开销并且妨碍程序优化，因此在写程序时应当尽量不用过程调用。</p>
+<hr>
+<p><strong>删除不必要内存引用</strong></p>
+<p>考虑如下函数</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">combine</span><span class="params">(<span class="type">int</span> *v, <span class="type">int</span> len, <span class="type">int</span> *dest)</span> &#123;</span><br><span class="line">    *dest = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) *dest = *dest + v[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个代码需要两次读内存一次写内存。可以改成</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">void</span> <span class="title">combine</span><span class="params">(<span class="type">int</span> *v, <span class="type">int</span> len, <span class="type">int</span> *dest)</span> </span>&#123;</span><br><span class="line">    <span class="type">int</span> acc = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) acc = acc + v[i];</span><br><span class="line">    *dest = acc;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>只需要一次读，<code>acc</code> 可以装在寄存器中。注意编译器不会尝试做此类优化，因为它会假设存在内存别名使用，比如 <code>combine(a, 3, a + 2)</code>，但是你知道你不会这样写。</p>
+<p>前面写的都是宝宝巴士，下面开始上强度。</p>
+<hr>
+<p>现代处理器采用所谓的<strong>超标量（superscalar）</strong>设计，分为指令控制单元（ICU）和执行单元（EU）。ICU 从 icache 中取若干条指令，做<em>分支预测</em>，然后<em>投机执行</em>。EU 中有一组功能单元以在一个时钟周期内接受多个操作。比如 Intel Core i7 Haswell 处理器有 8 个功能单元：</p>
+<ol>
+<li>整数运算，浮点乘，整数和浮点数除，分支</li>
+<li>整数运算，浮点加，整数乘，浮点乘</li>
+<li>加载、地址计算</li>
+<li>加载、地址计算</li>
+<li>存储</li>
+<li>整数运算</li>
+<li>整数运算、分支</li>
+<li>存储、地址计算</li>
+</ol>
+<p><em>退役单元</em>用于判断分支预测是否正确。若正确则该指令<em>退役</em>，其更新将被实际执行；否则将被<em>清空</em>，运算结果将被丢弃。</p>
+<p>功能单元同样是流水线化的，因此用<strong>延迟</strong>和<strong>吞吐量</strong>来描述其性能。延迟系指相互有依赖的指令依次完成的最小 CPE，吞吐量系指 CPE 的下界。将完整运算过程中的依赖关系做成 DAG，其中的最长链称为<strong>关键路径（critical path）</strong>，关键路径的长度决定了 CPE 的下界。在参考机上有如下数据：</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>整数 +</th>
+<th>整数 *</th>
+<th>浮点 +</th>
+<th>浮点 *</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>延迟</td>
+<td>1</td>
+<td>3</td>
+<td>3</td>
+<td>5</td>
+</tr>
+<tr>
+<td>吞吐量</td>
+<td>0.5</td>
+<td>1</td>
+<td>1</td>
+<td>0.5</td>
+</tr>
+</tbody></table>
+<p>浮点乘吞吐量反而低是因为浮点加只有一个功能单元（2），而浮点乘有两个（1，2），可以并行起来。</p>
+<p>考察下面的例子：</p>
+<p>用 Horner’s rule 计算多项式单点求值的代码</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">polyh</span><span class="params">(<span class="type">double</span> a[], <span class="type">double</span> x, <span class="type">long</span> deg)</span> &#123;</span><br><span class="line">    <span class="type">long</span> i;</span><br><span class="line">    <span class="type">double</span> result = a[deg];</span><br><span class="line">    <span class="keyword">for</span>(i = deg - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) result = a[i] + x * result;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>第 4 行的运算前后之间相互依赖，CPE 为 浮点乘 - 浮点加，其 CPE 为 8 左右。而</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">double</span> <span class="title function_">polyh</span><span class="params">(<span class="type">double</span> a[], <span class="type">double</span> x, <span class="type">long</span> deg)</span> &#123;</span><br><span class="line">    <span class="type">long</span> i;</span><br><span class="line">    <span class="type">double</span> result = <span class="number">0</span>, xpwr = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span>(i = deg - <span class="number">1</span>; i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        result += a[i] * xpwr;</span><br><span class="line">    	xpwr = x * xpwr;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>仔细考察依赖关系，发现 <code>a[i] * xpwr</code> 的结果和 <code>result</code> 的计算在相邻周期之间是没有依赖关系的，换言之在 <code>result</code> 进行加法时，可以继续算下一轮的 <code>a[i] * xpwr</code>。但是 <code>xpwr = x * xpwr</code> 在循环间有依赖关系，总的来说关键路径应该是 <code>xpwr</code> 的浮点数乘法链。其 CPE 仅为 5。</p>
+<p><img src="/../picture/polydependency.jpg"></p>
+<hr>
+<p><strong>循环展开</strong></p>
+<p>简单考虑如下计算累加、累乘（标记为 <code>OP</code>）的循环</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i++) </span><br><span class="line">    acc = acc OP data[i];</span><br></pre></td></tr></table></figure>
+
+<p>我们介绍几种循环展开技术</p>
+<ol>
+<li><p>$2\times 1$ 展开</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += <span class="number">2</span>)</span><br><span class="line">    acc = (acc OP data[i]) OP data[i + <span class="number">1</span>];</span><br></pre></td></tr></table></figure>
+
+<p>这种操作能够将循环体操作（<code>i++</code>，比较 <code>i &lt; len</code>）等减少一次，如果 <code>OP</code> 运算是加法，就可以将关键路径从循环体操作（一次加法、一次比较）变成 <code>OP</code> 运算的链，从而将 CPE 压到加法的延迟。但是如果 <code>OP</code> 是乘法，那么关键路径一向是 <code>OP</code> 运算的链，CPE 始终是乘法的延迟。</p>
+</li>
+<li><p>$2\times 2$ 展开</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += <span class="number">2</span>)</span><br><span class="line">    acc1 = (acc1 OP data[i]), acc2 = (acc2 OP data[i + <span class="number">1</span>])</span><br><span class="line">acc = acc1 OP acc2</span><br></pre></td></tr></table></figure>
+
+<p>发现 <code>acc1</code> 和 <code>acc2</code> 能够并行计算。关键路径还是需要分加法乘法讨论（循环体开销是否更大）。</p>
+</li>
+<li><p>$2\times 1a$ 展开 &#x2F; 重结合</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">0</span>; i &lt; len; i += <span class="number">2</span>)</span><br><span class="line">    acc = acc OP (data[i] OP data[i + <span class="number">1</span>]);</span><br></pre></td></tr></table></figure>
+
+<p>关键路径的分析类似于上面多项式的例子。发现在乘法运算上后两种展开都达到了乘法的延迟的一半。</p>
+</li>
+</ol>
+<p>注意 $2\times 2$ 和 $2\times 1a$ 都需要运算满足结合律。</p>
+<h1><span id="存储器层次结构">存储器层次结构</span></h1><h2><span id="存储技术">存储技术</span></h2><p><strong>RAM</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>实现</th>
+<th>晶体管 &#x2F; 位</th>
+<th>相对访问时间</th>
+<th>是否持续</th>
+<th>是否敏感</th>
+<th>相对花费</th>
+<th>应用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>SRAM</td>
+<td>双稳态元件</td>
+<td>$6$</td>
+<td>$1\times$</td>
+<td>是</td>
+<td>否</td>
+<td>$1000\times$</td>
+<td>高速缓存</td>
+</tr>
+<tr>
+<td>DRAM</td>
+<td>小电容</td>
+<td>$1$</td>
+<td>$10\times$</td>
+<td>否</td>
+<td>是</td>
+<td>$1\times$</td>
+<td>主存、帧缓冲区</td>
+</tr>
+</tbody></table>
+<ol>
+<li><p>DRAM 需要持续刷新或者使用纠错码（电容漏电）。</p>
+</li>
+<li><p>一个 DRAM 芯片上有 $w$ 个 DRAM 单元，每个单元被分为 $d &#x3D; rc$ 个超单元（一个超单元是 1 位）。因此一个 DRAM 芯片上存 $d\times w$ 位的信息。</p>
+<p>DRAM 单元内含一个行缓冲区，每次先将一行复制到缓冲区，然后取对应的列。</p>
+<p>访存时由内存控制器发送 $(i, j)$ 依次称为行访问选通脉冲 RAS 和列访问选通脉冲 CAS，共用相同的地址引脚先后发送（设计成二维的可以降低引脚数目）。</p>
+<p>一个 64 位的字被存储在 $8$ 个 $8\text{M}\times 8$ 的 DRAM 芯片上。</p>
+</li>
+<li><p>有一些增强的 DRAM</p>
+<ul>
+<li><strong>快页模式 DRAM（FPM DRAM）</strong> 发送一个 RAS 之后可以连续发送 CAS。</li>
+<li><strong>扩展数据输出 RAM（EDO RAM）</strong> 比 FPM RAM 能够容许时间上靠得更紧密的 CAS。</li>
+<li><strong>同步 DRAM（SDRAM）</strong> 内存控制器和 RAM 使用相同的时间信号，只需知道结果上来讲比异步的存储器更快。</li>
+<li><strong>双倍数据速率同步 DRAM（DDR DRAM）</strong> 用两个时钟沿作为控制信号，使速率翻倍。按照预取缓冲区大小分为 DDR（2 位）、DDR2（4 位）、DDR3（8 位）。</li>
+<li><strong>视频 RAM（VRAM）</strong> 用于图形系统的帧缓冲区。输出通过依次对内部缓冲区进行移位得到、允许并行读写。</li>
+</ul>
+<p>现在的 Core i7 只支持 DDR3.</p>
+</li>
+<li><p>后面不想看了。</p>
+</li>
+</ol>
+<hr>
+<p><strong>局部性</strong></p>
+<ol>
+<li><p><strong>时间局部性</strong> 指一个内存位置被引用则很可能在不远的将来被多次引用。</p>
+<p><strong>空间局部性</strong> 指一个内存位置被引用则很可能在不远的将来引用附近的一个位置。</p>
+<p>注意存储器上当步长为 1，无论大小如何变化吞吐量都是 12GB&#x2F;s，这是因为 Core i7 存储器系统有<em>预取</em>机制，会在提前取要访问的元素。</p>
+</li>
+</ol>
+<hr>
+<p><strong>缓存不命中</strong></p>
+<p>分为<strong>冷不命中</strong>、<strong>冲突不命中</strong>、<strong>容量不命中</strong>。注意后两者有区别，冲突不命中是指缓存本身足够大，但是因为映射策略的问题会始终将两个元素打到同一个位置，于是一直不命中。</p>
+<hr>
+<p><strong>写策略</strong></p>
+<p>写命中时</p>
+<ul>
+<li><strong>直写</strong> 继续往下写下一级的副本。</li>
+<li><strong>写回</strong> 在被驱除时才写给下一级。</li>
+</ul>
+<p>写不命中时</p>
+<ul>
+<li><strong>写分配</strong> 将块从下面拉上来然后写入。</li>
+<li><strong>非写分配</strong> 继续往下找。</li>
+</ul>
+<p>通常情况下时直写配非写分配，写回配写分配。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Assembly/" rel="tag"># Assembly</a>
+              <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+              <a href="/tags/Program-Optimization/" rel="tag"># Program Optimization</a>
+              <a href="/tags/Cache/" rel="tag"># Cache</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/10/18/QuantumComputation1/" rel="prev" title="【Under Construction】Revision | 应用线性代数">
+                  <i class="fa fa-angle-left"></i> 【Under Construction】Revision | 应用线性代数
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
