@@ -1,0 +1,731 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文实际上是离散数学与结构上半学期的笔记整理。本课实际上包含了其他内容，比如朴素集合论中的势理论，命题逻辑，一阶逻辑及（不）完备定理，在合集 category: Discrete Math 中有所收录，不再重复。本文只写抽象代数的内容。 本文最后一节有许多定理的证明有待补充，包括分裂域相关理论，    群论 群同态 群对集合的作用 Sylow 定理 有限生成 Abel 群">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 抽象代数小常识">
+<meta property="og:url" content="http://example.com/2024/11/05/DiscreteMathRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文实际上是离散数学与结构上半学期的笔记整理。本课实际上包含了其他内容，比如朴素集合论中的势理论，命题逻辑，一阶逻辑及（不）完备定理，在合集 category: Discrete Math 中有所收录，不再重复。本文只写抽象代数的内容。 本文最后一节有许多定理的证明有待补充，包括分裂域相关理论，    群论 群同态 群对集合的作用 Sylow 定理 有限生成 Abel 群">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-05T07:49:33.000Z">
+<meta property="article:modified_time" content="2024-11-06T15:22:44.953Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Algebra">
+<meta property="article:tag" content="Group Theory">
+<meta property="article:tag" content="Ring Theory">
+<meta property="article:tag" content="Polynomial Decomposition">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/11/05/DiscreteMathRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/11/05/DiscreteMathRevision/","path":"2024/11/05/DiscreteMathRevision/","title":"Revision | 抽象代数小常识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 抽象代数小常识 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">群论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">群同态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">群对集合的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">Sylow 定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">有限生成 Abel 群</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">环论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">环同态</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Gauss 整环，主理想整环，欧几里得整环</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">域论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">域的扩张</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">有限域</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">有限域上多项式的因子分解算法</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/05/DiscreteMathRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 抽象代数小常识 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 抽象代数小常识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-05 15:49:33" itemprop="dateCreated datePublished" datetime="2024-11-05T15:49:33+08:00">2024-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-06 23:22:44" itemprop="dateModified" datetime="2024-11-06T23:22:44+08:00">2024-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文实际上是离散数学与结构上半学期的笔记整理。本课实际上包含了其他内容，比如朴素集合论中的势理论，命题逻辑，一阶逻辑及（不）完备定理，在合集 <a href="../../../../categories/Notes/Discrete-Math/">category: Discrete Math</a> 中有所收录，不再重复。本文只写抽象代数的内容。</p>
+<p>本文最后一节有许多定理的证明有待补充，包括分裂域相关理论，</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%BE%A4%E8%AE%BA">群论</a><ul>
+<li><a href="#%E7%BE%A4%E5%90%8C%E6%80%81">群同态</a></li>
+<li><a href="#%E7%BE%A4%E5%AF%B9%E9%9B%86%E5%90%88%E7%9A%84%E4%BD%9C%E7%94%A8">群对集合的作用</a></li>
+<li><a href="#sylow-%E5%AE%9A%E7%90%86">Sylow 定理</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E7%94%9F%E6%88%90-abel-%E7%BE%A4">有限生成 Abel 群</a></li>
+</ul>
+</li>
+<li><a href="#%E7%8E%AF%E8%AE%BA">环论</a><ul>
+<li><a href="#%E7%8E%AF%E5%90%8C%E6%80%81">环同态</a></li>
+<li><a href="#gauss-%E6%95%B4%E7%8E%AF%E4%B8%BB%E7%90%86%E6%83%B3%E6%95%B4%E7%8E%AF%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E6%95%B4%E7%8E%AF">Gauss 整环，主理想整环，欧几里得整环</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%9F%E8%AE%BA">域论</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
+<li><a href="#%E5%9F%9F%E7%9A%84%E6%89%A9%E5%BC%A0">域的扩张</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E5%9F%9F">有限域</a></li>
+<li><a href="#%E6%9C%89%E9%99%90%E5%9F%9F%E4%B8%8A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E7%9A%84%E5%9B%A0%E5%AD%90%E5%88%86%E8%A7%A3%E7%AE%97%E6%B3%95">有限域上多项式的因子分解算法</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="群论">群论</span></h1><h2><span id="群同态">群同态</span></h2><div class="note info"><p><strong>定理 1.1.1（同态基本定理）.</strong> 对于 $G$ 到 $H$ 的同态 $f$，有</p>
+<p>$$<br>G &#x2F; \ker f \cong \mathrm{im~}f<br>$$</p>
+</div>
+
+<p>只需验证如下几个断言确实成立即可：</p>
+<ol>
+<li>$\ker f$ 是 $G$ 的正规子群。</li>
+<li>$\overline{f} : g\ker f \mapsto f(g)$ 是良定义的单射。</li>
+</ol>
+<div class="note info"><p><strong>命题 1.1.2（对应定理）.</strong> $f$ 是 $G\rightarrow H$ 的满同态，那么对于 $f$ 给出了 $G$ 中包含 $\ker f$ 的全体子群到 $H$ 的全体子群间的双射，并且保持正规子群关系（i.e. $\ker f \subset G_1 \trianglelefteq G_2 \subset H \Rightarrow f(G_1)\trianglelefteq f(G_2)$）。</p>
+</div>
+
+<p>对于双射的断言，回忆双射的等价定义是左可逆并且右可逆。而我们知道 $G\mapsto f(G)$（求值域）有一个自然的逆就是求原像（记为 $f^-1$），只需要验证 $f^{-1}f(G’) &#x3D; G’, f(f^{-1}(H’)) &#x3D; H’$ 即可。关于保持正规子群关系的断言只需要对着定义验证即可。</p>
+<p>此时对于 $G$ 的子群 $K$，考虑映射 $\eta : H \rightarrow H&#x2F;f(K)$ 为到商群的自然映射。那么有 </p>
+<p>$$<br>\ker\eta f &#x3D; K, \mathrm{im~}f &#x3D; H&#x2F;f(K)<br>$$</p>
+<p>根据同态基本定理</p>
+<p>$$<br>\color{red} G &#x2F; K \cong H &#x2F; f(K)<br>$$</p>
+<div class="note info"><p><strong>定理 1.1.3（第一同构定理）.</strong> 设 $H, N$ 是 $G$ 的正规子群且 $H\subset N$，则有</p>
+<p>$$<br>G&#x2F;N \cong G&#x2F;H {\Big&#x2F;} N&#x2F;H<br>$$</p>
+</div>
+
+<p>考虑 $G$ 到 $G&#x2F;H$ 的自然映射 $\eta$。在 $(3)$ 中带入 $K\leftarrow N$ 立即得到结论。</p>
+<div class="note info"><p><strong>定理 1.1.4（第二同构定理）.</strong> $N\trianglelefteq G, H\subset G$，则</p>
+<ul>
+<li>$NH\subset G$；</li>
+<li>$N\cap H \trianglelefteq H$；</li>
+<li>$$<br>  NH &#x2F; N \cong H &#x2F; N\cap H<br>$$</li>
+</ul>
+</div>
+
+<p>前两个断言只需要一些琐碎的验证。定义 $f : H \rightarrow NH &#x2F; N$，其中 $f(k) &#x3D; kH$，可知 $\ker f &#x3D; N \cap H$。由于 $N$ 是正规子群，$nhN &#x3D; hn’N &#x3D; hN$，因此 $\mathrm{im~}f &#x3D; NH &#x2F; N$。</p>
+<h2><span id="群对集合的作用">群对集合的作用</span></h2><p>考虑群对自身的<strong>共轭作用</strong> $a * x :&#x3D; axa^{-1}$。则轨道-稳定子定理指出：</p>
+<p>$$<br>|G| &#x3D; \sum_{x\in C} |Gx| &#x3D; \sum_{x\in C} [G : \mathrm{Stab}(x)]<br>$$</p>
+<p>其中 $C$ 是诸轨道（即共轭类）的代表元构成的集合。现在考察 $\mathrm{Stab}(x)$ 是什么。</p>
+<p>$$<br>\mathrm{Stab}(x) &#x3D; \{g\in G : gxg^{-1} &#x3D; x\} &#x3D; \{g\in G : gx &#x3D; xg\}<br>$$</p>
+<p>因此实际上 $\mathrm{Stab}(x)$ 就是 $x$ 的中心化子 $C(x)$。现在考察所有 $G$ 的中心中的元素的中心化子，容易发现是整个群。因此对于 $x\in C_G$ 有 $C(x) &#x3D; G$, $[G : \mathrm{Stab}(x)] &#x3D; 1$。于是我们得到了一个群的<strong>共轭类方程</strong>：</p>
+<p>$$<br>|G| &#x3D; |C| + \sum_{i} [G : C(y_i)]<br>$$</p>
+<p>其中 $y_i$ 枚举所有大小非 $1$ 的共轭类的代表元。</p>
+<div class="note info"><p><strong>命题 1.2.1.</strong> 任意 $p^k$ 阶群必然有 $&gt;1$ 个元素，此处 $p$ 为素数。</p>
+</div>
+
+<p>考虑将共轭类方程两边同时模 $p$，立即得到 $p | |C|$。</p>
+<div class="note info"><p><strong>命题 1.2.2.</strong> 任意 $p^2$ 阶群为 Abel 群。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>考虑 $C \ne G$，取 $a\not\in C$，则有 $C \in C(a)$，并且 $a\in C(a)$，因此有 $1 &lt; |C| &lt; |C(a)|$，只能是 $|C(a)| &#x3D; p^2$，这表明 $a\in C$，矛盾。于是不存在这样的元素，$C &#x3D; G$。</p>
+
+</details></div>
+
+<h2><span id="sylow-定理">Sylow 定理</span></h2><div class="note success"><p><strong>定义 1.3.1</strong> $G$ 是有限群，$p$ 是素数，若存在 $m &gt; 0$，$p^m \mid |G| \wedge p^{m + 1} \nmid |G|$，则 $G$ 的 $p^m$ 阶子群称为 $G$ 的 $p$-Sylow 子群。</p>
+</div>
+
+<div class="note info"><p><strong>引理 1.3.2（Cauchy 引理）.</strong> $G$ 是有限 Abel 群，$p$ 是素数，$p \mid |G|$，则 $G$ 中存在 $p$ 阶元。</p>
+<p><strong>证明.</strong> 在 $G$ 中任取 $a\ne 0$（$0$ 是该阿贝尔群的单位元），现在考虑 $\mathrm{ord}(a)$。若 $p | \mathrm{ord}(a)$，那么 $\mathrm{ord}(a^{\mathrm{ord}(a) &#x2F; p}) &#x3D; p$。</p>
+<p>否则 $G &#x2F; \langle a\rangle$ 仍然满足上述条件，递归下去可以找到 $\mathrm{ord}(b\langle a\rangle) &#x3D; p$，那么必然有 $p | \mathrm{ord}(b)$，有 $\mathrm{ord}(b^{\mathrm{ord}(b) &#x2F; p}) &#x3D; p$。</p>
+</div>
+
+<p>Sylow 第一定理指出 $p$-Sylow 子群的存在性。</p>
+<div class="note info"><p><strong>定理 1.3.3（Sylow 第一定理）.</strong> 设 $G$ 是有限群，$p$ 是素数，若 $p^k \mid |G|$，则 $G$ 包含至少一个 $p^k$ 阶子群。</p>
+<p><strong>证明.</strong> 首先考虑 $G$ 的共轭类方程</p>
+<p>$$<br>|G| &#x3D; |C| + \sum [G : C(y_i)]<br>$$</p>
+<p>若 $p \nmid |C|$，那么将等式两边模掉 $p$ 得到 $\sum [G : C(y_i)]\ne 0$，换言之存在 $y_i$，$p^k | C(y_i)$，递归到此子群中可以找到 $p^k$ 阶子群。</p>
+<p>否则 $p \mid |C|$，根据 Cauchy 引理存在一个 $p$ 阶元 $a$。于是 $p^{k-1} \mid |G &#x2F; \langle a\rangle|$，递归到其中可以找到一个 $p^{k-1}$ 阶子群 $H&#x2F;\langle a\rangle$。此 $H$ 的大小正是 $|H| &#x3D; |H&#x2F;\langle a\rangle| \cdot |\langle a\rangle| &#x3D; p^k$。</p>
+</div>
+
+<p>Sylow 第一定理的结论可以把 Cauchy 引理加强至任何群。首先说明存在 $p^k$ 阶群，然后群中自然有 $p$ 阶元。</p>
+<div class="note info"><p><strong>定理 1.3.4（Sylow 第二定理）.</strong> $G$ 是有限群，素数 $p\mid |G|$。则</p>
+<ol>
+<li>$G$ 的任意两个 $p$-Sylow 子群都共轭。</li>
+<li>$G$ 的任意 $p^k$ 阶群均包含在某个 $p$-Sylow 子群中。</li>
+</ol>
+</div>
+
+<div class="note info"><p><strong>定理 1.3.5（Sylow 第三定理）</strong> 设 $|G| &#x3D; p^k m$，$\gcd(p, m) &#x3D; 1$。$G$ 的 $p$-Sylow 子群的个数 $n_p$ 满足</p>
+<ol>
+<li>$n_p | m$。</li>
+<li>$n_p \equiv 1\pmod p$。</li>
+</ol>
+</div>
+
+<p>证明没看。这两个定理有一个显然的推论：若 $G$ 只有一个 $p$-Sylow 子群，则该群必为正规子群。（似乎实际上某阶群只有一个则该群必然正规？）</p>
+<p>上述结论可以用来推导一些神秘的低阶有限群相关结论：</p>
+<div class="note warning"><p><strong>Example 1.</strong> $20449&#x3D;11^2 \cdot13^2$ 阶群是阿贝尔群。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>用 Sylow 第三定理算出 $11^2$ 阶群和 $13^2$ 阶群都只有一个，因此这两个群是正规子群。这两个子群都是 $p^2$ 阶群，从而内部是交换的。因为这两个群阶数互质，所以是平凡交的，从而他们之间是交换的。</p>
+<blockquote>
+<p>上面的推到中用到的经典结论：$N, H$ 是正规子群，且 $N\cap H &#x3D; \{e\}$，那么 $\forall x\in N, y\in H, xy &#x3D; yx$。</p>
+<p>只需要证明 $xyx^{-1}y^{-1} &#x3D; e$，这是因为 $(xyx^{-1})y\in H, x(yx^{-1}y^{-1})\in N$，从而 $xyx^{-1}y^{-1} \in H\cap N &#x3D; \{e\}$。</p>
+</blockquote>
+
+</details>
+
+<p><strong>Example 2.</strong> $15$ 阶群都是循环群。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>用 Sylow 第三定理算出 $3$ 阶子群和 $5$ 阶子群恰好只有一个，从而其中 $3$ 阶元有 $2$ 个，$5$ 阶元有 $4$ 个，加上单位元，还有 $8$ 个元素的阶只能是 $15$，故其确实是循环群。</p>
+
+</details>
+
+<p><strong>Example 3.</strong> $56$ 阶群都不是单群。</p>
+<p><strong>Example 4.</strong> $108$ 阶群都不是单群。</p>
+<blockquote>
+<p>这两个例子都是用 Sylow 第三定理算每个 $p$-Sylow 子群的个数，必要时计算诸阶元的个数。</p>
+</blockquote></div>
+
+<h2><span id="有限生成-abel-群">有限生成 Abel 群</span></h2><div class="note info"><p><strong>定理 1.4.1（有限生成 Abel 群基本定理）.</strong> $G$ 是一个有限生成 Abel 群，那么 $G$ 可以分解成有限个循环群 $C_i$ 的直和：</p>
+<p>$$<br>G &#x3D; C_1 \oplus \cdots \oplus C_k<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 假设 $G$ 可以由<strong>最少</strong> $k$ 个元素生成，记为 $a_1, …, a_k$。考虑两种情况。</p>
+<ul>
+<li><p><strong>不存在一个生成元集合，能够非平凡地表示 $0$</strong> ，即对于整数 $x_1, …, x_k$，$\sum x_ia_i &#x3D; 0$ 当且仅当 $x_1 &#x3D; \cdots &#x3D; x_k &#x3D; 0$。这自然表明 $G$ 是 $\langle x_1\rangle\oplus \cdots\oplus \langle x_k\rangle$ 的内直和。</p>
+</li>
+<li><p><strong>存在生成元集合，能够非平凡地表示 $0$</strong> ，设 $m_1$ 是考虑所有的生成元组、所有 $0$ 的表示中最小的正整数，不失一般性地假设 $m_1$ 在对应的 $0$ 的表示的 $a_1$ 的系数上，有</p>
+<p>$$<br>m_1a_1 + \sum_{i&#x3D;2}^k x_ia_i &#x3D; 0<br>$$</p>
+<p>对后面的元素做带余除法得到</p>
+<p>$$<br>m_1a_1 + \sum_{i&#x3D;2}^k (q_i m_1 + r_i) a_i &#x3D; 0 \Rightarrow m_1 b_1 + \sum_{i&#x3D;2}^k r_ia_i &#x3D; 0<br>$$ </p>
+<p>其中 $b_1 &#x3D; \sum_{i&#x3D;2}^k q_ia_i + a_1$。现在 $b_1, …, b_k$ 可以生成 $G$，这是因为 $a_1$ 可以从 $b_1$ 反推。由于 $m_1$ 是所有生成元组中 $0$ 的坐标中的最小正整数，必然有 $r_2 &#x3D; \cdots &#x3D; r_k &#x3D; 0$。于是 $m_1b_1 &#x3D; 0$，且 $m_1$ 是可能的系数中最小的，因此 $|\langle x_1\rangle| &#x3D; m_1$。我们证明 $\langle x_1\rangle \cap \langle x_2, …, x_k\rangle &#x3D; \{0\}$。交集中的元素必然满足</p>
+<p>$$<br>y_1 b_1 &#x3D; \sum_{i&#x3D;2}^{k}y_i a_1<br>$$</p>
+<p>其中 $0 \leq y_1 &lt; m_1$。若 $y_1$ 非零，则 $y_1b_1 - \sum_{i&#x3D;2}^k y_ia_i$ 表示了 $0$，与 $m_1$ 的最小性矛盾，因此只能是 $y_1 &#x3D; 0$，交集中的元素只有 $0$。递归下去分解 $\langle x_2, …, x_k\rangle$ 即得到 $G$ 的直和分解。</p>
+</li>
+</ul>
+<blockquote>
+<p>Remark. 在上述证明中，可以发现“最小性”处处发挥关键作用。</p>
+</blockquote>
+<hr>
+<p>进一步可以证明这种分解在置换和同构的意义下是唯一的。</p>
+<h1><span id="环论">环论</span></h1><p>环 $(R, +, \cdot)$ 可能具有的性质：</p>
+<ul>
+<li><strong>交换环</strong> $\forall a, b\in R, ab &#x3D; ba$。</li>
+<li><strong>含幺环</strong> $\exists 1\ne 0, \forall a, a\cdot 1 &#x3D; 1\cdot a &#x3D; a$。</li>
+<li><strong>除环</strong> $\forall a\ne 0, \exists a^{-1}， aa^{-1} &#x3D; a^{-1}a &#x3D; 1$。</li>
+<li><strong>无零因子</strong> 不包含非平凡零因子（参见定义 $2.1$）。</li>
+<li><strong>整环</strong> 含幺无零因子交换环。</li>
+</ul>
+<p>可以简单地推导如下命题：<strong>整环有消去律</strong>。这是因为若 $a\ne 0 \wedge ab &#x3D; ac$，那么 $a(b - c) &#x3D; 0$。因为环中没有零因子，$a\ne 0$，所以只能是 $b - c &#x3D; 0$，即 $b &#x3D; c$。</p>
+<p>域系指交换的除环。事实上存在非交换的除环，比如实四元数环。</p>
+<div class="note success"><p><strong>定义 2.1（零因子）.</strong> 若存在 $ab &#x3D; 0$ 且 $a, b\ne 0$，则称 $a, b$ 为非平凡零因子，$a$ 称为左零因子，$b$ 称为右零因子。</p>
+</div>
+
+<p>注意环定义时只要求 $\cdot$ 是半群，所以不一定有逆元。对于一些元素，可能有左逆元或者右逆元，且有左逆元不一定有右逆元。若 $a$ 的左逆元等于右逆元，则称 $a$ 是群中的一个<strong>单位</strong>，此时可以证明其逆元唯一。</p>
+<p>在加法和乘法意义下均封闭的子集称为子环。</p>
+<p>我们希望环也可以像群一样做商，于是需要找到一类最弱的性质使得在加法群中商掉一个子集，能够保持乘法运算。因此定义</p>
+<div class="note success"><p><strong>定义 2.2（理想）.</strong> $I$ 是 $(R, +)$ 的子群，满足 $\forall r\in R, a\in I$ 都有 $ar\in I, ra\in I$，则称 $I$ 是 $R$ 的理想。</p>
+</div>
+
+<p>不难验证定义 $R&#x2F;I$ 上的加法 $(a+I) + (b + I) &#x3D; (a + b) + I$，乘法 $(a + I)\otimes (b + I) &#x3D; ab + I$ 之后，$(R&#x2F;I, +, \cdot)$ 构成环。称为商环。</p>
+<h2><span id="环同态">环同态</span></h2><p>环同态的定义是常规的。容易验证</p>
+<div class="note info"><p><strong>命题 2.1.1.</strong> 对于环同态 $\varphi: R_1\rightarrow R_2$，有 $\mathrm{im~}\varphi$ 是 $R_2$ 的子环，$\ker\varphi$ 是 $R_1$ 的理想。 </p>
+</div>
+
+<p>可以证明下面几个同态相关的定理，一切仿造群同态基本定理、对应定理和第一及第二同构定理的证明。</p>
+<div class="note info"><p><strong>定理 2.1.2.</strong></p>
+<ol>
+<li>$R &#x2F; \ker\varphi \cong \mathrm{im~}\varphi$</li>
+<li>$A$ 是 $R$ 的子环，$B$ 是 $R$ 的理想，则 $A + B$ 是一个子环，$A\cap B$ 是 $A$ 的理想，并且 $(A + B) &#x2F; B \cong A &#x2F; A\cap B$</li>
+<li>$I$ 是 $R$ 的理想，存在 $R$ 中包含 $I$ 的子环到 $R&#x2F;I$ 中的子环的双射（此双射正是自然映射 $\eta$）</li>
+<li>$I, J$ 都是 $R$ 的理想，$I\subset J$，则 $J&#x2F;I$ 是 $R&#x2F;I$ 的理想，且 $R&#x2F;J \cong (R&#x2F;I) &#x2F; (J&#x2F;I)$</li>
+</ol>
+</div>
+
+<p>定义一个集合 $S$ 生成的理想为：$(S) &#x3D; \bigcap\limits_{S\subset I, I\text{ an ideal}} I$。</p>
+<p>若一个理想可以有单元素集合生成，则称为主理想。</p>
+<h2><span id="gauss-整环主理想整环欧几里得整环">Gauss 整环，主理想整环，欧几里得整环</span></h2><p>本节讨论几个性质介于整环和域之间的特殊环。</p>
+<p>第一类环上可以做唯一分解。需要注意的是环的元素没有定义大小关系，所以我们需要仔细考虑如何定义“真因子”的概念。可以发现环中存在一类元素是所有数的因子，这类元素无非是可逆元（$u | 1$ 表明 $u$ 可逆，而 $au^{-1}u &#x3D; a$ 表明 $u | a$）。这类元素对因数分解而言没有意义（比如 $\mathbb{Z}$ 中的 $\pm 1$，和 $\mathbb{R}[x]$ 中的非零实数）</p>
+<p>若 $a | b$ 且 $b | a$，则 $a &#x3D; br, b &#x3D; as$，于是 $a &#x3D; ars$，消去 $a$ 得到 $rs&#x3D;1$，因此 $r, s$ 是单位。这表明互相整除的数必然只相差单位。若 $a&#x3D;ub$，其中 $u$ 是单位，则称 $a, b$ 是<strong>相伴元</strong>，记作 $a\sim b$。非相伴元的整除关系都是真整除关系。</p>
+<p>若 $a$ 非单位且不能分解成两个真因子的乘积，则称 $a$ 为<strong>不可约元</strong>。若非单位元 $p$ 满足 $p \mid ab$ 则 $p\mid a$ 或 $p\mid b$，则称 $p$ 是<strong>素元</strong>。</p>
+<div class="note success"><p><strong>定义 2.2.1（Gauss 整环 &#x2F; UFD）</strong> $R$ 是整环，$r$ 中的非单位元素都可以写成有限个非单位不可约元素的乘积：$r &#x3D; p_1p_2\cdots p_s$，且若 $r &#x3D; p_1\cdots p_s&#x3D;q_1\cdots q_r$，则 $r&#x3D;s$ 且存在置换 $\Pi$ 使得 $p_i \sim q_{\Pi_i}$，则称 $R$ 是唯一分解整环（UFD）或者高斯整环。</p>
+</div>
+
+<p>存在不是 UFD 的整环。</p>
+<div class="note warning"><p><strong>Example.</strong> 在 $\mathbb{Z}[\sqrt{-5}]$ 中有 $9 &#x3D; 3\cdot 3 &#x3D; (2 + \sqrt{-5})(2-\sqrt{-5})$。但是 $3, 2 + \sqrt{-5}, 2-\sqrt{-5}$ 均不可约。</p>
+<p>此处不可约性的证明采用一种常见的手法：对环中的元素定义“范数”为 $|a + b\sqrt{-5}|^2 &#x3D; a^2 + 5b^2$，可以发现两元素相乘范数也相乘，且范数是正整数，于是只需要枚举所有范数不超过 $9$ 的元素，发现乘起来均不是上述三元之一。</p>
+<p>这同时也表明在通常的环中素元和不可约元不是等价的概念。$3$ 是不可约的，但 $3$ 不是素元：$3 | (2 + \sqrt{-5})(2-\sqrt{-5})$。</p>
+</div>
+
+<div class="note info"><p><strong>引理 2.2.2.</strong> $R$ 是 UFD，当且仅当 $R$ 满足</p>
+<ul>
+<li><strong>因子链条件</strong> 不存在 $d_1, d_2, …$ 使得 $d_{i + 1} \mid d_i$ 且 $d_i\nmid d_{i + 1}$。</li>
+<li><strong>素性条件</strong> $R$ 中的不可约元都是素元。</li>
+</ul>
+<p><strong>证明.</strong> 必要性是平凡的，我们只证明充分性。</p>
+<p>任意元素的有限因子分解是存在的，因为我们可以给出算法。</p>
+<p>而分解实际上也是唯一的。施归纳于 $a$ 的分解中最短的一个的长度。若长度为 $0$ 即元素不可约，结论显然成立。考虑 $a &#x3D; p_1\cdots p_s &#x3D; q_1\cdots q_r$。则有 $p_1 | q_1\cdots q_r$，用素性条件可以递归找到某个 $p_1 | q_i$，而 $q_i$ 不可约，所以 $p_1\sim q_i$。不失一般性假设 $p_1\sim q_1$，消去 $p_1$ 得到 $p_2\cdots p_s &#x3D; uq_2\cdots q_r$，用归纳假设即得后面的分解是等价的，因此所有的分解都是等价的。</p>
+</div>
+
+<p>两元素 $g$ 是 $a, b$ 的最大公因数若 $\forall d, (d \mid a \wedge d \mid b)\rightarrow d \mid g$。从所有最大公因子中任取一个，构造二元函数 $\gcd(a, b)$。</p>
+<p>现在 UFD 中的任意两元素均能求最大公因数，只需求因子分解然后将指标取 $\mid$ 即可，因为容易将整除关系转化成指标的偏序关系。实际上环中任意两元素都有 $\gcd$ 强于素性条件：</p>
+<div class="note info"><p><strong>引理 2.2.3.</strong> 若环中任意两元素都能求 $\gcd$，则对于不可约元素 $p$，$p\mid ab\Rightarrow p\mid a\vee p\mid b$。</p>
+<p><strong>证明.</strong> 首先验证几个简单的等式，思路基本上都是简单粗暴的。</p>
+<ol>
+<li>$\gcd(\gcd(a, b), c)\sim\gcd(a, \gcd(b, c))$</li>
+<li>$c\gcd(a, b)\sim \gcd(ca, cb)$</li>
+<li>$\gcd(a, b)\sim 1\wedge \gcd(a, c)\sim 1\Rightarrow \gcd(a, bc)\sim 1$</li>
+</ol>
+<p>然后用第三条反证即可。</p>
+</div>
+
+<p>综上所述，因子链条件 + 素性条件 等价于 因子链条件 + $\gcd$ 条件，这两个组合形成两种等价的 UFD 判定定理。</p>
+<p>关注 $(a)$ 本身，实际上 $(a) &#x3D; \{ca : c\in R\}$，即 $a$ 的倍数的全体。这表明整除关系自然地转化成两个元素生成的理想的判定关系。从这个层面上考察上面的 UFD 的判定定理（使用 $\gcd$ 条件），这似乎是在说若干个元素生成的理想都可以被他们的 $\gcd$ 生成。这启发我们定义一个更强的环</p>
+<div class="note success"><p><strong>定义 2.2.5（主理想整环）.</strong> 若整环 $R$ 满足其所有理想都是主理想，则称 $R$ 是主理想整环（PID，Principle Ideal Ring）。</p>
+</div>
+
+<p>上课给的证明路线有点奇怪，我们先给出一个比较自然的证明。</p>
+<div class="note info"><p><strong>定理 2.2.6.</strong> PID 都是 UFD。</p>
+<p><strong>证明.</strong> 只需要证明 PID 也满足因子链条件和 $\gcd$ 条件。</p>
+<ul>
+<li><p>假设存在 $d_1, d_2, …$ 使得 $d_{i + 1} \mid d_{i}\wedge d_i \nmid d_{i + 1}$，等价的表达是存在 $d_1, d_2, …$ 满足其所有理想都是主理想</p>
+<p>$$<br>(d_1)\subsetneq (d_2) \subsetneq \cdots<br>$$</p>
+<p>那么假设</p>
+<p>$$<br>\bigcap_{i &#x3D; 1}^{\infty} (d_i) &#x3D; (a)<br>$$</p>
+<p>这是因为理想的可数并必然也是理想，那么必然有某个 $N$ 使得 $a\in (d_N)$，于是对于任意的 $i &gt; N$ 都有</p>
+<p>$$<br>(a) \subseteq (d_N) \subsetneq (d_i) \subset (a)<br>$$</p>
+<p>矛盾，此链并不存在。</p>
+</li>
+<li><p>只需证明 $(\{a, b\})$ 是由 $g$ 生成的理想，此 $g$ 正是 $\gcd(a, b)$。只需要对着定义验证即可。</p>
+</li>
+</ul>
+</div>
+
+<p>上课的奇怪证明出发点是证明素性条件。$p$ 是不可约元素表明 $(p)$ 是极大理想，考察考察环模掉极大理想的性质</p>
+<div class="note info"><p><strong>引理 2.2.7.</strong> 对于交换环 $R, F$ 有 </p>
+<ol>
+<li>$F$ 是一个域当且仅当它只有平凡的理想。</li>
+<li>$I$ 是 $R$ 的极大理想当且仅当 $R &#x2F; I$ 是域。</li>
+</ol>
+<p><strong>证明.</strong></p>
+<ol>
+<li><p>必要性：考虑理想 $I$，若其中含有非零元，则 $1 &#x3D; a^{-1}\cdot a\in I$，于是 $a &#x3D; a\cdot 1\in I$，$I$ 必平凡。</p>
+<p>充分性：若元素 $a$ 不可逆，那么 $(a)$ 不包含 $1$，这是一个非平凡理想，矛盾。</p>
+</li>
+<li><p>两个方向可以简单地从断言 1 推出。</p>
+</li>
+</ol>
+</div>
+
+<p>利用这个结论，我们知道 $R &#x2F; (p)$ 必然是域，因此 $p | ab$ 推出 $ab \in (p)$，这表明 $ab + (p) &#x3D; (a + (p))(b + (p))$，但是域中没有非平凡零因子，只能是 $a\in (p)$ 或者 $b\in (p)$，这样也证明了结论。</p>
+<p>回忆求 $\gcd$ 的常用方法是辗转相除，于是我们考察一类环：</p>
+<div class="note success"><p><strong>定义 2.2.7（欧几里得整环）.</strong> 若环 $R$ 上可以定义一个赋值 $\delta : R \setminus \{0\}\rightarrow \mathbb{N}$，满足如下条件：</p>
+<ul>
+<li>对于任意的 $a$，$\delta(a)\leq \delta(ab)$。</li>
+<li>对于任意的 $a$ 和非零元 $b$，都存在 $r$ 满足 $r&#x3D;0$ 或者 $\delta(r) &lt; \delta(b)$，且 $a &#x3D; bq + r$。</li>
+</ul>
+<p>则称 $R$ 为欧几里得整环。</p>
+</div>
+
+<p>整数环的 $\delta$ 定义为常函数，多项式环的 $\delta$ 定义为 $\deg$，都是欧几里得整环。</p>
+<div class="note info"><p><strong>定理 2.2.8</strong> 欧几里得整环都是 PID。</p>
+<p><strong>证明.</strong> 考虑一个非零理想 $I$，取其中 $\delta$ 最小的元素 $b$，那么对于任意的元素 $a$ 都有 $a &#x3D; bq$（因为 $\delta(r)$ 不可能小于 $\delta(b)$，只能取 $0$），因此 $I &#x3D; (b)$。</p>
+</div>
+
+<p>域自然都是欧几里得整环，因为所有非零元都可逆。</p>
+<p>综上所述我们有如下一条链：</p>
+<p>$$<br>\text{Integer domain} \leftarrow \text{UFD} \leftarrow \text{PID} \leftarrow \text{Euclidean Ring} \leftarrow \text{Field}<br>$$</p>
+<h1><span id="域论">域论</span></h1><h2><span id="基本概念">基本概念</span></h2><div class="note success"><p><strong>定义 3.1.1（环的特征）.</strong> 对于无零因子环 $R$，若其中存在至少一个周期元，则存在素数 $p$ 使得 $\forall r\in R, pr &#x3D; 0$。$p$ 称为 $R$ 的特征。若 $R$ 中无周期元，则称 $R$ 的特征为 $0$。</p>
+</div>
+
+<p>域是特殊的环。因此特征也可以定义在域上。</p>
+<div class="note info"><p><strong>定理 3.1.2.</strong> 无零因子环 $R$ 的特征要么是 $0$，要么是素数。</p>
+<p><strong>证明.</strong> 我们先断言若对于 $a\ne 0$，若 $ma &#x3D; 0$ 则 $\forall b\in R, mb &#x3D; 0$。这是因为根据分配律，$(ma)b &#x3D; a(mb) &#x3D; 0$，环中没有非平凡零因子，所以 $mb &#x3D; 0$。</p>
+<p>接下来我们证明最小的 $m$ 一定是素数。我们取 $m$ 为使得 $ma &#x3D; 0$ 的正整数中的最小者，若 $m &#x3D; pq$（非平凡分解）则 $q(pa) &#x3D; 0$，$m$ 的最小性导出 $p &gt; m$，同理 $q &gt; m$，矛盾。</p>
+</div>
+
+<p>上述推导同时表明域的特征是使得 $m\overline{1} &#x3D; 0$ 成立的最小正整数，若不存在则为 $0$。其中 $\overline{1}$ 是域的单位元。</p>
+<p>对于整环 $R$，可以定义其“分式域”为 $F &#x3D; (R\times R) &#x2F; \sim$，其中 $(a, b)\sim (c, d) :&#x3D; ad &#x3D; bc$，运算性质类似于分数运算，因为非常常规所以不赘述。一个域到其分式域有一个自然的同态：$r \mapsto (r, 1)$，称为标准嵌入。</p>
+<p>关于分式域，我们只强调如下泛性质</p>
+<div class="note info"><p><strong>定理 3.1.3.</strong> 设 $R$ 是整环，$F$ 是其分式域，$F’$ 是域，$f$ 是 $R$ 到 $F$ 的标准嵌入，$g$ 是 $R\rightarrow F’$ 的单同态，且 $g(1) &#x3D; 1$，则存在唯一的 $F$ 到 $F’$ 的同态使得 $g &#x3D; hf$。</p>
+<p><strong>证明.</strong> 令 $h(a &#x2F; b) &#x3D; g(a)g(b)^{-1}$，接下来只需要一些平凡的验证工作即可说明其是良定义的同态，并且唯一。</p>
+</div>
+
+<p>若一个域 $F$ 的特征为 $0$，则由单位元 $\overline{1}$ 用加法生成了一个同构于 $\mathbb{Z}$ 的整环，那么上述结论表明存在 $\mathbb{Z}$ 的分式域即 $\mathbb{Q}$ 到 $F$ 的同态，你可以验证这个同态是单的，特征为 $0$ 的域中必存在同构于有理数域的子域。</p>
+<p>本课程中我们重点讨论有限域，下面是一个特殊的有限域：</p>
+<p>$\mathbb{F}_p$ 是域 $\mathbb{Z} &#x2F; p\mathbb{Z}$，$f$ 是 $\mathbb{F}_p[x]$ 上的不可约多项式，因此 $(f)$ 是极大理想，从而 $\mathbb{F}_p[x] &#x2F; (f)$ 是域。不难看出其大小为 $p^{\deg f}$，正是某素数的幂。我们将证明任意有限域的幂都是素数的幂、并且相同大小的有限域都是同构的，并讲一些有限域上的多项式相关的内容（包括一个多项式分解算法）。</p>
+<h2><span id="域的扩张">域的扩张</span></h2><div class="note success"><p><strong>定义 3.2.1（域的扩张）.</strong> 设 $F, L$ 是两个域。若 $F\subset L$，我们称</p>
+<ul>
+<li>$F$ 是 $L$ 的子域。</li>
+<li>$L$ 是 $F$ 的扩域。</li>
+</ul>
+<p>记作 $L &#x2F; F$。可以验证 $L$ 是 $F$ 上的线性空间。定义 $[L : F]$ 表示其维数。</p>
+</div>
+
+<p>若 $[E : F]$ 有限，则称 $E$ 是 $F$ 的有限扩张。对于有限扩张，我们有如下结论，经常用于研究两个域之间是否存在其他的子域。</p>
+<div class="note info"><p><strong>定理 3.2.2.</strong> 设 $K&#x2F;E$，$E&#x2F;F$ 都是有限扩张，那么 </p>
+<p>$$<br>[K : F] &#x3D; [K : E][E : F]<br>$$</p>
+<p><strong>证明.</strong> 取 $K&#x2F;E$ 的一组基 $u_1, …, u_n$，$E&#x2F;F$ 的一组基 $v_1, …, v_m$。那么对于 $K$ 中的元素 $k$，有 </p>
+<p>$$<br>\begin{aligned}<br>  k &amp;&#x3D; \sum_{i&#x3D;1}^n e_i u_i \\<br>    &amp;&#x3D; \sum_{i&#x3D;1}^n\sum_{j&#x3D;1}^n f_{ij} u_iv_j<br>\end{aligned}<br>$$</p>
+<p>而 $k &#x3D; 0$ 推出所有 $e_i &#x3D; 0$，$e_i &#x3D; 0$ 推出所有 $f_{ij} &#x3D; 0$，因此 $\{u_iv_j\}$ 是 $K$ 的一组基。</p>
+</div>
+
+<p>记 $F(S)$ 表示包含域 $F$ 和集合 $S$ 的最小域。则 $F(S) &#x2F; F$。若 $S$ 中只有一个元素 $s$，可以简单地记为 $F(s)$。此时 $F(s)$ 称为一个<strong>单扩张</strong>。</p>
+<p>对于 $u$，定义映射 $\varphi : F[x] \rightarrow F[u]$，仅仅将 $x$ 替换为 $u$。若 $\varphi$ 是单射，称 $u$ 为 $F$ 的<em>超越元</em>，否则称为<em>代数元</em>。若 $E &#x2F; F$，$E$ 中所有元素都是 $F$ 的代数元，则称 $E$ 为<em>代数扩张</em>，反之称为<em>超越扩张</em>。对于代数元，取 $\ker \varphi$ 中 $\deg$ 最小的多项式，得到该元的<em>最小多项式</em>。最小多项式的度数即指出线性空间 $\langle 1, u, u^2, …\rangle$ 的维数，因此有限扩张都是代数扩张，反过来，关于代数元的单扩张一定是有限扩张。</p>
+<h2><span id="有限域">有限域</span></h2><p>上节的引理 2.2.7 指出域有限域 $\mathbb{F}_p$ 上的不可约多项式 $f$ 生成极大理想，因此 $\mathbb{F}_p[x] &#x2F; (f)$ 是一个域，这个域的大小无非是 $p^{\deg f}$，称为 $GF(p^k)$。我们定义这个记号的原因是下面的一系列结论：我们将证明任意有限域的幂都是素数的幂，且大小相同的有限域彼此同构。</p>
+<div class="note info"><p><strong>定理 3.3.1.</strong> 有限域的维数必然是某个素数的幂 $p^k$。</p>
+<p><strong>证明.</strong> 有限域的特征 $\mathrm{char~} F &#x3D; p$，因此单位元 $\overline{1}$ 生成一个同构于 $\mathbb{Z}_p$ 的子域，于是 $F &#x2F; \mathbb{Z}_p$。若 $[F : \mathbb{Z}_p] &#x3D; k$，则 $|F| &#x3D; p^k$。</p>
+</div>
+
+<p>在群中，我们有 Fermat 小定理，而域的乘法在非单位元上构成群，这启发我们：</p>
+<div class="note info"><p><strong>引理 3.3.2.</strong> 若 $|F| &#x3D; p^k$，那么 $\forall x\in F, (x^{p^{k} - 1} - 1)x &#x3D; 0$。</p>
+</div>
+
+<p>重复关于多项式的分解和根的关系的论证，我们得到</p>
+<div class="note info"><p><strong>引理 3.3.3.</strong> 若 $|F| &#x3D; p^k$，那么 </p>
+<p>$$<br>x^{p^k} - x &#x3D; \prod_{a\in F} (x - a)<br>$$</p>
+<p><strong>证明.</strong> 将每个元素带入验证得到 $(x - a) \mid x^{p^k} - x$，$(x - a)$ 均是 $F[x]$ 中的不可约元，对比两边的度数立即知道上式成立</p>
+</div>
+
+<div class="note info"><p><strong>引理 3.3.4.</strong> 若 $f\in F[x]$ 是度数为 $d$ 的不可约多项式，那么 $f \mid x^{|F|^d} - x$。</p>
+<p><strong>证明.</strong> 令 $L &#x3D; F[x] &#x2F; (f)$，则 $L$ 是 $F$ 的扩域，$|L| &#x3D; {|F|^d}$。我们知道</p>
+<p>$$<br>x^{|L|} - x &#x3D; \prod_{a\in L} (x - a)<br>$$</p>
+<p>因为 $\overline{x}\in L$，所以 $x - \overline{x} \mid x^{|L|} - x$。同时 $f(\overline{x}) &#x3D; 0$，因此 $x - \overline{x} | f$。</p>
+<p>这表明 $\deg \gcd(f, x^{|L|}- x) &gt; 0$，经典结论指出扩域不会改变 $\gcd$，因此 $\gcd(f, x^{|L|} - x)$ 只能是 $f$（因为 $f$ 在 $F[x]$ 中不可约）。</p>
+</div> 
+
+<div class="note info"><p><strong>定理 3.3.5.</strong> 设 $F$ 是有限域，其中 $|F| &#x3D; q$，令 $L &#x3D; F[x] &#x2F; (f)$，$f$ 是度数为 $d$ 的不可约多项式。则对于任意的 $K$ 满足 $K&#x2F;F$ 且 $[K : F] &#x3D; d$，都有 $L\cong K$。</p>
+<p><strong>证明.</strong> 首先知道 $|K| &#x3D; p^d$，进而</p>
+<p>$$<br>x^{p^d} - x &#x3D; \prod_{a\in K} (x - a)<br>$$</p>
+<p>由引理 3.3.4，$f | x^{p^d} - x$。这表明 $f &#x3D; \prod_{a_i\in K}(x - a_i)$，我们得到了 $f(a_1) &#x3D; 0$。</p>
+<p>定义映射 $\varphi : F[x]\rightarrow K$ 为 $h \mapsto h(a_i)$。则</p>
+<p>$$<br>\begin{align}<br>  g \in \ker \varphi &amp;\Leftrightarrow g(a_1) &#x3D; 0 \\<br>  &amp;\Leftrightarrow (x - a_1) | g \\<br>  &amp;\Leftrightarrow \gcd(g, f)\ne 1 \\<br>  &amp;\Leftrightarrow \gcd(f, g) &#x3D; f \\<br>  &amp;\Leftrightarrow g \in (f)<br>\end{align}<br>$$</p>
+<p>于是 $\ker \varphi &#x3D; (f)$，因此 $F[x] &#x2F; (f) \cong \mathrm{im~} \varphi\subset K$，然而 $|\mathrm{im~}\varphi| &#x3D; |F[x] &#x2F; (f)| &#x3D; p^d &#x3D; |K|$，所以 $\mathrm{im~}\varphi &#x3D; K$。</p>
+</div>
+
+<p>现在一切归结为对于任意的 $k$ 都存在度为 $k$ 的不可约多项式。我们之前已经证明了对于任意的不可约的 $f$ 都有 $f \mid x^{|F|^d} - x$。我们仍然考虑这个重要的多项式。</p>
+<div class="note info"><p><strong>引理 3.3.6.</strong> 对于不可约多项式 $f$，若 $\deg f\mid k$，则 $f \mid x^{p^k} - x$。</p>
+<p><strong>证明.</strong> 我们知道 $f\mid x^{p^{\deg f}} - x$。现在要证明 $x^{p^{\deg f}} - x | x^{p^k} - x$，我们容易证明 $a^{p^{\deg f}} - a &#x3D; 0 \Rightarrow a^{p^k} - a &#x3D; 0$。如果 $x^{p^{\deg f}} - x$ 能在某个域下被分解成一次多项式的乘积，那么就做完了。事实上确实是这样的，此扩域称为 $x^{p^{\deg f}} - x$ 的分裂域。考试前我们暂时放弃考察分裂域的相关理论。</p>
+</div>
+
+<p>至此已经可以知道所有的 $k$ 阶不可约多项式都存在：可以在 $x^{p^k} - x$ 中找到。于是我们可以结合定理 3.3.5 下断言：所有的大小为 $p^k$ 的域都同构，桥梁是某个不可约多项式给出的 $F[x] &#x2F; (f)$。但实际上 $x^{p^k}$ 的性质非常好，我们还有：</p>
+<div class="note "><p><strong>引理 3.3.7.</strong> 对于不可约多项式 $f$，若 $f \mid x^{p^k} - x$，则 $\deg f \mid k$。</p>
+<p><strong>证明.</strong> $\color{red} \text{Admit.}$</p>
+</div>
+
+<div class="note info"><p><strong>引理 3.3.8.</strong> $x^{p^k} - x$ 没有平方因子。</p>
+<p><strong>证明.</strong> 考虑 $\gcd(x^{p^k} - x, (x^{p^k} - x)’) &#x3D; 1$。若 $x^{p^k} - x &#x3D; f^2g$，则 $(f^2g)’ &#x3D; f(2g + fg’)$，故至少平方因子 $f$ 整除该 $\gcd$，但 $\gcd$ 是 $1$。</p>
+</div>
+
+<p>综上得到了 </p>
+<p>$$<br>x^{p^k} - x &#x3D; \prod_{\text{$f$ is irreducible and monic, and $\deg f\mid k$}} f(x)<br>$$</p>
+<p>这个反复出现的多项式连同其性质在解决许多问题中发挥了至关重要的作用。</p>
+<h2><span id="有限域上多项式的因子分解算法">有限域上多项式的因子分解算法</span></h2><p>我们的任务是在多项式时间内高概率给出多项式环 $F[x]$ 上的多项式 $f$ 的一个非平凡因子。此处 $F$ 是有限域。我们的算法分为三种情况：</p>
+<p><strong>$f$ 含有平方因子</strong> 此时输出 $\gcd(f, f’)$ 即可。</p>
+<p><strong>$f$ 的因子度数不同</strong> 假设存在 $f_1, f_2 \mid f$，且 $\deg f_1 &lt; \deg f_2$。那么 $f_1 | \gcd(f, x^{p^{\deg f_1}} - x)$，但 $28$ 式表明这个 $\gcd$ 并非 $f$。</p>
+<p><strong>$f$ 的因子度数均相同</strong> 设 $f &#x3D; f_1\cdot f_k$，$\deg f_i &#x3D; d$。则根据中国剩余定理，$F[x] &#x2F; (f)\cong F[x] &#x2F; (f_1)\times\cdots\times F[x] &#x2F; (f_k)$。那么我们在 $F[x] &#x2F; (f)$ 中随机采样多项式 $r$。则 </p>
+<p>$$<br>f_i | r^{p^d - 1} - 1 \quad \text{s.t.} \quad r^{p^d - 1} \equiv 1\pmod {f_i}<br>$$</p>
+<p>于是 </p>
+<p>$$<br>r^{\frac{p^d - 1}{2}} \equiv \pm 1 \pmod {f_i}<br>$$</p>
+<p>并且可以证明<em>结果是 $1$ 和 $-1$ 的概率是均等的</em>。这是我们求 $\gcd(r^{\frac{p^d - 1}{2}}, f)$，只有下面两种情况我们<em>得不到</em>$f$ 的非平凡因子：</p>
+<ul>
+<li>所有的 $r^{\frac{p^d - 1}{2}} \bmod f_i$ 都是 $1$。</li>
+<li>$r^{\frac{p^d - 1}{2}}\bmod f &#x3D; -1$。</li>
+</ul>
+<p>因此成功概率为 $1 - 2^{1-\deg f &#x2F; d}$，高概率成功。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Algebra/" rel="tag"># Algebra</a>
+              <a href="/tags/Group-Theory/" rel="tag"># Group Theory</a>
+              <a href="/tags/Ring-Theory/" rel="tag"># Ring Theory</a>
+              <a href="/tags/Polynomial-Decomposition/" rel="tag"># Polynomial Decomposition</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/03/ICSRevision1/" rel="prev" title="Revision | 计算机系统小常识">
+                  <i class="fa fa-angle-left"></i> Revision | 计算机系统小常识
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
