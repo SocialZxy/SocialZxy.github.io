@@ -123,18 +123,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">29</span>
+        <span class="site-state-item-count">31</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -180,6 +180,113 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/19/Schreier-Sims/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/08/19/Schreier-Sims/" class="post-title-link" itemprop="url">The Schreier-Sims Algorithm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-08-19 16:38:36" itemprop="dateCreated datePublished" datetime="2024-08-19T16:38:36+08:00">2024-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-08-23 17:00:49" itemprop="dateModified" datetime="2024-08-23T17:00:49+08:00">2024-08-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 本文将浅谈计算群论中的 Schreier-Sims 算法，该算法的核心思想是将群 $G$ 的信息表示为一列正规子群 $1 &#x3D; G_1 \subset G_2 \subset \cdots \subset G_k &#x3D; G$，通过 $G_i$ 在 $G_{i+1}$ 中的截面，回答一些重要的问题如某元素是否在群当中、某给定生成元的有限群的阶数是多少等。</p>
+<p>本文的第二节介绍该算法使用的重要技术截面（Transversal）和 Schreier 引理，第三节介绍该算法的核心技术 BSGS，但是很遗憾我们暂时没能看懂如何求解一组 BSGS，只能给出一类大多数应用问题的简单快速的下替算法（参见第 3.3 节）。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%A3%B0%E6%98%8E%E4%B8%8E%E8%AE%B0%E5%8F%B7">声明与记号</a></li>
+<li><a href="#%E6%88%AA%E9%9D%A2transversal%E5%92%8C%E7%A8%B3%E5%AE%9A%E5%AD%90%E9%9B%86%E5%90%88%E7%9A%84%E7%94%9F%E6%88%90%E5%85%83">截面（Transversal）和稳定子集合的生成元</a></li>
+<li><a href="#%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86">基和强生成集</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">基本定义</a></li>
+<li><a href="#%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8">简单应用</a></li>
+<li><a href="#%E6%9E%84%E9%80%A0%E5%AD%90%E7%BE%A4%E9%93%BE%E7%9A%84%E9%80%9A%E4%BF%97%E7%AE%97%E6%B3%95">构造子群链的通俗算法</a></li>
+<li><a href="#%E6%B1%82%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86%E6%9C%AA%E5%AE%8C%E6%88%90">求基和强生成集（未完成）</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/08/19/Schreier-Sims/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1170,129 +1277,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/01/25/AgdaDeductionSystem/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/25/Logic2Pred/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/01/25/Logic2Pred/" class="post-title-link" itemprop="url">数理逻辑 (2) 谓词逻辑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-01-25 16:41:35" itemprop="dateCreated datePublished" datetime="2024-01-25T16:41:35+08:00">2024-01-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-06-08 14:21:45" itemprop="dateModified" datetime="2024-06-08T14:21:45+08:00">2024-06-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Basic/Mathematical-Logic/" itemprop="url" rel="index"><span itemprop="name">Mathematical Logic</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 从语义的角度来看谓词逻辑，对应书上的第四、第五章。因为听说 thu 没学 6789 章，猜测可能是难度比较大，故在这里断章。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5-%E5%91%BD%E9%A2%98%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96">基本概念 命题的形式化</a><ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E5%AE%9A%E4%B9%89">相关定义</a></li>
-<li><a href="#%E5%90%88%E5%BC%8F%E5%85%AC%E5%BC%8F">合式公式</a></li>
-<li><a href="#%E4%B8%80%E4%BA%9B%E4%BB%A3%E8%A1%A8%E6%80%A7%E5%8F%A5%E5%AD%90%E7%9A%84%E5%BD%A2%E5%BC%8F%E5%8C%96%E6%96%B9%E6%B3%95">一些代表性句子的形式化方法</a></li>
-<li><a href="#%E5%85%AC%E5%BC%8F%E7%9A%84%E8%A7%A3%E9%87%8A%E5%92%8C%E6%99%AE%E9%81%8D%E6%9C%89%E6%95%88%E6%80%A7">公式的解释和普遍有效性</a></li>
-</ul>
-</li>
-<li><a href="#%E7%AD%89%E5%80%BC%E5%92%8C%E6%8E%A8%E7%90%86%E6%BC%94%E7%AE%97">等值和推理演算</a><ul>
-<li><a href="#%E7%AD%89%E5%80%BC%E5%85%AC%E5%BC%8F">等值公式</a></li>
-<li><a href="#%E8%8C%83%E5%BC%8Fskolem-%E6%A0%87%E5%87%86%E5%9E%8B">范式，Skolem 标准型</a><ul>
-<li><a href="#exists-%E5%89%8D%E6%9D%9F%E8%8C%83%E5%BC%8F">$\exists-$前束范式</a></li>
-<li><a href="#skolem-%E6%A0%87%E5%87%86%E5%9E%8B">Skolem 标准型</a></li>
-</ul>
-</li>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E6%8E%A8%E7%90%86%E5%85%AC%E5%BC%8F">基本推理公式</a></li>
-<li><a href="#%E6%8E%A8%E7%90%86%E8%A7%84%E5%88%99">推理规则</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/01/25/Logic2Pred/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

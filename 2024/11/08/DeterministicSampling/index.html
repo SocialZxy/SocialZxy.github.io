@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文是 https:&#x2F;&#x2F;doi.org&#x2F;10.1137&#x2F;0220002 的阅读笔记。文中提出了一种确定性的采样方法用于加速字符串匹配，由此得到了操作次数 $O(n)$ 时间 $O(\log^* n)$ 的并行算法。    简介 前置知识 字符串的周期性 CRCW PRAM 的选择 前缀和问题   模式分析 基本文本分析 基本常数时间算法 基本最优加速算法 模式串有周期性的情况">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)">
+<meta property="og:url" content="http://example.com/2024/11/08/DeterministicSampling/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文是 https:&#x2F;&#x2F;doi.org&#x2F;10.1137&#x2F;0220002 的阅读笔记。文中提出了一种确定性的采样方法用于加速字符串匹配，由此得到了操作次数 $O(n)$ 时间 $O(\log^* n)$ 的并行算法。    简介 前置知识 字符串的周期性 CRCW PRAM 的选择 前缀和问题   模式分析 基本文本分析 基本常数时间算法 基本最优加速算法 模式串有周期性的情况">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-08T06:14:49.000Z">
+<meta property="article:modified_time" content="2024-11-09T13:18:16.116Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Pattern Matching">
+<meta property="article:tag" content="Parallel Computing">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/11/08/DeterministicSampling/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/11/08/DeterministicSampling/","path":"2024/11/08/DeterministicSampling/","title":"Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991) | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">字符串的周期性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">CRCW PRAM 的选择</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">前缀和问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">模式分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">基本文本分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">基本常数时间算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">基本最优加速算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">模式串有周期性的情况</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">复杂度平衡后的 $O(\log^* n)$ 文本分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">进一步讨论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/08/DeterministicSampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991) | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-08 14:14:49" itemprop="dateCreated datePublished" datetime="2024-11-08T14:14:49+08:00">2024-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 21:18:16" itemprop="dateModified" datetime="2024-11-09T21:18:16+08:00">2024-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的阅读笔记。文中提出了一种确定性的采样方法用于加速字符串匹配，由此得到了操作次数 $O(n)$ 时间 $O(\log^* n)$ 的并行算法。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a><ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%A8%E6%9C%9F%E6%80%A7">字符串的周期性</a></li>
+<li><a href="#crcw-pram-%E7%9A%84%E9%80%89%E6%8B%A9">CRCW PRAM 的选择</a></li>
+<li><a href="#%E5%89%8D%E7%BC%80%E5%92%8C%E9%97%AE%E9%A2%98">前缀和问题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90">模式分析</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">基本文本分析</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B8%B8%E6%95%B0%E6%97%B6%E9%97%B4%E7%AE%97%E6%B3%95">基本常数时间算法</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%9C%80%E4%BC%98%E5%8A%A0%E9%80%9F%E7%AE%97%E6%B3%95">基本最优加速算法</a></li>
+<li><a href="#%E6%A8%A1%E5%BC%8F%E4%B8%B2%E6%9C%89%E5%91%A8%E6%9C%9F%E6%80%A7%E7%9A%84%E6%83%85%E5%86%B5">模式串有周期性的情况</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%B9%B3%E8%A1%A1%E5%90%8E%E7%9A%84-olog-n-%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">复杂度平衡后的 $O(\log^* n)$ 文本分析</a></li>
+<li><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%AE%A8%E8%AE%BA">进一步讨论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="简介">简介</span></h1><p>字符串匹配问题是一类常见的问题。我们重新叙述其严格定义和相关名词。</p>
+<div class="note info"><p><strong>字符串匹配问题.</strong> 给定一个长度为 $n$ 的字符串 $T[1…n]$，称为<em>文本串</em>，和一个更短的长度为 $m$ 的字符串 $P[1…m]$，称为<em>模式串</em>。求所有的<em>起始位置</em> $1\leq i\leq n-m+1$，满足 $P &#x3D; T[i…i+m-1]$。</p>
+</div>
+
+<p>本文提出的是求解字符串匹配问题的并行算法，采用的计算模型是 CRCW PRAM，鉴于以前没有接触过，给出其定义：</p>
+<div class="note success"><p><strong>定义 1.1（CRCW PRAM）.</strong> CRCW PRAM 系指 Concurrent-Reading-Concurrent-Writing Parallel Random Access Machine，即多台处理器公用一个无限大容量的共享存储器，公用一个同步时钟，允许并发的读写操作。</p>
+<p>必须详细考察写操作在并行时如何被采纳。CRCW PRAM 进一步可以分为</p>
+<ul>
+<li><strong>Common CRCW PRAM</strong> 只允许多台处理器同时写相同内容到内存单元中，否则机器行为未定义。</li>
+<li><strong>Arbitary CRCW PRAM</strong> 任选一台作为优胜者写入。</li>
+<li><strong>Priority CRCW PRAM</strong> 选取编号最小的作为优胜者写入。</li>
+</ul>
+</div>
+
+<p>在涉及到细节时我们再深入讨论计算模型相关的问题。</p>
+<p>此问题的朴素算法是 $O(nm)$ 的，容易发现在 有 $O(nm)$ 个处理器的 CRCW PRAM 上可以做到 $O(1)$ 时间。非平凡的算法如 KMP，Boyer Moore 等通常包含了两个阶段：<em>模式分析</em>和<em>文本分析</em>。KMP 中的求 next 就属于模式分析，把文本串放在上面跑就属于文本分析。</p>
+<p>本文的主要结果是</p>
+<ol>
+<li>一种新的字符串匹配问题的线性算法（串行）。</li>
+<li>一种新的 $O(\log^* n)$ 文本分析的并行算法，处理器数最优。</li>
+<li>一种需要先做模式分析的 $O(log^2 m &#x2F; \log \log m)$ 文本分析算法，处理器数最优。</li>
+<li>一种随机高概率成功的 $O(\log m)$ 的模式分析算法，处理器数最优。</li>
+<li>一种非标准 PRAM 上的最优时间的文本分析算法，处理器数最优。</li>
+</ol>
+<p>我们只试图看懂 1，2，3。</p>
+<p>这里的 $\log^*$ 是一个没有见过的记号。这是一个增长极慢的函数：</p>
+<div class="note success"><p><strong>定义 1.2.</strong> 我们定义 $\log^{(i)}$ 表示 $\log$ 函数的 $i$ 次复合。$\log^*(r)$ 定义为最小的 $i$ 使得 $\log^{(i)} \leq 2$。注意底数是 $2$。</p>
+</div>
+
+<p>这篇文章提出的核心科技 deterministic sampling 启发自我们如何“观察”一个模式串是否在文本串中出现：</p>
+<ul>
+<li><em>采样.</em> 首先找到一个模式串的局部。</li>
+<li><em>搜索.</em> 在主串中找所有的此局部出现的位置。</li>
+<li><em>验证.</em> 验证这个局部前后是否是模式串整体。</li>
+</ul>
+<p>我们期望采到一个模式串的子集 $[s(1), …, s(l)]$，理想情况下其应当满足</p>
+<ol>
+<li>其长度尽可能短，这样我们的<em>搜索量</em>才可能不会太大。</li>
+<li>如果这个子集成功匹配，其前后一段距离都不可能产生合法的匹配，这样我们的<em>验证量</em>才可能不会太大。</li>
+</ol>
+<p>这个采样并不能简单地用均匀随机构造，读者可以自行举出反例。但是却可以通过一个确定性的过程精细地构造，这就是所谓的 deterministic sample。</p>
+<h1><span id="前置知识">前置知识</span></h1><h2><span id="字符串的周期性">字符串的周期性</span></h2><div class="note success"><p><strong>定义 2.1.1.</strong> 令 $u, w$ 是两个字符串，称 $u$ 是 $w$ 的一个周期若 $w$ 是 $u^k$ 的一个前缀。</p>
+</div>
+
+<p><em>字符串 $w$ 的最短周期</em>定义为最短的 $u$，$u$ 是 $w$ 的一个周期。若 $w$ 的最短周期长度不超过其本身长度的一半，称 $w$ 是<em>周期性</em>的。</p>
+<p>收集一些我们熟知的 border 论。</p>
+<div class="note info"><p><strong>命题 2.1.2（equivalence fact）.</strong> 上述定义等价于 $w$ 是 $uw$ 的前缀。</p>
+</div>
+
+<div class="note info"><p><strong>命题 2.1.3（conflicting occurrence fact）.</strong> 对于一个串 $w$，其最短周期是 $u$，若它出现在位置 $i$，则其不可能出现在位置 $j$，其中 $i &lt; j &lt; i + |u|$。</p>
+</div>
+
+<div class="note info"><p><strong>命题 2.1.4（gcd lemma &#x2F; weak periodicity lemma）.</strong> 若 $w$ 有长度为 $p, q$ 的周期，且 $p + q \leq |w|$，那么 $w$ 也有长度为 $\gcd(p, q)$ 的周期。</p>
+</div>
+
+<div class="note info"><p><strong>命题 2.1.5</strong> 若 $v$ 出现在位置 $j$ 和 $j + P$，那么</p>
+<ol>
+<li>$v$ 是周期性的，且其周期 $T$ 不超过 $P$。</li>
+<li>$v$ 出现在 $j + T$。</li>
+</ol>
+</div>
+
+<p>下面是本文使用的一个关键定义。</p>
+<div class="note success"><p><strong>定义 2.1.5（witness 数组）.</strong> 考虑一个非周期性的字符串 $P[1…m]$。对于任意的 $1 &lt; i \leq m &#x2F; 2$，都有 $m - i + 1$ 并非原串的 border。这表明，至少存在一个位置 $1\leq k\leq m - i + 1$ 使得 $P(k)\ne P(i + k - 1)$。$\mathrm{WITNESS}(i)$ 存储这样的一个 $k$。</p>
+</div>
+
+<p>此数组可以在 $O(\log m)$ [VI85] 甚至 $O(\log\log m)$ [BG88] 时间内求出（共 $O(m)$ 次操作），我们可能会找时间看比较简单的那一个。</p>
+<h2><span id="crcw-pram-的选择">CRCW PRAM 的选择</span></h2><p>通过增加 $O(n)$ 个处理器，可以在 $O(1)$ 时间内用 Common CRCW PRAM 实现 Priority CRCW PRAM，增加后各种开销变化都是常数级别的。我们只需要考虑如下问题：</p>
+<div class="note "><p>给定一个 $n$ 位长的 vector，求最左边的非零位。</p>
+</div>
+
+<p>原论文 reference 一篇八十年代打字机写的论文，不想看所以自己想一个。</p>
+<details class="note "><summary><p><strong>解法.</strong></p>
+</summary>
+<p>首先考虑如何 $O(1)$ 时间 $O(m^2)$ 个处理器实现求长度为 $m$ 的 vector 的最小值。</p>
+<blockquote>
+<p>第一步定义一个辅助数组 $g_{i, 0&#x2F;1}$，全初始化为 $0$。给每个位分配 $m$ 个处理器，第 $i$ 位第 $j$ 个处理器用来比较 $v_i$ 是否小于等于 $v_j$。如果大于等于在 $g_{i, 1}$ 写 $1$，否则在 $g_{i, 0}$ 写 $1$。</p>
+<p>第二步使用 $m$ 个处理器，如果仅 $g_{i, 1}$ 为一向返回值写 $v_i$。</p>
+</blockquote>
+<p>然后我们只需要将数组分成 $\sqrt n$ 块，首先统计每块是否有数，然后用上述算法求出最小的有数的块，然后用上述算法求出有数的块中最左边的非零位。</p>
+
+</details>
+
+<p>本文中的所有操作可以在 Common CRCW PRAM 上完成。少数操作中最直观的算法需要使用 Priority CRCW PRAM，上述论证表明无额外开销地用 Common CRCW PRAM 实现。</p>
+<p>其次，关于并行算法，我们有如下定理：</p>
+<div class="note info"><p><strong>定理（Brent）.</strong> 任何共 $x$ 次基本操作、总时间 $t$ 的同步并行算法（理解为可以同时执行任意数量的计算，但是必须按照依赖关系定时）可以用 $p$ 个处理器在 $\lceil x &#x2F; p\rceil + t$ 时间内实现。</p>
+<p><strong>证明.</strong> 假设 $i$ 时刻同时执行的指令有 $x_i$ 条，这 $i$ 条可以被乱序执行，所以用 $p$ 个处理器执行时间为 </p>
+<p>$$<br>\sum_{i&#x3D;1}^t \lceil x_i &#x2F; p\rceil \leq \sum_{i&#x3D;1}^t x_i &#x2F; p + 1 \leq \lceil x &#x2F; p\rceil + t<br>$$</p>
+</div>
+
+<p>此外可以想象如果有 $n$ 次计算，要求时间为 $t$，那么需要的处理器数至少是 $n &#x2F; t$ 个。若算法达到了此下界（允许乘常数），则称<em>处理器数最优</em>。我们对上面的问题的解法是处理器数最优的。</p>
+<h2><span id="前缀和问题">前缀和问题</span></h2><div class="note "><p><strong>前缀和问题.</strong> 给定数组 $a[1…n]$，求数组 $b[1…n]$ 使得 $b[i] &#x3D; \sum_{j&#x3D;1}^i a[j]$。</p>
+</div>
+
+<p>这个问题好像其实没有那么平凡。[CV89] 指出存在一个 $O(\log n &#x2F; \log\log n)$ 的算法，我们有空再看。</p>
+<p>容易发现下面的问题弱于上面的问题：</p>
+<div class="note "><p>给定一个 $0&#x2F;1$ 数组 $a[1…n]$，提取其中标记为 $1$ 的编号到一个较短的数组中。</p>
+</div>
+
+<p>本文提出的算法经常使用前缀和算法来处理这个问题。</p>
+<h1><span id="模式分析">模式分析</span></h1><p>模式分析的首要目标是构造 <em>deterministic sample（DS）</em>。这个采样的构造需要辅助问题 <em>column sample</em>。步骤 2 计算 column sample，步骤 3 用 column sample 构造 deterministic sample。</p>
+<p>不失一般性地假设 $m$ 是偶数。然后考虑模式串的 $m &#x2F; 2$ 个复制，按照下面形式排列：</p>
+<p>$$<br>\begin{matrix}<br>    \text{Copy $c_{m &#x2F; 2}$}    &amp;   &amp;   &amp;         &amp; -      &amp; \cdots &amp; -      &amp; -      &amp; \cdots &amp; - \\<br>    \vdots                     &amp;   &amp;   &amp;         &amp; \vdots &amp;        &amp; \vdots &amp; \vdots &amp;        &amp;   \\<br>    \text{Copy $c_2$}          &amp;   &amp; - &amp; \cdots  &amp; -      &amp; \cdots &amp; -      &amp; -      &amp;        &amp;               \\<br>    \text{Copy $c_1$}          &amp; - &amp; - &amp; \cdots  &amp; -      &amp; \cdots &amp; -      &amp;        &amp;        &amp;               \\<br>    \text{Column id}           &amp; 1 &amp; 2 &amp; \cdots  &amp; m &#x2F; 2  &amp; \cdots &amp; m      &amp; m + 1  &amp; \cdots &amp; m + m &#x2F; 2 - 1 \\<br>\end{matrix}<br>$$</p>
+<div class="note "><p><strong>Column sample.</strong> 选择至多 $\log m - 1$ 个列 $\overline{ds}(1), …, \overline{ds}(l)$（其中 $l &lt; \log m$），附上一个字符 $car(\overline{ds}(i))$，满足</p>
+<ol>
+<li>恰好存在一个复制 $c_j$，满足<ol>
+<li>$c_j$ 和所有选出的列都相交。即 $j\leq \overline{ds}(i) &lt; j + m$。</li>
+<li>相交处的字符恰好是附上的字符。即 $car(\overline{ds}(i)) &#x3D; P(\overline{ds}(i) - j + 1)$。</li>
+</ol>
+</li>
+<li>对于其他的赋值，至少有一列与其相交，并且交点处的字符与列所附的字符不同。即对于任意的 $c_j\ne c_k$ 都存在 $\overline{ds}(i)$ 满足 $k\leq \overline{ds}(i) &lt; k + m$，且 $P(\overline{ds}(i) - k + 1)\ne car(\overline{ds}(i))$。</li>
+</ol>
+</div>
+
+<p>其解的存在性由步骤 2 的算法给出。假设满足上述条件 $1$ 的复制为 $c_x$。</p>
+<div class="note "><p><strong>Deterministic sample.</strong> 无非是将 $\overline{ds}$ 用 $c_x$ 中的位置来表达。具体地，$DS$ 是一个数组 $[ds(1), ds(2), …, ds(l)]$，其中 $l\leq \log m - 1$，且 $ds(j) &#x3D; \overline{ds}(j) - x + 1$。</p>
+</div>
+
+<hr>
+<div class="note "><p><strong>步骤 1.</strong> 判断模式串是否是周期性的。同时求 witness 数组。如果是周期性的，求出周期。</p>
+</div>
+
+<p>注意若原串是周期性的（周期为 $p$），那么其长度为 $2p - 1$ 的前缀必然是非周期性的，在第 4.3 节我们讲如何做周期性的情况。</p>
+<p>此过程可以被 [VI85] 完成，没有必要卷到 [BG88] 的水平，因为大头不在这里。</p>
+<hr>
+<div class="note "><p><strong>步骤 2.</strong> 此步骤归纳地构造集合 $A_1, …, A_l$，其中 $A_0 &#x3D; \{c_1, …, c_{m &#x2F; 2}\}$，且 $|A_{i + 1}|\leq |A_i| &#x2F; 2$，$|A_l| &#x3D; 1$。</p>
+</div>
+
+<p>下文中，对于复制 $c_i, c_j$，若 $i &lt; j$，称 $c_i$ 在 $c_j$ 左边，$c_j$ 在 $c_i$ 右边。</p>
+<p>若 $A_i$ 中只有一个元素，那么此步骤结束，我们求得了 $l &#x3D; i$，可以转向步骤 3。</p>
+<p>否则考虑 $A_i$ 中包含的复制中最左的和最右的，由于其差距不超过 $m &#x2F; 2$，witness 数组给出了一个列，这个列上包含了两个不同的字符 $c, c’$。那么和此列处字符等于 $c$ 的复制和等于 $c’$ 的复制中至少有一类是不超过一半的，将不超过一半的一类对应的字符作为 $\overline{ds}(i)$，将该字符置为 $car(\overline{ds}(i))$，将该类作为 $A_{i + 1}$。</p>
+<div class="note warning"><p><strong>例子.</strong> 考虑字符串 $\texttt{100111}$，其排列为</p>
+<p>$$<br>\begin{matrix}<br>    c_3 &amp;   &amp;   &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp;   &amp; \\<br>    c_2 &amp;   &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp;   &amp;   &amp; \\<br>    c_1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp;   &amp;   &amp;   &amp; \\<br>\end{matrix}<br>$$</p>
+<p>考察 $\text{WITNESS}(2)$，这个值可能是 $1$，这给出了一个列，$c_1$ 和 $c_3$ 在此列上不同：</p>
+<p>$$<br>\begin{matrix}<br>    c_3 &amp;   &amp;   &amp; \color{blue}{1} &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp;   &amp; \\<br>    c_2 &amp;   &amp; 1 &amp; \color{blue}{0} &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp;   &amp;   &amp; \\<br>    c_1 &amp; 1 &amp; 0 &amp; \color{blue}{0} &amp; 1 &amp; 1 &amp; 1 &amp;   &amp;   &amp;   &amp; \\<br>\end{matrix}<br>$$</p>
+<p>这列上为 $\texttt{0}$ 的有 $c_1, c_2$，为 $\texttt{1}$ 的有 $c_3$，后者大小不超过一半，将 $\overline{ds}(1)$ 置为 $3$，$car(\overline{ds}(1))$ 置为 $\texttt{0}$，$A_2$ 置为 $\{c_3\}$，继续递归。</p>
+<p>$A_2$ 的大小为 $1$，本步骤完成。</p>
+</div>
+
+<p>可以发现这一步骤的核心就是选出某一位等于 $c$ 或者 $c’$ 的元素，因此每一轮迭代时间复杂度是 $O(\log |A_i| &#x2F; \log \log |A_i|)$，总操作量是 $O(|A_i|)$，处理器数最优。集合的大小是指数级下降的，于是总复杂度是 $O(\log^2 m &#x2F; \log \log m)$，总操作量是 $O(m)$。</p>
+<hr>
+<div class="note "><p><strong>步骤 3.</strong> 求出 DS。</p>
+</div>
+
+<p>本步骤是平凡的。</p>
+<hr>
+<p>整个模式分析流程中的复杂度大头是步骤 2，总复杂度为 $O(\log^2 m &#x2F; \log\log m)$。</p>
+<h1><span id="基本文本分析">基本文本分析</span></h1><p>本节给出两种文本分析的算法，一种是<em>基本常数时间算法</em>，需要 $O(1)$ 时间 $O(n\log m)$ 次操作；另一种是<em>基本最优加速算法</em>，需要 $O(\log m)$ 时间 $O(n)$ 次操作。这两种算法展示了两种极端的情况，文章最后会将其平衡一个 $O(\log^* n)$ 时间 $O(n)$ 操作次数的算法。</p>
+<p>首先假设模式串是非周期性的，稍后再谈如何处理周期性串的情形。</p>
+<p>我们对串分块，块长为 $m&#x2F;2$。如果把每个块和其后面地 $m&#x2F;2$ 个元素视作一组资料，那么不同的组之间完全没有相互影响。下面的两个算法都是将所有块并行处理的。</p>
+<h2><span id="基本常数时间算法">基本常数时间算法</span></h2><div class="note "><p><strong>步骤 1.</strong> 对于位置 $1\leq i \leq n - m + 1$，逐一检查是否有 $T(i - 1 + ds(j)) &#x3D; P(ds(j))$ 均成立。若是，称 $i$ 为<em>候选</em>。</p>
+</div>
+
+<p>显然此步骤可以在 $O(1)$ 时间，$O(n\log m)$ 次操作内完成。</p>
+<div class="note "><p><strong>步骤 2.</strong> 只保留每一块的第一个和最后一个候选。</p>
+</div>
+
+<p>此步骤可以在 $O(1)$ 时间，$O(n)$ 次操作内完成。</p>
+<div class="note "><p><strong>步骤 3.</strong> 对于保留的候选，逐字节验证。</p>
+</div>
+
+<p>此步骤可以在 $O(1)$ 时间，$O(n)$ 次操作内完成（$n &#x2F; (m &#x2F; 2)\times m &#x3D; O(n)$）</p>
+<p>可能对于步骤 2，我们需要着重分析一下正确性。</p>
+<div class="note info"><p><strong>命题（the ricochet property）.</strong> 假设模式分析中得到的 $A_l$ 中的唯一元素是 $c_x$，那么若 $i$ 是候选，则其前面 $x - 1$ 个元素不可能是答案，其后面 $m &#x2F; 2 - x$ 个元素不可能是答案。</p>
+<p><strong>证明.</strong> 反证，发现与 column sample 的定义矛盾。</p>
+</div>
+
+<p>发现第一个候选和最后一个候选联合起来可以排除中间所有的候选，因此只需要考虑这两个候选。</p>
+<hr>
+<p>容易发现本算法可以在总共 $O(n\log m)$ 次操作，用 $O(n\log m)$ 个处理器可以在常数时间内完成。</p>
+<h2><span id="基本最优加速算法">基本最优加速算法</span></h2><p>现在我们被允许总时间 $O(\log n)$，但是总操作次数限制为 $O(n)$。那么思路其实很自然，我们将上述全并行的算法改为增量地执行即可。需要点明的是，为了使得总操作次数为 $O(n)$，每一轮的候选位置数量必须至少折半。</p>
+<p>依旧对于每一个块分开考虑。初始时块中所有位置都是候选。我们顺序地考虑 $ds(1), ds(2), …, ds(n)$，每次能够排除一些元素，但是这远远不够。因此我们继续用上 ricochet property，我们发现核对完 $ds(1)$ 之后，和最左边的侯选位置的相对位置不包含在 $A_1$ 中的都不可能成为答案，而 $A_1$ 的大小自然能够将候选位置的数量给 bound 住。</p>
+<p>理顺思路之后我们考虑并行实现。</p>
+<div class="note "><p><strong>步骤 1.</strong> 计算所有满足如下条件的位置 $i$：$T(i - 1 + ds(1)) &#x3D; P(ds(1))$。</p>
+</div>
+
+<div class="note "><p><strong>步骤 2-1.</strong> 找到所有位置中最左边和最右边的一个，记为 $T(a)$，$T(b)$。定义左辅助变量 $lg &#x3D; a-1 + ds(1)$ 和右辅助变量 $rg &#x3D; a - 1 + ds(1)$。</p>
+</div>
+
+<p>现在用 $A_1$ 来构造集合 $T_{lg}$ 和 $T_{rg}$，使得 $\overline{ds}(1)$ 分别被平移至与 $lg$ 和 $rg$ 重合，其他元素可以根据此偏移量算出。</p>
+<div class="note info"><p><strong>命题（key correctness observation）.</strong> 不在 $T_{lg}\cup T_{rg}$ 中的元素不可能成为答案。</p>
+<p><strong>证明.</strong> 和 ricochet property 类似。</p>
+</div>
+
+<p>$T_{lg}\cup T_{rg}$ 中可能包含一些非候选的位置。将其中的候选位置称作<em>真候选位置</em>。</p>
+<div class="note "><p><strong>步骤 2-2.</strong> 用 $A_1$ 构造 $T_{lg}$ 和 $T_{rg}$，方法如上。</p>
+</div>
+
+<p>对于 $ds(\alpha), 2\leq \alpha \leq l$，容易将上述过程修改为：</p>
+<div class="note "><p><strong>步骤 2-1’.</strong> 计算 $T_{lg} \cup T_{rg}$ 中所有真候选位置中满足 $T(i - 1 + ds(\alpha))$ 最左边的和最右边的 $T(a), T(b)$，并重算 $lg, rg$。</p>
+</div>
+
+<div class="note "><p><strong>步骤 2-2’.</strong> 用 $A_\alpha$ 更新 $T_{lg}, T_{rg}$。</p>
+</div>
+
+<p>这个过程需要仔细考虑处理器分配。为了做到最优处理器数，对于每一个块我们只有 $O(m&#x2F;\log m)$ 个处理器。我们每一轮都只给 $T_{lg}$ 和 $T_{rg}$ 分配处理器，处理器将读取此位置是否为真候选，若不是则其将空转。然后发现前 $\log\log m$ 轮我们的处理器数是不够用的，但是这部分的总复杂度仍然是 $O(\log m)$ 的（因为每轮的处理时间指数级下降），后面 $\log m - \log \log m$ 轮处理器足够，每轮 $O(1)$，自然总复杂度是 $O(\log m)$，计算次数为 $O(m)$，处理器数最优。</p>
+<div class="note "><p><strong>步骤 3.</strong> 逐字符检查候选是否形成匹配。</p>
+</div>
+
+<p>综上所述，本算法复杂度为 $O(\log m)$，总操作数 $O(n)$，处理器数最优。</p>
+<h2><span id="模式串有周期性的情况">模式串有周期性的情况</span></h2><p>不妨设模式串 $P &#x3D; u^kv$，其中 $|u| &#x3D; p$，$v$ 是 $u$ 的真前缀。</p>
+<p>鉴于 $|v| &lt; |u|$ 以及命题 2.1.3，算出 $u^k$ 的出现位置再验证后面 $|v|$ 位的复杂度正确，我们只需要先算出 $u^k$ 的出现位置。</p>
+<p>首先用上述算法计算 $p’ &#x3D; P[1, 2p - 1]$ 在 $T$ 中出现的位置。那么 $u^k$ 在某位置 $i$ 出现当且仅当 $p’$ 在 $i, i + p, …, i + (k - 2)p$ 均出现。上述条件 $\bmod p$ 同余的等价类上有一个连续的长度为 $k - 1$ 的区间。一切归结为如下问题：</p>
+<div class="note "><p>哪些位置 $i$ 满足：从 $i$ 起，连续 $k - 1$ 位均为 1？</p>
+</div>
+
+<p>我们将串按长度 $k - 1$ 分块，则可以计算每块的第一个 $0$ 和最后一个 $0$（由此得到前缀 1 和后缀 1）的长度。现在对于位置为 $i$ 的 $1$，若其是后缀 1，且 $i + k - 2$ 打中了下一块的某个前缀 $1$，则其满足条件。于是上述过程可以在 $O(1)$ 时间、$O(n)$ 总操作内用最优处理器数完成。</p>
+<h1><span id="复杂度平衡后的-olog-n-文本分析">复杂度平衡后的 $O(\log^* n)$ 文本分析</span></h1><p>我们重新审视一下两个基本文本分析算法：</p>
+<ul>
+<li>基本常数时间在一轮内并行验证所有的采样。</li>
+<li>基本最优加速算法在 $O(\log n)$ 轮内逐步验证采样，每轮验证一个。</li>
+</ul>
+<p>那么平衡的思路无非是，分成 $o(\log n)$ 轮逐步验证采样，每轮并行验证多个采样。需要注意的是，基本常数时间算法是带 $\log$ 的，所以需要预先像基本最优加速算法一样验证前几个元素。</p>
+<p>我们的算法分为三个阶段：</p>
+<div class="note "><p><strong>阶段 1.</strong> 执行 $\log \log^* n + 1$ 轮基本最优加速算法。令 $\delta &#x3D; \log\log^* n + 1$（现在已经处理了 $DS$ 的前几个元素）。</p>
+</div>
+
+<p>执行完上述操作后 $T_{lg}$ 和 $T_{rg}$ 中的元素个数上界为 $n &#x2F; \log^* n$。</p>
+<p>本阶段有 $O(n)$ 次操作，时间为 $O(\log \log^* n) &lt; O(\log^* n)$。</p>
+<div class="note "><p><strong>阶段 2.</strong> 令 $count$ 从 $\log^*$ 递减到 $1$，每一轮用 $ds(\delta + 1), …, ds(\delta + \log^{(count)} n)$ 验证 $T_{lg}$ 和 $T_{rg}$ 中的真候选位置是否还是真候选。选出当前最左和最右的真候选，更新 $T_{lg}$ 和 $T_{rg}$。</p>
+</div>
+
+<p>每一轮我们会对每个候选位置执行 $O(\log^{(count)} n)$ 次验证操作，总时间为 $O(1)$，而候选位置的数量为 $n &#x2F; 2^{\delta + \log^{(count)}n} &#x3D; n &#x2F; (\log^* n\log^{(count - 1)}n) \leq n &#x2F; (\log^* n \log^{(count)} n)$，操作次数总共不超过 $O(n &#x2F; \log^* n)$。所以阶段 2 的总时间为 $O(\log^* n)$，总操作次数为 $O(n)$。</p>
+<div class="note "><p><strong>阶段 3.</strong> 将候选位置前后文逐字符比较。</p>
+</div>
+
+<p>本阶段总操作次数 $O(n)$，时间为 $O(1)$。</p>
+<p>综上，我们得到了总时间 $O(\log^* n)$，总操作次数为 $O(n)$，处理器数最优的文本分析算法。</p>
+<h1><span id="进一步讨论">进一步讨论</span></h1><p>是否有亚线性匹配算法？</p>
+<blockquote>
+<p>理论上很难。</p>
+</blockquote>
+<p>是否能够向高维拓展？</p>
+<blockquote>
+<p>虽然高维上没有类似于周期的概念，但是如果输入满足某种 conflict occurrence assumption 即任意将模式串摆在两个足够近的位置（每一维差距不超过 $m&#x2F;2$）都可以发现重叠部分有一位不同（类似于 witness），做法就可以拓展到高维。总的来说难度很大。</p>
+</blockquote>
+<p>是否能够处理近似匹配？</p>
+<blockquote>
+<p>还是需要某种 conflict occurrence assumption，因此难度也很大。</p>
+</blockquote>
+<h1><span id="参考文献">参考文献</span></h1><p>[VI85] Uzi Vishkin, Optimal parallel pattern matching in strings, Inform. and Control, 67 (1985), 91–113</p>
+<p>[BG88] Dany Breslauer, Zvi Galil, An optimal $O(\log\log n)$ time parallel string matching algorithm, SIAM J. Comput., 19 (1990), 1051–1058</p>
+<p>[CV89] Richard Cole, Uzi Vishkin, Faster optimal parallel prefix sums and list ranking, Inform. and Comput., 81 (1989), 334–352</p>
+<p>[CV86] Cole, U. Vishkin, Deterministic coin tossing and accelerating cascades: micro and macro techniques for designing parallel algorithms, Proc. 18th Annual ACM Symposium on Theory of Computing, Association for Computing Machinery, New York, 1986, 206–219</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pattern-Matching/" rel="tag"># Pattern Matching</a>
+              <a href="/tags/Parallel-Computing/" rel="tag"># Parallel Computing</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/05/DiscreteMathRevision/" rel="prev" title="Revision | 抽象代数小常识">
+                  <i class="fa fa-angle-left"></i> Revision | 抽象代数小常识
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
