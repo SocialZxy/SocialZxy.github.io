@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文是 https:&#x2F;&#x2F;doi.org&#x2F;10.1016&#x2F;S1570-8667(03)00010-8 的阅读笔记。他们尝试把 https:&#x2F;&#x2F;doi.org&#x2F;10.1137&#x2F;0220002 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003)">
+<meta property="og:url" content="http://example.com/2024/11/11/QuantumStringMatching/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文是 https:&#x2F;&#x2F;doi.org&#x2F;10.1016&#x2F;S1570-8667(03)00010-8 的阅读笔记。他们尝试把 https:&#x2F;&#x2F;doi.org&#x2F;10.1137&#x2F;0220002 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-11T03:15:30.000Z">
+<meta property="article:modified_time" content="2024-11-27T09:06:47.869Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Pattern Matching">
+<meta property="article:tag" content="Quantum Computation">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/11/11/QuantumStringMatching/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/11/11/QuantumStringMatching/","path":"2024/11/11/QuantumStringMatching/","title":"H. Ramech, V.Vinay. String matching in $\\tilde{O}(\\sqrt n + \\sqrt m)$ quantum time (2003)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003) | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">朴素的 $\tilde{O}(\sqrt{nm})$ 的算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">针对非周期性模式串的 $\tilde{O}(\sqrt n)$ 文本分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">针对非周期性模式串的 $\tilde{O}(\sqrt m)$ 模式分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">处理周期性模式串</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/11/QuantumStringMatching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003) | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-11 11:15:30" itemprop="dateCreated datePublished" datetime="2024-11-11T11:15:30+08:00">2024-11-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-27 17:06:47" itemprop="dateModified" datetime="2024-11-27T17:06:47+08:00">2024-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1016/S1570-8667(03)00010-8">https://doi.org/10.1016/S1570-8667(03)00010-8</a> 的阅读笔记。他们尝试把 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他们重新算一遍。最后一节“处理周期性串”看起来比较对，但我们放弃仔细验证了。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a></li>
+<li><a href="#%E6%9C%B4%E7%B4%A0%E7%9A%84-tildeosqrtnm-%E7%9A%84%E7%AE%97%E6%B3%95">朴素的 $\tilde{O}(\sqrt{nm})$ 的算法</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E9%9D%9E%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2%E7%9A%84-tildeosqrt-n-%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">针对非周期性模式串的 $\tilde{O}(\sqrt n)$ 文本分析</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E9%9D%9E%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2%E7%9A%84-tildeosqrt-m-%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90">针对非周期性模式串的 $\tilde{O}(\sqrt m)$ 模式分析</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2">处理周期性模式串</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="简介">简介</span></h1><p>你妈啊，整篇文章里的公式只有几个渐进记号的批文章是怎么上 TCS 杂志的？？？</p>
+<p>本文章受并行计算中的方法 deterministic sampling [VI91] 启发，提出了一种 $\tilde{O}(\sqrt n + \sqrt m)$ 的字符串匹配的量子算法。</p>
+<h1><span id="前置知识">前置知识</span></h1><p>我们完全抛弃作者的 Preliminary 一节，因为他是傻逼。</p>
+<p>回忆对于一个函数 $f: [n] \rightarrow \{0, 1\}$，若给定复杂度为 $O(T)$ oracle $U_f$，其满足</p>
+<p>$$<br>U_f|x\rangle &#x3D; (-1)^{f(x)}|x\rangle<br>$$</p>
+<p>那么存在一个 $O(T\sqrt n)$ Grover 算法 $\mathcal{G}_f$，使得</p>
+<p>$$<br>\mathcal{G}_f|0^l\rangle &#x3D; \sqrt{1-p}|\Psi_0\rangle + \sqrt{p}|\Psi_1\rangle<br>$$</p>
+<p>其中 $U_f|\Psi_i\rangle &#x3D; (-1)^i |\Psi_i\rangle$，这里 $\Psi_1$ 称为“好元素”，也就是通过 $U_f$ 之后会得到 $1$ 的元素。进行测量，就可以常数概率得到一个 $f(x) &#x3D; 1$ 的元素。如果你将 $(2)$ 的结果通过一个 $f$，使用 phase kickback 技术，可以把好坏状态表示在一个辅助比特上：</p>
+<p>$$<br>(I\otimes H)(U_f \otimes H)(I \otimes H)(\mathcal{G}_f\otimes I)|0^l\rangle|0\rangle &#x3D; \sqrt{1-p}|\Psi_0\rangle|0\rangle + \sqrt{p}|\Psi_1\rangle|1\rangle<br>$$</p>
+<div class="note "><p><strong>Remark.</strong> 原版的 Grover 算法，在不知元素个数的情况下，需要猜测被标记元素个数为 $1, 2, …, 2^l$，然后进行测量，并配上一些经典过程来完成（以 $\frac{3}{4}$ 概率得到一个被标记元素）。然而我们有<em>延迟测量准则（deferred measurement principle）</em>，可以增加 $O(m)$ 个辅助比特来将测量推迟到电路末尾。计算一下可以发现被标记元素的振幅至少是 $3&#x2F;4$。</p>
+<p>如果我其实算错了，也不要紧，可能有两种方法替代：</p>
+<ul>
+<li>我自己想了一种办法，来让被标记元素的振幅至少是 $3&#x2F; (4\log n)$，如果你不关心 $\log$ 因子，这种做法就 work。（当然有可能这个也算错了）</li>
+<li>可以参考 [YL+14]，这种算法本来就不需要测量。（当然这篇文章我还没读完，如果理解错了就寄了）</li>
+</ul>
+<p>如果三种办法都寄了，我们就直接润了。</p>
+</div>
+
+<p>通过如下的方法来将 Grover 算法进行“嵌套”，比如我们有一个二维的函数 $f: [n]\times [m]\rightarrow \{0, 1\}$，我们的目标是借助 $U_f$ 找到其中的一个 $1$。首先固定第一维，我们有 Grover oracle</p>
+<p>$$<br>\mathcal{G}_{f_i}|i\rangle|0^l_m\rangle|0\rangle &#x3D; \sqrt {p_i} |i\rangle|\Psi_{i, 1}\rangle|1\rangle + \sqrt{1 - p_i} |i\rangle|\Psi_{i, 0}\rangle|0\rangle<br>$$</p>
+<p>如果某一行有 $1$，那么 $p\geq 3&#x2F;4$，否则 $p &#x3D; 0$。现在向第一个寄存器传入均一叠加态，结果应当是</p>
+<p>$$<br>\frac{1}{\sqrt n}\left(\sum_{i\in [n]}\sqrt {p_i} |i\rangle|\Psi_{i, 1}\rangle\right)|1\rangle + \frac{1}{\sqrt n}\left(\sum_{i\in [n]}\sqrt {1 - p_i} |i\rangle|\Psi_{i, 0}\rangle\right)|0\rangle<br>$$</p>
+<p>求和式子内部的向量是两两正交的，根据勾股定理，好元素的振幅是</p>
+<p>$$<br>\sqrt{\sum_{i\in [n]} p_i}\geq \sqrt{\frac{3}{4n}}<br>$$</p>
+<p>只需要做 $O(\sqrt n)$ 的振幅放大，就可以将好元素的振幅放至接近 $1$。注意此时你只知道振幅的下界，所以仍然需要猜测振幅为 $\sqrt{\frac{3}{4n}}, \sqrt{2\frac{3}{4n}}, \sqrt{4\frac{3}{4n}}, …$，配合一些经典过程。此时测量前两个寄存器，可以以 $\frac{3}{4}$ 得到一个 $(i, j)$ 使得 $f(i, j) &#x3D; 1$。</p>
+<p>另外，[DH96] 指出给定一个列表，可以在 $O(\sqrt n)$ 时间内找到其中的最小值，即存在一个 oracle $U_M$，满足</p>
+<p>$$<br>U_M|0^l\rangle &#x3D; \sqrt p |i_M\rangle + \sqrt{1 - p}|\bot\rangle<br>$$</p>
+<p>其中 $i_M$ 的每个分量 $i_M’$ 都满足 $a_{i_{M’}} \leq a_j, \forall j$。</p>
+<p>关于字符串的部分，在上一篇文章中有所谈及。</p>
+<p>下文假设给定两字符串的随机访问 Oracle。文本串称为 $T_{1, …, m}$，模式串称为 $P_{1, …, m}$。则 $U_T$ 给出酉变换 $|i\rangle|0\rangle\mapsto|i\rangle|T_i\rangle$，$U_P$ 同理。假设对态完成算术运算的复杂度是 $O(1)$。</p>
+<h1><span id="朴素的-tildeosqrtnm-的算法">朴素的 $\tilde{O}(\sqrt{nm})$ 的算法</span></h1><p>首先可以实现 $g(i, j)$ 表示 $T_{i + j}$ 和 $P_j$ 是否不匹配，这是一个 $O(1)$ 的经典算法。因此我们有了 $O(1)$ 的 oracle </p>
+<p>$$<br>U_g|i\rangle|j\rangle &#x3D; (-1)^{g(i, j)}|i\rangle|j\rangle<br>$$</p>
+<p>在第二个寄存器上用 grover 搜索，如果存在不匹配的位置，能将其振幅放大至至少 $3&#x2F;4$，也就是我们能够实现一个 $O(\sqrt m)$ 的 $U_f$，使得</p>
+<p>$$<br>U_f|i\rangle|0^l\rangle|0\rangle &#x3D; \begin{cases}<br>    |i\rangle|\Psi\rangle|0\rangle &amp; \text{the pattern matches at $i$} \\<br>    \sqrt p|i\rangle|\Psi_1\rangle|1\rangle + \sqrt{1 - p}|i\rangle|\Psi_0\rangle|0\rangle &amp; \text{the pattern doesn’t matches at $i$}<br>\end{cases}<br>$$</p>
+<blockquote>
+<p>如果使用早期 grover 算法，这里就会出现奇怪的问题：此处 $p$ 的下界是 $3&#x2F;4$ 如果你现在直接对第三个寄存器上是 $0$ 的元素做振幅放大（on the top of $i$），你最后得到的东西是<em>匹配上了的位置</em>和<em>未匹配上的位置的分量</em>混合在一起的东西。要使得这两部分的振幅之比变成 $O(1)$ 而非现在的 $O(1&#x2F;n)$，需要在第二、三寄存器上做振幅放大。这里除了 [YL+14] 中的办法，我不知道还有什么别的途径。总之这里我们可以付出 $O(\mathrm{polylog}(n))$ 的代价，使得 $p &#x3D; 1 - o(1)$。</p>
+</blockquote>
+<p>现在在第一、三寄存器上做 $O(\sqrt n)$ 振幅放大，然后测量第一个寄存器，就可以常数概率得到一个确实匹配上了的位置。总复杂度是 $\tilde{O}(\sqrt {nm})$。</p>
+<h1><span id="针对非周期性模式串的-tildeosqrt-n-文本分析">针对非周期性模式串的 $\tilde{O}(\sqrt n)$ 文本分析</span></h1><p>这节以及下一节思路来自 [VI91]，我们的阅读笔记是<a href="../../../../2024/11/08/DeterministicSampling/">链接</a>。假定我们能计算出 deterministic sampling。将序列分成 $2n &#x2F; m$ 块（块长为 $m&#x2F;2$），回忆我们做的事情是求出最小、最大的匹配上所有 deterministic sample 的位置。</p>
+<p>首先容易设计 $O(\log n)$ 的经典算法 $k(i, j)$，如果第 $i$ 块的第 $j$ 位匹配了所有的 deterministic sample，就将此位置置为 $j$，否则置为 $\infty$，具体地：</p>
+<p>$$<br>U_k|i\rangle|j\rangle|0\rangle &#x3D; \begin{cases}<br>    |i\rangle|j\rangle|j\rangle      &amp; \text{if all deterministic sample matches}\\<br>    |i\rangle|j\rangle|\infty\rangle &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>将 $U_f|i\rangle$ 用作 DH96 的 oracle，将得到一个算法，其读入 $|i\rangle|0\rangle$ 使得块中最小的匹配上所有 deterministic sample 的位置（记作 $mn_i$）的振幅超过 $3&#x2F;4$，即 </p>
+<p>$$<br>U_{mn}|i\rangle|0^l\rangle &#x3D; \sqrt{p}|i\rangle|mn_i\rangle + \sqrt{1 - p}|\bot\rangle<br>$$</p>
+<p>此 oracle 的时间为 $O(\sqrt m\log m)$。接下来，在第二个寄存器（附加辅助比特 $|0^l\rangle|0\rangle$）上作用 $(9)$ 式中的酉变换 $U_f$，得到一个 $O(\sqrt m\mathrm{polylog}(n))$ 的 oracle，使得</p>
+<p>$$<br>U_{h}|i\rangle|0^l\rangle|0\rangle|0\rangle &#x3D; \begin{cases}<br>    |i\rangle|\Phi\rangle|\Psi\rangle|0\rangle &amp; \text{if the candidate matches} \\<br>    \sqrt{p} |i\rangle|\Phi_1\rangle|\Psi_1\rangle|1\rangle + \sqrt{1-p} |i\rangle|\Phi_0\rangle|\Psi_0\rangle|0\rangle &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>其中 $p &#x3D; 1 - o(1)$。接下来在第一个寄存器上均一叠加 $|i\rangle$，以此为 Oracle 在第一、四寄存器上做 $O(\sqrt {n&#x2F;m})$ 的振幅放大，即可得到确实匹配上了的位置。总复杂度为 $O(\sqrt n\mathrm{polylog}(n))$。</p>
+<p>现在问题只剩下了 deterministic sample 的求解。</p>
+<h1><span id="针对非周期性模式串的-tildeosqrt-m-模式分析">针对非周期性模式串的 $\tilde{O}(\sqrt m)$ 模式分析</span></h1><p>这一节非常傻逼。首先这里思路参考 [VI91] 中的随机化模式分析算法，大致思路是找到 witness 之后不是选择相同字符数量较少的一个，而是随机选一个。</p>
+<p>因为 deterministic sample 一共只有 $O(\log n)$ 位，我们选择分 $O(\log n)$ 个阶段来计算这个问题，每阶段量子计算用于配合搜索 witness 和 $\min A_i$、$\max A_i$。计算 $\min A_i$ 和 $\max A_i$ 的手法和 $(10), (11)$ 式如出一辙，而计算 witness 则是非常 trivial 的 Grover 搜索。</p>
+<p>显然复杂度是 $\tilde{O}(\sqrt m)$。</p>
+<h1><span id="处理周期性模式串">处理周期性模式串</span></h1><p>首先找串的周期。使用经典过程套量子搜索：</p>
+<p>利用 $(9)$ 中的 oracle，容易判断 $v$ 是否是原串的周期。如果上一节的算法在某一阶段并没有找到 witness，那么周期必然是 $|v| &#x3D; \min A_i - \max A_i$ 的因数之一。那么可以尝试除掉其每一个质因子，然后用量子算法判断是否确实是周期，因此可以在 $O(\sqrt m\mathrm{polylog}(m))$ 的时间内求出周期。</p>
+<p>现在设 $P &#x3D; v^kw$，我们已经知道了 $|v|$，并可以求出 $v$ 的 deterministic sample。现在如果串在 $[im&#x2F;2, (i + 1)m&#x2F;2)$ 这段区间有出现，$v+w$ 必然在 $[(i+1)m&#x2F;2 - |v|, (i+1)m&#x2F;2)$ 这段区间有出现，而且只需要考虑最前面一次出现和最后面一次出现，用 [DH96] 中的算法可以解决。假设最、后前面一次出现位置分别为 $l, r$。再用 DH96 可以求出与 $l \bmod |v|$ 同余的最早出现位置和最晚出现位置，只要这两个的差距 $\geq k$，就说明这一块确实有匹配。对于 $r$ 同理。然后做振幅放大。</p>
+<p>唉唉，看起来确实是一些可逆经典电路和量子电路叠起来即可，那你说是对的就是对的吧，我也懒得细算了。</p>
+<h1><span id="参考文献">参考文献</span></h1><p>[BB+96] M. Boyer, G. Brassard, P. Hoyer, A. Tapp. Tight bounds on quantum searching. Proceedings of 4th Workshop on Physics and Computation-PhysComp (1996), pp. 36-43</p>
+<p>[DH96] C. Dürr, P. Hoyer. A quantum algorithm for finding the minimum. Quantum Physics E-Print Archive. <a target="_blank" rel="noopener" href="http://xxx.lanl.gov/quant-ph/9607014">http://xxx.lanl.gov/quant-ph/9607014</a>. 1996</p>
+<p>[YL+14] Theodore J. Yoder, Guang Hao Low, and Isaac L. Chuang. Fixed-Point Quantum Search with an Optimal Number of Queries. Phys. Rev. Lett. 113, 210501.</p>
+<p>[VI91] Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching. SIAM Journal on Computing 1991 20:1, 22-40</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pattern-Matching/" rel="tag"># Pattern Matching</a>
+              <a href="/tags/Quantum-Computation/" rel="tag"># Quantum Computation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/08/DeterministicSampling/" rel="prev" title="Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)">
+                  <i class="fa fa-angle-left"></i> Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/11/15/FixedpointQuantumSearch/" rel="next" title="【Under Construction】Yoder, Low, Chuang. Fixed-point quantum search with an optimal number of queries">
+                  【Under Construction】Yoder, Low, Chuang. Fixed-point quantum search with an optimal number of queries <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
