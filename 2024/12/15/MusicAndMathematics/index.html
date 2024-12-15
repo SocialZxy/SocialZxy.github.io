@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。 因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。    从拨弦的情形入手 d’Alembert 定理 空气柱振动方程 带哨口的乐器的振动方程解 【Not Completed】锥形管乐器的振动方程解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Under Construction】关于管乐器泛音演奏（超吹）的一些探究">
+<meta property="og:url" content="http://example.com/2024/12/15/MusicAndMathematics/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。 因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。    从拨弦的情形入手 d’Alembert 定理 空气柱振动方程 带哨口的乐器的振动方程解 【Not Completed】锥形管乐器的振动方程解">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/StringForceAnalysis.png">
+<meta property="article:published_time" content="2024-12-15T07:19:21.000Z">
+<meta property="article:modified_time" content="2024-12-15T15:10:12.374Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Music">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/StringForceAnalysis.png">
+
+
+<link rel="canonical" href="http://example.com/2024/12/15/MusicAndMathematics/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/15/MusicAndMathematics/","path":"2024/12/15/MusicAndMathematics/","title":"【Under Construction】关于管乐器泛音演奏（超吹）的一些探究"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【Under Construction】关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">从拨弦的情形入手 d’Alembert 定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">空气柱振动方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">带哨口的乐器的振动方程解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">【Not Completed】锥形管乐器的振动方程解</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/15/MusicAndMathematics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【Under Construction】关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Under Construction】关于管乐器泛音演奏（超吹）的一些探究
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-15 15:19:21 / Modified: 23:10:12" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。</p>
+<p>因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%BB%8E%E6%8B%A8%E5%BC%A6%E7%9A%84%E6%83%85%E5%BD%A2%E5%85%A5%E6%89%8B-dalembert-%E5%AE%9A%E7%90%86">从拨弦的情形入手 d’Alembert 定理</a></li>
+<li><a href="#%E7%A9%BA%E6%B0%94%E6%9F%B1%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B">空气柱振动方程</a></li>
+<li><a href="#%E5%B8%A6%E5%93%A8%E5%8F%A3%E7%9A%84%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">带哨口的乐器的振动方程解</a></li>
+<li><a href="#not-completed%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">【Not Completed】锥形管乐器的振动方程解</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="从拨弦的情形入手-dalembert-定理">从拨弦的情形入手 d’Alembert 定理</span></h1><p>设弦张力为 $T$，线密度为 $\rho$。取一段微元 $\Delta x$ 做受力分析。以向上为正方向设这段微元的位移为 $y(x, t)$。</p>
+<p><img src="/../picture/StringForceAnalysis.png" alt="image-20241215143248960"></p>
+<p>在 $\theta$ 很小的情况下可以用 $\partial y &#x2F; \partial x$ 近似 $\sin(x)$。于是依照牛顿定律得到方程</p>
+<p>$$<br>T\left(\frac{\partial y}{\partial x}(x + \Delta x) - \frac{\partial y}{\partial x}(x)\right) &#x3D; \rho\Delta x \frac{\partial^2 y}{\partial t^2}<br>$$</p>
+<p>令 $\Delta x\rightarrow 0$，得到偏微分方程（其中 $c &#x3D; \sqrt{T &#x2F; \rho}$）</p>
+<div class="note success"><p><strong>定义 1.1（弦振动方程）</strong> 给定张力为 $T$，线密度为 $\rho$ 的弦。定义 $c &#x3D; \sqrt{T &#x2F; \rho}$，则</p>
+<p>$$<br>\boxed{c^2\frac{\partial^2 y}{\partial x^2} &#x3D; \frac{\partial^2 y}{\partial t^2}} \label{stringvibr}<br>$$</p>
+</div>
+
+<p>由于弦两端锁死，所以方程包含边值条件 $y(0, t) &#x3D; y(L, t) &#x3D; 0$。现在解该方程，首先假设一切函数都足够光滑，那么偏导算子是对易的，这就是说</p>
+<p>$$<br>\left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t} - c\frac{\partial}{\partial x}\right)y &#x3D; 0<br>$$</p>
+<p>设 $u &#x3D; x + ct, v &#x3D; x - ct$，那么根据链式法则</p>
+<p>$$<br>\begin{cases}<br>\dfrac{\partial}{\partial x} &#x3D; \dfrac{\partial}{\partial u}\dfrac{\partial u}{\partial x} + \dfrac{\partial}{\partial v}\dfrac{\partial v}{\partial x} &#x3D; \dfrac{\partial}{\partial u} + \dfrac{\partial}{\partial v} \\<br>\dfrac{\partial}{\partial t} &#x3D; \dfrac{\partial}{\partial u}\dfrac{\partial u}{\partial t} + \dfrac{\partial}{\partial v}\dfrac{\partial v}{\partial t} &#x3D; c\left(\dfrac{\partial}{\partial u} - \dfrac{\partial}{\partial v}\right)<br>\end{cases}<br>$$</p>
+<p>带入上式之后整理得到 </p>
+<p>$$<br>{\color{grey} 4c^2}\frac{\partial^2}{\partial u\partial v}y &#x3D; 0<br>$$</p>
+<p>这表明方程的通解是 $y &#x3D; f(x + ct) + g(x - ct)$。从几何上理解，这是两列依次从右往左和从左往右以速度 $c$ 传播的行波的叠加，这也是为什么这个解称作原方程的<em>行波解</em>。现在加上边值条件得到</p>
+<p>$$<br>\begin{cases}<br>f(ct) + g(-ct) &#x3D; 0 \\<br>f(L + ct) + g(L - ct) &#x3D; 0<br>\end{cases}<br>$$</p>
+<p>于是答案改写为 </p>
+<p>$$<br>y &#x3D; f(ct + x) - f(ct - x)<br>$$</p>
+<p>置 $ct &#x3D; \lambda$（显然可以取到任意的实数）$f(\lambda - L) &#x3D; f(\lambda + L)$，这表明原微分方程的解都是周期解。综上，我们得到了如下定理</p>
+<div class="note info"><p><strong>定理 1.2（d’Alembert）.</strong> 弦振动方程 $\ref{stringvibr}$ 附上边值条件的通解是</p>
+<p>$$<br>y(x, t) &#x3D; f(ct + x) - f(ct - x)<br>$$</p>
+<p>其中 $f$ 是周期为 $2L$ 的函数。</p>
+</div>
+
+<p>将 $f(x)$ 其展开成傅里叶级数，$\sin$ 和 $\cos$ 用辅助角公式合并成 $\cos$，系数均作待定系数，得到 </p>
+<p>$$<br>f(x) &#x3D; \sum_{n&#x3D;1}^{\infty} C_n \cos\left(\frac{n\pi x}{L} + \phi_n\right)<br>$$</p>
+<p>换回原来的式子中和差化积得到</p>
+<p>$$<br>y &#x3D; \sum_{n&#x3D;1}^\infty 2C_n\sin\left(\frac{n\pi x}{L}\right)\sin\left(\frac{n\pi ct}{L} + \phi_n\right)<br>$$</p>
+<p>单独考察横坐标为 $x$ 的振动模态，观察到它是无穷多个简谐振动的叠加，其第 $i$ 个振动振幅为 $2C_n\sin\left(\frac{n\pi x}{L}\right)$，频率为 $\frac{nc}{2L}$，这给出了如下结果：</p>
+<div class="note info"><p><strong>定理 1.3（Marin Mersenne）.</strong> 一根弦张力为 $T$，线密度为 $\rho$，长度为 $L$，那么拨弦产生的声音的<em>基音</em>频率为</p>
+<p>$$<br>\frac{1}{2L}\sqrt{\frac{T}{\rho}}<br>$$</p>
+<p>第 $n$ 泛音的频率为</p>
+<p>$$<br>\frac{n + 1}{2L}\sqrt{\frac{T}{\rho}}<br>$$</p>
+</div>
+
+<p>现在要决定每个振动的强度，还需要确定待定系数 $C_n$。这时只需要对初状态做傅里叶分析即可。因为不是我们讨论的重点，所以略去。</p>
+<h1><span id="空气柱振动方程">空气柱振动方程</span></h1><p>所谓的“空气柱振动”可以理解为空气柱中的气体分子相互挤压，往复运动。</p>
+<p>首先考虑一个均匀细管，设 $\xi(\boldsymbol{x}, t)$ 为初始在 $\boldsymbol{x}$ 处的体积元的位移，另外设 $P(\boldsymbol{x}, t)$ 为此时 $\boldsymbol{x}$ 附近的压强。仍然假设一切函数都是充分光滑的。定义<em>声压</em> $p(\boldsymbol{x}, t) &#x3D; P(\boldsymbol{x}, t) - p_0$，其中 $p_0$ 是标准大气压。那么胡克定律指出</p>
+<p>$$<br>p &#x3D; -B\frac{\partial \xi}{\partial x} \label{hooke}<br>$$</p>
+<p>其中 $B$ 是气体的体积模量。我不知道这里的公式具体是如何推导的，尤其是 $B$ 是什么东西，但是 $\partial \xi &#x2F; \partial x$ 看起来明显就是 $x$ 方向上的压缩程度，它和声压成正比是符合直觉的。</p>
+<p>牛顿第二定律指出在 $x$ 方向上有</p>
+<p>$$<br>\frac{\partial p}{\partial x} &#x3D; -\rho\frac{\partial^2\xi}{\partial t^2} \label{newton}<br>$$</p>
+<p>将 $\ref{hooke}$ 求 $x$ 方向上的偏导带入 $\ref{newton}$ 得到</p>
+<p>$$<br>\frac{\partial^2 \xi}{\partial x^2} &#x3D; c^2\frac{\partial^2\xi}{\partial t^2}<br>$$</p>
+<p>其中 $c &#x3D; \sqrt{\rho &#x2F; B}$。也可以尝试消掉每个体积元的位移信息。将 $\ref{newton}$ 求 $x$ 方向上的偏导，然后注意在充分光滑性假设下，可以先对 $\xi$ 求 $x$ 的偏导，此时带入 $\ref{hooke}$ 即完全消掉 $\xi$，得到方程 </p>
+<p>$$<br>\frac{\partial^2 p}{\partial x^2} &#x3D; c^2\frac{\partial^2 p}{\partial t^2}<br>$$</p>
+<p>上述推导仅以一个方向为例，拓展至其他方向上同样成立，下面我们展示的是教科书的空气柱振动方程</p>
+<div class="note success"><p><strong>定义 1.4（空气柱振动方程）.</strong> 给定体积模量为 $B$，密度为 $\rho$ 的气体，$p(\boldsymbol{x}, t)$ 是 $\boldsymbol{x}$ 处的压强，则</p>
+<p>$$<br>\boxed{\nabla^2 p - c^2\frac{\partial^2 p}{\partial t^2} &#x3D; 0} \quad \text{and} \quad \boxed{\nabla^2 \xi - c^2\frac{\partial^2 \xi}{\partial t^2} &#x3D; 0} \label{windvibr}<br>$$</p>
+<p>其中 $c &#x3D; \sqrt{\rho &#x2F; B}$。</p>
+</div>
+
+<p>此方程的形式和 \ref{stringvibr} 如出一辙。因此行波解具有相同的形式。</p>
+<h1><span id="带哨口的乐器的振动方程解">带哨口的乐器的振动方程解</span></h1><p>演奏此类乐器时，向哨口吹入空气，哨子切割空气引发管内空气柱振动。之所以将问题限定在哨口，是因为我们暂时不清楚用哨片起振的管乐器应当怎么样加边值条件。</p>
+<p>为了给出方程的解，我们需要加边值条件。然而此处的边值条件和管的形状有关，一般地：</p>
+<ul>
+<li><p>若为开管（一端为送气口，一端敞开），则两端都有边值条件 $p &#x3D; 0$（与大气相通）。</p>
+<p>长笛、竖笛等属于此类。</p>
+</li>
+<li><p>若为闭管（一端为送气口，一段封闭），则送气端有边值条件 $p &#x3D; 0$（与大气相通），封闭端有边值条件 $\xi &#x3D; 0$（管口堵死）。</p>
+<p>一种非主流的乐器，称作“滑哨笛”或者“溜溜笛”是此类的实例。</p>
+</li>
+</ul>
+<p>此外，对于敞开口，可能实际参与振动的空气柱长度（称作<em>有效长度</em>）大于物理的管长，因此计算中可能需要求这个有效长度（称作<strong>管口校正</strong>）。下文中我们暂时忽略管口校正。</p>
+<p>开管施加边值条件后得到的边值问题和弦振动的情形别无二致，因此一切结论都保留。现在考虑闭管的情形。我们选择解决关于 $\xi$ 的方程，现在我们有行波解</p>
+<p>$$<br>\xi(x, t) &#x3D; f(ct + x) + g(x - ct)<br>$$</p>
+<p>和边值条件：</p>
+<p>$$<br>\begin{cases}<br>\dfrac{\partial}{\partial x} \xi(0, t) \equiv 0 &amp; \Rightarrow f’(\lambda) + g’(-\lambda) &#x3D; 0 \\<br>\xi(L, t) \equiv 0 &amp; \Rightarrow f(ct + L) + g(L - ct) &#x3D; 0<br>\end{cases}<br>$$</p>
+<p>将第一个关系从 $0$ 积分到 $t$ 立即得到 $f(\lambda) &#x3D; g(-\lambda) + C$，带进第二个关系当中得到 $f(\lambda + L) + f(\lambda - L) &#x3D; C$。对此式子稍做操作：</p>
+<p>$$<br>f(u) + f(u + 2L) &#x3D; C, f(u + 2L) + f(u + 4L) &#x3D; C \quad \Rightarrow \quad f(u) &#x3D; f(u + 4L)<br>$$</p>
+<p>至少说明所有的解都是周期解，只是周期变成了 $4L$。现在套上上文的傅里叶分析，得到解具有形式</p>
+<p>$$<br>\xi(x, t) &#x3D; \sum_{i&#x3D;1}^\infty 2C_n\cos\left(\frac{n\pi x}{2L}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
+<p>进一步分析，因为在 $x &#x3D; 0$ 处有 $\xi(x, t)\equiv 0$，因此我们对上述函数代入 $x &#x3D; 0$ 得到 </p>
+<p>$$<br>0(t) &#x3D; \sum_{n&#x3D;1}^\infty 2C_n\cos\left(\frac{n\pi}{2}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
+<p>注意任意函数在傅里叶基下的坐标唯一，而 $0(t)$ 的一个坐标为 $(0, 0, …)$，因此有当 $n$ 为偶数时，必须有 $C_n &#x3D; 0$。所以解一定具有形式</p>
+<p>$$<br>\xi(x, t) &#x3D; \sum_{n&#x3D;1, \text{$n$ is odd}}^\infty 2C_n\cos\left(\frac{n\pi x}{2L}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
+<p>这表明闭管乐器的基频为</p>
+<p>$$<br>\frac{1}{4L}\cdot c<br>$$</p>
+<p>比开管乐器低一个八度，并且只能够吹奏奇数阶泛音，符合我们的常识。</p>
+<h1><span id="not-completed锥形管乐器的振动方程解">【Not Completed】锥形管乐器的振动方程解</span></h1><p>暂时没写完，我们准备参考 R. Dean Ayers, Lowell J. Eliason, Daniel Mahgerefteh; The conical bore in musical acoustics. Am. J. Phys. 1 June 1985; 53 (6): 528–537. <a target="_blank" rel="noopener" href="https://doi.org/10.1119/1.14233%E3%80%82">https://doi.org/10.1119/1.14233。</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Music/" rel="tag"># Music</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/07/QuantumComputation2/" rel="prev" title="【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走">
+                  <i class="fa fa-angle-left"></i> 【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

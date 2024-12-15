@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    技术概览 前置知识 字符串基础 计算模型 量子算法 量子游走   最长公共子串问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【Under Construction】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems">
+<meta property="og:url" content="http://example.com/2024/11/28/NearOptimalQuantumStringAlgo/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    技术概览 前置知识 字符串基础 计算模型 量子算法 量子游走   最长公共子串问题">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2024-11-28T12:10:20.000Z">
+<meta property="article:modified_time" content="2024-11-29T03:42:02.946Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Quantum Computation">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2024/11/28/NearOptimalQuantumStringAlgo/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/11/28/NearOptimalQuantumStringAlgo/","path":"2024/11/28/NearOptimalQuantumStringAlgo/","title":"【Under Construction】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【Under Construction】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">技术概览</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">字符串基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">计算模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">量子算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">量子游走</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">最长公共子串问题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">40</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/28/NearOptimalQuantumStringAlgo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【Under Construction】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【Under Construction】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-28 20:10:20" itemprop="dateCreated datePublished" datetime="2024-11-28T20:10:20+08:00">2024-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-29 11:42:02" itemprop="dateModified" datetime="2024-11-29T11:42:02+08:00">2024-11-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%8A%80%E6%9C%AF%E6%A6%82%E8%A7%88">技术概览</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a><ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80">字符串基础</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B">计算模型</a></li>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">量子算法</a></li>
+<li><a href="#%E9%87%8F%E5%AD%90%E6%B8%B8%E8%B5%B0">量子游走</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2%E9%97%AE%E9%A2%98">最长公共子串问题</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="技术概览">技术概览</span></h1><h1><span id="前置知识">前置知识</span></h1><h2><span id="字符串基础">字符串基础</span></h2><div class="note success"><p><strong>记号</strong></p>
+<ul>
+<li>字符串 $s_1$ 字典序小于 $s_2$ 记作 $s_1\prec s_2$，类似地定义 $\succ, \preceq, \succeq$。</li>
+<li>$s$ 的反串记作 $s^R$。</li>
+<li>$s$ 的周期记作 $\textsf{per}(s)$。若 $\textsf{per}(s)\leq |s| &#x2F; 2$，则称 $s$ 是周期性的。若 $\textsf{per}(s)\nmid |s|$，称 $s$ primitive。</li>
+</ul>
+</div>
+
+<div class="note info"><p><strong>引理 1.</strong> 给定字符串 $s_1\preceq s_2 \preceq \cdots\preceq s_m$，则 $\mathsf{lcp}(s_1, s_m) &#x3D; \min_{1\leq i &lt; m} \mathsf{lcp}(s_{i}, s_{i + 1})$。</p>
+<blockquote>
+<p>这就是后缀排序时使用的经典结论。</p>
+</blockquote>
+</div>
+
+<div class="note info"><p><strong>引理 2（Weak Periodicity Lemma）.</strong> 若 $p, q$ 都是 $s$ 的周期，且 $p + q \leq |s|$，那么 $\gcd(p, q)$ 也是 $s$ 的周期。</p>
+</div>
+
+<div class="note info"><p><strong>引理 3.</strong> 假设 $|s| &#x2F; 2 \leq |t| \leq |s|$，$t$ 在 $s$ 中出现的所有位置为 $i_1, …, i_m$，则 $i_1, …, i_m$ 是等差数列，且若 $m\geq 3$，$\textsf{per}(t)$ 正是该等差数列的公差。</p>
+</div>
+
+<p>对于一个 primitive $s$，若其是所有循环位移中最小的一个，则称其为 <em>Lyndon word</em>。一个周期为 $p$ 的串的 <em>Lyndon root</em> 定义为其循环节的最小字典序循环位移。</p>
+<h2><span id="计算模型">计算模型</span></h2><p>假设有字符串 $s$ 的随机访问 Oracle $O_s : |i, b\rangle\mapsto |i, b \oplus s_i\rangle$。</p>
+<p>为了做量子游走，我们假定存在如下门：$|i, b, z_1, …, z_m\rangle \mapsto |i, z_i, z_1, …, b, …, z_m\rangle$。</p>
+<h2><span id="量子算法">量子算法</span></h2><div class="note info"><p><strong>引理 4.</strong> 存在一个量子算法能够在 $\tilde{O}(\sqrt n)$ 复杂度内求 $\mathsf{lcp}$ 和判断字典序大小关系。</p>
+<p><em>证明.</em> 回忆 Grover 可以判定两个字符串是否相等，在外面套上一层二分即可。</p>
+</div>
+
+<div class="note info"><p><strong>引理 5.</strong> 存在一个量子算法，能够在 $\tilde{O}(\sqrt n)$ 复杂度内判断 $s$ 在 $t$ 中是否出现。</p>
+<p>这就是臭名昭著的 [RV03]。</p>
+</div>
+
+<h2><span id="量子游走">量子游走</span></h2><p>本文考虑 Johnson 图 $J(m, r)$ 上的量子游走，此图有 $\binom{m}{r}$ 个点，每个点是 $[m]$ 的一个 $r$-子集，两点连边当且仅当边距为 $1$（相当于 Hamming 图 $H(m, r)$ 的一个诱导子图）。</p>
+<p>按照惯例设启动代价是 $S$，更新代价是 $U$，检验代价是 $C$，假设 marked item 占比是 $\varepsilon$。这个图的 Spectral Gap 看起来像 $\frac{1}{r}$ 的，所以说有</p>
+<div class="note info"><p><strong>定理 6.</strong> 存在一个时间为 $O(S + \frac{1}{\sqrt{\varepsilon}}(\sqrt rU + V))$ 量子算法，判断图是全空还是存在占比至少 $\varepsilon$ 的 mark item。</p>
+</div>
+
+<p>这个复杂度有点怪，我们先当 input 用，之后再细看。</p>
+<h1><span id="最长公共子串问题">最长公共子串问题</span></h1><p>问题是求两个串的最长公共（连续）子串。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Quantum-Computation/" rel="tag"># Quantum Computation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/11/15/FixedpointQuantumSearch/" rel="prev" title="【Under Construction】Yoder, Low, Chuang. Fixed-point quantum search with an optimal number of queries">
+                  <i class="fa fa-angle-left"></i> 【Under Construction】Yoder, Low, Chuang. Fixed-point quantum search with an optimal number of queries
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/07/QuantumComputation2/" rel="next" title="【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走">
+                  【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

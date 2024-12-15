@@ -19,19 +19,19 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 实际上是量子计算课程的学习笔记。但是在我对底层原理有充分理解之前，我会将我学的东西称为“应用线性代数”。    Grover’s Algorithm">
+    <meta name="description" content="Abstract. 实际上是量子计算课程的学习笔记。但是在我对底层原理有充分理解之前，我会将我学的东西称为“应用线性代数”。 本片    Grover’s Algorithm">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Under Construction】Revision | 应用线性代数">
+<meta property="og:title" content="【Under Construction】应用线性代数学习笔记 (1) 无结构搜索">
 <meta property="og:url" content="http://example.com/2024/10/18/QuantumComputation1/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 实际上是量子计算课程的学习笔记。但是在我对底层原理有充分理解之前，我会将我学的东西称为“应用线性代数”。    Grover’s Algorithm">
+<meta property="og:description" content="Abstract. 实际上是量子计算课程的学习笔记。但是在我对底层原理有充分理解之前，我会将我学的东西称为“应用线性代数”。 本片    Grover’s Algorithm">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/Qcircuit-AllRefl.png">
 <meta property="article:published_time" content="2024-10-18T13:04:34.000Z">
-<meta property="article:modified_time" content="2024-11-11T11:31:03.920Z">
+<meta property="article:modified_time" content="2024-12-07T07:27:23.295Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Linear Algebra">
-<meta property="article:tag" content="Quantum Computation">
+<meta property="article:tag" content="Grover&#39;s Search">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/picture/Qcircuit-AllRefl.png">
 
@@ -40,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/10/18/QuantumComputation1/","path":"2024/10/18/QuantumComputation1/","title":"【Under Construction】Revision | 应用线性代数"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/10/18/QuantumComputation1/","path":"2024/10/18/QuantumComputation1/","title":"【Under Construction】应用线性代数学习笔记 (1) 无结构搜索"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>【Under Construction】Revision | 应用线性代数 | Stellary's Notes</title>
+<title>【Under Construction】应用线性代数学习笔记 (1) 无结构搜索 | Stellary's Notes</title>
   
 
 
@@ -132,18 +132,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">37</span>
+          <span class="site-state-item-count">40</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-count">12</span>
         <span class="site-state-item-name">categories</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">31</span>
+        <span class="site-state-item-count">34</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -212,12 +212,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="【Under Construction】Revision | 应用线性代数 | Stellary's Notes">
+      <meta itemprop="name" content="【Under Construction】应用线性代数学习笔记 (1) 无结构搜索 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Under Construction】Revision | 应用线性代数
+          【Under Construction】应用线性代数学习笔记 (1) 无结构搜索
         </h1>
 
         <div class="post-meta-container">
@@ -235,7 +235,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-11-11 19:31:03" itemprop="dateModified" datetime="2024-11-11T19:31:03+08:00">2024-11-11</time>
+      <time title="Modified: 2024-12-07 15:27:23" itemprop="dateModified" datetime="2024-12-07T15:27:23+08:00">2024-12-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -243,7 +243,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Quantum-Computing/" itemprop="url" rel="index"><span itemprop="name">Quantum Computing</span></a>
         </span>
     </span>
 
@@ -257,6 +261,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 实际上是量子计算课程的学习笔记。但是在我对底层原理有充分理解之前，我会将我学的东西称为“应用线性代数”。</p>
+<p>本片</p>
 <!-- toc -->
 
 <ul>
@@ -307,8 +312,6 @@
 <p>因此</p>
 <p>$$<br>(VU)^t|\psi\rangle &#x3D; \sin (2t + 1)\theta|w\rangle + \cos(2t + 1)\theta|w^\perp\rangle<br>$$</p>
 <p>如果在标准正交基下测量，想要使得 $w$ 的出现概率尽可能大，就要使得 $(2t + 1)\theta \rightarrow \frac{\pi}{2}$，即 $t\simeq \frac{\pi}{4}\sqrt n$。</p>
-<hr>
-<p>如果是 $k$ 个元素未知，需要</p>
 
     </div>
 
@@ -319,7 +322,7 @@
     <footer class="post-footer">
           <div class="post-tags">
               <a href="/tags/Linear-Algebra/" rel="tag"># Linear Algebra</a>
-              <a href="/tags/Quantum-Computation/" rel="tag"># Quantum Computation</a>
+              <a href="/tags/Grover-s-Search/" rel="tag"># Grover's Search</a>
           </div>
 
         
