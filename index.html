@@ -207,7 +207,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/12/15/MusicAndMathematics/" class="post-title-link" itemprop="url">【Under Construction】关于管乐器泛音演奏（超吹）的一些探究</a>
+          <a href="/2024/12/15/MusicAndMathematics/" class="post-title-link" itemprop="url">关于管乐器泛音演奏（超吹）的一些探究</a>
         </h2>
 
         <div class="post-meta-container">
@@ -217,9 +217,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-12-15 15:19:21 / Modified: 23:10:12" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+      <time title="Created: 2024-12-15 15:19:21" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-16 23:50:25" itemprop="dateModified" datetime="2024-12-16T23:50:25+08:00">2024-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -241,15 +247,25 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。</p>
-<p>因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。</p>
+          <p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是“管乐器的超吹”，尤其是为何开管乐器能够吹出偶数次泛音，闭管乐器只能够吹出奇数次泛音，而锥形管乐器看似和闭管相同，但实际上也能吹出奇数次泛音。对管乐器的分类参见第 3，第 4 节。</p>
+<div class="note danger"><p><strong>警告：</strong> 本文可能包含如下要素：</p>
+<ul>
+<li>随便忽略高阶小量。</li>
+<li>随便使用对称性。</li>
+<li>随便交换微分算子。</li>
+<li>对着参考文献人云亦云。</li>
+</ul>
+<p>如您无法接受这些操作，我们推荐您<strong>不要阅读此文</strong>。</p>
+</div>
+
 <!-- toc -->
 
 <ul>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E5%A3%B0%E6%B3%A2%E7%9A%84%E7%BA%BF%E6%80%A7%E6%B3%A2%E5%8A%A8%E6%96%B9%E7%A8%8B">前置知识：声波的线性波动方程</a></li>
 <li><a href="#%E4%BB%8E%E6%8B%A8%E5%BC%A6%E7%9A%84%E6%83%85%E5%BD%A2%E5%85%A5%E6%89%8B-dalembert-%E5%AE%9A%E7%90%86">从拨弦的情形入手 d’Alembert 定理</a></li>
-<li><a href="#%E7%A9%BA%E6%B0%94%E6%9F%B1%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B">空气柱振动方程</a></li>
-<li><a href="#%E5%B8%A6%E5%93%A8%E5%8F%A3%E7%9A%84%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">带哨口的乐器的振动方程解</a></li>
-<li><a href="#not-completed%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">【Not Completed】锥形管乐器的振动方程解</a></li>
+<li><a href="#%E6%9F%B1%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">柱形管乐器的振动方程解</a></li>
+<li><a href="#%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">锥形管乐器的振动方程解</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
 </ul>
 <!-- tocstop -->
           <!--noindex-->

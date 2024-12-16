@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。 因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。    从拨弦的情形入手 d’Alembert 定理 空气柱振动方程 带哨口的乐器的振动方程解 【Not Completed】锥形管乐器的振动方程解">
+    <meta name="description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是“管乐器的超吹”，尤其是为何开管乐器能够吹出偶数次泛音，闭管乐器只能够吹出奇数次泛音，而锥形管乐器看似和闭管相同，但实际上也能吹出奇数次泛音。对管乐器的分类参见第 3，第 4 节。 警告： 本文可能包含如下要素：  随便忽略高阶小量。 随便使用对称性。 随便交换微分算子。 对着参考文献人云亦云。  如您无法接受这些操作">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Under Construction】关于管乐器泛音演奏（超吹）的一些探究">
+<meta property="og:title" content="关于管乐器泛音演奏（超吹）的一些探究">
 <meta property="og:url" content="http://example.com/2024/12/15/MusicAndMathematics/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。 因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。    从拨弦的情形入手 d’Alembert 定理 空气柱振动方程 带哨口的乐器的振动方程解 【Not Completed】锥形管乐器的振动方程解">
+<meta property="og:description" content="Abstract. 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是“管乐器的超吹”，尤其是为何开管乐器能够吹出偶数次泛音，闭管乐器只能够吹出奇数次泛音，而锥形管乐器看似和闭管相同，但实际上也能吹出奇数次泛音。对管乐器的分类参见第 3，第 4 节。 警告： 本文可能包含如下要素：  随便忽略高阶小量。 随便使用对称性。 随便交换微分算子。 对着参考文献人云亦云。  如您无法接受这些操作">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/StringForceAnalysis.png">
 <meta property="article:published_time" content="2024-12-15T07:19:21.000Z">
-<meta property="article:modified_time" content="2024-12-15T15:10:12.374Z">
+<meta property="article:modified_time" content="2024-12-16T15:50:25.073Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Music">
 <meta name="twitter:card" content="summary">
@@ -39,10 +39,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/15/MusicAndMathematics/","path":"2024/12/15/MusicAndMathematics/","title":"【Under Construction】关于管乐器泛音演奏（超吹）的一些探究"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/15/MusicAndMathematics/","path":"2024/12/15/MusicAndMathematics/","title":"关于管乐器泛音演奏（超吹）的一些探究"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>【Under Construction】关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes</title>
+<title>关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes</title>
   
 
 
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">从拨弦的情形入手 d’Alembert 定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">空气柱振动方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">带哨口的乐器的振动方程解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">【Not Completed】锥形管乐器的振动方程解</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">前置知识：声波的线性波动方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">从拨弦的情形入手 d’Alembert 定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">柱形管乐器的振动方程解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">锥形管乐器的振动方程解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -211,12 +211,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="【Under Construction】关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes">
+      <meta itemprop="name" content="关于管乐器泛音演奏（超吹）的一些探究 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Under Construction】关于管乐器泛音演奏（超吹）的一些探究
+          关于管乐器泛音演奏（超吹）的一些探究
         </h1>
 
         <div class="post-meta-container">
@@ -226,9 +226,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-12-15 15:19:21 / Modified: 23:10:12" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+      <time title="Created: 2024-12-15 15:19:21" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-16 23:50:25" itemprop="dateModified" datetime="2024-12-16T23:50:25+08:00">2024-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,21 +255,102 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是管乐器的超吹。</p>
-<p>因为本人不是学物理的所以不保证任何列方程过程的正确性，只能孬算一通，但是保证解方程的过程一定是对的（雾。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是“管乐器的超吹”，尤其是为何开管乐器能够吹出偶数次泛音，闭管乐器只能够吹出奇数次泛音，而锥形管乐器看似和闭管相同，但实际上也能吹出奇数次泛音。对管乐器的分类参见第 3，第 4 节。</p>
+<div class="note danger"><p><strong>警告：</strong> 本文可能包含如下要素：</p>
+<ul>
+<li>随便忽略高阶小量。</li>
+<li>随便使用对称性。</li>
+<li>随便交换微分算子。</li>
+<li>对着参考文献人云亦云。</li>
+</ul>
+<p>如您无法接受这些操作，我们推荐您<strong>不要阅读此文</strong>。</p>
+</div>
+
 <!-- toc -->
 
 <ul>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E5%A3%B0%E6%B3%A2%E7%9A%84%E7%BA%BF%E6%80%A7%E6%B3%A2%E5%8A%A8%E6%96%B9%E7%A8%8B">前置知识：声波的线性波动方程</a></li>
 <li><a href="#%E4%BB%8E%E6%8B%A8%E5%BC%A6%E7%9A%84%E6%83%85%E5%BD%A2%E5%85%A5%E6%89%8B-dalembert-%E5%AE%9A%E7%90%86">从拨弦的情形入手 d’Alembert 定理</a></li>
-<li><a href="#%E7%A9%BA%E6%B0%94%E6%9F%B1%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B">空气柱振动方程</a></li>
-<li><a href="#%E5%B8%A6%E5%93%A8%E5%8F%A3%E7%9A%84%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">带哨口的乐器的振动方程解</a></li>
-<li><a href="#not-completed%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">【Not Completed】锥形管乐器的振动方程解</a></li>
+<li><a href="#%E6%9F%B1%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">柱形管乐器的振动方程解</a></li>
+<li><a href="#%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">锥形管乐器的振动方程解</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="从拨弦的情形入手-dalembert-定理">从拨弦的情形入手 d’Alembert 定理</span></h1><p>设弦张力为 $T$，线密度为 $\rho$。取一段微元 $\Delta x$ 做受力分析。以向上为正方向设这段微元的位移为 $y(x, t)$。</p>
+<h1><span id="前置知识声波的线性波动方程">前置知识：声波的线性波动方程</span></h1><p>在本节中我们推到声音传播时，压强满足的偏微分方程。在自然中，这个方程是非线性的。但是实践中，其线性近似足够解决问题。</p>
+<div class="note success"><p><strong>记号.</strong> 我们约定如下记号：</p>
+<ul>
+<li>位置 $\boldsymbol{r} &#x3D; x\boldsymbol{x} + y\boldsymbol{y} + z\boldsymbol{z}$。</li>
+<li>粒子位移 $\boldsymbol{\xi} &#x3D; \xi_x\boldsymbol{x} + \xi_y\boldsymbol{y} + \xi_z\boldsymbol{z}$。</li>
+<li>粒子速度 $\boldsymbol{u} &#x3D; \dfrac{\partial \boldsymbol{\xi}}{\partial t}$。</li>
+<li>密度 $\rho$。</li>
+<li>压缩比 $s &#x3D; \dfrac{\rho - \rho_0}{\rho_0}$</li>
+<li>声压 $p &#x3D; P - P_0$。</li>
+</ul>
+<p>其中带有下标 $\square_0$ 的量表示平衡态下该物理量的值。对应的不加角标的记号表示扰动后实际上的值，都是关于时间和坐标的函数。</p>
+</div>
+
+<p>可以发现描述这个系统涉及到三种物理量（位置、密度、压强，及其若干阶导数），推出波动方程的过程中我们需要用到三个中间结果，依次称为</p>
+<ul>
+<li><strong>气体状态方程</strong> 联系压强和密度。</li>
+<li><strong>连续性方程</strong> 本质上是质量守恒，联系粒子速度和密度。</li>
+<li><strong>动力学方程</strong> 联系粒子速度和压强。</li>
+</ul>
+<p>该方程的最终形式在 \ref{acousticeq} 中给出，在文献 [1] 等当中也有相同的形式。</p>
+<hr>
+<p><strong>气体状态方程</strong></p>
+<p>回忆在准静态过程中，气体的压强和密度总是满足一定的关系，比如：</p>
+<p>$$<br>\frac{P}{P_0} &#x3D; \frac{\rho}{\rho_0} \quad {\color{blue}\text{(isothermic)}} \qquad \text{or} \qquad \frac{P}{P_0} &#x3D; \left(\frac{\rho}{\rho_0}\right)^\gamma \quad {\color{blue}\text{(adiabat)}}<br>$$</p>
+<p>其中 $\gamma$ 是热容比 $C_p &#x2F; C_v$。从方程中抽出 $P, \rho$ 之间的函数关系，然后将 $P$ 在 $\rho_0$ 处展开成 $\rho$ 的泰勒级数</p>
+<p>$$<br>P &#x3D; P_{\rho_0} + \left(\frac{\partial P}{\partial \rho}\right)_{\rho_0}(\rho - \rho_0) + O((\rho - \rho_0)^2)<br>$$</p>
+<p>定义下面的常量为气体的<em>体积模量</em></p>
+<p>$$<br>\mathbf{B} &#x3D; \rho_0\left(\frac{\partial P}{\partial \rho}\right)_{\rho_0}<br>$$</p>
+<p>那么在仅施加微扰的情况下（$s\ll 1$）我们得到了下面的气体状态方程：</p>
+<p>$$<br>\boxed{p &#x3D; \mathbf{B} s} \label{stateeq}<br>$$</p>
+<hr>
+<p><strong>连续性方程</strong></p>
+<p>这一段推导基于如下假设：固定 $t$，$\xi$ 是一个关于 $x$ 的连续函数。</p>
+<p>我们先从一个维度上来推导，然后推广到高维。同样，我们假设只有微扰，即 $\lvert\nabla \xi\rvert \ll 1$。那么感性理解起来</p>
+<p>$$<br>(x + \Delta x)(y + \Delta y)(z + \Delta z) - xyz &#x3D; yz\Delta x + xz\Delta y + xy\Delta z + o(1)<br>$$</p>
+<p>一个空间体元的体积变化量近似是三个维度上的变化量的加和。</p>
+<p>考虑一个垂直于 $x$ 轴的、面积为 $A$ 的小截面。此截面上 $[x, x + \Delta x]$ 这一段气体分子实际上的位置是 $[x + \xi_x(x), x + \Delta x + \xi_x(x + \Delta x)]$，那么 $x$ 轴方向对体积变化的贡献为</p>
+<p>$$<br>A(\xi_x(x + \Delta x, t) - \xi_x(x, t)) \simeq A\frac{\partial \xi_x}{\partial x}\Delta x<br>$$</p>
+<p>注意 $A\Delta x$ 实际上就是体元原来的体积 $\Delta V$。于是该体元的体积变化量就是</p>
+<p>$$<br>(\Delta V) \nabla \cdot \boldsymbol{\xi}<br>$$</p>
+<p>由于质量是守恒的，有</p>
+<p>$$<br>\rho_0 \Delta V &#x3D; \rho \Delta V (1 + \nabla \cdot \boldsymbol{\xi})<br>$$</p>
+<p>即得到</p>
+<p>$$<br>\rho_0 - \rho &#x3D; \rho \nabla \cdot \boldsymbol{\xi}<br>$$</p>
+<p>两边对时间求导得到</p>
+<p>$$<br>\frac{\partial \rho}{\partial t} &#x3D; {\color{orange}-\frac{\partial \rho}{\partial t} \nabla \cdot \boldsymbol{\xi}} - \rho \nabla \cdot \frac{\partial \boldsymbol{\xi}}{\partial t}<br>$$</p>
+<p>注意前面高亮的一项实际上是一个比 $\partial \rho &#x2F; \partial t$ 高阶的小量，而 $\rho$ 可以近似等于 $\rho_0$（这个近似是为了将方程线性化），于是我们得到了下面的方程：</p>
+<p>$$<br>\boxed{\frac{\partial \rho}{\partial t} &#x3D; - \rho_0 \nabla \cdot \boldsymbol{u}} \label{masseq}<br>$$</p>
+<hr>
+<p><strong>动力学方程</strong></p>
+<p>取体元 $\Delta V$，考虑 $x$ 方向上的分量，有</p>
+<p>$$<br>f_x &#x3D; -\frac{\partial p}{\partial x}\mathrm{d}V<br>$$</p>
+<p>将所有分量综合起来</p>
+<p>$$<br>\boldsymbol{f} &#x3D; -(\nabla p)\mathrm{d}V<br>$$</p>
+<p>根据牛顿第二定律</p>
+<p>$$<br>\boldsymbol{f} &#x3D; \boldsymbol{a}\rho\mathrm{d}V<br>$$</p>
+<p>其中 $\boldsymbol{a} &#x3D; \mathrm{d}\boldsymbol{u} &#x2F; \mathrm{d}t$，这与 $\partial \boldsymbol{u} &#x2F; \partial t$ 之间存在细微的差距，因为粒子的位置也在发生变化。所以这里原本需要计算一个全微分：</p>
+<p>$$<br>\begin{align}<br>    \boldsymbol{a} &amp;&#x3D; \left(\frac{\mathrm{d}\boldsymbol{u}}{\mathrm{d}x}\frac{\partial x}{\partial t} + \frac{\mathrm{d}\boldsymbol{u}}{\mathrm{d}y}\frac{\partial y}{\partial t} + \frac{\mathrm{d}\boldsymbol{u}}{\mathrm{d}z}\frac{\partial z}{\partial t} + \frac{\partial \boldsymbol{u}}{\partial t}\right) \\<br>    &amp;&#x3D; (\boldsymbol{u}\cdot\nabla)\boldsymbol{u} + \frac{\partial \boldsymbol{u}}{\partial t}<br>\end{align}<br>$$</p>
+<p>但是不知道为什么就把第一项近似掉了（似乎是认为在微扰的假设下粒子速度和局部速度差都是和小量）。总之我们得到了</p>
+<p>$$<br>-\nabla p &#x3D; \rho\frac{\partial \boldsymbol{u}}{\partial t}<br>$$</p>
+<p>这个方程仍然是非线性的，于是我们把 $\rho$ 近似成 $\rho_0$。</p>
+<p>$$<br>\boxed{-\nabla p &#x3D; \rho_0\frac{\partial \boldsymbol{u}}{\partial t}} \label{forceeq}<br>$$</p>
+<hr>
+<p>我们将上述方程联立起来的到 $p$ 的波动方程。首先对气体状态方程 \ref{stateeq} 求时间的偏导得到</p>
+<p>$$<br>\frac{\partial p}{\partial t} &#x3D; \frac{\mathbf{B}}{\rho_0}\frac{\partial \rho}{\partial t}<br>$$</p>
+<p>将其带入连续性方程 \ref{masseq} 中得到</p>
+<p>$$<br>\frac{\rho_0}{\mathbf{B}}\frac{\partial p}{\partial t} &#x3D; -\rho_0\nabla \cdot\boldsymbol{u}<br>$$</p>
+<p>上式中两边对 $t$ 求偏导，将动力学方程 \ref{forceeq} 两边作用 $(\nabla \cdot)$ 后可以消掉 $u$，得到 </p>
+<p>$$<br>\boxed{\frac{\mathbf{B}}{\rho_0} \nabla^2 p &#x3D;  \frac{\partial p}{\partial t^2}} \label{acousticeq}<br>$$</p>
+<p>这称为声波的线性波动方程。此方程和电磁波等的波动方程具有相同的形式。</p>
+<h1><span id="从拨弦的情形入手-dalembert-定理">从拨弦的情形入手 d’Alembert 定理</span></h1><p>本节是《音乐与数学》课程内容的拓展，详细给出了弦振动方程的解法。</p>
+<p>设弦张力为 $T$，线密度为 $\rho$。取一段微元 $\Delta x$ 做受力分析。以向上为正方向设这段微元的位移为 $y(x, t)$。</p>
 <p><img src="/../picture/StringForceAnalysis.png" alt="image-20241215143248960"></p>
 <p>在 $\theta$ 很小的情况下可以用 $\partial y &#x2F; \partial x$ 近似 $\sin(x)$。于是依照牛顿定律得到方程</p>
 <p>$$<br>T\left(\frac{\partial y}{\partial x}(x + \Delta x) - \frac{\partial y}{\partial x}(x)\right) &#x3D; \rho\Delta x \frac{\partial^2 y}{\partial t^2}<br>$$</p>
@@ -272,6 +359,7 @@
 <p>$$<br>\boxed{c^2\frac{\partial^2 y}{\partial x^2} &#x3D; \frac{\partial^2 y}{\partial t^2}} \label{stringvibr}<br>$$</p>
 </div>
 
+<p>可以发现此方程就是空气振动方程退化到一维。</p>
 <p>由于弦两端锁死，所以方程包含边值条件 $y(0, t) &#x3D; y(L, t) &#x3D; 0$。现在解该方程，首先假设一切函数都足够光滑，那么偏导算子是对易的，这就是说</p>
 <p>$$<br>\left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t} - c\frac{\partial}{\partial x}\right)y &#x3D; 0<br>$$</p>
 <p>设 $u &#x3D; x + ct, v &#x3D; x - ct$，那么根据链式法则</p>
@@ -300,50 +388,52 @@
 </div>
 
 <p>现在要决定每个振动的强度，还需要确定待定系数 $C_n$。这时只需要对初状态做傅里叶分析即可。因为不是我们讨论的重点，所以略去。</p>
-<h1><span id="空气柱振动方程">空气柱振动方程</span></h1><p>所谓的“空气柱振动”可以理解为空气柱中的气体分子相互挤压，往复运动。</p>
-<p>首先考虑一个均匀细管，设 $\xi(\boldsymbol{x}, t)$ 为初始在 $\boldsymbol{x}$ 处的体积元的位移，另外设 $P(\boldsymbol{x}, t)$ 为此时 $\boldsymbol{x}$ 附近的压强。仍然假设一切函数都是充分光滑的。定义<em>声压</em> $p(\boldsymbol{x}, t) &#x3D; P(\boldsymbol{x}, t) - p_0$，其中 $p_0$ 是标准大气压。那么胡克定律指出</p>
-<p>$$<br>p &#x3D; -B\frac{\partial \xi}{\partial x} \label{hooke}<br>$$</p>
-<p>其中 $B$ 是气体的体积模量。我不知道这里的公式具体是如何推导的，尤其是 $B$ 是什么东西，但是 $\partial \xi &#x2F; \partial x$ 看起来明显就是 $x$ 方向上的压缩程度，它和声压成正比是符合直觉的。</p>
-<p>牛顿第二定律指出在 $x$ 方向上有</p>
-<p>$$<br>\frac{\partial p}{\partial x} &#x3D; -\rho\frac{\partial^2\xi}{\partial t^2} \label{newton}<br>$$</p>
-<p>将 $\ref{hooke}$ 求 $x$ 方向上的偏导带入 $\ref{newton}$ 得到</p>
-<p>$$<br>\frac{\partial^2 \xi}{\partial x^2} &#x3D; c^2\frac{\partial^2\xi}{\partial t^2}<br>$$</p>
-<p>其中 $c &#x3D; \sqrt{\rho &#x2F; B}$。也可以尝试消掉每个体积元的位移信息。将 $\ref{newton}$ 求 $x$ 方向上的偏导，然后注意在充分光滑性假设下，可以先对 $\xi$ 求 $x$ 的偏导，此时带入 $\ref{hooke}$ 即完全消掉 $\xi$，得到方程 </p>
-<p>$$<br>\frac{\partial^2 p}{\partial x^2} &#x3D; c^2\frac{\partial^2 p}{\partial t^2}<br>$$</p>
-<p>上述推导仅以一个方向为例，拓展至其他方向上同样成立，下面我们展示的是教科书的空气柱振动方程</p>
-<div class="note success"><p><strong>定义 1.4（空气柱振动方程）.</strong> 给定体积模量为 $B$，密度为 $\rho$ 的气体，$p(\boldsymbol{x}, t)$ 是 $\boldsymbol{x}$ 处的压强，则</p>
-<p>$$<br>\boxed{\nabla^2 p - c^2\frac{\partial^2 p}{\partial t^2} &#x3D; 0} \quad \text{and} \quad \boxed{\nabla^2 \xi - c^2\frac{\partial^2 \xi}{\partial t^2} &#x3D; 0} \label{windvibr}<br>$$</p>
-<p>其中 $c &#x3D; \sqrt{\rho &#x2F; B}$。</p>
-</div>
-
-<p>此方程的形式和 \ref{stringvibr} 如出一辙。因此行波解具有相同的形式。</p>
-<h1><span id="带哨口的乐器的振动方程解">带哨口的乐器的振动方程解</span></h1><p>演奏此类乐器时，向哨口吹入空气，哨子切割空气引发管内空气柱振动。之所以将问题限定在哨口，是因为我们暂时不清楚用哨片起振的管乐器应当怎么样加边值条件。</p>
-<p>为了给出方程的解，我们需要加边值条件。然而此处的边值条件和管的形状有关，一般地：</p>
+<h1><span id="柱形管乐器的振动方程解">柱形管乐器的振动方程解</span></h1><p>在乐器有柱对称性时，我们做柱坐标换元，此时 Laplace 算子形式为</p>
+<p>$$<br>\nabla^2 &#x3D; \frac{\partial^2}{\partial \rho^2} + \frac{1}{\rho}\frac{\partial}{\partial \rho} + \frac{1}{\rho^2}\frac{\partial^2}{\partial \theta^2} + \frac{\partial^2}{\partial z^2}<br>$$</p>
+<p>我们认为乐器为柱对称时，方程的解应当也满足柱对称性，即一切和 $\rho, \theta$ 有关的偏导均为 $0$。此时方程简化为</p>
+<p>$$<br>c^2\frac{\partial^2 p}{\partial z^2} &#x3D; \frac{\partial^2 p}{\partial t^2}<br>$$</p>
+<p>于是此方程可以得到和弦振动方程一样的行波解。</p>
+<p>为了给出方程的解，我们需要加边值条件。然而此处的边值条件和管的形状有关，根据一些参考文献：</p>
 <ul>
-<li><p>若为开管（一端为送气口，一端敞开），则两端都有边值条件 $p &#x3D; 0$（与大气相通）。</p>
+<li><p><strong>开管</strong>（一端为送气口，一端敞开），则两端都有边值条件 $p &#x3D; 0$（与大气相通）。</p>
 <p>长笛、竖笛等属于此类。</p>
 </li>
-<li><p>若为闭管（一端为送气口，一段封闭），则送气端有边值条件 $p &#x3D; 0$（与大气相通），封闭端有边值条件 $\xi &#x3D; 0$（管口堵死）。</p>
+<li><p><strong>I 类闭管</strong>（一端为送气口，一段封闭），则送气端有边值条件 $p &#x3D; 0$（与大气相通），封闭端有边值条件 $\partial p &#x2F; \partial x &#x3D; 0$（这一段的粒子不能移动，受合力为 $0$）。</p>
 <p>一种非主流的乐器，称作“滑哨笛”或者“溜溜笛”是此类的实例。</p>
+</li>
+<li><p><strong>II 类闭管</strong>（一端为哨口，一段敞开），注意哨口可以近似认为是闭口。</p>
 </li>
 </ul>
 <p>此外，对于敞开口，可能实际参与振动的空气柱长度（称作<em>有效长度</em>）大于物理的管长，因此计算中可能需要求这个有效长度（称作<strong>管口校正</strong>）。下文中我们暂时忽略管口校正。</p>
-<p>开管施加边值条件后得到的边值问题和弦振动的情形别无二致，因此一切结论都保留。现在考虑闭管的情形。我们选择解决关于 $\xi$ 的方程，现在我们有行波解</p>
-<p>$$<br>\xi(x, t) &#x3D; f(ct + x) + g(x - ct)<br>$$</p>
-<p>和边值条件：</p>
-<p>$$<br>\begin{cases}<br>\dfrac{\partial}{\partial x} \xi(0, t) \equiv 0 &amp; \Rightarrow f’(\lambda) + g’(-\lambda) &#x3D; 0 \\<br>\xi(L, t) \equiv 0 &amp; \Rightarrow f(ct + L) + g(L - ct) &#x3D; 0<br>\end{cases}<br>$$</p>
-<p>将第一个关系从 $0$ 积分到 $t$ 立即得到 $f(\lambda) &#x3D; g(-\lambda) + C$，带进第二个关系当中得到 $f(\lambda + L) + f(\lambda - L) &#x3D; C$。对此式子稍做操作：</p>
+<p>开管施加边值条件后得到的边值问题和弦振动的情形别无二致，因此一切结论都保留。现在考虑闭管的情形。首先有行波解</p>
+<p>$$<br>p(x, t) &#x3D; f(ct + x) + g(x - ct)<br>$$<br>&#96;<br>和边值条件：</p>
+<p>$$<br>\begin{cases}<br>\dfrac{\partial}{\partial x} p(0, t) \equiv 0 &amp; \Rightarrow f’(\lambda) + g’(-\lambda) &#x3D; 0 \\<br>p(L, t) \equiv 0 &amp; \Rightarrow f(ct + L) + g(L - ct) &#x3D; 0<br>\end{cases}<br>$$</p>
+<p>将第一个关系从 $0$ 积分到 $\lambda$ 立即得到 $f(\lambda) &#x3D; g(-\lambda) + C$，带进第二个关系当中得到 $f(\lambda + L) + f(\lambda - L) &#x3D; C$。对此式子稍做操作：</p>
 <p>$$<br>f(u) + f(u + 2L) &#x3D; C, f(u + 2L) + f(u + 4L) &#x3D; C \quad \Rightarrow \quad f(u) &#x3D; f(u + 4L)<br>$$</p>
 <p>至少说明所有的解都是周期解，只是周期变成了 $4L$。现在套上上文的傅里叶分析，得到解具有形式</p>
 <p>$$<br>\xi(x, t) &#x3D; \sum_{i&#x3D;1}^\infty 2C_n\cos\left(\frac{n\pi x}{2L}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
-<p>进一步分析，因为在 $x &#x3D; 0$ 处有 $\xi(x, t)\equiv 0$，因此我们对上述函数代入 $x &#x3D; 0$ 得到 </p>
+<p>进一步分析，因为在 $x &#x3D; L$ 处有 $p(x, t)\equiv 0$，因此我们对上述函数代入 $x &#x3D; L$ 得到 </p>
 <p>$$<br>0(t) &#x3D; \sum_{n&#x3D;1}^\infty 2C_n\cos\left(\frac{n\pi}{2}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
 <p>注意任意函数在傅里叶基下的坐标唯一，而 $0(t)$ 的一个坐标为 $(0, 0, …)$，因此有当 $n$ 为偶数时，必须有 $C_n &#x3D; 0$。所以解一定具有形式</p>
-<p>$$<br>\xi(x, t) &#x3D; \sum_{n&#x3D;1, \text{$n$ is odd}}^\infty 2C_n\cos\left(\frac{n\pi x}{2L}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
+<p>$$<br>p(x, t) &#x3D; \sum_{n&#x3D;1, \text{$n$ is odd}}^\infty 2C_n\cos\left(\frac{n\pi x}{2L}\right)\cos\left(\frac{n\pi ct}{2L} + \phi_n\right)<br>$$</p>
 <p>这表明闭管乐器的基频为</p>
 <p>$$<br>\frac{1}{4L}\cdot c<br>$$</p>
 <p>比开管乐器低一个八度，并且只能够吹奏奇数阶泛音，符合我们的常识。</p>
-<h1><span id="not-completed锥形管乐器的振动方程解">【Not Completed】锥形管乐器的振动方程解</span></h1><p>暂时没写完，我们准备参考 R. Dean Ayers, Lowell J. Eliason, Daniel Mahgerefteh; The conical bore in musical acoustics. Am. J. Phys. 1 June 1985; 53 (6): 528–537. <a target="_blank" rel="noopener" href="https://doi.org/10.1119/1.14233%E3%80%82">https://doi.org/10.1119/1.14233。</a></p>
+<h1><span id="锥形管乐器的振动方程解">锥形管乐器的振动方程解</span></h1><p>现在我们考虑一类锥形的管乐器，如双簧管、萨克斯、唢呐。此类乐器的哨片和 II 类闭管乐器完全一致，但是实践中此类乐器能够超吹出偶数次泛音。在文献 [3] 和其他一些文献中，作者宣称锥形管等效于同长度的开管，但没有给出推导。文献 [4] 给出了一种理论上的推导。</p>
+<p>我们尝试给这一反直觉现象给出解释。</p>
+<p>我们认为，这种乐器具有球对称性。此时我们做球坐标换元，Laplace 算子的形式为</p>
+<p>$$<br>\nabla^2 &#x3D; \frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r} + \frac{1}{r^2}\left(\frac{\partial^2}{\partial \theta^2} + \cot\theta\frac{\partial}{\partial \theta} + \csc ^2\theta\frac{\partial^2}{\partial \varphi^2}\right)<br>$$</p>
+<p>在具有球对称性时，和 $\theta, \varphi$ 有关的偏导均为 $0$。此时方程简化为 </p>
+<p>$$<br>c^2\left(\frac{\partial^2}{\partial r^2} + \frac{2}{r}\frac{\partial}{\partial r}\right)p &#x3D; \frac{\partial^2 p}{\partial t^2}<br>$$</p>
+<p>注意到</p>
+<p>$$<br>\left(r\frac{\partial^2}{\partial r^2}p + 2\frac{\partial}{\partial r}p\right) &#x3D; \left(r\frac{\partial^2}{\partial r^2}p + 2\frac{\partial}{\partial r}r\frac{\partial}{\partial r}p + \frac{\partial^2}{\partial r^2}r p\right) &#x3D; \frac{\partial}{\partial r^2}(rp)<br>$$</p>
+<p>所以置 $q &#x3D; rp$，立即得到方程</p>
+<p>$$<br>c^2\frac{\partial^2}{\partial r^2}q &#x3D; \frac{\partial^2}{\partial t^2} q \label{coniceq}<br>$$</p>
+<p>若假设 $p$ 是一个有界的量，那么无论是在左端还是右端，都有 $rp &#x3D; 0$。于是 \ref{coniceq} 的边值问题和开管乐器完全一致。在得到的解中，除开奇异的端点不方便分析，其余的点确实可能产生频率为偶数倍基频的振动模态。</p>
+<h1><span id="参考文献">参考文献</span></h1><p>[1] Joshua E. Greenspon, <em>Acoustics, Linear</em>, Encyclopedia of Physical Science and Technology (Third Edition), 2003</p>
+<p>[2] Neville H. Fletcher, Thomas D. Rossing, <em>The Physics of Musical Instruments</em>, Springer (1991)</p>
+<p>[3] Dave Benson, <em>Music: A Mathematical Offering</em>, 1995.</p>
+<p>[4] R. Dean Ayers, Lowell J. Eliason and Daniel Mahgerefteh, <em>The conical bore in musical acoustics</em>, Amer. J. Physics 53 (6) (1985), 528–537.</p>
 
     </div>
 
