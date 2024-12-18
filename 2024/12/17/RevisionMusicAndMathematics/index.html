@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基础知识 乐音体系 记谱法 音程   弦振动方程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 音乐与数学">
+<meta property="og:url" content="http://example.com/2024/12/17/RevisionMusicAndMathematics/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="基础知识 乐音体系 记谱法 音程   弦振动方程">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/ADSR.webp">
+<meta property="og:image" content="http://example.com/picture/WaveFourier.jpg">
+<meta property="og:image" content="http://example.com/picture/AcientDrumTrack.png">
+<meta property="og:image" content="http://example.com/picture/AcientTrack2.webp">
+<meta property="og:image" content="http://example.com/picture/ReducedSymbolTrack.webp">
+<meta property="og:image" content="http://example.com/picture/GongCheNotation.webp">
+<meta property="og:image" content="http://example.com/picture/helmholtzInterval.png">
+<meta property="article:published_time" content="2024-12-17T08:27:32.000Z">
+<meta property="article:modified_time" content="2024-12-17T12:24:47.901Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Music">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/ADSR.webp">
+
+
+<link rel="canonical" href="http://example.com/2024/12/17/RevisionMusicAndMathematics/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/17/RevisionMusicAndMathematics/","path":"2024/12/17/RevisionMusicAndMathematics/","title":"Revision | 音乐与数学"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 音乐与数学 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">乐音体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">记谱法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">音程</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">弦振动方程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">34</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/17/RevisionMusicAndMathematics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 音乐与数学 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 音乐与数学
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2024-12-17 16:27:32 / Modified: 20:24:47" itemprop="dateCreated datePublished" datetime="2024-12-17T16:27:32+08:00">2024-12-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86">基础知识</a><ul>
+<li><a href="#%E4%B9%90%E9%9F%B3%E4%BD%93%E7%B3%BB">乐音体系</a></li>
+<li><a href="#%E8%AE%B0%E8%B0%B1%E6%B3%95">记谱法</a></li>
+<li><a href="#%E9%9F%B3%E7%A8%8B">音程</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%A6%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B">弦振动方程</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="基础知识">基础知识</span></h1><div class="note success"><p><strong>定义 1.1（e.g.《中国大百科全书·音乐舞蹈》）.</strong> <strong>音乐</strong>系指凭借声波振动而存在、在时间中展现、通过人类的听觉器官而引起各种情绪反应和情感体验的艺术门类。</p>
+</div>
+
+<p>众所周知声波是纵波，声音的几个物理属性对应音乐中的几个要素：</p>
+<ul>
+<li><p><strong>频率</strong>对应<strong>音高</strong>。</p>
+<p>人耳能听见的范围是 $20$ 至 $20000$ Hz。</p>
+<div class="note success"><p><strong>定义 1.2（音乐会音高）.</strong> 中央 $\textsf{C}$ 上方的 $\textsf{A}$ 为 $440 \textrm{ Hz}$。</p>
+</div>
+
+<p>人类对于频率的感知不是线性的（增加一个八度，频率乘 2）。</p>
+</li>
+<li><p><strong>振幅</strong>对应<strong>力度</strong>。<strong>气压</strong>决定<strong>响度</strong>（注意这里力度和响度有主观和客观的区别）。</p>
+<p>当频率为 $1000 \textrm{ Hz}$ 时，人类的听觉下限阈值为 $p_0 &#x3D; 20\mu Pa$。</p>
+<div class="note success"><p><strong>定义 1.3（声压水平，SPL）.</strong> </p>
+<p>$$<br>L_p &#x3D; 20\log_10\left(\frac{p}{p_0}\right)<br>$$</p>
+<p>单位是<strong>分贝（dB）</strong>。</p>
+</div></li>
+<li><p><strong>持续时间</strong>对应<strong>时值</strong>。</p>
+</li>
+<li><p><strong>波形</strong>对应<strong>音色</strong>。</p>
+<p>谈论音色的时候我们通常从<strong>时间包络</strong>、<strong>频谱</strong>两个面入手。</p>
+<ul>
+<li><p>通过做振幅的包络线可以直观展示乐器的音色，可以发现弹奏乐器时振幅的变化一般可以用四个阶段（Attack 起音；Decay 衰减；Sustain 持续；Release 释放）来刻画。这称作 ADSR，在一些电子音乐制作软件</p>
+<p><img src="/../picture/ADSR.webp"></p>
+</li>
+<li><p>通常的声音都是不同频率的振动的叠加。通过对振幅的时域信号做傅里叶展开，可以得到各个成分的振幅。</p>
+<p><img src="/../picture/WaveFourier.jpg"></p>
+<p>将各频率成分从低到高排列，称作<strong>泛音列</strong>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2><span id="乐音体系">乐音体系</span></h2><p>声音分为<strong>乐音</strong>和<strong>噪音</strong>两类，划分标准为振动是否有规律性。</p>
+<details class="note "><summary><p>音乐中噪音的使用</p>
+</summary>
+<p>传统音乐作品主要使用乐音，二十世纪以来音乐家越来越重视对于噪音的使用。</p>
+<p><strong>打击乐器</strong>可以分为<em>固定音高</em>和<em>无固定音高</em>的，后者发出的就属于噪音。</p>
+<p>一些例子：谭盾的《地图协奏曲》（使用一些神秘原始打击乐比如撞击石头）、柴可夫斯基的 1812 Overture, Op.49（使用加农炮）</p>
+
+</details>
+
+<p>音乐中所使用的具有固定音高的全体乐音构成的集合称作<strong>乐音体系</strong>，其中元素称作<strong>音级</strong>。将全体音级从低到高排列得到的序列称作<strong>音列</strong>，其中相邻两元素之差称作一个半音。</p>
+<p>钢琴中最接近的两个键（包括黑键和白键）相差一个半音。</p>
+<p>每个音级有一个名字，称作<strong>音名</strong>。基本的音名只有 $\textsf{C}, \textsf{D}, \textsf{E}, \textsf{F}, \textsf{G}, \textsf{A}, \textsf{B}$，在每个八度中循环使用。为了区分八度，加上角标。常见的钢琴键从 $\textsf{A}_0$ 到 $\textsf{C}_8$，中央 $\textsf{C}$ 指 $\textsf{C}_4$。</p>
+<p>$\textsf{C}, \textsf{D}, \textsf{E}, \textsf{F}, \textsf{G}, \textsf{A}, \textsf{B}$ 也称作基本音级。在基本音级前方加上变音记号（$\sharp, \flat, \natural, \flat\flat$，和一个 LaTeX 打不出来的 $^\mathbf{x}$ 状的重升号），得到<strong>变化音级</strong>。</p>
+<p>注意 $\textsf{E}$ 和 $\flat\textsf{F}$ 实际上是同一个音，这种现象称作<strong>等音</strong>。</p>
+<p>我们生活中常用的 do，re，mi，fa，sol，la，si 称为<strong>唱名</strong>，唱名的确定有两种方式：</p>
+<ul>
+<li>固定唱名法：do 指 $\textsf{C}$。</li>
+<li>首调唱名法：do 指任意一音级，其后 re，mi，fa，so，la，si 依次在前一个的基础上增加全、全、半、全、全、全音。</li>
+</ul>
+<h2><span id="记谱法">记谱法</span></h2><p>以书面形式记录音乐的方法称为记谱法。</p>
+<details class="note "><summary><p>一些材料</p>
+</summary>
+<p>《礼记·投壶》中的鼓谱：“圆者击鼙，方者击鼓”（郑玄注）</p>
+<p><img src="/../picture/AcientDrumTrack.png"></p>
+<p>中国留传最早的乐谱：《碣石调·幽兰》，属于文字谱。</p>
+<p><img src="/../picture/AcientTrack2.webp"></p>
+<p>将古琴的指法和弦序、徽位结合成文字的谱称作减字谱。</p>
+<p><img src="/../picture/ReducedSymbolTrack.webp"></p>
+<p>还有一种传统汉字记谱法称作工尺谱。</p>
+<p><img src="/../picture/GongCheNotation.webp"></p>
+
+</details>
+
+<p>现在主流的记谱方法是五线谱，这里不再赘述五线谱上的记号。</p>
+<h2><span id="音程">音程</span></h2><p>乐音体系中，两个音级之间的距离称作<strong>音程</strong>，其中较高的称作<strong>冠音</strong>，较低的称作<strong>根音</strong>。音程中的两个音先后发声称作<em>旋律音程</em>，同时发声称作<em>和声音程</em>。</p>
+<p>刻画一个音程需要描述根音和冠音之间的<em>音名数量</em>和<em>半音数量</em>。据此音名可以被命名为 $\square X$ 度，其中 $X$ 指示音名数量，$\square$ 用纯、大、小、增、减等字眼来提示半音数目。我们将以 $\textsf{C}$ 作为根音，$\textsf{C}, \textsf{F}, \textsf{G}, \textsf{C}’$ 为冠音得到的音程（以及有其他根音、冠音但是间隔相同唱名数和半音数的音程）称作<strong>纯音程</strong>；$\textsf{D}, \textsf{E}, \textsf{A}, \textsf{B}$ 为冠音得到的音程称作<strong>大音程</strong>。</p>
+<blockquote>
+<p>音程 $\textsf{C}-\textsf{G}$ 按照上面的规则被命名为”纯五度“。</p>
+<p>下面所说的将一个音程“扩大一个半音”系指将根音降低一个半音或将冠音升高一个半音，类似地定义“缩小一个半音”。</p>
+</blockquote>
+<p>我们继续规定其他可能的音程的命名：</p>
+<ul>
+<li>将大音程缩小一个音程，得到<strong>小音程</strong>。</li>
+<li>将大音程或者纯音程扩大一个半音，得到<strong>增音程</strong>。</li>
+<li>将小音程或者纯音程缩小一个半音，得到<strong>减音程</strong>。</li>
+</ul>
+<p>下表给出了一些诸音程的具体例子，括号中的数字是半音数</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">减</th>
+<th align="center">小</th>
+<th align="center">纯</th>
+<th align="center">大</th>
+<th align="center">增</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">一度</td>
+<td align="center"></td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{C}(0)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\sharp\textsf{C}(1)$</td>
+</tr>
+<tr>
+<td align="center">二度</td>
+<td align="center">$\sharp\textsf{C}-\flat\textsf{D}(0)$</td>
+<td align="center">$\textsf{C}-\flat\textsf{D}(1)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{D}(2)$</td>
+<td align="center">$\textsf{C}-\sharp\textsf{D}(3)$</td>
+</tr>
+<tr>
+<td align="center">三度</td>
+<td align="center">$\sharp\textsf{C}-\flat\textsf{E}(2)$</td>
+<td align="center">$\textsf{C}-\flat\textsf{E}(3)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{E}(4)$</td>
+<td align="center">$\textsf{C}-\sharp\textsf{E}(5)$</td>
+</tr>
+<tr>
+<td align="center">四度</td>
+<td align="center">$\sharp\textsf{C}-\textsf{F}(4)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{F}(5)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\sharp\textsf{F}(6)$</td>
+</tr>
+<tr>
+<td align="center">五度</td>
+<td align="center">$\sharp\textsf{C}-\textsf{G}(6)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{G}(7)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\sharp\textsf{G}(8)$</td>
+</tr>
+<tr>
+<td align="center">六度</td>
+<td align="center">$\sharp\textsf{C}-\flat\textsf{A}(7)$</td>
+<td align="center">$\textsf{C}-\flat\textsf{A}(8)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{A}(9)$</td>
+<td align="center">$\textsf{C}-\sharp\textsf{A}(10)$</td>
+</tr>
+<tr>
+<td align="center">七度</td>
+<td align="center">$\sharp\textsf{C}-\flat\textsf{B}(9)$</td>
+<td align="center">$\textsf{C}-\flat\textsf{B}(10)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{B}(11)$</td>
+<td align="center">$\textsf{C}-\sharp\textsf{B}(12)$</td>
+</tr>
+<tr>
+<td align="center">八度</td>
+<td align="center">$\sharp\textsf{C}-\textsf{C}’(11)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\textsf{C}’(12)$</td>
+<td align="center"></td>
+<td align="center">$\textsf{C}-\sharp\textsf{C}’(13)$</td>
+</tr>
+</tbody></table>
+<p>注意因为有等音的存在，不同的音程听起来一样是很正常的现象。</p>
+<p>同时弹奏不同的音程给人以不同的听觉感受，一些听起来是和谐的，另外的则比较难听。纯四度、纯五度、纯八度、大小三度、大小六度属于<strong>协和音程</strong>，其中纯音程<em>完全协和</em>，三度和六度<em>不完全协和</em>；二度、七度和增减音程均属于<strong>不协和音程</strong>。</p>
+<p>有若干理论用来解释音程是否和谐。</p>
+<div class="note "><p><strong>毕达哥拉斯理论</strong></p>
+<p>长度之比为简单整数比的弦能发出和谐的声音。根据后面的结果，这就是说振动频率之比越简单，相应音程越协和。</p>
+<p>这个理论是当时律制下的结果，如果按照十二平均律调音，那么频率比全是无理数，按理说应该非常难听，但实际上并不是这样。</p>
+</div>
+
+<div class="note "><p><strong>Helmholtz 拍音理论</strong> 注意到频率为 $\omega$ 和 $\omega + \delta$ 的声音叠加之后是</p>
+<p>$$<br>\sin(2\pi(\omega + \delta)t) + \sin(2\pi\omega t) &#x3D; 2\sin\left(2\pi(\omega + \frac{\delta}{2})t\right)\cos \pi\delta t<br>$$</p>
+<p>这类似于将 $\cos\pi\delta t$ 调制在一个频率为 $\omega + \delta &#x2F; 2$ 的波上 </p>
+<p><img src="/../picture/helmholtzInterval.png"></p>
+<p>那么将这两个声音叠加之后，将会产生每秒 $\delta$ 次的“震荡”的声音（读者可以自行用音频软件模拟，确实很明显），称作<strong>拍音</strong>。</p>
+<p>Helmholtz 认为每秒少于 $6$ 个或者多于 $120$ 个拍音的音程不协和，每秒 $33$ 个拍音的最不协和。</p>
+<p>但是这个理论缺陷很明显，因为升高八度频率乘二，所以这就导致一个非常不协和的音程升高几个八度就协和了，这自然是不对的。</p>
+</div>
+
+<div class="note "><p><strong>Stumpf 心理学实验结果</strong></p>
+<p>让未经过音乐训练的被试分别听到的声音（可能是单个音，也可能是同时演奏根音和冠音）是一个声音还是两个声音。</p>
+<p>实验表明将音程混同做一个音的比例排序是八度（75%），五度（50%），四度（33%）。</p>
+<p>1987 年 L.A.DeWitt, R.G.Crowder 拓展了他们的结果，增加了可能的要素比如反应时间、泛音、不同律制等。</p>
+</div>
+
+<div class="note "><p><strong>文化背景？</strong></p>
+</div>
+
+<h1><span id="弦振动方程">弦振动方程</span></h1><p>这部分问题我们在 <a href="../../../../2024/12/15/MusicAndMathematicsProject/">大作业</a> 当中研究的很充分了。而且我这两天算数真的要算吐了，所以就不赘述了。这里重申 Marin Mersenne 定理和管乐器的分类是比较重要的，尤其注意同长度闭管的基频比开管低一个八度。下面补充一点我们没推到的东西，但是结果都抄书，这里也不算。</p>
+<p>注意我们加了两个待定的傅里叶系数（在推式中为了形式简单，我们将傅里叶系数 $a_n, b_n$ 合并成了 $C_n, \phi_n$，这里需要拆开来看）。确定这两个系数还需要两个方程，可以采用下面的方式：</p>
+<ul>
+<li>将弦的初始形状做奇延拓，从而可以确定一切 $\sin$ 的系数 $a_n$。</li>
+<li>将弦的初始速度做奇延拓，假设解足够光滑，傅里叶级数可以逐项求导，可以得到一切 $\cos$ 的系数 $b_n$。</li>
+</ul>
+<p>简单推导可以知道由静止开始拨弦则 $b_n$ 均为 $0$。</p>
+<p>如果从弦正中央拨弦，要确定 $a_n$ 需要奇延拓并展开</p>
+<p>$$<br>\phi(x) &#x3D; \begin{cases}<br>    2x &#x2F; L &amp; 0\leq x\leq L &#x2F; 2 \\<br>    2 - 2x &#x2F; L &amp; L&#x2F;2\leq x\leq L<br>\end{cases}<br>$$</p>
+<p>可以发现 $n$ 为偶数时傅里叶系数都是 $0$，这表明只有奇数倍基频的振动模态存在。读者可以自己实验在吉他的 12 品拨弦然后测量频谱，确实是这样的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Music/" rel="tag"># Music</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2024/12/15/MusicAndMathematicsProject/" rel="prev" title="关于管乐器泛音演奏（超吹）的一些探究">
+                  <i class="fa fa-angle-left"></i> 关于管乐器泛音演奏（超吹）的一些探究
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2024/12/18/QuantumLSMR/" rel="next" title="Qisheng Wang, Mingsheng Ying. Quantum Algorithm for Lexicographically Minimal String Rotation (2022)">
+                  Qisheng Wang, Mingsheng Ying. Quantum Algorithm for Lexicographically Minimal String Rotation (2022) <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
