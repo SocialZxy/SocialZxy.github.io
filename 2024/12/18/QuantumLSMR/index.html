@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。 文章还提供了一个 Nested Grover 的 Error Reduction 框架，证明了这个问题的复杂度下界是 $O(\sqrt{n &#x2F; \log n})$。好像这才是最重要的贡献，但是我现在不关心这个，所以改天再看。    定义 一些朴素 &#x2F; 前置的结果 基础算法">
+    <meta name="description" content="Abstract. 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。文章还证明了这个问题的最坏复杂度下界 $\Omega(n^{1&#x2F;2} &#x2F; \log^{1&#x2F;2} n)$ 和平均复杂度下界 $\Omega(n^{1&#x2F;2})$，但他自己并没有达到这个界。    定义 一些朴素 &#x2F; 前置的结果 基础算法 算法分析">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Qisheng Wang, Mingsheng Ying. Quantum Algorithm for Lexicographically Minimal String Rotation (2022)">
 <meta property="og:url" content="http://example.com/2024/12/18/QuantumLSMR/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。 文章还提供了一个 Nested Grover 的 Error Reduction 框架，证明了这个问题的复杂度下界是 $O(\sqrt{n &#x2F; \log n})$。好像这才是最重要的贡献，但是我现在不关心这个，所以改天再看。    定义 一些朴素 &#x2F; 前置的结果 基础算法">
+<meta property="og:description" content="Abstract. 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。文章还证明了这个问题的最坏复杂度下界 $\Omega(n^{1&#x2F;2} &#x2F; \log^{1&#x2F;2} n)$ 和平均复杂度下界 $\Omega(n^{1&#x2F;2})$，但他自己并没有达到这个界。    定义 一些朴素 &#x2F; 前置的结果 基础算法 算法分析">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/LMSRExclusiveRule.png">
 <meta property="article:published_time" content="2024-12-18T13:47:21.000Z">
-<meta property="article:modified_time" content="2024-12-18T16:15:26.654Z">
+<meta property="article:modified_time" content="2024-12-20T09:17:37.758Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/picture/LMSRExclusiveRule.png">
@@ -115,7 +115,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">一些朴素 &#x2F; 前置的结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基础算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">将平均复杂度优化至 $\tilde{O}(\sqrt n)$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">【Under Construction】复杂度下界证明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">一些朴素 &#x2F; 前置的结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基础算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">算法分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">将平均复杂度优化至 $\tilde{O}(\sqrt n)$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">复杂度下界证明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -233,7 +233,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-19 00:15:26" itemprop="dateModified" datetime="2024-12-19T00:15:26+08:00">2024-12-19</time>
+      <time title="Modified: 2024-12-20 17:17:37" itemprop="dateModified" datetime="2024-12-20T17:17:37+08:00">2024-12-20</time>
     </span>
 
   
@@ -245,8 +245,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。</p>
-<p>文章还提供了一个 Nested Grover 的 Error Reduction 框架，证明了这个问题的复杂度下界是 $O(\sqrt{n &#x2F; \log n})$。好像这才是最重要的贡献，但是我现在不关心这个，所以改天再看。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。文章还证明了这个问题的最坏复杂度下界 $\Omega(n^{1&#x2F;2} &#x2F; \log^{1&#x2F;2} n)$ 和平均复杂度下界 $\Omega(n^{1&#x2F;2})$，但他自己并没有达到这个界。</p>
 <!-- toc -->
 
 <ul>
@@ -255,22 +254,22 @@
 <li><a href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
 <li><a href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90">算法分析</a></li>
 <li><a href="#%E5%B0%86%E5%B9%B3%E5%9D%87%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BC%98%E5%8C%96%E8%87%B3-tildeosqrt-n">将平均复杂度优化至 $\tilde{O}(\sqrt n)$</a></li>
-<li><a href="#under-construction%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8B%E7%95%8C%E8%AF%81%E6%98%8E">【Under Construction】复杂度下界证明</a></li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8B%E7%95%8C%E8%AF%81%E6%98%8E">复杂度下界证明</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="定义">定义</span></h1><p>字符串的最小字典序轮换是一个经典问题，旨在寻找一个字符串 $s$ 字典序最小的后缀。</p>
+<h1><span id="定义">定义</span></h1><p>字符串的最小字典序循环移位是一个经典问题。</p>
 <p>本文提出一个最差复杂度 $O(n^{3&#x2F;4})$ 的算法来解决这个问题，平均复杂度可以被优化到 $O(\sqrt n\log n)$。</p>
 <p>我们假设给定了如下的 Oracle 用于访问字符串 $s$：</p>
 <p>$$<br>U_{\mathrm{in}}|i, j\rangle &#x3D; |i, j \oplus s_i\rangle<br>$$</p>
 <p>以下是一些记号：</p>
 <ul>
-<li>$s^{(k)}$ 表示 $s$ 长度为 $k$ 的后缀。</li>
+<li>$s^{(k)}$ 表示 $s$ 做 $k$ 次循环移位。</li>
 <li>$\mathrm{LCP}(s, t)$ 表示 $s, t$ 的最长公共前缀。</li>
-<li>$\mathrm{SCR}(s)$ 表示 $s$ 字典序最小的后缀 $\min\{s^{(0)}, …, s^{(n - 1)}\}$。</li>
+<li>$\mathrm{SCR}(s)$ 表示 $s$ 字典序最小的循环移位 $\min\{s^{(0)}, …, s^{(n - 1)}\}$。</li>
 <li>$\mathrm{LMSR}(s)$ 表示对应的下标 $\arg \min_k \{s^{(k)}\}$。</li>
 </ul>
 <h1><span id="一些朴素-x2f-前置的结果">一些朴素 &#x2F; 前置的结果</span></h1><div class="note info"><p><strong>定理 2.1.1.</strong> 存在一个常数概率正确的算法，在 $O(\sqrt n)$ 内比较两个长度为 $n$ 的字符串 $s, t$ 的字典序。</p>
@@ -318,10 +317,66 @@
 <p>这一层复杂度为 $O(\sqrt{n &#x2F; B}(\sqrt{B\log B} + \sqrt N)) &#x3D; O(n &#x2F; \sqrt B)$</p>
 <h1><span id="算法分析">算法分析</span></h1><p>显然最后复杂度是 $O(\sqrt{nB} + n &#x2F; \sqrt{B})$，置 $B &#x3D; \sqrt n$ 得到最低复杂度 $O(n^{3&#x2F;4})$。</p>
 <h1><span id="将平均复杂度优化至-tildeosqrt-n">将平均复杂度优化至 $\tilde{O}(\sqrt n)$</span></h1><p>在字符串问题谈平均复杂度纯耍流氓，在 OI 里面都是只能拿 $10$ 分的水平，因为你知道这样两个串的 $\mathrm{LCP}$ 期望是 $\log$ 的。因此你也不难想象他想要干什么。我们这里就不讲了。</p>
-<h1><span id="under-construction复杂度下界证明">【Under Construction】复杂度下界证明</span></h1><p>复杂度下界使用阴间引理，拼劲全力无法想到，于是决定改天再看。</p>
+<h1><span id="复杂度下界证明">复杂度下界证明</span></h1><p>复杂度下界的证明采用了 Ambainis 和 de Wolf 的工作，他们将一个布尔函数的计算复杂度下界和其块敏感度联系了起来。</p>
+<p>对于 $S\subset [n]$，我们记 $x^S$（$x$ 关于 $S$ 翻转）为 </p>
+<p>$$<br>\left(x^S\right)_i &#x3D; \begin{cases}<br>  \bar{x}_i &amp; i\in S \\<br>  x_i &amp; i\notin S<br>\end{cases}<br>$$</p>
+<div class="note success"><p><strong>定义 6.1（Block Sensitivity）.</strong> 函数 $f$ 在输入 $x$ 上的块敏感度定义为最大的 $m$ 使得存在不相交的集合 $S_1, …, S_m$，使得 </p>
+<p>$$<br>f(x) \ne f(x^{S_i}) \quad \forall 1\leq i\leq m<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 6.2（[AdW99], Theorem 6.3）.</strong> 对于任意的布尔函数 $f: \{0, 1\}^n\rightarrow \{0, 1\}$ 和概率分布 $\mu : \{0, 1\}^n\rightarrow [0, 1]$，量子算法的平均复杂度下界</p>
+<p>$$<br>Q^\mu(f) &#x3D; \Omega\left(\mathbb{E}_{x\sim \mu}\left[\sqrt{bs_x(f)}\right]\right)<br>$$</p>
+</div>
+
+<p>现在我们定义 $\mathrm{LMSR}_0(x) &#x3D; \mathrm{LMSR}(x)\bmod 2$。显然 </p>
+<p>$$<br>\mathbb{E}_{x\sim \mu}\left[\sqrt{bs_x(\mathrm{LMSR}_0)}\right] \leq Q^\mu(\mathrm{LMSR}_0) \leq Q^\mu(\mathrm{LMSR})<br>$$</p>
+<p>现在任务是给出 $bs_x(\mathrm{LMSR}_0)$ 的下界。首先可以不失一般性地假设 $\mathrm{LMSR}(x) &#x3D; 0$，因为如果 $\mathrm{LMSR}(x) &#x3D; k$，那么可以先对着 $x^{(k)}$ 构造 $S_1^{(k)}, …, S_m^{(k)}$，然后令 $S_i &#x3D; S_i^{(k)} + k$ 即可。</p>
+<p>我们构造的整体思路是：选择一个奇数下标，将后面一段序列全部改成 $0$，来强行让它比 $x^{(0)}$ 小。回忆在串纯随机的情况下，两个位置的 $\mathrm{LCP}$ 不会很大。我们形式化这一件事情。</p>
+<div class="note danger"><p><strong>Warning.</strong> 下面的定义是我自己想的，因为我觉得他的定义实在是很不直观。但应该也是对的。</p>
+</div>
+
+<div class="note success"><p><strong>定义 6.3.</strong> 对于字符串 $s$，定义 </p>
+<p>$$<br>C(s) &#x3D; \max\{\mathrm{LCP}(s, s^{(i)}) : 0 &lt; i &lt; n\}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>引理 6.4.</strong> 若均匀随机采样 $s$，那么 $C(s)$ 超过 $B &lt; n &#x2F; 2$ 的概率不会很大。</p>
+<p>$$<br>\mathrm{Pr}\left[C(s) \leq B\right] \geq 1 - O\left(n|\Sigma|^{-B}\right)<br>$$</p>
+<p><em>证明.</em> 将补事件用 Union Bound 拆开。</p>
+<p>$$<br>\begin{align}<br>  \mathrm{Pr}\left[C(s) \leq B\right] &#x3D;&amp; 1 - \mathrm{Pr}\left[C(s) &gt; B\right] \\<br>  \geq&amp; 1 - \sum_{i &#x3D; 1}^{n - 1}\mathrm{Pr}\left[\mathrm{LCP}(s, s^{(i)}) &gt; B\right] \\<br>  \geq&amp; 1 - \sum_{i &#x3D; 1}^{n - 1}|\Sigma|^{-B} \\<br>  &#x3D;&amp; 1 - O\left(n|\Sigma|^{-B}\right)<br>\end{align}<br>$$</p>
+</div>
+
+<blockquote>
+<p>Remark. 因为这里是 $01$ 串，所以 $|\Sigma| &#x3D; 2$。</p>
+</blockquote>
+<p>取 $B &#x3D; O(2\log n)$ 得到 </p>
+<div class="note info"><p><strong>推论 6.5.</strong> </p>
+<p>$$<br>\mathrm{Pr}[C(s) \leq 2\log n] &#x3D; 1 - O\left(\frac 1n\right)<br>$$</p>
+</div>
+
+<p>接下来的引理表明给出我们对 $S_1, …, S_m$ 的构造。</p>
+<div class="note info"><p><strong>引理 6.6.</strong> 对于 $x$，若 $C(x) \leq n &#x2F; 5$，那么 </p>
+<p>$$<br>bs_x(\mathrm{LMSR}_0) \geq O\left(\frac{n}{4C(x)}\right)<br>$$</p>
+<p><em>证明.</em> 设 $B &#x3D; C(x)$，我们将序列分成长度为 $4B$ 的块，$\mathcal{B}_i$ 定义为第 $i$ 块的下标集合（从 $\mathcal{B}_0$ 开始）。那么根据 $C(x)$ 的定义，即便是 $s$ 的开头也不存在连续 $2B - 2$ 个 $0$。因此我们将连续 $2B - 1$ 个位置都调整为 $0$，即可让该位置开始的循环移位成为 $\mathrm{LMSR}$。那么恰当取异或，可以让 $s_{\mathcal{B}_i}$ 变成 $100…0$ 或者 $1100…0$，从而这一段后缀 $0$ 将成为 $\mathrm{LMSR}$，只需要根据 $\min \mathcal{B}_i$ 的奇偶性选择即可。</p>
+</div>
+
+<p>综合起来我们得到了最终结论</p>
+<div class="note info"><p><strong>定理 6.7（LMSR 的平均复杂度下界）.</strong> 若 $\mu$ 是 $2^n$ 上的均匀分布，则</p>
+<p>$$<br>Q^\mu(\mathrm{LMSR}) &#x3D; \Omega\left(\sqrt{\frac{n}{\log n}}\right)<br>$$</p>
+<p><em>证明.</em> 根据上述结果</p>
+<p>$$<br>\begin{align}<br>  Q^\mu(\mathrm{LMSR}) \geq&amp; \mathbb{E}_{x\sim \mu}\left[\sqrt{bs_x(\mathrm{LMSR}_0)}\right] \\<br>  &#x3D;&amp; \frac{1}{2^n}\sum_{x\in\{0, 1\}^n} \sqrt{\frac{n}{4C(x)}} \\<br>  \geq&amp; \frac{1}{2^n}\sum_{x\in\{0, 1\}^n, C(x) \leq 2\log n} O\left(\sqrt{\frac{n}{\log n}}\right) \\<br>  &#x3D;&amp; O\left(\sqrt{\frac{n}{\log n}}\right)\mathrm{Pr}_{x\sim \mu}\left[C(x) \leq 2\log n\right] \\<br>  &#x3D;&amp; O\left(\sqrt{\frac{n}{\log n}}\right)<br>\end{align}<br>$$</p>
+</div>
+
+<p>最坏复杂度的下界非常好证明。[AdW99] 同时给出了量子算法的时间下界在最坏情况下的版本：</p>
+<div class="note info"><p><strong>定理 6.8（[AdW99]）.</strong> 对于布尔函数 $f : \{0, 1\}^n\rightarrow \{0, 1\}$，任意高概率正确的量子算法 $A$ 在输入 $x$ 上的运行时间</p>
+<p>$$<br>T_A(x) &#x3D; \Omega\left(\sqrt{bs_x(f)}\right)<br>$$</p>
+</div>
+
+<p>而 $bs_{1^n}(\mathrm{LSMR}_0) \geq n &#x2F; 2$，因为你任意翻转一个奇数位置就可以改变 $\mathrm{LSMR}_0$。</p>
+<p>所以这篇文章给出的上下界之间还有一定差距。</p>
 <h1><span id="参考文献">参考文献</span></h1><p>[DH96] C. Dürr, P. Hoyer. A quantum algorithm for finding the minimum. Quantum Physics E-Print Archive. <a target="_blank" rel="noopener" href="http://xxx.lanl.gov/quant-ph/9607014">http://xxx.lanl.gov/quant-ph/9607014</a>. 1996</p>
 <p>[Vi91] Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching. SIAM Journal on Computing 1991 20:1, 22-40</p>
 <p>[RV03] H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003)</p>
+<p>[AdW99] A. Ambainis, R. de Wolf, Average-case quantum query complexity. Journal of Physics A General Physics, 34(35): 6741-6754, 1999</p>
 
     </div>
 

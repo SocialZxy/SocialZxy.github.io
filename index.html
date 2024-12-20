@@ -225,7 +225,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-19 00:15:26" itemprop="dateModified" datetime="2024-12-19T00:15:26+08:00">2024-12-19</time>
+      <time title="Modified: 2024-12-20 17:17:37" itemprop="dateModified" datetime="2024-12-20T17:17:37+08:00">2024-12-20</time>
     </span>
 
   
@@ -238,8 +238,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。</p>
-<p>文章还提供了一个 Nested Grover 的 Error Reduction 框架，证明了这个问题的复杂度下界是 $O(\sqrt{n &#x2F; \log n})$。好像这才是最重要的贡献，但是我现在不关心这个，所以改天再看。</p>
+          <p><strong>Abstract.</strong> 求字符串最小字典序后缀的 $O(n^{3&#x2F;4})$ 量子算法，感觉非常套路。文章还证明了这个问题的最坏复杂度下界 $\Omega(n^{1&#x2F;2} &#x2F; \log^{1&#x2F;2} n)$ 和平均复杂度下界 $\Omega(n^{1&#x2F;2})$，但他自己并没有达到这个界。</p>
 <!-- toc -->
 
 <ul>
@@ -248,7 +247,7 @@
 <li><a href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
 <li><a href="#%E7%AE%97%E6%B3%95%E5%88%86%E6%9E%90">算法分析</a></li>
 <li><a href="#%E5%B0%86%E5%B9%B3%E5%9D%87%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%BC%98%E5%8C%96%E8%87%B3-tildeosqrt-n">将平均复杂度优化至 $\tilde{O}(\sqrt n)$</a></li>
-<li><a href="#under-construction%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8B%E7%95%8C%E8%AF%81%E6%98%8E">【Under Construction】复杂度下界证明</a></li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8B%E7%95%8C%E8%AF%81%E6%98%8E">复杂度下界证明</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
 </ul>
 <!-- tocstop -->
@@ -321,7 +320,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-19 00:07:12" itemprop="dateModified" datetime="2024-12-19T00:07:12+08:00">2024-12-19</time>
+      <time title="Modified: 2024-12-20 11:35:54" itemprop="dateModified" datetime="2024-12-20T11:35:54+08:00">2024-12-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,6 +352,13 @@
 </ul>
 </li>
 <li><a href="#%E5%BC%A6%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B">弦振动方程</a></li>
+<li><a href="#%E5%BE%8B%E5%AD%A6">律学</a><ul>
+<li><a href="#%E4%B8%89%E5%88%86%E6%8D%9F%E7%9B%8A-%E4%BA%94%E5%BA%A6%E7%9B%B8%E7%94%9F-%E7%BA%AF%E5%BE%8B">三分损益、五度相生、纯律</a></li>
+<li><a href="#%E4%B8%AD%E5%BA%B8%E5%85%A8%E9%9F%B3%E5%BE%8B-%E5%B9%B3%E5%9D%87%E5%BE%8B">中庸全音律、平均律</a></li>
+<li><a href="#%E7%8B%97%E5%B1%8E%E5%A4%A7%E5%B1%B1">狗屎大山</a></li>
+<li><a href="#%E6%9C%BA%E5%99%A8%E4%BD%9C%E6%9B%B2">机器作曲</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
           <!--noindex-->
