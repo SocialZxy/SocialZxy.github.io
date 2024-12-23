@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="链接">
+    <meta name="description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机系统小常识（下）">
 <meta property="og:url" content="http://example.com/2024/12/22/ICSRevision2/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="链接">
+<meta property="og:description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2024-12-22T14:17:59.000Z">
-<meta property="article:modified_time" content="2024-12-22T14:19:37.144Z">
+<meta property="article:modified_time" content="2024-12-23T03:58:09.559Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Linking">
 <meta property="article:tag" content="Eception Control Flow">
@@ -119,7 +119,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">可重定位目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">符号解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">重定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">可执行目标文件</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -229,9 +229,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2024-12-22 22:17:59 / Modified: 22:19:37" itemprop="dateCreated datePublished" datetime="2024-12-22T22:17:59+08:00">2024-12-22</time>
+      <time title="Created: 2024-12-22 22:17:59" itemprop="dateCreated datePublished" datetime="2024-12-22T22:17:59+08:00">2024-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-23 11:58:09" itemprop="dateModified" datetime="2024-12-23T11:58:09+08:00">2024-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -255,13 +261,156 @@
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
 
 <ul>
-<li><a href="#%E9%93%BE%E6%8E%A5">链接</a></li>
+<li><a href="#%E9%93%BE%E6%8E%A5">链接</a><ul>
+<li><a href="#%E5%8F%AF%E9%87%8D%E5%AE%9A%E4%BD%8D%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6">可重定位目标文件</a></li>
+<li><a href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90">符号解析</a></li>
+<li><a href="#%E9%87%8D%E5%AE%9A%E4%BD%8D">重定位</a></li>
+<li><a href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6">可执行目标文件</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="链接">链接</span></h1>
+<h1><span id="链接">链接</span></h1><p><strong>编译的全过程</strong></p>
+<ul>
+<li><code>cpp</code> 预处理器，<code>main.cpp</code> $\rightarrow$ <code>main.i</code>（ASCII 中间文件）。</li>
+<li><code>cc1</code> 编译器，<code>main.i</code> $\rightarrow$ <code>main.s</code>（ASCII 汇编语言文件）。</li>
+<li><code>as</code> 汇编器，<code>main.s</code> $\rightarrow$ <code>main.o</code>（可重定位目标文件）。</li>
+<li><code>ld</code> 静态链接器，<code>main.o</code>，<code>sum.o</code> $\rightarrow$ <code>prog</code>（可执行文件）。</li>
+</ul>
+<p>静态链接器需要完成以下两个任务：</p>
+<ul>
+<li><strong>符号解析</strong> 目标文件定义和引用了符号（函数、全局变量、静态变量等），符号解析将每个定义和引用联系在一起。</li>
+<li><strong>重定位</strong> 编译器和汇编器生成地址从 $0$ 开始的数据和代码和数据节。链接器通过把每个符号定义与一个内存位置关联起来，从而重定位这些节。</li>
+</ul>
+<p>看到后面就知道具体是什么东西了。</p>
+<hr>
+<p><strong>目标文件</strong></p>
+<p>分为</p>
+<ul>
+<li><strong>可重定位目标文件</strong>。包含二进制代码和数据，可以在链接时和其他可重定位目标文件合并创建一个可执行目标文件。</li>
+<li><strong>可执行目标文件</strong>。可以直接被复制到内存上执行。</li>
+<li><strong>共享目标文件</strong>。一种特殊类型的可重定位目标文件，可以在加载或者运行时被动态加载进内存并链接。</li>
+</ul>
+<p>目标文件按照一定的格式来组织。在 Windows 系统中为可移植可执行格式（Portable Executable，PE），Mac OS-X 使用 Mach-O 格式，现代 Linux 和 Unix 使用可执行可链接格式（Executable and Linkable Format，ELF）。</p>
+<h2><span id="可重定位目标文件">可重定位目标文件</span></h2><p>多文件编译时，称一个<em>目标模块</em>为 <code>.o</code> 文件中的字节序列，<em>目标文件</em>为实际上磁盘中的文件。</p>
+<p><strong>ELF 的格式</strong></p>
+<ul>
+<li><strong>ELF 头</strong> 现有 16 字节的序列描述生成文件的系统的字大小、字节顺序，后接 ELF 头大小、目标文件类型、机器类型、<em>节头部表</em>的文件偏移，节头部表中条目的大小和数量。</li>
+<li><strong>节</strong> 夹在 ELF 头和节头部表之间的字节序列。其位置和大小由节头部表描述。典型的 ELF 文件包含下面的节<ul>
+<li><code>.text</code> 机器代码。</li>
+<li><code>.rodata</code> 只读数据，比如 <code>printf</code> 中的字符串常量和跳转表等。</li>
+<li><code>.data</code> 已初始化的全局和静态变量。</li>
+<li><code>.bss</code> 未初始化的全局和静态变量，以及初始化为 $0$ 的全局和静态变量。注意在可重定位目标文件中这一节只是占位符不占用空间，因为初始化为 $0$ 不需要额外信息。</li>
+<li><code>.symtab</code> 符号表，存放定义和引用的函数和全局变量的信息。（不包含局部变量，仅声明的函数，.rodata）</li>
+<li><code>.rel.text</code> 链接时可能需要修改的 <code>.text</code> 中的位置表。</li>
+<li><code>.rel.data</code> 被模块引用或定义的所有全局变量的重定位信息。（已初始化的全局变量，其初值为外部全局变量或函数的地址，则可能会被修改）。</li>
+<li><code>.debug</code> 调试符号表，包含局部变量和类型、全局变量、原始文件。（仅 <code>-g</code> 时生成）</li>
+<li><code>.line</code> 原始程序行号和机器指令之间的映射。（仅 <code>-g</code> 时生成）</li>
+<li><code>.strtab</code> 字符串表，包含 <code>.symtab</code>、<code>.debug</code> 中的符号表和节头部中的节名字。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<p><strong>符号和符号表</strong> </p>
+<p>每个可重定位目标模块 $m$ 都有一个符号表，包含 $m$ 中定义和引用的符号的信息。符号分为以下三种：</p>
+<ul>
+<li>由模块 $m$ 定义并能被其他模块引用的全局符号，称作全局链接器符号（非静态的函数和全局变量）。</li>
+<li>由其他模块定义并被 $m$ 引用的全局符号，成为外部符号（其他模块中非静态的函数和全局变量）。</li>
+<li>只被模块定义和引用的局部符号（带 <code>static</code> 属性的函数和全局变量）。<em>这些符号对其他模块不可见</em>。</li>
+</ul>
+<p>过程变量（即平常语境下的“局部变量”）在栈中，所以链接器不需要处理。函数中的 <code>static</code> 类过程变量不在栈中而是在 <code>.data</code> 或者 <code>.bss</code> 中，但是可以重名，这时编译器将向汇编器输出两个不同名字的局部链接器符号（比如 <code>x.1</code> 和 <code>x.2</code> 状物）。</p>
+<p>符号表的格式为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> name;        <span class="comment">// 符号名字在字符串表中的偏移</span></span><br><span class="line">    <span class="type">char</span> type:<span class="number">4</span>,     <span class="comment">// 函数 / 类型</span></span><br><span class="line">         bingding:<span class="number">4</span>; <span class="comment">// 局部 / 全局</span></span><br><span class="line">    <span class="type">char</span> reserved;</span><br><span class="line">    <span class="type">short</span> section;   <span class="comment">// 到节头部表的索引</span></span><br><span class="line">    <span class="type">long</span> value;      <span class="comment">// 距离定义的目标的节的起始偏移（可重定位）或者绝对地址（可执行）</span></span><br><span class="line">    <span class="type">long</span> size;       <span class="comment">// 目标大小（byte）</span></span><br><span class="line">&#125; Elf64_Symbol;</span><br></pre></td></tr></table></figure>
+
+<p><code>section</code> 可以是一些整数（<code>1</code> 表示 <code>.text</code>，<code>3</code> 表示 <code>.data</code>，etc.），也可以是一些特殊常数，称作<strong>伪节</strong>，伪节在节头部表中没有条目。</p>
+<ul>
+<li><code>ABS</code> 不该被重定位的符号。</li>
+<li><code>UNDEF</code> 未定义的符号。</li>
+<li><code>COMMON</code> 未被分配位置的未初始化数据目标。</li>
+</ul>
+<p><code>COMMON</code> 和 <code>.bss</code> 有一点区别，在 GCC 中一般未初始化的全局变量去 <code>COMMON</code>，未初始化的静态变量和初始化为 $0$ 的全局或静态变量去 <code>.bss</code>。但是这是一个很傻逼的历史遗留问题，可以用 <code>fno-common</code> 来让所有东西都去 <code>.bss</code>。在后面我们会看到为什么要留着一个 <code>COMMON</code>。</p>
+<h2><span id="符号解析">符号解析</span></h2><blockquote>
+<p>C++ 和 Java 发生重载的时候，编译器将类中每个重载函数的名字改成函数名 <code>__</code> 类名字符数加类名加参数表。比如 <code>Foo::bar(int, long)</code> 将会被改成 <code>bar__3Fooil</code>。</p>
+<p>这个过程称作重整，反向过程称作恢复。</p>
+</blockquote>
+<p>定义<em>函数</em>和<em>已经初始化的全局变量</em>为强符号，<em>未初始化的全局符号</em>为弱符号。</p>
+<p>当符号重名时，有如下规则：</p>
+<ul>
+<li>强符号不能重名。</li>
+<li>一个强符号和多个弱符号重名，选择强符号。</li>
+<li>有多个弱符号，则任选一个。</li>
+</ul>
+<p>如果遇到弱符号，编译器就会被放入 <code>COMMON</code> 伪节。但是如果多个模块里面发生了无意识的符号重名，就会寄的很惨，所以怀疑此类错误时一般打开 <code>fno-common</code>，这样如果定义了多个弱符号也会报错。</p>
+<hr>
+<p><strong>静态库</strong></p>
+<p>为了引用标准函数，有几种极端的办法：</p>
+<ul>
+<li>让编译器生成标准函数代码。但这会显著增加编译器的复杂性。</li>
+<li>每次链接都与定义了全体标准函数的模块（e.g. <code>libc.o</code>）链接。但这样很费内存。</li>
+<li>为每个函数创建一个可重定位文件。但是这样你需要 <code>include</code> 大量的东西。</li>
+</ul>
+<p>解决的办法是把若干可重定位文件封装成一个静态库文件（<code>.a</code>，存档文件，一组连接起来的可重定位目标文件的集合，有一个头部用来描述每个成员目标文件的大小和位置）。</p>
+<p>通过 AR 工具来创建一个静态库。</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-c</span> addvec.c mulvec.c</span><br><span class="line">ar rcs libvector.a addvec.o mulvec.o</span><br></pre></td></tr></table></figure>
+
+<p>用</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-static</span> <span class="literal">-o</span> prog main.o ./libvector.a</span><br></pre></td></tr></table></figure>
+
+<p>或者等价地</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-static</span> <span class="literal">-o</span> prog main.o <span class="literal">-lvector</span></span><br></pre></td></tr></table></figure>
+
+<p>来进行链接。<code>-static</code> 参数指示构建一个完全链接的可执行目标文件。</p>
+<hr>
+<p><strong>链接器解析引用流程</strong></p>
+<p>从左到右扫描出现在命令行上的目标文件和存档文件，维护三个集合：可重定位目标文件集合 $E$，未解析符号集合 $U$，已定义符号集合 $D$。</p>
+<ul>
+<li>如果是目标文件那么其会被加入 $E$，然后根据内容修改 $U, D$。</li>
+<li>如果是存档文件，那么链接器将尝试匹配 $U$ 和存档文件成员中的定义。如果对上了，就将该成员加入 $E$，然后修改 $U, D$，重复直到 $U, D$ 都不再变化。</li>
+</ul>
+<p>如果 $U$ 非空则发生链接错误，否则继续进行重定位之类的工作。</p>
+<p>从上述过程中看出静态库应该被放在命令的最后。且如果有相互依赖关系，需要在命令行中重复库或者合并相互依赖的库。</p>
+<details class="note "><summary><p>Example.</p>
+</summary>
+<p><code>libx.a</code> 依赖 <code>liby.a</code> 中的目标文件，而 <code>liby.a</code> 也依赖 <code>libx.a</code> 中的目标文件。那么此时命令应当是</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc foo.c libx.a liby.a libx.a</span><br></pre></td></tr></table></figure>
+</details>
+
+<h2><span id="重定位">重定位</span></h2><p>过程大致分成两段：</p>
+<ul>
+<li><strong>重定位节和符号定义</strong> 合并所有相同类型的节，给每条指令和全局变量分配唯一的运行时内存。这部分比较 trivial。</li>
+<li><strong>重定位节中的符号引用</strong> 修改符号引用，使其指向正确的地址。</li>
+</ul>
+<hr>
+<p><strong>重定位条目</strong></p>
+<p>回忆之前讲的 <code>rel.text</code> 和 <code>rel.data</code> 两节，当汇编器遇到一个最终位置未知的符号引用就往里面塞一个<em>重定位条目</em>。一个重定位条目结构为</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="type">long</span> offset;    <span class="comment">// 该需重定位的引用在节中的偏移</span></span><br><span class="line">    <span class="type">long</span> type:<span class="number">32</span>,   <span class="comment">// 重定位类型（下文有写）</span></span><br><span class="line">         symbol:<span class="number">32</span>; <span class="comment">// 符号表下标（应该指向哪个符号）</span></span><br><span class="line">    <span class="type">long</span> addend;    <span class="comment">// 有符号常数，一些类型的重定位需要用它来对地址做偏移修改（下一段有写）</span></span><br><span class="line">&#125; Elf_Rela;</span><br></pre></td></tr></table></figure>
+
+<p>重定位类型有 $32$ 中，我们只关心两种基本的类型：</p>
+<ul>
+<li><code>R_X86_64_PC32</code> 重定位一个 $32$ 位 PC 相对地址的引用。</li>
+<li><code>R_X86_64_32</code> 重定位一个 $32$ 位绝对地址的引用。</li>
+</ul>
+<p>这两种重定位模型假设代码和数据加起来不超过 $2$ GB，因此都可以用 $32$ 位相对地址表示。</p>
+<hr>
+<p><strong>重定位符号引用</strong></p>
+<p>假设现在已经做完了重定位节和符号定义。那么重定位算法大概是：</p>
+<ul>
+<li>对于节 $s$（$s &#x3D; \texttt{.data} &#x2F; \texttt{.text}$），设其地址为 <code>ADDR(s)</code>。</li>
+<li>考察节 $s$ 的重定位条目表中的每一项 $r$。<ul>
+<li>找到对应的位置 <code>refptr = s + r.offset</code>。</li>
+<li>若为 PC 相对寻址 <code>r.type == R_X86_64_PC32</code>，找到该位置的运行时地址 <code>ADDR(s) + r.offset</code>，然后修改目标位置 <code>*refptr = (unsigned)(ADDR(r.symbol) + r.addend - refaddr)</code></li>
+<li>若为绝对寻址 <code>r.type == R_X86_64_32</code>，则直接改 <code>*refptr = (unsigned)(ADDR(r.symbol) + r.addend)</code>。</li>
+</ul>
+</li>
+</ul>
+<p>回忆相对寻址时用的是<strong>下一条指令开始的地址</strong>，所以在 <code>R_X86_64_PC32</code> 时，<code>addend</code> 是重定位目标位置的开始地址减去下一条指令的开始地址。</p>
+<blockquote>
+<p>一定记住 x86_64 是小端法，所以你看到重定位完符号引用之后的数字是倒过来的。</p>
+</blockquote>
+<h2><span id="可执行目标文件">可执行目标文件</span></h2>
     </div>
 
     

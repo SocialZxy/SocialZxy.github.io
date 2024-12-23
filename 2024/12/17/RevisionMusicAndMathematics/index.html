@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="基础知识 乐音体系 记谱法 音程 调式 和弦   弦振动方程 律学 三分损益、五度相生、纯律 中庸全音律、平均律 狗屎大山   机器作曲 音乐变换理论">
+    <meta name="description" content="基础知识 乐音体系 记谱法 音程 调式 和弦   弦振动方程 律学 三分损益、五度相生、纯律 中庸全音律、平均律 狗屎大山   机器作曲 音乐变换理论 音类空间和上方的变换 十二音技术 音类集合 音网 新黎曼理论   零散音乐史">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【Under Construction】Revision | 音乐与数学">
 <meta property="og:url" content="http://example.com/2024/12/17/RevisionMusicAndMathematics/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="基础知识 乐音体系 记谱法 音程 调式 和弦   弦振动方程 律学 三分损益、五度相生、纯律 中庸全音律、平均律 狗屎大山   机器作曲 音乐变换理论">
+<meta property="og:description" content="基础知识 乐音体系 记谱法 音程 调式 和弦   弦振动方程 律学 三分损益、五度相生、纯律 中庸全音律、平均律 狗屎大山   机器作曲 音乐变换理论 音类空间和上方的变换 十二音技术 音类集合 音网 新黎曼理论   零散音乐史">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/ADSR.webp">
 <meta property="og:image" content="http://example.com/picture/WaveFourier.jpg">
@@ -38,8 +38,10 @@
 <meta property="og:image" content="http://example.com/picture/Track-Summer.jpg">
 <meta property="og:image" content="http://example.com/picture/Tristan-Chord.png">
 <meta property="og:image" content="http://example.com/picture/Canon-Chord.jpg">
+<meta property="og:image" content="http://example.com/picture/EulerNet.jpg">
+<meta property="og:image" content="http://example.com/picture/PCNet.png">
 <meta property="article:published_time" content="2024-12-17T08:27:32.000Z">
-<meta property="article:modified_time" content="2024-12-21T15:16:21.821Z">
+<meta property="article:modified_time" content="2024-12-23T09:27:00.118Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Music">
 <meta name="twitter:card" content="summary">
@@ -127,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">乐音体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">记谱法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">音程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">调式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">和弦</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">弦振动方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">律学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">三分损益、五度相生、纯律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">中庸全音律、平均律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">狗屎大山</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">机器作曲</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">音乐变换理论</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">乐音体系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">记谱法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">音程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">调式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">和弦</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">弦振动方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">律学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">三分损益、五度相生、纯律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">中庸全音律、平均律</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">狗屎大山</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">机器作曲</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">音乐变换理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">音类空间和上方的变换</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">十二音技术</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">音类集合</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">音网</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.5.</span> <span class="nav-text">新黎曼理论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">零散音乐史</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -245,7 +247,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-21 23:16:21" itemprop="dateModified" datetime="2024-12-21T23:16:21+08:00">2024-12-21</time>
+      <time title="Modified: 2024-12-23 17:27:00" itemprop="dateModified" datetime="2024-12-23T17:27:00+08:00">2024-12-23</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +287,15 @@
 </ul>
 </li>
 <li><a href="#%E6%9C%BA%E5%99%A8%E4%BD%9C%E6%9B%B2">机器作曲</a></li>
-<li><a href="#%E9%9F%B3%E4%B9%90%E5%8F%98%E6%8D%A2%E7%90%86%E8%AE%BA">音乐变换理论</a></li>
+<li><a href="#%E9%9F%B3%E4%B9%90%E5%8F%98%E6%8D%A2%E7%90%86%E8%AE%BA">音乐变换理论</a><ul>
+<li><a href="#%E9%9F%B3%E7%B1%BB%E7%A9%BA%E9%97%B4%E5%92%8C%E4%B8%8A%E6%96%B9%E7%9A%84%E5%8F%98%E6%8D%A2">音类空间和上方的变换</a></li>
+<li><a href="#%E5%8D%81%E4%BA%8C%E9%9F%B3%E6%8A%80%E6%9C%AF">十二音技术</a></li>
+<li><a href="#%E9%9F%B3%E7%B1%BB%E9%9B%86%E5%90%88">音类集合</a></li>
+<li><a href="#%E9%9F%B3%E7%BD%91">音网</a></li>
+<li><a href="#%E6%96%B0%E9%BB%8E%E6%9B%BC%E7%90%86%E8%AE%BA">新黎曼理论</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9B%B6%E6%95%A3%E9%9F%B3%E4%B9%90%E5%8F%B2">零散音乐史</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -885,7 +895,98 @@
 </ul>
 <hr>
 <p>可以用机器学习来完成曲风分类、乐曲生成等。</p>
-<h1><span id="音乐变换理论">音乐变换理论</span></h1><p>因为</p>
+<h1><span id="音乐变换理论">音乐变换理论</span></h1><h2><span id="音类空间和上方的变换">音类空间和上方的变换</span></h2><p>因为音名是八度循环的，所以我们取八度等价关系 $\sim$，然后做全体音级构成的集合 $\mathcal{P}$ 在此等价关系下的商集 $\mathcal{PC} &#x3D; \mathcal{P} &#x2F; \sim$，称作音类空间。显然 $\mathcal{PC}$ 和 $\mathbb{Z}_{12}$ 之间存在保相邻关系的一一对应。</p>
+<p>对于一段旋律，直觉上有几种保持旋律性质的变换，如移调、倒影、逆行。移调和倒影单独作用在每个音上，严格地有：</p>
+<ul>
+<li>移调变换 $T_n(\overline{x}) &#x3D; \overline{x + n}$</li>
+<li>倒影变换 $I(\overline{x}) &#x3D; \overline{-x}$</li>
+</ul>
+<p>简单计算可以知道 $T^k \circ I(\overline{x}) &#x3D; \overline{k - x}$。</p>
+<p>不难知道 $\langle T, I\rangle$ 同构于十二节二面体群 $D_{24}$。再加上 $R$，容易构造任意次移调和倒影都不能达到其回文的旋律，于是 $\langle T, I, R\rangle &#x3D; \langle T, I\rangle\times \langle R\rangle$，为 $48$ 阶群。</p>
+<blockquote>
+<p>注意这里的群元素都是对旋律的映射，运算是复合，检查映射的相等性使用外延性公理。</p>
+</blockquote>
+<h2><span id="十二音技术">十二音技术</span></h2><p>这一理论的贡献者是勋伯格。定义一个<strong>音列</strong>为十二个音列的一个排列。</p>
+<p>做一个将音列的第一项映射到 $0$ 的 $\mathcal{PC}\rightarrow \mathbb{Z}_{12}$ 的保相邻关系的一一映射，就可以用 $[\overline{12}]$ 的一个排列来表示一个音列。</p>
+<p>比如勋伯格的钢琴协奏曲 Concerto for piano and orchestra Op. 42 中有基本音列</p>
+<p>$$<br>\flat\textsf{E},\flat\textsf{B}, \textsf{D}, \textsf{F}, \textsf{E}, \textsf{C}, \sharp\textsf{F},\flat\textsf{A}, \flat\textsf{D}, \textsf{A}, \textsf{B}, \textsf{G}<br>$$</p>
+<p>可以记作</p>
+<p>$$<br>0, 7, 11, 2, 1, 9, 3, 5, 10, 6, 8, 4<br>$$</p>
+<p>初始音列记作 $P_0$。可以对音列做如下操作：</p>
+<ul>
+<li>将每个元素升高 $k$ 个半音得到移调音列 $P_k$。</li>
+<li>将 $P_k$ 关于 $P_k[0]$ 倒影，得到倒影音列 $I_k$。</li>
+<li>将 $P_k$ 翻转（逆行）得到逆行音列 $R_k$。</li>
+<li>将 $I_k$ 逆行得到逆行倒影音列 $RI_n$。</li>
+</ul>
+<p>发现可能出现如下情况：初始音列中心对称。此时对于任意的 $I_k$ 总存在一个 $R_k$ 与其相等。此时一共只有 $24$ 条音列。其余情况下都有 $48$ 条音乐。</p>
+<p>在使用十二音技术作曲时，音列给出的只是音列。具体采用哪个八度交由作曲家决定。</p>
+<blockquote>
+<p>实际上用这种手法谱出的曲都很阴间。勋伯格的曲子在非专业人士听来如同乱弹。罗忠镕的《涉江采芙蓉》（依次呈现了 $P_0, R_0, I_0, RI_0$）听起来也非常阴间。</p>
+</blockquote>
+<h2><span id="音类集合">音类集合</span></h2><p>$\mathcal{PC}$ 的一个 $n$ 元子集称作一个 $n$ 元 pc 集（音类集合）。</p>
+<p>将音类集合标记在圆周上，得到一个内接 $n$ 边形。对于两个音类 $X, Y$，其距离定义为从圆周上从 $X$ 到 $Y$ 的最短路。比如 $\textsf{G}, \textsf{C}$ 之间的距离是 $5$，$\textsf{C}, \textsf{E}$ 之间的距离是 $4$。</p>
+<p>记 $d_k$ 表示 pc 集中距离为 $k$ 的音类的无序对的数量，定义 </p>
+<p>$$<br>\delta &#x3D; (d_1, d_2, d_3, d_4, d_5, d_6)<br>$$</p>
+<p>为该 pc 集的<strong>距离向量</strong>，它给出了 pc 集的全部音程含量，从而刻画了该 pc 集的声音效果。</p>
+<div class="note info"><p><strong>定理（共同音定理）.</strong> 设音类集合 $\mathcal{X}$ 的距离向量是 $\delta$，那么当 $1\leq k\leq 5$ 时有 $|\mathcal{X}\cap T^k(\mathcal{X})| &#x3D; |\mathcal{X}\cap T^{-k}(\mathcal{X})| &#x3D; d_k$，当 $k &#x3D; 6$ 时 $|\mathcal{X}\cap T^6(\mathcal{X})| &#x3D; 2d_6$。</p>
+</div>
+
+<blockquote>
+<p>在特定的音乐语境中，只有少数子集合具有音乐上的意义。</p>
+</blockquote>
+<hr>
+<p><strong>音阶</strong>也是一种 pc 集。</p>
+<p>如果将音阶画在五度圆周上，将会得到一段连续的弧。一个自然大调音阶的补恰好是一个五声音阶。</p>
+<h2><span id="音网">音网</span></h2><p>这里的黎曼是音乐家 Hugo Riemann 而不是数学家 Bernhard Riemann。此理论中可以发现一些和声进行的规律。</p>
+<p>将 $24$ 个大小三和弦（记作对应大 &#x2F; 小写的根音，比如 $\textsf{G}$ 是以 $\textsf{G}$ 为根音的大三和弦）构成的集合称作 $\mathcal{S}$，在 $\mathcal{S}$ 上，我们定义：</p>
+<ul>
+<li><strong>平行变换</strong> $P$，将一个三和弦变成其平行三和弦。（具有相同的根音的大三和弦和小三和弦称作平行三和弦，可以发现这两个和弦具有相同的纯五度音程）。</li>
+<li><strong>关系变换</strong> $R$，将一个三和弦变成其关系三和弦。（具有相同的大三度音程的大三和弦和小三和弦称作关系三和弦）。</li>
+<li><strong>导音交换</strong> $L$，将大三和弦的根音降低一个半音，或者将小三和弦的冠音升高一个半音。（将和弦打到与其具有相同小三度音程的和弦）</li>
+</ul>
+<p>$P, R, L$ 称作黎曼变换。黎曼变换有直观的几何解释。将三和弦画在圆周上得到一个三角形，那么此三角形的边长为 $\overline{3}, \overline{4}, \overline{5}$（$\overline{x}$ 表示弧长 $x$ 所对的弦长），这时 </p>
+<ul>
+<li>$P$ 是关于 $\overline{5}$ 边中垂线的翻转。</li>
+<li>$R$ 是关于 $\overline{4}$ 边中垂线的翻转。</li>
+<li>$L$ 是关于 $\overline{3}$ 边中垂线的翻转。</li>
+</ul>
+<p>从上文的论述中可以看出，做黎曼变换后两和弦之间有共同音程，于是可以实现平滑过渡。比如贝多芬第九交响曲第二乐章·谐谑曲的弦乐组第 $143-146$ 小节，和弦进行为</p>
+<p>$$<br>\textsf{C}\xrightarrow{R} a\xrightarrow{L} F \xrightarrow{R} d<br>$$</p>
+<hr>
+<p>欧拉在著作《音乐新理论探索》中给出了如下的<strong>音网</strong>：</p>
+<p><img src="/../picture/EulerNet.jpg"></p>
+<p>此网上的边都是大三度或者纯五度音程。</p>
+<p>接下来我们来推导另一种音网。从某大三和弦出发，依次作用 $P, R, L, P, R, L$，可以得到一个循环</p>
+<p>$$<br>C\xrightarrow{P} c \xrightarrow{R} \flat E \xrightarrow{L} g \xrightarrow{P} G \xrightarrow{R} e \xrightarrow{L} C<br>$$</p>
+<p>注意到每个循环上所有和弦都包含一个唯一的音类（上面的循环中共同的音类是 $\textsf{G}$）。从每个音类出发，一共可以做出 $12$ 个六边形，每个循环可以排成一个正六边形。将所有正六边形的公共边重合，得到一张无限延申的网：</p>
+<p><img src="/../picture/PCNet.png"></p>
+<p>注意网上 <code>|</code> 方向两六边形包含的共同音类是大三度，<code>/</code> 方向是纯五度，<code>\</code> 方向是小三度。因此做此图的对偶图，得到的就是纯五度、大三度、小三度音程织成的音网。欧拉的音网正是其生成子图。</p>
+<h2><span id="新黎曼理论">新黎曼理论</span></h2><p>将三个黎曼变换在复合运算上构成的群</p>
+<p>$$<br>\mathcal{N} &#x3D; \langle P, R, L\rangle<br>$$</p>
+<p>称作<strong>新黎曼群</strong>。</p>
+<p>观察上面的图，可以发现我用蓝色线框出来的两个序列都是五度循环，于是可以发现 $R\circ L$ 相当于二面体旋转，$P$ 相当于二面体翻转。而 </p>
+<ul>
+<li>$P &#x3D; P$。</li>
+<li>$R &#x3D; P\circ(R\circ L)^{-2}$。</li>
+<li>$L &#x3D; R^{-1}\circ (R\circ L)$。</li>
+</ul>
+<p>$R\circ L$ 和 $P$ 组成 $\mathcal{N}$ 的生成元，所以 $P$ 同构于十二阶正二面体群 $D_{2n}$。</p>
+<p>注意到依次作用 $R$, $L$, $R$, $L$, …… 可以平滑地遍历全体三和弦。</p>
+<h1><span id="零散音乐史">零散音乐史</span></h1><p>早期音乐是单声部音乐。</p>
+<p>公元九世纪前后出现的<strong>奥尔加农</strong>是多声部音乐的雏形。</p>
+<p>多声部音乐可以分为</p>
+<ul>
+<li>复调音乐：不同声部相对独立，按照对位法结合。</li>
+<li>主调音乐：一个旋律为主要旋律声部，其他缺少独立性。</li>
+</ul>
+<hr>
+<p>赋格：一种盛行于巴洛克时期的复调音乐题材。乐曲开始时，以单声部形式贯穿全曲的主要音乐素材称为”主题”，与主题形成对位关系的称为”对题”。分为呈示部、展开部、再现部。</p>
+<p>里切卡尔：“无插部赋格”</p>
+<hr>
+<p>纯律的主要倡导者是意大利音乐理论家扎利诺（？ref：<a target="_blank" rel="noopener" href="https://www.daowen.com/lilun/2141127.html%EF%BC%89">https://www.daowen.com/lilun/2141127.html）</a></p>
+<hr>
+<p>明代律学家朱载堉最早计算出十二平均律关键数字 $\sqrt[12] 2$，称作“密律”。</p>
 
     </div>
 
