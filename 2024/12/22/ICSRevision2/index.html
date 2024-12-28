@@ -19,15 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件">
+    <meta name="description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件 动态链接   系统级 I&#x2F;O 并发编程 基于进程的并发编程 基于 I&#x2F;O 多路复用的并发编程 基于线程的并发编程 线程同步和资源调度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="计算机系统小常识（下）">
 <meta property="og:url" content="http://example.com/2024/12/22/ICSRevision2/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件">
+<meta property="og:description" content="链接 可重定位目标文件 符号解析 重定位 可执行目标文件 动态链接   系统级 I&#x2F;O 并发编程 基于进程的并发编程 基于 I&#x2F;O 多路复用的并发编程 基于线程的并发编程 线程同步和资源调度">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/TrajectoryGraph.png">
+<meta property="og:image" content="http://example.com/picture/Deadlock.png">
 <meta property="article:published_time" content="2024-12-22T14:17:59.000Z">
-<meta property="article:modified_time" content="2024-12-23T03:58:09.559Z">
+<meta property="article:modified_time" content="2024-12-28T12:28:33.286Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Linking">
 <meta property="article:tag" content="Eception Control Flow">
@@ -36,6 +38,7 @@
 <meta property="article:tag" content="Network">
 <meta property="article:tag" content="Concurrent Programming">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/TrajectoryGraph.png">
 
 
 <link rel="canonical" href="http://example.com/2024/12/22/ICSRevision2/">
@@ -119,7 +122,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">可重定位目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">符号解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">重定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">可执行目标文件</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">可重定位目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">符号解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">重定位</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">可执行目标文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.5.</span> <span class="nav-text">动态链接</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">系统级 I&#x2F;O</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">并发编程</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">基于进程的并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">基于 I&#x2F;O 多路复用的并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">基于线程的并发编程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">线程同步和资源调度</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -237,7 +240,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-23 11:58:09" itemprop="dateModified" datetime="2024-12-23T11:58:09+08:00">2024-12-23</time>
+      <time title="Modified: 2024-12-28 20:28:33" itemprop="dateModified" datetime="2024-12-28T20:28:33+08:00">2024-12-28</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,6 +269,15 @@
 <li><a href="#%E7%AC%A6%E5%8F%B7%E8%A7%A3%E6%9E%90">符号解析</a></li>
 <li><a href="#%E9%87%8D%E5%AE%9A%E4%BD%8D">重定位</a></li>
 <li><a href="#%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6">可执行目标文件</a></li>
+<li><a href="#%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5">动态链接</a></li>
+</ul>
+</li>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E7%BA%A7-io">系统级 I&#x2F;O</a></li>
+<li><a href="#%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B">并发编程</a><ul>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E8%BF%9B%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B">基于进程的并发编程</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-io-%E5%A4%9A%E8%B7%AF%E5%A4%8D%E7%94%A8%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B">基于 I&#x2F;O 多路复用的并发编程</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B">基于线程的并发编程</a></li>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5%E5%92%8C%E8%B5%84%E6%BA%90%E8%B0%83%E5%BA%A6">线程同步和资源调度</a></li>
 </ul>
 </li>
 </ul>
@@ -410,7 +422,268 @@
 <blockquote>
 <p>一定记住 x86_64 是小端法，所以你看到重定位完符号引用之后的数字是倒过来的。</p>
 </blockquote>
-<h2><span id="可执行目标文件">可执行目标文件</span></h2>
+<h2><span id="可执行目标文件">可执行目标文件</span></h2><p>可执行目标文件对比可重定位目标文件的差距是：</p>
+<ul>
+<li><strong>ELF 头</strong> 还需要包括程序的<em>入口点</em>。</li>
+<li><strong>段头部表</strong> 描述段的信息。描述一个段需要<ul>
+<li><code>off</code> 目标文件中的偏移。</li>
+<li><code>vaddr / paddr</code> 内存地址。</li>
+<li><code>align</code> 对齐要求。对于任意的段，链接器必须使得其起始地址（段中第一个节的起始地址）满足 <code>vaddr % align = off % align</code>。</li>
+<li><code>filesz</code> 目标文件中的段大小。</li>
+<li><code>memsz</code> 内存中的段大小。<code>memsz</code> 和 <code>filesz</code> 不总是一样的。回忆 <code>.bss</code> 区不占空间，于是 <code>.data</code> 的 <code>memsz</code> 比 <code>filesz</code> 多出来的部分将会被用来开 <code>.bss</code> 节。</li>
+<li><code>flags</code> 访问权限，可以是 <code>r-x</code>、<code>rw-</code> 之类的。</li>
+</ul>
+</li>
+<li><strong><code>.init</code> 节</strong> 定义了一个 <code>_init</code> 函数，程序的初始化代码会调用它。</li>
+<li><strong>没有 <code>.rel</code> 节</strong> 因为已经重定位完了。</li>
+</ul>
+<blockquote>
+<p><code>align</code> 的必要性在后面虚拟内存一节才被揭示。</p>
+</blockquote>
+<p>ELF 头，段头部表，<code>.init</code>，<code>.text</code>，<code>.rodata</code> 是只读内存段；<code>.data</code>，<code>.bss</code> 是读写内存段；<code>.symtab</code>，<code>.debug</code>，<code>.line</code>，<code>.strtab</code>，节头部表之类的属于不加载到内存的符号表和调试信息。</p>
+<p>可执行文件运行时被加载器（loader）按照段头部表的指示。复制到内存中去执行。只读代码段从 <code>0x400000</code> 开始向上增长，接下来是读&#x2F;写段、向上增长的堆、共享库内存、向下增长的栈（从 $2^{48} - 1$ 开始向下增长）、对用户不可见的内核代码。运行时首先执行 <code>_start</code> 函数，<code>_start</code> 调用 <code>__libc_start_main</code>，此函数初始化执行环境然后调用用户层的 <code>main</code> 函数，处理 <code>main</code> 的返回值并在需要的时候把控制返回给内核。</p>
+<h2><span id="动态链接">动态链接</span></h2><p>动态链接有两方面动机：</p>
+<ul>
+<li>让程序能够 follow 标准库的更新，不需要重新链接。</li>
+<li>减少高频率使用的库（<code>printf</code>，<code>scanf</code> 等）的内存占用。</li>
+</ul>
+<p>用如下办法创建一个动态链接库</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-shared</span> <span class="literal">-fpic</span> <span class="literal">-o</span> libvector.so addvec.c multvec.c</span><br></pre></td></tr></table></figure>
+
+<p>其中 <code>-fpic</code> 指示生成位置无关代码。（在下一小节解释）</p>
+<p>链接除了可以手动编译：</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-o</span> prog main.c ./libvector.so</span><br></pre></td></tr></table></figure>
+
+<p>之外还可以使用一些神秘函数，编译的使用要加 <code>-rdynamic</code> 选项，<code>-ldl</code> 应该是链接上动态链接器的代码</p>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc <span class="literal">-rdynamic</span> <span class="literal">-o</span> prog main.c <span class="literal">-ldl</span></span><br></pre></td></tr></table></figure>
+
+<p>函数有下面三个，直接看肯定看不懂在干什么，推荐先看后面的代码。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;dlfcn.h&gt;</span></span></span><br><span class="line"><span class="type">void</span> *<span class="title function_">dlopen</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">int</span> flag)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>如果成功则返回一个 handle。</p>
+<p>可以在运行时加载和链接共享库 <code>filename</code>。<code>flag</code> 可以是</p>
+<ul>
+<li><code>RTLD_NOW</code> 立即解析外部符号引用。</li>
+<li><code>RTLD_LAZY</code> 等到执行库中代码时再解析。</li>
+<li><code>RTLD_GLOBAL</code> 前面两个参数可以或上这东西。</li>
+</ul>
+<p>将用已经用 <code>RTLD_GLOBAL</code> 打开的库解析 <code>filename</code> 中的外部符号。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> *<span class="title function_">dlsym</span><span class="params">(<span class="type">void</span> *handle, <span class="type">char</span> *symbol)</span>; </span><br></pre></td></tr></table></figure>
+
+<p>查询一个共享库里面是否有 <code>symbol</code>。成功返回符号地址，否则返回 NULL。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">close</span><span class="params">(<span class="type">void</span> *handle)</span>; </span><br></pre></td></tr></table></figure>
+
+<p>如果没有其他共享库还在使用这个共享库，就将其关闭。成功返回 $0$，否则返回 $1$。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">const</span> <span class="type">char</span> *<span class="title function_">dlerror</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>返回前面几个函数调用最近发生的错误。没出错返回 NULL。</p>
+<p>使用方法为（在上面编译的 <code>main.c</code> 中写主函数）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">void</span> *handle;</span><br><span class="line">    <span class="type">void</span> (*addvec)(<span class="type">int</span> *, <span class="type">int</span> *, <span class="type">int</span> *, <span class="type">int</span>);</span><br><span class="line">    <span class="type">char</span> *error;</span><br><span class="line"></span><br><span class="line">    handle = dlopen(<span class="string">&quot;./libvector.so&quot;</span>, RTLD_LAZY);</span><br><span class="line">    <span class="keyword">if</span>(!handle) &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;%s\n&quot;</span>, dlerror());</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    addvec = dlsym(handle, <span class="string">&quot;addvec&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span>((error = dlerror()) != <span class="literal">NULL</span>) &#123;</span><br><span class="line">      <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;%s\n&quot;</span>, error);</span><br><span class="line">      <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 现在链接好了，你可以使用 addvec 函数了。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>位置无关代码</strong></p>
+<p>显然为了保持动态库的特性，一个动态库必须被能够被复制到共享库内存中的任何位置都能正常运行。这需要将代码编译成<strong>位置无关代码</strong>（可以加载但是无需重定位）。那么对库内部的引用可以简单地解决（使用 PC 相对寻址），但是外面的模块调用库函数则需要解决两方面问题：</p>
+<ol>
+<li><p><strong>PIC 数据引用</strong></p>
+<p>注意代码段和数据段之间的距离总是一个常量，那么可以在 <code>.data</code> 区的最前面定义一个全局偏移量表 GOT，每个全局数据目标都会在 GOT 里面有一个八字节条目，和一个重定位记录。动态链接时链接器会让 GOT 里面的条目指向正确的地址。在引用一个外部符号时，先拿着 PC 找到对应的 GOT 表项，然后找到正确的位置。你可能会编译出这样的代码：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov 0x2008b9(%rip), %rax  # 拿着 PC 找到 GOT 表项</span><br><span class="line">addl $0x1, (%rax)         # 拿着 GOT 表项找到正确的引用地址</span><br></pre></td></tr></table></figure></li>
+<li><p><strong>PIC 函数调用</strong></p>
+<p>显然库里面的函数只会用很少一部分，所以正常的想法是做某种 lazy load。</p>
+<p>这里需要用到两个数据结构，GOT 和 PLT。回忆 GOT 是一个每个 entry 为 8 字节整数的数组。而 PLT 是一个每个 entry 32 字节代码的数组。</p>
+<ul>
+<li><p><strong>GOT 数组</strong></p>
+<p><code>GOT[0]</code> 存的是 <code>.dynamic</code> 节开始的位置，不知道是干什么的。</p>
+<p><code>GOT[1]</code> 存的是重定位条目的地址。（给动态链接器的参数）</p>
+<p><code>GOT[2]</code> 存的是动态链接器的地址。</p>
+<p>其余项一开始都指向对应的 PLT 表项的<strong>第二行</strong>，在被调用第一次之后会被链接器改成实际上的引用地址。</p>
+</li>
+<li><p><strong>PLT 数组</strong></p>
+<p><code>PLT[0]</code> 是下面两行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pushq *GOT[1]</span><br><span class="line">jmpq *GOT[2]   # 运行动态链接器，它会拿着栈里面的参数去做重定位</span><br></pre></td></tr></table></figure>
+
+<p><code>PLT[1]</code> 是一个调用 <code>__libc_start_main</code>，这里我们不关心。</p>
+<p><code>PLT[2]</code> 开始，都是描述一个外部引用的，下面三行：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">jmpq *GOT[4]  # 第一次调用这玩意会直接传到下一行，下一次就会传到正确的引用位置</span><br><span class="line">pushq $0x1    # 把这个外部引用的 id 推到栈里</span><br><span class="line">jmpq 4005a0   # 4005a0 是 PLT[1] 的第一行代码，现在动态链接器会拿着正确的参</span><br><span class="line">              # 数去找这个外部引用的实际位置，完成重定位</span><br></pre></td></tr></table></figure>
+
+<p>目标模块里面的函数调用就被编译成 <code>call</code> 对应的 PLT 的第一行。</p>
+</li>
+</ul>
+</li>
+</ol>
+<h1><span id="系统级-ix2fo">系统级 I&#x2F;O</span></h1><h1><span id="并发编程">并发编程</span></h1><h2><span id="基于进程的并发编程">基于进程的并发编程</span></h2><p>每次 <code>accept</code> 完就 <code>fork</code> 一个子进程。注意父进程需要关闭已连接的描述符 <code>connfd</code>，子进程需要关闭监听套接字 <code>listenfd</code>，结束后要关闭 <code>connfd</code>，否则会一直占用系统资源。</p>
+<p>需要一个 <code>SIGCHLD</code> 的处理程序（<code>while(waitpid(-1, 0, WNOHANG));</code> 状物）。</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里父进程关闭 <code>confd</code> 之后，对 <code>connfd</code> 的文件表影响只是 <code>refcnt</code> 减一，子进程仍然可以用 <code>confd</code> 读写。</p>
+<p>子进程也可以不关闭 <code>connfd</code>，因为进程因为某种原因终止时，内核会自动关闭它打开的文件。</p>
+</blockquote>
+<p>进程之间有独立的地址空间，可以避免很多并发错误，但是为了共享信息必须使用显式 IPC 机制，而且上下文切换非常慢。</p>
+<h2><span id="基于-ix2fo-多路复用的并发编程">基于 I&#x2F;O 多路复用的并发编程</span></h2><p><strong><code>select</code> 函数</strong></p>
+<p>主要依赖 <code>select</code> 函数及其配套操作。<code>select</code> 函数非常复杂，我们将后面三个参数都设置为 <code>NULL</code> 来使用其功能之一：挂起进程，知道一组描述符准备好读。</p>
+<p>首先引入类型 <code>fd_set</code> 类型抽象了一个描述符的集合，提供了若干个访问此集合的接口：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">FD_ZERO(fd_set *fd_et);          <span class="comment">// 清空集合</span></span><br><span class="line">FD_CLR(<span class="type">int</span> fd, fd_set *fdset);   <span class="comment">// 从 `fd_set` 中删除元素 `fd`</span></span><br><span class="line">FD_SET(<span class="type">int</span> fd, fd_set *fdset);   <span class="comment">// 向 `fd_set` 中插入元素 `fd`</span></span><br><span class="line">FD_ISSET(<span class="type">int</span> fd, fd_set *fdset); <span class="comment">// 查询 `fd` 是否属于 `fd_set`</span></span><br></pre></td></tr></table></figure>
+
+<p>接下来介绍 <code>select</code> 函数的原型（<code>n</code> 是 <code>fdset</code> 的最大值加一）：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">select</span><span class="params">(<span class="type">int</span> n, fd_set* fdset, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>本函数将挂起当前进程，直到 <code>fdset</code> 中的某些描述符准备好读了。此函数返回已准备好的描述符个数（非零），若出错返回 $-1$，同时有个副作用是将 <code>fdset</code> 重置为准备好读的子集。</p>
+<p>现在如果你将 <code>STDIN_FILNO</code> 和 <code>listen_fd</code> 添加到 <code>fdset</code> 当中，然后 <code>select(listen_fd + 1, fdset)</code>，就可以同时接受来自标准输入和连接的读入，从而实现了等效意义上的并发。</p>
+<hr>
+<p><strong>并发事件驱动服务器</strong></p>
+<p>你可能希望事件的粒度更细，比如说从一个 <code>connfd</code> 中读入一行就响应一次乃至读入一个字符就响应一次之类的。</p>
+<p>这时容易想象的办法是手动把处理事件的逻辑流建模成一个状态机（回忆一个状态机就是一个带副作用的 DFA）。比如如果只是读一行，那么状态机上只有一个状态，代表“等待描述符 <code>connfd</code> 准备好读”，转移只有一个自环，这个自环是事件“<code>connfd</code> 准备好读了”，副作用是从 <code>connfd</code> 中读一行并且做一些操作。</p>
+<p>代码非常唐而且长，摆了。</p>
+<hr>
+<p><strong>优点</strong></p>
+<ul>
+<li>将所有东西集中在一个代码中，所以你对各个连接的控制能力非常强，可以提供针对性的服务。</li>
+<li>逻辑流之间的通信很容易。</li>
+<li>单进程程序方便调试。</li>
+<li>没有上下文切换的时间开销。</li>
+</ul>
+<p><strong>缺点</strong></p>
+<ul>
+<li>编码复杂。你需要把一段代码手动搓成状态机。</li>
+<li>一攻击整个服务器直接寄完。</li>
+</ul>
+<h2><span id="基于线程的并发编程">基于线程的并发编程</span></h2><p>线程系指运行在进程上下文中的逻辑流。一个进程中的所有线程共享该进程的整个虚拟地址空间、具有相同的地位（主线程和对等线程的区别只是它是第一个运行的线程）</p>
+<hr>
+<p><strong>共享内存模型</strong></p>
+<p>书的顺序有点令人迷惑，我们先讲理论，然后在讲一些函数。</p>
+<p>每个线程拥有自己独立的线程上下文，包括线程 ID、栈、栈指针、程序计数器、条件码、通用目的寄存器值。每个线程和其他线程共享进程上下文的其他部分。</p>
+<p>这里说的独立栈可能让人难以理解，我们做了一些测试，发现它实际上就是在虚拟地址空间中的栈区域里给每个线程分配了一段小栈：</p>
+<details class="note "><summary><p><strong>测试内容</strong></p>
+</summary>
+<p>运行代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pthread.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *(func)(<span class="type">void</span> *);</span><br><span class="line"></span><br><span class="line"><span class="type">void</span>* <span class="title function_">thread</span><span class="params">(<span class="type">void</span> *vargp)</span> &#123;</span><br><span class="line">    pthread_detach(pthread_self());</span><br><span class="line">    <span class="type">int</span> temp = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Stack of thread %lx: %lx\n&quot;</span>, pthread_self(), (<span class="type">long</span>)&amp;temp);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">NULL</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> now = <span class="number">0</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;Main thread: %lx\n&quot;</span>, (<span class="type">long</span>)&amp;now);</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) &#123;</span><br><span class="line">        <span class="type">pthread_t</span> *tid;</span><br><span class="line">        pthread_create(tid, <span class="literal">NULL</span>, thread, <span class="literal">NULL</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    pthread_exit(<span class="literal">NULL</span>);</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>得到如下结果：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Main thread: 7fff2b60a578</span><br><span class="line">Stack of thread 710cc06006c0: 710cc05ffea4</span><br><span class="line">Stack of thread 710cc06006c0: 710cc05ffea4</span><br><span class="line">Stack of thread 710cbe8006c0: 710cbe7ffea4</span><br><span class="line">Stack of thread 710cbd4006c0: 710cbd3ffea4</span><br><span class="line">Stack of thread 710cbfc006c0: 710cbfbffea4</span><br><span class="line">Stack of thread 710cbc0006c0: 710cbbfffea4</span><br><span class="line">Stack of thread 710cbf2006c0: 710cbf1ffea4</span><br><span class="line">Stack of thread 710cbca006c0: 710cbc9ffea4</span><br><span class="line">Stack of thread 710cbde006c0: 710cbddffea4</span><br><span class="line">Stack of thread 710cc06006c0: 710cc05ffea4 </span><br></pre></td></tr></table></figure>
+</details>
+
+<p>这个小栈是<strong>不对其他线程设防</strong>的。</p>
+<p>基于以上线程上下文的模型，我们可以知道在多线程编程时：</p>
+<ul>
+<li><strong>全局变量</strong> 在虚拟内存中只有一份，是共享的。</li>
+<li><strong>本地静态变量</strong> 在虚拟内存中只有一份，是共享的。</li>
+<li><strong>局部变量</strong> 在每个线程的栈上都有一份，基本上是私有的。（说基本上是因为栈不设防）</li>
+</ul>
+<hr>
+<p><strong>Posix 线程</strong></p>
+<p>关于线程的一套接口。方便起见我们定义如下线程例程的类型：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="type">void</span> *(func)(<span class="type">void</span> *); <span class="comment">// 将 func 定义为 void* -&gt; void* 的函数</span></span><br></pre></td></tr></table></figure>
+
+<p>函数的参数和返回值都是通用指针，应该是用来实现多态的。</p>
+<p>通过 <code>pthread_create</code> 来创建线程：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_create</span><span class="params">(<span class="type">pthread_t</span> *tid, <span class="type">pthread_attr_t</span> *attr, func *f, <span class="type">void</span> *arg)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>此函数创建一个新线程，在新线程中运行函数（称作线程例程） <code>f</code>（向 <code>f</code> 传入参数 <code>*arg</code>）。<code>attr</code> 是一些关于新线程默认属性的参数，这里不讲。新线程的 <code>id</code> 通过被存到 <code>*tid</code> 里面来告知主线程。</p>
+<p>通过 <code>pthread_self</code> 来获得自己的线程 ID。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">pthread_t</span> <span class="title function_">pthread_self</span><span class="params">(<span class="type">void</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>线程终止可能是如下几种情况：</p>
+<ul>
+<li><p>线程例程返回。</p>
+</li>
+<li><p>调用 <code>pthread_exit</code> 显示终止线程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pthread_exit</span><span class="params">(<span class="type">void</span> *thread_return)</span>; </span><br></pre></td></tr></table></figure>
+
+<p>参数是线程的返回值。主线程调用此函数后会等待其他对等线程终止，然后主线程和整个进程才终止。</p>
+</li>
+<li><p>对等线程调用 <code>exit()</code>，那么整个进程全部终止。</p>
+</li>
+<li><p>调用 <code>pthread_cancel()</code> 来杀掉对等线程。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">pthread_cancel</span><span class="params">(<span class="type">pthread_t</span> tid)</span>; </span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>通过 <code>pthread_join</code> 来等待其他线程终止，获取其返回值（注意和 wait 不一样，你只能指定等待某一个线程终止），并回收其资源：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_join</span><span class="params">(<span class="type">pthread_t</span> tid, <span class="type">void</span> **thread_return)</span>; </span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>pthread_detach</code> 来分离线程。线程是可结合的或者分离的。一个可结合的线程在被其他线程回收之前，其资源（如栈）都是不释放的。一个分离的线程不能被其他线程回收或者杀死，其终止时系统自动回收资源。默认情况下线程都是可结合的。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">pthread_detach</span><span class="params">(<span class="type">pthread_t</span> tid)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>通过 <code>pthread_once</code> 来做初始化。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">pthread_once_t</span> once_control = PTHREAD_ONCE_INIT;</span><br><span class="line"><span class="type">int</span> <span class="title function_">pthread_once</span><span class="params">(<span class="type">pthread_once_t</span> *once_control, <span class="type">void</span> (*init_routine)(<span class="type">void</span>))</span>;</span><br></pre></td></tr></table></figure>
+
+<p><code>once_control</code> 是一个指示初始化函数分类的标记：<code>pthread_once</code> 函数的作用是在第一次以 <code>once_control</code> 为参数调用的时候，其调用 <code>init_routine</code>，此后再一次以 <code>once_control</code> 为参数调用，它不做任何事情。</p>
+<p>可以想象这玩意是用来在多线程编程时初始化一些共享全局变量的。</p>
+<hr>
+<p><strong>基于线程的并发服务器</strong></p>
+<p>每次 <code>accept</code> 到一个连接，就 <code>pthread_create</code> 一个对等线程。现在核心的问题是怎么把 <code>connfd</code> 传递给对等线程。</p>
+<p>直觉上办法是直接用 <code>&amp;connfd</code> 传。但回忆主线程和对等线程运行的顺序是不确定，所以如果对等线程做 <code>int connfd = *((int *)vargp)</code> 之前，主线程又收到了一个连接然后改变了 <code>connfd</code> 就倒闭了。</p>
+<p>正确的办法是主线程 <code>malloc</code> 一个空间，然后把 <code>connfd</code> 存进去。对等线程拿到 <code>connfd</code> 之后 <code>free</code> 掉这个空间（<code>vargp</code>）来防止内存泄漏。</p>
+<h2><span id="线程同步和资源调度">线程同步和资源调度</span></h2><p>因为线程中存在一些共享变量，所以会有一些阴间问题。</p>
+<p><strong>竞争</strong></p>
+<p>一个例子是，假设 <code>cnt</code> 是一个全局变量，那么在做 <code>cnt++</code> 时，其实汇编是有三个阶段的：从加载，运算，写回。如果两个线程的执行顺序为：</p>
+<ol>
+<li>线程 1 访存，线程 2 访存。</li>
+<li>线程 1 运算，线程 2 运算，线程 1 写回，线程 2 写回。</li>
+</ol>
+<p>那么实际上 <code>cnt</code> 只被加了一次。直观地，可以画出如下的进度图（在这个局部意义下，一个线程分为 $H$ 头、$L$ 加载，$U$ 运算，$S$ 写回，$T$ 尾五部分，图上的坐标点 $(x, y)$ 表示线程 1 在 $x$ 阶段，线程 2 在 $y$ 阶段）</p>
+<p><img src="/../picture/TrajectoryGraph.png"></p>
+<p>这样的不安全是操作非原子导致的。可以通过信号量来规避这种情况。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">sem_init</span><span class="params">(<span class="type">sem_t</span> *sem, <span class="number">0</span>, <span class="type">unsigned</span> <span class="type">int</span> value)</span>; <span class="comment">// 将信号量 sem 初始化为 value</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sem_wait</span><span class="params">(<span class="type">sem_t</span> *s)</span>;                          <span class="comment">// P(s)，称作加锁</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">sem_post</span><span class="params">(<span class="type">sem_t</span> *s)</span>;                          <span class="comment">// V(s)，称作释放</span></span><br></pre></td></tr></table></figure>
+
+<p>$P(s)$ 和 $V(s)$ 是 Dijkstra 提出的两种抽象的原子操作。</p>
+<ul>
+<li>$P(s)$：如果 $s$ 非零，那么将 $s$ 减一，并立即返回。否则，挂起该线程，直到 $s$ 变成非零。在重启时才执行前面的操作。</li>
+<li>$V(s)$：将 $s$ 加一，并重启某一个阻塞在 $P(s)$ 上的线程。</li>
+</ul>
+<p>所以如果你在 <code>cnt++</code> 前面 $P$ 一下，后面 $V$ 一下，就不可能出现上面的情况。几何上相当于用一个禁止区完全包住了不安全区。</p>
+<p>另一个例子是上一节讲的传入 <code>connfd</code> 的例子。</p>
+<hr>
+<p><strong>死锁</strong></p>
+<p>可以想象如果你有两组锁，两个线程分别是：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// thread 1</span></span><br><span class="line">P(s)</span><br><span class="line">P(t)</span><br><span class="line">V(s)</span><br><span class="line">V(t)</span><br><span class="line"></span><br><span class="line"><span class="comment">// thread 2</span></span><br><span class="line">P(t)</span><br><span class="line">P(s)</span><br><span class="line">V(s)</span><br><span class="line">V(t)</span><br></pre></td></tr></table></figure>
+
+<p>如果运行顺序让线程 $1$ 先持有 $s$，线程 $2$ 持有 $t$，那么他们就会卡在第二行，出现<strong>死锁</strong>。直观地：</p>
+<p><img src="/../picture/Deadlock.png"></p>
+<p>但是有如下结论：</p>
+<div class="note info"><p><strong>定理.</strong> 如果为所有信号量指定一个全序，所有线程均按照该全序从小到大加锁，并按照相反的顺序释放，那么一定不会有死锁。</p>
+<details class="note "><summary><p><em>证明.</em></p>
+</summary>
+<p>假设有 $n$ 个信号量，考虑在线程 $i$ 做 $P(s_i)$ 的时候出现了死锁。定义集合 $S &#x3D; \{s_1, …, s_n\}$，$S$ 是有限全序集的子集，其中有极大元。</p>
+<p>但是根据死锁的定义，对于任意 $s_i$，都存在一个 $j$ 使得线程 $j$ 中 $P$ 了 $s_i$。因为我们按照全序从小到大加锁，所以 $s_j &gt; s_i$。$s_i$ 都不是极大元。这导出了矛盾。$\square$</p>
+
+</details></div>
+
+<hr>
+<p><strong>线程安全</strong></p>
+<p>主要有以下四类线程不安全的函数：</p>
+<ol>
+<li><strong>不保护共享变量</strong>。<em>修改方法是加锁。</em></li>
+<li><strong>保持跨越多个调用的状态的函数</strong>。比如 <code>rand()</code>，你可能希望指定 <code>seed</code> 之后每个线程都生成一样的序列，但是 <code>seed</code> 是一个静态变量，就不能达到这个效果。修改方法是<em>重写</em>。</li>
+<li><strong>返回指向静态变量得到指针的函数</strong>。这样会导致竞争。除了<em>重写</em>之外，可以使用<em>加锁-复制技术</em>：在调用该函数时加锁，然后把结果拷贝到私有地址上，然后释放。这种技术有一些缺点，比如<em>加锁降低效率</em>、<em>如果返回了一个链表之类的东西你需要深复制整个链表</em>。</li>
+<li><strong>调用线程不安全的函数</strong>。如果调用第二类不安全函数，那么就没什么救。否则可以调用前加锁，加锁之后就还是线程安全的。</li>
+</ol>
+<p><strong>可重入函数</strong>是线程安全的。其定义是在被任意多个线程调用时都不会有共享变量。可以进一步分成两类：</p>
+<ul>
+<li><em>显式可重入：</em>通过值传参，而且只有局部变量。</li>
+<li><em>隐式可重入：</em>传参可以用指针。此时如果你传参足够小心，就确实还是可重入。</li>
+</ul>
+<p>大部分 Linux 函数都是线程安全的，包括 <code>malloc</code>，<code>free</code>，<code>realloc</code>，<code>printf</code>，<code>scanf</code> 等。</p>
+<p><code>rand</code> 和 <code>strtok</code>（不知道是干什么的）属于第二类线程不安全函数。其他还有一些 <code>ctime</code>，<code>asctime</code>，<code>localtime</code> 和一堆 <code>gethostbyname</code>，<code>gethostbyaddr</code>，<code>inet_ntoa</code> 之类的网络编程函数是第三类线程不安全函数。</p>
+<hr>
+<p>接下来讲两类资源调度问题。</p>
+<p><strong>生产者-消费者问题</strong></p>
+<p>生产者线程往一个缓冲区里面写东西，消费者线程从缓冲区拿东西出来处理。有如下限制：</p>
+<ul>
+<li>不能并发读写。</li>
+<li>缓冲区满时生产者不能写。</li>
+<li>缓冲区空时消费者不能读。</li>
+</ul>
+<p>思路是在信号量里面存<em>空闲块的数量</em>和<em>待处理块的数量</em>。（<code>sbuf_init</code> 是一个带有三个信号量的循环队列，这里我们只考察信号量）</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">sbuf_init</span><span class="params">(<span class="type">sbuf_t</span> *sp, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  Sem_init(&amp;sf-&gt;mutex, <span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">  Sem_init(&amp;sf-&gt;slots, <span class="number">0</span>, n);</span><br><span class="line">  Sem_init(&amp;sf-&gt;items, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sbuf_insert</span><span class="params">(<span class="type">sbuf_t</span> *sp, <span class="type">int</span> item)</span> &#123;</span><br><span class="line">  P(&amp;sp-&gt;slots);</span><br><span class="line">  P(&amp;sp-&gt;mutex);</span><br><span class="line">  <span class="comment">// insert item into the queue</span></span><br><span class="line">  V(&amp;sp-&gt;mutex);</span><br><span class="line">  V(&amp;sp-&gt;items);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">sbuf_remove</span><span class="params">(<span class="type">sbuf_t</span> *sp)</span> &#123;</span><br><span class="line">  <span class="type">int</span> item;</span><br><span class="line">  P(&amp;sp-&gt;items);</span><br><span class="line">  P(&amp;sp-&gt;mutex);</span><br><span class="line">  <span class="comment">// item = queue.front()</span></span><br><span class="line">  V(&amp;sp-&gt;mutex);</span><br><span class="line">  V(&amp;sp-&gt;slots);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在服务器问题中可以抽象出一个生产者-消费者问题。每次 <code>accept</code> 一个新的 <code>connfd</code> 就往缓冲区写一个 <code>connfd</code>。然后一些线程作为消费者来处理这些 <code>connfd</code>。这样的优化叫做<strong>预线程化</strong>，优化了每次连接时开新线程的时间。</p>
+<hr>
+<p><strong>读者-写者问题</strong></p>
+<p>这是对 CREW 问题的一种抽象。要求</p>
+<ul>
+<li>读者可以同时读。</li>
+<li>写者在写时必须控制整个缓冲区。</li>
+</ul>
+<p>有两种变种，一类是读者优先（除非写者正在写，不能让读者等待），一类是写者优先。我们讨论读者优先，写者优先是对称的。</p>
+<p>只需要维护正在读的读者数量 <code>readcnt</code> 和刻画写者权限的信号量 <code>w</code>。一旦 <code>readcnt &gt; 0</code>，就 $P(w)$。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">reader</span><span class="params">()</span> &#123;</span><br><span class="line">  P(&amp;mutex); <span class="comment">// 注意这里需要锁上，不然有竞争</span></span><br><span class="line">  readcnt++;</span><br><span class="line">  <span class="keyword">if</span>(readcnt == <span class="number">1</span>) P(&amp;w);</span><br><span class="line">  V(&amp;mutex);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在这里读</span></span><br><span class="line"></span><br><span class="line">  P(&amp;mutex);</span><br><span class="line">  readcnt--;</span><br><span class="line">  <span class="keyword">if</span>(readcnt == <span class="number">0</span>) V(&amp;w);</span><br><span class="line">  V(&amp;mutex);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">writer</span><span class="params">()</span> &#123;</span><br><span class="line">  P(&amp;w);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在这里写</span></span><br><span class="line"></span><br><span class="line">  V(&amp;w);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     </div>
 
     
