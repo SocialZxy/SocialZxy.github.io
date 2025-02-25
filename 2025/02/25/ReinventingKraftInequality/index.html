@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。    准备定义 证明过程 结论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="重新发现 Kraft 不等式">
+<meta property="og:url" content="http://example.com/2025/02/25/ReinventingKraftInequality/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。    准备定义 证明过程 结论">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-02-25T14:29:05.000Z">
+<meta property="article:modified_time" content="2025-02-25T15:49:05.221Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/02/25/ReinventingKraftInequality/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/02/25/ReinventingKraftInequality/","path":"2025/02/25/ReinventingKraftInequality/","title":"重新发现 Kraft 不等式"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>重新发现 Kraft 不等式 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">证明过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/25/ReinventingKraftInequality/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="重新发现 Kraft 不等式 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          重新发现 Kraft 不等式
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-02-25 22:29:05 / Modified: 23:49:05" itemprop="dateCreated datePublished" datetime="2025-02-25T22:29:05+08:00">2025-02-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87%E5%AE%9A%E4%B9%89">准备定义</a></li>
+<li><a href="#%E8%AF%81%E6%98%8E%E8%BF%87%E7%A8%8B">证明过程</a></li>
+<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="准备定义">准备定义</span></h1><p>对于给定的字符集 $\Sigma$，一个<strong>编码</strong>系指一个映射 $C: \Sigma\rightarrow \{0, 1\}^*$。一个字符 $x\in \Sigma$ 的编码长度记作 $\mathscr{l}(x) &#x3D; |C(x)|$。信息论中常考虑的一个问题是给定一个 $\Sigma$ 上的概率分布 $P$，编码的期望编码长度</p>
+<p>$$<br>\mathscr{L}(C) &#x3D; \mathbb{E}_{x\sim P(x)}[\mathscr{l}(x)]<br>$$</p>
+<p>众所周知，如果不存在两个字符 $x_1 \ne x_2$ 使得 $C(x_1)$ 是 $C(x_2)$ 的前缀，则这样的编码 $C$ 称作<strong>前缀无关码</strong>。全体前缀无关码的集合记作 $A$。</p>
+<p>另一方面，我们可以将 $C$ 的定义延拓到字符串 $\Sigma^*$ 上：$C(s_1s_2…s_n) &#x3D; C(s_1)C(s_2)\cdots C(s_n)$。如果不存在两个字符串 $s, t\in \Sigma^*$，$s\ne t$ 但是 $C(s)\ne C(t)$，则称 $C$ 是<strong>可唯一解读编码</strong>。全体可唯一解读编码的集合记作 $B$。</p>
+<p>注意 $A\subsetneq B$。因为显然前缀无关码都是可唯一解读的，并且存在这样一个编码，它并不是前缀无关的，但是是可唯一解读的：</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$\texttt{a}$</td>
+<td align="center">$\texttt{10}$</td>
+</tr>
+<tr>
+<td align="center">$\texttt{b}$</td>
+<td align="center">$\texttt{1}$</td>
+</tr>
+<tr>
+<td align="center">$\texttt{c}$</td>
+<td align="center">$\texttt{00}$</td>
+</tr>
+</tbody></table>
+<p>$A$ 上的最优期望编码长度由著名的 Huffman 编码给出，另外配合一些放缩可以得到 Huffman 编码的期望编码长度是信源的信息熵的一个加性近似之类的经典结论，参见 <a href="../../../../2024/01/15/InfoAndEntropy6Commu/">这一篇黑历史</a>。然而以往我们始终回避了讨论 $B\setminus A$ 中的元素。很显然</p>
+<p>$$<br>\min_{C\in B} \mathscr{L}(C) \leq \min_{C\in A}\mathscr{L}(C)<br>$$</p>
+<p>本文将给出上式中不等号取等的证明，从而将（我所知的）经典结论拓展至</p>
+<div class="note info"><p><strong>定理.</strong> 对于任意的信源 $X$，定义 $B$ 为 $X$ 的字符集上所有可唯一解读编码的集合，则</p>
+<p>$$<br>H(X) \leq \min_{C\in B}\mathscr{L}(C) H(X + 1)<br>$$</p>
+</div>
+
+<h1><span id="证明过程">证明过程</span></h1><p>首先来推导编码可唯一解读的一个必要条件。</p>
+<p>设 $\mathscr{S}(L)$ 是编码长度为 $L$ 的字符串总数，即</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \mathrm{card}\{s\in \Sigma^* : |C(s)| &#x3D; L\}<br>$$</p>
+<p>如果存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$，那么根据鸽巢原理，必然发生冲突。因此编码可唯一解读的一个必要条件是 $\mathscr{S}(L)\leq 2^L$。现在我们来估计 $\mathscr{S}(L)$。显然它满足如下递推式：</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \sum_{c\in \Sigma}\mathscr{S}(L - \ell(c))<br>$$</p>
+<p>其特征方程为 </p>
+<p>$$<br>1 &#x3D; \sum_{c\in \Sigma}x^{-\ell(c)} \label{chareq}<br>$$</p>
+<p>那么 $\mathscr{S}(L)$ 可以用如下式子来估计：</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \Omega(\lambda_*^L)<br>$$</p>
+<p>其中 $\lambda_*$ 是该特征方程最大的实根。如果 $\lambda_* &gt; 2$，那么 $\mathscr{S}(L)$ 增长快于 $2^L$，一定存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$。因此编码可唯一解读的必要条件是 </p>
+<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1 \label{kraft}<br>$$</p>
+<p>否则因为 $\ref{chareq}$ 的右边单调递减趋于 $0$，结合零点存在性，必然有一个大于 $2$ 的零点。</p>
+<p><strong>$\ref{kraft}$ 正是 Kraft 不等式。</strong></p>
+<h1><span id="结论">结论</span></h1><p>现在我们知道，不但前缀无关码满足 Kraft 不等式，任意可唯一解读的编码也必须满足 Kraft 不等式。从而，任意可唯一解读的编码可以被 rearrange 成一个前缀无关码，保证每个字符的编码长度不变，这蕴含</p>
+<p>$$<br>\min_{C\in B} \mathscr{L}(C) &#x3D; \min_{C\in A}\mathscr{L}(C)<br>$$</p>
+<p>重复前缀无关码的相关论证得到</p>
+<p>$$<br>H(X) \leq \min_{C\in B}\mathscr{L}(C) H(X + 1)<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/02/08/CS285DRL5/" rel="prev" title="CS285 Part 3 - 策略梯度方法">
+                  <i class="fa fa-angle-left"></i> CS285 Part 3 - 策略梯度方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

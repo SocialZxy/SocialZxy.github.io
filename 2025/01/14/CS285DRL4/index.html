@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记号与术语 强化学习算法 价值函数 算法分类    本节将勾勒强化学习算法的轮廓， 记号与术语Markov Chain $\mathcal{M} &#x3D; \{\mathcal{S}, \mathcal{T}\}$，其中 $\mathcal{S}$ 是状态空间，$\mathcal{T}$ 是转移矩阵。 但是在 MDP 中，转移还和操作有关。我们用 $\mathcal{M} &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS285 Part 2 - RL 概述">
+<meta property="og:url" content="http://example.com/2025/01/14/CS285DRL4/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="记号与术语 强化学习算法 价值函数 算法分类    本节将勾勒强化学习算法的轮廓， 记号与术语Markov Chain $\mathcal{M} &#x3D; \{\mathcal{S}, \mathcal{T}\}$，其中 $\mathcal{S}$ 是状态空间，$\mathcal{T}$ 是转移矩阵。 但是在 MDP 中，转移还和操作有关。我们用 $\mathcal{M} &#x3D;">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-01-14T03:33:32.000Z">
+<meta property="article:modified_time" content="2025-02-09T07:51:23.481Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/01/14/CS285DRL4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/01/14/CS285DRL4/","path":"2025/01/14/CS285DRL4/","title":"CS285 Part 2 - RL 概述"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS285 Part 2 - RL 概述 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">记号与术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">强化学习算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">价值函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">算法分类</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/14/CS285DRL4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS285 Part 2 - RL 概述 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS285 Part 2 - RL 概述
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-01-14 11:33:32" itemprop="dateCreated datePublished" datetime="2025-01-14T11:33:32+08:00">2025-01-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-09 15:51:23" itemprop="dateModified" datetime="2025-02-09T15:51:23+08:00">2025-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E8%AE%B0%E5%8F%B7%E4%B8%8E%E6%9C%AF%E8%AF%AD">记号与术语</a></li>
+<li><a href="#%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E7%AE%97%E6%B3%95">强化学习算法</a></li>
+<li><a href="#%E4%BB%B7%E5%80%BC%E5%87%BD%E6%95%B0">价值函数</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E5%88%86%E7%B1%BB">算法分类</a></li>
+</ul>
+<!-- tocstop -->
+
+<p>本节将勾勒强化学习算法的轮廓，</p>
+<h1><span id="记号与术语">记号与术语</span></h1><p>Markov Chain $\mathcal{M} &#x3D; \{\mathcal{S}, \mathcal{T}\}$，其中 $\mathcal{S}$ 是状态空间，$\mathcal{T}$ 是转移矩阵。</p>
+<p>但是在 MDP 中，转移还和操作有关。我们用 $\mathcal{M} &#x3D; \{\mathcal{S}, \mathcal{A}, \mathcal{T}, r\}$ 来刻画一个 MDP，现在 $\mathcal{T}$ 变成了一个三维张量。定义 $\mu_{t, j} &#x3D; p(s_t &#x3D; j), \xi_{t, k} &#x3D; p(a_t &#x3D; k), \mathcal{T}_i^{jk} &#x3D; p(s_{t + 1} &#x3D; i | s_t &#x3D; j, a_t &#x3D; k)$，那么 </p>
+<p>$$<br>\mu_{t + 1, i} &#x3D; \mathcal{T}_i^{jk}\mu_{tj}\xi_{tk}<br>$$</p>
+<p>而上面 $r$ 是奖励函数：$r : \mathcal{S}\times\mathcal{A}\rightarrow \mathbb{R}$。</p>
+<p>注意即便增加了决策，将 $\mathbf{a}$ 和 $\mathbf{s}$ tuple 起来，整个过程还是可以用一个 Markov Chain 来刻画。转移为</p>
+<p>$$<br>p((\mathbf{s}_{t + 1}, \mathbf{a}_{t + 1}) | (\mathbf{s}_t, \mathbf{a}_t)) &#x3D; p(\mathbf{s}_{t + 1} | \mathbf{s}_t, \mathbf{a}_t)\pi_\theta(\mathbf{a}_{t + 1} | \mathbf{s}_{t + 1}) \label{trans}<br>$$</p>
+<p>强化学习将需要学习一个策略的分布 $\pi_\theta(\mathbf{a} | \mathbf{s})$，其中 $\theta$ 是神经网络的参数。那么在整个 MDP 过程中，产生一个状态序列的概率是</p>
+<p>$$<br>p_{\theta}(\mathbf{s}_1, \mathbf{a}_1, …, \mathbf{s}_T, \mathbf{a}_T) &#x3D; p(\mathbf{s}_1)\prod_{t &#x3D; 1}^T \pi_{\theta}(\mathbf{a}_t | \mathbf{s}_t)p(\mathbf{s}_{t + 1} | \mathbf{s}_t, \mathbf{a}_t)<br>$$</p>
+<p>RL 的目的是最优化整个过程中的奖励总和，即求</p>
+<p>$$<br>\theta^* &#x3D; \arg\max_\theta \mathbb{E}_{\tau\sim p_{\theta}(\tau)}\left[\sum_{t}r(\mathbf{s}_t, \mathbf{a}_t)\right]<br>$$</p>
+<p>一种 MDP 是有限时间步（Finite horizon）的。根据 $\ref{trans}$ 提供的结论，将期望用线性性展开，只需要优化</p>
+<p>$$<br>\arg\max_{\theta} &#x3D; \sum_{t &#x3D; 1}^T \mathbb{E}_{(\mathbf{s}_t, \mathbf{a}_t)\sim p_{\theta}(\mathbf{s}_t, \mathbf{a}_t)}[r(\mathbf{s}_t, \mathbf{a}_t)] \label{finitecase}<br>$$</p>
+<p>在无限时间步（Infinite horizon）的情况下，我们熟知不可约的 Markov chain 前 $T$ 项的均值都是收敛到稳态分布的，此时你就要对着下面的式子优化，其中 $p_{\theta}$ 是一个稳态。</p>
+<p>$$<br>\mathbb{E}_{(\mathbf{s}, \mathbf{a})\sim p_\theta(\mathbf{s}, \mathbf{a})}[r(\mathbf{s}, \mathbf{a})]\label{infinitecase}<br>$$</p>
+<p>$\ref{finitecase}, \ref{infinitecase}$ 分别是有限时间步 MDP 和无限时间步 MDP 需要优化的东西。在 RL 中我们需要考虑的东西是期望，一方面的原因是 $r(\mathbf{x})$ 可能不是可导的，但是 $\mathbf{E}_{\pi_\theta}[r(\mathbf{x})]$ 关于 $\theta$ 是可导的。不妨考虑如下直观的例子：</p>
+<div class="note warning"><p><strong>例子.</strong> 现在智能体面临一个向左转的桥，其以 $\mathrm{Bern}(p)$ 决定是否左转。如果成果左转将会获得 $1$ 的 Reward，否则获得 $-1$ 的 Reward。</p>
+</div>
+
+<h1><span id="强化学习算法">强化学习算法</span></h1><p>强化学习算法的框架：</p>
+<ol>
+<li>采样（i.e. 模拟当前的策略，生成一些轨迹）</li>
+<li>拟合一些模型，其功能可能包括：<ul>
+<li>估算状态转移的概率；</li>
+<li>估计当前局面的期望 Reward。</li>
+</ul>
+</li>
+<li>优化：$\theta \leftarrow \theta + \alpha\nabla_\theta J(\theta)$</li>
+</ol>
+<p>主流的强化学习算法几乎都限制在上述框架中，参见算法分类一节。</p>
+<p>选择算法时需要考虑如下因素：</p>
+<ol>
+<li>你是在现实世界中运行策略还是在某个模拟的环境。</li>
+<li>拟合模型可能非常难。</li>
+</ol>
+<h1><span id="价值函数">价值函数</span></h1><p>可以将代价 $\ref{finitecase}$ 写成某种递归的形式：</p>
+<p>$$<br>\mathbb{E}_{\mathbf{s}_1\sim p(\mathbf{s}_1)}[<br>\mathbb{E}_{\mathbf{a}_1\sim \pi(\mathbf{a}_1 | \mathbf{s}_1)}[{\color{blue}{r(\mathbf{s}_1, \mathbf{a}_1) + \mathbb{E}_{\mathbf{s}_2\sim p(\mathbf{s}_2 | \mathbf{s_1}, \mathbf{a}_1)}[\mathbb{E}_{\mathbf{a}_2\sim\pi(\mathbf{a}_2 | \mathbf{s}_2)}[{\color{red}{r(\mathbf{s}_2, \mathbf{a}_2) + \cdots}}]| \mathbf{s}_1, \mathbf{a}_1]}}| \mathbf{s}_1]]<br>$$</p>
+<p>因为是 Markov Chain，而中间的东西都是 conditional on 当前状态的，所以我们定义</p>
+<p>$$<br>Q(\mathbf{s}_1, \mathbf{a}_t) &#x3D; r(\mathbf{s}_1, \mathbf{a}_1) + \mathbb{E}_{\mathbf{s}_2\sim p(\mathbf{s}_2 | \mathbf{s_1}, \mathbf{a}_1)}[\mathbb{E}_{\mathbf{a}_2\sim\pi(\mathbf{a}_2 | \mathbf{s}_2)}[r(\mathbf{s}_2, \mathbf{a}_2) + \cdots]| \mathbf{s}_1, \mathbf{a}_1]<br>$$</p>
+<p>现在你需要优化的东西无非就是</p>
+<p>$$<br>\mathbb{E}_{\mathbf{s}_1\sim p(\mathbf{s}_1)}[\mathbb{E}_{\mathbf{a}_1\sim\pi(\mathbf{a}_1 | \mathbf{s}_1)}[Q(\mathbf{s}_1, \mathbf{a}_1) | \mathbf{s}_1]]<br>$$</p>
+<p>更一般地我们定义</p>
+<div class="note success"><p><strong>定义（Q-function）.</strong></p>
+<p>$$<br>Q^\pi(\mathbf{s}_t, \mathbf{a}_t) &#x3D; \sum_{t’ &#x3D; t}^T\mathbb{E}[r(\mathbf{s}_{t’}, \mathbf{a}_{t’}) | \mathbf{s}_t, \mathbf{a}_t]<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义（Value function）.</strong></p>
+<p>$$<br>V^{\pi}(\mathbf{s}_t) &#x3D; \sum_{t’ &#x3D; t}^T\mathbb{E}[r(\mathbf{s}_{t’}, \mathbf{a}_{t’}) | \mathbf{s}_t]<br>$$</p>
+</div>
+
+<p>简而言之，$Q^{\pi}$ 刻画了采取当前操作之后期望得到的奖励，而 $V^\pi$ 刻画了当前局面下期望得到的奖励。</p>
+<p>定义了这两个函数之后就有两个自然的想法来优化 $\pi$：</p>
+<ol>
+<li>直接让 $\pi(\mathbf{a}|\mathbf{s}) &#x3D; 1$，这里 $\mathbf{a} &#x3D; \arg\max_\mathbf{a}Q^\pi(\mathbf{s}, \mathbf{a})$。这样将会得到我们熟悉的策略迭代算法。</li>
+<li>增加 $Q^\pi(\mathbf{s}, \mathbf{a}) &gt; V^\pi(\mathbf{s})$（优于平均的决策）的概率。直觉上，这是直接对策略网络进行梯度下降的算法的运行效果。</li>
+</ol>
+<h1><span id="算法分类">算法分类</span></h1><p>主流的 RL 算法大概有如下几类（上面三种都不需要知道转移张量 $\mathcal{T}$，称作 Model-Free RL）：</p>
+<ul>
+<li><strong>Policy Gradient.</strong> 直接用梯度下降优化目标函数。</li>
+<li><strong>Value-Based.</strong> 拟合 $V^\pi$ 和 $Q^\pi$，然后选择最优的决策（策略迭代、值迭代算法）。</li>
+<li><strong>Actor-Critic.</strong> 拟合 $V^\pi$ 和 $Q^\pi$，并用梯度下降优化目标函数。</li>
+<li><strong>Model-Based RL.</strong> 拟合转移概率，然后在此基础上有一大套 MCTS 之类的算法，也可以对策略做梯度下降。</li>
+</ul>
+<p>各算法的细节将在后续笔记中补全。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/11/CS285DRL2/" rel="prev" title="CS285 Part 1 - 模仿学习">
+                  <i class="fa fa-angle-left"></i> CS285 Part 1 - 模仿学习
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/02/08/CS285DRL5/" rel="next" title="CS285 Part 3 - 策略梯度方法">
+                  CS285 Part 3 - 策略梯度方法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

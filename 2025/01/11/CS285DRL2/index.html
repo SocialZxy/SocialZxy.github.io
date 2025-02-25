@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="记号与术语 一些简单介绍 让模型更好 扩充数据集   分析 Homework 1: Imitation Learning Solution Analysis Experiment Extra Credit: SwitchDAgger      尝试通过如下方法来解决序列决策过程：  通过让一个专家来做某一任务，获得大量的观察与标签。 用监督学习拟合人类的操作。  这个过程称作模仿学习（Imi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CS285 Part 1 - 模仿学习">
+<meta property="og:url" content="http://example.com/2025/01/11/CS285DRL2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="记号与术语 一些简单介绍 让模型更好 扩充数据集   分析 Homework 1: Imitation Learning Solution Analysis Experiment Extra Credit: SwitchDAgger      尝试通过如下方法来解决序列决策过程：  通过让一个专家来做某一任务，获得大量的观察与标签。 用监督学习拟合人类的操作。  这个过程称作模仿学习（Imi">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/ImitationLearning.png">
+<meta property="og:image" content="http://example.com/picture/DistributionalDrift.png">
+<meta property="og:image" content="http://example.com/picture/EtESelfDrivingFig2.png">
+<meta property="article:published_time" content="2025-01-11T14:04:28.000Z">
+<meta property="article:modified_time" content="2025-02-09T07:50:50.916Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/ImitationLearning.png">
+
+
+<link rel="canonical" href="http://example.com/2025/01/11/CS285DRL2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/01/11/CS285DRL2/","path":"2025/01/11/CS285DRL2/","title":"CS285 Part 1 - 模仿学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CS285 Part 1 - 模仿学习 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">记号与术语</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">一些简单介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">让模型更好</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">扩充数据集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Homework 1: Imitation Learning Solution</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">Analysis</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">Experiment</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">Extra Credit: SwitchDAgger</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">48</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/01/11/CS285DRL2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CS285 Part 1 - 模仿学习 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CS285 Part 1 - 模仿学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-01-11 22:04:28" itemprop="dateCreated datePublished" datetime="2025-01-11T22:04:28+08:00">2025-01-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-02-09 15:50:50" itemprop="dateModified" datetime="2025-02-09T15:50:50+08:00">2025-02-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E8%AE%B0%E5%8F%B7%E4%B8%8E%E6%9C%AF%E8%AF%AD">记号与术语</a></li>
+<li><a href="#%E4%B8%80%E4%BA%9B%E7%AE%80%E5%8D%95%E4%BB%8B%E7%BB%8D">一些简单介绍</a><ul>
+<li><a href="#%E8%AE%A9%E6%A8%A1%E5%9E%8B%E6%9B%B4%E5%A5%BD">让模型更好</a></li>
+<li><a href="#%E6%89%A9%E5%85%85%E6%95%B0%E6%8D%AE%E9%9B%86">扩充数据集</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%9E%90">分析</a></li>
+<li><a href="#homework-1-imitation-learning-solution">Homework 1: Imitation Learning Solution</a><ul>
+<li><a href="#analysis">Analysis</a></li>
+<li><a href="#experiment">Experiment</a></li>
+<li><a href="#extra-credit-switchdagger">Extra Credit: SwitchDAgger</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<p>尝试通过如下方法来解决序列决策过程：</p>
+<ul>
+<li>通过让一个专家来做某一任务，获得大量的观察与标签。</li>
+<li>用监督学习拟合人类的操作。</li>
+</ul>
+<p>这个过程称作<strong>模仿学习</strong>（Imitation Learning）。</p>
+<h1><span id="记号与术语">记号与术语</span></h1><ol>
+<li>状态 $\mathbf{s}_t$</li>
+<li>观察 $\mathbf{o}_t$</li>
+<li>操作标签 $\mathbf{a}_t$</li>
+<li>神经网络拟合到的分布 $\pi_{\theta}(\mathbf{a}_t | \mathbf{o}_t)$</li>
+</ol>
+<p>其中 $t$ 表示时间步。操作可以是离散的选择，也可以是连续的。在离散的情况下，我们用 softmax 后的分布来刻画决策；在连续的情况下，我们可能用正态分布（通过给出 $\mu, \sigma$）之类的办法来刻画决策。</p>
+<p>状态是指对整个物理场景的精确刻画，而观察是指传感器数据之类的表象。我们所谓的 Markov 决策过程是指某时间步的<strong>状态</strong>只取决于上一个时间步的状态和操作，但一般地<strong>观察</strong>并非具有马尔可夫性质，因此在实现模型时只考虑当前时间步的观察是不足够的，不妨考虑如下的例子：</p>
+<blockquote>
+<p>一个老虎追赶一只羚羊，此时有一辆车遮挡了羚羊。</p>
+</blockquote>
+<p>你可能需要知道前几个时间步的羚羊和车的位置，才能推断此时羚羊的位置。</p>
+<h1><span id="一些简单介绍">一些简单介绍</span></h1><p>本节说一些批话。</p>
+<p>考虑一个生活中常见的场景：自动驾驶。很明显，这是一个 Markov Decision Problem。我们可能会考虑用摄像头来获得观察，然后用一个 CNN 来拟合决策与观察的关系。（以下图片都是从课件里截的）</p>
+<p><img src="/../picture/ImitationLearning.png"></p>
+<p>但容易想象这样的做法有如下的问题：</p>
+<ol>
+<li>任何模型都会犯错误。</li>
+<li>犯错误之后状态会偏离训练数据。</li>
+<li>这样的误差随着时间累计，直到发生无法预计的状况。</li>
+</ol>
+<p>这个问题称作<strong>分布漂移（distributional drift）</strong>，换言之，神经网络拟合到了 $\pi_{\theta}$，训练数据采样到的状态的分布是 $p_{data}$，但是按照神经网络的决策，智能体实际上面临的状态分布变成了 $p_{\pi_{\theta}}$。当这两个分布相差很远的时候，误差就会陡增。可以形象地用下图展示：</p>
+<p><img src="/../picture/DistributionalDrift.png"></p>
+<p>解决这个问题有两个符合直觉的办法：</p>
+<ol>
+<li>让神经网络学会纠正小错误，做出近乎完美的决策。</li>
+<li>让数据集变大，使得 $p_{\pi_{\theta}}$ 中可能出现的状况都在 $p_{data}$ 中。</li>
+</ol>
+<h2><span id="让模型更好">让模型更好</span></h2><p>可以通过增加额外的信息，来让模型学会实时纠正小错误。这来自 NVIDIA 的论文 <a target="_blank" rel="noopener" href="https://images.nvidia.cn/content/tegra/automotive/images/2016/solutions/pdf/end-to-end-dl-using-px.pdf">End to End Learning for Self-Driving Cars</a>。文章增加了两个侧方向的摄像头，然后做了数据增强。</p>
+<p><img src="/../picture/EtESelfDrivingFig2.png"></p>
+<p>另外，模型没法学会专家的操作的原因，包括但不限于：</p>
+<ol>
+<li><p>人类专家的操作可能是多模态的。不妨考虑如下的情况：</p>
+<blockquote>
+<p>人类专家在避让相同障碍时，可能从左边也可能从右边。</p>
+<p>在决策离散的情况下，模型可能不会有任何问题：Softmax 之后的分布很容易抓住这种分布在两端的情况。但是在连续的情况下如果我们用高斯分布来刻画决策的概率，$\mu$ 将会是可能的操作的均值，这时算法可能会决策“不做任何避让”。</p>
+</blockquote>
+</li>
+<li><p>人类专家的驾驶行为不是 Markov 的。</p>
+</li>
+</ol>
+<p>先解决第二个问题，我们熟知用 RNN &#x2F; LSTM 之类的算法可以缓解这个问题。</p>
+<p>对于第一个问题，一般有如下可能的办法：</p>
+<ol>
+<li><strong>将决策刻画成多个高斯分布的和。</strong>但这样所需高斯分布的个数可能是关于维数是指数级的。</li>
+<li><strong>使用 VAE 之类的隐变量模型。</strong></li>
+<li><strong>Autoregressive discretization。</strong>因为如果决策是离散的，那么没有什么问题，尝试把思路往这个方向靠近。这里只需要解决维数爆炸的问题，解决方法是：<ol>
+<li>首先用一个网络给出第一维的离散化决策。</li>
+<li>从给出的分布里面采样。</li>
+<li>将第一维的决策和观察同时喂给第二个神经网络，输出第二维的离散化决策。</li>
+<li>迭代。</li>
+</ol>
+</li>
+</ol>
+<p>模型表现糟糕的原因还有一种，称作<strong>因果混淆（Causal Confusion）</strong>。考察如下情形：</p>
+<blockquote>
+<p>有一辆车，在踩刹车时，刹车灯亮。人类专家在遇到突发情况（前面有人、红灯亮起时踩刹车）</p>
+<p>算法只学会了刹车灯亮时踩刹车，因此没法处理突发情况。</p>
+</blockquote>
+<p>使用 RNN 可能会加剧因果混淆。细节和解决的办法参见 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1905.11979">Causal Confusion in Imitation Learning</a>。</p>
+<h2><span id="扩充数据集">扩充数据集</span></h2><p>下面是一种称为 DAgger（Data Aggregation） 的算法：</p>
+<ol>
+<li>在数据集 $\mathcal{D} &#x3D; \{(\mathbf{o}_1, \mathbf{a}_1), …, (\mathbf{o}_N, \mathbf{a}_N)\}$ 上监督学习，训练神经网络 $\pi_{\theta}(\mathbf{a}_t | \mathbf{o}_t)$。</li>
+<li>运行该神经网络，得到一系列观察 $\mathcal{D}’ &#x3D; \{\mathbf{o}_1, …\mathbf{o}_M\}$。</li>
+<li>让人类来标注该观察。</li>
+<li>令 $\mathcal{D} &#x3D; \mathcal{D} \cup \mathcal{D}’$。</li>
+</ol>
+<p>这个做法有一个小问题是在做第三步的时候，人类专家做的操作不会作用到场景中，这是很不自然的。从而可能会产生一些奇怪的问题。</p>
+<h1><span id="分析">分析</span></h1><p>为了量化分布漂移的具体程度，我们可以定义奖励函数和损失函数，这两个函数本质上是一样的。下面我们展示两个例子，这是一个连续的奖励函数：</p>
+<p>$$<br>r(\mathbf{s}, \mathbf{a}) &#x3D; \log p(\mathbf{a} &#x3D; \pi^*(\mathbf{s}) | \mathbf{s})<br>$$</p>
+<p>这是一个离散的损失函数：</p>
+<p>$$<br>c(\mathbf{s}, \mathbf{a}) &#x3D; \begin{cases}<br>    0 &amp; \text{if $\mathbf{a} &#x3D; \pi^{*}(\mathbf{s})$} \\<br>    1 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>因为我们这里要做的是分析模型，所以不需要考虑函数光滑性之类的问题。唯一的要点是采用尽可能简单的离散的损失函数。我们可以用如下的期望来刻画分布漂移的程度：</p>
+<p>$$<br>\mathbb{E}\left[\sum_t c(\mathbf{s}_t, \mathbf{a}_t)\right]<br>$$</p>
+<p>下一小节是一个粗糙的分析：假设现在你的模型在训练集上误差的上界为 $\epsilon$，那么假设你一旦犯错就会接着继续犯错，那么 $T$ 时间内的总错误期望可以递归地表示为：</p>
+<p>$$<br>E(T) \leq \epsilon T + (1 - \epsilon)E(T - 1)<br>$$</p>
+<p>不难算出 </p>
+<p>$$<br>E(T) \leq \epsilon T^2 \label{ErrorBound}<br>$$</p>
+<hr>
+<p>实际上在训练模型的过程中，你可能只能拿到某种平均误差，而不是一个总误差的 bound，假如给定</p>
+<p>$$<br>\frac 1T\sum_{t}\mathbb{E}_{p_{\pi^*}(\mathbf{s}_t)}\pi_{\theta}(\mathbf{a}_t\ne \pi^*(\mathbf{s}_t) | \mathbf{s}_t) \leq \epsilon<br>$$</p>
+<p>（记号有点垃圾，这里 $p_{\pi^*}(\mathbf{s}_t)$ 系指按照人类专家的操作得到的 $t$ 时间步的状态的分布）</p>
+<p>我们首先可以给出 $p_{\theta}$ 和 $p_{\pi^*}$ 之间的 Total Varience 的上界：我们的目标是放缩</p>
+<p>$$<br>\sum_{s_t} |p_\theta(\mathbf{s}_t) - p_{\pi^*}(\mathbf{s}_t)|<br>$$</p>
+<p>假设你在前 $t$ 个时间步中，没有犯任何错误，则时间 $t$ 时的状态分布将就是 $p_{\pi^*}$。而如果你犯了一些错误，状态将服从另一些分布。总之我们将有</p>
+<p>$$<br>p_{\theta}(\mathbf{s}_t) &#x3D; \mathrm{Pr}[\text{No mistakes}] \cdot p_{\pi^*}(\mathbf{s}_t) + (1 - \mathrm{Pr}[\text{No mistakes}]) \cdot p’(\mathbf{s}_t)<br>$$</p>
+<p>其中 $p’$ 是另一个分布，即犯错误之后的分布。于是</p>
+<p>$$<br>\begin{align}<br>\sum_{\mathbf{s}_t}|p_\theta(\mathbf{s}_t) - p_{\pi^*}(\mathbf{s}_t)| &amp;&#x3D;\mathrm{Pr}[\text{making mistakes}] \cdot \sum_{\mathbf{s}_t} |p_{\pi^*}(\mathbf{s}_t) - p’(\mathbf{s}_t)|\\<br>&amp;\leq 2\cdot\mathrm{Pr}[\text{making mistakes}]<br>\end{align}<br>$$</p>
+<p>注意任意两个分布的 Total Variance 至多是 $2$。现在来放缩一下 $\mathrm{Pr}[\text{making mistakes}]$。</p>
+<p>$$<br>\begin{align}<br>\mathrm{Pr}[\text{making mistakes}] &amp;&#x3D; \mathbb{E}_{\mathbf{s}_1, …, \mathbf{s}_{t}}\left[\mathrm{Pr}\left[\bigcup_{i&#x3D;1}^{t} \mathbf{a}_i \ne \pi^*(\mathbf{s}_i))\right]\right] \\<br>&amp;\leq \sum_{i&#x3D;1}^{t} \mathbb{E}_{\mathbf{s}_1, …, \mathbf{s}_{t}}\left[\mathrm{Pr}[\mathbf{a}_i\ne \mathbf{s}_i]\right] \\<br>&amp;&#x3D; \sum_{i&#x3D;1}^{t} \mathbb{E}_{\mathbf{s}_i}\pi_{\theta}(\mathbf{a}_i\ne \mathbf{s}_i | \mathbf{s}_i) \\<br>&amp;\leq t\varepsilon<br>\end{align}<br>$$</p>
+<p>因此</p>
+<p>$$<br>\sum_{s_t} |p_\theta(\mathbf{s}_t) - p_{\pi^*}(\mathbf{s}_t)| \leq 2t\varepsilon<br>$$</p>
+<p>这个界只在你将神经网络训练的足够好（$\varepsilon &lt; 1 &#x2F; T$）时才比任意分布之间 Total Variance 的平凡上界要好。 </p>
+<p>接下来经过简单计算可以放出跟 $\ref{ErrorBound}$ 同样级别的界：</p>
+<p>$$<br>\begin{align}<br>\mathbb{E}\left[\sum_t c(\mathbf{s}_t, \mathbf{a}_t)\right] &amp;&#x3D; \sum_{\mathbf{s}_t}\sum_t p_{\theta}(\mathbf{s}_t) c(\mathbf{s}_t, \mathbf{a}_t) \\<br>&amp;\leq \sum_t \sum_{\mathbf{s}_t} p_{\pi^*} (\mathbf{s}_t) c(\mathbf{s}_t, \mathbf{a}_t) + |p_{\theta} - p_{\pi^*}| \cdot c_{\max} \\<br>&amp;\leq \varepsilon T + \varepsilon T^2 &#x3D; O(\varepsilon T^2)<br>\end{align}<br>$$</p>
+<p>这个界的意义就是告诉你一个模仿学习的算法的安全性指标，比如可能辅助驾驶在一定时间之后就需要人类操控一下。另一方面，此界可以用于进一步分析 DAgger 的迭代次数。参见 <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1011.0686">A Reduction of Imitation Learning and Structured Prediction to No-Regret Online Learning</a></p>
+<h1><span id="homework-1-imitation-learning-solution">Homework 1: Imitation Learning Solution</span></h1><p>我们尝试完成 23 Fall 的作业。</p>
+<h2><span id="analysis">Analysis</span></h2><p>第一小问结果已经整合在了上一节，第二小问很 trivial 不用做。</p>
+<h2><span id="experiment">Experiment</span></h2><p>代码题做实验做的云里雾里的，写了半天不知道我的 Performance 在哪里看，所以先咕了。我们还是做数学题吧。</p>
+<h2><span id="extra-credit-switchdagger">Extra Credit: SwitchDAgger</span></h2><p>本节考虑一个 DAgger 变种：SwitchDAgger。这是为了解决上文中提到的 DAgger 的一个缺点：人类专家需要在自己操作没有反馈的情况下提供策略指导，这是不自然的。</p>
+<p>考虑一个 $T$ 时间步的 MDP，并假设专家策略为 $\pi^*$。在迭代 $n &#x3D; 1, …, N$ 时，我们将会训练出一个不依赖于人类专家的策略 $\pi^n$。此时我们将模拟执行策略 $\pi^n$，然后在一个随机的时间步 $X^* + 1$ 将控制转交给专家直到模拟结束。</p>
+<p>定义策略 $S^X(\pi_1, \pi_2)$ 表示在前 $X$ 个时间步执行 $\pi_1$ 策略，后面所有时间步都执行 $\pi_2$ 策略的一个策略。$\tilde \pi^n$ 表示 $S^X(\pi^n, \pi^*)$，其中 $X$ 是一个随机数。$\hat \pi^n$ 表示在第 $n - 1$ 次迭代产生的轨迹上拟合出的策略，拟合效果被如下的不等式刻画：</p>
+<p>$$<br>\mathbb{E}_{s\sim p_{\tilde \pi_{n - 1}}}\mathrm{Pr}[\hat{\pi}^n(s)\ne \pi^*(s)]\leq \varepsilon<br>$$</p>
+<p>SwitchDAgger 被定义为如下的迭代：初始时 $\tilde{\pi}^0 :&#x3D; \pi^*, \pi^0 :&#x3D; \hat{\pi}^1$，然后 </p>
+<ol>
+<li>在 $s\sim p_{\tilde{\pi}^{n - 1}}$ 上拟合 $\hat{\pi}^n$；</li>
+<li>在几何分布 $\mathrm{Geom}(1 - \alpha)$ 上采样切换步数 $X_n + 1$，然后令 $\tilde{\pi}^{n}\leftarrow S^{X_n}(\hat{\pi}^n, \tilde{\pi}^{n - 1})$；</li>
+<li>令 $\pi^n \leftarrow S^{X_n}(\hat{\pi}^n, \pi^{n - 1})$。</li>
+</ol>
+<p>定义犯错误的次数为</p>
+<p>$$<br>C(\pi) &#x3D; \sum_{t &#x3D; 1}^T \mathbb{E}_{s_t\sim p_{\pi}} \mathrm{Pr}[\pi(s_t)\ne \pi^*(s_t)]<br>$$</p>
+<p>我们将要逐步证明 $C(\pi^n)$ 可以有一个 $O(T\varepsilon \log 1 &#x2F; \varepsilon)$ 的 bound。</p>
+<p>首先我们用一个递推式来刻画 $C(\tilde{\pi}^n)$ 的界。即存在 $A(t, n)$ 满足 $C(\tilde{\pi}^n)\leq A(T, n)$。</p>
+<ul>
+<li><p><strong>初值.</strong> 对于任意的 $t$，$A(t, 0) &#x3D; 0$。因为 $\tilde{\pi}^0$ 是专家策略。对于任意的 $n$，$A(0, n) &#x3D; 0$。</p>
+</li>
+<li><p><strong>递推关系.</strong> 考察第一步是否移交策略。因为移交控制的步数服从几何分布 $\mathrm{Geom}(1 - \alpha)$，所以移交控制的概率为 $1 - \alpha$。</p>
+<ol>
+<li><p>不移交控制，考虑是否犯错。若犯错，假设后面都会全错。那么期望犯错次数不会超过</p>
+<p>$$<br>\begin{align}<br>&amp;{\color{blue}{\alpha}}\mathbb{E}_{s\sim p_{\hat{\pi}^n}}\left[\mathrm{Pr}[\hat{\pi}^n(s)\ne \pi^*(s)]\cdot t + (1 - \mathrm{Pr}[\hat{\pi}^n(s)\ne \pi^*(s)])\cdot A(t - 1, n)\right]<br>\end{align}<br>$$</p>
+<p>需要注意的是无论如何 $A(t - 1, n)$ 都不会超过 $t$，所以此处可以将概率悉数放到最大，套用 $\hat{\pi}^n$ 的拟合效果立即得到这部分犯错次数不超过</p>
+<p>$$<br>\alpha \varepsilon t + \alpha (1 - \varepsilon) A(t - 1, n)<br>$$</p>
+</li>
+<li><p>移交控制，递归得到期望犯错次数被 $A(t, n - 1)$ bound 住。</p>
+</li>
+</ol>
+<p> 综上得到递推关系：</p>
+<p> $$<br> A(t, n) &#x3D; \alpha\varepsilon t + \alpha (1 - \varepsilon)A(t - 1, n) + (1 - \alpha) A(t, n - 1)<br> $$</p>
+</li>
+</ul>
+<div class="note danger"><p><strong>警告.</strong> 接下来我们将 input 一个神秘结论，来自作业题的第二问。</p>
+</div>
+
+<p>可以证明</p>
+<p>$$<br>C(\tilde{\pi}^n) \leq Tn\alpha\varepsilon \label{wtf_bound}<br>$$</p>
+<blockquote>
+<p>但是取 $n &#x3D; 1, \alpha &#x3D; 1$，这个就退化成了不做 DAgger，这样居然能分析出来一个 $T\varepsilon$ 的界，比之前分析的 $O(T\varepsilon^2)$ 好了一个级别？？总之这个界肯定不是 General 的，在 $\alpha \leq 1 &#x2F; T$ 的时候可能是对的，可以归纳一下。这里摆了。</p>
+</blockquote>
+<p>然后需要注意到 $C(\pi^n)$ 和 $C(\tilde{\pi}^n)$ 之间差的并不远，因为他们之间只有最后一小段是不一样的。根据 Chernoff bound 当 $n \geq T, \alpha \leq 1 &#x2F; T$ 时，有</p>
+<p>$$<br>\mathrm{Pr}\left[\sum_{i&#x3D;1}^n X_n\leq T\right] &#x3D; \exp\left(\frac{-n}{(1-\alpha)T}\right)<br>$$</p>
+<p>如果没有覆盖最后一小段，假设它会全错，那么显然</p>
+<p>$$<br>C(\pi^n) \leq C(\tilde{\pi}^n) + T\exp\left(\frac{-n}{(1-\alpha)T}\right)<br>$$</p>
+<p>只需取 $n &#x3D; T\log 1&#x2F;\varepsilon, \alpha &#x3D; 1 &#x2F; T$，即可获得一个 $O(T\varepsilon\log1&#x2F;\varepsilon)$ 的界。但他第二小问这个 $\ref{wtf_bound}$ 实在是太怪了，也不知道怎么证的。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/01/11/CS285DRLI/" rel="prev" title="CS285 Deep Reinforcement Learning 学习笔记">
+                  <i class="fa fa-angle-left"></i> CS285 Deep Reinforcement Learning 学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/01/14/CS285DRL4/" rel="next" title="CS285 Part 2 - RL 概述">
+                  CS285 Part 2 - RL 概述 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
