@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文收录于 AI 论文选读。    TL;DR 前置知识 Score Matching Langevin Dynamics   基于 score matching 的生成式模型的问题 Noise Conditional Score Networks 训练 推理      TL;DR介绍了一种基于 denoising score matching 和 Langevin dynamics 采样的生成式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Generative Modeling by Estimating Gradients of the Data Distribution (2019)">
+<meta property="og:url" content="http://example.com/2025/03/10/GenerativeModelByEstimatingGradient/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="本文收录于 AI 论文选读。    TL;DR 前置知识 Score Matching Langevin Dynamics   基于 score matching 的生成式模型的问题 Noise Conditional Score Networks 训练 推理      TL;DR介绍了一种基于 denoising score matching 和 Langevin dynamics 采样的生成式">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/Song2019Fig1.png">
+<meta property="og:image" content="http://example.com/picture/Song2019Fig2.png">
+<meta property="og:image" content="http://example.com/picture/Song2019Fig3.png">
+<meta property="article:published_time" content="2025-03-10T06:35:21.000Z">
+<meta property="article:modified_time" content="2025-03-11T16:22:54.545Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/Song2019Fig1.png">
+
+
+<link rel="canonical" href="http://example.com/2025/03/10/GenerativeModelByEstimatingGradient/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/03/10/GenerativeModelByEstimatingGradient/","path":"2025/03/10/GenerativeModelByEstimatingGradient/","title":"Generative Modeling by Estimating Gradients of the Data Distribution (2019)"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Generative Modeling by Estimating Gradients of the Data Distribution (2019) | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前置知识</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Score Matching</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Langevin Dynamics</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基于 score matching 的生成式模型的问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Noise Conditional Score Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">训练</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">推理</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">51</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/10/GenerativeModelByEstimatingGradient/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Generative Modeling by Estimating Gradients of the Data Distribution (2019) | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Generative Modeling by Estimating Gradients of the Data Distribution (2019)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-03-10 14:35:21" itemprop="dateCreated datePublished" datetime="2025-03-10T14:35:21+08:00">2025-03-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-03-12 00:22:54" itemprop="dateModified" datetime="2025-03-12T00:22:54+08:00">2025-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文收录于 <a href="../../../../2025/03/05/AIPaperReading/">AI 论文选读</a>。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#tldr">TL;DR</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a><ul>
+<li><a href="#score-matching">Score Matching</a></li>
+<li><a href="#langevin-dynamics">Langevin Dynamics</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-score-matching-%E7%9A%84%E7%94%9F%E6%88%90%E5%BC%8F%E6%A8%A1%E5%9E%8B%E7%9A%84%E9%97%AE%E9%A2%98">基于 score matching 的生成式模型的问题</a></li>
+<li><a href="#noise-conditional-score-networks">Noise Conditional Score Networks</a><ul>
+<li><a href="#%E8%AE%AD%E7%BB%83">训练</a></li>
+<li><a href="#%E6%8E%A8%E7%90%86">推理</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h1><span id="tldr">TL;DR</span></h1><p>介绍了一种基于 denoising score matching 和 Langevin dynamics 采样的生成式模型。将 score matching 和 Langevin dynamics 结合起来是很自然的（形式上）。可能解答了下面这些问题：</p>
+<ul>
+<li><strong>为什么将分布建模成原始分布加高斯噪声？</strong> 解决流形假设带来的 score function 不良定义问题。</li>
+<li><strong>为什么添加不同水平的噪声，逐步去噪？</strong> 本质上是一种退火 Langevin dynamics 采样。</li>
+</ul>
+<h1><span id="前置知识">前置知识</span></h1><h2><span id="score-matching">Score Matching</span></h2><p>在 <a href="../../../../2025/03/05/ScoreMatching/">上一篇文章</a> 中我们介绍了 Score Matching 方法，需要注意的是补充的 Denoising Score Matching：</p>
+<p>$$<br>\frac 12\mathbb{E}_{\boldsymbol{x}\sim p_{data}}\mathbb{E}_{\boldsymbol{\tilde{x}}\sim q(\boldsymbol{\tilde{x}} | \boldsymbol{x})} [\lVert\boldsymbol{s}_{\boldsymbol{\theta}}(\boldsymbol{\tilde{x}}) - \nabla_{\boldsymbol{\tilde x}}\log q(\boldsymbol{\tilde{x}} | \boldsymbol{x})\rVert^2]<br>$$</p>
+<h2><span id="langevin-dynamics">Langevin Dynamics</span></h2><p>存在一种在只知道 score function 时从原分布中采样的算法，称为 Sampling with Langevin dynamics。只需做如下迭代：</p>
+<p>$$<br>\tilde{\boldsymbol{x}}_t &#x3D; \tilde{\boldsymbol{x}}_{t - 1} + \frac{\epsilon}{2}\nabla_{\boldsymbol{x}}\log p(\tilde{\boldsymbol{x}}_{t - 1}) + \sqrt{\epsilon} \boldsymbol{z}_t<br>$$</p>
+<p>这个算法的收敛性我们暂时无力严格分析。但是形象的展示可以参见 <a target="_blank" rel="noopener" href="https://friedmanroy.github.io/blog/2022/Langevin/">A Simplified Overview of Langevin Dynamics</a>。结论是当 $\varepsilon \rightarrow 0$ 和 $T\rightarrow \infty$ 时，有 $\tilde{\boldsymbol{x}}_T \sim p(\boldsymbol{x})$。</p>
+<hr>
+<p>这篇论文提出的生成式模型大概框架就是：训练时用 score matching 拟合分布的 score function，推理时用 langevin dynamics 采样。</p>
+<h1><span id="基于-score-matching-的生成式模型的问题">基于 score matching 的生成式模型的问题</span></h1><p><strong>流形假设.</strong> 根据流形假设，现实世界中的图片倾向于集中在一个低维流形附近，这使得 score function 在一个稠密的区域定义不良。作者做了如下实验来证明该问题实际上也存在。</p>
+<p><img src="/../picture/Song2019Fig1.png"></p>
+<p><strong>低密度区域.</strong> 原始分布中的低密度区域可能造成两方面影响：</p>
+<ul>
+<li><p><em>Score Matching 不准确.</em> 低密度区域可能没法产生足够的样本来帮助模型拟合出可信的 Score function。</p>
+<p><img src="/../picture/Song2019Fig2.png"></p>
+</li>
+<li><p><em>Langevin Dynamics 收敛慢.</em> 低密度区域可能将整个分布分割成若干个岛，此时用 Langevin Dynamics 采样时，难以从一个岛转移到另一个岛。虽然理论上 Langevin Dynamics 产生正确的分布，但是 mixing time 非常大。</p>
+<p><img src="/../picture/Song2019Fig3.png"></p>
+</li>
+</ul>
+<h1><span id="noise-conditional-score-networks">Noise Conditional Score Networks</span></h1><p>作者提出了 NCSN 来解决上述问题。简而言之就是：</p>
+<ol>
+<li>给训练数据添加不同等级的随机噪声。</li>
+<li>用退火 Langevin 动力学来采样。</li>
+</ol>
+<h2><span id="训练">训练</span></h2><p>形式化地，令 $\{\sigma_i\}_{i &#x3D; 1}^L$ 是一列等比数列，其公比 $\dfrac{\sigma_i}{\sigma_{i - 1}} &#x3D; q &lt; 1$，这表示噪声等级。其中 $\sigma_1$ 应该大到能够克服上节所述的问题，而 $\sigma_T$ 应到小到人眼无法分辨。添加协方差为 $\sigma^2 \mathbf{I}$ 的高斯噪声之后，图像的概率分布为</p>
+<p>$$<br>q_{\sigma}(\boldsymbol{\tilde{x}}) &#x3D; \mathbb{E}_{\boldsymbol{x}\sim p_{data}}\left[\mathcal{N}(\boldsymbol{\tilde{x}} | \boldsymbol{x}, \sigma^2\mathbf{I})\right]<br>$$</p>
+<p>在此处使用 denoising score matching，现在需要优化的目标是 </p>
+<p>$$<br>\mathscr{l}(\boldsymbol{\theta}; \sigma) :&#x3D; \frac 12\mathbb{E}_{\boldsymbol{x}\sim p_{data}}\mathbb{E}_{\boldsymbol{\tilde{x}}\sim q(\boldsymbol{\tilde{x}} | \boldsymbol{x})} [\lVert\boldsymbol{s}_{\boldsymbol{\theta}}(\boldsymbol{\tilde{x}}, \sigma) - \nabla_{\boldsymbol{\tilde x}}\log q(\boldsymbol{\tilde{x}} | \boldsymbol{x})\rVert^2]<br>$$</p>
+<p>这里梯度无非是</p>
+<p>$$<br>-\frac{\boldsymbol{\tilde{x}} - \boldsymbol{x}}{\sigma^2}<br>$$</p>
+<p>注意 $\dfrac{\boldsymbol{\tilde{x}} - \boldsymbol{x}}{\sigma} \sim \mathcal{N}(0, \mathbf{I})$，所以理想情况下拟合出的 $\mathbf{s}_{\boldsymbol{\theta}}(\boldsymbol{\tilde{x}}, \sigma)$ 长度应当是 $1 &#x2F; \sigma$ 级别的。因此我们需要定义一个总损失函数</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{x}, \{\sigma_i\}) &#x3D; \sum_{i&#x3D;1}^L \lambda(\sigma_i)\ell(\boldsymbol{\theta}, \sigma_i)<br>$$</p>
+<p>时，为了平衡各网络的梯度，应当令 $\lambda(\sigma) &#x3D; \sigma^2$。</p>
+<h2><span id="推理">推理</span></h2><p>推理算法是一种退火 Langevin Dynamics 采样。</p>
+<ol>
+<li>从 $\boldsymbol{x}_0$ 开始；</li>
+<li><strong>For</strong> $i\leftarrow 1$ to $L$ <strong>do</strong></li>
+<li>$\qquad$ $\alpha_i &#x3D; \epsilon\cdot {\sigma_i^2} &#x2F; \sigma_L^2$；</li>
+<li>$\qquad$ $\boldsymbol{x}_T \leftarrow \boldsymbol{x}_0$ 开始迭代 $T$ 步 $\epsilon &#x3D; \alpha_i$ 的 Langevin 动力学采样；</li>
+<li>$\qquad$ 令 $\boldsymbol{x}_0\leftarrow \boldsymbol{x}_T$；</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/03/05/ScoreMatching/" rel="prev" title="Aapo Hyvärinen - Estimation of Non-Normalized Statistical Models by Score Matching (2005)">
+                  <i class="fa fa-angle-left"></i> Aapo Hyvärinen - Estimation of Non-Normalized Statistical Models by Score Matching (2005)
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
