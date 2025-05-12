@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文收录于 EDA 论文选读。    TL;DR 基本直觉 速查表的生成 常数优化 处理度数更大的 net    TL;DR一个 RSMT 的并不精确的高速启发式算法。  对于 $n\leq 9$ 的 net，打表； 对于更大的 net，设计启发式的分治。  由于我刚入门，所以想先对这个学科研究的侧重点和方法论有一个大致的理解。因此，本文的构建中极其注重算法的动机。关于侧重点和方法论，有如下初步的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FLUTE Algorithm">
+<meta property="og:url" content="http://example.com/2025/05/11/FLUTE-Algorithm/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="本文收录于 EDA 论文选读。    TL;DR 基本直觉 速查表的生成 常数优化 处理度数更大的 net    TL;DR一个 RSMT 的并不精确的高速启发式算法。  对于 $n\leq 9$ 的 net，打表； 对于更大的 net，设计启发式的分治。  由于我刚入门，所以想先对这个学科研究的侧重点和方法论有一个大致的理解。因此，本文的构建中极其注重算法的动机。关于侧重点和方法论，有如下初步的">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/RSMT-Example.png">
+<meta property="og:image" content="http://example.com/picture/FLUTE-compaction.png">
+<meta property="og:image" content="http://example.com/picture/FLUTE-connect-adj.png">
+<meta property="article:published_time" content="2025-05-11T07:02:21.000Z">
+<meta property="article:modified_time" content="2025-05-12T02:28:27.203Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/RSMT-Example.png">
+
+
+<link rel="canonical" href="http://example.com/2025/05/11/FLUTE-Algorithm/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/11/FLUTE-Algorithm/","path":"2025/05/11/FLUTE-Algorithm/","title":"FLUTE Algorithm"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>FLUTE Algorithm | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">基本直觉</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">速查表的生成</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">常数优化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">处理度数更大的 net</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/11/FLUTE-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="FLUTE Algorithm | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          FLUTE Algorithm
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-11 15:02:21" itemprop="dateCreated datePublished" datetime="2025-05-11T15:02:21+08:00">2025-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-12 10:28:27" itemprop="dateModified" datetime="2025-05-12T10:28:27+08:00">2025-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文收录于 <a href="../EDAPaper/">EDA 论文选读</a>。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#tldr">TL;DR</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%9B%B4%E8%A7%89">基本直觉</a></li>
+<li><a href="#%E9%80%9F%E6%9F%A5%E8%A1%A8%E7%9A%84%E7%94%9F%E6%88%90">速查表的生成</a></li>
+<li><a href="#%E5%B8%B8%E6%95%B0%E4%BC%98%E5%8C%96">常数优化</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%BA%A6%E6%95%B0%E6%9B%B4%E5%A4%A7%E7%9A%84-net">处理度数更大的 net</a></li>
+</ul>
+<!-- tocstop -->
+
+<h1><span id="tldr">TL;DR</span></h1><p>一个 RSMT 的并不精确的高速启发式算法。</p>
+<ul>
+<li>对于 $n\leq 9$ 的 net，打表；</li>
+<li>对于更大的 net，设计启发式的分治。</li>
+</ul>
+<p>由于我刚入门，所以想先对这个学科研究的侧重点和方法论有一个大致的理解。因此，本文的构建中极其注重算法的动机。关于侧重点和方法论，有如下初步的结论：</p>
+<ol>
+<li>可能需要注意到实践中某个量并不大；</li>
+<li>有很多小数据上的 adhoc；</li>
+<li>需要考虑如何充分利用算力（e.g. 卡常，GPU 加速）；</li>
+<li>可能需要设计不那么有道理的启发式算法，挖一些因子。</li>
+</ol>
+<h1><span id="基本直觉">基本直觉</span></h1><p>在 <a href="../EDAPaper/">索引页面</a> 中介绍 RSMT 问题时，我们已经提到了 RSMT 问题存在 Hannan Grid 上的解。不妨设 $x_1 \leq x_2 \leq \cdots \leq x_n$ 是所有横坐标排序之后的结果，$y_1 \leq y_2 \leq \cdots \leq y_n$ 类似。那么，任意一个 RSMT 问题的实例可以用一个长度为 $n$ 的 position sequence $s_i$ 和两个长度为 $n - 1$ 的数组 $h_i$ 和 $v_i$ 刻画：其中，$s_i$ 表示 $x_i$ 对应的 $y_i$ 是第几大的；$h_i$ 和 $v_i$ 分别表示网格第 $i$ 列的宽和第 $i$ 行的高。</p>
+<p>如此一来，为了计算任意一个 Hannan Grid 上的 Steiner tree 的总边长，我们惟需考察有多少边水平穿过了第 $i$ 列（记作 $\alpha_i$）以及有多少边竖直穿过了第 $i$ 行（记作 $\beta_i$），然后便有 </p>
+<p>$$<br>L &#x3D; (\boldsymbol{h}, \boldsymbol{v})^\top (\alpha, \beta)<br>$$</p>
+<p>这样的 $(\alpha, \beta)$ 称作 wirelength vector。如下图所示，下面的三个 Steiner tree 的 wirelength vector 分别是 $(1, 2, 1, 1, 1, 2), (1, 1, 1, 1, 2, 3)$ 和 $(1, 2, 1, 1, 1, 1)$。</p>
+<p><img src="/../picture/RSMT-Example.png"></p>
+<p>注意，如果一个 wirelength vector $\boldsymbol{w}$ 偏序（i.e. 每一维都大于等于，其中至少有一维严格大于）了另一个 wirelength vector $\boldsymbol{w}’$，那么 $\boldsymbol{w}$ 对应的 Steiner tree 永无可能成为最优的 Steiner tree。比方说此处的 $(a)$ 状的树，无论如何都不可能是最优的 Steiner tree。一切不偏序其他向量的 wirelength vector 即可能产生最优的 Steiner tree 的向量称作 <em>potentially optimal wirelength vector</em> (POWV)，对应的 Steiner tree 称作 <em>potentially optimal Steiner tree</em>（POST）。</p>
+<p>直觉上，可能的 POWV 并不多。因此我们可以打一个表来描述任意一个 position sequence 对应的全部 POWV 和 POST，然后在上面快速查询。</p>
+<h1><span id="速查表的生成">速查表的生成</span></h1><p>现在我们尝试生成 $n\leq 9$ 的全部 POST 和对应的 POWV。因为点数非常少，所以树的结构并不多样。</p>
+<p>生成 POWV 和 POST 的基本思想是递归。可以从两个方向考虑这件事情：</p>
+<ol>
+<li><strong>boundary compaction</strong>，即考虑某一条边界（如 $x &#x3D; x_1$）上的点应当如何与其余的点连通。一个简单的想法是，将这些点都投影到 $x &#x3D; x_2$ 上，并在压缩后的网格上求出 POST，然后连接原始点和投影点。<br><img src="/../picture/FLUTE-compaction.png"></li>
+<li><strong>connect adjacent pins</strong>，即将一个边界上的点全都连接起来然后在上面指定一个接入点。<br><img src="/../picture/FLUTE-connect-adj.png"></li>
+</ol>
+<p>显然，通过 compaction 操作未必能准确地生成 POWV。对于网格 $G$（配上格点上的引脚），称其是 compectable 的，若可以通过上述流程求出其全部 POWV（注意，在做 boundary compaction 后，求子问题的 POST 不一定要继续使用 compaction，而是务必保证求出准确的 POST）。然而，有一些特殊的实例上可以做这样的操作。我们将逐渐揭示何种网格上可以做这种操作：</p>
+<ol>
+<li><strong>如果存在一个网格边界，上方有且仅有一个点，则该网格是 compactable 的。</strong> 只需考虑该点在何处接入除开该点以外的 steiner tree。如果该位置不是正投影，将该路径沿着矩形对角线方向翻折。</li>
+<li><strong>如果存在一个网格的角，其上有一个点，且相邻两个边界上均仅有一个另外的点，则该网格是 compactable 的。</strong> 这也是一个简单的调整，只需考虑涉及到的三个点之间如何连接和如何接入剩余部分的 steiner tree。</li>
+<li><strong>如果一个网格的边界上至多有六个点，则该网格是 compactable 的。</strong> 不难发现边界上至多有六个点则必然落入上述两种情况之一。</li>
+</ol>
+<p>这样一来我们已经解决了一切边界上至多有 $6$ 个点的问题。顺带可以解决一些剩余的情况：</p>
+<ol>
+<li>若 $n$ 个点全部在网格的边界上，那么每个 POWV 一定对应一个完全在边界的 POST。</li>
+<li>剩余情况（$8\leq n$，且至少有 $7$ 个都在边界上）可以用 connect adjacent pins 解决。证明想必非常暴力，这里先不看。</li>
+</ol>
+<p>实验表明，这样求出的 POWV 基本上只有 $10\sim 10^2$ 量级（对于 $9$ 度的 net，平均 $30+$ 个，最大 $70+$ 个）。</p>
+<h1><span id="常数优化">常数优化</span></h1><p>system 魅力时刻。考虑从两个方向压榨计算机的性能：</p>
+<ul>
+<li><strong>空间常数优化</strong>；</li>
+<li><strong>时间常数优化</strong>。</li>
+</ul>
+<p>有点太细了，先不看。</p>
+<p>关于空间，基本上有下面的这些 idea（论文中的，和我猜的）：</p>
+<ol>
+<li>一开始的 position sequence 都是 permutation，这意味着初始时四个边界上只有一个点，因而网格是可以沿着四个方向上 compact。容易发现，compact 之后有十六种初始网格会对应到同一个网格（取决于最外一圈的点和次外一圈的点）；</li>
+<li>position sequence 做逆行、倒映、或两者之复合后得到的 position sequance 的 POWV 可以由其推出。</li>
+</ol>
+<p>这样一来，看起来我们至少能把空间压缩几十倍（$(1 - \epsilon) \cdot 16\cdot 4$）。</p>
+<p>关于时间，我们可以考虑：</p>
+<ol>
+<li>注意这里是小数据，加法的代价比乘法的代价小的多，所以我们用加法来算点乘，此外注意条边至少要被经过一次，因此可以预处理网格的长加宽，从而节约 $2(n - 1)$ 个加法。</li>
+<li>好像还有个递推算的，没怎么看懂，但感觉不是很重要。</li>
+</ol>
+<p>我感觉这个在现代处理器 &#x2F; GPU 上应该用处没那么大，所以先不管了。</p>
+<h1><span id="处理度数更大的-net">处理度数更大的 net</span></h1><p>至此，对于低于 $9$ 度的 net，我们已经打好了表。为了强行利用这个表求解更大的问题，我们需要对度数较大的 net 构造一种分治策略。</p>
+<p>然而很不幸的是对于 steiner tree 问题并不存在一个很好的分治策略。下面的结论非常平凡，但已经是我们能有的比较好的直觉：</p>
+<div class="note info"><p><strong>定理 1.</strong> 若存在 $(x, y)$ 使得所有引脚要么只在 $(x, y)$ 的一、三象限，要么只在二、四象限，那么将横坐标不超过 $x$ 的引脚集合记作 $L$，其余记作 $R$，则 $\mathrm{RSMT}(L\cup R) &#x3D; \mathrm{RSMT}(L\cup\{(x, y)\})\cup \mathrm{RSMT}(R\cup\{(x, y)\})$。</p>
+</div>
+
+<p>因此，我们被迫牺牲准确率，转而思考一些 heuristics。下面是一个比较直观的启发式算法框架：</p>
+<ul>
+<li>将 net 按照某个水平边 $y_r$ 分成上下两部分。注意这个划分不一定是均分，而是在 $\delta n$ 到 $n - \delta n + 1$ 之间去找一个估计比较优的。</li>
+<li>递归下去找两部分（都包含 $x_r, y_r$）的 RSMT，然后合并，并用某种方法消除冗余边。</li>
+</ul>
+<p>关于划分的选择，我们考虑对划分点 $r$ 定义一个分数 $S(r)$，用于鼓励以下两个直觉上让算法得到更好的 steiner tree 的要点：</p>
+<ol>
+<li><strong>算法选择一个分界线，在最优的 steiner tree 中确实只有一个桥经过此分界线。</strong> 比如你可以要求网格在分界点附近纵向跨度大，横向跨度小以促进只有一个纵向的桥跨过此点，左右两侧横向连接。</li>
+<li><strong>算法选择一个分界线，使得以此划分后斯坦纳树的估计值较小。</strong> 比如你可以要求分界点尽量在网格中间，以及划分后两部分的 HPWL（half-perimeter wirelength 即包围盒包周长，常用于估计 wirelength）尽量小。</li>
+</ol>
+<p>受此启发，原论文将 $S(r)$ 定义做</p>
+<p>$$<br>\begin{aligned}<br>S(r) &amp;&#x3D; S_1(r) - \alpha S_2(r) - \beta S_3(r) - \gamma S_4(r) \quad \text{where} \\<br>S_1(r) &amp;&#x3D; y_{r + 1} - y_{r - 1} \\<br>S_2(r) &amp;&#x3D; \begin{cases}<br>    2(x_3 - x_2) &amp; \text{if $s_r &#x3D; 1$ or $2$} \\<br>    x_{s_r + 1} - x_{s_r - 1} &amp; \text{if $3\leq s_r \leq n - 2$} \\<br>    2(x_{n - 1} - x_{n - 2}) &amp; \text{if $s_r &#x3D; n - 1$ or $n$}<br>\end{cases} \\<br>S_3(r) &amp;&#x3D; \left|s_r - \frac{n + 1}{2}\right|\times \overline{h} + \left|r - \frac{n + 1}{2}\right|\times \overline{v} \\<br>S_4(r) &amp;&#x3D; \mathrm{HPWL}(L) + \mathrm{HPWL}(R)<br>\end{aligned}<br>$$</p>
+<p>并实验得出取 $\alpha &#x3D; 0.3, \beta &#x3D; 7.4&#x2F;(n + 10), \gamma &#x3D; 4.8 &#x2F; (n - 1)$ 比较优。</p>
+<blockquote>
+<p><strong>Remark.</strong> 我个人觉得这部分非常之丑，尤其是 $S_2$ 这个诡异的分类讨论和这个意义不明的 $S_3$。但是我也没精力做消融实验。</p>
+</blockquote>
+<p>最后，为了合并两部分的 steiner tree，有以下一些直观的思路：</p>
+<ol>
+<li>直接破坏掉环（显然，合并后至多出现一个环）。</li>
+<li>如果重合部分涉及到的邻居很少，甚至可以在前面打的表里查一下这部分最优的 steiner tree 长什么样子。</li>
+</ol>
+<hr>
+<p>另外我们可以引入一个参数 $A$ 来平衡时间-准确度的 tradeoff。参数 $A$ 表示在本次递归中找 $A$ 个分界线做递归。每次递归下去后将 $A$ 置为 $\max(A&#x2F;2, 1)$。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/11/EDAPaper/" rel="prev" title="EDA 论文选读">
+                  <i class="fa fa-angle-left"></i> EDA 论文选读
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

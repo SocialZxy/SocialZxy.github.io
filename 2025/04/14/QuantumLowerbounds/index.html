@@ -19,27 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。    准备定义 证明过程 结论">
+    <meta name="description" content="Abstract. Under Construction    Hybrid Method">
 <meta property="og:type" content="article">
-<meta property="og:title" content="重新发现 Kraft 不等式">
-<meta property="og:url" content="http://example.com/2025/02/25/ReinventingKraftInequality/index.html">
+<meta property="og:title" content="一些证明量子复杂度下界的办法">
+<meta property="og:url" content="http://example.com/2025/04/14/QuantumLowerbounds/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。    准备定义 证明过程 结论">
+<meta property="og:description" content="Abstract. Under Construction    Hybrid Method">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-02-25T14:29:05.000Z">
-<meta property="article:modified_time" content="2025-02-25T15:49:05.221Z">
+<meta property="article:published_time" content="2025-04-14T13:13:20.000Z">
+<meta property="article:modified_time" content="2025-04-14T15:07:01.742Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2025/02/25/ReinventingKraftInequality/">
+<link rel="canonical" href="http://example.com/2025/04/14/QuantumLowerbounds/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/02/25/ReinventingKraftInequality/","path":"2025/02/25/ReinventingKraftInequality/","title":"重新发现 Kraft 不等式"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/04/14/QuantumLowerbounds/","path":"2025/04/14/QuantumLowerbounds/","title":"一些证明量子复杂度下界的办法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>重新发现 Kraft 不等式 | Stellary's Notes</title>
+<title>一些证明量子复杂度下界的办法 | Stellary's Notes</title>
   
 
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">证明过程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Hybrid Method</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">52</span>
+          <span class="site-state-item-count">57</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">40</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -195,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/25/ReinventingKraftInequality/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/14/QuantumLowerbounds/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
@@ -208,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="重新发现 Kraft 不等式 | Stellary's Notes">
+      <meta itemprop="name" content="一些证明量子复杂度下界的办法 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          重新发现 Kraft 不等式
+          一些证明量子复杂度下界的办法
         </h1>
 
         <div class="post-meta-container">
@@ -225,16 +225,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-02-25 22:29:05 / Modified: 23:49:05" itemprop="dateCreated datePublished" datetime="2025-02-25T22:29:05+08:00">2025-02-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
-        </span>
+      <time title="Created: 2025-04-14 21:13:20 / Modified: 23:07:01" itemprop="dateCreated datePublished" datetime="2025-04-14T21:13:20+08:00">2025-04-14</time>
     </span>
 
   
@@ -246,67 +237,42 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 今天上信息论课的时候被提问为什么我们在研究平均编码长度时只考虑了前缀无关码，而不考虑非前缀无关但是可以唯一解读的编码。以前以为前者比后者要弱，但今天证了一手发现前缀无关码还真不弱于可唯一解读的编码。在证明过程中重新发现了 Kraft 不等式，特发此傻逼文章。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> Under Construction</p>
 <!-- toc -->
 
 <ul>
-<li><a href="#%E5%87%86%E5%A4%87%E5%AE%9A%E4%B9%89">准备定义</a></li>
-<li><a href="#%E8%AF%81%E6%98%8E%E8%BF%87%E7%A8%8B">证明过程</a></li>
-<li><a href="#%E7%BB%93%E8%AE%BA">结论</a></li>
+<li><a href="#hybrid-method">Hybrid Method</a></li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="准备定义">准备定义</span></h1><p>对于给定的字符集 $\Sigma$，一个<strong>编码</strong>系指一个映射 $C: \Sigma\rightarrow \{0, 1\}^*$。一个字符 $x\in \Sigma$ 的编码长度记作 $\mathscr{l}(x) &#x3D; |C(x)|$。信息论中常考虑的一个问题是给定一个 $\Sigma$ 上的概率分布 $P$，编码的期望编码长度</p>
-<p>$$<br>\mathscr{L}(C) &#x3D; \mathbb{E}_{x\sim P(x)}[\mathscr{l}(x)]<br>$$</p>
-<p>众所周知，如果不存在两个字符 $x_1 \ne x_2$ 使得 $C(x_1)$ 是 $C(x_2)$ 的前缀，则这样的编码 $C$ 称作<strong>前缀无关码</strong>。全体前缀无关码的集合记作 $A$。</p>
-<p>另一方面，我们可以将 $C$ 的定义延拓到字符串 $\Sigma^*$ 上：$C(s_1s_2…s_n) &#x3D; C(s_1)C(s_2)\cdots C(s_n)$。如果不存在两个字符串 $s, t\in \Sigma^*$，$s\ne t$ 但是 $C(s)\ne C(t)$，则称 $C$ 是<strong>可唯一解读编码</strong>。全体可唯一解读编码的集合记作 $B$。</p>
-<p>注意 $A\subsetneq B$。因为显然前缀无关码都是可唯一解读的，并且存在这样一个编码，它并不是前缀无关的，但是是可唯一解读的：</p>
-<table>
-<thead>
-<tr>
-<th align="center">字符</th>
-<th align="center">编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\texttt{a}$</td>
-<td align="center">$\texttt{10}$</td>
-</tr>
-<tr>
-<td align="center">$\texttt{b}$</td>
-<td align="center">$\texttt{1}$</td>
-</tr>
-<tr>
-<td align="center">$\texttt{c}$</td>
-<td align="center">$\texttt{00}$</td>
-</tr>
-</tbody></table>
-<p>$A$ 上的最优期望编码长度由著名的 Huffman 编码给出，另外配合一些放缩可以得到 Huffman 编码的期望编码长度是信源的信息熵的一个加性近似之类的经典结论，参见 <a href="../../../../2024/01/15/InfoAndEntropy6Commu/">这一篇黑历史</a>。然而以往我们始终回避了讨论 $B\setminus A$ 中的元素。很显然</p>
-<p>$$<br>\min_{C\in B} \mathscr{L}(C) \leq \min_{C\in A}\mathscr{L}(C)<br>$$</p>
-<p>本文将给出上式中不等号取等的证明，从而将（我所知的）经典结论拓展至</p>
-<div class="note info"><p><strong>定理.</strong> 对于任意的信源 $X$，定义 $B$ 为 $X$ 的字符集上所有可唯一解读编码的集合，则</p>
-<p>$$<br>H(X) \leq \min_{C\in B}\mathscr{L}(C) H(X + 1)<br>$$</p>
+<h1><span id="hybrid-method">Hybrid Method</span></h1><p>本节主要参考 arXiv:1711.00465v3。</p>
+<div class="note info"><p><strong>定理 1 (Hybrid method for arbitrary phase oracles).</strong> 令 $G$ 是一个有限大小的标号的集合，$\mathcal{H} :&#x3D; \mathrm{Span}(|x\rangle : x\in G)$ 是一个希尔伯特空间。对于函数 $\tilde{f} : G\rightarrow \mathbb{R}$，令 $O_{\tilde{f}}$ 是查询 $\tilde{f}$ 的 phase oracle：</p>
+<p>$$<br>O_{\tilde{f}}|x\rangle &#x3D; \mathrm{e}^{\mathrm{i}\tilde{f}(x)}|x\rangle<br>$$</p>
+<p>假设 $\mathcal{F}$ 是一族 $G\rightarrow \mathbb{R}$ 的函数，另有一个 $f_*: G \rightarrow \mathbb{R}$ 的函数，$f_*\notin \mathcal{F}$。如果一个量子算法能够调用 $O_{\tilde{f}}$ 或者 $O_{\tilde{f}}^\dagger$ 总计 $T$ 次以后，对于任意的 $f\in \mathcal{F}$ 都能以至少 $2&#x2F;3$ 的概率判断 $\tilde{f} &#x3D; f$ 还是 $\tilde{f} &#x3D; f_*$，则 </p>
+<p>$$<br>T\geq \frac{\sqrt{|\mathcal{F}|}}{3} \bigg &#x2F; \sqrt{\max_{x\in G}\sum_{f\in \mathcal{F}}\min(|f(x) - f_*(x)|^2, 4)}<br>$$</p>
 </div>
 
-<h1><span id="证明过程">证明过程</span></h1><p>首先来推导编码可唯一解读的一个必要条件。</p>
-<p>设 $\mathscr{S}(L)$ 是编码长度为 $L$ 的字符串总数，即</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \mathrm{card}\{s\in \Sigma^* : |C(s)| &#x3D; L\}<br>$$</p>
-<p>如果存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$，那么根据鸽巢原理，必然发生冲突。因此编码可唯一解读的一个必要条件是 $\mathscr{S}(L)\leq 2^L$。现在我们来估计 $\mathscr{S}(L)$。显然它满足如下递推式：</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \sum_{c\in \Sigma}\mathscr{S}(L - \ell(c))<br>$$</p>
-<p>其特征方程为 </p>
-<p>$$<br>1 &#x3D; \sum_{c\in \Sigma}x^{-\ell(c)} \label{chareq}<br>$$</p>
-<p>那么 $\mathscr{S}(L)$ 可以用如下式子来估计：</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \Omega(\lambda_*^L)<br>$$</p>
-<p>其中 $\lambda_*$ 是该特征方程最大的实根。如果 $\lambda_* &gt; 2$，那么 $\mathscr{S}(L)$ 增长快于 $2^L$，一定存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$。因此编码可唯一解读的必要条件是 </p>
-<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1 \label{kraft}<br>$$</p>
-<p>否则因为 $\ref{chareq}$ 的右边单调递减趋于 $0$，结合零点存在性，必然有一个大于 $2$ 的零点。</p>
-<p><strong>$\ref{kraft}$ 正是 Kraft 不等式。</strong></p>
-<h1><span id="结论">结论</span></h1><p>现在我们知道，不但前缀无关码满足 Kraft 不等式，任意可唯一解读的编码也必须满足 Kraft 不等式。从而，任意可唯一解读的编码可以被 rearrange 成一个前缀无关码，保证每个字符的编码长度不变，这蕴含</p>
-<p>$$<br>\min_{C\in B} \mathscr{L}(C) &#x3D; \min_{C\in A}\mathscr{L}(C)<br>$$</p>
-<p>重复前缀无关码的相关论证得到</p>
-<p>$$<br>H(X) \leq \min_{C\in B}\mathscr{L}(C) H(X + 1)<br>$$</p>
+<blockquote>
+<p><strong>Remark.</strong> 这个定理大概是启发自无结构搜索问题。该问题本质上是在区分 $n$ 个函数（仅在一点上为 $1$）和全部输出 $0$ 的函数，用这个方法可以得到 $\Omega(\sqrt n)$ 的界，证明也和无结构搜索问题的复杂度证明如出一辙。</p>
+</blockquote>
+<p><strong>证明.</strong> 在这里，一个使用函数 $f$ 的 phase oracle $O_f$ 的量子算法可以被刻画成</p>
+<p>$$<br>\mathcal{A}_f &#x3D; U_T O_f’ U_{T - 1}\cdots O_f’ U_1 O_f’ U_0<br>$$</p>
+<p>其中 $O_f’ :&#x3D; O_f \otimes I_{\mathcal{W}}$。这里 $\mathcal{W}$ 是辅助比特所在的希尔伯特空间。</p>
+<p>假设 $\mathcal{F}$ 中有 $d$ 个函数，依次是 $f_1, …, f_d$，另外记 $f_0 &#x3D; f_*$。记 $\mathcal{A}_j$ 表示调用 $f_j$ 的 phase oracle 的量子算法，$|\psi_j\rangle &#x3D; \mathcal{A}_j |0\rangle$。</p>
+<p>为了区分 $f_*$ 和 $f_1$，我们至少需要能够区分 $|\psi_0\rangle$ 和 $|\psi_1\rangle$。这要求 $\lVert|\psi_0\rangle - |\psi_1\rangle\rVert \geq 1&#x2F;3$。定义</p>
+<p>$$<br>|\psi_j^{(t)}\rangle :&#x3D; \left(\prod_{i&#x3D;1}^t U_i O’_{f_j}\right) U_0 |0\rangle<br>$$</p>
+<p>我们本质上是要求对于任意的 $j &#x3D; 1, 2, …, d$ 都有 $\lVert |\psi_j^{(T)}\rangle - |\psi_0^{(T)}\rangle\rVert \geq 1&#x2F;3$（$\star$）。这里，我们递归地估计一下 $\lVert |\psi_j^{(T)}\rangle - |\psi_0^{(T)}\rangle\rVert$ 的上界：</p>
+<p>$$<br>\begin{aligned}<br>\lVert |\psi_j^{(t)}\rangle - |\psi_0^{(t)}\rangle\rVert &amp;&#x3D; \lVert U_tO_{f_j}’|\psi_j^{(t - 1)}\rangle - U_tO_{f_0}’|\psi_0^{(t - 1)}\rangle\rVert \\<br>&amp;&#x3D; \lVert O_{f_j}’|\psi_j^{(t - 1)}\rangle - O_{f_0}’|\psi_0^{(t - 1)}\rangle\rVert \\<br>&amp;\leq \lVert O_{f_j}’|\psi_j^{(t - 1)}\rangle - O_{f_j}’|\psi_0^{(t - 1)}\rangle\rVert + \lVert O_{f_j}’|\psi_0^{(t - 1)}\rangle - O_{f_0}’|\psi_0^{(t - 1)}\rangle\rVert \\<br>&amp;\leq  \sum_{i&#x3D;1}^{t - 1} \lVert (O_{f_j}’ - O_{f_0}’) |\psi_0^{i}\rangle\rVert<br>\end{aligned}<br>$$</p>
+<p>根据柯西不等式</p>
+<p>$$<br>\begin{aligned}<br>\lVert |\psi_j^{(T)}\rangle - |\psi_0^{(T)}\rangle\rVert^2 &amp;\leq  T\sum_{i&#x3D;1}^{T - 1} \lVert (O_{f_j}’ - O_{f_0}’) |\psi_0^{i}\rangle\rVert^2<br>\end{aligned}<br>$$</p>
+<p>现在将这个式子对于所有的 $d &#x3D; 1, 2, …, d$ 加起来，为了满足条件（$\star$），我们至少需要 </p>
+<p>$$<br>\frac d9 \leq T\sum_{j &#x3D; 1}^d\sum_{i&#x3D;1}^{T - 1} \lVert (O_{f_j}’ - O_{f_0}’) |\psi_0^{i}\rangle\rVert^2 \leq T^2 \max_i\left(\sum_{j &#x3D; 1}^d \lVert (O_{f_j}’ - O_{f_0}’) |\psi_0^{i}\rangle\rVert^2\right)<br>$$</p>
+<p>而 $O_{f_j}’ - O_{f_0}’$ 的特征向量为所有的 $|x\rangle : x\in G$，对应特征值为 $\mathrm{e}^{\mathrm{i} f_j(x)} - \mathrm{e}^{\mathrm{i} f_0(x)}$，我们在 $|x\rangle : x\in G$ 下将 $\psi$ 傅里叶展开可以知道</p>
+<p>$$<br>\begin{align}<br>    \sum_{j &#x3D; 1}^d \lVert (O_{f_j}’ - O_{f_0}’) |\psi\rangle\rVert^2 &amp;&#x3D; \sum_{x\in G} \langle x|\psi\rangle^2\sum_{j &#x3D; 1}^d |\mathrm{e}^{\mathrm{i} f_j(x)} - \mathrm{e}^{\mathrm{i} f_0(x)}|^2 \\<br>    &amp;\leq \max_{x\in G}\left(\sum_{j &#x3D; 1}^d |\mathrm{e}^{\mathrm{i} f_j(x)} - \mathrm{e}^{\mathrm{i} f_0(x)}|^2\right) \\<br>    &amp;\leq \max_{x\in G}\left(\sum_{j &#x3D; 1}^d \min(|f_j(x) - f_0(x)|^2, 4)\right)<br>\end{align}<br>$$</p>
+<p>整理一下上面的所有结果</p>
+<p>$$<br>\frac d9 \leq T^2 \max_{x\in G}\left(\sum_{j &#x3D; 1}^d \min(|f_j(x) - f_0(x)|^2, 4)\right) \quad \Rightarrow \quad {\color{blue} T\geq \frac{\sqrt{|\mathcal{F}|}}{3} \bigg &#x2F; \sqrt{\max_{x\in G}\sum_{f\in \mathcal{F}}\min(|f(x) - f_*(x)|^2, 4)}}<br>$$</p>
 
     </div>
 
@@ -320,13 +286,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/02/08/CS285DRL5/" rel="prev" title="CS285 Part 3 - 策略梯度方法">
-                  <i class="fa fa-angle-left"></i> CS285 Part 3 - 策略梯度方法
+                <a href="/2025/03/18/JordanGradientEstimation/" rel="prev" title="Stephen P. Jordan, <i>Fast Quantum Algorithm for Numerical Gradient Estimation</i> (2005)">
+                  <i class="fa fa-angle-left"></i> Stephen P. Jordan, <i>Fast Quantum Algorithm for Numerical Gradient Estimation</i> (2005)
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/03/05/AIPaperReading/" rel="next" title="泛 AI 论文选读">
-                  泛 AI 论文选读 <i class="fa fa-angle-right"></i>
+                <a href="/2025/04/17/ProbabilityTheoryRevision1/" rel="next" title="Revision | 信息科学中的概率统计（上）">
+                  Revision | 信息科学中的概率统计（上） <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

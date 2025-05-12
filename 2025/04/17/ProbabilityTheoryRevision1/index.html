@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基本概念 随机变量 离散随机变量 连续随机变量">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 信息科学中的概率统计（上）">
+<meta property="og:url" content="http://example.com/2025/04/17/ProbabilityTheoryRevision1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="基本概念 随机变量 离散随机变量 连续随机变量">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-04-17T05:55:18.000Z">
+<meta property="article:modified_time" content="2025-05-12T03:25:43.190Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Probability Theory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/04/17/ProbabilityTheoryRevision1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/04/17/ProbabilityTheoryRevision1/","path":"2025/04/17/ProbabilityTheoryRevision1/","title":"Revision | 信息科学中的概率统计（上）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 信息科学中的概率统计（上） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">随机变量</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">离散随机变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">连续随机变量</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/17/ProbabilityTheoryRevision1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 信息科学中的概率统计（上） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 信息科学中的概率统计（上）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-04-17 13:55:18" itemprop="dateCreated datePublished" datetime="2025-04-17T13:55:18+08:00">2025-04-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-12 11:25:43" itemprop="dateModified" datetime="2025-05-12T11:25:43+08:00">2025-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F">随机变量</a><ul>
+<li><a href="#%E7%A6%BB%E6%95%A3%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F">离散随机变量</a></li>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F">连续随机变量</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="基本概念">基本概念</span></h1><p>本节列举一些半吊子的公理化概率论内容。</p>
+<div class="note success"><p><strong>定义 1（$\sigma$-代数）.</strong> 一个 $S$ 上的集合系 $\mathcal{F}\subset 2^S$ 若满足</p>
+<ol>
+<li>$S\in \mathcal{F}$；</li>
+<li>$A\in \mathcal{F} \Rightarrow \bar{A}\in \mathcal{F}$；</li>
+<li>$A_i\in \mathcal{F} \Rightarrow \cup_{i&#x3D;1}^\infty A_i\in \mathcal{F}$。</li>
+</ol>
+<p>则 $\mathcal{F}$ 称为一个 $\sigma$-代数。</p>
+</div>
+
+<p>直觉上，$S$ 可以用于刻画某一实验的全部可能结果（样本空间），而 $\mathcal{F}$ 刻画了全体可以被赋予概率的样本空间的子集（事件）。</p>
+<div class="note success"><p><strong>定义 2（测度、概率）.</strong> 对于一个 $\mathcal{F}\rightarrow \mathbb{R}$ 的函数 $\mu$，若 $\mu$ 满足</p>
+<ol>
+<li>（非负性）$\forall A\in \mathcal{F}, \mu(A) \geq 0$；</li>
+<li>（可列可加性）对于任意一列两两不相交的 $A_i\in\mathcal{F}$，有 $\mu(\sqcup_{i&#x3D;1}^\infty) &#x3D; \sum_{i&#x3D;1}^\infty \mu(A_i)$。</li>
+</ol>
+<p>则 $\mu$ 称为 $\mathcal{F}$ 上的测度。</p>
+<p>若 $\mu$ 额外满足 $\mu(S) &#x3D; 1$（规范性），则 $\mu$ 称为 $\mathcal{F}$ 上的概率。</p>
+</div>
+
+<p>定义了以上资料之后，我们便可以用 $(S, \mathcal{F}, P)$ 来描述一个概率空间。</p>
+<p>需要注意的是，有限可加性不能推出可列可加性。课件上和 <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Sigma-additive_set_function#An_additive_function_which_is_not_%CF%83-additive">wiki</a> 上如下反例：令 $S &#x3D; \mathbb{R}_{\geq 0}, P(A) &#x3D; \lim\limits_{k\rightarrow \infty} \frac 1k \lambda(A \cap (0, k)), A_i &#x3D; [i - 1, i)$，这里 $\lambda$ 应该是集合的勒贝格测度。显然有限可加性是成立的，但是 $0 &#x3D; \sum_i P(A_i) \ne P(\sqcup_{i&#x3D;1}^\infty A_i) &#x3D; 1$。</p>
+<blockquote>
+<p>我其实不是很懂这个反例是怎么 work 的。因为你这里实际上是想要证明一个 $\sigma$-代数上的非负集函数是有限可加的不一定是可列可加的，但是显然这里的 $P$ 甚至不是一个定义在 ${A_i}$ 生成的 $\sigma$-代数上的非负集函数。因为取 $A &#x3D; \cup_{i&#x3D;1}^\infty [2^{2i} - 2^{2i - 1} + 1, 2^{2i})$，这是一个 Borel 集，但在这个集合上面原来的极限不收敛。可能至少还需要证明这个极限收敛的范围是一个 $\pi$ 系。</p>
+</blockquote>
+<p>如果想要从有限可加性推出可列可加性，可以进一步补充连续性。</p>
+<div class="note info"><p><strong>命题 1.</strong> 设 $\mu$ 是 $\sigma$-代数 $\mathcal{F}$ 上的非负集函数，满足</p>
+<ol>
+<li>（有限可加性）对于任意互相不交的 $A_1, …, A_n\in \mathcal{F}$，都有 $\mu(\sqcup_{i&#x3D;1}^n A_i) &#x3D; \sum_{i&#x3D;1}^n \mu(A_i)$；</li>
+<li>（连续性）对于任意一列单调的集合 $A_1, A_2, …$ 都有 $\mu(\lim_{i\rightarrow \infty} A_i) &#x3D; \lim_{i\rightarrow \infty} \mu(A_i)$。</li>
+</ol>
+<p><strong>证明.</strong> 对于任意一列互相不交的 $A_1, A_2, …$，定义 $B_n &#x3D; \cup_{i&#x3D;1}^n B_i$。则有 $\mu(B_n) &#x3D; \sum_{i&#x3D;1}^n \mu(A_i)$ 成立。显然 $B_n$ 是一列单调的集合，有 </p>
+<p>$$<br>\sum_{i&#x3D;1}^\infty \mu(A_i) &#x3D; \lim_{n\rightarrow \infty} \mu(B_n) &#x3D; \mu\left(\lim_{n\rightarrow \infty} B_n\right) &#x3D; \mu\left(\bigsqcup_{i&#x3D;1}^\infty A_i\right)<br>$$</p>
+</div>
+
+<hr>
+<div class="note success"><p><strong>定义 3（独立性）.</strong> 假设 $A_1, …, A_n \in \mathcal{F}$ 是一族事件，若对于任意 ${1, …, n}$ 的大小为 $d$ 的子集 $\mathcal{I}$ 都有 $P(\cap_{i\in \mathcal{I}} A_i) &#x3D; \prod_{i\in \mathcal{I}} P(A_i)$，则称 $A_1, …, A_n$ 是 $d$-wise 独立的。</p>
+<p>若对于任意 ${1, …, n}$ 的子集 $\mathcal{I}$ 都有 $P(\cap_{i\in \mathcal{I}} A_i) &#x3D; \prod_{i\in \mathcal{I}} P(A_i)$，则称 $A_1, …, A_n$ 是相互独立的。</p>
+</div>
+
+<p>这里特地分开定义了两类独立性，是因为我们想要强调相互独立和 $d$-wise 独立是不等价的。考虑如下反例：$S &#x3D; {1, 2, 3, 4}, \mu(A) &#x3D; |A| &#x2F; 4$，则下面三个事件：$A &#x3D; {1, 2}, B &#x3D; {1, 3}, C &#x3D; {1, 4}$ 两两独立，但不相互独立。</p>
+<div class="note info"><p><strong>命题 2.</strong> $A_1, …, A_n$ 相互独立，则 $A_1, …, A_{n - 1}, \overline{A_n}$ 相互独立。</p>
+<p><strong>证明.</strong> 显然。</p>
+</div>
+
+<h1><span id="随机变量">随机变量</span></h1><p>一个集合 $S$ 上的随机变量可以被形式化为 $T\rightarrow S$ 的可测函数，其中 $T$ 是另一个样本空间，$S, T$ 分别配上 $\sigma$-代数 $\mathcal{F}, \mathcal{G}$，$(T, \mathcal{G}, P)$ 构成一个概率空间。可测函数意味着对于任意的 $A\in \mathcal{F}$ 都有 $f^{-1}(A)\in\mathcal{G}$，$\mathrm{Pr}[X\in A] &#x3D; P(f^{-1}(A))$。</p>
+<p>对于广义实数集 $\mathbb{R}\cup \{\infty, -\infty\}$ 上的随机变量 $X$，定义其<strong>分布函数</strong>为</p>
+<p>$$<br>F(x) &#x3D; \mathrm{Pr}[X \leq x]<br>$$</p>
+<p>这对于一切 $\mathbb{R}$ 上的随机变量，无论其连续与否，都是良定义的，因为 $(-\infty, x]$ 是 Borel 集。</p>
+<div class="note info"><p><strong>定理 2.1.</strong> $X$ 的分布函数 $F(x)$ 满足</p>
+<ol>
+<li>$F(-\infty) &#x3D; 0, F(\infty) &#x3D; 1$；</li>
+<li>$F(x)$ 单调不降；</li>
+<li>$F(x)$ 右连续。</li>
+</ol>
+<p><strong>证明.</strong> 着重证明 $F(x)$ 右连续。这等价于取一列单调收敛于零的正数列 $x_1 &gt; x_2 &gt; \cdots &gt; x_n &gt; \cdots$，$\lim_{n\rightarrow 0} x_n &#x3D; 0$，然后证明</p>
+<p>$$<br>F(x) &#x3D; \lim_{n\rightarrow \infty} F(x + x_n)<br>$$</p>
+<p>对于任意的 $n \in \mathbb{N}$，都有</p>
+<p>$$<br>\begin{aligned}<br>F(x + x_n) &amp;&#x3D; F(x) + \mathrm{Pr}[X\in (x, x + x_n]] \\<br>           &amp;&#x3D; F(x) + \sum_{i&#x3D;n}^\infty [X\in (x + x_{i - 1}, x + x_i]] \\<br>           &amp;&#x3D; F(x) + F(x + x_n) - \lim_{i\rightarrow \infty} F(x + x_i)<br>\end{aligned}<br>$$</p>
+<p>整理后立即得到欲证明的等式。</p>
+</div>
+
+<h2><span id="离散随机变量">离散随机变量</span></h2><p>可数集上的随机变量称为离散随机变量。</p>
+<p><strong>伯努利分布.</strong> $\{0, 1\}$ 上的随机变量 $X$，满足 $\mathrm{Pr}[X &#x3D; 1] &#x3D; p$，则称 $X\sim \mathrm{Bern}(p)$。</p>
+<hr>
+<p><strong>二项分布.</strong> 设 $X_1, …, X_n$ 是独立同分布的随机变量，$X_i\sim \mathrm{Bern}(p)$，则 $X &#x3D; \sum_{i&#x3D;1}^N X_i$ 服从二项分布 $B(n, p)$。有 </p>
+<p>$$<br>\mathrm{Pr}[X &#x3D; k] &#x3D; \binom nk p^k(1-p)^{n - k}<br>$$</p>
+<p>通过差分可以算出最概然的取值是 $[(n + 1)p]$。</p>
+<hr>
+<p><strong>泊松分布.</strong> $X$ 是 $n$ 上的随机变量，满足 $\mathrm{Pr}[X &#x3D; k] &#x3D; \mathrm{e}^{-\lambda}\dfrac{\lambda^k}{k!}$，则称 $X\sim \pi(\lambda)$。</p>
+<p>直觉上，泊松分布刻画了一段连续的时间 &#x2F; 空间上，某事件在每个时刻 &#x2F; 点发生的可能性都是均匀的，且期望共发生 $\lambda$ 次，最后实际发生次数的期望：</p>
+<ul>
+<li>一个诊所平均每小时接待 $\lambda$ 个病人，每个病人在每个时刻到达的概率均等。则每小时接待的病人总数服从 $\pi(\lambda)$；</li>
+<li>一个种群种某疾病发病率为 $\lambda$，在种群数量充分大时，患病个体数量差不多是 $\pi(\lambda)$。</li>
+</ul>
+<p>可以形式化地说：泊松分布是二项分布的极限：</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \binom{n}{k} (\lambda &#x2F; n)^k (1 - \lambda &#x2F; n)^{n - k} &#x3D; \mathrm{e}^{-\lambda}\frac{\lambda^k}{k!}<br>$$</p>
+<p>同样用差分法可以证明最概然的取值是 $[\lambda]$。</p>
+<hr>
+<p><strong>负二项分布.</strong> $X_1, X_2, …$ 是一列独立同分布的随机变量，$X_i \sim \mathrm{Bern}(p)$，则 $X :&#x3D; \min\{k : \sum_{i&#x3D;1}^k X_i &#x3D; r\}$（一直做伯努利试验，直到成功 $r$ 次）服从负二项分布 $\mathrm{NB}(r, p)$。注意<br>$$<br>\mathrm{Pr}[X &#x3D; k] &#x3D; \binom{k - 1}{r - 1}p^{r}(1-p)^{k - r}<br>$$</p>
+<p><strong>几何分布.</strong> 是负二项分布在 $r &#x3D; 1$ 时的特例，$\mathrm{G}(p) &#x3D; \mathrm{NB}(1, p)$</p>
+<div class="note info"><p><strong>命题 2.2.</strong> 几何分布无记忆性，i.e. $X\sim\mathrm{G}(p)$ 则 </p>
+<p>$$<br>\mathrm{Pr}[X &#x3D; n + m | X &gt; n] &#x3D; \mathrm{Pr}[X &#x3D; m]<br>$$</p>
+<p><strong>证明.</strong> 验证即可。</p>
+</div>
+
+<h2><span id="连续随机变量">连续随机变量</span></h2><p>如果某 $\mathbb{R}$ 上随机变量的分布函数处处可导，则称其为连续型随机变量，并定义 $f(x) &#x3D; F’(x)$，因此有</p>
+<p>$$<br>F(x) &#x3D; \int_{-\infty}^x f(t)\mathrm{d}t<br>$$</p>
+<p>我们首先列出一些抽象的基本结论，再举一些分布的具体例子。</p>
+<div class="note info"><p><strong>定理 2.3.</strong> 设 $X$ 是 $\mathbb{R}^n$ 上的连续随机向量。函数 $ g : \mathbb{R}^n \rightarrow \mathbb{R}^n$ 有唯一的反函数 $h$，则 $Y :&#x3D; h(X)$ 也是 $\mathbb{R}^n$ 上的随机变量，且 </p>
+<p>$$<br>f_Y(\boldsymbol{y}) &#x3D; f_X(h(\boldsymbol{y})) \frac{1}{\mathbf{J}(h(\boldsymbol{y}))}<br>$$</p>
+<p>其中 $\mathbf{J}$ 是 $g$ 的 Jacobian，即 </p>
+<p>$$<br>\mathbf{J} &#x3D; \begin{pmatrix}<br>\frac{\partial g}{\partial x_1} &amp; \cdots &amp; \frac{\partial g}{\partial x_n}<br>\end{pmatrix}<br>$$</p>
+</div>
+
+<p><strong>均匀分布.</strong> $X$ 是 $(a, b)$ 上的随机变量，满足 $f(x) &#x3D; 1 &#x2F; (b - a)$，则称 $X\sim \mathrm{U}(a, b)$。</p>
+<hr>
+<p><strong>指数分布.</strong> $X$ 是 $(0, \infty)$ 上的随机变量，满足 $f(x) &#x3D; \lambda \mathrm{e}^{-\lambda x}$，则称 $X\sim \mathrm{Exp}(\lambda)$。</p>
+<p>指数分布同样是无记忆性的。</p>
+<p><strong>$\Gamma$ 分布.</strong> $X$ 是 $(0, \infty)$ 上的随机变量，满足</p>
+<p>$$<br>f(x) &#x3D; \frac{x^{\alpha - 1}\lambda^{\alpha}\mathrm{e}^{-\lambda x}}{\Gamma(\alpha)}<br>$$</p>
+<p>则称 $X\sim \Gamma(\alpha, \lambda)$。</p>
+<p>需要注意到的是，$\Gamma$ 分布是负二项分布的连续版本。形式化地，有：设 $X_n$ 服从负二项分布 $\mathrm{NB}(r, \lambda &#x2F; n)$，则</p>
+<p>$$<br>\begin{aligned}<br>        \lim_{n\rightarrow \infty}\mathrm{Pr}[X &#x3D; nx] &#x2F; (1 &#x2F; n) &amp;&#x3D; \lim_{n\rightarrow \infty}n\binom{nx - 1}{r - 1} (\lambda &#x2F; n)^r(1 - \lambda &#x2F; n)^{nx - r} \\<br>        &amp;&#x3D; \lim_{n\rightarrow \infty}\frac{1}{r!x}\times \left(\frac{\lambda &#x2F; n \cdot nx}{1 - \lambda &#x2F; n}\right)^r\times (1 - \lambda&#x2F;n)^{nx} \\<br>        &amp;&#x3D; \frac{x^{r - 1}\lambda^r \mathrm{e^{-\lambda x}}}{(r - 1)!}<br>\end{aligned}<br>$$</p>
+<p>等式左侧可以理解为每 $1 &#x2F; n$ 秒做一次实验，平均一秒能成功 $\lambda$ 次，在第 $x$ 秒附近恰好是第 $r$ 次成功的概率密度。右侧恰好是 $\Gamma(r, \lambda)$ 的概率密度。</p>
+<hr>
+<p><strong>正态分布.</strong> 对于 $\mu$ 和 $\sigma &gt; 0$，若 $\mathbb{R}$ 上的随机变量 $X$ 的概率密度为 </p>
+<p>$$<br>f(x) &#x3D; \frac{1}{\sqrt{2\pi}\sigma}\mathrm{e}^{-\frac{(x - \mu)^2}{2\sigma^2}}<br>$$</p>
+<p>则称 $X$ 服从均值为 $\mu$，标准差为 $\sigma$ 的正态分布 $\mathcal{N}(\mu, \sigma)$。</p>
+<hr>
+<p><strong>多元正态分布.</strong> 给定向量 $\boldsymbol{\mu}$ 和正定矩阵 $\Sigma$，若 $\mathbb{R}^n$ 上的随机向量 $X$ 的概率密度为 </p>
+<p>$$<br>f(\boldsymbol{x}) &#x3D; \frac{1}{(2\pi)^{\frac{n}{2}}|\Sigma|^{\frac 12}}\mathrm{e}^{-(\boldsymbol{x} - \boldsymbol{\mu})^\top\Sigma^{-1}(\boldsymbol{x} - \boldsymbol{\mu})}<br>$$</p>
+<p>则称 $X$ 服从期望为 $\boldsymbol{\mu}$，协方差为 $\Sigma$ 的正态分布。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Probability-Theory/" rel="tag"># Probability Theory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/14/QuantumLowerbounds/" rel="prev" title="一些证明量子复杂度下界的办法">
+                  <i class="fa fa-angle-left"></i> 一些证明量子复杂度下界的办法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/05/02/RevisionRA/" rel="next" title="Revision | 随机算法">
+                  Revision | 随机算法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
