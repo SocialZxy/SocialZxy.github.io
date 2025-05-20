@@ -30,7 +30,7 @@
 <meta property="og:image" content="http://example.com/picture/FLUTE-compaction.png">
 <meta property="og:image" content="http://example.com/picture/FLUTE-connect-adj.png">
 <meta property="article:published_time" content="2025-05-11T07:02:21.000Z">
-<meta property="article:modified_time" content="2025-05-12T02:28:27.203Z">
+<meta property="article:modified_time" content="2025-05-20T08:22:23.492Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/picture/RSMT-Example.png">
@@ -132,7 +132,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -235,7 +235,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-12 10:28:27" itemprop="dateModified" datetime="2025-05-12T10:28:27+08:00">2025-05-12</time>
+      <time title="Modified: 2025-05-20 16:22:23" itemprop="dateModified" datetime="2025-05-20T16:22:23+08:00">2025-05-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -284,7 +284,17 @@
 <li>需要考虑如何充分利用算力（e.g. 卡常，GPU 加速）；</li>
 <li>可能需要设计不那么有道理的启发式算法，挖一些因子。</li>
 </ol>
-<h1><span id="基本直觉">基本直觉</span></h1><p>在 <a href="../EDAPaper/">索引页面</a> 中介绍 RSMT 问题时，我们已经提到了 RSMT 问题存在 Hannan Grid 上的解。不妨设 $x_1 \leq x_2 \leq \cdots \leq x_n$ 是所有横坐标排序之后的结果，$y_1 \leq y_2 \leq \cdots \leq y_n$ 类似。那么，任意一个 RSMT 问题的实例可以用一个长度为 $n$ 的 position sequence $s_i$ 和两个长度为 $n - 1$ 的数组 $h_i$ 和 $v_i$ 刻画：其中，$s_i$ 表示 $x_i$ 对应的 $y_i$ 是第几大的；$h_i$ 和 $v_i$ 分别表示网格第 $i$ 列的宽和第 $i$ 行的高。</p>
+<h1><span id="基本直觉">基本直觉</span></h1><p>RSMT 问题是 EDA 领域的经典问题，用于在 routing 阶段为每个 net 生成通路。其定义如下：</p>
+<div class="note success"><p><strong>定义 1 (Rectilinear Steiner Minimal Tree).</strong> 给定 $n$ 个 $\mathbb{R}^2$ 上的点 $\{(x_i, y_i)\}_{i&#x3D;1}^n$，用水平或垂直的线段将所有点连通，最小化线段总长度。</p>
+</div>
+
+<p>当然，在现实中我们可能通常需要多次查询（量级在 $10^{5}\sim 10^6$）小规模问题（$n$ 平均为 $4$ 左右，最大为 $100+$）的答案。上面的参考数据来自 ISPD98 benchmark。因此我们可能不希望使用那个众所周知的状压 DP 或者模拟退火之类单次非常慢的算法。</p>
+<p>关于这个问题，有以下直觉，这里略去证明，如感兴趣可以自行参考相关文献：</p>
+<ol>
+<li>$\mathrm{RSMT}\in \mathbf{NP}\text{-complete}$；</li>
+<li>对于一个 RSMT 问题的实例，存在一个最优的 Steiner Tree，满足每一条边都在 Hannan Grid 上（<strong>Hannan Grid</strong> 是由 $x &#x3D; x_i$ 和 $y &#x3D; y_i$ 织成的网格）。</li>
+</ol>
+<p>我们已经提到了 RSMT 问题存在 Hannan Grid 上的解。不妨设 $x_1 \leq x_2 \leq \cdots \leq x_n$ 是所有横坐标排序之后的结果，$y_1 \leq y_2 \leq \cdots \leq y_n$ 类似。那么，任意一个 RSMT 问题的实例可以用一个长度为 $n$ 的 position sequence $s_i$ 和两个长度为 $n - 1$ 的数组 $h_i$ 和 $v_i$ 刻画：其中，$s_i$ 表示 $x_i$ 对应的 $y_i$ 是第几大的；$h_i$ 和 $v_i$ 分别表示网格第 $i$ 列的宽和第 $i$ 行的高。</p>
 <p>如此一来，为了计算任意一个 Hannan Grid 上的 Steiner tree 的总边长，我们惟需考察有多少边水平穿过了第 $i$ 列（记作 $\alpha_i$）以及有多少边竖直穿过了第 $i$ 行（记作 $\beta_i$），然后便有 </p>
 <p>$$<br>L &#x3D; (\boldsymbol{h}, \boldsymbol{v})^\top (\alpha, \beta)<br>$$</p>
 <p>这样的 $(\alpha, \beta)$ 称作 wirelength vector。如下图所示，下面的三个 Steiner tree 的 wirelength vector 分别是 $(1, 2, 1, 1, 1, 2), (1, 1, 1, 1, 2, 3)$ 和 $(1, 2, 1, 1, 1, 1)$。</p>
@@ -373,6 +383,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/05/12/SALT-Algorithm/" rel="next" title="SALT Algorithm">
+                  SALT Algorithm <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

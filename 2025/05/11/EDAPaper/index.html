@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：  Rectilinear Steiner Minimal Tree">
+    <meta name="description" content="Abstract. 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：  Trees in Routing">
 <meta property="og:type" content="article">
 <meta property="og:title" content="EDA 论文选读">
 <meta property="og:url" content="http://example.com/2025/05/11/EDAPaper/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：  Rectilinear Steiner Minimal Tree">
+<meta property="og:description" content="Abstract. 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：  Trees in Routing">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-11T06:52:28.000Z">
-<meta property="article:modified_time" content="2025-05-11T15:27:00.934Z">
+<meta property="article:modified_time" content="2025-05-20T08:27:00.449Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Rectilinear Steiner Minimal Tree</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Trees in Routing</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">57</span>
+          <span class="site-state-item-count">58</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -223,9 +223,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-05-11 14:52:28 / Modified: 23:27:00" itemprop="dateCreated datePublished" datetime="2025-05-11T14:52:28+08:00">2025-05-11</time>
+      <time title="Created: 2025-05-11 14:52:28" itemprop="dateCreated datePublished" datetime="2025-05-11T14:52:28+08:00">2025-05-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-20 16:27:00" itemprop="dateModified" datetime="2025-05-20T16:27:00+08:00">2025-05-20</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -248,20 +254,17 @@
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：</p>
 <ul>
-<li>Rectilinear Steiner Minimal Tree</li>
+<li>Trees in Routing</li>
 </ul>
 <span id="more"></span>
 
-<h1><span id="rectilinear-steiner-minimal-tree">Rectilinear Steiner Minimal Tree</span></h1><p>RSMT 问题是 EDA 领域的经典问题，用于在 routing 阶段为每个 net 生成通路。其定义如下：</p>
-<div class="note success"><p><strong>定义 1 (Rectilinear Steiner Minimal Tree).</strong> 给定 $n$ 个 $\mathbb{R}^2$ 上的点 $\{(x_i, y_i)\}_{i&#x3D;1}^n$，用水平或垂直的线段将所有点连通，最小化线段总长度。</p>
-</div>
-
-<p>当然，在现实中我们可能通常需要多次查询（量级在 $10^{5}\sim 10^6$）小规模问题（$n$ 平均为 $4$ 左右，最大为 $100+$）的答案。上面的参考数据来自 ISPD98 benchmark。因此我们可能不希望使用那个众所周知的状压 DP 或者模拟退火之类单次非常慢的算法。</p>
-<p>关于这个问题，有以下直觉，这里略去证明，如感兴趣可以自行参考相关文献：</p>
+<h1><span id="trees-in-routing">Trees in Routing</span></h1><p>在 Routing 时，我们需要找一种方法来连通所有的引脚。为了方便芯片的加工，通常要求一切连边都是水平 &#x2F; 垂直方向的。在连接时，应当优化如下两个目标：</p>
 <ol>
-<li>$\mathrm{RSMT}\in \mathbf{NP}\text{-complete}$；</li>
-<li>对于一个 RSMT 问题的实例，存在一个最优的 Steiner Tree，满足每一条边都在 Hannan Grid 上（<strong>Hannan Grid</strong> 是由 $x &#x3D; x_i$ 和 $y &#x3D; y_i$ 织成的网格）。</li>
+<li><strong>线路延迟.</strong> 对应路径长度。</li>
+<li><strong>资源消耗.</strong> 对应线缆总长度。</li>
 </ol>
+<p>前者对应曼哈顿距离度量下的最短路树问题，可以用 Dijkstra 等经典算法在 $O((n + m)\log n)$ 时间内完美解决；而单独考虑资源消耗的问题就已经非常困难，因为它对应经典的 steiner tree 问题，这个问题是 $\mathbf{NP}\text{-complete}$ 的。</p>
+<p>因此常常需要考虑两个问题：最小 steiner tree 问题（SMT），和最短路 steiner tree 问题（SPT），或者将其合起来然后探究一些 trade-off（对应所谓的 shallow light tree（SLT）问题）。</p>
 <table>
 <thead>
 <tr>
@@ -271,7 +274,15 @@
 </thead>
 <tbody><tr>
 <td align="center"><a href="../FLUTE-Algorithm">FLUTE Algorithm</a></td>
-<td align="center">RSMT <br> lookup table</td>
+<td align="center"><strong>RSMT</strong> <br> Lookup Table, Divide &amp; Conquer</td>
+</tr>
+<tr>
+<td align="center">GPU-Accelerated Rectilinear Steiner Tree Generation</td>
+<td align="center"><strong>RSMT</strong> <br> GPU Acceleration</td>
+</tr>
+<tr>
+<td align="center"><a href="../../../../2025/05/12/SALT-Algorithm/">SALT Algorithm</a></td>
+<td align="center"><strong>Steiner SLT</strong> <br> Spanner, Divide &amp; Conquer</td>
 </tr>
 </tbody></table>
 

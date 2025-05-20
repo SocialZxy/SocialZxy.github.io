@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文收录于 EDA 论文选读。    TL;DR 基本定义 &amp; 直觉 ES Algorithm SALT Algorithm 参考文献    TL;DR本文首先引述了参考文献 [1]，提出了一个 Steiner SLT 问题的 $(1 + 2\varepsilon, 4 + 2\lceil\log 2 &#x2F; \varepsilon\rceil)$ 的 bound。 然后在得到了这个">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SALT Algorithm">
+<meta property="og:url" content="http://example.com/2025/05/12/SALT-Algorithm/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="本文收录于 EDA 论文选读。    TL;DR 基本定义 &amp; 直觉 ES Algorithm SALT Algorithm 参考文献    TL;DR本文首先引述了参考文献 [1]，提出了一个 Steiner SLT 问题的 $(1 + 2\varepsilon, 4 + 2\lceil\log 2 &#x2F; \varepsilon\rceil)$ 的 bound。 然后在得到了这个">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-05-12T12:13:16.000Z">
+<meta property="article:modified_time" content="2025-05-20T08:24:41.493Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/05/12/SALT-Algorithm/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/12/SALT-Algorithm/","path":"2025/05/12/SALT-Algorithm/","title":"SALT Algorithm"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SALT Algorithm | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">基本定义 &amp; 直觉</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">ES Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">SALT Algorithm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/12/SALT-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="SALT Algorithm | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          SALT Algorithm
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-12 20:13:16" itemprop="dateCreated datePublished" datetime="2025-05-12T20:13:16+08:00">2025-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-05-20 16:24:41" itemprop="dateModified" datetime="2025-05-20T16:24:41+08:00">2025-05-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文收录于 <a href="../../../../2025/05/11/EDAPaper/">EDA 论文选读</a>。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#tldr">TL;DR</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89-%E7%9B%B4%E8%A7%89">基本定义 &amp; 直觉</a></li>
+<li><a href="#es-algorithm">ES Algorithm</a></li>
+<li><a href="#salt-algorithm">SALT Algorithm</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+
+<h1><span id="tldr">TL;DR</span></h1><p>本文首先引述了参考文献 [1]，提出了一个 Steiner SLT 问题的 $(1 + 2\varepsilon, 4 + 2\lceil\log 2 &#x2F; \varepsilon\rceil)$ 的 bound。</p>
+<p>然后在得到了这个 bound 的情况下，选择相信 heuristics，把 FLUTE 算法和 CT Heuristics 拼起来得到了求 Rectilinear Steiner SLT 的算法。</p>
+<h1><span id="基本定义-amp-直觉">基本定义 &amp; 直觉</span></h1><p>本文解决的核心问题是 Shallow Light Tree 问题。</p>
+<div class="note success"><p><strong>定义 1（$(\alpha, \beta)$-SLT）.</strong> 带权图 $G &#x3D; (V, E, w)$、配上根节点 $r$ 的一个 $(\alpha, \beta)$-SLT 是其一棵生成树 $T$，其中</p>
+<ol>
+<li>对于任意的点 $v$，都有 $d_T(r, v) \leq \alpha d_G(r, v)$；</li>
+<li>该树的权重 $w(T) \leq w(\mathrm{MST}(G))$。</li>
+</ol>
+<p>直观地，将 $\alpha$ 称作 shallowness，将 $\beta$ 称作 lightness。</p>
+</div>
+
+<p>对于此问题的基本直觉是，$\alpha$ 和 $\beta$ 之间存在一个 trade-off，两侧的极端情况分别由最小生成树和最短路树给出。</p>
+<p>当然在 EDA 当中，我们通常需要求 Manhattan 距离度量下的 Steiner Tree。对于一般的图 $G(V, E, w)$，其上方的最短路诱导出度量空间 $M_G$。这时，可以将图 $G$ 上的一个 Steiner Tree 定义做 $T &#x3D; (V, E’, w’)$，其中 $T$ 诱导的度量空间 $M_T$ 支配 $M_G$（i.e. $\forall u, v, d_T(u, v)\geq d_G(u, v)$）。显然，这样的定义和习见的 Steiner Tree 并不相符——未必存在 $T$ 到原来度量空间的一个嵌入。但是，可以证明在 Manhattan 距离度量下，这样的嵌入是存在的。</p>
+<blockquote>
+<p><strong>Remark.</strong> 这个定义其实更像之前程设学的 Spanner。</p>
+</blockquote>
+<p>对于 Steiner Tree 情形下的 SLT，只须将定义 1 中一切生成树修改做 Steiner Tree。</p>
+<h1><span id="es-algorithm">ES Algorithm</span></h1><p>ES 算法是用于求解生成树情形下的 SLT 的 ABP 算法在 Steiner Tree 情形下的拓展。对于任意的 $\varepsilon$，它可以给出近似比为 $(1 + 2\varepsilon, 4 + 2\lceil \log(2&#x2F;\varepsilon)\rceil)$ 的解。</p>
+<p>该算法的流程为：</p>
+<div class="note warning"><p><strong>Algorithm 1（Ekkin, Solomon）.</strong></p>
+<ol>
+<li>令 $T_M\leftarrow \mathrm{MST}(G)$，$P$ 为 $T_M$ 的一个 dfs 序；</li>
+<li>定义断点集合 $\mathcal{B}\leftarrow \varnothing$，上一个断点 $b\leftarrow r$；</li>
+<li><strong>For</strong> $v &#x3D; P_1, P_2, …, P_n$ <strong>do</strong></li>
+<li>$\quad$ <strong>If</strong> $d_P(b, v) &gt; \varepsilon \cdot d_G(r, v)$ <strong>do</strong></li>
+<li>$\quad\quad$ $b\leftarrow v, \mathcal{B}\leftarrow \mathcal{B}\cup{v}$；</li>
+<li>$T_{\mathcal{B}} \leftarrow$ $G[\mathcal{B}\cup{r}]$ 上的最短路 steiner tree；</li>
+<li>$T\leftarrow$ $T_M\cup T_{\mathcal{B}}$ 上的最短路生成树。</li>
+</ol>
+</div>
+
+<p>为了阐释这里的近似比和启发后面的算法，我们有必要知道这里的最短路 Steiner Tree 是如何构造和分析的（尽管原文献直接引用了 [1]）。为此，我们证明下面的引理：</p>
+<div class="note info"><p><strong>引理 1.</strong> 令 $G &#x3D; (V, E, w)$ 是一个 $n$ 个点图，其上最短路诱导出度量 $M_G$，$r$ 是一个指定的根节点。令 $H$ 是度量空间 $M$ 上的一条从 $r$ 开始的哈密尔顿路径。则存在一个 $O(n^2)$ 的算法根据此哈密尔顿路径构造一棵二叉树 $T &#x3D; (V’, E’, w’)$，满足：</p>
+<ol>
+<li>$T$ 以 $r$ 为根，$V$ 中除 $r$ 外的点充当 $T$ 的叶子，且度量 $M_T$ 支配 $M_G$；</li>
+<li>$T$ 中 $r$ 到叶子 $v$ 的路径长度恰为 $t$ 的最短路。</li>
+<li>$w’(T) \leq \log n\cdot w(H) + w(\mathrm{MST}(G))$。</li>
+</ol>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>我们首先给出这个算法。该算法将建立 $H[2, n]$ 上的线段树，然后给每条边赋一个非负权值，然后将线段树的根和 $r$ 连接并赋非负权值。兹记 $x$ 的左右儿子为 $L(x), R(x)$，对应边的权值为 $w_L(x), w_R(x)$；为了求出满足条件的权值，我们将自底向上地递推出这些量：</p>
+<ol>
+<li><p>$\rho(x)$：最短路的冗余量，即对于 $x$ 子树中的任意一个叶子 $v$ 都有 $d_G(r, v) - d_T(x, v) &#x3D; \rho(x)$；辅以 $\delta(x) &#x3D; \rho(L(x)) - \rho(R(x))$；</p>
+</li>
+<li><p>$\Delta(x_L, x_R)$：距离的差额，其中 $x_L, x_R$ 分别为 $x$ 的左右子树中的叶子：</p>
+<p>$$<br>\Delta(x_L, x_R) :&#x3D; d_G(x_L, x_R) - d_T(x_L, L(x)) - d_T(x_R, R(x))<br>$$</p>
+<p>辅以子树内该距离差额的最大值 </p>
+<p>$$<br>\Delta(x) :&#x3D; \max\{\Delta(x_L, x_R)\}<br>$$</p>
+</li>
+</ol>
+<p>最后由线段树的根 $r’$ 向 $r$ 连接的边之权值应为 $\rho(r’)$</p>
+<p>为对齐权值及支配度量，惟需满足以下条件：</p>
+<p>$$<br>\begin{cases}<br>    w_L(x) - \rho(L(x)) &#x3D; w_R(x) - \rho(R(x)) \\<br>    w_L(x) + w_R(x) \geq \Delta(x)<br>\end{cases}<br>$$</p>
+<p>出于保证构造出最短路 steiner tree 之需要，我们需要尽量节约最短路的冗余量。因此，给 $w_L(x)$ 和 $w_R(x)$ 的赋值应为</p>
+<p>$$<br>\begin{cases}<br>    w_L(x) &#x3D; \frac{\Delta(x) + \delta(x)}{2}, w_R(x) &#x3D; \frac{\Delta(x) - \delta(x)}{2}, &amp; \text{if $\Delta(x) \geq |\delta(x)|$,} \\<br>    w_L(x) &#x3D; \max(\delta(x), 0), w_R(x) &#x3D; \max(-\delta(x), 0), &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>分析此算法的正确性，需要验证：</p>
+<details class="note "><summary><p><strong>度量 $M_T$ 支配度量 $M_G$，$T$ 上根到叶子的距离恰为最短路</strong></p>
+</summary>
+<p>根据构造，显然成立。</p>
+
+</details>
+
+<details class="note "><summary><p><strong>$T$ 的边权必非负</strong></p>
+</summary>
+<p>只需验证 $\rho(r’)\geq 0$。为此，我们归纳验证对于一切线段树中的点 $x$ 都有 $\rho(x) \geq 0$。</p>
+<p>对于叶子，结论显然成立。而对于非叶子节点 $x$，可注意到惟须考虑 $\Delta(x) \geq |\delta(x)|$ 的情形，因为另外一种情形连接了边权为 $0$ 的边，从而 $\rho(x)$ 将直接继承 $\rho(L(x))$ 和 $\rho(R(x))$ 中的一者。此时不妨设 $\rho(L(x)) \geq \rho(R(x))$。此时有</p>
+<p>$$<br>\begin{aligned}<br>\rho(x) &amp;&#x3D; \rho(L(x)) - \frac{\Delta(x) + \rho(L(x)) - \rho(R(x))}{2} \\<br>&amp;&#x3D; \frac 12\left(\rho(L(x)) + \rho(R(x)) - \Delta(x)\right) \\<br>&amp;&#x3D;\frac{1}{2}\left(\min_{x_L, x_R}\left( d_G(r, x_L) + d_G(r, x_R) - d_G(x_L, x_R) \right)\right) \\<br>&amp;\geq 0<br>\end{aligned}<br>$$</p>
+
+</details>
+
+<details class="note "><summary><p><strong>$T$ 的总边权不超过 $\log n\cdot w(H) + w(\mathrm{MST}(G))$</strong></p>
+</summary>
+<p>首先有 </p>
+<p>$$<br>w((r, r’)) &#x3D; \rho(r’) \leq \max_x(d_G(r, x)) \leq \max_{x}d_{\mathrm{MST}(G)}(r, x) \leq w(\mathrm{MST}(G))<br>$$</p>
+<p>然后我们只需要放缩 $w_L(x) + w_R(x)$。兹断言：</p>
+<p><strong>断言 1.</strong> $w_L(x) + w_R(x)$ 不超过子树内所有叶子节点构成的 $H$ 的子段的长度 $\mathcal{W}(l_x, r_x)$（此处 $\mathcal{W}(l, r)$ 表示 $H[l:r]$ 的长度）。</p>
+<p><em>证明.</em> 当 $\Delta(x) \geq |\delta(x)|$ 时，有 </p>
+<p>$$<br>w_L(x) + w_R(x) &#x3D; \Delta(x) \leq d_G({x_L}, x_R) \leq \mathcal{W}<br>$$</p>
+<p>否则 </p>
+<p>$$<br>\begin{aligned}<br>w_L(x) + w_R(x) &amp;&#x3D; \rho(L(x)) - \rho(R(x)) \\<br>&amp;&#x3D; d_G(r, x_L) - d_G(r, x_R) - d_T(L(x), x_L) + d_T(R(x), x_R) \\<br>&amp;\leq d_G(x_L, x_R) + d_T(R(x), x_R)<br>\end{aligned}<br>$$</p>
+<p>其中 $x_L, x_R$ 在子树里任取。此后只需要仔细证明一下存在一个 $x_R$ 使得 $d_T(R(x), x_R) \leq \mathcal{W}(x_R, r_{R(x)})$，形式化为如下断言：</p>
+<p><strong>断言.</strong> 对于树上任意一个点 $x$，存在子树中的点 $v$ 使得 $d_T(x, v)\leq \mathcal{W}(v, r_x)$。</p>
+<p><em>证明.</em> 方法仍是施归纳于该二叉树，若连了边权为 $0$ 的边，那么可以直接在两个子树之一（对应边权为 $0$ 的那个子树）中找到满足条件的点；否则取使 $\Delta(x_L, x_R)$ 取最大值的 $x_L, x_R$，有 </p>
+<p>$$<br>d_T(x, x_L) &#x3D; w_L(x) + d_{T}(L(x), x_L) \leq \Delta(x) + d_T(L(x), x_L) \leq d_G(x_L, x_R) \leq \mathcal{W}(x_L, r_{x})<br>$$</p>
+<p>$x_L$ 即为满足条件的点。</p>
+<p>断言 1 直接推出线段树的边权和不超过 $\log n \cdot W(H)$。因而 $\log n\cdot w(H) + w(\mathrm{MST}(G))$。</p>
+
+</details>
+
+<p>明所欲证。$\blacksquare$</p>
+</details>
+
+<p>将引理 1 中所述算法用作求最短路 steiner tree 的算法，即得到当参数取 $\varepsilon$ 时，首先可以看到算法得到的树的 shallowness 为 $1 + 2\varepsilon$：考虑 $x$，其上一个断点为 $b$，</p>
+<p>$$<br>\begin{aligned}<br>d_T(r, x) &amp;\leq d_T(b, x) + d_T(b, r) \\<br>&amp;\leq d_T(b, x) + \varepsilon d_G(r, v) \\<br>&amp;&#x3D; d_G(b, x) + \varepsilon d_G(r, v) \\<br>&amp;\leq d_G(r, v) + d_G(r, x) + \varepsilon d_G(r, v) \\<br>&amp;\leq (1 + 2\varepsilon)\cdot d_G(r, v)<br>\end{aligned}<br>$$</p>
+<p>但是算法对最小 Steiner Tree 的近似比就非常 Tricky 了。因为如果直接引用引理证明中的 bound，可以发现给一张边权都是 $1$ 便可将 $\mathcal{B}$ 卡到 $n - 1$。然而，关于 $T$ 的大小实际上另有如下关于边权的 bound<em>（这你妈是怎么想到的？？？）</em></p>
+<div class="note info"><p><strong>引理 2.</strong> 给定正数 $\xi, \eta$，若哈密顿路径 $H$ 上所有点到 $r$ 的距离之和满足</p>
+<p>$$<br>\sum_{i&#x3D;2}^n d_G(r, H_i) \leq \xi \cdot \eta<br>$$</p>
+<p>则有</p>
+<p>$$<br>w(T) \leq \eta + \lceil\log(\xi)\rceil\cdot w(H) + w(\mathrm{MST}(G))<br>$$</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>若 $\lceil\log\xi\rceil \geq \log n$，则结论显然成立。不妨设 $\lceil\log\xi\rceil \geq \log n - 1$。</p>
+<p>注意到定义 $W_i$ 表示线段树自下而上第 $i$ 层的边权之和，则</p>
+<p>$$<br>\sum_{i &#x3D; 2} d_G(v, H_i) &#x3D; \sum_{i&#x3D;1}^{\log n} 2^{\log n - i} W_i<br>$$</p>
+<p>我们此前已经证明了 $W_i \leq w(H)$。当 $i \geq \log n - \lceil \log \xi \rceil$ 时，有 </p>
+<p>$$<br>\sum_{i&#x3D;\log n - \lceil\log \xi \rceil + 1}^{\log n} \leq \lceil\log \xi\rceil\cdot w(H)<br>$$</p>
+<p>而当 $i$ 较小时有</p>
+<p>$$<br>\begin{aligned}<br>    \xi\cdot \eta &amp;\geq \sum_{i&#x3D;1}^{\log n - \lceil\log \xi \rceil} 2^{\log n - i} W_i \\<br>                  &amp;\geq \sum_{i&#x3D;1}^{\log n - \lceil\log \xi \rceil} 2^{\log n - \log n + \lceil\log \xi\rceil} W_i \\<br>                  &amp;\geq \xi \cdot\left(\sum_{i&#x3D;1}^{\log n - \lceil\log \xi \rceil} W_i\right)<br>\end{aligned}<br>$$</p>
+<p>这蕴含 </p>
+<p>$$<br>\sum_{i&#x3D;1}^{\log n - \lceil\log \xi \rceil} W_i \leq \eta<br>$$</p>
+<p>综上明所欲证。$\blacksquare$</p>
+
+</details>
+
+<p>此处因为 $H$ 取的是树的 dfs 序，其长度顶多是 $2w(\mathrm{MST}(G))$。令注意根据断点的选择方法，</p>
+<p>$$<br>\sum_{i\in \mathcal{B}} \varepsilon d(r, i) \leq w(H) &#x3D; 2\cdot w(\mathrm{MST}(G))<br>$$</p>
+<p>取 $\xi &#x3D; \frac 2\varepsilon, \eta &#x3D; w(\mathrm{MST}(G))$ 立即得到 </p>
+<p>$$<br>w(T) \leq (2 + \lceil\log 2 &#x2F; \varepsilon\rceil)\cdot w(\mathrm{MST}(G)) \leq (4 + 2\lceil\log 2 &#x2F; \varepsilon\rceil)\cdot w(\mathrm{SMT}(G))<br>$$</p>
+<p>这里用到了在任意的度量空间上都有 $\mathrm{MST}$ 是最小斯坦纳树的 $2$-近似。这表明算法生成的树的 lightness 至多为 $(4 + 2\lceil\log \varepsilon&#x2F;2\rceil)$。</p>
+<h1><span id="salt-algorithm">SALT Algorithm</span></h1><p>他加了几个意义不明的改进，比如说</p>
+<ol>
+<li>直接在树上松弛求断点，而不是在 Hamilton 路径上做这件事；</li>
+<li>建线段树的时候，自底向上地将当前所有子树树根配对使得每次边权将增加最少（找一个环上的完美匹配）。</li>
+</ol>
+<p>当然，直觉上来说这些都有改进，比如说你取环上的完美匹配，似乎至少可以让增加的权值不超过 Hamilton 环长度的一半。</p>
+<p>然后用这个来证明 bound，但是有些非常 confusing 的地方，比如说：</p>
+<ol>
+<li>ES 算法的 lightness 是和 steiner tree 比的，这篇文章的 lightness 是和 MST 比的，凭什么宣称自己改进了近似比的 bound 到原来的两倍？</li>
+<li>取完美匹配对 bound 的影响应该是把 $\log 2&#x2F;\varepsilon$ 变成 $\log 1&#x2F;\varepsilon$，那可能确实改进了，但是只在 log 因子上面。</li>
+</ol>
+<hr>
+<p>现在我们已经把 bound 证出来了，那么为了实现一个 practical 的 Rectilinear Steiner SLT，我们选择相信 bound 和启发式算法：</p>
+<ol>
+<li>把第一步的 MST 改成 FLUTE；</li>
+<li>把第二步的建线段树改成 CL Heuristics；</li>
+<li>最后还可以做一些后处理，比如说翻转 L 形边，提升 U 形的底边等。</li>
+</ol>
+<p>效果非常好。</p>
+<h1><span id="参考文献">参考文献</span></h1><ol>
+<li>M. Elkin and S. Solomon, <em>“Steiner Shallow-Light Trees are Exponentially Lighter than Spanning Ones,”</em> 2011 IEEE 52nd Annual Symposium on Foundations of Computer Science, Palm Springs, CA, USA, 2011, pp. 373-382, doi: 10.1109&#x2F;FOCS.2011.18.</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/11/FLUTE-Algorithm/" rel="prev" title="FLUTE Algorithm">
+                  <i class="fa fa-angle-left"></i> FLUTE Algorithm
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
