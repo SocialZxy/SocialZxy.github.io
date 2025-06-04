@@ -19,27 +19,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 这学期选修了信息论，这篇文章记录一些上课讲到的直觉。老师喜欢在上课时留下一些没有当场证明的命题作为作业，下面的内容大体来源于这些作业。    Kraft 不等式是编码无歧义必要条件 正态分布是熵最大的、能匹配给定的前两阶矩的分布">
+    <meta name="description" content="本文收录于 EDA 论文选读，系 Sailesh K. Rao, P. Sadayappan, Frank K. Hwang, Peter W. Shor 所作论文 The Rectilinear Steiner Arborescence Problem 之阅读笔记。 TL;DR基本概念在 EDA 中，最优化一个 net 的延迟自然地引出曼哈顿平面上的最短路 steiner tree 问题。学术上">
 <meta property="og:type" content="article">
-<meta property="og:title" content="一些信息论中的直觉">
-<meta property="og:url" content="http://example.com/2025/02/25/InformationTheoryIntuitions/index.html">
+<meta property="og:title" content="启发式 RSMA 算法">
+<meta property="og:url" content="http://example.com/2025/05/26/HeuristicRSMA/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 这学期选修了信息论，这篇文章记录一些上课讲到的直觉。老师喜欢在上课时留下一些没有当场证明的命题作为作业，下面的内容大体来源于这些作业。    Kraft 不等式是编码无歧义必要条件 正态分布是熵最大的、能匹配给定的前两阶矩的分布">
+<meta property="og:description" content="本文收录于 EDA 论文选读，系 Sailesh K. Rao, P. Sadayappan, Frank K. Hwang, Peter W. Shor 所作论文 The Rectilinear Steiner Arborescence Problem 之阅读笔记。 TL;DR基本概念在 EDA 中，最优化一个 net 的延迟自然地引出曼哈顿平面上的最短路 steiner tree 问题。学术上">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-02-25T14:29:05.000Z">
-<meta property="article:modified_time" content="2025-04-14T12:53:21.700Z">
+<meta property="article:published_time" content="2025-05-26T07:26:50.000Z">
+<meta property="article:modified_time" content="2025-05-27T03:17:11.941Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2025/02/25/InformationTheoryIntuitions/">
+<link rel="canonical" href="http://example.com/2025/05/26/HeuristicRSMA/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/02/25/InformationTheoryIntuitions/","path":"2025/02/25/InformationTheoryIntuitions/","title":"一些信息论中的直觉"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/05/26/HeuristicRSMA/","path":"2025/05/26/HeuristicRSMA/","title":"启发式 RSMA 算法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>一些信息论中的直觉 | Stellary's Notes</title>
+<title>启发式 RSMA 算法 | Stellary's Notes</title>
   
 
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Kraft 不等式是编码无歧义必要条件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">正态分布是熵最大的、能匹配给定的前两阶矩的分布</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">TL;DR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">一种启发式算法</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -195,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/25/InformationTheoryIntuitions/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/26/HeuristicRSMA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
@@ -208,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="一些信息论中的直觉 | Stellary's Notes">
+      <meta itemprop="name" content="启发式 RSMA 算法 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          一些信息论中的直觉
+          启发式 RSMA 算法
         </h1>
 
         <div class="post-meta-container">
@@ -224,14 +224,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2025-02-25 22:29:05" itemprop="dateCreated datePublished" datetime="2025-02-25T22:29:05+08:00">2025-02-25</time>
+      <time title="Created: 2025-05-26 15:26:50" itemprop="dateCreated datePublished" datetime="2025-05-26T15:26:50+08:00">2025-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-04-14 20:53:21" itemprop="dateModified" datetime="2025-04-14T20:53:21+08:00">2025-04-14</time>
+      <time title="Modified: 2025-05-27 11:17:11" itemprop="dateModified" datetime="2025-05-27T11:17:11+08:00">2025-05-27</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,7 +239,11 @@
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
         </span>
     </span>
 
@@ -252,80 +256,96 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 这学期选修了信息论，这篇文章记录一些上课讲到的直觉。老师喜欢在上课时留下一些没有当场证明的命题作为作业，下面的内容大体来源于这些作业。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#kraft-%E4%B8%8D%E7%AD%89%E5%BC%8F%E6%98%AF%E7%BC%96%E7%A0%81%E6%97%A0%E6%AD%A7%E4%B9%89%E5%BF%85%E8%A6%81%E6%9D%A1%E4%BB%B6">Kraft 不等式是编码无歧义必要条件</a></li>
-<li><a href="#%E6%AD%A3%E6%80%81%E5%88%86%E5%B8%83%E6%98%AF%E7%86%B5%E6%9C%80%E5%A4%A7%E7%9A%84-%E8%83%BD%E5%8C%B9%E9%85%8D%E7%BB%99%E5%AE%9A%E7%9A%84%E5%89%8D%E4%B8%A4%E9%98%B6%E7%9F%A9%E7%9A%84%E5%88%86%E5%B8%83">正态分布是熵最大的、能匹配给定的前两阶矩的分布</a></li>
-</ul>
-<!-- tocstop -->
-
-<span id="more"></span>
-
-<h1><span id="kraft-不等式是编码无歧义必要条件">Kraft 不等式是编码无歧义必要条件</span></h1><blockquote>
-<p>这个 Intuition 回答了为什么在讨论通信时的最优编码长度时，我们只考虑前缀无关码。</p>
-</blockquote>
-<div class="note "><p><strong>定义和记号</strong></p>
-<p>对于给定的字符集 $\Sigma$，一个<strong>编码</strong>系指一个映射 $C: \Sigma\rightarrow \{0, 1\}^*$。一个字符 $x\in \Sigma$ 的编码长度记作 $\mathscr{l}(x) &#x3D; |C(x)|$。信息论中常考虑的一个问题是给定一个 $\Sigma$ 上的概率分布 $P$，编码的期望编码长度</p>
-<p>$$<br>\mathscr{L}(C) &#x3D; \mathbb{E}_{x\sim P(x)}[\mathscr{l}(x)]<br>$$</p>
-<p>众所周知，如果不存在两个字符 $x_1 \ne x_2$ 使得 $C(x_1)$ 是 $C(x_2)$ 的前缀，则这样的编码 $C$ 称作<strong>前缀无关码</strong>。</p>
-<p>另一方面，我们可以将 $C$ 的定义延拓到字符串 $\Sigma^*$ 上：$C(s_1s_2…s_n) &#x3D; C(s_1)C(s_2)\cdots C(s_n)$。如果不存在两个字符串 $s, t\in \Sigma^*$，$s\ne t$ 但是 $C(s)\ne C(t)$，则称 $C$ 是<strong>可唯一解读编码</strong>。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文收录于 <a href="../../../../2025/05/11/EDAPaper/">EDA 论文选读</a>，系 Sailesh K. Rao, P. Sadayappan, Frank K. Hwang, Peter W. Shor 所作论文 <em>The Rectilinear Steiner Arborescence Problem</em> 之阅读笔记。</p>
+<h1><span id="tldr">TL;DR</span></h1><h1><span id="基本概念">基本概念</span></h1><p>在 EDA 中，最优化一个 net 的延迟自然地引出曼哈顿平面上的最短路 steiner tree 问题。学术上将这个问题命名做 Rectilinear Steiner Minimal Arborescence (RSMA) 问题，其形式定义如下：</p>
+<div class="note success"><p><strong>定义 1（RSMA）.</strong> 一个欧式空间第一象限中的一个 RSMA 乃是一个以原点为根，且经过另外 $n$ 个第一象限中的点（称作<strong>汇点</strong>）的外向有根树。其中每条边的起点 $x_u$ 和终点 $x_v$ 之间必须满足 $x_u \prec x_v$，此处 $\prec$ 为二维空间上的标准二维偏序。</p>
 </div>
 
-<p>下文中，全体前缀无关码的集合记作 $A$，全体可唯一解读编码的集合记作 $B$。</p>
-<p>注意 $A\subsetneq B$。因为显然前缀无关码都是可唯一解读的，并且存在这样一个编码，它并不是前缀无关的，但是是可唯一解读的：</p>
-<table>
-<thead>
-<tr>
-<th align="center">字符</th>
-<th align="center">编码</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">$\texttt{a}$</td>
-<td align="center">$\texttt{10}$</td>
-</tr>
-<tr>
-<td align="center">$\texttt{b}$</td>
-<td align="center">$\texttt{1}$</td>
-</tr>
-<tr>
-<td align="center">$\texttt{c}$</td>
-<td align="center">$\texttt{00}$</td>
-</tr>
-</tbody></table>
+<p>兹建立一些关于此问题的直觉。</p>
+<div class="note info"><p><strong>引理 1.</strong> 在任意一个 RSMA $A$ 中，若 $u, v$ 的父亲相同，则有其父亲 $z &#x3D; \min(u, v)$，这里 $\min$ 表示对横纵坐标分别取最小值。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>假设其反面，那么在 $\min(u, v)$ 处新增一个点 $z’$，有 $l(u, z’) + l(v, z’) + l(z, z’) &lt; l(u, z) + l(v, z)$，与原树为 RSMA 矛盾。$\blacksquare$</p>
+
+</details>
+
+<p>将 $G(N)$ 定义做 $n$ 个汇点及原点所在横纵坐标织成的网格，则类似于 RSMT 的结论，我们有:</p>
+<div class="note info"><p><strong>定理 2.</strong> 存在仅使用 $G(N)$ 中的点的 RSMA。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>任取一个 RSMA $A$，按照到原点的距离由远及近归纳。注意任意两个点 $u, v$ 的父亲为 $z &#x3D; \min(u, v)$，所以边 $(u, z), (v, z)$ 必为网格边，$z$ 必为网格格点。$\blacksquare$</p>
+
+</details>
+
+<p>似乎还不知道 RSMA 问题是否是 $\mathbf{NP}\text{-hard}$ 的。至少在某些特例上，其能在多项式时间内解决。</p>
+<div class="note info"><p><strong>定理 3.</strong> 若给定的 $n$ 个汇点构成偏序集 $(\mathbb{R}^2, \prec)$ 上的反链，则原问题可以在 $O(n^3)$ 时间内解决。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>区间 DP。$\blacksquare$</p>
+
+</details>
+
+<p>$\mathbb{R}^2$ 上有一类特殊的反链，为 $L_n : x + y &#x3D; n$ 在第一象限（含坐标轴正方向）内的 $n + 1$ 个整点，简便起见将其记作 $D_n$。则容易想象这些点的 RSMA 应当连成线段树状，更严谨地可以考虑手动计算上述区间 DP，不难验证若 $n &#x3D; 2^{\alpha} + \beta$，其中 $0\leq \beta &lt; 2^\alpha$，则其 RSMA 总边长为 $n\alpha + 2\beta$。</p>
 <hr>
-<div class="note success"><p><strong>定义 1.1(Kraft 不等式).</strong> Kraft 不等式是如下关于字符集中每个字符的编码长度的不等式：</p>
-<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1<br>$$</p>
+<p>现在考虑分析一些粗略地 RSMA 解的大小的界。有两个显而易见的方向：</p>
+<ol>
+<li>众所周知最小<strong>生成树</strong>和最小<strong>斯坦纳树</strong>之间存在一个近似比，这个比例在最短路树和 RSMA 之间是否存在？</li>
+<li><strong>RSMA</strong> 的大小与<strong>最小生成树</strong>的大小能够有多接近？</li>
+</ol>
+<p>很遗憾，对于前者答案是不存在的。因为只需要考虑汇点集合 $D_n$，有</p>
+<p>$$<br>\frac{w(\mathrm{SPT}(D_n))}{w(\mathrm{RSMA}(D_n))} &#x3D; \Omega\left(\frac{n}{\log n}\right)<br>$$</p>
+<p>而对于后者，我们在 <a href="../../../../2025/05/12/SALT-Algorithm/">上一篇文章</a> 的引理 2 中给出的算法给出了一个上界（其实是紧的，最坏情况依旧是由 $D_n$ 给出）：</p>
+<p>$$<br>\max_{S : |S| &#x3D; n} \frac{w(\mathrm{RSMA}(S))}{w(\mathrm{RSMT}(S))} &#x3D; O(\log n) \qquad {\color{orange} \text{In fact, $\Theta(\log n)$}}<br>$$</p>
+<h1><span id="一种启发式算法">一种启发式算法</span></h1><p>注意，一棵 RSMA 可以看作迭代地每次选择两个点 $u, v$，将其替换做 $\min(u, v)$ 而成。其代价为 </p>
+<p>$$<br>\lVert u\rVert + \lVert v\rVert - 2\lVert\min(u, v)\rVert<br>$$</p>
+<p>涉及优化的部分仅有 $\lVert \min(u, v)\rVert$，由此自然引出一种启发式算法，即每次直接选最大化 $\lVert \min(u, v)\rVert$ 的两个点将其合并。</p>
+<p>首先思考如何实现该算法。显然，只需实现一个斜向的扫描线（$x + y &#x3D; k$，$k$ 从大到小），用一个平衡树维护当前扫描线上方的全部点。注意可能使得 $\lVert\min(u, v)\rVert$ 最大化的点对惟有横坐标相邻者（这也解释了我们为何需要用平衡树维护，这是为了查询前驱后继），因此只需要用可删堆来维护这些点对将产生的 steiner node。这样时间复杂度为 $O(n\log n)$。</p>
+<p>兹证明该启发式算法对 RSMA 的近似比为 $2$，即对于任意的点集 $N$ 有此算法生成的树形图 $A$ 的权重满足 </p>
+<p>$$<br>\frac{w(A)}{w(\mathrm{RSMA}(N))} \leq 2<br>$$</p>
+<p>为证明此结论，我们首先转换计算 $w(A)$ 的方法。注意到 </p>
+<p>$$<br>w(A) &#x3D; \int_0^\infty \sqrt 2|L_x \cap A|\mathrm{d}x<br>$$</p>
+<p>定义 $\mathrm{MC}(N, z)$ 表示在 $L_z$ 上取最少的点，使得对于任意一个 $N$ 中的点，都存在一个取出的点在其左下方。依该定义立即有对于任意的 $x$，</p>
+<p>$$<br>|L_x \cap \mathrm{RSMA}(N)| \geq \mathrm{MC}(\{p\in N, \lVert p\rVert\geq x\}, x)<br>$$</p>
+<p>我们将证明 $L_x\cap A \leq 2\mathrm{MC}(\{p\in N, \lVert p\rVert\geq x\}, x)$。</p>
+<div class="note info"><p><strong>断言 1.</strong> 对任意该启发式算法生成的树 $A$ 的每一个节点 $p$，有以下两个集合上均存在至少一个汇点，且该汇点与 $p$ 之间存在路径：</p>
+<p>$$<br>h_p :&#x3D; \{ (x, y_p) : x \geq x_p \}, \quad v_p &#x3D; \{ (x_p, y) : y\geq y_p \}<br>$$</p>
 </div>
 
-<p>此前，我们熟知：</p>
-<div class="note info"><p><strong>定理 1.2.</strong> 前缀无关编码满足 Kraft 不等式；满足 Kraft 不等式的编码长度必然有对应的前缀无关编码。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>归纳即可。$\blacksquare$</p>
+
+</details>
+
+<div class="note info"><p><strong>断言 2.</strong> 该算法生成的树 $A$ 中不存在两条边相交。</p>
 </div>
 
-<p><strong>证明.</strong> 只需考虑在 Trie 树上归纳即可。$\square$</p>
-<p>现在我们将结论的<em>一侧</em>加强至：</p>
-<div class="note info"><p><strong>定理 1.3.</strong> 任意可唯一解读的编码都满足 Kraft 不等式。</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>同样归纳即可。$\blacksquare$</p>
+
+</details>
+
+<p>将算法扫描线运行至 $L_k$ 时，BST 中的点集记作 $W_k$。显然 $W_k$ 一定是 $(\mathbb{R}^2, \prec)$ 上的一个反链，且对于任意的 $p, q\in W_k$，有 $\lVert\min(p, q)\rVert &lt; k$。这自然地推出 $\mathrm{MC}(W_k, k) &#x3D; |W_k|$。进而只需讨论 $W_k$ 的覆盖集和 $\{u\in N : \lVert u\rVert\geq k\}$ 的覆盖集之间的关系。</p>
+<div class="note info"><p><strong>断言 3.</strong> 对于任意的 $k$，对于任意的 $p, q\in W_k$ 满足 $x_p &lt; x_q$（这也蕴含 $y_p &gt; y_q$），以下集合上必存在至少一个汇点 $s$：</p>
+<p>$$<br>\{(x, y_p) : x_p\leq x \leq x_q\} \cup \{(x_q, y) : y_q \leq y \leq y_p\}<br>$$</p>
 </div>
 
-<p><strong>证明.</strong> 设 $\mathscr{S}(L)$ 是编码长度为 $L$ 的字符串总数，即</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \mathrm{card}\{s\in \Sigma^* : |C(s)| &#x3D; L\}<br>$$</p>
-<p>如果存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$，那么根据鸽巢原理，必然发生冲突。因此编码可唯一解读的一个必要条件是 $\mathscr{S}(L)\leq 2^L$。现在我们来估计 $\mathscr{S}(L)$。显然它满足如下递推式：</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \sum_{c\in \Sigma}\mathscr{S}(L - \ell(c))<br>$$</p>
-<p>其特征方程为 </p>
-<p>$$<br>1 &#x3D; \sum_{c\in \Sigma}x^{-\ell(c)} \label{chareq}<br>$$</p>
-<p>那么 $\mathscr{S}(L)$ 可以用如下式子来估计：</p>
-<p>$$<br>\mathscr{S}(L) &#x3D; \Omega(\lambda_*^L)<br>$$</p>
-<p>其中 $\lambda_*$ 是该特征方程最大的实根。如果 $\lambda_* &gt; 2$，那么 $\mathscr{S}(L)$ 增长快于 $2^L$，一定存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$。因此编码可唯一解读的必要条件是 </p>
-<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1 \label{kraft}<br>$$</p>
-<p>否则因为 $\ref{chareq}$ 的右边单调递减趋于 $0$，必然有一个大于 $2$ 的特征根。$\square$</p>
-<h1><span id="正态分布是熵最大的-能匹配给定的前两阶矩的分布">正态分布是熵最大的、能匹配给定的前两阶矩的分布</span></h1><p>即 $\mathbb{R}$ 上熵最大的、满足 $\mathbb{E}[X] &#x3D; 0$, $\mathbb{E}[X^2] &#x3D; \sigma^2$ 的随机变量 $X$ 服从正态分布。</p>
-<blockquote>
-<p>这个结论的物理版本是一个各向同性的、固定温度的系统中粒子的在某个分量上的速度分布律是 Boltzman 分布：</p>
-<p>$$<br>\frac{\mathrm{d}N}{N} &#x3D; \left(\frac{m}{2\pi k_B T}\right)^{\frac 12} \exp\left(-\frac{mv^2}{2k_B T}\right) {\rm d}v<br>$$</p>
-</blockquote>
-<p>方法其实就是拉格朗日乘子，如果拉格朗日乘子是对的的话（</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>由断言 1 可以知道存在汇点 $p’$ 和 $p$ 有水平方向的连边，存在汇点 $q’$ 和 $q$ 有垂直方向的连边。若他们都不在上述集合之内，则 $A$ 中有两条边相交于 $(x_q, y_p)$，与断言 2 矛盾。$\blacksquare$</p>
+
+</details>
+
+<p>注意到覆盖了 $s$ 的点必然也能覆盖 $p, q$ 之一。因此欲覆盖全部的 $s$，至少将覆盖 $W_k$ 的一半，这自然导出</p>
+<p>$$<br>|L_k \cup A| \leq |W_k| &#x3D; \mathrm{MC}(W_k, k) \leq 2\mathrm{MC}(\{u\in N : \lVert u\rVert\geq k\}, k) \leq 2|L_k\cup \mathrm{RSMA}(N)|<br>$$</p>
+<p>积分可得近似比确实是 $2$。</p>
 
     </div>
 
@@ -339,13 +359,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2025/02/08/CS285DRL5/" rel="prev" title="CS285 Part 3 - 策略梯度方法">
-                  <i class="fa fa-angle-left"></i> CS285 Part 3 - 策略梯度方法
+                <a href="/2025/05/12/SALT-Algorithm/" rel="prev" title="SALT Algorithm">
+                  <i class="fa fa-angle-left"></i> SALT Algorithm
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/03/05/AIPaperReading/" rel="next" title="泛 AI 论文选读">
-                  泛 AI 论文选读 <i class="fa fa-angle-right"></i>
+                <a href="/2025/06/04/InformationTheoryIntuitions/" rel="next" title="一些信息论中的直觉">
+                  一些信息论中的直觉 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

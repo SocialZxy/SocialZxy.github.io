@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 这是本学期信息论的复习笔记。主干内容是证明有噪信道编码定理，佐以一些神秘小结论。    基本定义 信息熵 互信息，相对熵 凸性 数据处理不等式   信源编码 Kraft 不等式 Haffman 编码   纠错码 Non-uniform 纠错码效率的上下界 可高效计算的纠错码   信道编码定理 渐进等分性质和有噪信道编码存在性 Fano 不等式和有噪信道编码错误率下界   杂项">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些信息论中的直觉">
+<meta property="og:url" content="http://example.com/2025/06/04/InformationTheoryIntuitions/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 这是本学期信息论的复习笔记。主干内容是证明有噪信道编码定理，佐以一些神秘小结论。    基本定义 信息熵 互信息，相对熵 凸性 数据处理不等式   信源编码 Kraft 不等式 Haffman 编码   纠错码 Non-uniform 纠错码效率的上下界 可高效计算的纠错码   信道编码定理 渐进等分性质和有噪信道编码存在性 Fano 不等式和有噪信道编码错误率下界   杂项">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-04T14:29:05.000Z">
+<meta property="article:modified_time" content="2025-06-04T08:32:56.087Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/06/04/InformationTheoryIntuitions/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/06/04/InformationTheoryIntuitions/","path":"2025/06/04/InformationTheoryIntuitions/","title":"一些信息论中的直觉"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一些信息论中的直觉 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基本定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">信息熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">互信息，相对熵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">凸性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.4.</span> <span class="nav-text">数据处理不等式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">信源编码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Kraft 不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Haffman 编码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">纠错码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Non-uniform 纠错码效率的上下界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">可高效计算的纠错码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">信道编码定理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">渐进等分性质和有噪信道编码存在性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">Fano 不等式和有噪信道编码错误率下界</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">杂项</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">无偏估计和 Cramer-Rao 不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">通信复杂度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">最大熵估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">Kolmogrov 复杂度</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/04/InformationTheoryIntuitions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一些信息论中的直觉 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一些信息论中的直觉
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-06-04 22:29:05 / Modified: 16:32:56" itemprop="dateCreated datePublished" datetime="2025-06-04T22:29:05+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 这是本学期信息论的复习笔记。主干内容是证明有噪信道编码定理，佐以一些神秘小结论。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">基本定义</a><ul>
+<li><a href="#%E4%BF%A1%E6%81%AF%E7%86%B5">信息熵</a></li>
+<li><a href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9B%B8%E5%AF%B9%E7%86%B5">互信息，相对熵</a></li>
+<li><a href="#%E5%87%B8%E6%80%A7">凸性</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8D%E7%AD%89%E5%BC%8F">数据处理不等式</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81">信源编码</a><ul>
+<li><a href="#kraft-%E4%B8%8D%E7%AD%89%E5%BC%8F">Kraft 不等式</a></li>
+<li><a href="#haffman-%E7%BC%96%E7%A0%81">Haffman 编码</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BA%A0%E9%94%99%E7%A0%81">纠错码</a><ul>
+<li><a href="#non-uniform-%E7%BA%A0%E9%94%99%E7%A0%81%E6%95%88%E7%8E%87%E7%9A%84%E4%B8%8A%E4%B8%8B%E7%95%8C">Non-uniform 纠错码效率的上下界</a></li>
+<li><a href="#%E5%8F%AF%E9%AB%98%E6%95%88%E8%AE%A1%E7%AE%97%E7%9A%84%E7%BA%A0%E9%94%99%E7%A0%81">可高效计算的纠错码</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86">信道编码定理</a><ul>
+<li><a href="#%E6%B8%90%E8%BF%9B%E7%AD%89%E5%88%86%E6%80%A7%E8%B4%A8%E5%92%8C%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AD%98%E5%9C%A8%E6%80%A7">渐进等分性质和有噪信道编码存在性</a></li>
+<li><a href="#fano-%E4%B8%8D%E7%AD%89%E5%BC%8F%E5%92%8C%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E9%94%99%E8%AF%AF%E7%8E%87%E4%B8%8B%E7%95%8C">Fano 不等式和有噪信道编码错误率下界</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9D%82%E9%A1%B9">杂项</a><ul>
+<li><a href="#%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C-cramer-rao-%E4%B8%8D%E7%AD%89%E5%BC%8F">无偏估计和 Cramer-Rao 不等式</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E5%A4%8D%E6%9D%82%E5%BA%A6">通信复杂度</a></li>
+<li><a href="#%E6%9C%80%E5%A4%A7%E7%86%B5%E4%BC%B0%E8%AE%A1">最大熵估计</a></li>
+<li><a href="#kolmogrov-%E5%A4%8D%E6%9D%82%E5%BA%A6">Kolmogrov 复杂度</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="基本定义">基本定义</span></h1><h2><span id="信息熵">信息熵</span></h2><p>本题定义熵并推导一众熵、互信息、KL 散度的性质，以勾勒这些度量的几何性质。</p>
+<div class="note success"><p><strong>定义 1（香农熵）.</strong> 一个定义在支撑集 $\mathcal{X}$ 上的离散随机变量 $X$ 的熵定义为</p>
+<p>$$<br>H(X) &#x3D; -\sum_{x\in \mathcal{X}} p(x)\log p(x)<br>$$</p>
+</div>
+
+<p>香农熵具有多位一体的组合意义，比如说：</p>
+<div class="note "><p><strong>香农熵和玻尔兹曼熵的一致性。</strong> 因为我不是很懂物理，所以下面的是批话。</p>
+<p>现有一系统中 $N$ 个同种粒子可能位于 $m$ 个非简并的能级，第 $i$ 个能级上的粒子数为 $p_i$，其中 $N &#x3D; \sum_{i&#x3D;1}^m p_i$。则显然系统的状态数</p>
+<p>$$<br>   W &#x3D; \frac{N!}{\prod_{i&#x3D;1}^m p_i!}<br>$$</p>
+<p>对玻尔兹曼熵 $\log W$ 作斯特林近似，得到</p>
+<p>$$<br>   \log W \approx N\ln N - \sum_{i&#x3D;1}^m p_i\log p_i &#x3D; -\sum_{i&#x3D;1}^m \frac{p_i}{N}\log \frac{p_i}{N}<br>$$</p>
+<p>正是粒子能量分布的信息熵。</p>
+</div>
+
+<div class="note "><p><strong>香农熵是理想的不确定性的度量。</strong> 为了构造不确定性的合理度量，我们希望有以下几个条件成立：</p>
+<ul>
+<li><p>$H$ 关于概率密度是连续的；</p>
+</li>
+<li><p>对于 $[n]$ 上的均匀随机变量 $X_n\sim U([n])$，希望 $H(X_n)$ 单调递增（选择越多，越不确定）；</p>
+</li>
+<li><p>若 $\mathcal{X}$ 可被划分为两个支撑集 $\mathcal{X}_1 \sqcup \mathcal{X}_2$，希望有 </p>
+<p>$$<br>  H(X) &#x3D; P(X\in \mathcal{X}_1)H(X |_{\mathcal{X}_1}) + P(X\in \mathcal{X}_2) H(X |_{\mathcal{X}_2})<br>$$</p>
+</li>
+</ul>
+<p>容易证明满足上述三条件的一切度量都是 $H(X)$ 的正实数倍。</p>
+</div>
+
+<div class="note "><p><strong>香农熵是期望编码长度的下（确）界。</strong> 这将在下一节阐明。</p>
+</div>
+
+<p>自然，可以将熵挂在联合分布、条件分布上，有 </p>
+<div class="note success"><p><strong>定义 2（联合熵）.</strong> 对于服从联合分布 $P(X, Y)$ 的随机变量，定义其联合熵为 </p>
+<p>$$<br>H(X, Y) :&#x3D; -\sum_{x\in \mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y)\log p(x, y)<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 3（条件熵）.</strong> 对于服从联合分布 $P(X, Y)$ 的随机变量，定义 $X$ 在 $Y &#x3D; y\in \mathcal{Y}$ 上的条件熵为 </p>
+<p>$$<br>H(X | Y &#x3D; y) :&#x3D; -\sum_{x\in\mathcal{X}} p(x | Y &#x3D; y)\log p(x | Y &#x3D; y)<br>$$</p>
+<p>将所有此种条件熵加权叠加得到</p>
+<p>$$<br>H(X | Y) :&#x3D; -\sum_{y\in \mathcal{Y}}H(X | Y &#x3D; y) &#x3D; -\sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y)\log p(x | y)<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.</strong> 熵满足以下几个性质：</p>
+<p>$$<br>\begin{align}<br>    &amp; H(X, Y) &#x3D; H(X) + H(Y | X) \label{ent-chain-rule} \\<br>    &amp; H(X, Y) \geq H(X) \label{joint-geq-margin} \\<br>    &amp; H(X, Y) \geq H(X | Y) \label{joint-geq-cond} \\<br>    &amp; H(X) \geq H(X | Y) \label{margin-geq-cond}<br>\end{align}<br>$$</p>
+</div>
+
+<blockquote>
+<p>后三个不等式容易从直觉上理解：</p>
+<ol>
+<li>你对联合分布比对边缘分布、条件分布更不确定。</li>
+<li>已经知道 $Y$ 的分布，便可能泄露关于 $X$ 的信息，因此不确定度不超过 $X$ 本身的不确定度。</li>
+</ol>
+</blockquote>
+<p><strong>证明.</strong> 式 $(\ref{ent-chain-rule})$ 直接验证即可。</p>
+<p>式 $(\ref{joint-geq-margin})$、式 $(\ref{joint-geq-cond})$ 由式 $(\ref{ent-chain-rule})$ 和熵的非负性立即得到。</p>
+<p>式 $(\ref{margin-geq-cond})$ 考虑左边减右边得（回忆 $\log x \geq 1 - 1 &#x2F; x$）</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{LHS} - \mathrm{RHS} &amp;&#x3D; \sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y) \log \frac{p(x | y)}{p(x)} \\<br>                            &amp;&#x3D; \sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y)\log \frac{p(x, y)}{p(x)p(y)} \\<br>                            &amp;\geq \sum_{x\in\mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y) \left(1 - \frac{p(x)p(y)}{p(x, y)}\right) &#x3D; 0<br>\end{aligned}<br>$$</p>
+<p>$\blacksquare$</p>
+<h2><span id="互信息相对熵">互信息，相对熵</span></h2><p>接下来是两个重要的度量，回忆我们在式 $(\ref{margin-geq-cond})$ 中提及了已知 $Y$ 泄露得关于 $X$ 的信息量，将其定义做：</p>
+<div class="note success"><p><strong>定义 4（互信息）.</strong> 定义两个随机变量 $X, Y$ 的互信息为</p>
+<p>$$<br>\begin{aligned}<br>I(X; Y) &amp;:&#x3D; H(X) + H(Y) - H(X, Y) \\<br>        &amp;&#x3D; H(X) - H(X | Y) &#x3D; H(Y) - H(Y | X) \\<br>        &amp;&#x3D; \sum_{x\in \mathcal{X}}\sum_{y\in\mathcal{Y}} p(x, y)\log\frac{p(x, y)}{p(x)p(y)}<br>\end{aligned}<br>$$</p>
+<p>类似地，也可以把互信息挂在条件分布上</p>
+<p>$$<br>I(X; Y | Z) :&#x3D; H(X|Z) - H(X | Y, Z)<br>$$</p>
+</div>
+
+<p>另一个度量是如果你计算 $Y$ 的信息熵（对 $Y$ 进行编码）时，误将另一个信源 $X$ 当成了信源 $Y$，求得信息熵的偏差（期望编码长度的增加量）。直觉上，这刻画了两个分布的偏差。</p>
+<div class="note success"><p><strong>定义 5（Kullback-Leibler 散度 &#x2F; 相对熵）.</strong> 令 $X，Y$ 是定义在同一个支撑集 $\mathcal{X}$ 上的随机变量，其 KL 散度为</p>
+<p>$$<br>D_{KL}(X\Vert Y) &#x3D; \sum_{x\in \mathcal{X}} p(x)\log \frac{p(x)}{p(y)}<br>$$</p>
+<p>同样也可以挂在条件分布上</p>
+<p>$$<br>D_{KL}(X\Vert Y | Z) &#x3D; \sum_{z\in \mathcal{Z}} p(z) D_{KL}(P(X | z) \Vert P(Y | z))<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.</strong> 互信息和 KL 散度都是非负的。</p>
+<p>$$<br>\begin{align}<br>    &amp; D_{KL}(X\Vert Y)\geq 0 \label{dkl-pos} \\<br>    &amp; I(X; Y) &#x3D; D_{KL}(P_{XY}\Vert P_XP_Y) \\<br>    &amp; I(X; Y)\geq 0 \label{mutual-info-pos}<br>\end{align}<br>$$</p>
+<p>都满足链式法则</p>
+<p>$$<br>\begin{align}<br>    &amp; I(X, Z; Y) &#x3D; I(X; Y | Z) + I(Z; Y) \\<br>    &amp; D_{KL}(P_{XZ}\Vert P_{YZ}) &#x3D; D_{KL}(P_{X} \Vert P_Y) + D_{KL}(P_{X|Z}\Vert P_{Y|Z})<br>\end{align}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 式 $(\ref{mutual-info-pos})$ 无非是 $(\ref{margin-geq-cond})$。式 $\ref{dkl-pos}$ 的证明和式 $(\ref{margin-geq-cond})$ 如出一辙（都是用那个经典不等式放缩）。链式法则拆开验证即可。$\blacksquare$</p>
+<h2><span id="凸性">凸性</span></h2><p>由于熵中含有的 $-p\log p$ 是上凸函数，所以关于信息的定义大多都是凸的，这为机器学习中进行优化提供了便利。</p>
+<div class="note info"><p><strong>定理 3（Log sum 不等式.</strong> 对于任意非负数 $a_1, …, a_n, b_1, …, b_n$，都有</p>
+<p>$$<br>\sum_{i&#x3D;1}^n a_i\log \frac{a_i}{b_i} \geq \left(\sum_{i&#x3D;1}^n a_i\right)\log \frac{\sum_{i&#x3D;1}^n a_i}{\sum_{i&#x3D;1}^n b_i}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 考虑对 $f(x) &#x3D; x\log x$ 用 Jensen 不等式。取 $x_i &#x3D; \frac{a_i}{b_i}$，$\alpha_i &#x3D; b_i$，有 </p>
+<p>$$<br>\frac{\sum_{i&#x3D;1}^n \alpha_i f(x_i)}{\sum_{i&#x3D;1}^n \alpha_i} \geq \sum_{i&#x3D;1}^n f\left(\frac{\sum_{i&#x3D;1}^n \alpha_i x_i}{\sum_{i&#x3D;1}^n \alpha_i}\right)<br>$$</p>
+<p>整理便得到上述结论。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 4.</strong> 熵是上凸的，即对于两个分布 $p, q$ 和 $\lambda\in [0, 1]$，有</p>
+<p>$$<br>H(\lambda p + (1 - \lambda) q) \geq \lambda H(p) + (1 - \lambda) H(q) \label{ent-concave}<br>$$</p>
+<p>KL 散度是下凸的，即对于四个分布 $p_1, p_2, q_1, q_2$ 和 $\lambda\in[0, 1]$，有</p>
+<p>$$<br>D(\lambda p_1 + (1 - \lambda) p_2 \Vert \lambda q_1 + (1 - \lambda) q_2) \leq \lambda D(p_1\Vert q_1) + (1 - \lambda) D(p_2\Vert q_2) \label{dkl-convex}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 式 $(\ref{dkl-convex})$ 蕴含式 $(\ref{ent-concave})$，因为可以用 $p$ 和均匀分布的 KL 散度凑出 $p$ 的熵。</p>
+<p>欲证 $(\ref{dkl-convex})$，自然可以对每个 $x$ 用 log sum 不等式。这里放一个我想到的神秘证明。</p>
+<p>构造联合分布 $\pi_i(x, z)$（$i &#x3D; 1, 2$），其中 $z$ 是一个 $0, 1$ 随机变量。具体地，以概率 $\lambda$ 抛一枚硬币，若正面朝上，则将 $x$ 的分布取作 $p_i$，否则将 $x$ 的分布取作 $q_i$。则左边无非是 $D(\pi_1(x)\Vert \pi_2(x))$（边缘分布的 KL 散度），右边是 $D(\pi_1(x, z) \Vert \pi_2(x, z))$，根据链式法则和 KL 散度非负性得证。$\blacksquare$</p>
+<h2><span id="数据处理不等式">数据处理不等式</span></h2><p>直觉上，如果有一个信道 $X\rightarrow Y$，此时你再把得到的输出通过另一个信道 $Y\rightarrow Z$，必然是要丢信息的。形式化地，有 </p>
+<div class="note info"><p><strong>定理 5（数据处理不等式，互信息）.</strong> 给定三个形成马尔科夫链的随机变量 $X\rightarrow Y\rightarrow Z$，必有 </p>
+<p>$$<br>I(X; Y) \geq I(X; Z)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 根据链式法则有 </p>
+<p>$$<br>\begin{align}<br>I(X; Y) + I(X; Y | Z) &#x3D; I(X; Y, Z) \\<br>I(X; Z) + I(X; Z | Y) &#x3D; I(X; Y, Z)<br>\end{align}<br>$$</p>
+<p>因此只需要比较 $I(X; Y|Z)$ 和 $I(X; Z|Y)$ 的大小。注意因为 $X\rightarrow Y\rightarrow Z$ 是马尔科夫链，所以 $X$ 和 $Z$ 在给定 $y$ 的条件下是独立的，因此 $I(X; Z | Y) &#x3D; 0$。综上得定理成立。$\blacksquare$</p>
+<p>另一个版本是在 KL 散度上的。直觉上，将两个分布都通过同一个信道，其差距将被模糊。</p>
+<div class="note info"><p><strong>定理 6（数据处理不等式，KL 散度）.</strong> 给定两个分布 $P_X, Q_X$ 和条件概率 $\mathcal{P}(Y | X)$（称作概率核，kernel），有 </p>
+<p>$$<br>D(P_X \Vert Q_X) \geq D(P_Y \Vert Q_Y)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 直接拆式子然后用 log sum 不等式：</p>
+<p>$$<br>\begin{align}<br>D(P_Y \Vert Q_Y) &amp;&#x3D; \sum_{y\in \mathcal{Y}}\left(\sum_{x\in \mathcal{X}} P(x)\mathcal{P}(y | x)\right) \log\frac{\sum_{x\in \mathcal{X}} P(x) \mathcal{P}(y|x)}{\sum_{x\in \mathcal{X}} Q(x)\mathcal{P}(y|x)} \\<br>&amp;\leq \sum_{y\in \mathcal{Y}}\sum_{x\in \mathcal{X}} P(x)\mathcal{P}(y|x)\log\frac{P(x)\color{lightgrey} \mathcal{P}(y|x)}{P(y)\color{lightgrey} \mathcal{P}(y|x)} &#x3D; D(P_X \Vert P_Y)<br>\end{align}<br>$$</p>
+<p>$\blacksquare$</p>
+<p>当然，根据 KL 散度和互信息之间的关系，定理 6 实际上蕴含定理 5：取概率核 $\mathcal{P}((x, z) | (x, y)) &#x3D; P(z | y)$ 立即得到</p>
+<p>$$<br>I(X; Y) &#x3D; D(P_{XY}\Vert P_XP_Y) \geq D(P_{XZ}\Vert P_XP_Z)<br>$$</p>
+<p>数据处理不等式的一个有意思的应用是证明两种重要的分布偏差的度量，KL 散度和统计距离（total variance，$\Delta_{TV}$）事实上是大同小异的。回忆</p>
+<p>$$<br>\Delta_{TV}(p, q) &#x3D; \frac 12\sum_{x\in \mathcal{X}} |p(x) - q(x)|<br>$$</p>
+<p>具体地，有 </p>
+<div class="note info"><p><strong>定理 7.</strong></p>
+<p>$$<br>D(P\Vert Q) \geq 2\Delta_{TV}(P, Q)^2<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 其实这个不等式佐证了 KL 散度的凸性。某种程度上来看，$\Delta_{TV}$ 是度量两个分布之间（线性）距离的量，本定理类似于说明 KL 散度至少是二次的。</p>
+</blockquote>
+<p><strong>证明.</strong> 关于统计距离，有如下观察（取 $E :&#x3D; \{x\in \mathcal{X} : p(x) &gt; q(x)\}$）：</p>
+<p>$$<br>\Delta_{TV}(p, q) &#x3D; \max_{E\subseteq \mathcal{X}} (p(E) - q(E))<br>$$</p>
+<p>容易用微积分证明，对于伯努利分布结论成立。</p>
+<p>此后可凭如下函数：$f(x) :&#x3D; \mathbf{1}\{x\in E\}$ 将 $X$ data process 成伯努利分布 $\mathrm{Bern}(p(E)), \mathrm{Bern}(q(E))$，有如下不等式链成立</p>
+<p>$$<br>D(p \Vert q) \geq D(f(p)\Vert f(q)) \geq 2(p(E) - q(E))^2 &#x3D; 2\Delta_{TV}(p, q)^2<br>$$</p>
+<p>$\blacksquare$</p>
+<h1><span id="信源编码">信源编码</span></h1><h2><span id="kraft-不等式">Kraft 不等式</span></h2><blockquote>
+<p>本节引入信息论中重要的不等式 Kraft 不等式，并将回答它与可唯一解读编码、前缀无关码之间的深刻联系。</p>
+</blockquote>
+<div class="note "><p><strong>定义和记号</strong></p>
+<p>对于给定的字符集 $\Sigma$，一个<strong>编码</strong>系指一个映射 $C: \Sigma\rightarrow \{0, 1\}^*$。一个字符 $x\in \Sigma$ 的编码长度记作 $\mathscr{l}(x) &#x3D; |C(x)|$。信息论中常考虑的一个问题是给定一个 $\Sigma$ 上的概率分布 $P$，编码的期望编码长度</p>
+<p>$$<br>\mathscr{L}(C) &#x3D; \mathbb{E}_{x\sim P(x)}[\mathscr{l}(x)]<br>$$</p>
+<p>众所周知，如果不存在两个字符 $x_1 \ne x_2$ 使得 $C(x_1)$ 是 $C(x_2)$ 的前缀，则这样的编码 $C$ 称作<strong>前缀无关码</strong>。</p>
+<p>另一方面，我们可以将 $C$ 的定义延拓到字符串 $\Sigma^*$ 上：$C(s_1s_2…s_n) &#x3D; C(s_1)C(s_2)\cdots C(s_n)$。如果不存在两个字符串 $s, t\in \Sigma^*$，$s\ne t$ 但是 $C(s)\ne C(t)$，则称 $C$ 是<strong>可唯一解读编码</strong>。</p>
+</div>
+
+<p>下文中，全体前缀无关码的集合记作 $A$，全体可唯一解读编码的集合记作 $B$。</p>
+<p>注意 $A\subsetneq B$。因为显然前缀无关码都是可唯一解读的，并且存在这样一个编码，它并不是前缀无关的，但是是可唯一解读的：</p>
+<table>
+<thead>
+<tr>
+<th align="center">字符</th>
+<th align="center">编码</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">$\texttt{a}$</td>
+<td align="center">$\texttt{10}$</td>
+</tr>
+<tr>
+<td align="center">$\texttt{b}$</td>
+<td align="center">$\texttt{1}$</td>
+</tr>
+<tr>
+<td align="center">$\texttt{c}$</td>
+<td align="center">$\texttt{00}$</td>
+</tr>
+</tbody></table>
+<hr>
+<div class="note success"><p><strong>定义 1(Kraft 不等式).</strong> Kraft 不等式是如下关于字符集中每个字符的编码长度的不等式：</p>
+<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1<br>$$</p>
+</div>
+
+<p>此前，我们熟知：</p>
+<div class="note info"><p><strong>定理 1.</strong> 前缀无关编码满足 Kraft 不等式；满足 Kraft 不等式的编码长度必然有对应的前缀无关编码。</p>
+</div>
+
+<p><strong>证明.</strong> 只需考虑在 Trie 树上归纳即可。$\square$</p>
+<p>现在我们将结论的<em>一侧</em>加强至：</p>
+<div class="note info"><p><strong>定理 2.</strong> 任意可唯一解读的编码都满足 Kraft 不等式。</p>
+</div>
+
+<p><strong>证明.</strong> 设 $\mathscr{S}(L)$ 是编码长度为 $L$ 的字符串总数，即</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \mathrm{card}\{s\in \Sigma^* : |C(s)| &#x3D; L\}<br>$$</p>
+<p>如果存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$，那么根据鸽巢原理，必然发生冲突。因此编码可唯一解读的一个必要条件是 $\mathscr{S}(L)\leq 2^L$。现在我们来估计 $\mathscr{S}(L)$。显然它满足如下递推式：</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \sum_{c\in \Sigma}\mathscr{S}(L - \ell(c))<br>$$</p>
+<p>其特征方程为 </p>
+<p>$$<br>1 &#x3D; \sum_{c\in \Sigma}x^{-\ell(c)} \label{chareq}<br>$$</p>
+<p>那么 $\mathscr{S}(L)$ 可以用如下式子来估计：</p>
+<p>$$<br>\mathscr{S}(L) &#x3D; \Omega(\lambda_*^L)<br>$$</p>
+<p>其中 $\lambda_*$ 是该特征方程最大的实根。如果 $\lambda_* &gt; 2$，那么 $\mathscr{S}(L)$ 增长快于 $2^L$，一定存在 $L$ 使得 $\mathscr{S}(L) &gt; 2^L$。因此编码可唯一解读的必要条件是 </p>
+<p>$$<br>\sum_{c\in \Sigma} 2^{-\ell(c)}\leq 1 \label{kraft}<br>$$</p>
+<p>否则因为 $\ref{chareq}$ 的右边单调递减趋于 $0$，必然有一个大于 $2$ 的特征根。$\square$</p>
+<h2><span id="haffman-编码">Haffman 编码</span></h2><p>众所周知 Haffman 编码是最优的前缀无关码。本节证明 </p>
+<div class="note info"><p><strong>定理 3.</strong> 给定一个随机信源 $X$，对其使用 Haffman 编码作一个 $\{0, 1\}$ 串后期望长度不超过 $H(X) + 1$。</p>
+</div>
+
+<p><strong>证明.</strong> 由于 Haffman 编码已是最优的编码，我们只需要证明存在一个长度不超过 $H(X) + 1$ 的编码即可。</p>
+<p>假设 $X$ 的概率质量函数为 $p(x)$。对于符号 $x$，我们期望给其附一个编码长度 $\ell(x) &#x3D; \lceil \log p(x)\rceil$。不难验证 $\ell$ 符合 Kraft 不等式，满足期望长度条件。$\blacksquare$</p>
+<p>在 i.i.d 信源下，想要把这个结论加强至 $H(X) + o(1)$，只需要将 $n$ 个符号捆绑在一起编码。此时有编码<strong>效率</strong></p>
+<p>$$<br>\frac{\mathscr{L}(C)}{n} \leq \frac{H(X^n) + 1}{n} &#x3D; H(X) + \frac 1n<br>$$</p>
+<h1><span id="纠错码">纠错码</span></h1><p>已经有了信源编码，现要将其通过某个信道传输给另一者，此时基于以下动机，不应当直接发送信源编码，而需要额外进行编码后发送新的编码：信道通常是有噪的，因而需要某种算法来纠错。</p>
+<p>可以想象，为纠错而进行编码，势必会引入冗余。另外，纠错码能纠正的错误位数和编码之间的汉明距离有关。因此纠错码常以揭示其性能的三元组命名——$(n, k, d)$ 码表示输入 $k$ 比特，将其编作 $n$ 比特的、两两汉明距离下界为 $d$ 的编码的纠错码。特别地，若该编码是线性的（i.e. $\forall x, y \in \{0, 1\}^k, f(x\oplus y) &#x3D; f(x)\oplus f(y)$），则称为 $[n, k, d]$ 码。</p>
+<p>关于纠错码，有一些无聊的小结论：</p>
+<div class="note info"><p><strong>命题 1 (shortening).</strong> 若存在 $(n, m, d)$ 码，则存在 $(n - 1, m - 1, d)$ 码。</p>
+</div>
+
+<p><strong>证明.</strong> 考虑编码中首位为 $0$ 的和首位为 $1$ 的，其中必有一者总数不少于 $2^{m - 1}$。那么取除开该相同首位的剩下 $n - 1$ 位作为编码，汉明距离仍然至少是 $d$。$\blacksquare$</p>
+<div class="note info"><p><strong>命题 2 (expanding).</strong> 若存在 $[n, k, d]$ 码，其中 $d$ 为奇数，则存在 $[n + 1, k, d + 1]$ 码。</p>
+</div>
+
+<p><strong>证明.</strong> 在编码后方增加一个奇偶校验位。$\blacksquare$</p>
+<p>有噪信道可以用一个条件概率 $P(Y|X)$ 来刻画，它描述了信道一端输入 $X$ 时输出的分布。考虑最简单的情况，假设 $X, Y$ 都是 $0&#x2F;1$ 随机变量，且 $\Pr[X &#x3D; Y] &#x3D; 1 - \varepsilon$，其中 $\varepsilon &lt; 1&#x2F;2$。在此种信道上，存在一种最简单的容错编码：重复码（Repitition Code），发信者只需要重复发送 $t$ 次，解码者用主元素投票解码。欲获得 $\delta$ 的错误率，惟须重复发送大约 $O\left(\frac{\log 1 &#x2F; \delta}{(1 &#x2F; 2 - \varepsilon)^2}\right)$ 次即可<em>（这个数是我蒙的，你大概可以用 Chernoff Bound 算一下）</em>。</p>
+<h2><span id="non-uniform-纠错码效率的上下界">Non-uniform 纠错码效率的上下界</span></h2><blockquote>
+<p>本节探究当传输时至多有 $t$ 个比特发生翻转时，最优编码效率（编码长度 &#x2F; 原信息长度）的（渐进）上下界。此处，编码方式无需能由某一高效算法生成，参照计算理论中对 log space uniform circuit 的命名，我将其称为 Non-uniform 的纠错码。</p>
+<p>结论是若要经由某至多翻转占比为 $\delta \in (0, 1&#x2F;2)$ 个比特的信道通信 $n$ 个比特，将该 $n$ 比特的字符串依照某种规则编码做长度为 $m &#x3D; \Theta(n)$ 的字符串后传输，接收者用最近邻解码即可。</p>
+</blockquote>
+<p>在传输过程中，至多有 $t &#x3D; \delta m$ 个比特（$m$ 为经信道发送的比特数）发生翻转（$0 &lt; \delta &lt; 1&#x2F;2$，为常数）的设定下，重复码的效率几何？可以发现在我们的设定下重复码甚至无力保证一切信息都开被正确解读。</p>
+<p>注意重复码虽然不可行，但是它提示了一种设计纠错码的范式：即发信者将编码映射到一个更大的空间，使得任意两个编码的像间的汉明距离有一个下界，解码者用最近邻解码。具体地，假设在传输过程中，至多有 $t$ 个比特将会发生翻转，那么发信者惟须构造一个映射 $f : \{0, 1\}^n \rightarrow \{0, 1\}^m$，满足：</p>
+<p>$$<br>\forall x, y\in\{0, 1\}^n, d_H(f(x), f(y)) \geq 2t + 1<br>$$</p>
+<p>其中 $d_H$ 系汉明距离。</p>
+<p>欲最大化效率，须最小化 $m$。上式相当于在一个赋汉明距离作为度量的度量空间中，一个大小为 $2^m$ 的空间中应当能装下至少 $2^n$ 个半径为 $t$ 的球使其两两不相交。遗憾的是，这个问题是知名的开放性问题 sphere packing 问题，但是只需统计每个球的“体积”之和便可给出 $m$ 的下界：</p>
+<p>$$<br>2^m \geq 2^n \sum_{i&#x3D;0}^t \binom{m}{i} \label{sphere-packing}<br>$$</p>
+<p>（当然，仅证明本节的结论，这个不等式过于紧了，我们只需要用到 $m &#x3D; \Omega(n)$）</p>
+<p>另一方面，考虑求 $m$ 的下界。不妨将问题形式化作给定 $n$ 和 $\delta\in(0, 1&#x2F;2)$，求最小的 $m$ 满足存在 $f: \{0, 1\}^n\rightarrow \{0, 1\}^m$，使得 $\forall x, y\in \{0, 1\}^n, d_H(f(x), f(y)) \geq \delta m$（$\star$）。我们将证明如下定理，这也表明最优编码的长度为 $\Theta(n)$ 级别。</p>
+<div class="note info"><p><strong>定理（Gilbert-Vashamov）.</strong> 对于任意的 $\delta\in (0, 1&#x2F;2)$，存在不与 $n$ 有关的常数 $c$ 使得 $m &gt; cn$ 时必存在 $f$ 满足条件（$\star$）。</p>
+</div>
+
+<p>对于此种存在性问题，不难想到使用 probabilistic method：将 $f$ 均匀随机地取作 $\{0, 1\}^n\rightarrow \{0, 1\}^m$ 的映射，则对于任意的 $x, y\in \{0, 1\}^n$，有</p>
+<p>$$<br>\Pr(d_H(f(x), f(y)) \geq \delta m) &#x3D; 1 - \frac{1}{2^m}\sum_{i&#x3D;0}^{\delta m}\binom{m}{i}<br>$$</p>
+<p>则对一切 $x, y\in\{0, 1\}^n$ 使用 union bound 得到</p>
+<p>$$<br>\Pr[\exists x, y\in\{0, 1\}^n, d_H(f(x), f(y)) &lt; \delta m] \leq \frac{2^{2n}}{2^m} \sum_{i&#x3D;0}^{\delta m}\binom{m}{i}<br>$$</p>
+<p>现要保证 $f$ 存在，只需有</p>
+<p>$$<br>\frac{2^{2n}}{2^m} \sum_{i&#x3D;0}^{\delta m}\binom{m}{i} &lt; 1 \label{err-code-upper-bound}<br>$$</p>
+<p>用 chernoff bound 放缩 $\ref{err-code-upper-bound}$ 中含 $m$ 的部分（将其视作抛掷 $m$ 枚硬币，正面朝上的个数不超过 $\delta m$ 的概率），可得以下充分条件能决定编码的存在性：</p>
+<p>$$<br>2^{2n} \leq e^{\Theta(m)}<br>$$</p>
+<p>两边取对数，定理得证。$\blacksquare$</p>
+<h2><span id="可高效计算的纠错码">可高效计算的纠错码</span></h2><p>汉明码是一类可高效计算的纠错码。其构造依赖于如下事实：考虑将所有非零 $b$ 位二进制数视作列向量排成矩阵 $H\in \mathbb{GF}(2)^{b\times (2^b - 1)}$，例如当 $n &#x3D; 3$ 时，有矩阵</p>
+<p>$$<br>\mathbf{H} &#x3D; \begin{pmatrix}<br>    0001111 \\<br>    0110011 \\<br>    1010101<br>\end{pmatrix}<br>$$</p>
+<p>该矩阵的零空间是一个 $2^b - 1 - b$ 维的 $\mathbb{GF}(2)$ 上的线性空间，因此可编码 $2^{2^b - 1 - b}$ 种输入。注意到，对于任意的 $\boldsymbol{x}\in \ker H$，$\lVert x\rVert_1 \geq 3$（只需要讨论 $1$ 范数为 $1, 2$ 都不可能使得 $\mathbf{H}\boldsymbol{x} &#x3D; 0$ 即可），这蕴含</p>
+<p>$$<br>\forall \boldsymbol{x}, \boldsymbol{y}\in \ker \mathbf{H}, d_H(\boldsymbol{x}, \boldsymbol{y}) \geq 3<br>$$</p>
+<p>因此若以 $\ker \mathbf{H}$ 中的向量作编码，必然可纠正 $1$ 位的错误。接下来，我们将利用此矩阵的性质来给出汉明码的编码、解码的过程，即给定一个可高效计算的编码映射 $f: \{0, 1\}^{2^b - b - 1}\rightarrow \ker \mathbf{H}$，和一种解码方式。</p>
+<p>根据 $\mathbf{H}$ 的构造，它天然就是一个行最简型矩阵，因此映射 $f$ 是可以高效计算的：只需将原像 $\boldsymbol{v}$ 视为对非主元的赋值，然后用一次回代便可求出主元的值。显然，$f$ 是线性映射，因此汉明码是<em>线性码</em>。</p>
+<p>另外，此时解码也是可以高效计算的。注意经过有噪信道之后，编码 $\boldsymbol{v}$ 将变成 $\boldsymbol{v} + \boldsymbol{\delta}$，其中 $\lVert\boldsymbol{\delta}\rVert_1 \leq 1$。那么 $\mathbf{H}(\boldsymbol{v} + \boldsymbol{\delta}) &#x3D; \mathbf{H}\boldsymbol{\delta}$，要么是矩阵的一列，要么是 $0$，由此便可知道哪一位发生了翻转，从而完成解码。</p>
+<p>当欲编码的输入长度不形如 $2^b - b - 1$ 时，须找到最小的 $b$ 使得 $2^b - b - 1 \geq n$。我们还可以揭示这个不等式更深刻的含义，将其两边取 $2$ 的幂次，注意编码长度 $m &#x3D; 2^b - 1$，得到</p>
+<p>$$<br>\frac{2^m}{m + 1} \geq n<br>$$</p>
+<p>这正是 $t &#x3D; 1$ 时的 sphere packing bound $(\ref{sphere-packing})$！因此，汉明码是最优的能纠正一位错误的编码。</p>
+<hr>
+<p>当然，汉明码不是唯一的可高效计算的纠错码。还有另外一种 $[7, 4, 3]$ 码，你可以发现下面这个矩阵对应的线性变换也可以保证像的汉明矩不小于 $3$：</p>
+<p>$$<br>\mathbf{G} &#x3D; \begin{pmatrix}<br>    1101000 \\<br>    0110100 \\<br>    0011010 \\<br>    0001101<br>\end{pmatrix}<br>$$</p>
+<p>此类编码称为循环码（cyclic code），然而课上没有给出循环码的一般构造，想必这种基于循环矩阵的编码和 $\mathbb{GF}(2)$ 上的多项式乘法有深刻的关联，我们暂且不谈。</p>
+<h1><span id="信道编码定理">信道编码定理</span></h1><p>回忆我们会用条件分布 $P(Y | X)$ 来刻画一个有噪信道的行为。完整性起见，我们给出一个重述的形式化定义。</p>
+<div class="note success"><p><strong>定义 1（信道）.</strong> 令 $\Sigma_1, \Sigma_2$ 是两个有限字符集。一个信道 $\mathcal{C}$ 乃是一个从 $\Sigma_1$ 到 $\Sigma_2$ 的随机映射，具体地，当输入 $x$ 时，输出 $Y$ 服从分布 $P(Y | x)$。</p>
+</div>
+
+<p>在补充了编码方式和信源产生每种符号的概率之后，便可获得欲发送信息的分布 $P(X)$，进而得到联合分布 $P(X, Y)$。然后，我们便可利用此前定义的熵等工具来探究有噪信道的性质。</p>
+<p>现在想要刻画信道的容量。直觉上，我们想要知道从 $Y$ 一端最多能获知多少关于 $X$ 的信息。对于给定的 $X$ 的分布，这无非就是此前定义的互信息</p>
+<p>$$<br>I(X; Y) &#x3D; H(X) - H(X|Y)<br>$$</p>
+<div class="note success"><p><strong>定义 2（信道容量）.</strong> 一个有噪信道 $P(Y|X)$ 的容量被定义做</p>
+<p>$$<br>C :&#x3D; \max_{P_X} I(X; Y)<br>$$</p>
+</div>
+
+<p>本节的核心是证明以下定理：</p>
+<div class="note info"><p><strong>定理 1（信道编码定理，非正式）.</strong> 令 $R$ 表示通信的效率，即传输的比特数除以信源产生的比特数。有</p>
+<ul>
+<li>若 $R &lt; C$，则传输信息的错误率可以任意小；</li>
+<li>若 $R &gt; C$，则传输信息的错误率不能任意小。</li>
+</ul>
+</div>
+
+<p><strong>证明.</strong> 参见本节定理 4，定理 6。$\blacksquare$</p>
+<p>在证明过程中，我们仅追求一个 high level picture，因此会使用弱大数定律之类的工具，而非用集中不等式详细计算 $n$ 的级别（这将反映错误率的收敛速度）。这样做的问题是什么呢？事实上，因为我们将 $n$ 次发送信息同时编码，这样一来，一旦发生错误，这 $n$ 次通信都将失败。因此，为了证明有意义的结果，我们可能需要拿到一个每轮通信 $o(1 &#x2F; n)$ 的错误率，而这个渐进上界不是大数定律能给出的。当然，如果有闲心，你可以自行将其换成集中不等式。</p>
+<h2><span id="渐进等分性质和有噪信道编码存在性">渐进等分性质和有噪信道编码存在性</span></h2><div class="note info"><p><strong>引理 2（渐进等分性质，AEP）.</strong> 对于任意信息熵存在的离散随机变量 $X$，有对于任意的 $\varepsilon, \delta &gt; 0$，存在 $N$ 使得当 $n &gt; N$ 时，有对于独立和 $X$ 同分布的 $X_1, …, X_n$，</p>
+<p>$$<br>\Pr\left[P(X_1, …, X_n) \notin 2^{-n(H(X)\pm \varepsilon)}\right] &lt; \delta<br>$$</p>
+<p>即，对于几乎所有的信息，其出现概率都相差无几。</p>
+</div>
+
+<p><strong>证明.</strong> 因为 $X$ 的信息熵存在，i.e. $\mathbb{E}[-\log P(X)]$ 存在，根据辛钦大数定律有</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr\left[ \left[\frac 1n\sum_{i&#x3D;1}^n \log P(X_n) - H(X)\right| &gt; \varepsilon\right] &#x3D; 0<br>$$</p>
+<p>这无非是欲证结论的等价形式。$\blacksquare$</p>
+<p>考虑 $A :&#x3D; \{(x_1, …, x_n) \in \{0, 1\}^n : P(x_1, …, x_n)\in 2^{-n(H(X)\pm \varepsilon)}\}$。则有 $P(A) \geq 1 - \delta$，因此我们可以忽略 $A^c$ 中的串，仅对 $A$ 中的串编码。此种串的个数即 $|A|$ 不超过 $2^{n(H(X) + \varepsilon)}$。</p>
+<p>AEP 在信道上的表现形式为：</p>
+<div class="note info"><p><strong>推论 3（联合典型集合）.</strong> 定义</p>
+<p>$$<br>A_n :&#x3D; \left\{(x_1, …, x_n, y_1, …, y_n) : \begin{matrix}<br>    P_{XY}(x_1, …, x_n, y_1, …, y_n) \in 2^{-n (H(X, Y)\pm \varepsilon)} \\<br>    P_X(x_1, …, x_n) \in 2^{-n(H(X) \pm \varepsilon)} \\<br>    P_Y(y_1, …, y_n) \in 2^{-n H(Y)\pm \varepsilon}<br>\end{matrix}\right\}<br>$$</p>
+<p>有对于任意的 $\varepsilon, \delta &gt; 0$，存在 $N$ 使得 $n &gt; N$ 时必有 $P(A) \geq 1 - \delta$。</p>
+</div>
+
+<p>很明显，若 $(\hat{X}_1, …, \hat{X}_n)$ 和 $(\hat{Y}_1, …, \hat{Y}_n)$ 是独立从边缘分布中选取而不是通过信道求出，则 </p>
+<p>$$<br>\begin{aligned}<br>\Pr[(\hat{X}_1, …, \hat{X}_n, \hat{Y}_1, …, \hat{Y}_n)\in A_n] &amp;&#x3D; \sum_{(\boldsymbol{x}, \boldsymbol{y})\in A_n} P_X({\boldsymbol{x}})P_Y({\boldsymbol{y}}) \\<br>&amp;\leq 2^{-n(I(X; Y) - 3\varepsilon)}<br>\end{aligned} \label{jts-prob}<br>$$</p>
+<p>接下来便可证明定理 $1$ 的一侧。</p>
+<div class="note info"><p><strong>定理 4（信道编码定理，单侧）.</strong> 给定 $\Sigma_1$ 到 $\Sigma_2$ 的信道 $\mathcal{C}$，其容量为 $C$。若 $R &lt; C$，则对于任意的 $\epsilon &gt; 0$，存在 $N\in \mathbb{N}$ 使得对于任意的 $n &gt; N$ 都存在一对函数 $f : \{0, 1\}^{nR} \rightarrow \Sigma_1^n$ 和 $g : \Sigma_2^{n}\rightarrow \{0, 1\}^{nR}$ 使得</p>
+<p>$$<br>\Pr_X\left[X \ne g(\mathcal{C}(f(X)))\right] &lt; \epsilon<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 1.</strong> 在上述定理的叙述中我们使用了 $\varepsilon$-$N$ 语言，这里给出一个人话解释。</p>
+<p>考虑如下情景。Alice 和 Bob 现在要通过信道 $\mathcal{C}$ 进行无数次通信，每次交流 $R$ 个比特的信息。当然，Alice 和 Bob 可以将 $n$ 次通信分为一组，对每组信息合并进行编码。那么若 $R &lt; C$，则随着组大小 $n$ 趋近于 $\infty$，最好的编码-解码方式的错误率将趋近于 $0$。</p>
+</blockquote>
+<blockquote>
+<p><strong>Remark 2.</strong> 在上述定理的叙述种有一个反直觉的点，就是我们把 $\{0, 1\}^{nR}$ 映射到了 $\Sigma_1^n$，看起来长度变短了。实则不然，需要注意 $\Sigma_1$ 是<strong>一般的字符集</strong>而非 $\{0, 1\}$，因此 $n$ 并不是某种“传输的零一串的长度”。</p>
+</blockquote>
+<blockquote>
+<p><strong>Remark 3.</strong> 我们这里直接考虑了发送 $2^{nR}$ 个信息。事实上，稍作讨论便可将其加强至发送 $X^n$，其中 $X$ 是一个熵为 $R$ 的信源：只需使用 AEP 或者 Haffman 编码，如果遇到长度超过 $2^{n(R + \varepsilon)}$ 的信息就直接摆烂，都可以证明错误率是 $o(1)$ 的。</p>
+</blockquote>
+<p><strong>证明.</strong> 对充分大的 $n$ 使用 probabilistic method。对于 $x\in \{0, 1\}^{nR}$，独立地将 $f(x)$ 设置为一个服从 $P(X)$ 的值。其中 $P(X)$ 是那个使得 $I(X; Y)$ 达到信道容量的分布，即 </p>
+<p>$$<br>P(X) &#x3D; \arg \max_{P(X)} I(X; Y)<br>$$</p>
+<p>考虑解码。令</p>
+<p>$$<br>g(y_1, …,y_n) &#x3D; \begin{cases}<br>    \boldsymbol{v} &amp;, \exists !\boldsymbol{v}\in\{0, 1\}^{nR}, (f(\boldsymbol{v}), \boldsymbol{y})\in A_n \\<br>    \mathrm{Abort} &amp;, \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>按照 probabilistic method 的惯例，计算此时错误率的期望。根据期望的线性性，</p>
+<p>$$<br>\mathbb{E}_{f}\left[\Pr_X\left[X \ne g(\mathcal{C}(f(X)))\right]\right] &#x3D; \sum_{X} P(X) \Pr_f[X\ne g(\mathcal{C}(f(X)))] \label{err-expect}<br>$$</p>
+<p>现在 $X$ 具体是什么都无关紧要。不失一般性地，我们计算</p>
+<p>$$<br>\Pr_{f}[0^{Rn} \ne g(\mathcal{C}(f(0^{Rn})))]<br>$$</p>
+<p>内侧的事件发生无非是两种情况的 Union：</p>
+<ol>
+<li><p>$f(0^{Rn}), \mathcal{C}(f(0^{Rn}))$ 不是联合典型序列。这样的情况概率不超过 $\delta$；</p>
+</li>
+<li><p>存在 $y\ne 0^{Rn}$，$(f(y), \mathcal{C}(f(0^n)))$ 是联合典型序列。根据式 $(\ref{jts-prob})$ 和 union bound，其概率不超过</p>
+<p>$$<br>2^{nR} 2^{-n(I(X; Y) - 3\varepsilon)} &#x3D; 2^{n(R - I(X; Y) + 3\varepsilon)}<br>$$</p>
+<p>证明中 $\varepsilon$ 可以任取，将其取作 $(0, C - R)$ 间的数即可使得此概率是 $o(1)$ 的。</p>
+</li>
+</ol>
+<p>因此错误率的期望 $(\ref{err-expect})$ 不超过 $\delta + o(1)$，再随便调整一下 $\delta$ 即可得到编码和解码方式 $f, g$ 的存在性。$\blacksquare$</p>
+<h2><span id="fano-不等式和有噪信道编码错误率下界">Fano 不等式和有噪信道编码错误率下界</span></h2><p>Fano 不等式勾勒了用随机函数估计一个随机函数的逆的误差下界。以下是一些记号：设 $X$ 是一个定义在有限支撑集合 $\mathcal{X}$ 上的随机变量，其概率分布为 $p(x)$；另一随机变量 $Y$ 依赖于 $X$，且给出条件分布 $p(y | x)$。现在用一个随机变量 $\hat{X}$ 来估计 $\hat{X}$，方法是让其仅依赖于 $Y$ 并给定条件分布 $p(\hat{x} | y)$。文献中经常用 $X\rightarrow Y \rightarrow \hat{X}$ 来描述这样的<em>仅依赖</em>关系的随机变量三元组。现在可以定义错误率</p>
+<p>$$<br>P_e &#x3D; \Pr[X \ne \hat{X}]<br>$$</p>
+<div class="note info"><p><strong>定理 5（Fano 不等式）.</strong> 对于任意三个的随机变量 $X\rightarrow Y\rightarrow \hat{X}$，有 </p>
+<p>$$<br>H(P_e) + P_e\log |\mathcal{X}|\geq H(X | \hat{X}) \geq H(X | Y)<br>$$</p>
+<p>这蕴含 </p>
+<p>$$<br>1 + P_e\log |\mathcal{X}| \geq H(X | Y), \quad \text{or} \quad P_e \geq \frac{H(X | Y) - 1}{\log |\mathcal{X}|}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 定义随机变量 $E :&#x3D; \mathbf{1}\{X\ne \hat{X}\}$。则 $H(P_e) &#x3D; H(E)$。根据链式法则，</p>
+<p>$$<br>\begin{align}<br>H(E, X | \hat{X}) &amp;&#x3D; H(X | \hat{X}) + {\color{lightgrey} H(E | X, \hat{X})} \\<br>                  &amp;&#x3D; H(E | \hat{X}) + H(X | E, \hat{X})<br>\end{align}<br>$$</p>
+<p>注意因为 $E$ 是关于 $X, \hat{X}$ 的确定性函数，所以 ${\color{lightgrey} H(E | X, \hat{X})} &#x3D; 0$。另外有 $H(E | \hat{X}) \leq H(E)$。同时，若 $E &#x3D; 0$，则 $X$ 也是关于 $\hat{X}$ 的确定性函数，因此</p>
+<p>$$<br>H(X | E, \hat{X}) &#x3D; \Pr[E &#x3D; 1] H(X | E &#x3D; 0, \hat{X}) \leq P_e\log |\mathcal{X}|<br>$$</p>
+<p>综上第一个不等号成立。第二个不等号是 data processing 不等式的经典推论。根据 data processing 不等式 </p>
+<p>$$<br>I(X; \hat{X}) \leq I(X; Y) \quad \Rightarrow \quad H(X) - H(X | \hat{X}) \leq H(X) - H(X | Y)<br>$$</p>
+<p>得证。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 6（信道编码定理，另一侧）.</strong> 若 $R &gt; C$，则存在 $\varepsilon_0$，$\forall N, \exists n &gt; N$，一切 $f, g$ 都必然满足</p>
+<p>$$<br>\Pr_{X}[X\ne g(\mathcal{C}(f(X)))] &gt; \varepsilon_0<br>$$</p>
+<p>即无论如何编码，错误率都有下界。</p>
+</div>
+
+<p><strong>证明.</strong> 假设消息是 $M &#x3D; X_1X_2…X_n$。则</p>
+<p>$$<br>H(M | Y_1, …, Y_n) &#x3D; H(M) - I(M; Y_1, …, Y_n) \geq n(R - C)<br>$$</p>
+<p>根据 Fano 不等式 </p>
+<p>$$<br>P_e \geq \frac{n(R - C) - 1}{\log 2^{n(R - \varepsilon)}} \quad \Rightarrow \quad \lim_{n\rightarrow \infty} P_e &#x3D; R - C<br>$$</p>
+<p>确实存在下界。$\blacksquare$</p>
+<h1><span id="杂项">杂项</span></h1><h2><span id="无偏估计和-cramer-rao-不等式">无偏估计和 Cramer-Rao 不等式</span></h2><p>给定一个参数化的概率密度 $f(x; \theta)$。从中 i.i.d 采样了 $X_1, X_2, …, X_n$。</p>
+<p>现在为了估计 $\theta$ 的值，我们可以构造一个统计量 $\hat{\theta} &#x3D; \phi(X_1, …, X_n)$。根据 bias-variance decomposition，若有 $\theta$ 的无偏估计，其方差必有下界。这里我们精确计算这个下界。</p>
+<div class="note success"><p><strong>定义 1（score function）.</strong> 一个参数化的分布 $f(X; \theta)$ 的 score function 为 </p>
+<p>$$<br>S(X; \theta) :&#x3D; \frac{\partial}{\partial\theta} f(X; \theta)<br>$$</p>
+</div>
+
+<p>以下两个等式的证明是概率统计习题难度：</p>
+<p>$$<br>\begin{align}<br>    &amp;\mathbb{E}[S(X; \theta)] &#x3D; 0 \\<br>    &amp;\mathbb{E}[S(X; \theta)^2] &#x3D; \mathbb{D}[S(X; \theta)] &#x3D; -\mathbb{E}\left[\frac{\partial}{\partial\theta}S(X; \theta)\right]<br>\end{align}<br>$$</p>
+<p>因此，下面的量能够度量分布关于 $\theta$ 的敏感程度：</p>
+<div class="note success"><p><strong>定义 2（Fisher 信息）.</strong> 一个参数化的分布 $f(X; \theta)$ 的 Fisher 信息为</p>
+<p>$$<br>I(\theta) :&#x3D; \mathbb{E}\left[\left(\frac{\partial}{\partial\theta} f(X; \theta)\right)^2\right]<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这东西和信息论有什么关系呢？在之前学 TRPO 的时候我们见过它好像是 KL 散度的二阶导。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 1（Cramer-Rao 不等式）.</strong> 对于任意一个 $\theta$ 的无偏估计 $\hat{\theta}$，有 </p>
+<p>$$<br>\mathbb{D}[\hat{\theta}] \geq \frac{1}{I(\hat{\theta})}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 因为 $\hat{\theta}$ 是无偏估计，有 </p>
+<p>$$<br>\int (\hat{\theta} - \theta) f(x; \theta)\mathrm{d}x &#x3D; 0<br>$$</p>
+<p>将其关于 $\theta$ 求导，整理得到</p>
+<p>$$<br>\int (\hat{\theta} - \theta) \frac{\partial}{\partial\theta}f(x; \theta)\mathrm{d}x &#x3D; \int f(x; \theta)\mathrm{d}x \quad \Rightarrow \quad \mathbb{E}\left[(\hat{\theta} - \theta) S(X; \theta)\right] &#x3D; 1<br>$$</p>
+<p>由柯西不等式，立即得证。$\blacksquare$</p>
+<h2><span id="通信复杂度">通信复杂度</span></h2><p>考虑如下情景：Alice 和 Bob 要联手计算一个函数 $f : \{0, 1\}^n\times \{0, 1\}^n \rightarrow \{0, 1\}$。其中 Alice 知道输入 $x$，Bob 知道输入 $y$，想要求得 $f(x, y)$。</p>
+<p>为了计算这个函数值，Alice 和 Bob 可以互相发送至多 $t$ 轮消息。第 $i$ 轮，Alice 首先给 Bob 发送一个比特 $a_i &#x3D; p(x; b_1, …, b_{i - 1})$，接着 Bob 给 Alice 发送一个比特 $b_i &#x3D; q(y; a_1, …, a_i)$（此处 $p, q$ 为两确定性的函数）。第 $t$ 轮，Bob 给 Alice 发送的消息必须是答案。对于固定的函数 $f$，最小的 $t$ 使得对于所有的输入都能准确计算 $f(x, y)$ 称 $f$ 的通讯复杂度，记作 $\mathrm{CC}(f)$。</p>
+<p>$\mathrm{CC}(f)$ 有一个显然的上界是 $n$，因为 Alice 可以直接发送其输入。现在，我们希望寻找 $\mathrm{CC}(f)$ 的下界。</p>
+<p>考虑 $\mathcal{H}$ 为全部可能的聊天记录构成的集合，令 $R_h : h\in \mathcal{H}$ 表示能产生聊天记录 $h$ 的全体输入对 $(x, y)$。显然，有以下基本事实：</p>
+<p><strong>断言 1.</strong> $R_h$ 是单色的，i.e. $\forall (x, y)\in R_h$，$f(x, y)$ 都相等。</p>
+<p>这是因为聊天记录的最后一位就是 $f(x, y)$。</p>
+<p><strong>断言 2.</strong> $R_h$ 互不相交。因为函数是确定性的，因此 $(x, y)\mapsto h$ 是单射。这自然导出 </p>
+<p>$$<br>X\times Y &#x3D; \bigsqcup_{h\in \mathcal{H}} R_h<br>$$</p>
+<p><strong>断言 3.</strong> $R_h$ 必然形如 $X_h\times Y_h$，其中 $X_h\subset X, Y_h\subset Y$。只需要验证若 $(x_1, y_1), (x_2, y_2)\in R_h$ 则必有 $(x_1, y_2), (x_2, y_1)\in R_h$。这也是很明显的，因为两者都只能基于聊天记录和自己手里的数进行判断。我们将这样可写作笛卡尔积的 $R_h$ 称作一个 $X\times Y$ 上的矩形。</p>
+<p>也就是说，聊天记录的总数必为 $X\times Y$ 的某一个单色矩形划分。记 $\mathcal{X}$ 为最小单色矩形划分。因此有 </p>
+<p>$$<br>2^{\mathrm{CC}(f)} \geq |\mathcal{H}| \geq |\mathcal{X}|<br>$$</p>
+<p>至此，我们证明了如下定理：</p>
+<div class="note info"><p><strong>定理 2（Yao）.</strong> 对于任意的函数 $f : X\times Y\rightarrow \{0, 1\}^n$，定义 $\mathcal{X}$ 为 $X\times Y$ 的最小单色举行划分，有</p>
+<p>$$<br>\mathrm{CC}(f) \geq \log_2 |\mathcal{X}|<br>$$</p>
+</div>
+
+<p>当然 $\mathcal{X}$ 通常是很难求的，但是它有一个显然的下界。注意如果将 $f$ 视为 $|X|\times |Y|$ 的矩阵，则 $\mathcal{X}$ 将 $f$ 拆成 $\mathcal{X}$ 个秩不超过 $1$ 的矩阵之和。因此 </p>
+<p>$$<br>\mathrm{rank}(M) \leq \sum_{R_h\in \mathcal{X}}\mathrm{rank}(R_h) \leq |\mathcal{X}| \label{rank-partition}<br>$$</p>
+<div class="note warning"><p><strong>例子 1.</strong> $\mathrm{EQ}_N$ 是判断两个 $N$ 位二进制数是否相等的函数。则 $\mathrm{EQ}$ 视为 $2^n\times 2^n$ 阶矩阵为单位阵，根据定理 2 和式 $(\ref{rank-partition})$</p>
+<p>$$<br>n\leq \mathrm{CC}(\mathrm{EQ}(N)) \leq n<br>$$</p>
+</div>
+
+<p>但注意，这仅仅是确定性算法的情况。如果允许 Alice 和 Bob 使用随机的比特来决定待发送的信息，仅要求高概率正确，则通信复杂度将降低，甚至在一些例子上是指数级的。比如说对于 $\mathrm{EQ}_N$，这是 Schwatz-Zippel 引理的经典引用：Alice 向 Bob 发送随机的模数和哈希值，通信复杂度仅为 $O(\log n)$！</p>
+<h2><span id="最大熵估计">最大熵估计</span></h2><p>在统计物理中有如下经典问题：在一个各向同性、温度一定的系统中，粒子的速度服从什么分布？这将被抽象为如下数学问题：</p>
+<p>$$<br>\begin{aligned}<br>    \text{maximize}   &amp; \int_{-\infty}^{\infty} p(x)\ln p(x\mathrm{d}x \\<br>    \text{subject to} &amp; \int_{-\infty}^\infty p(x)\mathrm{d}x &#x3D; 1 \\<br>                        &amp; \int_{-\infty}^\infty x p(x)\mathrm{d}x &#x3D; 0 \\<br>                        &amp; \int_{-\infty}^\infty x^2 p(x)\mathrm{d}x &#x3D; \sigma^2<br>\end{aligned}<br>$$</p>
+<p>我们有一个经典的拉格朗日乘子证明，现在，我们利用信息论知识给出一个巧妙的证明。</p>
+<div class="note info"><p><strong>定理 3（Boltzman）.</strong> 上述优化问题的解是 $\mathcal{N}(0, \sigma^2)$。</p>
+</div>
+
+<p><strong>证明.</strong> 即证明对于任意的概率密度函数 $q$，其熵都大于正态分布（概率密度为 $p$ 的熵）。注意到</p>
+<p>$$<br>\begin{aligned}<br>D_{KL}(q\Vert p) &amp;&#x3D; \int_{-\infty}^\infty q(x)\ln \frac{q(x)}{p(x)}\mathrm{d}x \\<br>                 &amp;&#x3D; -H(q) + \int_{-\infty}^\infty q(x)\left(\ln\frac{1}{\sqrt{2\pi}\sigma} + \frac{x^2}{2\sigma^2}\right) \\<br>                 &amp;&#x3D; -H(q) + \frac 12<br>\end{aligned}<br>$$</p>
+<p>故，最大化熵等价于最小化 $q$ 和 $p$ 之间的 KL 散度。取等当且仅当它就是正态分布。$\blacksquare$</p>
+<blockquote>
+<p><strong>Remark.</strong> 当然，这个做法唯一的不足就是它 conditional on 你知道答案。不过，这个做法还是给你提供了一种猜答案的方法。</p>
+</blockquote>
+<div class="note warning"><p><strong>例子 2.</strong> 定义在支撑集 $\mathbb{N}$ 上期望为 $1 &#x2F; p$ 的熵最大的分布是 $\mathrm{Geom}(p)$。</p>
+</div>
+
+<h2><span id="kolmogrov-复杂度">Kolmogrov 复杂度</span></h2><p>Kolmogrov 复杂度刻画了字符串的复杂程度。</p>
+<div class="note success"><p><strong>定义 3（Kolmogrov 复杂度）.</strong> 令 $U$ 是一个通用图灵机。一个字符串 $s$ 在 $U$ 下的 Kolmogrov 复杂度为</p>
+<p>$$<br>K_U(s) :&#x3D; \min_{U(x) &#x3D; s} |x|<br>$$</p>
+</div>
+
+<p>为了避免进行繁琐的计算理论上的讨论，我们下面用“某编程语言的代码”来理解图灵机的编码，用“某编程语言的解释器”来理解一个通用图灵机。上述定义即，能输出字符串 $s$ 的最短代码长度。</p>
+<p>自然，$K_U$ 和 $U$ 的选择基本上没关系，因为 </p>
+<div class="note info"><p><strong>定理 4.</strong> 对于任意的通用图灵机 $U, U’$，都存在正整数 $c$ 使得</p>
+<p>$$<br>\forall s, K_{U’}(x) \leq K_U(x) + c<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 只需要用 $U’$ 模拟 $U$ 的运行即可（把 $U$ 到 $U’$ 的解释器写在代码前面，代码则作为字符串常量写在后面）。$\blacksquare$</p>
+<p>但是很遗憾，Kolmogrov 复杂度是不可计算的。</p>
+<div class="note info"><p><strong>定理 5.</strong> 给定通用图灵机 $U$，语言 $K_U :&#x3D; \{\langle s, x\rangle :&#x3D; K_U(s) \leq x\}$ 是不可判定的。</p>
+</div>
+
+<p><strong>证明.</strong> 假设其反面，若存在图灵机 $M$ 能判断上述语言，我们证明存在一个图灵机 $M’$，其长度为 $\langle M\rangle + C$，能够输出一个 kolmogrov 大于 $\langle M\rangle + C$ 字符串从而导出矛盾。</p>
+<p>显然（$\star$），长度为 $|\langle M\rangle| + C + 1$ 的字符串中存在 kolmogrov 复杂度大于 $\langle M\rangle + C$ 的（因为一个图灵机仅对应一个字符串）。则下面的图灵机 $M’$ 能输出一个 Kolmogrov 复杂度大于 $\langle M\rangle + C$ 的字符串：</p>
+<ol>
+<li>在一切输入上：</li>
+<li>以短字典序枚举 $s$，</li>
+<li>若 $M(\langle s, M + C\rangle)$ 则输出 $s$ 停机</li>
+</ol>
+<p>因为（$\star$），该图灵机必停机。$\blacksquare$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/05/26/HeuristicRSMA/" rel="prev" title="启发式 RSMA 算法">
+                  <i class="fa fa-angle-left"></i> 启发式 RSMA 算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

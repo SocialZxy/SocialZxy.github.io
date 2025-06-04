@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 因为最近在一个 EDA 组里轮转，所以需要学一些经典 EDA 算法。现在主要包括如下线索：  Trees in Routing">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-05-11T06:52:28.000Z">
-<meta property="article:modified_time" content="2025-05-20T08:27:00.449Z">
+<meta property="article:modified_time" content="2025-05-26T07:36:21.806Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">58</span>
+          <span class="site-state-item-count">59</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -231,7 +231,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-20 16:27:00" itemprop="dateModified" datetime="2025-05-20T16:27:00+08:00">2025-05-20</time>
+      <time title="Modified: 2025-05-26 15:36:21" itemprop="dateModified" datetime="2025-05-26T15:36:21+08:00">2025-05-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -264,7 +264,7 @@
 <li><strong>资源消耗.</strong> 对应线缆总长度。</li>
 </ol>
 <p>前者对应曼哈顿距离度量下的最短路树问题，可以用 Dijkstra 等经典算法在 $O((n + m)\log n)$ 时间内完美解决；而单独考虑资源消耗的问题就已经非常困难，因为它对应经典的 steiner tree 问题，这个问题是 $\mathbf{NP}\text{-complete}$ 的。</p>
-<p>因此常常需要考虑两个问题：最小 steiner tree 问题（SMT），和最短路 steiner tree 问题（SPT），或者将其合起来然后探究一些 trade-off（对应所谓的 shallow light tree（SLT）问题）。</p>
+<p>因此常常需要考虑两个问题：最小 steiner tree 问题（SMT），和最短路 steiner tree 问题（SPT &#x2F; RSA），或者将其合起来然后探究一些 trade-off（对应所谓的 shallow light tree（SLT）问题）。</p>
 <table>
 <thead>
 <tr>
@@ -279,6 +279,10 @@
 <tr>
 <td align="center">GPU-Accelerated Rectilinear Steiner Tree Generation</td>
 <td align="center"><strong>RSMT</strong> <br> GPU Acceleration</td>
+</tr>
+<tr>
+<td align="center"><a href="../../../../2025/05/26/HeuristicRSMA/">启发式 RSMA 算法</a></td>
+<td align="center"><strong>RSMA</strong> <br> ？</td>
 </tr>
 <tr>
 <td align="center"><a href="../../../../2025/05/12/SALT-Algorithm/">SALT Algorithm</a></td>
