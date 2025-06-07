@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    准备工具 集中不等式 随机变量的收敛 特征函数   大数定律，中心极限定理">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 信息科学中的概率统计（下）">
+<meta property="og:url" content="http://example.com/2025/06/05/ProbabilityTheoryRevision2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    准备工具 集中不等式 随机变量的收敛 特征函数   大数定律，中心极限定理">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-05T05:23:42.000Z">
+<meta property="article:modified_time" content="2025-06-06T06:31:03.550Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Probability Theory">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/06/05/ProbabilityTheoryRevision2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/06/05/ProbabilityTheoryRevision2/","path":"2025/06/05/ProbabilityTheoryRevision2/","title":"Revision | 信息科学中的概率统计（下）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 信息科学中的概率统计（下） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">准备工具</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">集中不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">随机变量的收敛</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">特征函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">大数定律，中心极限定理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/05/ProbabilityTheoryRevision2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 信息科学中的概率统计（下） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 信息科学中的概率统计（下）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-05 13:23:42" itemprop="dateCreated datePublished" datetime="2025-06-05T13:23:42+08:00">2025-06-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-06 14:31:03" itemprop="dateModified" datetime="2025-06-06T14:31:03+08:00">2025-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%87%86%E5%A4%87%E5%B7%A5%E5%85%B7">准备工具</a><ul>
+<li><a href="#%E9%9B%86%E4%B8%AD%E4%B8%8D%E7%AD%89%E5%BC%8F">集中不等式</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E5%8F%98%E9%87%8F%E7%9A%84%E6%94%B6%E6%95%9B">随机变量的收敛</a></li>
+<li><a href="#%E7%89%B9%E5%BE%81%E5%87%BD%E6%95%B0">特征函数</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%A7%E6%95%B0%E5%AE%9A%E5%BE%8B%E4%B8%AD%E5%BF%83%E6%9E%81%E9%99%90%E5%AE%9A%E7%90%86">大数定律，中心极限定理</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="准备工具">准备工具</span></h1><h2><span id="集中不等式">集中不等式</span></h2><div class="note info"><p><strong>定理 1.1.1（马尔可夫不等式）.</strong> 设随机变量的 $k$ 阶矩存在（$\mathbb{E}[|X|^k] &lt; \infty$），则</p>
+<p>$$<br>\Pr[|X| &gt; \varepsilon] \leq \frac{\mathbb{E}[|X|^k]}{\varepsilon^k}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong></p>
+<p>$$<br>\begin{aligned}<br>    \Pr[|X| &gt; \varepsilon] &#x3D; \int_{|x| &gt; \varepsilon} f(x)\mathrm{d}x \leq \int_{|x| &gt; \varepsilon} \frac{|x|^k}{\varepsilon^k} f(x)\mathrm{d}x &#x3D; \frac{\mathbb{E}[|X|^k]}{\varepsilon^k}<br>\end{aligned}<br>$$</p>
+<p>$\blacksquare$</p>
+<div class="note info"><p><strong>定理 1.1.2（切比雪夫不等式）.</strong> 设随机变量的期望 $\mu$ 和方差 $\sigma^2$ 存在，则 </p>
+<p>$$<br>\Pr(|X - \mu| &gt; \varepsilon) \leq \frac{\sigma^2}{\varepsilon^2}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 对标准化后的随机变量使用二阶矩的马尔可夫不等式。$\blacksquare$</p>
+<p>上面两个不等式都只考虑了随机变量的某一阶矩。可以想象的是，我们可以将所有阶矩通过某种方式混合起来考虑，然后通过调参找到最紧的一种混合方式。为此，引入矩生成函数</p>
+<div class="note success"><p><strong>定义 1.1.1（矩生成函数）.</strong> 随机变量 $X$ 的矩生成函数是 $\mathrm{MGF}_X(t) &#x3D; \mathbb{E}[e^{tX}]$。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 1.1.1.</strong> 关于这个东西的命名：矩生成函数正是随机变量各阶矩的 EGF。</p>
+</blockquote>
+<p>矩生成函数法系如下范式——证明 $\Pr[X &gt; \varepsilon]$ 的界可用如下步骤：</p>
+<ol>
+<li>注意 $X &gt; \varepsilon$ 等价于 $e^{tX} &gt; e^{t\varepsilon}$；</li>
+<li>使用马尔可夫不等式，导出概率不超过 $\mathbb{E}[e^{tX}] &#x2F; e^{t\varepsilon} \leq \varphi(t)$；</li>
+<li>求 $t$ 使得 $\varphi(t)$ 最小化，即得到概率上界为 $\varphi(t^*)$。</li>
+</ol>
+<div class="note info"><p><strong>定理 1.1.3（Chernoff 界）.</strong> 设 $X_1, X_2, …, X_n$ 独立，$X_i\sim \mathrm{Bern}(p_i)$，$p &#x3D; \frac 1n \sum_{i&#x3D;1}^n p_i$，则对于任意 $\varepsilon &gt; 0$ 都有</p>
+<p>$$<br>\Pr\left[\frac 1n\sum_{i&#x3D;1}^n X_i \geq p + \varepsilon\right] &lt; \mathbb{e}^{-nD(p + \varepsilon\Vert p)} \leq e^{-2n\varepsilon^2}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 标准的矩生成函数法。记 $X &#x3D; \sum_{i&#x3D;1}^n X_i$</p>
+<p>$$<br>\begin{aligned}<br>\Pr[X \geq n(p + \varepsilon)]&amp;\leq \frac{\mathbb{E}[e^{tX}]}{e^{tn(p + \varepsilon)}} &amp;{\color{blue}\text{Markov bound}} \\<br>&amp;&#x3D;\frac{\prod_{i&#x3D;1}^n(1 - p_i + p_ie^{t})}{e^{tn(p + \varepsilon)}} &amp;{\color{blue}{\text{Independentness}}} \\<br>&amp;\leq \frac{(1 - p + pe^{t})^n}{e^{tn(p + \varepsilon)}} &amp;{\color{blue}{\text{$\text{AM} \geq \text{GM}$ Inequality}}}<br>\end{aligned}<br>$$</p>
+<p>只需最小化 $\ln(1 - p + p\varepsilon^t) - t(p + \varepsilon)$。简单求导可知 $t &#x3D; \ln \frac{(p + \varepsilon)(1 - p)}{(1 - p - \varepsilon)p}$ 时恰好是 $D(p + \varepsilon \Vert p)$。</p>
+<p>还可以根据经典不等式 $D(p \Vert q) \geq 2\Delta_{TV}(p, q)^2$ 再放缩一次。$\blacksquare$</p>
+<p>注意，Chernoff 界可以加强至任意 $[0, 1]$ 上的分布。因为根据 Jensen 不等式</p>
+<p>$$<br>\mathbb{E}[e^{tX}] \leq 1 - p + p{e^t}<br>$$</p>
+<p>上述矩生成函数方法仍然成立。</p>
+<p>对于更一般的分布，可以使用 Azuma-Hoeffding 不等式。</p>
+<div class="note info"><p><strong>引理 1.1.4（Hoeffding 引理）.</strong> 随机变量 $X\in [a, b], \mathbb{E}[X] &#x3D; 0$，则 $\mathbb{E}[e^{tX}] \leq \exp\left(\frac{t^2(b - a)^2}{8}\right)$</p>
+</div>
+
+<p><strong>证明.</strong> 这个式子很像我们证 Azuma 不等式的时候证的东西，但是它不对称，所以阴间了很多（因为 $e^x$ 的性质，哪怕是将区间向左平移一下都会让不等式松很多）。</p>
+<p>首先用 Jensen 不等式，可知 </p>
+<p>$$<br>\mathbb{E}[e^{tX}] \leq \mathbb{E}\left[\frac{X - a}{b - a}e^{tb} + \frac{b - X}{b - a}e^{ta}\right] \leq \frac{-a}{b - a}e^{tb} + \frac{b}{b - a}e^{ta}<br>$$</p>
+<p>将右侧式子取对数后泰勒展开到二阶拉格朗日余项即可证明。节约时间这里略去。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 1.1.5（Azuma-Hoeffding 不等式）.</strong> 随机变量 $X_1, …, X_n$ 相互独立，期望均为 $0$，各自有上下界 $a_i, b_i$（$\forall i, X_i\in [a_i, b_i]$），则对于任意的 $\varepsilon &gt; 0$</p>
+<p>$$<br>\begin{align}<br>\Pr\left[\sum_{i&#x3D;1}^n X_i &gt; \varepsilon\right] \leq \exp\left(-\frac{2\varepsilon^2}{\sum_{i&#x3D;1}^n (a_i - b_i)^2}\right) \\<br>\Pr\left[\sum_{i&#x3D;1}^n X_i &lt; -\varepsilon\right] \leq \exp\left(-\frac{2\varepsilon^2}{\sum_{i&#x3D;1}^n (a_i - b_i)^2}\right)<br>\end{align}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 我们只需要证明 $&gt; \varepsilon$ 的一边，另一边取相反数即可得证。</p>
+<p>记 $X &#x3D; \sum_{i&#x3D;1}^n X_i$。则对于任意的 $t &gt; 0$，$X &gt; \varepsilon$ 等价于 $e^{tX} &gt; e^{t\varepsilon}$。依次根据马尔可夫不等式、变量独立性、Hoeffding 引理</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{LHS} &amp;\leq \frac{\mathbb{E}[e^{tX}]}{e^{t\varepsilon}} &#x3D; \frac{\prod_{i&#x3D;1}^n\mathbb{E}[e^{tX_i}]}{e^{t\varepsilon}} \leq \exp\left(t^2\sum_{i&#x3D;1}^n \frac{(a_i - b_i)^2}{8} - \varepsilon t\right)<br>\end{aligned}<br>$$</p>
+<p>取 $t &#x3D; 4 &#x2F; \sum_{i&#x3D;1}^n (a_i - b_i)^2$ 得到最紧的上界。$\blacksquare$</p>
+<p>证明的重点是一个 Hoeffding 引理的成立性，因此可以定义</p>
+<div class="note success"><p><strong>定义 1.1.2（Subgaussian 分布）.</strong> 对于随机变量 $X$，若 $\forall t\in \mathbb{R}, \mathrm{MGF}_X(t) \leq e^{\frac{\sigma^2t^2}{2}}$，则称 $X$ 是 $\sigma$-subgaussian 的。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 不等号右侧是 $\mathcal{N}(0, \sigma^2)$ 的矩生成函数。正态分布的尾分布有指数级的上界：</p>
+<p>$$<br>\Pr[X &gt; t] &#x3D; \int_{t}^\infty \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{x^2}{2\sigma^2}}\mathrm{d}x \leq \int_{t}^\infty \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{t^2 + (x - t)^2}{2\sigma^2}} \mathrm{d}x &#x3D; \frac 12 e^{-\frac{t^2}{2\sigma^2}}<br>$$</p>
+</blockquote>
+<p>实际上 Hoeffding 不等式可以加强成：若 $X_i$ 都是 $\sigma_i$-subgaussian 分布，则 </p>
+<p>$$<br>\Pr\left[\sum_{i&#x3D;1}^n X_i &gt; \varepsilon\right] \leq \exp\left(-\frac{\varepsilon^2}{2\sum_{i&#x3D;1}^n \sigma_i^2}\right)<br>$$</p>
+<p>可以证明关于 Subgaussian 分布的一些性质。</p>
+<div class="note info"><p><strong>定理 1.1.6（Subgaussian 分布的性质）</strong> 若 $X, X_1, X_2$ 是 $\sigma, \sigma_1, \sigma_2$-subgaussian 分布，则以下断言成立：</p>
+<ol>
+<li>$\mathbb{E}[X] &#x3D; 0, \mathbb{D}(X) \leq \sigma^2$；</li>
+<li>$cX$ 是 $|c|\sigma$-subgaussian 分布；</li>
+<li>$X_1 + X_2$ 是 $\sqrt{\sigma_1^2 + \sigma_2^2}$-subgaussian 分布。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 在 $t &#x3D; 0$ 处的端点效应（$t &#x3D; 0$ 时两函数相等，为了保证全局小于等于需要导数相等，二阶导不超过 $\sigma^2$）蕴含断言 1。</p>
+<p>后面两个断言是平凡的。$\blacksquare$</p>
+<p>对于一些非 subgaussian 的分布，比如 $\Gamma$ 分布和 $\chi^2$ 分布，也可以用矩生成函数方法得到集中不等式。计算机科学中两个经典的例子是 Coupon Collector Bound 和 Johnson-Lindstrauss Lemma，想必大家都非常熟悉。</p>
+<h2><span id="随机变量的收敛">随机变量的收敛</span></h2><p>本节形式化定义高中概率统计中常见的“频率收敛于概率 &#x2F; 均值收敛于期望 &#x2F; 几乎是正态分布”一类的说法。共有三种想法：</p>
+<ol>
+<li>随着试验次数的增加，高概率观测到实验结果和 $X$ 的误差不大。<strong>（依概率收敛）</strong></li>
+<li>随着试验次数的增加，实验结果的分布和 $X$ 的分布误差不大。<strong>（依分布收敛）</strong></li>
+<li>如果做无穷次实验，几乎必然观测到实验结果就是 $X$。<strong>（几乎必然收敛）</strong></li>
+</ol>
+<div class="note success"><p><strong>定义 1.2.1（依概率收敛）.</strong> 考虑随机变量 $X, X_1, X_2, …$，若对于任意的 $\varepsilon &gt; 0$ 都有 </p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr[|X_n - X| &lt; \varepsilon] &#x3D; 1<br>$$</p>
+<p>则称随机变量序列 $X_1, X_2, …$ 依概率收敛于 $X$，记作 $X_n \xrightarrow{P} X (n\rightarrow \infty)$。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.2（依分布收敛）.</strong> 考虑随机变量 $X, X_1, X_2, …$，若 $X_n$ 的分布函数在 $X$ 的一切连续点上点点收敛于 $X$ 的分布函数，i.e.</p>
+<p>$$<br>\lim_{n\rightarrow \infty} F_{X_n}(X) &#x3D; F_X(x)<br>$$</p>
+<p>则称 $\{F_{X_n}(x)\}$ 弱收敛于 $F_{X}(x)$，或随机变量列 $X_1, X_2, …$ 依分布收敛于 $X$，记作 $X_n\xrightarrow{d} X (n\rightarrow \infty)$。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 1.2.1.</strong> 在正经的概率论教材中，应该会把范围扩大到非降函数 $F(X)$，比如说 $X_i &#x3D; i$ 的分布函数弱收敛到 $0$。但这里我们不管。</p>
+</blockquote>
+<div class="note success"><p><strong>定义 1.2.3（几乎必然收敛）.</strong> 考虑随机变量 $X, X_1, X_2, …$，若 </p>
+<p>$$<br>\Pr\left[\lim_{n\rightarrow \infty} X_n &#x3D; X\right] &#x3D; 1<br>$$</p>
+<p>则称 $\{X_n\}$ 几乎必然收敛于 $X$，记作 $X_n\xrightarrow{a.s.} X (n\rightarrow \infty)$。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 1.2.2.</strong> 依分布收敛和几乎必然收敛的定义可能显得比较怪。需要时刻记住随机变量是 $\mathcal{S}\rightarrow \mathbb{R}$ 的可测函数，随机变量的背后都是有一个样本空间的。实验结果是这个样本空间中的一个样本，$X_n$ 只是它的函数值。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 1.2.1（几乎必然收敛的刻画）.</strong> 令事件 $A_n(\varepsilon) &#x3D; \{|X_n - X| \geq \varepsilon\}$，则 $X_n \xrightarrow{a.s.} X$ 当且仅当</p>
+<p>$$<br>\forall \varepsilon &gt; 0, \lim_{n\rightarrow \infty} \Pr\left[\bigcup_{m &#x3D; n}^\infty A_m(\varepsilon)\right] &#x3D; 0 \label{as-eqdef}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 用 $\varepsilon &#x3D; 1 &#x2F; k$ 控制极限，将几乎必然收敛的定义改写做</p>
+<p>$$<br>\Pr\left[\bigcap_{k&#x3D;1}^\infty\bigcup_{n &#x3D; 1}^\infty \bigcap_{m &#x3D; n}^\infty \neg A_m(1 &#x2F; k)\right] &#x3D; 1 \quad\Leftrightarrow\quad \Pr\left[\bigcup_{k&#x3D;1}^\infty\bigcap_{n &#x3D; 1}^\infty \bigcup_{m &#x3D; n}^\infty A_m(1 &#x2F; k)\right] &#x3D; 0<br>$$</p>
+<p>根据次可加性、单调性，上式等价于 </p>
+<p>$$<br>\forall k\in \mathbb{N}, \Pr\left[\bigcap_{n &#x3D; 1}^\infty \bigcup_{m &#x3D; n}^\infty A_m(1 &#x2F; k)\right] &#x3D; 0 \label{1.2.1-inter1}<br>$$</p>
+<p>进而可推出 $\forall \varepsilon &gt; 0$ 上式都成立（将 $\varepsilon$ round 到不超过它的某个 $1&#x2F;k$，注意 $A_m(x)$ 关于 $x$ 不升）。$(\ref{1.2.1-inter1})\Leftrightarrow (\ref{as-eqdef})$ 无非是因为 $\cup_{m &#x3D; n}^\infty A_m(\varepsilon)$ 是单调的。$\blacksquare$</p>
+<blockquote>
+<p><strong>Remark 1.2.3.</strong> 依概率收敛的定义是 $\lim_{n\rightarrow \infty} A_n(\varepsilon) &#x3D; 0$。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 1.2.2.</strong> 几乎必然收敛蕴含依概率收敛，反之未必（<em>即使是收敛到常数分布也不行</em>）。</p>
+</div>
+
+<p><strong>证明.</strong> 因为 $A_n(\varepsilon) \subseteq \cup_{m&#x3D;n}^\infty A_n(\varepsilon)$。此外，我们给出一个逆命题的反例。</p>
+<p>考虑一列独立的随机变量，$X_i\sim \mathrm{Bern}(1 &#x2F; i)$。计算发现这列随机变量依概率收敛至 $0$，但是不可能几乎必然收敛。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 1.2.3.</strong> 依概率收敛蕴含依分布收敛，反之未必。</p>
+</div>
+
+<p><strong>证明.</strong> 用几个连续性立即得证。逆命题不成立的本质原因是分布相同不能推出随机变量相同（除非该分布是常数分布）。$\blacksquare$</p>
+<h2><span id="特征函数">特征函数</span></h2><p>我们经常遇到计算两个随机变量之和 $X_1 + X_2$ 的密度函数的问题。熟知，这个问题的答案是两个函数概率密度函数的卷积。因此，我们想到可以用傅里叶变换来计算卷积。</p>
+<div class="note danger"><p><strong>警告.</strong> 因为我是学计算机的，所以将省略一切分析上的严格推导。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.3.1（特征函数）.</strong> 定义随机变量 $X$ 的特征函数为</p>
+<p>$$<br>\psi_X(t) :&#x3D; \mathbb{E}[e^{itX}]<br>$$</p>
+<p>这正是 $X$ 的密度函数的傅里叶变换。</p>
+</div>
+
+<div class="note info"><p><strong>命题 1.3.2（特征函数的性质）.</strong> 关于特征函数，有如下简单的性质：</p>
+<ol>
+<li>$\psi_{aX + b}(t) &#x3D; e^{itb}\psi_X(at)$；</li>
+<li>若 $X_1, X_2$ 独立，则 $\psi_{X_1 + X_2} &#x3D; \psi_{X_1}(t)\psi_{X_2}(t)$；</li>
+<li>可以从特征函数中提取 $X$ 的 $k$ 阶矩：$\mathbb{E}[X^k] &#x3D; (-i)^k \psi_X^{(k)}(0)$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 直接对着定义验证即可。第三个断言可能需要一些积分和求导的交换性，这里没办法，只能不管。$\blacksquare$</p>
+<p>关于特征函数有两个重要结论，但是没学过实分析，只能不证。</p>
+<div class="note info"><p><strong>定理 1.3.3（唯一性定理）.</strong> 随机变量的分布函数由特征函数唯一决定。</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.3.4（连续性定理）.</strong> 分布函数 $F_{X_n}$ 弱收敛于 $F_X$ 的充分必要条件是 $\psi_{X_n}$ 点点收敛于 $\psi_X$。</p>
+</div>
+
+<h1><span id="大数定律中心极限定理">大数定律，中心极限定理</span></h1><p>关于依概率收敛的几个大数定律称作弱大数定律。在几种不同的独立性要求下，都可以证明均值收敛于期望。</p>
+<div class="note info"><p><strong>定理 2.1（切比雪夫大数定律）.</strong> 设随机变量 $X_1, X_2, …$ 两两独立，方差都有界，则对于任意的 $\varepsilon &gt; 0$ 都有 </p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr\left[\left|\frac{\sum_{i&#x3D;1}^n X_i}{n} - \frac{\sum_{i&#x3D;1}^n \mathbb{E}[X_i]}{n}\right| &lt; \varepsilon\right] &#x3D; 1<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 假设方差上界是 $C$，则由切比雪夫不等式可知偏差超过 $\varepsilon$ 不超过 $C &#x2F; n\varepsilon^2$，因此收敛于 $0$。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 2.2（马尔可夫大数定律）.</strong> 设随机变量 $X_1, X_2, …$ 两两独立，且 $\lim_{n\rightarrow\infty} \frac{1}{n^2}\sum_{i&#x3D;1}^n D(X_i) &#x3D; 0$，则</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr\left[\left|\frac{\sum_{i&#x3D;1}^n X_i}{n} - \frac{\sum_{i&#x3D;1}^n \mathbb{E}[X_i]}{n}\right| &lt; \varepsilon\right] &#x3D; 1<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 仍然是切比雪夫不等式。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 2.3（辛钦大数定律）.</strong> 设随机变量 $X_1, X_2, …$ 独立同分布，且期望 $\mu$ 存在，则对于任意的 $\varepsilon &gt; 0$ 都有</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr\left[\left|\frac{\sum_{i&#x3D;1}^n X_i}{n} - \mu\right| &lt; \varepsilon\right] &#x3D; 1<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 这里关于随机变量的矩没有什么信息，因此不能继续用之前常用的矩方法。考虑使用特征函数。</p>
+<p>依概率收敛于常数等价于依分布收敛进而等价于特征函数点点收敛，考虑证明之。若 $X_i$ 的特征函数是 $\psi_{X_i}(t)$（因为独立同分布所以均相等），则 $X &#x3D; \frac 1n \sum_{i&#x3D;1}^n X_i$ 的特征函数是 $\psi_{X_i}(t&#x2F;n)^n$。对于固定的 $t$，有在零处的泰勒展开（带 Peano 余项）</p>
+<p>$$<br>\psi_{X_i}(t) &#x3D; 1 + t\cdot \psi_{X_i}’(t) + o(t^2) &#x3D; 1 + i\mu t + o(t^2)<br>$$</p>
+<p>因此 </p>
+<p>$$<br>\psi_{X_i}(t &#x2F; n)^n &#x3D; \left(1 + \frac{i\mu t}{n} + o(t^2 &#x2F; n)\right)^n \rightarrow e^{i\mu t} \quad (n\rightarrow \infty)<br>$$</p>
+<p>因此依分布收敛于常数分布 $\mu$，根据唯一性定理，定理得证。$\blacksquare$</p>
+<p>几乎必然收敛意义下的大数定律称作强大数定律。现在要将 $A_n(\varepsilon)$ 加强至 $\cup_{m&#x3D;n}^\infty A_n(\varepsilon)$，最简单粗暴的办法是拓展切比雪夫大数定律，将有界矩的阶数加到四阶。</p>
+<div class="note info"><p><strong>定理 2.4（强大数定律）.</strong> 设 $X_1, X_2, …$ 独立同分布，期望存在（最弱可以是 $4$-wise 独立，期望存在），且 $\mathbb{E}[X_i^4] \leq C$。令 $S_n$ 是前 $n$ 个随机变量之和，则</p>
+<p>$$<br>\frac{S_n - \mathbb{E}(S_n)}{n} \xrightarrow{a.s.} 0 \quad(n\rightarrow \infty)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 用四阶矩方法可以证明 $A_m(\varepsilon) \leq \mathbb{E}(S^4_m) &#x2F; {n^4\varepsilon^4}$，注意</p>
+<p>$$<br>\begin{aligned}<br>\mathbb{E}[S_m^4] &amp;&#x3D; \sum_{i, j, k, l} \mathbb{E}[X_i X_j X_k X_l] \\<br>                  &amp;&#x3D; {\sum_{i&#x3D;1}^m \mathbb{E}[X_i^4]} + {6 \sum_{i &lt; j}\mathbb{E}[X^2_i]\mathbb{E}[X^2_j]} \\<br>                  &amp;\leq mC + 6m^2C<br>\end{aligned}<br>$$</p>
+<p>这里使用了柯西不等式：$\mathbb{E}[X^2] \leq \sqrt{\mathbb{E}[1]} \cdot \sqrt{\mathbb{E}[X^4]}$ 因此 </p>
+<p>$$<br>\Pr\left[\cup_{m&#x3D;n}^\infty A_m(\varepsilon)\right] \leq \sum_{m &#x3D; n}^\infty A_{m}(\varepsilon) \leq \sum_{m &#x3D; n}^\infty O\left(\frac{1}{m^2}\right) &#x3D; O\left(\frac{1}{n^2}\right)<br>$$</p>
+<p>根据定理 1.2.1 定理得证。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 2.5（Kolmogrov 大数定律）</strong> 设 $X_1, X_2, …$ 独立同分布，期望、方差存在，则 </p>
+<p>$$<br>\frac{S_n}{n} \xrightarrow{a.s.} \mathbb{E}[X]<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 2.1.</strong> 在正经的概率论教材中这个定理的叙述可能是，存在一列单增趋于无穷的 $b_n$ 使得 $\sum_{i&#x3D;1}^n D[X_n] &#x2F; b_n^2$ 收敛推出 $S_n &#x2F; b_n$ 几乎必然收敛。我们写的只是令 $b_n &#x3D; n$ 的特殊情况。</p>
+</blockquote>
+<blockquote>
+<p><strong>Remark 2.2.</strong> 证明这个定理需要很多我不想写的前置知识（比如几乎必然收敛的柯西准则、Kronecker 引理等），所以这里不证。</p>
+</blockquote>
+<hr>
+<p>如果你现在不是除 $n$ 而是除 $\sqrt n$，就会使得 $D[S_n &#x2F; \sqrt n] &#x3D; D(X)$，因此，$S_n &#x2F; \sqrt n$ 不会收敛到一个点上，但是中心极限定理指出它将收敛于正态分布。</p>
+<div class="note info"><p><strong>定理 2.6（Lindeberg-Lévy 中心极限定理）.</strong> 设 $X_1, X_2, …$ 独立同分布，$\mathbb{E}[X_i] &#x3D; \mu, D[X_i] &#x3D; \sigma^2$，令</p>
+<p>$$<br>\widetilde{S}_n &#x3D; \frac{\sum_{i&#x3D;1}^n X_i - \mu}{\sqrt n\sigma}<br>$$</p>
+<p>则 $\widetilde{S}_n \xrightarrow{d} Z\sim \mathcal{N}(0, 1)$。</p>
+</div>
+
+<p><strong>证明.</strong> 不失一般性设 $\mu &#x3D; 0, \sigma &#x3D; 1$，考虑 $\sum_{i&#x3D;1}^n X_i &#x2F; \sqrt n$ 的特征函数：</p>
+<p>$$<br>\psi_{\widetilde{S}_n}(t) &#x3D; \psi_{X}(t &#x2F; \sqrt n)^n<br>$$</p>
+<p>将 $\psi_{X}(t)$ 泰勒展开到二阶 Peano 余项得到</p>
+<p>$$<br>\psi_{X}(t) &#x3D; 1 + i \mathbb{E}[X] t - D[X] \frac{t^2}{2} + o(t^2) &#x3D; 1 - \frac{t^2}{2} + o(t^2)<br>$$</p>
+<p>代入得到</p>
+<p>$$<br>\psi_{\widetilde{S}_n}(t) &#x3D; \left(1 - \frac{t^2}{2n} + o\left(\frac{t^2}{n}\right)\right)^n \rightarrow e^{-t^2 &#x2F; 2}<br>$$</p>
+<p>这正是 $\mathcal{N}(0, 1)$ 的特征函数。$\blacksquare$</p>
+<p>中心极限定理的经典应用是用来估计 $n$ 比较大时的二项分布等。估计的误差由 Berry-Esseen 定理给出，但是我不会证，只在这里放一下形式：</p>
+<div class="note info"><p><strong>定理 2.7（Berry-Esseen 中心极限定理）.</strong> 在中心极限定理的条件下，实际上有 </p>
+<p>$$<br>\sup_{t\in \mathbb{R}} \left(\left|\Pr[\widetilde{S}_n &lt; t] - \Pr[Z &lt; t]\right|\right) &#x3D; O\left(\frac{\rho}{\sqrt n}\right)<br>$$</p>
+<p>其中 $\rho &#x3D; \mathbb{E}[|X^3|]$。</p>
+</div>
+
+<p>一个有意思的应用是证明泊松分布的中位数基本上是在期望附近的，或者说 $X_n\sim \pi(n)$</p>
+<p>$$<br>\lim_{n\rightarrow \infty} \Pr[X_n &lt; n] &#x3D; \lim_{n\rightarrow \infty} e^{-n}\sum_{i&#x3D;0}^n \frac{n^{i}}{i!} &#x3D; \frac 12<br>$$</p>
+<p>方法是注意到 $X_n &#x3D; \sum_{i&#x3D;1}^n Y_i$，其中 $Y_i\sim \pi(1)$，然后用中心极限定理。误差也可以用 Berry-Esseen 给出，结论是 $\forall n, X\sim \pi(n)$ 则 $\Pr[X \leq n] \geq \frac 14$ 且 $\Pr[X\geq n] \geq \frac 14$。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Probability-Theory/" rel="tag"># Probability Theory</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/04/AlgorithmAnalysis/" rel="prev" title="算法设计与分析（实验班）复习笔记">
+                  <i class="fa fa-angle-left"></i> 算法设计与分析（实验班）复习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

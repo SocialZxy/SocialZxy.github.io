@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 仅 Focus 在当年学 OI 的时候没有重视的网络流复杂度分析、下界计算、近似比计算等。    最大流 最小割最大流定理 基于增广路的算法 基于预流推进的算法   费用流">
+<meta property="og:type" content="article">
+<meta property="og:title" content="算法设计与分析（实验班）复习笔记">
+<meta property="og:url" content="http://example.com/2025/06/04/AlgorithmAnalysis/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 仅 Focus 在当年学 OI 的时候没有重视的网络流复杂度分析、下界计算、近似比计算等。    最大流 最小割最大流定理 基于增广路的算法 基于预流推进的算法   费用流">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-04T11:46:46.000Z">
+<meta property="article:modified_time" content="2025-06-05T05:22:56.013Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/06/04/AlgorithmAnalysis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/06/04/AlgorithmAnalysis/","path":"2025/06/04/AlgorithmAnalysis/","title":"算法设计与分析（实验班）复习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>算法设计与分析（实验班）复习笔记 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">最大流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">最小割最大流定理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">基于增广路的算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">基于预流推进的算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">费用流</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">61</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/04/AlgorithmAnalysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="算法设计与分析（实验班）复习笔记 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          算法设计与分析（实验班）复习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-04 19:46:46" itemprop="dateCreated datePublished" datetime="2025-06-04T19:46:46+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-05 13:22:56" itemprop="dateModified" datetime="2025-06-05T13:22:56+08:00">2025-06-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 仅 Focus 在当年学 OI 的时候没有重视的网络流复杂度分析、下界计算、近似比计算等。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9C%80%E5%A4%A7%E6%B5%81">最大流</a><ul>
+<li><a href="#%E6%9C%80%E5%B0%8F%E5%89%B2%E6%9C%80%E5%A4%A7%E6%B5%81%E5%AE%9A%E7%90%86">最小割最大流定理</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E5%A2%9E%E5%B9%BF%E8%B7%AF%E7%9A%84%E7%AE%97%E6%B3%95">基于增广路的算法</a></li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%A2%84%E6%B5%81%E6%8E%A8%E8%BF%9B%E7%9A%84%E7%AE%97%E6%B3%95">基于预流推进的算法</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B4%B9%E7%94%A8%E6%B5%81">费用流</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="最大流">最大流</span></h1><p>本节中，记一个容量网络为一个五元组 $N &#x3D; \langle V, E, c, s, t\rangle$，其中 $V$ 为点集，$E\subset V \times V \setminus {(v, v) : v\in V}$ 为有向边的集合，$c : E\rightarrow \mathbb{R}^*$ 为流量，$s, t$ 为源点汇点。默认读者熟悉诸网络流的问题描述、线性规划形式。任意一个可行流的流量记作 $v(f)$。</p>
+<h2><span id="最小割最大流定理">最小割最大流定理</span></h2><p>本节揭示最大流问题与网络最小割问题的深刻关联，顺带介绍和分析 Ford-Fulkerson 算法。当然，为了证明最小割最大流定理，有一个极其丑陋的线性规划对偶加调整的证法，这里从另一个方向考虑。</p>
+<div class="note success"><p><strong>定义 1（割集）.</strong> 网络 $N$ 的一个基于 $A\subset V$（须满足 $s\in A, t\notin A$）的割集记作 </p>
+<p>$$<br>(A, \bar{A}) :&#x3D; { (u, v) \in E : u\in A, v\in \bar{A} }<br>$$</p>
+<p>其容量为 </p>
+<p>$$<br>c(A, \bar{A}) :&#x3D; \sum_{e\in (A, \bar{A})} c(e)<br>$$</p>
+</div>
+
+<p>将源汇割开之后，一个可行流的流量正好是割集上的流量。具体地</p>
+<div class="note info"><p><strong>引理 1.</strong> 对于任意可行流 $f$ 和割集 $(A, \bar{A})$，都有</p>
+<p>$$<br>v(f) &#x3D; \sum_{(u, v) : u\in A, v\in \bar{A}} f(u, v) - \sum_{(u, v) : u\in \bar{A}, v\in A} f(u, v)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 用节点流量守恒将流量推至割集边缘即可。$\blacksquare$</p>
+<p>这自然推出可行流和割集的弱对偶性和互补松弛条件。</p>
+<div class="note info"><p><strong>推论 2.</strong> 对于任意可行流 $f$ 和割集 $(A, \bar{A})$，都有</p>
+<p>$$<br>v(f) \leq c(A, \bar{A})<br>$$</p>
+<p>取等当且仅当 $f$ 是最大流，$(A, \bar{A})$ 是最小割。</p>
+</div>
+
+<p>Ford-Fulkerson 算法的出发点是图论中常见的增广路思想，本质上是一种反悔贪心。我们首先从增广路的定义开始。</p>
+<div class="note success"><p><strong>定义 2（增广路）.</strong> 网络 $N$ 上的一条 $i, j$-路系指一个途径点的序列 $i &#x3D; p_1, p_2, …, p_k &#x3D; j$ 配上对应的边 $e_1, …, e_{k - 1}$，满足 $e_t &#x3D; (p_t, p_{t + 1})$ 或 $e_t &#x3D; (p_{t + 1}, p_t)$。满足前者的边称作前向边（边方向和链前进方向相等），满足后者的边称作后向边。</p>
+<p>如果序列中的任意前向边 $e_f$ 都未满流即 $f(e_f) &lt; c(e_f)$，任意后向边 $e_b$ 都非空即 $f(e_b) &gt; 0$，则该路径为 $i, j$-增广路。</p>
+</div>
+
+<div class="note info"><p><strong>引理 3.</strong> $f$ 是最大流当且仅当图中不存在 $s, t$-增广路。</p>
+</div>
+
+<p><strong>证明.</strong> 必要性显然。下证充分性。</p>
+<p>令 $A$ 表示全体 $j$，使得存在 $s, j$-增广路。考虑一条割边 $(i, j)$。</p>
+<ol>
+<li>若 $i\in A, j\in \bar{A}$，则 $f(i, j) &#x3D; c(i, j)$，否则 $j\in A$；</li>
+<li>若 $i\in \bar{A}, j\in A$，则 $f(i, j) &#x3D; 0$，否则 $i\in A$。</li>
+</ol>
+<p>由引理 1，$v(f) &#x3D; c(A, \bar{A})$，进而由引理 2，$f$ 是最大流，$(A, \bar{A})$ 是最小割。$\blacksquare$</p>
+<p>至此，为了证明最小割最大流定理，只需要证明确实存在一种 $f$ 使得图中不存在 $s, t$-增广路即可。有一众基于增广路的网络流算法都可以构造出这个流，因此我们证明了如下定理：</p>
+<div class="note info"><p><strong>定理 4（最小割最大流定理）.</strong> 一个网络 $N$ 的最小割等于其最大流。</p>
+</div>
+
+<h2><span id="基于增广路的算法">基于增广路的算法</span></h2><p>接下来介绍一众基于增广路的算法，包括 Ford-Fulkerson，Edmonds-Karp，Dinic，<em>ISAP</em>。这些算法系依次改进而来，其核心思路都是出于图论上的直觉，即每次增广一条路径。</p>
+<div class="note warning"><p><strong>算法 1（Ford-Fulkerson）.</strong> 重复用 dfs 找增广路，若找到就尝试增广使得一条前向边满流或者一条后向边零流。直到找不到时停止。</p>
+</div>
+
+<p>该算法每次找到增广路流量必增加，流量有上界。在只有整数流量时，算法复杂度为 $O(E|f^*|)$。然而，在有无理数流量时，可能发生无穷次增广，最后答案收敛在最大流。</p>
+<p>为此提出的改进导出了 EK 算法。首先为了方便实现算法，定义网络 $N$ 在可行流 $f$ 上的残量网络：</p>
+<div class="note success"><p><strong>定义 3（残量网络）.</strong> 网络 $N$ 在可行流 $f$ 上的残量网络的边集和对应容量由以下构造给出：若 $N$ 中有边 $(u,v)$，流量为 $c(u, v)$，则 $N(t)$ 中将增加边 $(u, v)$，流量为 $c(u, v) - f(u, v)$ 和 $(v, u)$，流量为 $f(u, v)$。</p>
+</div>
+
+<p>容易发现以下几个基本事实：</p>
+<ol>
+<li>$N(f)$ 上任意一条不满流的路径和 $N$ 上的一条增广路一一对应。</li>
+<li>$N(f)$ 上任意一个可行流 $g$ 对应 $N$ 上一个可行流 $f’$，其中 $v(f’) &#x3D; v(f) + v(g)$，且 $$<br>f’(u, v) &#x3D; f(u, v) + g(u, v) - g(v, u)<br>$$</li>
+<li>一轮增广之后，残量网络的变化可以高效计算。</li>
+</ol>
+<p>因此我们只需在残量网络上操作。另外定义</p>
+<div class="note success"><p><strong>定义 4（分层辅助网络）.</strong> 网络 $N$ 在可行流 $f$ 上的分层辅助网络 $AN(f)$ 是保留所有 $N(f)$ 中满足 $d(v) &#x3D; d(u) + 1$ 的边（$d(u)$ 表示从 $s$ 出发仅经过非满流边到 $u$ 的最短路长度）得到的网络。很明显，这是一个有向无环图。</p>
+</div>
+
+<p>EK 算法即是强制每次增广必须增广最短的那条增广路的 Ford-Fulkerson 算法。换言之，每次增广的路径必须在 $AN(f)$ 上。</p>
+<p>考察每次增广之后分层辅助网络的变化。</p>
+<ol>
+<li>$AN(f)$ 上的边可能因为满流而被从 $N(f)$ 中删去，进而被从 $N(f)$ 中删去。这可能导致某些点 $u$ 的 $d(u)$ 增大。</li>
+<li>$AN(f)$ 上的边的反向边可能原为零容量，但在增广之后容量增加进而加入 $N(f)$。但是只要 $d(u)$ 没有发生变化，这条反向边就不会加入 $AN(f)$，因为</li>
+</ol>
+<p>则至多 $|E|$ 次增广后，将至少有一个点 $u$ 的 $d(u)$ 增大。每次增广时间为 $O(|E|)$，$d(u)$ 增大的次数至多为 $O(|V|^2)$。因此 EK 算法的时间复杂度为 $O(V^2E^2)$（无论流量是整数还是实数）。</p>
+<p>似乎还可以分析的更细一点。如果一条边 $(u, v)$ 被删掉了又被加回了 $AN$，则这表明其反向边进入了 $AN$，此时 $d’(v) \geq d(v), d’(u) &#x3D; d(v’) + 1 \geq d(u) + 2$，这蕴含总增广次数不超过 $EV &#x2F; 2$。这样可以分析出一个 $O(VE^2)$ 的复杂度。</p>
+<hr>
+<p>当然，这里还存在改进的空间。如果每次在 $AN(f)$ 上做多路增广，似乎可以节省复杂度。这就是 Dinic 算法的动机。为此，我们定义一个<strong>极大流</strong>为不存在仅包含前向边的 $s, t$-增广路的可行流。容易对 $d(u)$ 归纳证明，Dinic 里的那个当前弧优化的 dfs 能求出 $AN(f)$ 上的一个极大流。</p>
+<p>再分析一下当前弧优化的复杂度。该算法实际上就是每次用 $O(V)$ 的时间（而非 $O(E)$ 时间，因为过程中动态维护了第一条能走通的出边）找一条 $s, t$-路，然后删掉上面一条边。因此复杂度为 $O(VE)$。</p>
+<p>注意，增广一个极大流之后，必有 $d(t)$ 增大。这个事件发生的次数至多为 $V$。因此，Dinic 算法的复杂度为 $O(V^2E)$。</p>
+<hr>
+<div class="note danger"><p>这一段是口胡的批话。</p>
+</div>
+
+<p>上课没有讲过的一个网络流优化是 ISAP 算法。这个算法的动机是动态维护 $d(u)$（从而动态诱导出），节省 bfs 次数。首先 $d(u)$ 是从 $s$ 出发来的最短路还是到 $t$ 的最短路不影响分层性质，所以我们跑到 $t$ 的最短路以便后续实现。dfs 的时候，如果发现一个点的流量没有用完，说明它出发已经不能从现在的 $AN$ 走到 $t$ 了，于是我们将其 $d$ 加 $1$。如果 $d$ 出现了断层，则停止算法。</p>
+<p>这个算法并不能分析出更好的界，但是实际上快很多。</p>
+<h2><span id="基于预流推进的算法">基于预流推进的算法</span></h2><p>另一类网络流算法基于物理直觉：模拟往网络上灌水的过程。受此启发，我们首先定义“预流” $f$ 为原网络流问题对应线性规划的线性规划：只要求</p>
+<ol>
+<li>$f(u, v) \leq c(u, v)$；</li>
+<li>每个节点的流入量<strong>大于等于</strong>流出量，即除 $s$ 外所有点 $i$ 都满足 $$<br>\sum_{(u, i)} f(u, i) - \sum_{(i, v)} f(i, v)<br>$$</li>
+</ol>
+<p>记每个节点的溢出量（上述约束不等式的左边）为 $e(u)$。每次选择一个 $e(u) &gt; 0$ 的<strong>非汇点</strong>，将其溢出量沿着残量网络上的出边推到它的邻居（流量不得超过容量）。因为残量网络上反向边的存在性，多余的流量可以流回 $s$。</p>
+<p>这样可能会出现在两个点之间来回推流的情况，因此用类似于 Dinic 的办法给图分层，为每个节点定义一个高度 $h(u)$，规定推流只能从高度为 $h + 1$ 的点推至高度为 $h$ 的点。但这样还是会有问题，可以想象无论如何初始化，都会出现某时刻存在某点仍然溢出，但是不能向周围任意一个点推流的情况（比如说把分层辅助网络全部推满流之后），因此还需要对点进行重标号。</p>
+<p>形式化地，我们定义下面两个操作：</p>
+<div class="note warning"><p><strong>算法 2（预流推进）.</strong> $\text{Push}(u, v)$：应用条件为 $e(u) &gt; 0, c_f(u, v) &gt; 0$。这里容量系残量网络上的容量。</p>
+<p>令 $\Delta(u, v) :&#x3D; \min(e(u), c_f(u, v))$。更新预流为：若 $(u, v)$ 为正向边，让 $f(u, v)$ 加上 $\Delta(u, v)$，若 $(u, v)$ 为反向边，让 $f(u, v)$ 减去 $\Delta(u, v)$。</p>
+</div>
+
+<p>对于此操作，若 $\Delta(u, v) &#x3D; c_f(u, v)$，则称为饱和推进，否则称不饱和推进。</p>
+<div class="note warning"><p><strong>算法 3（重标号）.</strong> $\text{Relabel}(u)$：应用条件为 $e(u) &gt; 0$ 且 $u$ 在残量网络上的任意邻居 $v$ 都满足 $h(u) \leq h(v)$。</p>
+<p>将 $h(u)$ 置为 $\min_v h(v) + 1$。</p>
+</div>
+
+<p>则下面的算法将能够求出网络最大流：</p>
+<div class="note warning"><p><strong>算法 4（预流推进算法）.</strong> </p>
+<ol>
+<li>初始化 $h(s) &#x3D; V$，其余 $h(u) &#x3D; 0$；$e(u) &#x3D; +\infty$；</li>
+<li>$\mathrm{Push}(s)$；</li>
+<li>重复以下两步骤，直到无法操作：</li>
+<li>若 $(u, v)$ 满足 $\mathrm{Push}(u, v)$ 的条件，执行之；</li>
+<li>若 $u\ne s, t$ 满足 $\mathrm{Relabel}(u, v)$ 的条件，执行之。</li>
+</ol>
+<p>答案是 $e(t)$。</p>
+</div>
+
+<p>这个算法非常符合直觉，但是无论是时间还是正确性的分析都非常阴间。</p>
+<div class="note info"><p><strong>引理 1.</strong> 算法执行过程中 $h(u)$ 单调递增，且每次 relabel 至少使其增加 $1$。</p>
+</div>
+
+<p><strong>证明.</strong> 显然。$\blacksquare$</p>
+<p>注意，下面所说的残量网络都是<strong>不计容量为 $0$ 的边</strong>的。</p>
+<div class="note info"><p><strong>引理 2.</strong> 算法执行过程中，以下条件始终满足：</p>
+<p>$$<br>\forall (u, v)\in N(f), \quad h(v) + 1 \geq h(u)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 施归纳于算法过程。考虑两个操作对 $N(f), h(u), h(v)$ 各自的影响。</p>
+<ol>
+<li>预流推进操作可能会让一条边从残量网络中消失或者增加反向边。根据预流推进操作的条件，执行后条件仍然满足。</li>
+<li>重标号操作可能会改变 $h(u)$，但是根据其流程此条件仍然满足。</li>
+</ol>
+<p>$\blacksquare$</p>
+<div class="note info"><p><strong>引理 3.</strong> 残量网络中始终不存在 $s$ 到 $t$ 的路径。</p>
+</div>
+
+<p><strong>证明.</strong> 假设存在路径，则根据引理 2 可推得 $h(u) \leq V - 1$，与其初值矛盾。$\blacksquare$</p>
+<div class="note info"><p><strong>引理 4.</strong> 若算法终止，则算法求出最大流。</p>
+</div>
+
+<p><strong>证明.</strong> 若算法终止，则 $f$ 是可行流（除源、汇外，都有 $e(u) &#x3D; 0$）。而且根据引理 $3$，图上没有增广路，因此该可行流是最大流。$\blacksquare$</p>
+<div class="note info"><p><strong>引理 5.</strong> 算法执行中任意节点的高度 $h(u) \leq 2V - 1$。</p>
+</div>
+
+<p><strong>证明.</strong> 因为 $s$ 的高度锁死为 $V$，再根据引理 2 立即得到结论。$\blacksquare$</p>
+<p>事实上引理 5 和引理 1 几乎能表明算法将停止。我们现在来详细分析算法的复杂度。</p>
+<div class="note info"><p><strong>引理 6.</strong> 算法执行中：</p>
+<ol>
+<li>重标号操作至多发生 $V^2$ 次；</li>
+<li>饱和推进至多发生 $O(VE)$ 次；</li>
+<li>不饱和推进至多发生 $O(V^2E)$ 次。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 第一条根据 $h(u)$ 的值域和重标号的影响立即得证。</p>
+<p>第二条类似于 EK 算法的分析，若一条边上发生了一次饱和推进，下次推进它之前必然依次对 $v, u$ 进行了重标号，因此 $h(u)$ 将增加 $2$，再根据 $h$ 有上界，可知每条边最多推进 $V$ 次，总共最多推进 $VE$ 次。</p>
+<p>第三条考虑记账法，定义</p>
+<p>$$<br>\Phi &#x3D; \sum_{e(i) &gt; 0} h(i)<br>$$</p>
+<p>每次饱和推进、重标号都将使得 $\Phi$ 至多增加 $O(V)$，而每次非饱和推进至少使其减少 $1$。因此非饱和推进次数为 $O(V^2(V + E)) &#x3D; O(V^2E)$。$\blacksquare$</p>
+<p>至此，我们证明了</p>
+<div class="note info"><p><strong>定理 7.</strong> 通用预流推进算法在 $O(V^2E)$ 时间内算出网络的最大流。</p>
+</div>
+
+<hr>
+<p>如果时间充裕，我可能还想学一把最高标号预流推进的 $O(V^2\sqrt E)$ 是怎么来的，可惜我现在火烧眉毛了，所以我不学了。</p>
+<h1><span id="费用流">费用流</span></h1><p>两种算法：</p>
+<ol>
+<li><strong>消圈算法.</strong> 先求最大流，然后 Bellman Ford 找负环。</li>
+<li><strong>MCMF 算法.</strong> 每次增广最短路。</li>
+</ol>
+<p>前者适用于一切情况，后者仅在初始不存在负环时能证明是对的，方法都很 trivial，这里不写。</p>
+<hr>
+<p>课件上说可以用 Dijkstra 算法跑费用流，但你可能还需要一些额外的操作，因为 Dijkstra 不能跑负权图。</p>
+<p>经典的操作是对于每个点维护一个势能 $h(u)$，将边权置为 $w(u, v) + h(u) - h(v)$。这样一来，因为在路径上势能会发生邻项相消，所以最短路还是最短路。只需要保证 $w(u, v) + h(u) \geq h(v)$ 即可。容易想到，可以将 $h$ 设置为上一把的最短路，此时图中原有的边因为三角形不等式满足上述性质，在因为增广而新引入的负权边上三角形不等式是紧的，因此也满足此性质。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/04/InformationTheoryIntuitions/" rel="prev" title="一些信息论中的直觉">
+                  <i class="fa fa-angle-left"></i> 一些信息论中的直觉
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/06/05/ProbabilityTheoryRevision2/" rel="next" title="Revision | 信息科学中的概率统计（下）">
+                  Revision | 信息科学中的概率统计（下） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

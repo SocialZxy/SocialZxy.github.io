@@ -19,16 +19,16 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="球和桶模型（Balls and Bins） The Power of Two Choices   随机图 大连通块（Giant Component）   鞅">
+    <meta name="description" content="球和桶模型（Balls and Bins） The Power of Two Choices   随机图 大连通块（Giant Component）   鞅（Martingale） Azuma 不等式 可选停时定理（optional stopping time theorem）   Lovász Local Lemma">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 随机算法">
 <meta property="og:url" content="http://example.com/2025/05/02/RevisionRA/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="球和桶模型（Balls and Bins） The Power of Two Choices   随机图 大连通块（Giant Component）   鞅">
+<meta property="og:description" content="球和桶模型（Balls and Bins） The Power of Two Choices   随机图 大连通块（Giant Component）   鞅（Martingale） Azuma 不等式 可选停时定理（optional stopping time theorem）   Lovász Local Lemma">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/branch-process-graph.png">
 <meta property="article:published_time" content="2025-05-02T06:57:42.000Z">
-<meta property="article:modified_time" content="2025-05-21T09:13:54.625Z">
+<meta property="article:modified_time" content="2025-06-06T17:31:32.793Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Random Algorithms">
 <meta name="twitter:card" content="summary">
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">球和桶模型（Balls and Bins）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">The Power of Two Choices</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">随机图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">大连通块（Giant Component）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">鞅</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">球和桶模型（Balls and Bins）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">The Power of Two Choices</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">随机图</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">大连通块（Giant Component）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">鞅（Martingale）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Azuma 不等式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">可选停时定理（optional stopping time theorem）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Lovász Local Lemma</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,7 +131,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-05-21 17:13:54" itemprop="dateModified" datetime="2025-05-21T17:13:54+08:00">2025-05-21</time>
+      <time title="Modified: 2025-06-07 01:31:32" itemprop="dateModified" datetime="2025-06-07T01:31:32+08:00">2025-06-07</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -266,7 +266,12 @@
 <li><a href="#%E5%A4%A7%E8%BF%9E%E9%80%9A%E5%9D%97giant-component">大连通块（Giant Component）</a></li>
 </ul>
 </li>
-<li><a href="#%E9%9E%85">鞅</a></li>
+<li><a href="#%E9%9E%85martingale">鞅（Martingale）</a><ul>
+<li><a href="#azuma-%E4%B8%8D%E7%AD%89%E5%BC%8F">Azuma 不等式</a></li>
+<li><a href="#%E5%8F%AF%E9%80%89%E5%81%9C%E6%97%B6%E5%AE%9A%E7%90%86optional-stopping-time-theorem">可选停时定理（optional stopping time theorem）</a></li>
+</ul>
+</li>
+<li><a href="#lov%C3%A1sz-local-lemma">Lovász Local Lemma</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -363,13 +368,14 @@
 
 <p>取 $k &#x3D; \frac{3}{(1 - c)^2}\ln n$，上述概率不超过 $O(n^{-\frac{3}{2}})$，对所有点用 union bound 得到存在一个连通块大小超过 $3\ln n&#x2F;(1-c)^2$ 的概率仅为 $o(1)$ 级别。</p>
 <p><strong>第二部分（$c &gt; 1$ 时只有一个大连通块）.</strong> 【FIXME】</p>
-<h1><span id="鞅">鞅</span></h1><p>本节讲随机过程中的重要概念鞅，主要围绕其集中不等式和可选停时定理展开。</p>
-<div class="note success"><p><strong>定义 1（鞅）.</strong> 给定一列非降 $\sigma$-代数 $\varnothing &#x3D; \mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \mathcal{F}_n$，称作<strong>滤子</strong>，以及一列随机变量 $X_1, …, X_n$。若对于任意的 $i$ 都有 $\mathbb{E}[X_i | \mathcal{F}_{i - 1}] &#x3D; X_{i - 1}$，则 $(X_i)$ 称作关于 $(\mathcal{F}_i)$ 的鞅；$Y_i &#x3D; X_i - X_{i - 1}$ 称作其<strong>差分序列</strong>，依定义有 $\mathbb{E}[Y_i | \mathcal{F}_i] &#x3D; 0$</p>
+<h1><span id="鞅martingale">鞅（Martingale）</span></h1><p>本节讲随机过程中的重要概念鞅，主要围绕其集中不等式和可选停时定理展开。</p>
+<div class="note success"><p><strong>定义 1（鞅）.</strong> 给定一列非降 $\sigma$-代数 $\varnothing &#x3D; \mathcal{F}_0 \subseteq \mathcal{F}_1 \subseteq \mathcal{F}_n$，称作<strong>滤子（filter）</strong>，以及一列随机变量 $X_1, …, X_n$。若对于任意的 $i$ 都有 $\mathbb{E}[X_i | \mathcal{F}_{i - 1}] &#x3D; X_{i - 1}$（$\star$），则 $(X_i)$ 称作关于 $(\mathcal{F}_i)$ 的鞅；$Y_i &#x3D; X_i - X_{i - 1}$ 称作其<strong>差分序列</strong>，依定义有 $\mathbb{E}[Y_i | \mathcal{F}_i] &#x3D; 0$。</p>
+<p>有一些鞅的变种。如果将（$\star$）修改作 $\mathbb{E}[X_i | \mathcal{F}_{i - 1}] \geq \mathbb{X}_{i - 1}$ 则称为<strong>下鞅（submartingale）</strong>，若修改作 $\mathbb{E}[X_i | \mathcal{F}_{i - 1}] \leq \mathbb{X}_{i - 1}$ 则称为<strong>上鞅（supermartingale）</strong>。</p>
 </div>
 
 <p>一个常举的例子是有一个点 $x$ 在数轴上随机游走，每时刻其坐标等概率地 $+1$ 或者 $-1$，$n$ 步之后停止。那么显然，该点最终位置的期望值是关于前 $i$ 次移动方向的鞅。当然在 CS 中，我们通常不需要用到非降 $\sigma$-代数这种抽象层级的概念，只需采纳一种形象的理解，即鞅是在一个逐渐发展的过程中，随着新信息被不断揭露，对结果的估计量。因此可将那一列非降 $\sigma$-代数替换做一列随机变量 $Z_1, …, Z_n$，并将定义对应修改为 $\mathbb{E}[X_i | Z_{1}…Z_{i - 1}] &#x3D; X_{i - 1}$。</p>
 <p>对于任意一个随机变量 $A$ 和一列随机变量 $Z_1, …, Z_n$，我们都可以构造一个鞅。</p>
-<div class="note info"><p><strong>定理 2（Doob 鞅）.</strong> 令 $A$ 和 $Z_1, …, Z_n$ 为同一个概率空间上的随机变量。则 $X_i &#x3D; \mathbb{E}[A | Z_1 … Z_i]$ 是一个鞅，称作 $A$ 的 Doob 鞅。</p>
+<div class="note info"><p><strong>定理 1（Doob 鞅）.</strong> 令 $A$ 和 $Z_1, …, Z_n$ 为同一个概率空间上的随机变量。则 $X_i &#x3D; \mathbb{E}[A | Z_1 … Z_i]$ 是一个鞅，称作 $A$ 的 Doob 鞅。</p>
 </div>
 
 <details class="note "><summary><p><strong>证明.</strong></p>
@@ -378,6 +384,156 @@
 <p>$$<br>\begin{aligned}<br>\mathbb{E}[X_i | Z_1 … Z_{i - 1}] &amp;&#x3D; \mathbb{E}[\mathbb{E}[A | Z_1 … Z_i] | Z_1 … Z_{i - 1}] \\<br>                                    &amp;&#x3D; \mathbb{E}[A | Z_1 … Z_{i - 1}]<br>\end{aligned}<br>$$</p>
 
 </details>
+
+<h2><span id="azuma-不等式">Azuma 不等式</span></h2><p>直觉上如果一个随机过程是一个鞅过程，那么它最后的结果应该会比较集中。这个集中不等式的证明是一个标准的矩生成函数法，先证明 Hoeffding Lemma（的一个弱化版）</p>
+<div class="note info"><p><strong>引理 2（Hoeffding Lemma）.</strong> 对于随机变量 $X$，若 $|X| \leq c, \mathbb{E}[X] &#x3D; 0$，则 $\mathbb{E}[e^{tX}] \leq e^{(ct)^2 &#x2F; 2}$。</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明 $c &#x3D; 1$ 的情况，其余可以通过缩放来推广。</p>
+<p>根据 $e^x$ 的凸性有 $\mathbb{E}[e^{tX}] \leq \frac 12(e^t + e^{-t})$，将右侧泰勒展开后奇数项全消掉了，可以发现它等于 $e^{t^2 &#x2F; 2}$。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 3（Azuma 不等式）.</strong> 若 $(X_i)$ 是关于 $(\mathcal{F}_i)$ 的鞅，且 $(X_i)$ 的差分序列 $(Y_i)$ 满足 $|Y_i| \leq c_i$，则 </p>
+<p>$$<br>\begin{align}<br>\Pr[X_n \geq X_0 + \lambda] \leq \exp\left(-\frac{\lambda^2}{2\sum_{i&#x3D;1}^n c_i^2}\right) \\<br>\Pr[X_n \geq X_0 - \lambda] \leq \exp\left(-\frac{\lambda^2}{2\sum_{i&#x3D;1}^n c_i^2}\right)<br>\end{align}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 只用证上面半边。考虑马尔可夫不等式</p>
+<p>$$<br>\begin{aligned}<br>\Pr\left[e^{t(X_n - X_0)} \geq e^{t\lambda}\right] &amp;\leq e^{-t\lambda}\mathbb{E}[e^{t(X_n - X_0)}] \\<br>&amp;&#x3D; e^{-t\lambda}\mathbb{E}[\mathbb{E}[e^{t(Y_n + X_{n - 1} - X_0)}|\mathcal{F}_{n - 1}]] \\<br>&amp;&#x3D; e^{-t\lambda}\mathbb{E}[e^{t(X_{n - 1} - X_0)} \cdot {\color{blue}\mathbb{E}[e^{tY_n} | \mathcal{F}_{n - 1}]}]<br>\end{aligned}<br>$$</p>
+<p>至此已经形成明显的递归结构，根据 $Y_i$ 的条件和鞅的性质，蓝色部分符合 Hoeffding Lemma 的使用条件，因此归纳可知</p>
+<p>$$<br>\Pr\left[e^{t(X_n - X_0)} \geq e^{t\lambda}\right] \leq \exp\left(\frac {t^2}2\sum_{i&#x3D;1}^n c_i^2 - \lambda t\right) \leq \exp\left(-\frac{\lambda^2}{2\sum_{i&#x3D;1}^n c_i^2}\right)<br>$$</p>
+<p>下半边取相反数可得证。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 4（Doob 鞅上的 Azuma 不等式）.</strong> 设 $f$ 是关于随机变量 $Z_1, …, Z_n$ 的 $n$ 元 $c$-Lipschitz 函数（i.e. 改变 $f$ 的一个坐标值，函数变化不超过 $\pm c$），若 $Z_i$ 在 $Z_1, …, Z_{i - 1}$ 的条件下和 $Z_{i + 1}, …, Z_n$ 独立（$\star$），则 $X_1, …, X_n$ 为 $f$ 关于 $(Z_i)$ 的 Doob 鞅，则</p>
+<p>$$<br>|X_i - X_{i - 1}| \leq c<br>$$</p>
+<p>进而满足 Azuma 不等式。</p>
+</div>
+
+<p><strong>证明.</strong> 道理很简单，实际写起来有点繁琐，本质上就是一个 dummy variable 换元。 记 $\hat{Z}_i$ 是在 $Z_1, …, Z_{i - 1}$ 条件下同 $Z_i$ 独立同分布的一个东西，它和 $Z_i, Z_{i + 1}, …, Z_n$ 独立。则 </p>
+<p>$$<br>\begin{aligned}<br>X_{i - 1} &amp;&#x3D; \mathbb{E}_{Z_i, …, Z_n}[f | Z_1, …, Z_{i - 1}] \\<br>&amp;&#x3D; \mathbb{E}_{Z_{i + 1}, …, Z_n}[\mathbb{E}_{Z_i}[f | Z_1, …, Z_{i - 1}, Z_{i + 1}, …, Z_n] | Z_1, …, Z_{i - 1}] &amp; \color{blue}{\text{(chain rule)}} \\<br>&amp;&#x3D; \mathbb{E}_{\hat{Z}_i, Z_{i + 1}, …, Z_n}[f(…, \hat{Z}_i, …) | Z_1, …, Z_{i - 1}] &amp; \color{blue}{\text{(definition of $\hat{Z}_i$)}} \\<br>&amp;&#x3D; \mathbb{E}_{\hat{Z}_i, Z_{i + 1}, …, Z_n}[f(…, \hat{Z}_i, …) | Z_1, …, Z_{i - 1}, Z_i] &amp; \color{blue}{\text{(independentness)}}<br>\end{aligned}<br>$$</p>
+<p>因此</p>
+<p>$$<br>\begin{aligned}<br>&amp;\mathbb{E}[f | Z_1, …, Z_i] - \mathbb{E}[f | Z_1, …, Z_{i - 1}] \\<br>&amp;&#x3D; \mathbb{E}[f(…, Z_i, …) - f(…, \hat{Z}_i, …) | Z_1, …, Z_i] \\<br>&amp;\leq c<br>\end{aligned}<br>$$</p>
+<p>$\blacksquare$</p>
+<p>实际上，我们在绝大多数算法问题（尤其是 conditional probabilistic method）中遇到的都是这样的 $c$-Lipschitz 函数（问题的可行解 $\rightarrow$ 解的价值）的 Doob 鞅。下面是一些应用。</p>
+<div class="note "><p><strong>球和桶.</strong> 向 $n$ 个桶中随机丢 $m$ 个球，空桶个数的集中性如何？</p>
+</div>
+
+<p>$f(x_1, …, x_m)$ 表示第 $i$ 个球丢进了第 $x_i$ 个桶时的空桶个数，是 $1$-Lipschitz 函数，因此有 </p>
+<p>$$<br>\Pr[|X - \mathbb{E}[X]| &gt; \lambda] \leq e^{-\lambda^2 &#x2F; 2m}<br>$$</p>
+<p>Chernoff bound 难以给出这样的界，因为每次丢球后空桶个数的减少量不太独立。</p>
+<div class="note "><p><strong>随机图色数.</strong> $\chi(\mathcal{G}_{n, 1&#x2F;2})$ 的集中性如何？</p>
+</div>
+
+<p>关于随机图，有两个常见的鞅</p>
+<ol>
+<li><strong>Vertex exposure 鞅.</strong> $Z_i$ 表示 $i$ 和 $1, …, i - 1$ 的连边情况。</li>
+<li><strong>Edge exposure 鞅.</strong> $Z_i$ 表示第 $i$ 条边是否存在。</li>
+</ol>
+<p>函数 $f$ 表示对应连边情况的色数。注意到，无论是在 vertex exposure 鞅还是 edge exposure 鞅的滤子上，$f$ 都是 $1$-Lipschitz（把涉及到的点改成一个没出现过的颜色总能满足染色条件），得到的集中不等式为 </p>
+<p>$$<br>\Pr[|X - \mathbb{E}[X]| &gt; \lambda] \leq e^{-\lambda^2 &#x2F; 2n} \quad \text{or} \quad {\color{lightgray} \Pr[|X - \mathbb{E}[X]| &gt; \lambda] \leq e^{-\lambda^2 &#x2F; 2m}}<br>$$</p>
+<p>前者更紧。</p>
+<div class="note "><p><strong>快速排序（Hayward，McDiarmid 96）.</strong> 随机快排的集中性如何？</p>
+</div>
+
+<p>熟知随机快排的期望复杂度是 </p>
+<p>$$<br>q_n &#x3D; 2n\ln n - (4 - 2\gamma)n + 2\ln n + O(1)<br>$$</p>
+<p>本小节证明对于任意的 $\varepsilon &gt; 0$（这篇文章甚至证出了这个界是紧的，那很厉害了）</p>
+<p>$$<br>\Pr[|Q_n - q_n| &gt; \varepsilon q_n] \leq n^{-(2 + o(1))\varepsilon \ln\ln n}<br>$$</p>
+<p>【FIXME】</p>
+<h2><span id="可选停时定理optional-stopping-time-theorem">可选停时定理（optional stopping time theorem）</span></h2><div class="note success"><p><strong>定义 2（停时）.</strong> $(\mathcal{F}_i)$ 是滤子，一个随机变量 $T \in \mathbb{N}\cup\{\infty\}$ 是 $(\mathcal{F}_i)$ 的一个<strong>停时</strong>当且仅当任意的事件 $T &#x3D; i$ 都是 $\mathcal{F}_i$-可测的。 </p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这就是说你总能从当前的局面判断要不要停。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 5（可选停时定理）.</strong> $(X_i)$ 是 $(\mathcal{F}_i)$ 上的鞅，$T$ 是停时，则若以下条件成立，则 $\mathbb{E}[X_T] &#x3D; \mathbb{E}[X_0]$：</p>
+<ol>
+<li>$\Pr[T &lt; \infty] &#x3D; 1$；</li>
+<li>$\mathbb{E}[X_T] &lt; \infty$；</li>
+<li>$\mathbb{E}[X_i \mathbf{1}\{T &gt; i\}]\rightarrow 0 (i\rightarrow \infty)$。</li>
+</ol>
+<p>这组条件可以被换成一组更弱的条件比如</p>
+<ol>
+<li>$\mathbb{E}[T] &lt; \infty$；</li>
+<li>$\mathbb{E}[|X_i - X_{i - 1}| \mid \mathcal{F}_i] &lt; c$。</li>
+</ol>
+<p>另外，对应条件下，在下鞅上可以证出 $\mathbb{E}[X_T] \geq \mathbb{E}[X_0]$，在上鞅上可以证出 $\mathbb{E}[X_T]\leq \mathbb{E}[X_0]$。</p>
+</div>
+
+<p><strong>证明.</strong> $\color{red} \text{Sorry.}$</p>
+<p>注意停时定理是关于停止时的 $X_T$ 的结论，而不是关于 $T$ 的结论。为了得到关于 $X_T$ 的结论，经典的办法是在鞅上面再造一个鞅。</p>
+<div class="note info"><p><strong>断言 6.</strong> 若 $(X_i)$ 是一个鞅，$D_i$ 是其差分序列。若 $\mathbb{E}[D_i^2 | \mathcal{F}_{i - 1}] &#x3D; \sigma^2$，则 $Y_i &#x3D; X_i^2 - \sigma^2 i$ 是也一个鞅。</p>
+<p>若 $(X_i)$ 是一个上鞅，其值域为 $[0, n]$，$D_i$ 是其差分序列，若 $\mathbb{E}[D_i^2 | \mathcal{F}_{i - 1}] \geq \sigma^2$，则 $Y_i &#x3D; X_i^2 - 2n X_i - \sigma^2 i$ 是一个下鞅。</p>
+</div>
+
+<p><strong>证明.</strong> 验证即可。系数配比的关键是：首先要配一个和 $i$ 相关的东西进去，然后再调整一点别的东西让它能继续保持鞅的性质。$\blacksquare$</p>
+<p>这样一来，如果有一个鞅，我们就知道 $\mathbb{E}[T] &#x3D; \mathbb{E}[X_T^2]$；如果有一个 $[0, n]$ 上的上鞅（你的算法让某个量期望意义下减少），且停时为 $T : X_T &#x3D; 0$（减到 $0$ 就停止），就可以知道 $\mathbb{E}[T] \leq \mathbb{E}\left[\frac{2nX_0 - X_0^2}{\sigma^2}\right] \leq n^2 &#x2F; \sigma^2$</p>
+<p>以下是一些应用。</p>
+<div class="note "><p><strong>赌徒之殇.</strong> 一个赌徒初始时持有 $a$ 元本金进场，每次等概率赢得 $1$ 元或输掉 $1$ 元，当其输光本金或得利 $b$ 元时离场，问其离场时期望得利几何？破产概率几何？期望离场时间几何？</p>
+</div>
+
+<p>设其 $i$ 时间得利为 $X_i$ 元。显然，$(X_i)$ 是关于每轮结果的鞅，可以验证 $\mathbb{E}[T] &lt; \infty$，因此符合停时定理的使用条件。</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里有点唐，为了验证这些条件你都能把 $\mathbb{E}[T]$ 算出来了，但这只是一个展示停时定理的 toy example，所以无需多虑。</p>
+</blockquote>
+<p>根据停时定理，其离场时期望得利 $0$ 元，因此可以解出破产概率是 $b &#x2F; (a + b)$。</p>
+<p>为了求期望离场时间，再构造如下随机变量：$Y_i &#x3D; X_{i}^2 - i$。容易验证 $(Y_i)$ 也是一个鞅，因此根据停时定理</p>
+<p>$$<br>\mathbb{E}[T] &#x3D; \mathbb{E}[X_T^2 - Y_T] &#x3D; \mathbb{E}[X_T^2] - \mathbb{E}[Y_0] &#x3D; ab<br>$$</p>
+<div class="note "><p><strong>投票选举.</strong> 现有 Alice 和 Bob 两人参加某一选举。Alice 得票 $a$ 张，Bob 得票 $b$ 张（$a &gt; b$）。假设计票时，所有选票被随机地收到，问计票过程中 Alice 票数始终领先的概率。</p>
+</div>
+
+<p>设 $S_i$ 表示 $i$ 时刻 Alice 领先的票数。则根据超几何分布的性质，$\frac{(a - b)}{a + b}i$ 是 $S_i$ 的一个无偏估计。受此启发我们定义一列随机变量</p>
+<p>$$<br>X_i :&#x3D; \frac{S_{n - i}}{n - i}<br>$$</p>
+<p>特别地，$X_n &#x3D; 1$。则可以验证 $(X_i)$ 是鞅，$T :&#x3D; \{X_i &#x3D; 0 \wedge X_{j} \ne 0 \quad, \forall j\ne i\}$（领先优势首次消失）是其上的停时。停止时，要么是因为过程结束（$X_T &#x3D; 1$），要么是因为领先优势消失（$X_T &#x3D; 0$），根据停时定理</p>
+<p>$$<br>p &#x3D; \mathbb{E}[X_T] &#x3D; \mathbb{E}[X_0] &#x3D; \frac{a - b}{a + b}<br>$$</p>
+<div class="note "><p><strong>随机游走 $2\text{-SAT}$.</strong> 有一个经典的 $2\text{-SAT}$ 的随机算法。我们首先给 $\phi$ 找一组随机赋值 $a_0$，如果这组赋值不能满足 $\phi$，则随机找一个没有满足的子句，然后随机翻转其中的一个变元。问迭代多少轮可保高概率成功？</p>
+</div>
+
+<p>若 $\text{2-SAT}$ 可满足，那么存在一个满足它的赋值 $a^*$。将 $X_i$ 定义做第 $i$ 次迭代后 $a^*$ 和 $a_i$ 的汉明距。注意到 $(X_i)$ 是一个上鞅，且 $\mathbb{E}[D_i^2 | \mathcal{F}_{i - 1}] &#x3D; 1$，因此 $X_i^2 - 2nX_i - i$ 是一个下鞅，这给出 $T$ 的上界是 $n^2$。</p>
+<p>$O(n^2)$ 次随机可保高概率成功。</p>
+<div class="note "><p><strong>正则图最大连通块.</strong> 定义图 $G$ 的一个 $p$-渗滤为独立地以概率 $p$ 加入其每条边得到的随机图。则令 $C_1$ 是 $d$-正则图的 $p$-渗滤的最大连通块，存在常数 $\alpha$ 使得 </p>
+<p>$$<br>\Pr[|C_1| \geq An^{2&#x2F;3}] \leq \frac{\alpha}{A^{3&#x2F;2}}<br>$$</p>
+</div>
+
+<p>对于这种题显然是考虑一个 Galton-Watson 分支过程（这会 stochastically dominate 连通块大小）。定义随机变量</p>
+<p>$$<br>X_t &#x3D; X_{t - 1} - 1 + B\left(d - 1, \frac{1}{d - 1}\right)<br>$$</p>
+<p>显然 $X_t$ 是鞅。为了利用鞅相关工具，我们首先设计如下停时 $T :&#x3D; \{\min_t X_t &#x3D; 0 \vee X_t &gt; h\}$。即，前沿太大时我们也将强行掐断 bfs。那么，根节点所在连通块非常大（$\mathcal{C}(r) \geq k$）这件事情包含于以下两事件的或：</p>
+<ol>
+<li>$X_T \geq h$（dfs 被掐断）</li>
+<li>$T \geq k$（dfs 没有终止）</li>
+</ol>
+<p><strong>兹断言，</strong> 在以下两条件成立时：</p>
+<ol>
+<li>$\mathbb{E}[(X_i - X_{i - 1})^2 | \mathcal{F}_{i - 1}]\geq \sigma^2$<strong>（过程波动更大，更有希望停止）</strong>；</li>
+<li>$\mathbb{E}[X_T^2 | X_T \geq h] \leq Dh^2$<strong>（如果最后停止是 bfs 被掐断，希望前沿不要太大）</strong>。</li>
+</ol>
+<p>有 </p>
+<p>$$<br>\Pr[T\geq k \cup X_T \geq h] \leq \frac 1h + \frac{Dh}{k\sigma^2} \label{percolation-claim}<br>$$</p>
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>无论是直接用停时定理还是配合 Markov 不等式都容易证明 </p>
+<p>$$<br>\Pr[X_T \geq h] \leq \frac{\mathbb{E}[X_T]}{h} &#x3D; \frac{1}{h}<br>$$</p>
+<p>该断言显然成立，因为可以构造下鞅 $Y_i &#x3D; X_i^2 - \sigma^2 i$，容易算出</p>
+<p>$$<br>\mathbb{E}[T] \leq \frac{\mathbb{E}[X_T^2] - 1}{\sigma^2} \leq \frac{\frac 1h \mathbb{E}[X_T^2 | E_T\geq h]}{\sigma^2} \leq \frac{Dh}{\sigma^2}<br>$$</p>
+
+</details>
+
+<p>对于本题，可以算出 $\sigma^2 &#x3D; \frac{d - 2}{d - 1} \geq \frac 12$，且对于充分大的 $h$ 都有</p>
+<p>$$<br>\mathbb{E}[X_T^2 | X_T \geq h] \leq \mathbb{E}_{Z\sim B(d - 1, 1 &#x2F; (d - 1))}[(h + z)^2] \leq h^2 + 2h + 2 \leq \frac{3}{2}h^2<br>$$</p>
+<p>代入式 $(\ref{percolation-claim})$ 后令 $h &#x3D; \sqrt k$ 得到对于任意 $v\in V$ 有</p>
+<p>$$<br>\Pr[\mathcal{C}(v) \geq k] \leq \frac{4}{\sqrt k}<br>$$</p>
+<p>注意对于连通块问题不要直接用 union bound，而是考虑</p>
+<p>$$<br>\Pr[\mathcal{C}_1 \geq k] \leq \frac{\mathbb{E}[|\{v : \mathcal{C}(v) \geq k\}|]}{k} \leq \frac{4n}{k\sqrt k}<br>$$</p>
+<p>取 $K &#x3D; An^{2&#x2F;3}$ 得到欲证的结论。$\blacksquare$</p>
+<h1><span id="lovász-local-lemma">Lovász Local Lemma</span></h1><div class="note info"><p><strong>引理 1.</strong> 设 $A_1, …, A_n$ 是一系列坏事件。$\Pr[A_i] \leq p$，且每个 $A_i$ 独立于除 $d$ 个 $A_j$ 之外的所有事件。若 $ep(d + 1) \leq 1$，则 </p>
+<p>$$<br>\Pr\left[\bigcap_{i&#x3D;1}^n \overline{A_i}\right]\geq 0<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 无非是证明对于任意的 $i &#x3D; 1, 2, …, n$</p>
+<p>$$<br>\Pr\left[A_i | \bigcap_{i&#x3D;1}^{i - 1} \overline{A_i}\right] \leq k &lt; 1<br>$$</p>
+<p>我们施归纳于事件数量 $m$，归纳证明这个上界是 $1 &#x2F; (d + 1)$。</p>
+<p>令 $D_i$ 是和 $S_i$ 不独立的那至多 $d$ 个事件。令 $S:&#x3D; [m - 1]$，$S_i :&#x3D; S \cap D_1$，$S_2 &#x3D; S\setminus S_1$。则</p>
+<p>$$<br>\Pr\left[A_m \bigg| \bigcap_{j\in S} \overline{A_j} \right] &#x3D; \frac{\Pr\left[A_i\cup\bigcap_{j\in S_1}\overline{A_j}\big|\bigcap_{j\in S_2} \overline{A_j}\right]}{\Pr\left[\bigcap_{j\in S_1}\overline{A_j}\big|\bigcap_{j\in S_2} \overline{A_j}\right]}<br>$$</p>
+<p>根据题目条件分子不超过 $p$。根据归纳假设</p>
+<p>$$<br>\Pr\left[\bigcap_{j\in S_1}\overline{A_j}\big|\bigcap_{j\in S_2} \overline{A_j}\right] \geq \left(1 - \frac{1}{d + 1}\right)^{d} \geq \frac{1}{e}<br>$$</p>
+<p>在根据题目条件这个商不超过 $ep \leq 1 &#x2F; (d + 1)$。$\blacksquare$</p>
+
     </div>
 
     

@@ -26,8 +26,8 @@
 <meta property="og:site_name" content="Stellary&#39;s Notes">
 <meta property="og:description" content="Abstract. 这是本学期信息论的复习笔记。主干内容是证明有噪信道编码定理，佐以一些神秘小结论。    基本定义 信息熵 互信息，相对熵 凸性 数据处理不等式   信源编码 Kraft 不等式 Haffman 编码   纠错码 Non-uniform 纠错码效率的上下界 可高效计算的纠错码   信道编码定理 渐进等分性质和有噪信道编码存在性 Fano 不等式和有噪信道编码错误率下界   杂项">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2025-06-04T14:29:05.000Z">
-<meta property="article:modified_time" content="2025-06-04T08:32:56.087Z">
+<meta property="article:published_time" content="2025-06-04T04:29:05.000Z">
+<meta property="article:modified_time" content="2025-06-06T12:12:31.046Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">59</span>
+          <span class="site-state-item-count">61</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -223,9 +223,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-06-04 22:29:05 / Modified: 16:32:56" itemprop="dateCreated datePublished" datetime="2025-06-04T22:29:05+08:00">2025-06-04</time>
+      <time title="Created: 2025-06-04 12:29:05" itemprop="dateCreated datePublished" datetime="2025-06-04T12:29:05+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-06 20:12:31" itemprop="dateModified" datetime="2025-06-06T20:12:31+08:00">2025-06-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -353,6 +359,12 @@
 <p>$$<br>D_{KL}(X\Vert Y) &#x3D; \sum_{x\in \mathcal{X}} p(x)\log \frac{p(x)}{p(y)}<br>$$</p>
 <p>同样也可以挂在条件分布上</p>
 <p>$$<br>D_{KL}(X\Vert Y | Z) &#x3D; \sum_{z\in \mathcal{Z}} p(z) D_{KL}(P(X | z) \Vert P(Y | z))<br>$$</p>
+</div>
+
+<p>关于 KL 散度如何刻画两个分布的偏差，还有另外一个直觉。</p>
+<div class="note "><p><strong>KL 散度和从给定分布中采出经验分布的概率.</strong> 考虑一个定义在支撑集 $[n]$ 上的分布，其概率质量函数为 $p_1, …, p_n$。现在在上面进行了 $m$ 次采样，采出 $i$ 出现了 $c_i$ 次，对应经验分布 $q_i &#x3D; c_i &#x2F; m$。那么用斯特林近似估计从 $p$ 中采出 $q$ 的概率：</p>
+<p>$$<br>P &#x3D; \binom{n}{c_1, …, c_m} \prod_{i&#x3D;1}^n p_i^{c_i} \approx \exp\left(-mD_{KL}(q \Vert p)\right)<br>$$</p>
+<p>这也很符合我们的常识，当 $n &#x3D; 2$ 时这就是 chernoff bound，当 $n$ 更大时这和 Sanov 定理的形式差不多。</p>
 </div>
 
 <div class="note info"><p><strong>定理 2.</strong> 互信息和 KL 散度都是非负的。</p>
@@ -729,6 +741,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/06/04/AlgorithmAnalysis/" rel="next" title="算法设计与分析（实验班）复习笔记">
+                  算法设计与分析（实验班）复习笔记 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
