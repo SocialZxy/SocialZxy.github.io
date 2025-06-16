@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 主干参考教学课件，预计将覆盖 Michael Sipser Book 的重要内容，以及 Arora Book 第一部分前八个章节的内容。    形式语言和自动机 有限状态自动机和正则语言 （非确定性）下推自动机和上下文无关语言   可计算性理论 图灵机的基本定义 关于可计算性的一些论题   复杂度理论 时间复杂度   附录 开放性问题 练习和补充结论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 计算理论导论">
+<meta property="og:url" content="http://example.com/2025/06/14/TCSRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 主干参考教学课件，预计将覆盖 Michael Sipser Book 的重要内容，以及 Arora Book 第一部分前八个章节的内容。    形式语言和自动机 有限状态自动机和正则语言 （非确定性）下推自动机和上下文无关语言   可计算性理论 图灵机的基本定义 关于可计算性的一些论题   复杂度理论 时间复杂度   附录 开放性问题 练习和补充结论">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/cfl-pumping-lemma.png">
+<meta property="article:published_time" content="2025-06-14T09:02:59.000Z">
+<meta property="article:modified_time" content="2025-06-16T03:35:03.921Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Theory of Computing">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/cfl-pumping-lemma.png">
+
+
+<link rel="canonical" href="http://example.com/2025/06/14/TCSRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/06/14/TCSRevision/","path":"2025/06/14/TCSRevision/","title":"Revision | 计算理论导论"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 计算理论导论 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">形式语言和自动机</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">有限状态自动机和正则语言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">（非确定性）下推自动机和上下文无关语言</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">可计算性理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">图灵机的基本定义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">关于可计算性的一些论题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">复杂度理论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">开放性问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">练习和补充结论</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/14/TCSRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 计算理论导论 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 计算理论导论
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-14 17:02:59" itemprop="dateCreated datePublished" datetime="2025-06-14T17:02:59+08:00">2025-06-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-16 11:35:03" itemprop="dateModified" datetime="2025-06-16T11:35:03+08:00">2025-06-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 主干参考教学课件，预计将覆盖 Michael Sipser Book 的重要内容，以及 Arora Book 第一部分前八个章节的内容。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BD%A2%E5%BC%8F%E8%AF%AD%E8%A8%80%E5%92%8C%E8%87%AA%E5%8A%A8%E6%9C%BA">形式语言和自动机</a><ul>
+<li><a href="#%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%92%8C%E6%AD%A3%E5%88%99%E8%AF%AD%E8%A8%80">有限状态自动机和正则语言</a></li>
+<li><a href="#%E9%9D%9E%E7%A1%AE%E5%AE%9A%E6%80%A7%E4%B8%8B%E6%8E%A8%E8%87%AA%E5%8A%A8%E6%9C%BA%E5%92%8C%E4%B8%8A%E4%B8%8B%E6%96%87%E6%97%A0%E5%85%B3%E8%AF%AD%E8%A8%80">（非确定性）下推自动机和上下文无关语言</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%90%86%E8%AE%BA">可计算性理论</a><ul>
+<li><a href="#%E5%9B%BE%E7%81%B5%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">图灵机的基本定义</a></li>
+<li><a href="#%E5%85%B3%E4%BA%8E%E5%8F%AF%E8%AE%A1%E7%AE%97%E6%80%A7%E7%9A%84%E4%B8%80%E4%BA%9B%E8%AE%BA%E9%A2%98">关于可计算性的一些论题</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E7%90%86%E8%AE%BA">复杂度理论</a><ul>
+<li><a href="#%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">时间复杂度</a></li>
+</ul>
+</li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a><ul>
+<li><a href="#%E5%BC%80%E6%94%BE%E6%80%A7%E9%97%AE%E9%A2%98">开放性问题</a></li>
+<li><a href="#%E7%BB%83%E4%B9%A0%E5%92%8C%E8%A1%A5%E5%85%85%E7%BB%93%E8%AE%BA">练习和补充结论</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="形式语言和自动机">形式语言和自动机</span></h1><p>所谓语言者，无非是合法字符串的集合。或形式化地，一个字符集 $\Sigma$ 上的语言 $L$ 即是全体该字符集上正整数长度的字符串的一个子集，即 $L \subseteq \Sigma^*$。欲进行计算，换言之想要机械地识别一个语言 $L$，即需设计一个“机器” $M$，以一个字符串 $s$ 为输入，输出 accept 或者 reject，表示 $s\in L$ 或者 $s\notin L$。</p>
+<p>自动机乃是一类最为简单的“机器”。作为对计算理论的初探，我们探究此类机器的能力边界所在。</p>
+<h2><span id="有限状态自动机和正则语言">有限状态自动机和正则语言</span></h2><p>本节中，我们假设读者对自动机的工作方式有基本的直觉，且经受过一定的训练以能够设计简单的自动机。下文中的形式定义仅为完整性起见给出。</p>
+<div class="note success"><p><strong>定义 1.1.1（确定性有限状态自动机 &#x2F; DFA）.</strong> 一个<em>确定性有限状态自动机</em>包含如下资料 $M &#x3D; (Q, \Sigma, \delta, q_0, F)$，其中</p>
+<ul>
+<li>$Q$ 表示状态集合。</li>
+<li>$\Sigma$ 表示输入字符集合。</li>
+<li>$\delta: Q\times \Sigma\rightarrow Q$ 表示转移函数。</li>
+<li>$q_0$ 表示起始状态。</li>
+<li>$F\subseteq Q$ 表示接受状态集。</li>
+</ul>
+<p>称确定性有限状态自动机 $M$ 接受（长度为 $n$ 的）字符串 $s$ 当且仅当存在一列状态 $r_0, r_1, …, r_n$ 满足 $r_0 &#x3D; q_0$，$\forall i &#x3D; 0, 1, …, n - 1$ 都有 $\delta(r_i, s_{i + 1}) &#x3D; r_{i + 1}$ 且 $r_n \in F$。</p>
+<p>称如下集合为 $M$ <em>识别的语言</em>：$L(M) :&#x3D; \{w \in \Sigma^* : \text{$M$ accepts $w$}\}$。</p>
+</div>
+
+
+<p>定义中使用的字眼“确定性”，即是在描述此类自动机具有的特性：处于某状态时读入一个新字符，只能转移到某一个固定的状态。因此，最直接的对此类自动机性能拓展的尝试就是引入“非确定性”。</p>
+<div class="note success"><p><strong>定义 1.1.2（非确定性有限状态自动机 &#x2F; NFA）.</strong> 一个<em>非确定性有限状态自动机</em>包含如下资料 $M &#x3D; (Q, \Sigma, \delta, Q_0, F)$，其中</p>
+<ul>
+<li>$Q$ 表示状态集合。</li>
+<li>$\Sigma$ 表示输入字符集合。</li>
+<li>$\delta: Q\times (\Sigma \cup \{\varepsilon\}) \rightarrow \mathcal{P}(Q)$ 表示转移函数。这里 $\mathcal{P}(\cdot)$ 表示幂集，$\varepsilon$ 表示“空字符”，在判断两字符串是否相等时我们将忽略其中所有空字符。</li>
+<li>$Q_0$ 表示起始状态的集合。</li>
+<li>$F\subseteq Q$ 表示接受状态集。</li>
+</ul>
+<p>称非确定性有限状态自动机 $M$ 接受（长度为 $n$ 的）字符串 $s$ 当且仅当存在字符串 $w :&#x3D; w_1w_2…w_m$，其中 $w_i\in \Sigma\cup\{\varepsilon\}$ 且 $w &#x3D; s$，以及状态序列 $r_0, r_1, …, r_m$ 满足 $r_0\in Q_0$，对于任意的 $i &#x3D; 0, 1, …, m - 1$ 都有 $r_{i + 1}\in \delta(r_i, w_{i + 1})$，且 $r_m\in F$。</p>
+</div>
+
+<p>然而可以发现这样的尝试是徒劳的。</p>
+<div class="note info"><p><strong>定理 1.1.1.</strong> 对于一个语言 $A\in \Sigma^*$，存在一个 DFA $M$ 使得 $L(M) &#x3D; A$ 当且仅当存在一个 NFA $M’$ 使得 $L(M’) &#x3D; A$。</p>
+</div>
+
+<p><strong>证明.</strong> 必要性显然，因为 DFA 可以自然地嵌入 NFA 中。为证明充分性，只需在 NFA $M’$ 的基础上构造一个状态集为 $\mathcal{P}(Q)$ 的 DFA（直觉上理解做当前能走到的全体状态）即可。$\blacksquare$</p>
+<p>由是，DFA 和 NFA 具有相同的计算能力边界，因此将其统称做有限状态自动机。能被有限状态自动机识别的语言，称为<strong>正则语言</strong>，以 $\mathbf{REG}$ 指代全体正则语言构成的集合。可以发现，正则语言在某些操作下具有封闭性：</p>
+<div class="note info"><p><strong>定理 1.1.2.</strong> 若 $A, B$ 是正则语言（分别被 NFA $M_1, M_2$ 识别），则以下语言都是正则语言：</p>
+<ol>
+<li>$A\cup B$、$A\cap B$ 和 $A^c$；</li>
+<li>$AB :&#x3D; \{ab : a\in A, b\in B\}$；</li>
+<li>$A^* :&#x3D; \cup_{n&#x3D;1}^\infty A^n$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 利用 $M_1, M_2$ 构造对应的自动机即可。无非是一些构造两自动机的“乘积”、“串联”，或者从接收状态向起始状态连 $\varepsilon$ 边之类。$\blacksquare$</p>
+<p>可凭这些操作构建计算机从业者熟知的“正则表达式”。</p>
+<div class="note success"><p><strong>定义 1.1.3（正则表达式）.</strong> 正则表达式 $\mathcal{R}$ 系指最小的满足如下条件的集合：</p>
+<ol>
+<li>对于任意的 $a\in \Sigma$，$a\in \mathcal{R}$；$\varnothing \in \mathcal{R}$；$\varepsilon \in \mathcal{R}$。</li>
+<li>若 $R_1, R_2\in \mathcal{R}$，则 $R_1\cup R_2, R_1\cap R_2, R_1^c, R_1R_2, R_1^*\in \mathcal{R}$。</li>
+</ol>
+<p>可以结合以上论述，望文生义地定义何为“一个正则表达式描述的语言”，节约篇幅此处不写。</p>
+</div>
+
+<p>直觉上便有</p>
+<div class="note info"><p><strong>定理 1.1.3.</strong> 一个语言是正则语言当且仅当存在一个正则表达式描述之。</p>
+</div>
+
+<p><strong>证明.</strong> <em>必要性.</em> 显然，因为正则表达式中的基本元素（1）都是正则语言，且正则语言对于（2） 中的操作都封闭。</p>
+<p><em>充分性.</em> 现有正则语言 $L$，其能被一个 NFA $M$ 识别。不失一般性可设 $M$ 的起始节点和接受节点唯一，且没有 $\varepsilon$ 边（读者自行思考如何改造其余形式的 NFA）。</p>
+<p>方便起见，我们另外定义一种非确定性有限状态自动机。其每条转移边上都是一个正则表达式，能够从此转移当且仅当字符串的一个前缀能够匹配上此正则表达式。容易证明，这种自动机的能力和 NFA 相同。可交替进行如下两种操作，将 $M$ 逐步改造做一个只有起始节点和接受节点的、只有一条连接它们的边的自动机：</p>
+<ol>
+<li><p><em>去重边.</em> 若存在两个状态 $u, v$，从 $u$ 到 $v$ 有 $k &gt; 1$ 条转移边，边上的正则表达式依次是 $r_1, …, r_k$。则将其一并删去，并加一条标注 $r_1 \cup \cdots \cup r_k$ 的转移边，得到的自动机识别的语言不变。</p>
+</li>
+<li><p><em>删点.</em> 选择一个非起始非中止节点 $p$。删去它和与之相关的所有边，然后连接</p>
+<p>$$<br>\{(u, v, r_1r_2) : \text{transition $(u, p, r_1)$ and $(p, v, r_2)$ exists}\}<br>$$</p>
+</li>
+</ol>
+<p>最后得到的自动机唯一的转移边上缩写之正则表达式即为描述该 NFA 识别的语言的正则表达式。$\blacksquare$</p>
+<hr>
+<p>然而很遗憾，正则语言不是全部的语言。即 $\mathbf{REG} \subsetneq \mathcal{P}(\Sigma^*)$。比如考虑语言 $\{0^n1^n : n\in \mathcal{N}\}$，任何尝试以正则表达式或自动机识别之的尝试都是徒劳无功的。这是因为直觉上，输入一个长度大于有限状态自动机状态数的字符串，必然会走出一个环，而重复走这个环，不会对接受 &#x2F; 拒绝的决策造成任何影响。此直觉表明正则语言一定具有某种特殊的结构。形式化地，有</p>
+<div class="note info"><p><strong>定理 1.1.4（泵引理）.</strong> 对于任意的 $L\in \mathbf{REG}$，都存在一个常数 $p$ 使得：对于任意的 $s\in L, |s| \geq p$，都可将 $s$ 划分做三段（即 $s &#x3D; xyz$）使得</p>
+<ol>
+<li>$|y| &gt; 0, |xy| &lt; p$；</li>
+<li>对于任意的 $i\in \mathbb{N}$，都有 $xy^iz\in L$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 设 $L$ 被一个 DFA $M$ 识别，其状态集为 $Q$。这里 $p$ 无非是 $|Q| + 1$。则根据鸽巢原理 $s$ 在 $M$ 上行走的一个路径必然形如一个“$\rho$”加上一段后续的过程。将 $x$ 取作“$\rho$”上进入环时读入的字符串，$y$ 取作环上的字符串，$z$ 取作后续字符串，这就是一个满足条件的切片。$\blacksquare$</p>
+<p>另外一条刻画正则语言的结构的定理如下，该定理对于自动机的最小化也有一些帮助：</p>
+<div class="note info"><p><strong>定理 1.1.5（Myhill–Nerode）.</strong> 对于语言 $L$，定义等价关系 </p>
+<p>$$<br>\sim_L :&#x3D; \{(x, y) \in \Sigma^*\times \Sigma^* : \forall w\in \Sigma^*, \text{$M$ accepts $xw$ iff $M$ accepts $yw$}\}<br>$$</p>
+<p>则 $L$ 是正则语言当且仅当 $|\Sigma^* &#x2F; \sim_L| &lt; \omega$（$\omega$ 是 $\mathbb{N}$ 的基数）。</p>
+</div>
+
+<p><strong>证明.</strong> 若在一个 DFA 上，两个字符串输入后转移到了同一个节点，那么他们等价。因此对于正则语言 $L$ 必有 $|\Sigma^* &#x2F; \sim_L| \leq |Q|$。同样，可尝试构造一个 $Q &#x3D; \Sigma^* &#x2F; \sim_L$ 的 DFA。因为若 $x\sim_L y$ 则对于任意的 $c\in \Sigma$ 都有 $xc\sim_L yc$，所以它必是良定义的。$\blacksquare$</p>
+<h2><span id="非确定性下推自动机和上下文无关语言">（非确定性）下推自动机和上下文无关语言</span></h2><p>一个增强自动机能力的尝试是给它增加“内存”。比如有限状态自动机在识别上方的 $01$ 语言时遇到的困难，只要有一个栈便可迎刃而解。</p>
+<p>本节探究这种附带一个栈的自动机的计算能力。</p>
+<div class="note success"><p><strong>定义 1（非确定性下推自动机 &#x2F; NPDA）.</strong> 一个非确定性下推自动机包含一下资料：$(Q, \Sigma, \Gamma, \delta, q_0, F)$，其中</p>
+<ul>
+<li>$Q$ 是状态集；</li>
+<li>$\Sigma$ 是输入字符集；</li>
+<li>$\Gamma$ 是栈字符集；</li>
+<li>$\delta : Q\times (\Sigma \cup \{\varepsilon\})\times (\Gamma \cup \varepsilon) \rightarrow \mathcal{P}(Q\times \Gamma_{varepsilon})$ 为转移函数；</li>
+<li>$q_0\in Q$ 为起始状态；</li>
+<li>$F\subseteq Q$ 为接受状态集合。</li>
+</ul>
+<p>一个 NPDA $M$ 接受一个字符串 $s$ 若存在字符串 $w &#x3D; w_1w_2…w_m$、一列字符串 $t_0, t_1, …, t_m$、一列状态 $r_0, r_1, …, r_m$，满足：</p>
+<ol>
+<li>$w &#x3D; s$，$r_0 &#x3D; \varepsilon$，$r_0 &#x3D; q_0$；</li>
+<li>对于任意的 $i &#x3D; 0, 1, …, m - 1$ 都有存在 $a, b\in \Gamma$ 和 $s\in \Gamma^*$，满足 $t_i &#x3D; sa, t_{i + 1} &#x3D; sb$，且 $(q_{i + 1}, b)\in \delta(q_i, w_{i + 1}, a)$。</li>
+</ol>
+</div>
+
+<p>方便起见，以后若 $(v, b)\in \delta(u, c, a)$，我们将称存在转移边 $(u\xrightarrow{c, a, b} v)$。</p>
+<p>因为此类自动机带上了一个副作用（栈），所以不好直接使用上一节中的手法来探究 NPDA 识别的语言的边界（甚至不能知道定理 1.1.2 中的结论是否成立）。我们需要转换视角。</p>
+<p>此处引入了栈，所以这种自动机将能够做括号匹配一类的工作。这让我们联想到用递归的语法规则定义的语言——上下文无关语言。这个上下文无关语言就是软件科学和编译原理中常见的那个上下文无关语言，因此我们仍然假设读者有相关直觉，以下形式定义仅是为完整性起见给出。</p>
+<div class="note success"><p><strong>定义 1.2.2（上下文无关文法 &#x2F; CFG）.</strong> 一个上下文无关文法 $G$ 包含以下资料：$(V, v_0, \Sigma, R)$ 其中</p>
+<ul>
+<li>$V$ 为变量集。</li>
+<li>$v_0\in V$ 为起始变量。</li>
+<li>$\Sigma$ 为终止符集。一般认为 $V\cap \Sigma &#x3D; \varnothing$。</li>
+<li>$R\in \mathcal{P}(V\times (V\cup \Sigma)^*)$ 是替换规则（有限集）。这个看起来很抽象的类型表示 $R$ 中的元素形如 $s \rightarrow t$，其中 $s\in V, t\in (V\cup \Sigma)^*$。</li>
+</ul>
+<p>对于 $s, t\in (V\cup \Sigma)^*$，称 $s\Rightarrow t$ 当且仅当可以用 $R$ 中的替换规则 $a\rightarrow$，将 $s$ 中的一个变量 $a$ 替换为 $b$ 得到 $t$。若 $s$ 能够经有限次替换得到 $t$，记 $s\Rightarrow^* t$。$G$ 生成的语言定义做 $L(G) :&#x3D; \{t : v_0\Rightarrow^* t\}$。</p>
+<p>生成一个字符串的过程可以用一棵树刻画，这棵树称作<em>语法树</em>。</p>
+</div>
+
+<p>能被某个上下文无关文法生成的语言称为<strong>上下文无关语言</strong>，其全体构成集合 $\mathbf{CFL}$。</p>
+<div class="note info"><p><strong>定理 1.2.1.</strong> 对于语言 $L$，$L\in \mathbf{CFL}$ 当且仅当存在 NPDA $M$ 使得 $L(M) &#x3D; L$。</p>
+</div>
+
+<p><strong>证明.</strong> <em>必要性.</em> 对着替换规则写一个 NPDA 即可。显然，栈中存当前可能替换出已经读入部分的字符串的中间结果即可（每次识别栈顶连续若干个元素是否是某个替换规则的产物，若是将其全部弹出并压入该替换规则的变量）。</p>
+<p><em>充分性.</em> 不失一般性可设该 NPDA $M$ 只有一个接受节点 $f$，转移时要么压栈、要么弹栈，接受任意一个字符串时栈都可以是空的（改造方式留予读者）。则可以用如下的上下文无关文法刻画 NPDA 识别一个字符串过程中的行走路径及栈的运动：</p>
+<ul>
+<li>变量集为 $Q\times Q$，每个元素 $(u, v)$ 表示存在一条路径从 $u$ 走到 $v$，且保持行走过程中栈不低于初始未知，结束时栈恰为原来的栈。</li>
+<li>起始变量为 $(q_0, f, \varepsilon)$。</li>
+<li>终止符集为 $\Sigma$。</li>
+<li>若存在转移边 $u\xrightarrow{c_1, \varepsilon, b} p_1$ 和转移边 $p_2\xrightarrow{c_2, a, \varepsilon} v$，则添加替换规则 $(u, v) \rightarrow c_1(p_1, p_2)c_2$；对于任意三个状态 $q_1, q_2, q_3\in Q$，添加替换规则 $(q_1, q_3)\rightarrow (q_1, q_2)(q_2, q_3)$。</li>
+</ul>
+<p>于是便得到了一个生成 $M$ 所识别语言的 CFG，因此 $L(M)\in \mathbf{CFL}$。$\blacksquare$</p>
+<div class="note info"><p><strong>推论 1.2.2.</strong> $\mathbf{REG}\subsetneq \mathbf{CFL}$。</p>
+</div>
+
+<p>至此，我们完全将非确定性下推自动机和上下文无关语言联系起来。然后便能探究其能力边界。</p>
+<div class="note info"><p><strong>定理 1.2.3（泵引理）.</strong> 对于任意的 $A\in \mathbf{CFL}$，都存在常数 $p$ 使得对于任意的 $s\in \Sigma^*$，若 $|s| &gt; p$，则 $s$ 可被切成五段 $s &#x3D; uvxyz$，满足：</p>
+<ol>
+<li>$|vy| &gt; 0$；</li>
+<li>$|vxy| &lt; p$；</li>
+<li>对于任意的 $i\in \mathbb{N}$，都有 $uv^ixy^iz\in A$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 设 $A &#x3D; L(G)$，其中 $G$ 是一个上下文无关文法。取 $p &#x3D; (|V| + 1)^{r_m + 1}$，其中 $r_m &#x3D; \max\{|v| : (u\rightarrow v) \in R\}|$。这个 $p$ 使得生成长度大于 $p$ 的语法树深度必超过 $|V|$，进而生成过程中存在一个变量在一条竖直的链上出现了两次。下图道尽一切：</p>
+<p><img src="/../picture/cfl-pumping-lemma.png"></p>
+<p>得证。$\blacksquare$</p>
+<p>因此，我们可以说明 $L_1 &#x3D; \{0^n1^n0^n : n\in \mathbb{N}\}$ 这类语言是上下文无关语言。因此 $\mathbf{CFL}\subsetneq \mathcal{P}(\Sigma^*)$。</p>
+<p>观察到令 $L_2 &#x3D; \{0^n1^n1^m : n, m\in \mathbb{N}\}, L_3 &#x3D; \{0^n1^m0^m : n, m\in \mathbb{N}\}$，有 $L_1 &#x3D; L_2 \cap L_3$。因此 $\mathbf{CFL}$ <em>对交不封闭</em>。但是可以证明 $\mathbf{CFL}$ <em>对上下文无关语言和正则语言的交封闭</em>（只需要改造自动机部分，和存储无关）、<em>对并封闭</em>。进而，通过证明 $\overline{L_1}\in \mathbf{CFL}$，可以证明 $\mathbf{CFL}$ <em>对补不封闭</em>。</p>
+<h1><span id="可计算性理论">可计算性理论</span></h1><p>再尝试拓展自动机的计算能力边界。我们将赋予其完全的访存能力，得到图灵机。这将是（就目前已知）物理上能够实现的最强的计算模型。但是很遗憾，图灵机能够“识别”的语言仍只是全部语言的真子集。</p>
+<h2><span id="图灵机的基本定义">图灵机的基本定义</span></h2><div class="note success"><p><strong>定义 2.1.1（确定性图灵机 &#x2F; DTM）.</strong> 一个 $k$ 带图灵机包含如下资料：七元组 $(Q, \Sigma, \Gamma, \delta, q_0, q_{acc}, q_{rej})$，其中</p>
+<ul>
+<li>$Q$ 为状态集，$q_0\in Q$ 为起始状态，$q_{acc}, q_{rej}\in Q$ 分别为（停机并）接收状态和拒绝状态。</li>
+<li>$\Sigma$ 为输入字符集，$\Gamma$ 为纸带字符集。</li>
+<li>$\delta: Q\times \Gamma^k\rightarrow Q\times \Gamma^k\times \{L, S, R\}^k$ 为转移函数，描述在某状态下每个纸带的读写头读入到某些字符将转移到何状态、写何字符、向何处移动读写头。</li>
+</ul>
+<p>你可以将其想象成一个配备了 $k$ 条无限长的纸带的抽象的机器。</p>
+</div>
+
+<p>通常 $\Gamma$ 中有两个特殊字符：$\triangleright$ 和 $\text{_}$，表示纸带开头和空格。</p>
+<div class="note success"><p><strong>定义 2.1.2（格局）.</strong> 图灵机的一个<em>格局</em>描述了某一时刻图灵机和纸带的情况，它是一个包含如下资料的元组 $(q, t_1, …, t_k, h_1, …, h_k)：</p>
+<ul>
+<li>$q$ 表示当前状态；</li>
+<li>$t_1, …, t_k$ 表示当前纸带内容（仅包含最后一个非 $\text{_}$ 前的内容）；</li>
+<li>$h_1, …, h_k$ 表示当前读写头位置。</li>
+</ul>
+</div>
+
+<p>图灵机的计算过程，在此我们不进行琐碎的形式定义。只明确以下几点：</p>
+<ol>
+<li>图灵机的面临的初始情况由<em>初始格局</em> $C_0$描述。此时图灵机处于状态 $q_0$，$k$ 条纸带内容为<br>$$<br>\begin{aligned}<br>   \text{tape $1$}\quad &amp; \boxed{\triangleright \texttt{ s } \text{_ _ _} \cdots} \\<br>   \text{tape $2$}\quad &amp; \boxed{\triangleright \text{_ _ _} \cdots} \\<br>   \vdots\quad &amp; \\<br>   \text{tape $k$}\quad &amp; \boxed{\triangleright \text{_ _ _} \cdots} \\<br>\end{aligned}<br>$$<br>其中 $\texttt{s}$ 为输入。</li>
+<li>图灵机从 $k$ 条纸带读入字符，执行 $\delta$ 要求的转移。</li>
+<li>如果运行到 $q_{acc}$（或者 $q_{rej}$），<strong>停机</strong>并<em>接受</em>（或者<em>拒绝</em>）。</li>
+</ol>
+<p>由此，一个图灵机 $M$ <strong>识别（recognize）</strong>的语言为 $L(M) :&#x3D; \{s : \text{$M$ halts and accepts $s$}\}$。注意，图灵机可能有环，因此在某些输入上可能不停机，此类语言即使能被图灵机识别，可能也没有现实意义，因此你不知一个有环的图灵机在某输入上将何时停机，任何截断其运行的操作都将是武断的。可以被图灵机识别的语言称为<strong>图灵可识别</strong>的，或者在递归论的术语下称作<strong>递归可枚举</strong>的，其全体构成集合 $\textbf{RE}$。</p>
+<p>自然，容易想到图灵机识别语言的另一种模式，即其在所有不属于该语言的输入上停机并拒绝。我不知道这类语言的中文名，但是其全体构成集合 $\mathbf{coRE}$。</p>
+<p>如果一个图灵机 $M$ 在一切输入上都停机，那么它被称为一个<strong>判定机（decider）</strong>，且称 $M$ <strong>判定（decides）</strong> $L(M)$。若一个语言能被一个判定机判定，则称其为<strong>图灵可判定</strong>的，或者在递归论的术语下称作<strong>递归</strong>的，其全体构成集合 $\mathbf{R}$。</p>
+<p>补充一些关于图灵机的信息：</p>
+<ul>
+<li><strong>函数计算.</strong> 不只是简单接受和拒绝（只是计算函数 $f : \{0, 1\}^* \rightarrow \{0, 1\}$）。称 $M$ 计算 $f : \{0, 1\}^* \rightarrow \{0, 1\}^*$，若其在任意输入 $x$ 上都停机并在某一条输出纸带上写 $f(x)$。</li>
+<li><strong>运行时间.</strong> 称一个图灵机的运行时间为 $T(n)$，若它在任意输入 $x$ 上都将在 $T(|x|)$ 步内停机。称 $T$ 是 time-constructable 的，若存在一个图灵机在 $T(n)$ 时间内计算 $x\mapsto \lfloor T(|x|)\rfloor$。</li>
+</ul>
+<p>图灵机可以有一些变种。比如图灵机可以有更多的纸带和更大的字符集，但是在识别语言的意义下，这些变种都和朴素的图灵机等同。因为 </p>
+<div class="note info"><p><strong>定理 2.1.1.</strong> 对于任意计算 $f : \{0, 1\}^* \rightarrow \{0, 1\}$ 的图灵机 $M$，其纸带字符集为 $\Gamma$，运行时间为 $T(n)$，则存在另一个图灵机 $M’$ 也计算 $f$，但其纸带字符集仅为 $\{0, 1, \triangleright, \text{_}\}$，时间为 $O(T(n)\log |\Gamma|)$。</p>
+</div>
+
+<p><strong>证明.</strong> 编码字符集即可。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 2.1.2.</strong> 对于任意计算 $f : \{0, 1\}^* \rightarrow \{0, 1\}$ 的图灵机 $M$，其使用 $k$ 条纸带，运行时间为 $T(n)$，则存在另一个图灵机 $M’$ 也计算 $f$，但其只是用一条纸带，时间为 $O(kT^2(n))$。</p>
+</div>
+
+<p><strong>证明.</strong> 将纸带穿插一下即可。可能需要维护一些必要的辅助信息，但是都是琐碎的。$\blacksquare$</p>
+<p>同样，仅考虑可判定性，确定性图灵机和非确定性图灵机也是等价的。构造是琐碎的，此处不写。</p>
+<hr>
+<p>接下来介绍可计算理论中的重要内容：<strong>通用图灵机</strong>。直觉上，我们希望一个机器能够运行各种算法（就如同现在的电脑）。这样的机器称作通用图灵机。</p>
+<p>首先，因为图灵机涵盖的资料都是有限的，所以存在一个图灵机到 $\{0, 1\}^*$ 的双射，称作图灵机为编码。编号为 $\alpha$ 的图灵机记作 $M_\alpha$。</p>
+<div class="note info"><p><strong>定理 2.1.3（通用图灵机）.</strong> 存在一个图灵机 $U$，使得对于任意的 $x, \alpha\in \{0, 1\}^*, U(x, a) &#x3D; M_\alpha(x)$。特别地，若 $M_\alpha$ 在 $x$ 上运行 $T$ 步边停机，则 $U$ 在 $CT\log T$ 步内停机，其中 $C$ 是只和 $M_\alpha$ 有关的常数。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 似乎 $CT\log T$ 是前沿结果，甚至还有 $\sqrt T$ 空间模拟的前沿结果，这里我们只会证 $CT^2$。</p>
+</blockquote>
+<p><strong>证明（Sketch）.</strong> 这个图灵机将使用五条纸带，依次存放输入 $x$、$M$ 的描述（用编码算出）、运行中纸带的情况、$M$ 现在的状态、输出，必要时附带一条草稿纸。模拟时每步取对应状态和字符，然后查表得知转移函数，最后将变化写回。简单思考发现这些事情都是可以在 $O(T)$ 内实现的。$\blacksquare$</p>
+<h2><span id="关于可计算性的一些论题">关于可计算性的一些论题</span></h2><p>首先，我们罗列一些可计算的语言。在此处，我们将使用一些所谓的“算法”来描述图灵机，这样做的根据是 Turing-Church Thesis。并且，方便起见，我们将混淆机器（包括自动机和图灵机）的编码和机器本身。</p>
+<div class="note "><p><strong>一些平凡的断言.</strong> 有以下显然的包含关系：</p>
+<ol>
+<li>$\mathbf{REG}\subset \mathbf{R}$；</li>
+<li>$\mathbf{CFG}\subset \mathbf{R}$。</li>
+</ol>
+</div>
+
+<p>这是因为有限状态自动机和 PDA 可以嵌入必然停机的图灵机之中。</p>
+<div class="note "><p><strong>关于自动机的可判定语言.</strong> 以下几个语言都是可判定的：</p>
+<ol>
+<li>$\mathrm{A_{DFA}} :&#x3D; \{ \langle A, w\rangle : \text{$A$ is a DFA and $A$ accepts $w$} \}$；</li>
+<li>$\mathrm{E_{DFA}} :&#x3D; \{ A : \text{$A$ is a DFA and $L(A) &#x3D; \varnothing$} \}$；</li>
+<li>$\mathrm{EQ_{DFA}} :&#x3D; \{ \langle A, B\rangle : \text{$A, B$ are DFAs and $L(A) &#x3D; L(B)$} \}$；</li>
+<li>$\mathrm{A_{CFG}} :&#x3D; \{ \langle G, w\rangle : \text{$G$ is a CFG and $G$ generates $w$} \}$；</li>
+<li>$\mathrm{E_{CFG}} :&#x3D; \{ \langle G\rangle : \text{$G$ is a CFG and $L(G) &#x3D; \varnothing$} \}$。</li>
+</ol>
+<p>前三个命题换成 NFA、正则表达式也成立，因为存在 NFA &#x2F; 正则表达式转 DFA 的算法。</p>
+</div>
+
+<p>欲证明这些断言，只需设计一些算法。这些算法无非是一些在自动机 &#x2F; CFG 上面进行深度优先搜索之类的操作。</p>
+<p>值得注意的是，用证明 $3$ 的手法（你可能会想构造一个识别 $A\oplus B$ 的自动机，这里 $\oplus$ 表示对称差）不能证明 $\mathrm{EQ_{CFG}}$ 是可判定的，因为 CFG 在对称差下不封闭。后续我们会论述 $\mathrm{EQ_{CFG}}$ 是不可判定的。</p>
+<hr>
+<p>接下来我们论证不可判定语言的广泛存在性。</p>
+<div class="note info"><p><strong>定理 2.2.1.</strong> 存在不可识别的语言。即 $\mathbf{RE}\subsetneq \mathcal{P}(\{0, 1\}^*)$。</p>
+</div>
+
+<p><strong>证明.</strong> 为了证明真子集，只需要证明其不等势即可。显然存在 $\mathbf{RE}$ 到图灵机的单射，但是图灵机都有编码，因此可嵌入 $\mathbb{N}$。于是 </p>
+<p>$$<br>|\mathbf{RE}| \leq \mathbb{N} &lt; 2^{|\mathbb{N}|} &#x3D; |\mathcal{P}(\{0, 1\}^*)|<br>$$</p>
+<p>确实不等势，因此是真子集。$\blacksquare$</p>
+<div class="note info"><p><strong>定理 2.2.2.</strong> 若一个语言及其补都是可识别的，则它是可判定的，即 $\mathbf{R} &#x3D; \mathbf{RE} \cap \mathbf{coRE}$。</p>
+</div>
+
+<p><strong>证明.</strong> 同时交替运行识别该语言及其补的图灵机。对任意输入，总有一个将停机，因此该语言可判定。$\blacksquare$</p>
+<p>$\mathbf{R}\ne \mathbf{RE}$ 的证明是一个经典的对角线法。</p>
+<div class="note info"><p><strong>定理 2.2.3.</strong> 存在可识别但不可判定的语言，即 $\mathbf{R}\subsetneq \mathbf{RE}, \mathbf{R}\subsetneq \mathbf{coRE}$。</p>
+</div>
+
+<p><strong>证明.</strong> 考虑如下语言 $\mathrm{UC}$：</p>
+<p>$$<br>\mathrm{UC}(\alpha) :&#x3D; \begin{cases}<br>   \text{reject} &amp; \text{$M_\alpha(\alpha)$ halts and accepts.} \\<br>   \text{accept} &amp; \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>假设存在一个图灵机 $M$ 能够判定此问题，其编码为 $\alpha$，则无论 $M(\alpha)$ 接受还是拒绝都将推出对方，导出矛盾。而显然 $\mathrm{UC}\in \mathbf{coRE}$，这证明了第二个断言。</p>
+<p>另考虑如下语言（著名的停机问题） $\mathrm{HALT}(\langle \alpha, x\rangle) :&#x3D; \{\text{$M_\alpha$ halts on input $x$}\}$。显然 $\mathrm{HALT}\in \mathbf{RE}$，但如果 $\mathrm{HALT}\in \mathbf{R}$，则可以结合一个通用图灵机来判定 $\mathrm{UC}$，因此 $\mathrm{HALT}\notin \textbf{R}$，这证明了第一个断言。$\blacksquare$</p>
+<hr>
+<p>注意，我们证明一个语言不可判定时，几乎必然使用以下两种方法之一：<strong>对角线法</strong>和<strong>规约</strong>。而在进行规约时，一般有两种惯用的手法：</p>
+<ol>
+<li><strong>调用子过程.</strong> 构造一个（可能使用 UTM 的）图灵机，它通过一些自己的步骤和模拟 $B$ 问题的判定机来判定问题 $A$。若 $A$ 是不可判定的，便导出矛盾，进而证明 $B$ 不可判定。</li>
+<li><strong>Map Reduction.</strong> 这是上述方法的一个上层建筑。若存在可计算的函数 $f : \{0, 1\}^*\rightarrow \{0, 1\}^*$ 使得 $x\in A \Leftrightarrow f(x)\in B$，则称 $A \leq_m B$。容易证明，$A\leq_m B$，则 $A$ 不可判定蕴含 $B$ 不可判定、$B$ 可判定蕴含 $A$ 可判定。</li>
+</ol>
+<p>以下是更多例子。</p>
+<div class="note "><p><strong>一些规约的应用.</strong> 以下语言都是不可判定的：</p>
+<ol>
+<li>$\mathrm{A_{TM}} :&#x3D; \{ \langle M, w\rangle : \text{$M$ is a TM and accepts $w$}\}$；</li>
+<li>$\mathrm{E_{TM}} :&#x3D; \{ M : L(M) &#x3D; \varnothing \}$；</li>
+<li>$\mathrm{EQ_{TM}} :&#x3D; \{ \langle M_1, M_2\rangle : L(M_1) &#x3D; L(M_2) \}$；</li>
+<li>$\mathrm{REGULAR_{TM}} :&#x3D; \{ M : L(M) \in \mathbf{REG} \}$；</li>
+</ol>
+</div>
+
+<p>容易发现 $\mathrm{UC} \leq_m \mathrm{A_{TM}}$，$\mathrm{E_{TM}} \leq \mathrm{EQ_{TM}}$。<em>（断言 1、3 证毕）</em></p>
+<p>因此着重证明第 2 条和第 4 条。现证明 $\mathrm{UC} \leq_m \mathrm{E_{TM}}$，考虑构造如下可计算函数 $f$：它将 $\alpha$ 映射到如下图灵机 $M’$ 的编码：</p>
+<ol>
+<li>在输入 $x$ 上：</li>
+<li>如果 $x\ne \alpha$，拒绝。</li>
+<li>否则，模拟 $M_{\alpha}$ 在 $\alpha$ 上的运行并输出对应结果。</li>
+</ol>
+<p>注意，这里只是要计算 $M’$ 的编码，无非是做一些程序填空的工作，因此 $f$ 是可计算的。而若 $\alpha \in \mathrm{UC}$，则 $M’ &#x3D; M_{f(\alpha)}$ 将拒绝一切，否则 $M’$ 将接受 $\alpha$。因此，$\alpha\in \mathrm{UC} \Leftrightarrow f(\alpha) \in \mathrm{E_{TM}}$，得到 $\mathrm{UC} \leq_m \mathrm{E_{TM}}$。<em>（断言 2 证毕）</em></p>
+<p>接下来证明 $\mathrm{A_{TM}} \leq_m \mathrm{REGULAR_{TM}}$。设 $M_0$ 是判定语言 $\{0^n1^n : n\in \mathbb{N}\}$ 的图灵机。考虑构造如下可计算函数 $f$：他将 $\langle M, w\rangle$ 映射到如下图灵机 $M’$ 的编码：</p>
+<ol>
+<li>在输入 $x$ 上：</li>
+<li>模拟 $M$ 在 $w$ 上的运行。</li>
+<li>若接受，则模拟 $M_0$ 在 $x$ 上的运行。</li>
+<li>若拒绝，则拒绝。</li>
+</ol>
+<p>那么，如果 $M$ 接受 $w$，则 $L(M’) &#x3D; L(M_0)$，不是正则语言，否则 $L(M’) &#x3D; \varnothing$。因此 $\langle M, w\rangle\in \mathrm{A_{TM}} \Leftrightarrow f(\langle M, w\rangle)\in \mathrm{REGULAR_{TM}}$，得到 $\mathrm{A_{TM}} \leq_m \mathrm{E_{TM}}$。<em>（断言 4 证毕）</em></p>
+<p>我们已经证明了如此之多的关于图灵机的性质的不可判定性。事实上，一切非平凡的关于图灵机的性质都是不可判定的。该定理的证明与上述断言 $4$ 如出一辙。</p>
+<div class="note info"><p><strong>定理 2.2.4（Rice）.</strong> $P$ 是一个关于图灵机的谓词。称 $P$ 是非平凡的，当且仅当 $\exists L_1, L_2\in \mathbf{RE}, P(L_1) \wedge \neg P(L_2)$。则对于任意的非平凡的 $P$，语言 $\mathrm{P_{TM}} :&#x3D; \{ M : P(M) \}$ 都是不可判定的。</p>
+</div>
+
+<p><strong>证明.</strong> 不失一般性，设 $M_1$ 能识别 $L_1$，$L_2 &#x3D; \varnothing$。（这是因为 $P(\varnothing)$ 或不然，若 $P(\varnothing)$ 我们可以先证明 $\overline{P_{TM}}$ 不可判定，然后用 $\mathbf{R} &#x3D; \mathbf{RE} \cap \mathbf{coRE}$ 推出 $\overline{P_{TM}}$ 必然也不可判定）</p>
+<p>接下来证明 $\mathrm{A_{TM}} \leq_m \mathrm{P_{TM}}$。为此构造函数 $f$，它将 $\langle M, w\rangle$ 映射到如下图灵机的编码：</p>
+<ol>
+<li>在输入 $x$ 上：</li>
+<li>模拟 $M$ 在 $w$ 上的运行。</li>
+<li>若接受，模拟 $M_1$ 在 $x$ 上的运行；</li>
+<li>否则，拒绝。</li>
+</ol>
+<p>显然 $\langle M, w\rangle\in \mathrm{A_{TM}}\Leftrightarrow f(\langle M, w\rangle)\in \mathrm{P_{TM}}$。$\blacksquare$</p>
+<p>最后介绍几个和 CFG 相关的不可判定性证明。这些证明主要依赖于图灵机的合法或非法格局序列可以被巧妙地表示出。</p>
+<div class="note "><p><strong>PCP Problem.</strong> 给定一个二元组的有限集 $(\Sigma^* \times \Sigma^*) \supseteq S :&#x3D; \{(a_1, b_1), …, (a_k, b_k)\}$。判断是否存在一列（可重复的）标号 $i_1, …, i_r$ 使得 $a_{i_1}…a_{i_r} &#x3D; b_{i_1}…b_{i_r}$。</p>
+<p>有 $\mathrm{PCP}\in \mathbf{RE}\setminus \mathbf{R}$。</p>
+</div>
+
+<p>设 $\mathrm{PCP}_{(a, b)}$ 表示固定开头为 $(a, b)$ 的 $\mathrm{PCP}$。显然 $\mathrm{PCP}_{(a, b)} \leq_m \mathrm{PCP}$。（需要一些简单的“错位”构造）</p>
+<p>用如下形状的字符串来包囊一个单纸带图灵机的格局的全部信息：</p>
+<p>$$<br>t_1 t_2\cdots t_{h - 1} \texttt{ [head: $q$] } t_h \texttt{ [&#x2F;head] } t_{h + 1} \cdots t_{m}<br>$$</p>
+<p>我们证明 $\mathrm{A_{TM}}\leq_m \mathrm{PCP}$。为此，针对 $M$ 和 $w$ 构造一个 PCP 问题的实例 $S$：</p>
+<ol>
+<li>向 $S$ 中加入 $(a_0, b_0) :&#x3D; (\varepsilon, \texttt{ [head: $q_0$] } \triangleright \texttt{ [&#x2F;head] } w)$，表示初始格局。</li>
+<li>对于任意的 $c\in \Gamma$，向 $S$ 中加入 $(c, c)$。</li>
+<li>对于任意的 $c_1, c_2\in \Gamma, q\in Q$，若 $\delta(q, c_2) &#x3D; (q’, c_3, L)$，向 $S$ 中加入<br>$$<br>(c_1\texttt{ [head: $q$] } c_2 \texttt{ [&#x2F;head] }, \texttt{ [head: $q’$] } c_1 \texttt{ [&#x2F;head] } c_3)<br>$$<br>对于向右移动和不动的情况，做类似的构造。相信聪明的读者可以洞悉这个构造的奥妙。</li>
+<li>对于任意的 $c\in \Gamma$，向 $S$ 中加入 $(c, \varepsilon)$，并向 $S$ 中加入 $(\texttt{ [head: $q_{acc}$] } c \texttt{ [&#x2F;head] }, \varepsilon)$</li>
+</ol>
+<p>容易看出 $S$ 的解对应一个合法的接受 $w$ 的格局序列。因此 $S$ 有解当且仅当 $M$ 接受 $w$，即 $\mathrm{A_{TM}}\leq \mathrm{PCP}_{(a_0, b_0)}$。$\blacksquare$</p>
+<div class="note "><p><strong>其他关于 CFG 的不可判定问题.</strong> 以下问题不可判定。</p>
+<ol>
+<li>$\mathrm{AMB_{CFG}}$ 判断一个 CFG 是否是无歧义的；</li>
+<li>$\mathrm{ALL_{CFG}}$ 判断一个 CFG 是否生成一切；</li>
+<li>$\mathrm{EQ_{CFG}}$ 判断两个 CFG 的语言是否相同。</li>
+</ol>
+</div>
+
+<p>节约篇幅，不予详细证明。</p>
+<ol>
+<li>证明 $\mathrm{PCP}\leq_m \mathrm{AMB_{CFG}}$。</li>
+<li>设计 NPDA 来识别一切非法的格局序列，进而证明 $\mathrm{A_{TM}} \leq_m \mathrm{ALL_{CFG}}$。</li>
+<li>因为存在生成一切的 CFG，所以显然 $\mathrm{ALL_{CFG}}\leq_m \mathrm{EQ_{CFG}}$。</li>
+</ol>
+<h1><span id="复杂度理论">复杂度理论</span></h1><p>现实中除了考虑问题是否可判定外，还需要度量其需要的资源。</p>
+<h2><span id="时间复杂度">时间复杂度</span></h2><div class="note success"><p><strong>定义 3.1.1（确定性时间复杂度类）.</strong> $T : \mathbb{N}\rightarrow \mathbb{N}$ 是一个函数。则 $\mathbf{DTIME}(T(n))$ 是全体能被确定性单纸带图灵机在 $O(T(n))$ 时间内判定的语言之集合。在此基础上衍生出：</p>
+<p>$\mathbf{P} :&#x3D; \cup_{c \geq 0} \mathbf{DTIME}(n^c)$ 为多项式时间可判定的复杂度类。</p>
+<p>$\mathbf{EXP} :&#x3D; \cup_{c\geq 0} \mathbf{DTIME}(2^{n^c})$ 为指数时间可判定的复杂度类。</p>
+</div>
+
+<p>直觉上，随着时间的递增，可计算的问题应当越来越多，事实上有</p>
+<div class="note info"><p><strong>定理 3.1.1（时间层级定理）.</strong> 设 $f(n), g(n)$ 是两个 time-constructable 的函数，满足 $f(n)\log f(n) &#x3D; o(g(n))$。则 </p>
+<p>$$<br>\mathbf{DTIME}(f(n)) \subsetneq \mathbf{DTIME}(g(n))<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 易见 $\mathbf{DTIME}(f(n))\subset \mathbf{DTIME}(g(n))$。现在要证明真子集关系，注意这个问题很像 $\mathbf{R}\subsetneq \mathbf{RE}$，只是把时间限制从 $\omega$ 改成了 $f(n)$。因此我们直接把该问题的对角线证明搬运过来。</p>
+<p>设 $\mathcal{U}$ 是一个效率为 $O(T\log T)$ 通用图灵机。考虑如下语言 $L$：</p>
+<ol>
+<li>在输入 $x$ 上：</li>
+<li>用通用图灵机 $\mathcal{U}$ 模拟 $f(|x|)$ 步 $M_x$ 在 $x$ 上的运行。</li>
+<li>如果 $M_x$ 停机，那么翻转其输出，否则拒绝。</li>
+</ol>
+<p>根据定义 $L\in \mathbf{DTIME}(g(n))$。而若 $L\in \mathbf{DTIME}(f(n))$，设 $M_x$ 是一个在 $f(n)$ 时间内求解 $L$ 的图灵机。则 $M_x(x)$ 接受或拒绝都将推出对方，矛盾。$\blacksquare$</p>
+<div class="note success"><p><strong>定义 3.1.2（非确定性时间复杂度类）.</strong> $T : \mathbb{N}\rightarrow \mathbb{N}$ 是一个函数。则 $\mathbf{NTIME}(T(n))$ 是全体能被非确定性单纸带图灵机在 $O(T(n))$ 时间内判定的语言之集合。在此基础上衍生出 $\mathbf{NP} :&#x3D; \cup_{c\geq 0} \mathbf{NTIME}(n^c)$。</p>
+</div>
+
+<p>这个 $\mathbf{NP}$ 的定义和我们熟悉的版本不同。我们熟悉的版本是所谓的“多项式时间内验证”。实际上，这两个定义是等价的。</p>
+<div class="note info"><p><strong>定理 3.1.2（类 $\mathbf{NP}$ 的刻画）.</strong> 对于语言 $L$，$L\in \mathbf{NP}$ 当且仅当：存在一个图灵机 $M$（称作 verifier）和常数 $c$，对于任意的输入 $x$，都存在 $u \in \cup_{i\leq n^c} \Sigma^i$（称作 certificate），使得 $x\in L\Leftrightarrow M(x, u) &#x3D; 1$。</p>
+</div>
+
+<p><strong>证明.</strong> <em>必要性.</em> 由于 $L$ 可被非确定性图灵机判定，只需用 certificate 指导走哪一个分支即可。</p>
+<p><em>充分性.</em> 非确定性图灵机可以猜一个 certificate。$\blacksquare$</p>
+<p>至此显而易见 $\mathbf{P}\subset \mathbf{NP}\subset \mathbf{EXP}$，但都不知道是否是真子集。</p>
+<h1><span id="附录">附录</span></h1><h2><span id="开放性问题">开放性问题</span></h2><p>为了防止考场上挑战图灵奖，这里收集一些开放性问题。</p>
+<ol>
+<li>$\mathbf{P}\subset \mathbf{NP}\subset \mathbf{EXP}$ 不知道是否是真子集。</li>
+</ol>
+<h2><span id="练习和补充结论">练习和补充结论</span></h2><div class="note "><p>设 $f(n) &#x3D; o(n\log n)$，则 $\mathbf{DTIME}(f(n)) &#x3D; \mathbf{REG}$。</p>
+</div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Theory-of-Computing/" rel="tag"># Theory of Computing</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/05/ProbabilityTheoryRevision2/" rel="prev" title="Revision | 信息科学中的概率统计（下）">
+                  <i class="fa fa-angle-left"></i> Revision | 信息科学中的概率统计（下）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
