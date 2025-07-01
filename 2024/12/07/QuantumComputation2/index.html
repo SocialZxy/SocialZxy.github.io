@@ -19,29 +19,43 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract.    随机游走经典结论 块编码">
+    <meta name="description" content="Abstract.    基础与概览 量子门通用性 基础算法   基于量子傅里叶变换的算法 量子相位估计 求元素的阶 Shor 算法   基于 $SU(2)$ 旋转的量子算法 Grover Quantum Random Walk Quantum Random Walk 中的旋转变换 判断完全图中是否有标记 元素区分问题     基于 Hamiltonian 模拟的算法 乘积公式 稀疏 Hamilt">
 <meta property="og:type" content="article">
-<meta property="og:title" content="【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走">
+<meta property="og:title" content="Revision | 量子计算">
 <meta property="og:url" content="http://example.com/2024/12/07/QuantumComputation2/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract.    随机游走经典结论 块编码">
+<meta property="og:description" content="Abstract.    基础与概览 量子门通用性 基础算法   基于量子傅里叶变换的算法 量子相位估计 求元素的阶 Shor 算法   基于 $SU(2)$ 旋转的量子算法 Grover Quantum Random Walk Quantum Random Walk 中的旋转变换 判断完全图中是否有标记 元素区分问题     基于 Hamiltonian 模拟的算法 乘积公式 稀疏 Hamilt">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/image-20250101134942951.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101135827575.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101162612237.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101163934689.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101170247398.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101205447853.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101205550561.png">
+<meta property="og:image" content="http://example.com/picture/image-20250101210933932.png">
+<meta property="og:image" content="http://example.com/picture/Qcircuit-AllRefl.png">
+<meta property="og:image" content="http://example.com/picture/image-20250103210742249.png">
+<meta property="og:image" content="http://example.com/picture/image-20250104160539748.png">
+<meta property="og:image" content="http://example.com/picture/image-20250104161318981.png">
+<meta property="og:image" content="http://example.com/picture/image-20250104165539911.png">
 <meta property="article:published_time" content="2024-12-07T07:27:39.000Z">
-<meta property="article:modified_time" content="2024-12-15T15:02:48.098Z">
+<meta property="article:modified_time" content="2025-06-30T12:55:19.490Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Linear Algebra">
 <meta property="article:tag" content="Discrete Time Quantum Walk">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/image-20250101134942951.png">
 
 
 <link rel="canonical" href="http://example.com/2024/12/07/QuantumComputation2/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/07/QuantumComputation2/","path":"2024/12/07/QuantumComputation2/","title":"【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2024/12/07/QuantumComputation2/","path":"2024/12/07/QuantumComputation2/","title":"Revision | 量子计算"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走 | Stellary's Notes</title>
+<title>Revision | 量子计算 | Stellary's Notes</title>
   
 
 
@@ -90,7 +104,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
   </ul>
 </nav>
 
@@ -115,7 +129,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">随机游走经典结论</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">块编码</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础与概览</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">量子门通用性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">基础算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">基于量子傅里叶变换的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">量子相位估计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">求元素的阶</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">Shor 算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">基于 $SU(2)$ 旋转的量子算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Grover</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Quantum Random Walk</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.1.</span> <span class="nav-text">Quantum Random Walk 中的旋转变换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.2.</span> <span class="nav-text">判断完全图中是否有标记</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.3.</span> <span class="nav-text">元素区分问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">基于 Hamiltonian 模拟的算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">乘积公式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">稀疏 Hamiltonian 模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">连续时间量子游走</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -130,7 +144,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -141,7 +155,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -178,6 +192,9 @@
             <li class="links-of-blogroll-item">
               <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
             </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
         </ul>
       </div>
     </div>
@@ -210,12 +227,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走 | Stellary's Notes">
+      <meta itemprop="name" content="Revision | 量子计算 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          【Under Construction】应用线性代数学习笔记 (2) 离散时间量子游走
+          Revision | 量子计算
         </h1>
 
         <div class="post-meta-container">
@@ -233,7 +250,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-12-15 23:02:48" itemprop="dateModified" datetime="2024-12-15T23:02:48+08:00">2024-12-15</time>
+      <time title="Modified: 2025-06-30 20:55:19" itemprop="dateModified" datetime="2025-06-30T20:55:19+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -262,34 +279,405 @@
 <!-- toc -->
 
 <ul>
-<li><a href="#%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E7%BB%8F%E5%85%B8%E7%BB%93%E8%AE%BA">随机游走经典结论</a></li>
-<li><a href="#%E5%9D%97%E7%BC%96%E7%A0%81">块编码</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%A6%82%E8%A7%88">基础与概览</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E9%97%A8%E9%80%9A%E7%94%A8%E6%80%A7">量子门通用性</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%87%8F%E5%AD%90%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E7%AE%97%E6%B3%95">基于量子傅里叶变换的算法</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%9B%B8%E4%BD%8D%E4%BC%B0%E8%AE%A1">量子相位估计</a></li>
+<li><a href="#%E6%B1%82%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6">求元素的阶</a></li>
+<li><a href="#shor-%E7%AE%97%E6%B3%95">Shor 算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-su2-%E6%97%8B%E8%BD%AC%E7%9A%84%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">基于 $SU(2)$ 旋转的量子算法</a><ul>
+<li><a href="#grover">Grover</a></li>
+<li><a href="#quantum-random-walk">Quantum Random Walk</a><ul>
+<li><a href="#quantum-random-walk-%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2">Quantum Random Walk 中的旋转变换</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%AE%8C%E5%85%A8%E5%9B%BE%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E6%A0%87%E8%AE%B0">判断完全图中是否有标记</a></li>
+<li><a href="#%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%86%E9%97%AE%E9%A2%98">元素区分问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-hamiltonian-%E6%A8%A1%E6%8B%9F%E7%9A%84%E7%AE%97%E6%B3%95">基于 Hamiltonian 模拟的算法</a><ul>
+<li><a href="#%E4%B9%98%E7%A7%AF%E5%85%AC%E5%BC%8F">乘积公式</a></li>
+<li><a href="#%E7%A8%80%E7%96%8F-hamiltonian-%E6%A8%A1%E6%8B%9F">稀疏 Hamiltonian 模拟</a></li>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E9%87%8F%E5%AD%90%E6%B8%B8%E8%B5%B0">连续时间量子游走</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="随机游走经典结论">随机游走经典结论</span></h1><p>矩阵 $P$ 称为一个随机矩阵若</p>
-<p>$$<br>P_{ij} \geq 0 ~\forall i, j; \quad \sum_{j}P_{ij} &#x3D; 1 ~\forall i.<br>$$</p>
-<p>这样的矩阵 $P$ 描述了一个图 $G &#x3D; (V, E)$ 上的随机游走的转移概率。称一个随机游走是</p>
+
+
+<h1><span id="基础与概览">基础与概览</span></h1><h2><span id="量子门通用性">量子门通用性</span></h2><p>对于经典电路，称一个门的集合是<em>通用</em>的，若其能够计算一切布尔函数 $f : {0, 1}^n\rightarrow {0, 1}^m$。我们熟知 ${\mathrm{NAND}}, {\mathrm{AND}, \mathrm{NOT}}$ 都是通用的。（需要指出的是，在经典计算中，我们默认可以使用复制输出的 FAN-OUT 门）。</p>
+<p>下面的门称作 Toffoli 门</p>
+<p><img src="/../picture/image-20250101134942951.png" alt="image-20250101134942951"></p>
+<p>容易发现 Toffoli 门可以制作经典 NAND 门和 FAN-OUT 门，因此 Toffoli 门是通用的。此外注意到 Toffoli 门作用两次相当于什么都没发生，因此 Toffoli 门是<em>可逆</em>的。现在使用 Toffoli 门，我们可以计算一切布尔函数，输入 $x_1, …, x_n$，结果为 $y_1, …, y_m$，但是需要引入若干初始为 $0$ 的辅助比特，这些辅助比特在经过电路之后变成了 $j_1, …, j_k$，那么可以通过如下变换来消除掉辅助比特：</p>
+<p><img src="/../picture/image-20250101135827575.png" alt="image-20250101135827575"></p>
+<blockquote>
+<p><strong>命题 1.1.1.</strong> 一切布尔函数都可以用 Toffoli Gate 配上若干初始和结尾都为 $0$ 的辅助比特来计算。</p>
+</blockquote>
+<p>在量子线路中我们接受这些单、双量子比特门：</p>
 <ul>
-<li><strong>不可约的</strong> 若图是强连通的。</li>
-<li><strong>非周期性的</strong> 若图中所有环长的最大公约数为 $1$。</li>
-<li><strong>遍历的</strong> 若满足上述两条。</li>
+<li><p>Pauli $X, Y, Z$ 门<br>$$<br>X &#x3D; \begin{pmatrix}<br>0 &amp; 1 \\<br>1 &amp; 0<br>\end{pmatrix} \quad Y &#x3D; \begin{pmatrix}<br>0 &amp; -i \\<br>i &amp; 0<br>\end{pmatrix} \quad Z &#x3D; \begin{pmatrix}<br>1 &amp; 0 \\<br>0 &amp; -1<br>\end{pmatrix}<br>$$<br>及其拓展版本 $R_X(\theta) &#x3D; \exp\left(-i\frac\theta 2 X\right)， R_Y(\theta) &#x3D; \exp\left(-i\frac\theta 2 Y\right)， R_Y(\theta) &#x3D; \exp\left(-i\frac\theta 2 Y\right)$。</p>
+</li>
+<li><p>Hadamard 门，$S$ 门，$T$ 门。<br>$$<br>H &#x3D; \frac 1{\sqrt 2}\begin{pmatrix}1&amp; 1 \\<br>1 &amp;-1\end{pmatrix}\quad S &#x3D; \begin{pmatrix}1&amp; 0\\<br>0 &amp;i\end{pmatrix}\quad T &#x3D; \begin{pmatrix}1&amp; 0 \\<br>0 &amp;e^{i\frac \pi4}\end{pmatrix}<br>$$</p>
+</li>
+<li><p>受控 $U$ 门：$\textsf c!-!U &#x3D; \ket 0\bra 0 \otimes I + \ket 1\bra 1\otimes U$，一个特例是 CNOT 门（$\mathrm{CNOT} &#x3D; \ket 0\bra 0 \otimes I + \ket 1 \bra 1 \otimes X$）。</p>
+</li>
 </ul>
-<p>我们将下述经典结果作为 input：</p>
-<div class="note info"><p><strong>定理 1.1（Perron-Frobenius）.</strong> 任意一个遍历的随机游走有唯一的稳态 $\pi$ 使得 $\pi_i &gt; 0$，$\sum_{i}\pi_I &#x3D; 1$ 且 $\sum_i \pi_iP_{ij} &#x3D; \pi_j$。</p>
-<p>换言之，$\pi$ 是 $P$ 的特征值为 $1$ 的特征向量。</p>
+<p>有时也可以使用 Toffoli 门。</p>
+<p>注意一个态总是可以表示成（忽略全局相位）<br>$$<br>\ket\psi &#x3D; \cos \frac \theta 2\ket 0 + e^{i\phi} \sin \frac \theta 2\ket 1<br>$$<br>以 $\phi, \theta$ 作为球坐标，可以将一个态画在一个单位球面（Bloch Sphere）上。经过一些琐碎的讨论，可以证明对于 $\hat n&#x3D; (n_x, n_y, n_z)\in \mathbb{S}^3$（$\mathbb S^3$ 指三维欧几里得空间中的单位球面），下面形式的酉变换：<br>$$<br>R_{\hat n}(\theta) &#x3D; e^{i\frac \theta 2(n_x X + n_yY + n_zZ)}<br>$$<br>是球面上绕 $\hat n$ 旋转 $\theta$  度。接下来我们证明如下结论：</p>
+<blockquote>
+<p><strong>命题 1.1.2.</strong> 任何的 $1$-qubit 门都可以被分解为<br>$$<br>e^{i\phi}R_z(\theta_3)R_x(\theta_2)R_z(\theta_1)<br>$$<br>其中 $\phi, \theta_1, \theta_2, \theta_3\in \R$。</p>
+<p><strong>证明.</strong> 所有的 $1$-qubit 门都是酉变换，而任意的酉变换 $U$ 都可以对角化，其特征值全为模长为 $1$ 的复数：<br>$$<br>U &#x3D; P^\dagger{\rm diag}(e^{i\theta_1}, e^{i\theta_2})P &#x3D; \exp\left(iP^\dagger {\rm diag}(\theta_1, \theta_2)P\right)<br>$$<br>注意 $P^\dagger {\rm diag}(\theta_1, \theta_2)P$ 是 Hermit 矩阵，而 Pauli 矩阵 $I, X, Y, Z$ 是二阶 Hermit 矩阵的一组基，所以存在实数 $c_1, c_2, c_3, c_4$ 使得<br>$$<br>P^\dagger {\rm diag}(\theta_1, \theta_2)P &#x3D; c_1I + c_2X + c_3Y + c_4 Z<br>$$<br>若 $c_2, c_3, c_4 &#x3D; 0$，那么该酉变换就是一个全局相位。于是不妨设 $c_2^2 + c_3^2 + c_4^2 &#x3D; (2 &#x2F; \theta)^2 &gt; 0$。令 $n_x &#x3D; c_2 &#x2F; (\theta &#x2F; 2), n_y &#x3D; c_3 &#x2F; (\theta &#x2F; 2), n_z &#x3D; c_4 &#x2F; (\theta &#x2F; 2)$。则<br>$$<br>U &#x3D; \exp\left(ic_1 I + i\frac\theta 2(n_xX + n_yY + n_zZ)\right)<br>$$<br>注意 $I$ 和一切矩阵对易，所以 $U &#x3D; e^{ic_1}R_{\hat n}(\theta)$。只需要验证一切三维空间中的旋转都可以拆分成一次绕 $z$ 轴的旋转，一次绕 $x$ 轴的旋转，一次绕 $z$ 轴的旋转即可。</p>
+<p>这个很符合直觉，而且我也有一个几何证明（但是太丑了不想放上来），所以我不写证明。</p>
+</blockquote>
+<p>接下来讨论量子门的通用性。然而因为系数非常复杂，恐怕不能用有限的门集合精确实现一切酉变换。因此我们定义一个度量：<br>$$<br>E(U, V) &#x3D; \max_{\ket \psi} \left\lVert U\ket \psi - V\ket \psi \right\rVert<br>$$<br>称一个量子门的集合是通用的，若对于任意的正整数 $n$，$n$-qubit 酉变换 $U$ 和 $\varepsilon &gt; 0$，都存在一个序列 $V_1, V_2, …, V_k$，使得该门被 $\varepsilon$-近似，即<br>$$<br>E(U, V_1\cdots V_k) \leq \varepsilon<br>$$</p>
+<ul>
+<li>经典 Toffoli 门是通用的，但是在量子计算下，它无法把 $\ket 0^{\otimes n}$ 映射到纠缠态。</li>
+<li>${\mathrm{CNOT}, X, Y, Z}$ 也不是通用的，它也不能把 $\ket 0^{\otimes n}$ 映射到纠缠态。</li>
+</ul>
+<p>下面的结论证明都超出了能力范围。</p>
+<blockquote>
+<p><strong>命题 1.1.3.</strong> 通用的 $1$-qubit 门集合并上产生纠缠态的门集合得到通用的门集合。</p>
+</blockquote>
+<p>${\mathrm{CNOT}, H, T}$ 是完备的。因为 $HTHT, THTH$ 给出了无理数旋转角，而 $\mathrm{CNOT}, H$ 可以产生纠缠态。</p>
+<blockquote>
+<p><strong>定理 1.1.4 (Solovay-Kitaev).</strong> 给定一个在求逆下封闭的通用的 $1$-qubit 门的集合，任意的 $1$-qubit 门都可以用 $O(\log^4(1&#x2F;\varepsilon))$ 个该集合中的门 $\varepsilon$-近似。</p>
+</blockquote>
+<p>这个指数现在被优化到了 $1.44043$。</p>
+<h2><span id="基础算法">基础算法</span></h2><p>首先定义 Bell 基：<br>$$<br>\ket{\beta_{zx}} &#x3D; ((Z^zX^x)\otimes I)\frac 12(\ket{00} + \ket{11})<br>$$<br>容易验证这是一组标准正交基。</p>
+<blockquote>
+<p><strong>量子超密编码</strong></p>
+<p>Alice 和 Bob 共享一个纠缠态 $\ket{\beta_{00}}$。那么 Alice 可以给 Bob 发送一个 qubit 来使 Bob 获得两个经典 bit 的信息。</p>
+</blockquote>
+<p>假设 Alice 想要发送 $zx\in{0, 1}^2$，那么：</p>
+<ul>
+<li>Alice 在她的 qubit 上作用 $Z^zX^x$。</li>
+<li>Alice 把她的 qubit 发送给 Bob。</li>
+<li>Bob 在贝尔基下测量，立即知道 Alice 作用了什么酉变换，从而知道 Alice 要发送的经典 bit。</li>
+</ul>
+<blockquote>
+<p><strong>量子隐形传态</strong></p>
+<p>Alice 和 Bob 共享一个纠缠态 $\ket{\beta_{00}}$，Alice 手里有一个态 $\ket\psi$，那么 Alice 可以给 Bob 发送两个经典 bit 来把 $\ket\psi$ 发送给 Bob。</p>
+</blockquote>
+<p>考虑如下过程：</p>
+<ul>
+<li>Alice 在 Bell 基下测量自己手里的两个 qubit，得到 $\beta_{zx}$。</li>
+<li>Alice 发送 $z, x$ 给 Bob。</li>
+<li>Bob 在他的 qubit 上作用 $Z^zX^x$。</li>
+</ul>
+<p>我们计算这个过程中，整个系统会发生了什么。这是一个三量子比特的系统，简单计算发现<br>$$<br>\begin{aligned}<br>\ket \psi\ket{\beta_{00}} &amp;&#x3D; (a_0\ket 0 + a_1\ket 1)\frac 1{\sqrt 2}(\ket{00} + \ket{11}) \\<br>&amp;&#x3D; \frac 1{\sqrt 2}(a_0\ket{00}\ket 0 + a_1\ket{10}\ket 0 + a_0\ket{01}\ket 1 + a_1\ket{11}\ket 1) \\<br>&amp;&#x3D; \frac{1}{2}(\ket{\beta_{00}}\ket\psi + \ket{\beta_{01}}X\ket\psi + \ket{\beta_{10}}Z\ket\psi + \ket{\beta_{11}}XZ\ket\psi)<br>\end{aligned}<br>$$<br>所以如果 Alice 测量得到了 $\beta_{zx}$，那么 Bob 手里的比特会坍缩到 $X^xZ^z \ket\psi$。只需要作用 $Z^zX^x$，即可还原出 $\ket\psi$。这个过程可以用如下电路来描述：</p>
+<p><img src="/../picture/image-20250101162612237.png" alt="image-20250101162612237"></p>
+<p>其中最开始的 $H, \mathrm{CNOT}$ 用于产生 Bell 基。</p>
+<hr>
+<p>接下来的问题都是关于布尔函数 $f : {0, 1}^n\rightarrow {0, 1}$。此时我们将获得 $f$ 的一个 oracle 算符，它将对应的函数值装载到一个辅助比特上：<br>$$<br>U_f : \ket x\ket y \mapsto \ket x\ket{y\oplus f(x)}<br>$$<br>其中 $x$ 是 $n$-qubit 态，而 $y$ 是 $1$-qubit 态。那么容易发现有如下性质：</p>
+<blockquote>
+<p><strong>命题 1.2.1 (Phase Kickback)</strong> 一个 $f$ 的上述形式的 oracle 等价于将 $f(x)$ 装载到 $x$ 的相位上。<br>$$<br>U_f \ket x\ket - &#x3D; (-1)^{f(x)}\ket x\ket -<br>$$</p>
+</blockquote>
+<p>这个技巧可以用来解决下面的一系列问题。接下来我们将随机使用将函数值装载到辅助比特上的形式和装载到相位上的形式，应当可以通过上下文推断。</p>
+<blockquote>
+<p><strong>Deutsch 问题</strong></p>
+<p>给定一个 $f : {0, 1}\rightarrow {0, 1}$，判断 $f$ 是常函数还是 Balanced 函数。</p>
+<p>Balanced 函数的定义是<br>$$<br>\mathrm{Pr}_x[f(x) &#x3D; 1] &#x3D; \frac 12<br>$$</p>
+</blockquote>
+<p>注意到<br>$$<br>U_f\ket + &#x3D; \frac{1}{\sqrt 2}((-1)^{f(0)}\ket 0 + (-1)^{f(1)}\ket 1)<br>$$<br>如果 $f(0)$ 和 $f(1)$ 是相同的，那么右边和 $\ket +$ 差一个全局相位，否则和 $\ket -$ 差一个全局相位。我们在标准正交基 ${\ket +, \ket -}$ 下测量此结果（即先作用 $H$ 再在 ${\ket 0, \ket 1}$ 下测量），即解决问题。因此电路为：</p>
+<p><img src="/../picture/image-20250101163934689.png" alt="image-20250101163934689"></p>
+<p>只查询了一次，经典必须查询两次，获得了常数级别的优化。</p>
+<blockquote>
+<p><strong>Deutsch-Jozsa 问题</strong></p>
+<p>给定一个 $f : {0, 1}^n\rightarrow{0, 1}$，保证 $f$ 或者是常函数，或者是 Balanced 函数。你需要区分这两种情况。</p>
+</blockquote>
+<p>和上面的思路完全一样。首先制备一个均一叠加态（$H^{\otimes n}\ket 0^{\otimes n}$）<br>$$<br>\ket\psi &#x3D; \frac 1{\sqrt{2^n}}\sum_{x\in{0, 1}^n} \ket x<br>$$<br>将此态通过 $U_f$ 得到<br>$$<br>U_f\ket\psi &#x3D; \frac 1{\sqrt{2^n}}\sum_{x\in{0, 1}^n}(-1)^{f(x)} \ket x<br>$$<br>如果 $f(x)$ 是个常函数，那么此时得到的态和 $\ket\psi$ 只差一个全局相位。否则，$\ket\psi$ 在其中的投影长度为：<br>$$<br>\begin{aligned}<br>|\bra\psi U_f\ket\psi| &amp;&#x3D; \left|\frac 1\sum_{x\in{0, 1}^n} \bra x\sum_{y\in{0, 1}^n}(-1)^{f(y)} \ket y\right| \\<br>&amp;&#x3D;\left|\frac 1{2^n}\sum_{x\in{0, 1}^n}(-1)^{f(x)} \right| \\<br>&amp;&#x3D; 0<br>\end{aligned}<br>$$<br>也就是只需要在 $\ket \psi$ 扩充成的标准正交基下测量，如果测出 $\ket\psi$ 就回答常函数，否则回答 Balanced。当然实际上你没法“在 $\ket \psi$ 扩充成的标准正交基下测量”，合理的办法是先作用 $H^{\otimes n}$ 然后在 computational basis 下测量。最终电路为</p>
+<p><img src="/../picture/image-20250101170247398.png" alt="image-20250101170247398"></p>
+<p>只查询了 $1$ 次。经典确定性算法复杂度为指数级，$1-\delta$ 概率成功的算法复杂度为 $O(\log 1&#x2F;\delta)$。</p>
+<blockquote>
+<p><strong>Simon 问题</strong> </p>
+<p>给定函数 $f: {0, 1}^n\rightarrow X$，其中 $|X|\geq 2^{n-1}$，你可以认为其中的值被离散化到了 ${0, 1}^m$，其中 $m \geq n-1$。保证 $f$ 满足性质：存在 $s$，$f(x) &#x3D; f(y)$ 当且仅当 $x &#x3D; y$ 或者 $x \oplus y &#x3D; s$。你的任务是求出 $s$。</p>
+</blockquote>
+<p>书上这个硬算感觉非常的不 intuitive。我们提供一个关于此问题的 insight：**$H^{\otimes n}$ 实际上是 Walsh-Hadamard 变换。**</p>
+<p>考虑你对如下的态：<br>$$<br>\frac{1}{\sqrt{2^n}}\sum_{x\in{0, 1}^n}\ket x\ket{f(x)}<br>$$<br>作用上 $H^{\otimes n}\otimes I$，发生了什么。<br>$$<br>\begin{aligned}<br>&amp;(H^{\otimes n}\otimes I)\frac{1}{\sqrt{2^n}}\sum_{x\in{0, 1}^n}\ket x\ket{f(x)} \\<br>&#x3D;&amp; \frac{1}{2^n}\sum_{x\in{0, 1}^n}\bigotimes_{i&#x3D;1}^n(\ket 0 + (-1)^{x_i}\ket 1)\ket{f(x)} \\<br>&#x3D;&amp; \sum_{y\in {0, 1}^n}\ket y\color{red}\frac{1}{2^n}\sum_{x\in{0, 1}^n}(-1)^{x\cdot y}\ket{f(x)}<br>\end{aligned}<br>$$<br>红色的部分正是 $f(x)$ 在阿贝尔群 $G &#x3D; \mathbb{Z}_2^n$ 下面的傅里叶变换（即 Walsh-Hadamard 变换）！</p>
+<p>而这个问题中 $f$ 满足的性质是 $f(x) &#x3D; f(x\oplus s)$。定义函数 $g_s(x) &#x3D; [x &#x3D; s]$，那么这个性质就是 $f &#x3D; 2^n f * g$。两边做 Walsh-Hadamard 变换得到 $\hat f &#x3D; 2^n \hat f \cdot \hat g$。而 $\hat g$ 实际上是<br>$$<br>\frac{1}{2^n}\sum_{y\in{0, 1}^n} (-1)^{x\cdot y}g(s) &#x3D; \frac{(-1)^{s\cdot x}}{2^n}<br>$$<br>代入到关于 $\hat f$ 和 $\hat g$ 的关系式中，得到<br>$$<br>\hat f(x) &#x3D; \hat f(x)\cdot (-1)^{x\cdot s}<br>$$<br>这表明如果 $x\cdot s\bmod 2 &#x3D; 1$，那么 $\hat f(x) &#x3D; 0$！而其他时候，简单验算一下发现 $\hat f(x)$ 的模长都是一样的。</p>
+<p>回到原问题。先用 $U_f(H^{\otimes n}\otimes I)$ 制备带 $f$ 的均一叠加态，然后用 $H^{\otimes n}\otimes I$ 做 Walsh-Hadamard 变换，现在测量前 $n$ 个比特，将等概率得到 $x$，满足 $x\cdot s &#x3D; 0$。重复 $k$ 次可以得到关于 $s$ 的 $k$ 个线性方程组。如果我们只随机 $n - 1$ 次，随出来的方程线性无关的概率是<br>$$<br>\prod_{i&#x3D;1}^{n - 2}\left(1 - \frac 1{2^i}\right)\geq \prod_{i&#x3D;1}^{\infty}\left(1 - \frac 1{2^i}\right)<br>$$<br>放缩这东西是一个经典高中题目，总之成功概率是常数。获得了这种线性无关的 $n - 1$ 个方程之后，立即可以解出 $s$。因此只需要 $O(n\log 1 &#x2F; \delta)$ 次即可保证高概率成功。</p>
+<p>经典算法只能进行生日悖论攻击，复杂度为 $O(2^{n &#x2F; 2})$，我们实现了指数级加速。</p>
+<h1><span id="基于量子傅里叶变换的算法">基于量子傅里叶变换的算法</span></h1><p>在上面的讨论中我们看到量子计算的能力很大一部分是来自它可以快速的做 Walsh-Hadamard 变换，即 $\mathbb{Z}_2^n$ 上的傅里叶变换。实际上，在接下来的讨论中我们将看到它可以做 $\mathbb{Z}_{2^n}$ 上的快速傅里叶变换：<br>$$<br>\ket x \mapsto \frac{1}{\sqrt{2^n}}\sum_{y\in[2^n]} e^{\frac{2\pi ixy}{2^n}} \ket y &#x3D; \ket{\tilde{x}}<br>$$<br>根据经典结论，我们熟知傅里叶变换的逆是<br>$$<br>\ket {\tilde x} \mapsto \frac{1}{\sqrt{2^n}}\sum_{y\in[2^n]} e^{-\frac{2\pi i\tilde xy}{2^n}} \ket y &#x3D; \ket x<br>$$</p>
+<p>这里所有的 $\mathbb{Z}_{2^n}$ 中的整数都被编码成 $n$-qubit 量子态。我们考察这个变换实际上是在做什么：<br>$$<br>\begin{aligned}<br>\ket{x_1}\ket{x_2}\cdots\ket{x^n}\mapsto&amp; \frac{1}{\sqrt {2^n}}\sum_{y\in[2]^n}\prod_{i&#x3D;0}^{n-1}e^{\frac{2\pi i xy_i2^i}{2^n}}\bigotimes_{i&#x3D;0}^{n-1}\ket{y_i} \\<br>&#x3D;&amp;\frac{1}{\sqrt {2^n}}\sum_{y\in[2]^n}\bigotimes_{i&#x3D;0}^{n-1}e^{\frac{2\pi i xy_i2^i}{2^n}}\ket{y_i} \\<br>&#x3D;&amp; \bigotimes_{i&#x3D;0}^{n - 1}\frac 1{\sqrt 2}(\ket 0 + e^{\frac{2\pi ix}{2^{n - i}}}\ket 1) \\<br>&#x3D;&amp; \bigotimes_{i&#x3D;0}^{n - 1}\frac{1}{\sqrt 2}(\ket 0 + e^{2\pi i\cdot 0.x_ix_{i+1}…x_{n-1}}\ket 1)<br>\end{aligned}<br>$$<br>指数上的小数是<strong>二进制</strong>小数。剖析出傅里叶变换的本质是制作这样一个乘积态之后，我们自然得出如下暴力算法：</p>
+<ul>
+<li><p>从 $0$ 到 $n - 1$ 枚举 $i$。</p>
+<ul>
+<li><p>让 $\ket{x_i}$ 变成 $\ket 0 + e^{2\pi i\cdot 0.x_i}\ket 1$。这其实就是在第 $i$ 个 qubit 上作用 Hadamard 门。</p>
+</li>
+<li><p>$j$ 从 $i + 1$ 到 $n - 1$ 递增。</p>
+<ul>
+<li>若 $x_j$ 是 $1$，那么将 $\ket 1$ 的相位乘上 $e^{\pi i &#x2F; 2^{j - i}}$。这可以用受控 $R_k$ 门来实现，其中 $R_k$ 的 $SU(2)$ 表示是<br>$$<br>R_k &#x3D; \begin{pmatrix}<br>1 &amp; 0 \\<br>0 &amp; e^{\frac{2\pi i}{2^k}}<br>\end{pmatrix}<br>$$</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>容易将上述过程实现成下面的电路（$\mathrm{QFT}$）：</p>
+<p><img src="/../picture/image-20250101205447853.png" alt="image-20250101205447853"></p>
+<p>那么傅里叶变换的逆自然就是（$\mathrm{QFT}^{\dagger}$）</p>
+<p><img src="/../picture/image-20250101205550561.png" alt="image-20250101205550561"></p>
+<h2><span id="量子相位估计">量子相位估计</span></h2><blockquote>
+<p>给定一个酉算符 $U$ 的受控门，和 $U$ 的一个本征态 $\ket \psi$，满足 $U\ket \psi &#x3D; e^{i\theta} \ket \psi$。</p>
+<p>目标是求 $\theta$。</p>
+</blockquote>
+<p>首先考虑 $\theta &#x3D; 2\pi\cdot 0.x_0x_1…x_{n - 1}$。观察上文，我们已经实现了 IQFT，这个算法可以将装载在相位上的二进制小数恢复出来。那么我们的想法很简单，就是制备所有的<br>$$<br>\ket 0 + e^{2\pi i\cdot 0.x_{i}…x_{n - 1}}\ket 1<br>$$<br>注意到<br>$$<br>\begin{aligned}<br>&amp;(\op 0 \otimes I + \op 1\otimes U^{2^k})(H\otimes I)\ket 0\ket \psi \\<br>&#x3D;&amp; (\op 0 \otimes I + \op 1\otimes U^{2^k})\frac 1{\sqrt 2}(\ket 0 + \ket 1)\ket\psi \\<br>&#x3D;&amp; \frac 1{\sqrt 2}\ket 0\ket \psi + \frac{1}{\sqrt 2}\ket 1<br>U^{2^k}\ket \psi \\<br>&#x3D;&amp; \frac{1}{\sqrt 2}(\ket 0 + e^{2\pi i\cdot 0.x_k…x_{n - 1}}\ket 1)\ket \psi<br>\end{aligned}<br>$$<br>实现成电路就是</p>
+<p><img src="/../picture/image-20250101210933932.png" alt="image-20250101210933932"></p>
+<p>总共使用的门数量为 $O(2^n + n)$。</p>
+<p>那么只需要在前 $n$ 个 qubit 上接上 $\textrm{QFT}^{\dagger}$，即可恢复出 $x_0, …, x_{n - 1}$。</p>
+<p>在 $\theta &#x2F; 2\pi$ 的二进制小数表示超过 $n$ 位时，直觉上误差也不会很大。这里我们具体计算一下测量出结果的分布。</p>
+<p>假设 $U\ket\psi &#x3D; e^{2\pi i \varphi}\ket\psi$，那么经过 Hadamard 门和受控 $U$ 门阵列之后得到的态是<br>$$<br>\bigotimes_{i&#x3D;1}^n\frac{1}{\sqrt 2}(\ket 0 + e^{\pi i2^{i}\varphi}\ket 1) &#x3D; \frac{1}{\sqrt{2^n}}\sum_{x &#x3D; 0}^{2^{n} - 1}e^{i\varphi x}\ket x<br>$$<br>再做 $\mathrm{QFT}^{\dagger}$ 得到（注意此时 $\varphi - 2\pi y &#x2F; 2^n$ 非零，后面是一个等比数列，方便起见记 $\tilde \varphi &#x3D; \varphi - 2\pi y &#x2F; 2^n$）<br>$$<br>\begin{aligned}<br>\frac{1}{2^n}\sum_{x &#x3D; 0}^{2^n - 1}\sum_{y &#x3D; 0}^{2^n - 1}e^{i\varphi x}e^{-\frac{2\pi i xy}{2^n}}\ket y &amp;&#x3D; \frac{1}{2^n}\sum_{x &#x3D; 0}^{2^n - 1}\ket y\sum_{x &#x3D; 0}^{2^n - 1}\exp\left(ix\left(\varphi - \frac{2\pi y}{2^n}\right)\right) \\<br>&amp;&#x3D; \frac{1}{2^n}\sum_{y &#x3D; 0}^{2^n - 1}\ket y\frac{1 - e^{i\tilde\varphi2^{n}}}{1 - e^{i\tilde\varphi}}<br>\end{aligned}<br>$$<br>测出结果为 $y$ 的概率为<br>$$<br>\begin{aligned}<br>\mathrm{Pr}[y] &#x3D;&amp; \frac{1}{2^{2n}}\left|\frac{1 - e^{i\tilde\varphi2^n}}{1 - e^{i\tilde\varphi}}\right|^2 \\<br>&#x3D;&amp;\frac{1}{2^{2n}}\left|\frac{1 - \cos\tilde\varphi2^n - i\sin\tilde\varphi2^n}{1 - \cos\tilde\varphi - i\sin\tilde\varphi}\right|^2 \\<br>&#x3D;&amp;\frac{1}{2^{2n}}\left|\frac{2\sin^2\frac{\tilde\varphi2^n}{2} + i\cdot 2\sin\frac{\tilde\varphi2^n}{2}\cos\frac{\tilde \varphi2^n}{2}}{2\sin^2\frac{\tilde\varphi}{2} + i\cdot 2\sin\frac{\tilde\varphi}{2}\cos\frac{\tilde \varphi}{2}}\right|^2 \\<br>&#x3D;&amp;\frac{1}{2^{2n}}\frac{\sin^2\left(\left(\varphi - \frac{2\pi}{2^n}y\right)2^{n - 1}\right)}{\sin^2\left(\left(\varphi - \frac{2\pi}{2^n}y\right) &#x2F; 2\right)}\color{lightgrey}\left|\frac{\exp(i\tilde\varphi 2^{n - 1})}{\exp(i\tilde\varphi &#x2F; 2)}\right|^2<br>\end{aligned}<br>$$</p>
+<blockquote>
+<p><strong>命题 2.1.1.</strong> 设 $\frac{2\pi k}{2^n}\leq \varphi \leq \frac{2\pi(k + 1)}{2^n}$，则测出 $y &#x3D; k$ 和 $y &#x3D; k + 1$ 的概率和至少是 $\frac{8}{\pi^2}$。</p>
+<p><strong>证明.</strong> 纯 Dirty work，求导发现 $\varphi$ 在中间的时候答案最小，然后直接带进去硬放。</p>
+</blockquote>
+<p>总结起来，我们得到如下结论：</p>
+<blockquote>
+<p><strong>定理 2.1.2.</strong> 给定酉算符 $U$ 和本征向量  $\ket\varphi$，可以用 $O((\log 1 &#x2F; \varepsilon)^2)$ 的 $\mathrm{QFT}^{\dagger}$和 $O(1&#x2F;\varepsilon)$ 的受控 $U$ 门，来以至少 $\frac{8}{\pi^2}$ 获得其特征值的相位的一个绝对误差至多为 $\varepsilon$ 的近似。</p>
+</blockquote>
+<h2><span id="求元素的阶">求元素的阶</span></h2><blockquote>
+<p>给定正整数 $a$ 和 $N$，求最小的正整数 $r$ 使得 $a^r\equiv 1\pmod n$。</p>
+<p>保证 $\gcd(a, N) &#x3D; 1$。</p>
+</blockquote>
+<p>由于 $\gcd(a, N) &#x3D; 1$，$U : \ket x \mapsto \ket{ax}$ 是酉变换。此变换有高效的经典算法实现，所以 $U$ 是可以制作的。</p>
+<p>记 $\langle a\rangle$ 是 $a$ 在 $\bmod n$ 乘法群中生成的子群。考虑 $\langle a\rangle$ 作用在 $\mathbb{Z}_N^* &#x3D; {1, …, N - 1}$ 上，作用为乘法。根据轨道 - 稳定子定理，每个轨道的大小都相同。方便起见，我们取 $1$ 所在的轨道 $1^{\langle a\rangle}$ 来研究，这个轨道是 $G$ 的不变子空间（实际上在后面的算法中，你会发现我们的态矢确实都落在这个不变子空间中）。这个子空间同构于 $\mathbb{Z}_{r}$ 上的加法群。在加法群上，我们的酉变换 $U$ 实际上相当于 $P : \ket x \mapsto \ket{x + 1\bmod r}$。这是一个循环矩阵，我们熟知它的特征值是 $e^{-2\pi ik &#x2F; r}$，对应特征向量<br>$$<br>\ket{\tilde k} &#x3D; \frac{1}{\sqrt r}\sum_{x &#x3D; 0}^{r - 1}e^{\frac{2\pi ikx}{r}}\ket x<br>$$<br>那么回到乘法群上，$G | 1^{\langle a\rangle}$ 的特征向量是<br>$$<br>\ket{u_k} &#x3D; \frac{1}{\sqrt r}\sum_{x &#x3D; 0}^{r - 1}e^{\frac{2\pi i kx}{r}}\ket{a^x\bmod N}<br>$$<br>自然，它也是 $G$ 的一个特征向量。如果我们对 $u^k$ 做相位估计，立即得到 $1 - k &#x2F; r$ 的估计。只需要解决下面的问题：</p>
+<ul>
+<li>如何在不知道 $k, r$ 的情况下制备 $\ket {u_k}$？</li>
+<li>如何用估计值逼近 $k &#x2F; r$ 的真实值？</li>
+<li>如果 $k, r$ 有公因子，如何区分是否约分？</li>
+</ul>
+<blockquote>
+<p>如何在不知道 $k, r$ 的情况下制备 $\ket {u_k}$？</p>
+</blockquote>
+<p>我们虽然不能制备 $\ket{u_k}$，但是可以制备 $\ket{u_k}$ 关于 $k$ 的均一叠加。<br>$$<br>\frac{1}{\sqrt r}\sum_{k &#x3D; 0}^{r - 1}\ket{u_k} &#x3D; \frac{1}{r}\sum_{k &#x3D; 0}^{r - 1}\sum_{x &#x3D; 0}^{r - 1}e^{\frac{2\pi i k x}{r}}\ket{a^x\bmod N} &#x3D; \ket{1\bmod N}<br>$$<br>这样一来我们做 Phase Estimation 后测量，就能够知道估计值 $\widetilde{k &#x2F; r}$，其中 $k$ 从 $[r]$ 中均一抽取。注意这时候制备 $U^{2^k}$ 的时候，只需要 ${\rm poly}(k)$ 个门（使用快速幂）。因此此时相位估计的开销为 $O({\rm poly}(m))$。其中 $m$ 是选定的有效位数。</p>
+<blockquote>
+<p>如何用估计值逼近 $k &#x2F; r$ 的真实值？</p>
+</blockquote>
+<p>这里我们选择使用连分数逼近来得到 $k &#x2F; r$ 的真实值。我们 input 连分数逼近的如下性质：</p>
+<blockquote>
+<p><strong>定理 2.2.1.</strong> 对于任意的实数 $x$，$p&#x2F;q$ 是 $x$ 的渐进分数当且仅当它是 $x$ 的第二类最优逼近。即对于任意的 $0 &lt; b\leq q$，$a, b\in \mathbb{Z}$，且 $a&#x2F;b\ne p&#x2F;q$ 都有<br>$$<br>|bx - a| &gt; |qx - p|<br>$$</p>
+</blockquote>
+<p>我们取 $n$ 使得 $2^n &gt; 2r^2$（此时 $n$ 为 $\log N$ 级别），然后做 $n$ 位的相位估计。此时将得到 $k &#x2F; r$ 的估计 $x$，满足</p>
+<p>$$<br>\left|x - \frac kr\right| &lt; \frac{1}{2^n} \quad \Rightarrow  \quad \left|x - \frac kr\right| &lt; \frac{1}{2r^2}<br>$$</p>
+<p>不妨设 $x &#x3D; k&#x2F;r + \Delta$，其中 $\Delta &lt; 1 &#x2F; 2r^2$。现在证明 $k &#x2F; r$ 是 $x$ 的第二类最优逼近。考虑 $a, b$，有</p>
+<p>$$<br>\begin{aligned}<br>\left|x - \frac ab\right| &#x3D;&amp; \left|\frac{k}{r} - \frac{a}{b} + \Delta\right| \\<br>\geq&amp; \frac 1{br} - |\Delta| \\<br>\ge &amp; \frac{1}{2r^2}\frac{r}{b} \\<br>\ge &amp; \frac rb\left|x - \frac kr\right|<br>\end{aligned}<br>$$</p>
+<p>化简即得到 $|bx - a| &gt; |rx - k|$。因此 $k &#x2F; r$ 必将出现在 $x$ 的连分数逼近序列中。此序列的长度为 $O(n)$ 级别，因为求连分数逼近的过程就是在对分子分母做辗转相除。</p>
+<p>因此只需要对 $x$ 的连分数逼近的每一项 $p &#x2F; q$ 验证 $q$ 是否是 $a$ 的阶即可。如果碰巧你抽到的 $k$ 和 $r$ 互质，你就能找到这个阶。</p>
+<blockquote>
+<p>如何处理 $k$ 和 $r$ 不互质的情况？</p>
+</blockquote>
+<p>因为 $k$ 是从 $[r]$ 中均一抽取的，所以我们抽到一个互质的 $k$ 的概率是 $\varphi(k) &#x2F; k$。其中 $\varphi$ 是欧拉函数。</p>
+<p>著名的结果是 $\varphi(n) &#x2F; n &#x3D; \Omega(1 &#x2F; \log\log n)$，因此随 $\log\log N$ 次就可以高概率成功。</p>
+<h2><span id="shor-算法">Shor 算法</span></h2><p>首先可以排除两种平凡的情况：</p>
+<ul>
+<li>$n$ 是偶数，直接返回 $2$</li>
+<li>$n &#x3D; p^{\alpha}$。计算 $n$ 的 $2, 3, …, \log_3$ 次方根，判断是不是整数。</li>
+<li>$n$ 是素数，可以用 AKS 素性测试。</li>
+</ul>
+<p>算法的核心思路是找到 $1$ 的二次剩余。设 $x\ne \pm 1$ 且 $x^2 \equiv 1\pmod N$，那么<br>$$<br>kN &#x3D; (x + 1)(x - 1)<br>$$<br>$(x + 1)$ 和 $(x - 1)$ 不可能都和 $N$ 互质。</p>
+<p>然后我们在 ${1, …, N - 1}$ 里面随机一个 $x$，如果 $\gcd(x, N)$ 不是 $1$，直接返回此数。否则用上一节的算法求 $x$ 的阶 $r$。如果 $r$ 是偶数且 $x^{r &#x2F; 2}$ 不是 $-1$（条件 $\star$），我们的算法就结束，否则重复。</p>
+<hr>
+<p>首先设 $N &#x3D; \prod_{i &#x3D; 1}^l p_i^{\alpha_i}$用中国剩余定理把 $x$ 打到模 $p_i^{\alpha_i}$ 的环上去。在 $N$ 中随机 $x$ 等价于随机<br>$$<br>(x_1, …, x_l)\in \prod_{i&#x3D;1}^l \mathbb{Z}_{p_i^{\alpha_i}}^*<br>$$<br>只要任意一个 $x_i$ 在 $\mathbb{Z}_{p_i}^{\alpha_i}$ 中满足 $(\star)$，$x$ 就满足 $(\star)$。</p>
+<p>首先熟知奇素数的幂都有原根 $g$，因此存在同构 $\tau : \mathbb{Z}_{p^{\alpha}}^*\cong \mathbb{Z}_{\varphi(p^{\alpha})}$。设 $n &#x3D; \varphi(p^\alpha)$。设我们随机到的 $x &#x3D; g^s, -1 &#x3D; g^{t}$，设 $n &#x3D; 2^k q$，其中 $q$ 是奇数，那么：</p>
+<ul>
+<li>$x$ 的阶是 $n &#x2F; \gcd(n, s)$。</li>
+<li>$x^{r &#x2F; 2} &#x3D; -1$ 等价于 $sr &#x3D; 2t$。</li>
+<li>因为 $-1$ 是二阶元，所以 $\gcd(n, t) &#x3D; 2$。</li>
+</ul>
+<p>现在考虑如下情况：$s$ 是奇数。显然，这种情况出现的概率为 $1&#x2F;2$。而出现这种情况时：</p>
+<p>- </p>
+<h1><span id="基于-su2-旋转的量子算法">基于 $SU(2)$ 旋转的量子算法</span></h1><h2><span id="grover">Grover</span></h2><p>我们期望解决下面所述的无结构搜索问题：</p>
+<div class="note "><p><strong>问题.</strong> 给定一个函数 $f : [n] \rightarrow \\{0, 1\\}$，包装成一个 oracle：</p>
+<p>$$<br>|x, z\rangle \xmapsto{U_f} |x, z \oplus f(z)\rangle<br>$$</p>
+<p>搜索其中的一个 $x$，满足 $f(x) &#x3D; 1$。</p>
 </div>
 
-<p>称一个遍历的随机游走是<em>可逆的</em>，若 $\pi_iP_{ij} &#x3D; \pi_j P_{ji}$。定义遍历的随机游走的 <em>discriminant matrix</em> 为 $D_{ij} &#x3D; \sqrt{P_{ij}P_{ji}}$，依定义它是实对称的。</p>
-<div class="note info"><p><strong>命题 1.2.</strong> 若随机游走 $P$ 可逆且遍历，那么其稳态 $|\pi\rangle &#x3D; \sum_i\sqrt{\pi_i}|i\rangle$ 是 $D$ 的特征值为 $1$ 的特征向量，且</p>
-<p>$$<br>D &#x3D; \mathrm{diag}(\sqrt \pi) P \mathrm{diag}(\sqrt \pi)^{-1}<br>$$</p>
-<p>因此 $D$ 和 $P$ 有相同的特征值。</p>
-<p><strong>证明.</strong> 简单计算。</p>
-</div>
+<p>首先考虑使用 phase kickback 技巧：</p>
+<p>$$<br>|x, -\rangle \xmapsto{U_f \otimes I} (-1)^{f(x)}|x, -\rangle<br>$$</p>
+<p>这个操作（带有一个辅助比特）成为一次 phase query。考虑这个操作作用在一个均一叠加态 $|\psi\rangle &#x3D; 1 &#x2F; \sqrt{n} \sum_{x &#x3D; 1}^n |x\rangle$ 上：</p>
+<p>$$<br>|\psi\rangle\xmapsto{\text{phase query}} \left(\sum_{x:f(x) &#x3D; 0}|x\rangle\right) - \left(\sum_{x:f(x) &#x3D; 1}|x\rangle\right)<br>$$</p>
+<p>这个操作形如某种“反射”。Grover 算法的出发点是，用两种“反射”构造“旋转”，将均一叠加态转到 $f(x) &#x3D; 1$ 的方向。</p>
+<hr>
+<p>首先考虑只有一个元素 $w$ 使得 $f(w) &#x3D; 1$ 的情况。那么上述的 phase query 写成酉矩阵就是</p>
+<p>$$<br>U &#x3D; I - 2|w\rangle\langle w|<br>$$</p>
+<p>接下来定义（$\psi$ 是均一叠加态）</p>
+<p>$$<br>V &#x3D; 2|\psi\rangle\langle\psi| - I<br>$$</p>
+<p>我们来制备此门。注意为了实现类似于分支判断的操作，受控门是一个很好的选择，但是受控门对叠加态并不友好。所幸我们注意到</p>
+<p>$$<br>V &#x3D; H^{\otimes m}(2|0^m\rangle\langle0^m| - I)H^{\otimes m}<br>$$</p>
+<p>因此下图用 $O(\log n)$ 个门制备了该门。</p>
+<p><img src="/../picture/Qcircuit-AllRefl.png"></p>
+<p>万事俱备。Grover 算法的完整过程如下：</p>
+<ul>
+<li>制备均一叠加态 $|\psi\rangle$（$O(\log n)$ 个门）</li>
+<li>重复 $t &#x3D; \pi &#x2F; 4\sqrt{n}$ 次<ul>
+<li>作用 $U$。</li>
+<li>作用 $V$。</li>
+</ul>
+</li>
+<li>测量。</li>
+</ul>
+<p>做一些简单的计算：</p>
+<p>$$<br>\begin{align}<br>    U|\psi\rangle &amp;&#x3D; |\psi\rangle - \frac{2}{\sqrt n}|w\rangle \\<br>    U|w\rangle &amp;&#x3D; -|w\rangle \\<br>    V|\psi\rangle &amp;&#x3D; |\psi\rangle \\<br>    V|w\rangle &amp;&#x3D; \frac{2}{\sqrt n} |\psi\rangle - |w\rangle<br>\end{align}<br>$$</p>
+<p>因此 $|\psi\rangle, |w\rangle$ 生成 $U, V$ 下的不变子空间。方便起见，我们将这组基 Schmidt 正交化为 $|w\rangle, |w^\perp\rangle$，其中</p>
+<p>$$<br>|w^\perp\rangle &#x3D; \frac{|\psi\rangle - \langle w|\psi\rangle|w\rangle}{\parallel |\psi\rangle - \langle w|\psi\rangle|w\rangle\parallel}<br>$$</p>
+<p>于是（假设 $\theta &#x3D; \arcsin \frac{1}{\sqrt n}$）</p>
+<p>$$<br>\begin{align}<br>|\psi\rangle &amp;&#x3D; \frac{1}{\sqrt n}|w\rangle + \sqrt{1 - \dfrac{1}{n}}|w^\perp\rangle \\<br>             &amp;&#x3D; \sin\theta |w\rangle + \cos\theta|w^\perp\rangle<br>\end{align}<br>$$</p>
+<p>现在可以方便地在 $|w\rangle, |w^\perp\rangle$ 下研究 $U, V$ 的矩阵表示，我们将看到它正是平面内旋转 $2\theta$ 度：</p>
+<p>$$<br>U &#x3D; \begin{pmatrix}<br>    -1 &amp; 0 \\<br>    0 &amp; 1<br>\end{pmatrix}, V &#x3D; \begin{pmatrix}<br>    -\cos 2\theta &amp; \sin 2\theta \\<br>    \sin 2\theta &amp; \cos 2\theta<br>\end{pmatrix},<br>VU &#x3D; \begin{pmatrix}<br>    \cos 2\theta &amp; \sin 2\theta \\<br>    -\sin 2\theta &amp; \cos 2\theta<br>\end{pmatrix}<br>$$</p>
+<p>因此</p>
+<p>$$<br>(VU)^t|\psi\rangle &#x3D; \sin (2t + 1)\theta|w\rangle + \cos(2t + 1)\theta|w^\perp\rangle<br>$$</p>
+<p>如果在标准正交基下测量，想要使得 $w$ 的出现概率尽可能大，就要使得 $(2t + 1)\theta \rightarrow \frac{\pi}{2}$，即 $t\simeq \frac{\pi}{4}\sqrt n$。</p>
+<h2><span id="quantum-random-walk">Quantum Random Walk</span></h2><h3><span id="quantum-random-walk-中的旋转变换">Quantum Random Walk 中的旋转变换</span></h3><p>考虑一个有稳态 $\pi$、且在 $\pi$ 上细致平衡随机游走 $P$。细致平衡定义为：<br>$$<br>\pi_iP_{ij} &#x3D; \pi_j P_{ji}<br>$$<br>定义其 Discriminant Matrix 为<br>$$<br>D_{ij} &#x3D; \sqrt{P_{ij}P_{ji}}<br>$$</p>
+<p>容易证明此矩阵满足如下性质：</p>
+<blockquote>
+<p><strong>命题 4.2.1.</strong> $P$ 的稳态 $\ket\pi &#x3D; \sum_i\sqrt{\pi_i}\ket i$ 是 $D$ 的本征值为 $1$ 的特征向量，且因为 $D$ 和 $P$ 是相似的：<br>$$<br>D &#x3D; \mathrm{diag}(\sqrt \pi) P (\mathrm{diag}(\sqrt \pi))^{-1}<br>$$<br>所以他们有相同的本征值。</p>
+<p><strong>证明.</strong> 对于第一个断言<br>$$<br>\begin{aligned}<br>\bra i D\ket \pi &amp;&#x3D; \sum_{j} D_{ij}\braket{j}{\pi} \\<br>&amp;&#x3D; \sum_{j}\sqrt{P_{ij}P_{ji}}\sqrt{\pi_{j}} \\<br>&amp;&#x3D; \sum_{j}\sqrt{\pi_i}P_{ij} &#x3D; \sqrt{\pi_i}<br>\end{aligned}<br>$$<br>且 $D_{ij} &#x3D; \sqrt{P_{ij}P_{ji}} &#x3D; \sqrt{\pi_i}P_{ij}(\sqrt{\pi_j})^{-1} &#x3D; (\mathrm{diag}(\sqrt \pi) P (\mathrm{diag}(\sqrt \pi))^{-1})_{ij}$。</p>
+</blockquote>
+<p>假设给定了如下的 Oracle<br>$$<br>O_p \ket{0^n}\ket j &#x3D; \sum_k \sqrt{P_{jk}}\ket k\ket j<br>$$<br>可以通过如下方法把 $D$ 编码在电路中：令<br>$$<br>U_D &#x3D; O_p^\dagger \cdot \mathrm{SWAP} \cdot O_p<br>$$<br>这是一个 Hermit 算子。则有</p>
+<blockquote>
+<p><strong>命题 4.2.2.</strong> 对于任意的 $i, j\in[N]$ 都有<br>$$<br>\bra i \bra{0^n} U_D\ket{0^n}\ket j &#x3D; D_{ij}<br>$$<br>即<br>$$<br>U_D &#x3D; \begin{pmatrix} D &amp; \cdot \\<br>\cdot &amp; \cdot \end{pmatrix} &#x3D; \ket{0^n}\bra{0^n}\otimes D + \cdots<br>$$<br>此形式称作 $D$ 的<em>块编码</em>。</p>
+<p><strong>证明.</strong> 直接硬算：<br>$$<br>O_p \ket{0^n}\ket j &#x3D; \sum_k \sqrt{P_{jk}}\ket k\ket j<br>$$<br>因此<br>$$<br>\begin{aligned}<br>\bra i\bra{0^n}U_D\ket {0^n}\ket j &amp;&#x3D; (O_p\ket i\ket{0^n})^\dagger (\mathrm{SWAP\cdot}O_p\ket{0^n}\ket j) \\<br>&amp;&#x3D; \sum_{k}\sqrt{P_{ik}}\bra k\bra i\sum_{k’}\sqrt{P_{jk’}}\bra j\bra {k’} \\<br>&amp;&#x3D; \sqrt{P_{ji}P_{ij}} &#x3D; D_{ij}<br>\end{aligned}<br>$$</p>
+</blockquote>
+<p>假设 $D$ 有谱分解 $D &#x3D; \sum_i \lambda_i\op{v_i}$，那么 $U_D$ 作用在一个特征向量上就是<br>$$<br>U_D\ket{0^n}\ket{v_i} &#x3D; \ket{0^n}D\ket{v_i} + \ket{\tilde\bot_i} &#x3D; \lambda_i \ket{0^n}\ket{v_i} + \ket{\tilde\bot_i}<br>$$<br>其中 $\ket{\tilde\bot_i}$ 已经和前面的态正交。需要注意到的是 $\ket{0^n}\ket{v_i}$ 和 $\ket{\tilde\bot_i} &#x3D; \sqrt{1 - \lambda_i^2}\ket{\bot_i}$ 张成了 $U_D$ 的不变子空间：在上式两边同时作用 $U_D$ 得到<br>$$<br>\ket{0^n}\ket{v_i} &#x3D; \lambda_i(\lambda_i\ket{0^n}\ket{v_i} + \sqrt{1 - \lambda_i^2}\ket{\bot_i}) + \sqrt{1 - \lambda_i^2}U_D\ket{\bot_i} \\<br>\Rightarrow U_D\ket{\bot_i} &#x3D; \sqrt{1 - \lambda_i^2}\ket{0^n}\ket{v_i} - \lambda_i\ket{\bot_i}<br>$$<br>那么 $U_D$ 在基 $\beta_i &#x3D; { \ket{0^n}\ket{v_i}, \ket{\bot_i}}$ 下的矩阵表示就是<br>$$<br>[U_D]_{\beta_i} &#x3D; \begin{pmatrix}<br>\lambda_i &amp; \sqrt{1 - \lambda_i^2} \\<br>\sqrt{1 - \lambda_i^2} &amp; -\lambda_i<br>\end{pmatrix}<br>$$<br>如果我们能做关于第一个基向量的反射：<br>$$<br>Z_\Pi &#x3D; I - 2\op{0^n}<br>$$<br>那么就可以获得一个旋转矩阵 $O_D &#x3D; U_DZ_{\Pi}$，其 $SU(2)$ 表示为<br>$$<br>[O_D]_{\beta_i} &#x3D; \begin{pmatrix}<br>\lambda_i &amp; \sqrt{1 - \lambda_i^2} \\<br>-\sqrt{1 - \lambda_i^2} &amp; \lambda_i<br>\end{pmatrix} &#x3D; \begin{pmatrix}<br>\cos\theta_i &amp; \sin\theta_i \\<br>-\sin\theta_i &amp; \cos\theta_i<br>\end{pmatrix}<br>$$<br>实际上 $Z_\Pi$ 的制作可以使用 $n$ 路 Toffoli 门，因此如下电路可以实现 $O_D$：</p>
+<p><img src="/../picture/image-20250103210742249.png" alt="image-20250103210742249"></p>
+<blockquote>
+<p><strong>命题 4.2.3.</strong> $O_D$ 的特征值为 $e^{\pm i\arccos(\lambda_i)}$。</p>
+<p><strong>证明.</strong> 直接特征方程，其根为<br>$$<br>x &#x3D; \frac{2\cos\theta_i \pm \sqrt{4\cos^2\theta_2 - 4}}{2} &#x3D; e^{\pm i\theta_i}<br>$$</p>
+</blockquote>
+<p>因为 $\arccos(1 - \delta) &#x3D; O(\sqrt{2\delta})$，所以 $O_D$ 的 spectral gap 是 $D$ 的根号倍，实现了 spectral gap amplification。</p>
+<h3><span id="判断完全图中是否有标记">判断完全图中是否有标记</span></h3><p>考虑如下抽象的简单问题：</p>
+<blockquote>
+<p>隐藏一个完全图，只可能有两种情况：</p>
+<ul>
+<li>图中所有点都不带标记。</li>
+<li>图中有 $m$ 个点带标记。（$m &#x3D; o(1)$）</li>
+</ul>
+<p>每次你可以询问一个点 $u$，oracle 以等概率返回其邻居和其自身，如果询问的点有标记，则总是返回自己。</p>
+<p>你需要区分这两种情况。</p>
+</blockquote>
+<p>在经典情况下，你只能尝试硬问，打中带标记的点的期望时间为 $n&#x2F;m$。而在量子情况下，假设上述询问被打包成了一个 oracle $U_D$，那么我们可以制备 $O_D$。</p>
+<p>在情况 1 下，矩阵 $P$ 为 $\frac 1N e_Ne_N^{T}$，只有 $e_N$ 是其特征值为 $1$ 的特征向量，其余特征向量的特征值都是 $0$。</p>
+<p>在情况 2 下，矩阵 $\tilde P$ 为<br>$$<br>\tilde P &#x3D; \begin{pmatrix}<br>I &amp; 0 \\<br>\frac{1}{n}J_{n - m, m} &amp; \frac 1n J_{n - m, n - m}<br>\end{pmatrix}<br>$$<br>其中 $J_{XY} &#x3D; e_X^Te_Y$。那么其 discriminant matrix 就是<br>$$<br>\tilde D &#x3D; \begin{pmatrix}<br>I &amp; 0 \\<br>0 &amp; \frac{1}{n}J_{n - m, n - m}<br>\end{pmatrix}<br>$$<br>容易看到该矩阵的特征值为 $1$（重数为 $m$），$(n - m) &#x2F; n$（重数为 $1$），一堆 $0$。</p>
+<p>注意到：令初状态为<br>$$<br>\ket{0^n}\ket\psi &#x3D; \ket{0^n}\frac 1{\sqrt{n}}\sum_{i&#x3D;1}^n\ket i<br>$$<br>那么 $\ket \psi$ 是 $D$ 的特征值为 $1$ 的特征向量，在 $\beta_1$ 中的旋转为 $0$ 度旋转，无论如何最后测量第一个寄存器都将得到 $1$。</p>
+<p>而<br>$$<br>\ket\psi &#x3D; \sqrt{\frac{m}{n}}\ket{\tilde\pi} + \sqrt{\frac{n - m}{n}}\ket{\tilde{v}}<br>$$<br>其中 $\ket{\tilde\pi} &#x3D; \sum_{i&#x3D;1}^m \frac{1}{\sqrt m}\ket i$，是特征值为 $1$ 的特征向量，$\ket{\tilde v} &#x3D; \sum_{i&#x3D;m + 1}^{n}\frac{1}{\sqrt{n - m}}\ket 1$ 是特征值为 $\frac{n - m}{n}$ 的特征向量。记 $\varepsilon &#x3D; m &#x2F; n$（这个值实际上是 $\tilde D$ 的 spectral gap）。我们作用 $k &#x3D; \pi &#x2F; (2\arccos\frac{n - m}{n})   &#x3D; O(\sqrt{m &#x2F; n})$ 次 $O_{\tilde D}$，即可得到<br>$$<br>O_{\tilde D}^k &#x3D; \sqrt{\varepsilon}\ket{0^n}\ket\pi + \ket{\tilde \bot_k}<br>$$<br>测出 $0$ 的概率只有 $\varepsilon$。于是用 $O(1 &#x2F; \sqrt{\varepsilon})$ 次量子游走然后测量 $0$ 来高概率成功区分此问题。</p>
+<h3><span id="元素区分问题">元素区分问题</span></h3><p>首先我们列举一个证明超出能力范围的事实（上面的讨论中虽然把这个问题的复杂度分析清楚了，但是非常 adhoc）</p>
+<blockquote>
+<p>给定一个在强正则图 $G$ 上的，启动时间为 $S$，转移时间为 $U$，检验是否为标记元素时间为 $C$ 的随机游走，若被标记元素的比例至少为 $\varepsilon$，$G$ 的 spectral gap 为 $\delta$，则量子游走可以在如下时间内解决问题：<br>$$<br>S + \frac{1}{\sqrt{\delta\varepsilon}}(U + C)<br>$$</p>
+</blockquote>
+<p><strong>元素区分问题</strong>是这样的一个问题：</p>
+<blockquote>
+<p>给定一个一个函数 $f : {1, 2, …, N}\rightarrow S$，判断是否存在 $x, y$ 使得 $f(x) &#x3D; f(y)$。</p>
+</blockquote>
+<p>有一个与其非常类似的问题，称作 <strong>collision problem</strong>，其形式如下：</p>
+<blockquote>
+<p>给定一个函数 $f$，它或者是一对一的，或者是严格二对一的，区分这两种情况。</p>
+<p><strong>解法.</strong> 首先取前 $B$ 个元素，用经典算法断定这些元素是否两两不同。如果没找到，用 Grover 算法在后面的元素中找和前面一样的元素（假设你可以把前 $B$ 个元素存下来，然后 $O(1)$ 判断是不是相同）。因为好元素的个数是 $B$ 个，所以 Grover 的复杂度是 $O(\sqrt{n &#x2F; B})$。取 $B &#x3D; n^{1&#x2F;3}$ 得到复杂度 $O(n^{1&#x2F;3})$。</p>
+<p><strong>复杂度下界.</strong> 可以证明此问题复杂度下界就是 $O(n^{1&#x2F;3})$。</p>
+</blockquote>
+<p>我们用 collision problem 的下界证明元素区分问题的下界。假设能在 $T(n)$ 时间内解决规模为 $n$ 的元素区分问题。那么对于 collision problem，我们随机取 $\sqrt n$ 个元素（这里正确的做法是取 $[\sqrt n]\rightarrow [n]$ 的哈希函数）做生日悖论攻击，如果元素区分问题给出了重复元素，那么函数就是二对一的，从而在 $T({\sqrt n})$ 时间内解决了 collision problem，因此<br>$$<br>T(\sqrt n)\geq n^{1&#x2F;3}<br>$$<br>得到 $T(n) &#x3D; \Omega(n^{2&#x2F;3})$。而这个下界确实可以用量子游走达到。这个算法的设计遵循 Hamming 图上的量子游走范式。</p>
+<blockquote>
+<p><strong>定义 4.2.4.</strong> Hamming 图 $H(n, m)$ 是这样的一个图：</p>
+<ul>
+<li>图的点集是 $[n]^m$。</li>
+<li>两个点连边当且仅当其 hamming distance 为 $1$。</li>
+</ul>
+</blockquote>
+<p>标记一个点当且仅当一个点表示的向量中存在 $x\ne y, f(x) &#x3D; f(y)$。则标记的点占比至少为<br>$$<br>\varepsilon\geq \frac{1}{N^M}\binom M 2 \cdot 2 \cdot (N - 2)^{M - 2} &#x3D; \frac{M(M - 1)\cdot (N - 2)^{M -2}}{N^M}<br>$$<br>接下来需要知道 Hamming 图的谱信息。Hamming 图的邻接矩阵是<br>$$<br>\begin{aligned}<br>A &amp;&#x3D; (J - I)\otimes I \otimes \cdots \otimes I \\<br>&amp;+ I \otimes (J - I)\otimes \cdots \otimes I \\<br>&amp;\ \ \vdots \\<br>&amp;+I\otimes I\otimes \cdots \otimes (J - I)<br>\end{aligned}<br>$$<br>我们来计算 $A$ 的特征值。首先从 $(J - I)$ 入手，他有重数为 $1$ 的特征值 $(n - 1)$ 和重数为 $n - 1$ 的特征值 $-1$。对应的特征向量全都是 $I$ 的特征向量。因此 $A$ 的 $n^m$ 个特征向量形如：<br>$$<br>\ket {v_1}\ket{v_2}\cdots\ket{v_m}<br>$$<br>其中 $\ket{v_i}$ 为 $(J - I)$ 的特征值。其特征值形如 $(n - 1)\cdot k + (-1)\cdot(m - k)$。所以最大特征值是 $N(M - 1)$，其次是 $N(M - 1) - M$。对应的随机游走的 spectral gap 是<br>$$<br>\delta &#x3D; \frac{N}{M(N - 1)}<br>$$<br>观察上面的复杂度式子，你肯定不会希望每次量子游走完之后为了计算是不是标记状态，还要给每一维查一次 $f$。所以正确的做法是把所有的 $f$ 带着一起走，维护<br>$$<br>\ket{x_1, x_2, …, x_m, f(x_1), f(x_2), …, f(x_m), \text{DS}}<br>$$<br>其中 $\textrm{DS}$ 是一些 $O(m)$ 空间经典数据结构，比如哈希表，然后你就可以实现：</p>
+<ul>
+<li><p>$S &#x3D; m$，一开始需要查 $m$ 次 $f$。</p>
+</li>
+<li><p>$U &#x3D; O(1)$，每次修改需要查两次 $f$：<br>$$<br>\begin{aligned}<br>&amp;\ket{x_1, x_2, …, x_m, f(x_1), f(x_2), …, f(x_m), \text{DS}} \\<br>\xrightarrow{U_f^{\dagger}} &amp; \ket{x_1, x_2, …, x_m, 0, f(x_2), …, f(x_m), \text{DS}} \\<br>\rightarrow&amp; \ket{x_1’, x_2, …, x_m, 0, f(x_2), …, f(x_m), \text{DS}}\\<br>\xrightarrow{U_f} &amp; \ket{x_1’, x_2, …, x_m, f(x_1’), f(x_2), …, f(x_m), \text{DS}} \\<br>\end{aligned}<br>$$</p>
+</li>
+<li><p>$C &#x3D; O(1)$，因为所有东西都存好了。</p>
+</li>
+</ul>
+<p>根据上面的理论，最终复杂度是<br>$$<br>M + \sqrt{\frac{M(N - 1)N^M}{N\cdot M(M - 1)\cdot (N - 2)^{M -2}}} &#x3D; O\left(M + \frac{N}{\sqrt M}\right)<br>$$<br>取 $M &#x3D; N^{2&#x2F;3}$ 得到最优复杂度。</p>
+<blockquote>
+<p>我总感觉这里差了很多东西，而且那个硬套的 $\textrm{DS}$ 也非常难绷。但是只能不管了。</p>
+</blockquote>
+<h1><span id="基于-hamiltonian-模拟的算法">基于 Hamiltonian 模拟的算法</span></h1><p>称一个 $n$-qubit 的哈密顿量 $H$ 能够被高效模拟，若对于任意的 $t &gt; 0, \varepsilon &gt; 0$，存在一个电路包含 ${\rm poly}(n, t, 1&#x2F;\varepsilon)$ 个门的电路 $U$ 使得 $\Norm{U - e^{-iHt}} \leq \varepsilon$。我们一般假设 $\Norm H &#x3D; \mathrm{poly}(n)$。这里 $\Norm \cdot$ 是谱范数，即最大奇异值。</p>
+<p>注意下文中高效模拟和高效实现是两回事。高效实现就是实现 $U$，要求 $U$ 是 unitary，高效模拟是实现 $e^{-iHt}$，要求 $H$ 是 Hermitian。</p>
+<p>有一些简单的结论</p>
+<ol>
+<li><p><strong>若 $H$ 只作用在常数个 qubit 上，那么 $H$ 可被高效模拟。</strong></p>
+<p>考虑 Solovay-Kitaev 定理。</p>
+</li>
+<li><p><strong>若 $H$ 能被高校模拟，那么 $cH$ 能被高效模拟。</strong>（$c &#x3D; \mathrm{poly}(n)$）</p>
+<p>注意 $H &#x3D; cHc^{-1}$，因此要拟合 $e^{-icHt}$，只需要将 $t$ 乘 $c$ 即可。对于 $c &lt; 0$ 的情况，只需要先造 $c &gt; 0$ 的，然后对电路取 $\dagger$。</p>
+</li>
+<li><p><strong>若 $H$ 能被高效模拟，$U\in \mathbb{C}^{2^n\otimes 2^n}$ 能被高效实现，那么 $UHU^\dagger$ 能被高效模拟。</strong></p>
+<p>只需注意到 $e^{i(uHU^\dagger)t} &#x3D; Ue^{-iHt}U^\dagger$。</p>
+</li>
+<li><p><strong>若 $H\in \mathbb{C}^{2^n\times 2^n}$ 是对角的，且对角元 $\bra k H\ket k$ 都能被高效计算，那么 $H$ 能被高效模拟。</strong></p>
+<p>若 $H$ 是对角的，那么只需要实现 $\ket{d(k)}\mapsto e^{-id(k)t}$。为了保证常数误差，只需要将 $d(k)$ 算成精度为 $l &#x3D; \log_21&#x2F;\varepsilon$ 的浮点数。假设 $d(k) &#x3D; 0.d_1…d_l$，存在 $l$ 个 qubit 当中，那么只需要如下的门：<br>$$<br>R_Z(-t &#x2F; 2^j) &#x3D; \begin{pmatrix}<br>1 &amp; 0 \\<br>0 &amp; e^{-it &#x2F; 2^j}<br>\end{pmatrix}<br>$$<br>作用 $l$ 次，即可实现目标。</p>
+</li>
+</ol>
+<h2><span id="乘积公式">乘积公式</span></h2><p>称 $H$ 是 $k$-local 哈密顿量，若它是若干个作用在至多 $k$ 个 qubit 上的 Hamiltonian 的和。</p>
+<p>接下来考虑如下问题：</p>
+<blockquote>
+<p>若 $H_1, H_2$ 能被高效模拟，那么 $H_1 + H_2$ 是否能被高效模拟？</p>
+</blockquote>
+<p>若 $H_1, H_2$ 对易，那么是显然的。但大多数情况下 $H_1, H_2$ 并非对易，此时我们有</p>
+<blockquote>
+<p><strong>定理 5.1.1 (Lie product formula)</strong><br>$$<br>e^{-i(H_1 + H_2)t} &#x3D; \lim_{m\rightarrow \infty}\left(e^{-iH_1t &#x2F; m}e^{-iH_2t&#x2F;m}\right)^m<br>$$<br><strong>证明.</strong> 定量分析收敛速度。即我们想要知道 $m$ 为多大时<br>$$<br>\Norm{\left(e^{-iH_1t &#x2F; m}e^{-iH_2t&#x2F;m}\right)^m - \left(e^{-i(H_1 + H_2)t &#x2F; m}\right)^m} \leq \varepsilon \tag{$\triangle$} \label{ieq:e-e}<br>$$<br>注意<br>$$<br>\begin{aligned}<br>\Norm{a^m - b^m} &amp;&#x3D; \Norm{(a - b)\left(\sum_{i&#x3D;0}^{m - 1}a^i b^{m -  1 - i}\right)} \\<br>&amp;\leq m\left\lVert a - b \right\rVert (\max{\norm a, \norm b})^m<br>\end{aligned}<br>$$<br>上式中的 $e^{(\cdot)}$ 都是酉矩阵，因此后面的 $\max$ 项是 $0$。要计算 $\left\lvert a - b \right\rvert$，我们将 $e^{(\cdot)}$ 泰勒展开，经过一些平凡的计算得到 $\ref{ieq:e-e}$ 左侧为<br>$$<br>O\left(\frac 1m \max{\Norm {-iH_1 t}, \Norm{-iH_2 t}}^2\right) \leq \varepsilon<br>$$<br>得到<br>$$<br>m &#x3D; O\left(\frac{t^2\max{\Norm {H_1}, \Norm {H_2}}^2}{\varepsilon}\right)<br>$$<br>因为 $H_1, H_2$ 都是多项式，所以这里也是多项式。</p>
+</blockquote>
+<p>另外还有别的乘积公式，比如</p>
+<blockquote>
+<p><strong>定理 5.1.2 (Trotter-Suzuki formula).</strong><br>$$<br>\Norm{\left(e^{-iH_1t&#x2F;2m}e^{-iH_2t&#x2F;m}e^{-iH_1t&#x2F;2m}\right)^m - e^{-i(H_1 + H_2)t}} &#x3D; O\left(\frac{t^3}{m^2}\right)<br>$$<br>证明和上面如出一辙。</p>
+</blockquote>
+<p>对于高维的情形，我们也有<br>$$<br>e^{-i(H_1 + \cdots + H_k)t} &#x3D; \lim_{m\rightarrow \infty}\left(e^{-iH_1t&#x2F;m}\cdots e^{-iH_k t&#x2F;m}\right)^m<br>$$<br>对于 $k$-local Hamiltonian，其求和项只有最多 $\binom nk$ 项，当 $k &#x3D; O(1)$ 时，这是 $n$ 的多项式级别。至此我们证明了</p>
+<blockquote>
+<p><strong>定理 5.1.3.</strong> $O(1)$-local Hamiltonian 可以被高效模拟。</p>
+</blockquote>
+<h2><span id="稀疏-hamiltonian-模拟">稀疏 Hamiltonian 模拟</span></h2><p>称一个 Hamiltonian 是 $d$-sparse 的，若其每行只有 $d$ 个非零位置。</p>
+<p>显然 $k$-local Hamiltonian 是 $2^k\binom nk$-sparse 的。在 $k &#x3D; O(1)$ 时，这是 $n$ 的多项式级别。</p>
+<p>考察 $d$-sparse 的几何意义。注意 Hamiltonian 都是 Hermit 矩阵，所以是对称的，相当于给出了一个每个点度数都不超过 $d$ 的无向图。</p>
+<blockquote>
+<p><strong>命题.</strong> 给定一个度数不超过 $d$ 的二分图，可以将其分解为 $d^2$ 个二分图之和。</p>
+<p><strong>证明 5.2.1.</strong> 给每个点的邻居顶一个顺序。对边 $(u, v)$，假设 $v$ 是 $u$ 的第 $i$ 个邻居，$v$ 是 $u$ 的第 $j$ 个邻居，那么将此边加入第 $id+j$ 个图。</p>
+</blockquote>
+<p>通过下面的办法将一般图的情形约减到二分图：对于 $d$-sparse 的 $H$，$X\otimes H$ 是 $d$-sparse 二分图。而<br>$$<br>\begin{aligned}<br>e^{-(X\otimes H)t} &amp;&#x3D; I\otimes \left(\sum_{i&#x3D;0}^\infty\frac{(-it)^{2i}H^{2i}}{(2i)!}\right) + Z\otimes \left(\sum_{i&#x3D;0}^\infty\frac{(-it)^{2i+1}H^{2i+1}}{(2i+1)!}\right)<br>\end{aligned}<br>$$<br>注意到 $I\ket + &#x3D; Z\ket + &#x3D; \ket +$，因此<br>$$<br>e^{-i(X\otimes H)t}\ket +\ket \psi &#x3D; \ket +\otimes e^{-iHt}\ket \psi<br>$$<br>用一个辅助比特即实现 $H$ 的模拟。根据乘积公式，我们只需要能做 $1$-sparse Hamiltonian 即可。</p>
+<p>假设对于 $1$-sparse Hamiltonian，我们可以查它某一行是哪一个位置非零，以及对应的位置，用如下的 oracle 给出：<br>$$<br>U\ket{x, 0, 0} &#x3D; \ket{x, v(x), H_{x, v(x)}}<br>$$<br>因为 Hamiltonian 是 $1$-sparse 的，我们将其放在每条边连接的两个点张成的子空间里考虑。那么此时<br>$$<br>H|_{\langle\ket i, \ket{v_i}\rangle} &#x3D; \begin{pmatrix}<br>0 &amp; z \\<br>\bar z &amp; 0<br>\end{pmatrix} \Rightarrow e^{iHt} |_{\langle\ket i, \ket{v_i}\rangle} &#x3D; \cos (t|z|) I - i\frac{\sin(t|z|)}{|z|} H | _{\langle\ket i, \ket{v_i}\rangle}<br>$$<br>在子空间上是相位旋转。下面的结论不保证正确：</p>
+<blockquote>
+<p><strong>引理 5.2.2.</strong> 如果有 $SU(2)$ 上的酉变换 $U$，就用 $O(1)$ 个门可以实现：<br>$$<br>\ket a\ket b\ket v \mapsto \ket a\ket b \widehat U\ket v<br>$$<br>其中 $\widehat U$ 是唯一的线性映射使得 $\widehat U &#x3D; U\eta$，其中 $\eta : \ket a\ket b\mapsto \ket 0, \ket b\ket a\mapsto 1$。</p>
+<p><strong>证明.</strong> 感觉如果存在一个 unitary 能够实现 $\ket a\ket b\ket 0\mapsto \ket a\ket b\ket{[a &#x3D; b]}$，那么一切都好起来了。这个 unitary 只要有 $n$-qubit Toffoli 好像就可以了。</p>
+</blockquote>
+<p>于是我们可以实现 $\widehat H$ 和 $\widehat T$ 以及受控的这两个门。根据 Solovay-Kitaev 定理，${H, T}^l$ 是旋转变换的 $\varepsilon$-net（其中 $l$ 是 $O({\rm poly}\log 1&#x2F;\varepsilon)$ 级别的），这表明我们可以制备一条长度为 $2l$ 的 $\widehat H, \widehat T$ 门阵列，然后用 Solovay-Kitaev 定理中的构造算法判断 $e^{-iH(z)t}$ 对应的是哪个序列，从而实现高效模拟。</p>
+<p>总算法如下：</p>
+<ul>
+<li>对于读入的 $\sum_i a_i\ket{x_i}$：</li>
+<li>作用 $U$ 得到 $\sum_i a_i\ket{x_i}\ket{v(x_i)}\ket{H_{x_i, v(x_i)}}$。</li>
+<li>作用上面谈到的受控旋转得到</li>
+</ul>
+<p>因为我不知道 Solovay-Kitaev 有没有给出构造 &#x2F; 构造算法复杂度是多少，所以不确定上面的做法对不对。但想了下好像也只能这么干了。</p>
+<h2><span id="连续时间量子游走">连续时间量子游走</span></h2><p>考虑一个图 $G$ 的 Laplace 矩阵 $L$，考虑一个“扩散”过程<br>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}\mathbf{p} &#x3D; L\mathbf{p}<br>$$<br>那么这个方程的解显然就是<br>$$<br>\mathbf{p}(t) &#x3D; e^{Lt}\mathbf{p}(0)<br>$$<br>这个方程长得和薛定谔方程很像。薛定谔方程的解是<br>$$<br>\ket{\psi(t)} &#x3D; e^{-iHt}\ket{\psi(0)}<br>$$<br>只差了一个 $i$，但是有本质不同，因为容易证明：</p>
+<ol>
+<li>$e^{Lt}$ 是一个随机矩阵，保向量的 $l_1$ 范数。</li>
+<li>$e^{-iLt}$ 是一个酉矩阵，保向量的 $l_2$ 范数。</li>
+</ol>
+<p>在经典情况下，$\mathbf{p}$ 快速趋近于均匀分布。在 $[1, T]$ 内随机一个时间，过这一段时间后观测到某个点 $v$ 的概率接近 $1&#x2F;v$。但是在量子情况下，这个概率是<br>$$<br>\begin{aligned}<br>p_{a\rightarrow b}(T) &amp;&#x3D; \frac{1}{T}\int_{0}^T|\bra b e^{-iHt}\ket a|^2\mathrm{d}t \\<br>&amp;&#x3D;\frac 1T\int_0^T\bra ae^{iHt}\ket b\bra be^{-iHt}\ket a\mathrm{d}t \\<br>&amp;&#x3D; \frac 1T\int_0^T\sum_{\lambda, \lambda’}e^{-i\lambda t}\braket{b}{\lambda}\braket{b}{\lambda}e^{i\lambda’ t}\braket{a}{\lambda’}\braket{a}{\lambda’}\mathrm{d}t \\<br>&amp;&#x3D; \sum_{\lambda, \lambda’} \braket{b}{\lambda}\braket{b}{\lambda}\braket{a}{\lambda’}\braket{a}{\lambda’}\int_{0}^T e^{-i(\lambda’ - \lambda)t}\mathrm{d}t<br>\end{aligned}<br>$$<br>假设 $H$ 的特征值是非简并的，那么式子可以拆成<br>$$<br>\sum_{\lambda}|\braket{a}{\lambda}\braket{b}{\lambda}|^2 + \sum_{\lambda\ne \lambda’}\braket{b}{\lambda}\braket{\lambda}{a}\braket{a}{\lambda’}\braket{\lambda’}{b}\frac{1 - e^{-i(\lambda - \lambda’)T}}{i(\lambda - \lambda’)T}<br>$$<br>后面一项被 $2&#x2F;(\min(\lambda - \lambda’)T)$ 控制，接下来你可以看到第一项其实非常大。</p>
+<hr>
+<p>下面的问题称作胶合树问题：</p>
+<blockquote>
+<p>给定一个胶合树</p>
+<p><img src="/../picture/image-20250104160539748.png" alt="image-20250104160539748"></p>
+<p>和起点编号，每次可以询问邻居，目标是输出 EXIT 的编号。</p>
+</blockquote>
+<p>假设给定了树上随机游走的 oracle：<br>$$<br>A\ket x &#x3D; \frac{1}{\sqrt{|\mathrm{Neighbor}(x)|}}\sum_{y\in \mathrm{Neighbor}(x)}\ket y<br>$$<br>注意到树有对称性，因此定义<br>$$<br>\ket{\mathrm{col}_j} &#x3D; \frac{1}{\sqrt{N_j}} \sum_{dis(a, \text{ENT}) &#x3D; j}\ket a<br>$$<br>简单计算得到 $\mathrm{col}$ 之间的转移概率为：</p>
+<p><img src="/../picture/image-20250104161318981.png" alt="image-20250104161318981"></p>
+<p>可以证明胶合树的邻接矩阵在 $\langle\mathrm{col}_i\rangle$ 下特征值非简并，且任意两个特征值之间的差都是至少 $\Omega(n^{-3})$ 的，于是套上之前的分析，有<br>$$<br>p_{\mathrm{ENT}\rightarrow\mathrm{EXIT}}(\infty) &#x3D; |\braket{\mathrm{ENT}}{\lambda}\braket{\mathrm{EXIT}}{\lambda}|^2<br>$$<br>注意这个图非常对称，这启发我们可能 $\braket{\mathrm{ENT}}{\lambda}$ 和 $\braket{\mathrm{EXIT}}{\lambda}$ 之间相差不多。考虑一个反射<br>$$<br>R : \ket{\mathrm{col}_{j}} \mapsto \ket{\mathrm{col}_{2n + 1 - j}}<br>$$<br>则 $R$ 只有 $\pm 1$ 的特征值，其特征向量为 $\frac{1}{\sqrt 2}(\ket{\mathrm{col}_j}\pm \ket{\mathrm{col}_{2n + 1 - j}})$，且 $R$ 和 $A$ 是交换的。那么对于 $A$ 的所有特征向量 $\ket\lambda$ 都有<br>$$<br>AR\ket\lambda &#x3D; RA\ket\lambda &#x3D; \lambda R\ket\lambda<br>$$<br>因为 $A$ 的特征值非简并，但你找到了 $R\ket\lambda$ 和 $\ket\lambda$ 都是 $A$ 的特征向量，因此只能有 $\ket \lambda$ 是 $R$ 的特征向量，特征值为 $\pm 1$。这样一来，它必然和 $\ket{\mathrm{ENT}}\mp \ket{\mathrm{EXIT}}$，从而<br>$$<br>\braket{\mathrm{ENT}}{\lambda} &#x3D; \pm\braket{\mathrm{EXIT}}{\lambda}<br>$$<br>继续化简从 $\mathrm{ENT}$ 走到 $\mathrm{EXIT}$ 的概率：<br>$$<br>\begin{aligned}<br>p_{\mathrm{ENT}\rightarrow\mathrm{EXIT}}(\infty) &amp;&#x3D; \sum_{\lambda}(|\braket{\mathrm{ENT}}{\lambda}|^2)^2 \\<br>&amp;\geq \frac{1}{2n + 2}\left(\sum_{\lambda}|\braket{\mathrm{ENT}}{\lambda}|^2\right)^2 &#x3D; \frac{1}{2n + 2}<br>\end{aligned}<br>$$<br>容易证明余下的东西<br>$$<br>\begin{aligned}<br>&amp;\sum_{\lambda\ne \lambda’}\braket{\mathrm{EXIT}}{\lambda}\braket{\lambda}{\mathrm{ENT}}\braket{\mathrm{ENT}}{\lambda’}\braket{\lambda’}{\mathrm{EXIT}} \\<br>\leq&amp; \frac{2}{T\min(\lambda - \lambda^2)}\sum_{\lambda, \lambda^2} |\braket{\mathrm{EXIT}}{\lambda}|^2|\braket{\mathrm{ENT}}{\lambda’}|^2 \\<br>&#x3D;&amp; O\left(\frac{n^3}{T}\right)<br>\end{aligned}<br>$$<br>因此取 $T &#x3D; Cn^4$，就可以以 $O(n^{-1})$ 概率成功。只需要重复 $n$ 次，就可以高概率成功。</p>
+<p>另外注意 $A$ 是一个 $3$-sparse 的 Hamiltonian，所以 $A$ 的模拟式多项式级别的，总复杂度也是多项式的。</p>
+<p>对比经典情况，你只能硬走，转移概率大概是</p>
+<p><img src="/../picture/image-20250104165539911.png" alt="image-20250104165539911"></p>
+<p>基本上是一直在中间荡来荡去。走到 $\mathrm{EXIT}$ 的期望时间式指数级的。</p>
 
-<h1><span id="块编码">块编码</span></h1>
     </div>
 
     

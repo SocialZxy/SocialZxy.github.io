@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="策略梯度的推导 算法的问题 高方差 Baseline Trick Reward-to-go Trick 折扣因子   采样效率低      本部分介绍策略梯度相关的方法。这是一种 Model-Free 的强化学习算法，即假设不能知道转移概率。 策略梯度的推导回忆在强化学习中我们需要优化的目标是 $${J}(\theta) &#x3D; \mathbb{E}_{\tau\sim p_\thet">
+    <meta name="description" content="策略梯度的推导 算法的问题 高方差 Baseline Trick Reward-to-go Trick 折扣因子   采样效率低">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CS285 Part 3 - 策略梯度方法">
 <meta property="og:url" content="http://example.com/2025/02/08/CS285DRL5/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="策略梯度的推导 算法的问题 高方差 Baseline Trick Reward-to-go Trick 折扣因子   采样效率低      本部分介绍策略梯度相关的方法。这是一种 Model-Free 的强化学习算法，即假设不能知道转移概率。 策略梯度的推导回忆在强化学习中我们需要优化的目标是 $${J}(\theta) &#x3D; \mathbb{E}_{\tau\sim p_\thet">
+<meta property="og:description" content="策略梯度的推导 算法的问题 高方差 Baseline Trick Reward-to-go Trick 折扣因子   采样效率低">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-02-08T05:15:17.000Z">
-<meta property="article:modified_time" content="2025-02-09T11:52:50.509Z">
+<meta property="article:modified_time" content="2025-06-30T11:56:19.835Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -88,7 +88,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
   </ul>
 </nav>
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">62</span>
+          <span class="site-state-item-count">63</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -139,7 +139,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-count">42</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -175,6 +175,9 @@
             </li>
             <li class="links-of-blogroll-item">
               <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
             </li>
         </ul>
       </div>
@@ -231,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-02-09 19:52:50" itemprop="dateModified" datetime="2025-02-09T19:52:50+08:00">2025-02-09</time>
+      <time title="Modified: 2025-06-30 19:56:19" itemprop="dateModified" datetime="2025-06-30T19:56:19+08:00">2025-06-30</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,6 +271,8 @@
 </li>
 </ul>
 <!-- tocstop -->
+
+<span id="more"></span>
 
 <p>本部分介绍策略梯度相关的方法。这是一种 Model-Free 的强化学习算法，即假设不能知道转移概率。</p>
 <h1><span id="策略梯度的推导">策略梯度的推导</span></h1><p>回忆在强化学习中我们需要优化的目标是</p>

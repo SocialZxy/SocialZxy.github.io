@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    引入 原始定理陈述和证明 Moser-Tardos 算法 Moser 算法及其信息论证明">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NJU TCS Workshop&#39;25 | Lecture 1. Lovasz Local Lemma">
+<meta property="og:url" content="http://example.com/2025/06/30/NJULec1LLL/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    引入 原始定理陈述和证明 Moser-Tardos 算法 Moser 算法及其信息论证明">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-06-30T14:57:17.000Z">
+<meta property="article:modified_time" content="2025-07-01T11:02:51.254Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/06/30/NJULec1LLL/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/06/30/NJULec1LLL/","path":"2025/06/30/NJULec1LLL/","title":"NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">原始定理陈述和证明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Moser-Tardos 算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Moser 算法及其信息论证明</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/30/NJULec1LLL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-30 22:57:17" itemprop="dateCreated datePublished" datetime="2025-06-30T22:57:17+08:00">2025-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-01 19:02:51" itemprop="dateModified" datetime="2025-07-01T19:02:51+08:00">2025-07-01</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E5%8E%9F%E5%A7%8B%E5%AE%9A%E7%90%86%E9%99%88%E8%BF%B0%E5%92%8C%E8%AF%81%E6%98%8E">原始定理陈述和证明</a></li>
+<li><a href="#moser-tardos-%E7%AE%97%E6%B3%95">Moser-Tardos 算法</a></li>
+<li><a href="#moser-%E7%AE%97%E6%B3%95%E5%8F%8A%E5%85%B6%E4%BF%A1%E6%81%AF%E8%AE%BA%E8%AF%81%E6%98%8E">Moser 算法及其信息论证明</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<p>本文收录于 <a href="../../../../2025/06/30/NJUworkshopIndex/#more">NJU 4th “计算理论之美” 暑期学校笔记</a>。</p>
+<h1><span id="引入">引入</span></h1><p>$k\text{-SAT}$ 问题可谓是计算机科学中最经典、最重要的问题之一，我们默认读者熟悉关于该问题的描述和相关术语。根据 Cook-Levin 定理，当 $k\geq 3$ 时有 $k\text{-SAT}\in \mathbf{NP}\text{-complete}$。因此现阶段，难以找到一种可高效判定的充分必要条件。但显然有如下一些有 $m$ 条子句的 $k$-合取范式可满足的充分条件：</p>
+<ol>
+<li>若任意两子句没有重复变元，则该合取范式可满足。</li>
+<li>若 $m &lt; 2^k$，则该合取范式可满足。</li>
+</ol>
+<p>断言 2 的证明是一个经典的概率方法证明。我们给每个文字独立均匀随机赋值为真、假，对于 $i &#x3D; 1, 2, …, m$，定义“坏事件” $A_i$ 为子句 $C_i$ 不被满足。则根据 union bound：</p>
+<p>$$<br>\Pr\left[\bigvee_{i&#x3D;1}^m A_i\right] \leq m2^{-k} &lt; 1 \quad \Rightarrow \quad \Pr\left[\bigwedge_{i&#x3D;1}^m \overline{A_i}\right] &gt; 0<br>$$</p>
+<p>这蕴含存在一组赋值满足了全部的子句。</p>
+<p>注意，在上述证明中我们使用了 union bound。然而熟知 union bound 在事件比较独立之时是松的。是否有一种更为细致、更为局部的 union bound？</p>
+<h1><span id="原始定理陈述和证明">原始定理陈述和证明</span></h1><p>Lovasz Local Lemma 是一种更局部的 union bound 类似物。</p>
+<div class="note info"><p><strong>定理 2.1（Lovasz Local Lemma）.</strong> 令 $A_1, …, A_m$ 是 $m$ 个“坏事件”，满足对于任意的 $i$，$\Pr[A_i] \leq p$，且每个 $A_i$ 与除至多 $d$ 个 $A_j$ 外的其余坏事件都独立。那么，若 $ep(d + 1)\leq 1$，则存在一个样本使得这 $m$ 个事件都不发生，即</p>
+<p>$$<br>ep(d + 1)\leq 1 \quad \Rightarrow \quad \Pr\left[\bigwedge_{i&#x3D;1}^m \overline{A_i}\right] &gt; 0<br>$$</p>
+</div>
+
+<p>事实上，上述陈述还是不够局部。因为这里的 $p, d$ 都是全局的信息。我们称 $\Gamma(A_i)$ 为和 $A_i$ 相关的集合的下标（即 $A_i$ 和 $A_j, \forall j\notin \Gamma(A_i)$ 都独立），并定义 $\Gamma^+(A_i) &#x3D; \Gamma(A_i)\cup \{A_i\}$。形象地，你可以想象一张无向图，其点集为 $\{ A_1, …, A_m \}$，边集为 $\{(u, v) : v \in \Gamma(u)\}$，称作相关性图。一种更强的版本为：</p>
+<div class="note info"><p><strong>定理 2.2（Asymmetric Lovasz Local Lemma）.</strong> 令 $A_1, …, A_m$ 是 $m$ 个“坏事件”。若存在 $\alpha_1, …, \alpha_m\in [0, 1)$，满足对于任意的 $i$ 都有 </p>
+<p>$$<br>\Pr[A_i] \leq \alpha_i\prod_{A_j\in \Gamma(A_i)} (1 - \alpha_j) \label{ALLLcondition}<br>$$</p>
+<p>则有</p>
+<p>$$<br>\Pr\left[\bigwedge_{i&#x3D;1}^m \overline{A_i}\right] \geq \prod_{i&#x3D;1}^m (1 - \alpha_i) &gt; 0<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 易见定理 2.2 蕴含定理 2.1。只需取 $\alpha_i &#x3D; \frac{1}{d + 1}$ 然后用 $e$ 的定义即可得证。</p>
+</blockquote>
+<p><strong>证明.</strong> 首先根据链式法则有</p>
+<p>$$<br>\Pr\left[\bigwedge_{i&#x3D;1}^m \overline{A_{i}}\right] &#x3D; \prod_{i&#x3D;1}^m\left(1 - \Pr\left[A_i \bigg| \bigwedge_{j&#x3D;1}^{i - 1}\overline{A}_{j}\right]\right)<br>$$</p>
+<p>现在来放缩这个条件概率。令 $S\subseteq \{1, 2, …, m\}$。我们证明对于任意的 $S$ 都有</p>
+<p>$$<br>\Pr\left[A_i \bigg| \bigwedge_{j\in S}\overline{A}_{j}\right]\leq \alpha_i<br>$$</p>
+<p>为此，施归纳于 $S$ 之大小，当 $|S| &#x3D; 0$ 时结论显然成立。当 $S &#x3D; \{j_1, …, j_m\}$，其中 $m &gt; 0$ 时，有</p>
+<p>$$<br>\begin{aligned}<br>\Pr\left[A_i \bigg| \bigwedge_{k&#x3D;1}^{i - 1}\overline{A}_{j_k}\right] &amp;&#x3D; \frac{\Pr\left[ A_{i}\wedge \left(\wedge_{k\in \Gamma(A_i)} \overline{A_k}\right) | \wedge_{k\in S\setminus \Gamma(A_i) }\overline{A_k}\right]}{\Pr[\wedge_{k\in \Gamma(A_i)} \overline{A_k} | \wedge_{k\in S\setminus \Gamma(A_i)} \overline{A_k}]} \\<br>&amp;\leq \frac{\Pr\left[A_i | \wedge_{k\in S\setminus \Gamma(A_i) }\overline{A_k}\right]}{\Pr[\wedge_{k\in \Gamma(A_i)} \overline{A_k} | \wedge_{k\in S\setminus \Gamma(A_i)} \overline{A_k}]}<br>\end{aligned}<br>$$</p>
+<p>分子就是 $\Pr[A_i]$，继续用链式法则拆开分母后由归纳假设和条件 $(\ref{ALLLcondition})$ 立即得证。$\blacksquare$</p>
+<p>这样一来我们证明了 SAT 有解的一个充分条件：</p>
+<div class="note info"><p><strong>推论 2.3.</strong> 对于任意的 $k$-合取范式 $\phi$，若每个变量至多在 $2^{k - 2} &#x2F; k$ 个子句中出现，则 $\phi$ 可满足。</p>
+</div>
+
+<p><strong>证明.</strong> 套用定理 2.1 即可。$\blacksquare$</p>
+<h1><span id="moser-tardos-算法">Moser-Tardos 算法</span></h1><p>在判定之外，我们还希望搜索一组解。然而这里的判定算法是一个充分条件，所以直接用 decide-search 规约似乎是不可行的。所幸对于满足 LLL 条件的坏时间，存在搜索样本高效算法。本节我们将在一个具体的样本空间——独立变量上的 CSP 问题中探索如何搜索一组解。</p>
+<div class="note success"><p><strong>定义 3.1（变量框架下的 LLL）.</strong> 给定以下资料：</p>
+<ul>
+<li><strong>相互独立的变量集合</strong> $\mathcal{X} :&#x3D; \{X_1, …, X_n\} \in [q]^n$；</li>
+<li><strong>一系列坏事件</strong> $\mathcal{A} :&#x3D; \{A_1, …, A_m\}$，约束某些变量不能同时取某些值。其中每个 $A_i$ 涉及的变量集合记作 $\textsf{vbl}(A_i)\subseteq \mathcal{X}$，$A_i$ 可以被集合 $[q]^{\textsf{vbl}(A_i)}$ 刻画：若 $\textsf{vbl}(A_i)$ 的取值落在其中，坏事件发生；</li>
+<li><strong>相关性图</strong> $\Gamma(A_i) :&#x3D; \{ A_j \ne A_i : \textsf{vbl}(A_j) \cap \textsf{vbl}(A_i)\ne \varnothing \}$。</li>
+</ul>
+<p>目标：高效求解一个变量的赋值，使得所有坏事件都不发生。</p>
+</div>
+
+<p>求解该问题的算法出奇地简单：</p>
+<div class="note warning"><p><strong>算法 3.1（Moser-Tardos）.</strong><br><em>输入.</em> 一个由 $\mathcal{X}, \mathcal{A}$ 刻画的 CSP 问题。<br><em>输出.</em> 一组满足该 CSP 的解。</p>
+<ol>
+<li>为每个 $\mathcal{X}$ 中的变量随机赋值；</li>
+<li><strong>while</strong> 存在某个 $A_i$ 发生：</li>
+<li>$\qquad$ 重新采样 $\textsf{vbl}(A_i)$。 </li>
+<li>返回当前赋值。</li>
+</ol>
+</div>
+
+<p>现在来分析该算法。我们将证明：</p>
+<div class="note info"><p><strong>定理 3.1（Algorithmic Lovasz Local Lemma）.</strong> 若条件 $\ref{ALLLcondition}$ 成立，则 Moser-Tardos 算法的期望重采样次数为</p>
+<p>$$<br>\sum_{i&#x3D;1}^m \frac{\alpha_i}{1 - \alpha_i}<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark 1.</strong> 这个算法是非常高效的。在对称的情况下，这个数是 $m &#x2F; d$。</p>
+</blockquote>
+<blockquote>
+<p><strong>Remark 2.</strong> 注意算法假设了 $X_i$ 的采样器和判断 $A_i$ 发生的高效算法存在。这很可能是 non-trivial 的。</p>
+</blockquote>
+<p>方便起见，首先提取出整个算法的随机性：</p>
+<div class="note success"><p><strong>定义 3.2（Moser-Tardos 算法的重采样表）.</strong> Moser-Tardos 算法的重采样表是一个写在 $n$ 条只可单向阅读的纸带上的随机表格：</p>
+<p>$$<br>\begin{aligned}<br>    X_1 &amp;: X_1^{(1)}, X_1^{(2)}, … \\<br>    \vdots &amp; \\<br>    X_n &amp;: X_n^{(1)}, X_n^{(2)}, …<br>\end{aligned}<br>$$</p>
+<p>表示重采样使用的随机变量。每次重采样 $A_i$，便将 $\textsf{vbl}(A_i)$ 的读写头右移一位。</p>
+</div>
+
+<p>然后将算法期望的重采样轮数和每个 $A_i$ 联系起来：</p>
+<div class="note success"><p><strong>定义 3.3（Moser-Tardos 算法的运行日志）.</strong> Moser-Tardos 算法的运行日志是系指随机变量序列 $\Lambda\in \mathcal{A}^*$，表示算法运行过程中重采样的坏事件。</p>
+</div>
+
+<p>我们要放缩的无非是 </p>
+<p>$$<br>\mathbb{E}\left[\text{$\#$ of $A_i$ in $\Lambda$}\right]<br>$$</p>
+<p>那么，每个 $A_i$ 出现在某个位置上的因果关系可以用一颗树刻画（一定是前面某个与之相关的重采样打乱了这个约束，它才会不被满足）：</p>
+<div class="note success"><p><strong>定义 3.4（Moser-Tardos 算法的 witness tree）.</strong> 根据运行日志 $\Lambda$，可以构造一棵儿子有顺序的有根树 $T(\Lambda, t)$ 表示前 $t$ 个时刻的重采样的因果关系。树中每个节点 $u$ 都被标记为一个事件 $A_{[u]}$。构造方法如下：</p>
+<ol>
+<li>初始时，树中仅包含一个标记为 $\Lambda_t$ 的根；</li>
+<li><strong>for</strong> $i &#x3D; t - 1, t - 2, …, t$</li>
+<li>$\qquad$ <strong>if</strong> 存在 $u\in T$ 使得 $\Gamma_i \in \Gamma^+(A_{[u]})$；</li>
+<li>$\qquad \qquad$ 在最深、最左边的满足条件的 $u$ 下面挂一个标记为 $\Lambda_i$ 的儿子。</li>
+</ol>
+<p>记 $\mathcal{T}(A_i)$ 为全体可能的以 $A_i$ 为根的 witness tree 的集合。</p>
+</div>
+
+<div class="note info"><p><strong>引理 3.2.</strong> 对于任意的 $\Lambda$ 和 $s &lt; t$，都有 $T(\Lambda, s) \ne T(\Lambda, t)$。</p>
+</div>
+
+<p><strong>证明.</strong> 分类讨论。若 $\Lambda_s\ne \Lambda_t$，则树根不同。否则显然 $T(\Lambda, t)$ 更大。$\blacksquare$</p>
+<p>因此，计数的组合对象可以改为 witness tree：</p>
+<p>$$<br>\mathbb{E}\left[\text{$\#$ of $A_i$ in $\Lambda$}\right] &#x3D; \sum_{\tau \in \mathcal{T}(A_i)} {\color{red} \Pr_{\Lambda}\left[\exists t, T(\Lambda, t) &#x3D; \tau\right]}<br>$$</p>
+<p>现在只需要放缩红色概率的上界。</p>
+<div class="note info"><p><strong>引理 3.3.</strong> 对于任意的 $\tau$，有</p>
+<p>$$<br>\Pr_{\Lambda}\left[\exists t, T(\Lambda, t) &#x3D; \tau\right] \leq \prod_{u\in \tau} \Pr[A_{[u]}]<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 这其实很显然。因为如果 $T(\Lambda, t) &#x3D; \tau$，那么“$\tau$ 中的每个节点被重采样时一定没被满足”（记作事件 $S(\tau, \Lambda)$），而且我们已经将算法使用的随机性提取到了重采样表中，我们要求每次重采样必须使用崭新的随机比特，所以对于固定的 $\Lambda$，“$\tau$ 中的节点 $u$ 重采样时没被满足”相互独立，概率为 $\Pr[A_{[u]}]$。这推出</p>
+<p>$$<br>\Pr[S(\tau, \Lambda)] &#x3D; \prod_{u\in \tau} \Pr[A_{[u]}]<br>$$</p>
+<p>而显然事件 $\exists t, T(\Lambda, t) &#x3D; \tau$ 蕴含事件 $S(\tau, \Lambda)$，明所欲证。$\blacksquare$</p>
+<p>继续推进证明。现在</p>
+<p>$$<br>\begin{aligned}<br>    \mathbb{E}\left[\text{$\#$ of $A_i$ in $\Lambda$}\right] &amp;&#x3D; \sum_{\tau \in \mathcal{T}(A_i)} { \Pr_{\Lambda}\left[\exists t, T(\Lambda, t) &#x3D; \tau\right]} \\<br>    {\color{blue}\text{(Lemma 3.3)}} &amp;\leq \sum_{\tau \in \mathcal{T}(A_i)} \prod_{u\in \tau} \Pr[A_{[u]}] \\<br>    {\color{blue}\text{(LLL Condition)}} &amp;\leq \sum_{\tau \in \mathcal{T}(A_i)}{\color{red}\prod_{u\in \tau} \alpha_u \prod_{j\in \Gamma(A_{[u]})} (1 - \alpha_j)}<br>\end{aligned}<br>$$</p>
+<p>我们现在建立一些关于红色部分的直觉。</p>
+<div class="note info"><p><strong>引理 3.4.</strong> 考虑一个定义在相关性图上的分支过程：</p>
+<ol>
+<li>初始时，队列中只有一个节点 $A_i$。</li>
+<li>每一时刻，对于每个队列中的节点 $u$，对于 $i\in \Gamma(u)$，独立以概率 $a_i$ 在其下方挂上儿子 $i$ 后 $u$ 出队。</li>
+<li>将所有新增的儿子加入队列，重复上方过程。</li>
+</ol>
+<p>则 </p>
+<ol>
+<li>该过程能生成一切 $T\in \mathcal{T}(A_i)$。</li>
+<li>该过程生成 $\tau$ 的概率恰为<br>$$<br>\frac{1 - \alpha_i}{\alpha_i}\prod_{u\in \tau} \alpha_u \prod_{j\in \Gamma(A_{[u]})} (1 - \alpha_j)<br>$$</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 断言 1 显然。断言 2 只需在树上仔细计算即可。$\blacksquare$</p>
+<p>因为上述分支过程产生一个良定义的概率分布，$\mathcal{T}(A_i)$ 是其支撑集的一个子集，所以</p>
+<p>$$<br>\sum_{\tau \in \mathcal{T}(A_i)}\frac{1 - \alpha_i}{\alpha_i}\prod_{u\in \tau} \alpha_u \prod_{j\in \Gamma(A_{[u]})} (1 - \alpha_j) \leq 1<br>$$</p>
+<p>这表明</p>
+<p>$$<br>\mathbb{E}\left[\text{$\#$ of $A_i$ in $\Lambda$}\right] \leq \frac{\alpha_i}{1 - \alpha_i}<br>$$</p>
+<p>至此，定理 3.1 得证！</p>
+<h1><span id="moser-算法及其信息论证明">Moser 算法及其信息论证明</span></h1><p>Moser 算法是 Moser-Tardos 在 $k\text{-SAT}$ 上的变种。为便于分析，我们对寻找坏事件的方法稍作修改。</p>
+<div class="note warning"><p><strong>算法 4.1（Moser）.</strong> <em>输入.</em> 一个 $k$-CNF $\phi$，满足推论 2.3 的条件。<br><em>输出.</em> 一组满足其的赋值。</p>
+<ol>
+<li>均匀随机为每个变量赋值 True &#x2F; False</li>
+<li><strong>while</strong> 存在 $C_i$ 未被满足：</li>
+<li>$\qquad$ $\mathrm{Fix}(C_i)$；</li>
+</ol>
+<p>$\mathrm{Fix}(C_i)$ 定义如下：</p>
+<ol>
+<li>重采样 $C_i$；</li>
+<li><strong>while</strong> 存在 $j\in \Gamma^+(C_i)$，$C_j$ 未被满足：</li>
+<li>$\qquad$ $\mathrm{Fix}(C_j)$。</li>
+</ol>
+</div>
+
+<p>现在来分析此算法高概率的重采样次数上界。我们的核心直觉是：</p>
+<ol>
+<li>随机串是不可压缩的（Kolmogrov）。</li>
+<li>若重采样次数过多，则会用很多随机比特。而可以通过输出少量的信息来还原这些随机比特。</li>
+</ol>
+<div class="note info"><p><strong>定理 4.1（Kolmogrov 不可压缩准则）.</strong> 设 $X\in \{0, 1\}^n$。对于任意的 $f : \{0, 1\}^n \rightarrow \{0, 1\}^*$ 都有</p>
+<p>$$<br>\Pr[|f(X)| \leq n - l] \leq 2^{1 - l}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 直接数。$\blacksquare$</p>
+<p>以此推进算法 4.1 的分析。注意每次重采样的子句 $C_i$ 都是不被满足的，因此 $\textsf{vbl}(C_i)$ 中的变量取值唯一，进而可以知道使用的随机比特的值。接下来顺次注意到：</p>
+<ol>
+<li>每个 $C_i$ 在 Moser 算法顶层至多被 Fix 一次。</li>
+<li>通过输出第一次采样使用的比特、顶层进入 Fix 函数时的下标和 Fix 递归时进入了第几个儿子，可以指导一个 decoder 通过这些输出还原出使用的随机比特序列。</li>
+<li>若进行了 $t$ 次重采样：<ul>
+<li>使用的随机比特总量为 $n + tk$；</li>
+<li>用于指导 decoder 的字符串长度为 $n + m\log m + t\log kd$。</li>
+</ul>
+</li>
+<li>回忆 $\log kd \leq k - 2$。</li>
+</ol>
+<p>若重采样的次数超过 $t_0 &#x3D; m\log m + \log n$ 时，有我们将一个长度为 $n + t_0k$ 的随机字符串压缩成了一个长度为 $n + m\log m + t_0\log kd$ 的字符串，其概率不超过</p>
+<p>$$<br>2^{m\log m + t_0\log kd - t_0k} \leq 2^{-\log n} &#x3D; 1&#x2F;n<br>$$</p>
+<p>因此算法重采样次数高概率不超过 $m\log m + \log n$。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/30/NJUworkshopIndex/" rel="prev" title="NJU 4th “计算理论之美” 暑期学校笔记">
+                  <i class="fa fa-angle-left"></i> NJU 4th “计算理论之美” 暑期学校笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
