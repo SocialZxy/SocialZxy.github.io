@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    问题 完美哈希 一级完美哈希   Succint Dictionaries">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NJU TCS Workshop&#39;25 | Lecture 3. 现代哈希表设计">
+<meta property="og:url" content="http://example.com/2025/07/01/NJULec3HashTable/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    问题 完美哈希 一级完美哈希   Succint Dictionaries">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-01T11:27:03.000Z">
+<meta property="article:modified_time" content="2025-07-01T16:44:16.981Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/07/01/NJULec3HashTable/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/07/01/NJULec3HashTable/","path":"2025/07/01/NJULec3HashTable/","title":"NJU TCS Workshop'25 | Lecture 3. 现代哈希表设计"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>NJU TCS Workshop'25 | Lecture 3. 现代哈希表设计 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">完美哈希</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">一级完美哈希</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Succint Dictionaries</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/01/NJULec3HashTable/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="NJU TCS Workshop'25 | Lecture 3. 现代哈希表设计 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          NJU TCS Workshop'25 | Lecture 3. 现代哈希表设计
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-07-01 19:27:03" itemprop="dateCreated datePublished" datetime="2025-07-01T19:27:03+08:00">2025-07-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-02 00:44:16" itemprop="dateModified" datetime="2025-07-02T00:44:16+08:00">2025-07-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E5%AE%8C%E7%BE%8E%E5%93%88%E5%B8%8C">完美哈希</a><ul>
+<li><a href="#%E4%B8%80%E7%BA%A7%E5%AE%8C%E7%BE%8E%E5%93%88%E5%B8%8C">一级完美哈希</a></li>
+</ul>
+</li>
+<li><a href="#succint-dictionaries">Succint Dictionaries</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="问题">问题</span></h1><p>现希望维护一个集合，并进行成员判定。问题的规模和记号<strong>（这些记号在全文中都适用）</strong>如下所示：</p>
+<div class="note success"><p><strong>定义 1.1（静态字典问题）.</strong> 静态字典问题系指如下问题：</p>
+<p><strong>数据.</strong> 给定一个固定不变的集合 $S$，满足 $|S| &#x3D; n$，且 $S\subseteq [N] &#x3D; U$。</p>
+<p><strong>询问.</strong> 每次给出一个 $x\in U$，判断是否有 $x\in S$。可能需要维护动态插入、删除。</p>
+<p><strong>记号.</strong> $S$ 系指可能出现的元素集合；$n$ 系指 $|S|$ 的大小；$U$ 系指全集，实为 $\{1, 2, …, N\}$。</p>
+</div>
+
+<p>为此已有一系列算法。对这些算法的评价指标主要分两个维度：</p>
+<ol>
+<li><strong>空间复杂度.</strong> 存储该数据结构所需比特数。</li>
+<li><strong>时间复杂度.</strong> 单次查询的访存次数。</li>
+</ol>
+<p>显然，存在从数据结构到集合的满射，否则不在像中的集合无法被正确维护。因此经简单计数可知空间复杂度的理论下界</p>
+<p>$$<br>2^\mathrm{Space} \geq \binom Nn \quad \Rightarrow \quad \mathrm{Space} \geq n\log N - O(n\log n)<br>$$</p>
+<p>兹假定 $N &#x3D; O(\mathrm{poly}(n))$，即值域不能大的太离谱。下表列举了一些常见的算法及其时空复杂度，此处方便起见，设计算机的字长为 $O(\log n)$ 级别，空间复杂度以字数而非比特数记。</p>
+<table>
+<thead>
+<tr>
+<th align="center"><strong>算法</strong></th>
+<th align="center"><strong>空间复杂度</strong></th>
+<th align="center"><strong>查询时间复杂度</strong></th>
+<th align="center"><strong>更新时间复杂度</strong></th>
+<th align="center"><strong>评价</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">平衡树</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(\log n)$</td>
+<td align="center">$O(\log n)$</td>
+<td align="center">慢</td>
+</tr>
+<tr>
+<td align="center">拉链法哈希表</td>
+<td align="center">$O(n)$</td>
+<td align="center">期望 $O(1)$</td>
+<td align="center">期望 $O(\log n)$</td>
+<td align="center">慢</td>
+</tr>
+<tr>
+<td align="center">朴素完美哈希</td>
+<td align="center">$O(n^2)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">大</td>
+</tr>
+<tr>
+<td align="center">FKS 完美哈希</td>
+<td align="center">$O(n)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">大常数</td>
+</tr>
+<tr>
+<td align="center">Succint Dictionary</td>
+<td align="center">$(1 + o(1))n$</td>
+<td align="center">$O(1)$</td>
+<td align="center">$O(1)$</td>
+<td align="center">好</td>
+</tr>
+</tbody></table>
+<h1><span id="完美哈希">完美哈希</span></h1><p>哈希是求解成员判定问题的经典思路。其思路是从一族 $[N] \rightarrow [m]$ 的函数 $\mathcal{H}$ 当中随机采样一个 $h$，并用 $m$ 个字 $L_1, …, L_m$ 来存储信息。每次查询时，先计算 $h(x)$，然后查看 $L_{h(x)}$ 是否为 $x$。</p>
+<p>容易发现，此类方法的核心矛盾点是哈希冲突。即可能存在 $x_1\ne x_2$，$h(x_1) &#x3D; h(x_2)$。解决哈希的方向有：</p>
+<ol>
+<li><strong>重新查找.</strong> 拉链法、线性探测法、二次探测法等，相信读者在数据结构课程中有所涉猎。</li>
+<li><strong>增大值域.</strong> 取充分大的 $m$ 使得高概率没有冲突。</li>
+</ol>
+<p>高概率没有冲突的哈希方法称作<strong>完美哈希</strong>。</p>
+<h2><span id="一级完美哈希">一级完美哈希</span></h2><p>首先，考虑接受如下假设：</p>
+<div class="note success"><p><strong>假设 2.1.1（简单均匀哈希假设，SUHA）.</strong> 假设存在一个高效的采样器，从支撑集为一切 $[N]\rightarrow [m]$ 的函数的均匀分布中采样一个 $h$，并且对于任意的此类 $h$ 与 $x$，都可以 $O(1)$ 计算 $h(x)$。</p>
+</div>
+
+<p>在此假设下，不发生哈希冲突的概率为</p>
+<p>$$<br>\prod_{i &#x3D; 1}^n \left(1 - \frac{i}{m}\right) &#x3D; \exp\left(-(1 + o(1))\frac{n^2}{2m}\right)<br>$$</p>
+<p>可知为高概率不出错，须将 $m$ 取作 $\tilde{O}(n^2)$ 级别。</p>
+<p>然而，上述假设过于强了。事实上我们只需要：</p>
+<div class="note success"><p><strong>定义 2.1.1（通用哈希族）.</strong> 一族哈希函数 $\mathcal{H}$ 是 $k$-通用的，若对于任意不超过 $k$ 个 $x_1, …., x_k\in U$，都有</p>
+<p>$$<br>\Pr_{h\sim U(\mathcal{H})} \left[h(x_1) &#x3D; \cdots &#x3D; h(x_k)\right] \leq \frac{1}{m^{k - 1}}<br>$$</p>
+<p>更进一步，称 $\mathcal{H}$ 是强 $k$-通用的（或 $k$-wise 独立的），若对于任意不超过 $k$ 个 $x_1, …, x_k\in U$ 和 $y_1, …, y_k\in [m]$ 都有</p>
+<p>$$<br>\Pr_{h\sim U(\mathcal{H})} \left[ \bigwedge_{i&#x3D;1}^k h(x_i) &#x3D; y_i\right] &#x3D; \frac{1}{m^k}<br>$$</p>
+</div>
+
+<p>显然，$k$-wise 独立蕴含 $k$-通用。</p>
+<div class="note info"><p><strong>定理 2.1.1.</strong> 对于任意的 $N, k, m$，满足 $k\leq m$，$N, m$ 都是 $2$ 的幂次，存在 $k$-wise 独立的从 $[N]$ 到 $[m]$ 的哈希函数族。</p>
+</div>
+
+<p><strong>证明.</strong> 取 $\mathcal{H} :&#x3D; \{ f(x)\bmod m : f\in \mathbb{GF}(N)[x] &#x2F; (x^{k})\}$，用拉格朗日插值等工具分析概率。$\blacksquare$</p>
+<blockquote>
+<p><strong>Remark.</strong> 常用的是 $2$-wise 独立哈希 $\mathcal{H} :&#x3D; \{h_{a, b}(x) &#x3D; ax + b \pmod m : a, b\in \mathbb{GF}(N)\}$。</p>
+</blockquote>
+<p>那么，可以证明只用 $2$-wise 独立哈希即可做到同样的空间。定义随机变量</p>
+<p>$$<br>Y :&#x3D; \sum_{i, j\in S, i &lt; j} \mathbf{1}[h(i) &#x3D; h(j)]<br>$$</p>
+<p>则哈希没有冲突等价于 $Y &#x3D; 0$，而这个概率是 $O\left(\frac{n^2}{2m}\right)$，因为 $2$-wise 独立哈希也是 $2$-通用哈希。因此取 $m &#x3D; O(n^2)$ 即可保证常数概率正确。</p>
+<p>如何将这个 $O(n^2)$ 的空间优化至 $O(n)$？一个自然的想法是双哈希。</p>
+<div class="note warning"><p><strong>算法 2.1.1（Fredman-Komlos-Szemeredi 完美哈希）.</strong>  本算法是一个分两级的哈希算法。</p>
+<ol>
+<li>首先从 $[N]\rightarrow [n]$ 的 $2$-wise 独立哈希族中采样一个 $h$。</li>
+<li>现在，设 $B_i :&#x3D; |\{x : h(x) &#x3D; i\}|$。存储 $n$ 个指针 $p_1, …, p_n$，第 $i$ 个指向内存中第 $\sum_{j&#x3D;1}^{i - 1} B_i^2$ 个字。</li>
+<li>对于每个 $i$，找 $[N]\rightarrow [B_i^2]$ 的完美哈希。</li>
+</ol>
+<p>当询问 $x$ 时，首先查询 $i &#x3D; h(x)$，然后查看第 $p_i + h_i(x)$ 个字是否为 $x$。</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.1.2.</strong> 已知 $S$，可以期望 $O(n)$ 时间预处理出 $h, h_1, …, h_n$ 使得 FKS 哈希表的空间消耗为 $O(n)$。</p>
+</div>
+
+<p><strong>证明.</strong> 结合前述一切结果，惟须证明随机采样 $h$ 之后哈希表的空间复杂度正确。此哈希表使用的空间将是</p>
+<p>$$<br>2 + 2n + \sum_{i&#x3D;1}^n B_i^2<br>$$</p>
+<p>前两项来自 $h, h_1, …, h_i$ 的参数，我们惟须求后方和式的期望。注意到</p>
+<p>$$<br>Y &#x3D; \sum_{i&#x3D;1}^n \binom{B_i}{2} &#x3D; \frac{1}{2}\sum_{i&#x3D;1}^n B_i^2 - \frac{n}{2}<br>$$</p>
+<p>两边求期望立即得到</p>
+<p>$$<br>\mathbb{E}\left[\sum_{i&#x3D;1}^n B_i^2\right] &#x3D; n + \frac{n^2}{n} &#x3D; 2n<br>$$</p>
+<p>只需重复采样 $h$ 并验证 $\sum_{i&#x3D;1}^n B_i^2$ 确实满足要求，然后随机直至找到 $[N]\rightarrow [B_i^2]$ 的完美哈希即可。$\blacksquare$</p>
+<h1><span id="succint-dictionaries">Succint Dictionaries</span></h1><blockquote>
+<p><strong>本节接受 SUHA（假设 2.1.1）。</strong></p>
+</blockquote>
+<div class="note success"><p><strong>定义 3.1（Succint Data Structure）.</strong> 称一个数据结构是 succint 的，若其仅使用 $(1 + o(1))n$ 个字。</p>
+<p>稍松一些地，称一个数据结构是 compact 的，若其仅使用 $O(n)$ 个字。</p>
+</div>
+
+<p>注意 FKS 的常数非常大，仅仅是 compact 的，而并不是 succint 的。是否有其他方法能够构造 succint 的字典？</p>
+<div class="note "><p><strong>尝试.</strong> </p>
+<p>从 $[N]\rightarrow [n &#x2F; \log^3 n]$ 的简单均匀哈希族中采样哈希函数 $h$，将 $n$ 个元素打到 $n &#x2F; \log^3 n$ 个桶中。定义 $n’ &#x3D; (1 + 2 &#x2F; \log n)\log^3 n$。</p>
+<p>根据 Chernoff bound，有最大负载高概率不超过 $n’$。计算此方法消耗的额外空间：</p>
+<ul>
+<li>存储每个桶的开始指针：$n\log n’$。</li>
+<li>存储所有桶中元素：$n &#x2F; \log^3 n\cdot n’\log U &#x3D; (1 + 2 &#x2F; \log n) n\log U$。</li>
+</ul>
+<p>确实只需要 $(1 + o(1))n\log U$ 的空间。</p>
+</div>
+
+<div class="note info"><p><strong>定理 3.1.</strong> 只需用 $O(\log n)$ 个比特，便可维护 $O(\log n &#x2F; \log \log n)$ 个</p>
+</div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/06/30/NJULec1LLL/" rel="prev" title="NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma">
+                  <i class="fa fa-angle-left"></i> NJU TCS Workshop'25 | Lecture 1. Lovasz Local Lemma
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/07/07/ElonaAlgorithm/" rel="next" title="中性 Rydberg 原子量子计算编译的 Elona 算法">
+                  中性 Rydberg 原子量子计算编译的 Elona 算法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

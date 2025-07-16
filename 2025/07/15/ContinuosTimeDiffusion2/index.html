@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    说明与记号 Fokker-Plank 方程 扩散过程的稳态和收敛速率">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PKU Summer School 2025 | 2 扩散过程及其收敛性">
+<meta property="og:url" content="http://example.com/2025/07/15/ContinuosTimeDiffusion2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    说明与记号 Fokker-Plank 方程 扩散过程的稳态和收敛速率">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-15T08:36:14.000Z">
+<meta property="article:modified_time" content="2025-07-16T04:34:21.690Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/07/15/ContinuosTimeDiffusion2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/07/15/ContinuosTimeDiffusion2/","path":"2025/07/15/ContinuosTimeDiffusion2/","title":"PKU Summer School 2025 | 2 扩散过程及其收敛性"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PKU Summer School 2025 | 2 扩散过程及其收敛性 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">说明与记号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Fokker-Plank 方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">扩散过程的稳态和收敛速率</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/15/ContinuosTimeDiffusion2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PKU Summer School 2025 | 2 扩散过程及其收敛性 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PKU Summer School 2025 | 2 扩散过程及其收敛性
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-07-15 16:36:14" itemprop="dateCreated datePublished" datetime="2025-07-15T16:36:14+08:00">2025-07-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-16 12:34:21" itemprop="dateModified" datetime="2025-07-16T12:34:21+08:00">2025-07-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%AF%B4%E6%98%8E%E4%B8%8E%E8%AE%B0%E5%8F%B7">说明与记号</a></li>
+<li><a href="#fokker-plank-%E6%96%B9%E7%A8%8B">Fokker-Plank 方程</a></li>
+<li><a href="#%E6%89%A9%E6%95%A3%E8%BF%87%E7%A8%8B%E7%9A%84%E7%A8%B3%E6%80%81%E5%92%8C%E6%94%B6%E6%95%9B%E9%80%9F%E7%8E%87">扩散过程的稳态和收敛速率</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="说明与记号">说明与记号</span></h1><details class="note "><summary><p>记号</p>
+</summary>
+<p>本章中有大量的矢量微积分，清晰起见，我们规定一下字体对应的变量类型。</p>
+<ul>
+<li>$\boldsymbol{X}_t, \boldsymbol{x}, \boldsymbol{v}$ 等粗斜体表示向量（或向量函数），若不取转置都是列向量；</li>
+<li>$\mathbf{A}, \mathbf{\Sigma}$ 等粗正体表示矩阵（或矩阵函数）；</li>
+<li>$t, \pi, f$ 等普通斜体表示标量（或标量函数）；</li>
+<li>$\mathscr{A}, \mathscr{P}$ 等花体表示泛函。</li>
+</ul>
+<p>除了 $\nabla \cdot \nabla$ 这种司空见惯的表达外，为了避免歧义，向量内积均用转置乘法 $\boldsymbol{x}^\top \boldsymbol{y}$ 或尖括号 $\langle\boldsymbol{x}, \boldsymbol{y}\rangle$ 的形式写出。</p>
+<p>文章中有两个重要的算子 $\nabla$ 和 $\Delta$，这里重申一遍其含义：</p>
+<p>$$<br>\begin{aligned}<br>    \nabla &amp;&#x3D; \left(\frac{\partial}{\partial x_1}, …, \frac{\partial}{\partial x_n}\right)^\top \\<br>    \Delta &amp;&#x3D; \sum_{i&#x3D;1}^n \frac{\partial}{\partial x_i} &#x3D; \nabla \cdot \nabla<br>\end{aligned}<br>$$</p>
+<p>$\nabla$ 可以直接作用于一个函数 $f$，结果将较 $f$ 本身升高一维，得到 </p>
+<p>$$<br>\nabla f &#x3D; \left(\frac{\partial f^\top}{\partial x_1}, …, \frac{\partial f^\top}{\partial x_n}\right)^\top<br>$$</p>
+<p>也可以以内积的方式作用于一个向量函数 $\boldsymbol{g}$，结果将较 $\boldsymbol{g}$ 本身降低一维，得到 </p>
+<p>$$<br>\nabla \cdot \boldsymbol{g} &#x3D; \sum_{i&#x3D;1}^n \frac{\partial}{\partial x_i} g_i<br>$$</p>
+<p>$\nabla$ 可以以内积的形式作用 $n$ 次，写作 $\nabla^{\cdot n}$。这是为了与 Hessian 区分：</p>
+<p>$$<br>\nabla^2 &#x3D; \begin{pmatrix}<br>    \frac{\partial^2}{\partial x_1x_1} &amp; \cdots &amp; \frac{\partial^2}{\partial x_1x_n} \\<br>    \vdots &amp; &amp; \vdots \\<br>    \frac{\partial^2}{\partial x_nx_1} &amp; \cdots &amp; \frac{\partial^2}{\partial x_nx_n}<br>\end{pmatrix}<br>$$</p>
+
+</details>
+
+<p>本节主要考虑由如下随机微分方程给出的扩散过程：</p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; \boldsymbol{b}(\boldsymbol{X}_t)\mathrm{d}t + \mathbf{\Sigma}(\boldsymbol{X}_t)^{1&#x2F;2}\mathrm{d}\boldsymbol{B}_t \label{thdiff}<br>$$</p>
+<p>其中：</p>
+<ul>
+<li>$\boldsymbol{X}_t$ 是 $d$ 维随机向量；</li>
+<li>$\boldsymbol{b}(\cdot)$ 是 $d$ 维向量到 $d$ 维向量的函数；</li>
+<li>$\mathbf{\Sigma}(\cdot)$ 是 $d$ 阶半正定矩阵；</li>
+<li>$\boldsymbol{B}_t$ 是 $d$ 维布朗运动。</li>
+</ul>
+<p>我们熟知这是一个连续时间马尔可夫过程，因此可能希望研究如下方面的内容：</p>
+<ol>
+<li>其<strong>特征</strong>。类比离散时间马尔可夫过程：离散情况下有一个随机转移矩阵 $\mathbf{P}$，使得 $t$ 时间的概率质量函数 $\pi_t$ 满足方程 $\pi_t &#x3D; \pi_{t - 1}\mathbf{P}$（写成差分的形式即 $\Delta \pi_t &#x3D; \pi_t(\mathbf{P} - \mathbf{I})$）。在扩散过程中是否有类似的（微分）方程？</li>
+<li>其<strong>稳态</strong>、<strong>收敛性</strong>、<strong>收敛速率</strong>。</li>
+</ol>
+<h1><span id="fokker-plank-方程">Fokker-Plank 方程</span></h1><p>本节探讨第一方面内容，所得重要结果即标题。</p>
+<p>首先，我们希望能类比离散马尔可夫过程中的矩阵 $\mathbf{P}$。为此，我们从一个泛性质入手（测试函数法）。先来找一族泛函 $(\mathscr{P}_t : t\geq 0)$ 满足：对于一切足够光滑的函数 $f$，都有</p>
+<p>$$<br>   (\mathscr{P}_t f)(\boldsymbol{x}) &#x3D; \mathbb{E}\left[f(\boldsymbol{X}_t) | \boldsymbol{X}_0 &#x3D; \boldsymbol{x}\right]<br>$$</p>
+<p>可以发现，这族泛函内部的复合具有相当良好的形式，因为 </p>
+<p>$$<br>\begin{aligned}<br>    (\mathscr{P}_s\mathscr{P}_t f)(x) &#x3D; \mathbb{E}\left[(\mathscr{P}_s f)(\boldsymbol{X}_t) | \boldsymbol{X}_0 &#x3D; \boldsymbol{x}\right] &#x3D; \mathbb{E}[\boldsymbol{X}_{s + t} | \boldsymbol{X}_0 &#x3D; \boldsymbol{x}] &#x3D; (\mathscr{P}_{s + t} f)(x)<br>\end{aligned}<br>$$</p>
+<p>于是 $\mathscr{P}_s\circ\mathscr{P}_t &#x3D; \mathscr{P}_{s + t}$。从而若定义</p>
+<p>$$<br>\mathscr{A} :&#x3D; \frac{\mathrm{d}}{\mathrm{d}t}\mathscr{P}_t \bigg |_{t &#x3D; 0}<br>$$</p>
+<p>便可以算出</p>
+<p>$$<br>\begin{aligned}<br>    \frac{\mathrm{d}}{\mathrm{d}t}\mathscr{P}_t &amp;&#x3D; \lim_{s\rightarrow 0^+} \frac{\mathscr{P}_{t + s} - \mathscr{P}_t}{s} \\<br>    &amp;&#x3D; \lim_{s\rightarrow 0^+} \frac{\mathscr{P}_t(\mathscr{P}_s - I)}{s} &amp;&amp; {\color{lightgray} \text{ or } \lim_{s\rightarrow 0^+} \frac{(\mathscr{P}_s - I)\mathscr{P}_t}{s}} \\<br>    &amp;&#x3D; \mathscr{P}_t\mathscr{A} &amp;&amp; {\color{lightgray} \text{ or } \mathscr{A}\mathscr{P}_t}<br>\end{aligned} \label{APODE}<br>$$</p>
+<p>灰色部分指出 $\mathscr{A}$ 和 $\mathscr{P}_t$ 可交换。注意一旦有了微分方程 $(\ref{APODE})$，便可用 $\mathscr{A}$ 来表示 $\mathscr{P}_t$（大约是 $\mathscr{P}_t &#x3D; \exp(t\mathscr{A})$ 状物），因此我们现在来计算 $\mathscr{A}$。</p>
+<p>那么对于一个时齐扩散过程和一个足够光滑的函数 $f$，计算</p>
+<p>$$<br>\lim_{T\rightarrow 0^+}\frac{\mathbb{E}[f(\boldsymbol{X}_T) | \boldsymbol{X}_0 &#x3D; \boldsymbol{x}] - f(\boldsymbol{x})}{T}, \quad \text{ where $\boldsymbol{X}_t$ follows (\ref{thdiff})}<br>$$</p>
+<p>用伊藤积分计算期望内部的 $f$ 得到欲计算之式子等于</p>
+<p>$$<br>\begin{aligned}<br>\mathscr{A}f &amp;&#x3D;\lim_{T\rightarrow 0^+} \frac{1}{T}\mathbb{E}\left[\int_0^T \nabla f(\boldsymbol{X}_t)^\top \boldsymbol{b}(\boldsymbol{X}_t)\mathrm{d}t + {\color{blue}\int_0^T\nabla f(\boldsymbol{X}_t)^\top \mathbf{\Sigma}(\boldsymbol{X}_t)^{1&#x2F;2}\mathrm{d}\boldsymbol{B}_t} + \frac 12 \int_0^T\mathrm{tr}\left(\nabla^2 f(\boldsymbol{X}_t)\mathbf{\Sigma}(\boldsymbol{X}_t)\right)\mathrm{d} t\right] \\<br>&amp;&#x3D; \nabla f(\boldsymbol{x})^\top b(\boldsymbol{x}) + \frac 12 \mathrm{tr}\left(\nabla^2 f(\boldsymbol{x}) \mathbf{\Sigma}(\boldsymbol{x})\right) \label{cfofA}<br>\end{aligned}<br>$$</p>
+<p>注意蓝色部分是一个鞅，因此其期望为零。</p>
+<hr>
+<p>得到了上述重要泛函之后，我们来考虑 $\pi$ 满足的方程。令 $\pi_t$ 为 $\boldsymbol{X}_t$ 的概率密度（非平凡，这里不证明对于扩散过程其存在）。</p>
+<p>一方面，断言某些一致收敛性的存在（意在随意交换求导和含参积分）之后可以得到</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t} \mathbb{E}\left[f(\boldsymbol{X}_t)\right] &#x3D; \int f(x)\frac{\partial \pi_t}{\partial t}(x)\mathrm{d}x<br>$$</p>
+<p>另一方面又有</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t} \mathbb{E}[f(\boldsymbol{X}_t)] &#x3D; \mathbb{E}\left[\frac{\mathrm{d}}{\mathrm{d}t}\mathscr{P}_t f(\boldsymbol{X}_0)\right] &#x3D; \mathbb{E}\left[(\mathscr{A}\mathscr{P}_t)(\boldsymbol{X}_0)\right]<br>$$</p>
+<p>先令 $t &#x3D; 0$（这样操作也是非常自然的，因为 $\boldsymbol{X}_t$ 是时齐的，所以 $\pi_0$ 满足的方程理应能推到所有 $\pi_t$）得到方程</p>
+<p>$$<br>\int f(\boldsymbol{x}) \frac{\partial \pi_t}{t}\bigg|_{t &#x3D; 0}(\boldsymbol{x})\mathrm{d}\boldsymbol{x} &#x3D; \int \mathscr{A}f(\boldsymbol{x})\pi_0(\boldsymbol{x})\mathrm{d}\boldsymbol{x} \label{switchtodo}<br>$$</p>
+<p>这里 $\mathscr{A}f$ 里面有对 $f$ 的二阶微分。我们希望把微分全部推到 $\pi_0$ 头上去，从而得到如下形式：</p>
+<p>$$<br>\int f(\boldsymbol{x}) \cdot {\color{red} (\text{something})}\mathrm{d}\boldsymbol{x} &#x3D; 0<br>$$</p>
+<p>进而根据 $f$ 可以任取来扔掉积分，得到 $\pi$ 的方程。因此容易想到使用分部积分。回忆</p>
+<p>$$<br>\int_{\Omega} (\nabla f(\boldsymbol{x}))^\top\boldsymbol{g}(\boldsymbol{x})\mathrm{d}\boldsymbol{x} &#x3D; \oint_{\partial\Omega} f(\boldsymbol{x})\boldsymbol{g}(\boldsymbol{x})^\top \boldsymbol{n}\mathrm{d}s - \int_{\Omega} f(\boldsymbol{x})(\nabla \cdot \boldsymbol{g}(\boldsymbol{x}))\mathrm{d}\boldsymbol{x}<br>$$</p>
+<p>这可以自然地拓展到 $f, g$ 中有一者是矢量函数（每一维独立做一遍）</p>
+<details class="note "><summary><p>（这本该是一年级的知识，但是我们忘干净了，所以重新推一遍）</p>
+</summary>
+<div class="note info"><p>首先验证一个链式法则。</p>
+<p>$$<br>\begin{aligned}<br>\nabla \cdot (f\boldsymbol{g}(\boldsymbol{x})) &amp;&#x3D; \sum_{i&#x3D;1}^n \frac{\partial}{\partial x_i} (f(\boldsymbol{x})g_i(\boldsymbol{x})) \\<br>&amp;&#x3D; \sum_{i&#x3D;1}^n \left(\frac{\partial}{\partial x_i} f(\boldsymbol{x})\right)g_i(\boldsymbol{x}) + \sum_{i&#x3D;1}^n f(\boldsymbol{x})\left(\frac{\partia}{\partial x_i} g_i(\boldsymbol{x})\right) \\<br>&amp;&#x3D; \nabla f(\boldsymbol{x})^\top \boldsymbol{g}(\boldsymbol{x}) + f(\boldsymbol{x})(\nabla \cdot \boldsymbol{g}(\boldsymbol{x}))<br>\end{aligned}<br>$$</p>
+<p><strong>引理 2.1（高斯公式）.</strong> 设区域 $\Omega$ 的边界是分片连续的封闭曲面，函数 $\boldsymbol{F} : \mathbb{R}^n\rightarrow \mathbb{R}^n$ 各维在 $\overline{\Omega}$ 内有连续的一阶偏导，则</p>
+<p>$$<br>\oint_{\partial \Omega} \boldsymbol{F} \cdot \boldsymbol{n} \mathrm{d}s &#x3D; \int_{\Omega}\nabla \cdot \boldsymbol{F}\mathrm{d}V<br>$$</p>
+</div>
+
+<!-- 兹使用一个各维都是同样的函数（即 $\boldsymbol{F}(\boldsymbol{x}) = (f(\boldsymbol{x}, ..., \boldsymbol{f}(x)))$，其中 $f : \mathbb{R}^n\rightarrow \mathbb{R}$，在 $\overline{\Omega}$ 内有连续的一阶偏导）得到如下变种
+
+$$
+\oint\_{\partial \Omega} f \boldsymbol{n} \mathrm{d}s = \int\_{\omega} \nabla f \mathrm{d}V
+$$ -->
+
+<p>置 $f \leftarrow f\boldsymbol{g}$（一个标量函数乘一个矢量函数）移项得证。$\blacksquare$</p>
+</details>
+
+<p>我们首先用球区域内的积分来逼近整个空间中的积分。可以证明（详情请考虑寻求数学家的合作😄）本节中用到的全部函数（以 $F$ 代称）均满足：取 $\Omega &#x3D; \mathbb{B}^n(0, R)$，都有</p>
+<p>$$<br>\left|\int_\Omega F \mathrm{d}V - \int_{\mathbb{R}^d} F \mathrm{d}V\right| \rightarrow 0 \qquad (R\rightarrow \infty)<br>$$</p>
+<p>现在开始推进 $\ref{switchtodo}$ 的整理。首先</p>
+<p>$$<br>\int_\Omega \mathscr{A} f(\boldsymbol{x})\pi_0(\boldsymbol{x})\mathrm{d}\boldsymbol{x} &#x3D; \int_\Omega \nabla f(\boldsymbol{x})^\top \boldsymbol{b}(x)\pi_0(\boldsymbol{x})\mathrm{d}\boldsymbol{x} + \frac 12\int_\Omega \mathrm{tr}(\mathbf{\Sigma}(\boldsymbol{x})\cdot \nabla^2 f(\boldsymbol{x}))\pi_0(\boldsymbol{x})\mathrm{d}\boldsymbol{x}<br>$$</p>
+<p>对第一项应用分部积分得到</p>
+<p>$$<br>\int_\Omega \nabla f(\boldsymbol{x})^\top \boldsymbol{b}(\boldsymbol{x})\pi_0(\boldsymbol{x})\mathrm{d}\boldsymbol{x} &#x3D; \oint_{\partial\Omega} \pi_0(\boldsymbol{x})f(\boldsymbol{x})\boldsymbol{b}(\boldsymbol{x})^\top \boldsymbol{n}\mathrm{d}s - \int_\Omega f(\boldsymbol{x})(\nabla \cdot \pi_0\boldsymbol{b}(\boldsymbol{x}))\mathrm{d}x<br>$$</p>
+<p>可以证明这个边界上的积分收敛于 $0$（详情请考虑寻求数学家的合作😄）。今后，我们都将直接忽略边界项。</p>
+<p>对于第二项，有</p>
+<p>$$<br>\begin{aligned}<br>&amp;\int_{\Omega}\mathrm{tr}\left(\nabla^2 f(\boldsymbol{x})\mathbf{\Sigma}(\boldsymbol{x})\right) \pi(\boldsymbol{x})\mathrm{d}\boldsymbol{x} \\<br>&#x3D;&amp; -\int_\Omega \nabla f(\boldsymbol{x})^\top (\nabla\cdot (\pi(\boldsymbol{x})\mathbf{\Sigma}(\boldsymbol{x}))) \mathrm{d}\boldsymbol{x} \\<br>&#x3D;&amp; \int_{\Omega} f(\boldsymbol{x})\cdot \nabla^{\cdot 2} \pi\mathbf{\Sigma}(\boldsymbol{x})\mathrm{d}\boldsymbol{x}<br>\end{aligned}<br>$$</p>
+<details class="note "><summary><p>第一行推第二行的计算细节</p>
+</summary>
+<p>方便起见定义 $\mathbf{A}(\boldsymbol{x}) &#x3D; \mathbf{\Sigma}(\boldsymbol{x})\pi(\boldsymbol{x})$。依迹的线性性，本质上要算的就是</p>
+<p>$$<br>\int_{\Omega}\mathrm{tr}\left(\nabla^2 f(\boldsymbol{x})\mathbf{A}(\boldsymbol{x})\right) \mathrm{d}\boldsymbol{x}<br>$$</p>
+<p>这里偏导被套在迹之中，看起来很不直观。然而我的一个朋友告诉我看不清楚就直接拆开爆算，因此我们直接算</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{tr}(\nabla^2 f(\boldsymbol{x})\mathbf{A}(\boldsymbol{x}))<br>&amp;&#x3D; \sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^n \nabla^2 f(x)_{i, j} \mathbf{A}(\boldsymbol{x})_{j, i}(\boldsymbol{x}) \\<br>&amp;&#x3D; \sum_{i&#x3D;1}^n \sum_{j&#x3D;1}^n \frac{\partial^2}{\partial x_i\partial x_j}f(\boldsymbol{x}) \mathbf{A}(\boldsymbol{x})_{j, i} \\<br>&amp;&#x3D; \sum_{i&#x3D;1}^n \left(\nabla\left(\frac{\partial}{\partial x_i} f\right)\right)^\top \mathbf{A}(\boldsymbol{x})_{\cdot, i}<br>\end{aligned}<br>$$</p>
+<p>积分是线性的。对于每一个求和项用分部积分公式</p>
+<p>$$<br>\int_\Omega \left(\nabla\left(\frac{\partial}{\partial x_i} f\right)\right)^\top \mathbf{A}(\boldsymbol{x})_{\cdot, j}\mathrm{d}\boldsymbol{x} &#x3D; -\int_\Omega \frac{\partial}{\partial x_i} f(\boldsymbol{x}) (\nabla \cdot \mathbf{A}(\boldsymbol{x})_{\cdot, i})<br>$$</p>
+<p>加起来即得到第二行。这里你可能需要解读一下 $\nabla \cdot \mathbf{A}$ 的含义。</p>
+
+</details>
+
+<p>第二行推第三行没有迹了，因此就比较显然了。</p>
+<p>整理全部结果得到对于一切 $f$ 都有</p>
+<p>$$<br>\int f(\boldsymbol{x})\left(\partial_t \pi_0(\boldsymbol{x}) + \nabla\cdot \pi_0\boldsymbol{b}(\boldsymbol{x}) - \nabla^{\cdot 2}\pi_0(\boldsymbol{x})\boldsymbol{\Sigma}(\boldsymbol{x})\right)\mathrm{d} \boldsymbol{x} &#x3D; 0<br>$$</p>
+<p>根据 $f$ 的任意性和扩散过程的时齐性（可以把式子中的 $\pi_0$ 拓展到任意的 $\pi_t$），我们最终得到了扩散过程 $t$ 时间的概率密度满足的方程：</p>
+<div class="note info"><p><strong>定理 2.1（Fokker-Plank 方程）.</strong> 设 $\pi_t$ 是时齐扩散过程 $(\ref{thdiff})$ 中 $\boldsymbol{X}_t$ 的概率分布。则有</p>
+<p>$$<br>\partial_t \pi_t &#x3D; -\nabla \cdot (\pi_t \boldsymbol{b}) + \frac 12 \nabla^{\cdot 2}(\pi_t\boldsymbol{\Sigma})<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这里的 Fokker-Plank 方程甚至可以写成和马尔科夫链转移矩阵相仿的简单形式。回忆在线性代数中我们学习过一个经典的泛性质：在赋内积 $\langle\cdot, \cdot\rangle$ 的线性空间中，存在唯一的转置 $\mathbf{A}\mapsto \mathbf{A}^*$ 使得 $\langle \mathbf{A}\boldsymbol{x}, \boldsymbol{y}\rangle &#x3D; \langle\boldsymbol{x}, \mathbf{A}^* \boldsymbol{y}\rangle$ 对于一切 $\boldsymbol{x}, \boldsymbol{y}$ 成立。将乘起来积分视作内积，在上述的分部积分中，本质上我们推出了 $\mathscr{A}^* &#x3D; \pi \mapsto -\nabla \pi \boldsymbol{b} + \nabla^{\cdot 2}\pi\mathbf{\Sigma}$，因此 Fokker-Plank 方程可以简写作</p>
+<p>$$<br>  \partial_t \pi_t &#x3D; \mathscr{A}^*\pi_t<br>  $$</p>
+<p>但这于应用而言大概并无帮助。</p>
+</blockquote>
+<h1><span id="扩散过程的稳态和收敛速率">扩散过程的稳态和收敛速率</span></h1><p>基于以下动机，希望研究扩散过程的稳态和收敛速率：</p>
+<div class="note "><p><strong>动机（采样问题）.</strong> 给定 $f : \mathbb{R}^d\rightarrow \mathbb{R}$，希望设计一个采样器生成一个随机变量，其密度恰为</p>
+<p>$$<br>\pi(\boldsymbol{x}) &#x3D; \frac{e^{-f(\boldsymbol{x})}}{\int e^{-f(\boldsymbol{y})}\mathrm{d}\boldsymbol{y}} \label{expdist}<br>$$</p>
+<p>低维空间中，有以下几种现成的方法：</p>
+<ol>
+<li>重要性采样；<em>在高维根本没法做前缀和积分之类的东西，因此不可行。</em></li>
+<li>拒绝采样；<em>高维情况下成功率会非常低，因此不可行。</em></li>
+</ol>
+<p>高维空间中一般采用的是 MCMC（马尔科夫链蒙特卡洛采样），其核心思路是：模拟一个稳态分布恰为 $\pi$ 的随机过程足够长的时间（混合时间），即可产生（近似的）上述分布。</p>
+</div>
+
+<p>如何求扩散过程的<strong>稳态</strong>？按照定义这就是取 Fokker-Plank 方程 $\partial_t\pi_t &#x3D; 0$ 所对应的 PDE 的解。</p>
+<p>如何求扩散过程的<strong>混合时间</strong>？首先需要定义它。常见的定义是 $\Delta_{TV}$ 和稳态差距充分小的时间（$\tau_{mix} &#x3D; \min\{T : \Delta_{TV}(\pi_T, \pi) &lt; \varepsilon\}$）。当然根据 Pinsker 不等式，其上界可以由 KL 散度差距充分小时给出。熟悉马尔科夫链相关技术的朋友们都知道，在求混合时间时有一个十分有用的工具是<strong>耦合</strong>，因为 $\Delta_{TV}$ 是被所谓的 Wasserstein 距离 bound 住的。</p>
+<div class="note success"><p><strong>定义 3.1（耦合）.</strong> 称联合分布 $\gamma$ 是随机变量 $X\sim p, Y\sim q$ 的一个<em>耦合</em>，若边缘分布 $\gamma(X) &#x3D; p$ 且 $\gamma(Y) &#x3D; q$。记作 $\gamma\in \mathrm{coupling}(p, q)$。</p>
+</div>
+
+<div class="note success"><p><strong>定义 3.2（Wasserstein 距离）.</strong> 两个分布 $p, q$（对应随机变量 $X, Y$）的 Wasserstein 距离为</p>
+<p>$$<br>\mathcal{W}_\ell(p, q) &#x3D; \left(\inf_{\gamma\in \mathrm{coupling}(p, q)} \mathbb{E}_{\gamma}\left[\left\lVert X - Y\right\rVert^\ell\right]\right)^{1 &#x2F; \ell}<br>$$</p>
+</div>
+
+<p>众所周知 $\Delta_{TV} &#x3D; \mathcal{W}_1 \leq \mathcal{W}_2$。</p>
+<hr>
+<p>现在我们来分析几个扩散过程的稳态和混合时间。首先是 <strong>Langevin 扩散</strong>，回忆其 SDE 为 </p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; -\nabla f(\boldsymbol{X}_t)\mathrm{d}t + \sqrt 2\mathrm{d}\boldsymbol{B}_t<br>$$</p>
+<p>其 Fokker-Plank 方程为</p>
+<p>$$<br>\partial_t \pi_t &#x3D; \nabla\cdot (\pi_t \nabla f) + \nabla^{\cdot 2} (\pi_t I)<br>$$</p>
+<p>也可以根据 $\nabla^{\cdot 2}(\pi I) &#x3D; \Delta \pi$ 化简成更直观的形式。现在来求解稳态，即解 PDE</p>
+<p>$$<br>\nabla\cdot (\pi\nabla f) + \Delta \pi &#x3D; 0<br>$$</p>
+<p>因为 PDE 水平过低，所以只能靠猜 $\pi \propto e^{-f(\boldsymbol{x})}$ 然后验证。只需注意到 $\nabla \pi &#x3D; -\pi\nabla f$ 以及 $\Delta &#x3D; \nabla\cdot \nabla$ 即可。因此</p>
+<p>$$<br>\pi(\boldsymbol{x}) &#x3D; \frac{e^{-f(\boldsymbol{x})}}{\int e^{-f(\boldsymbol{y})}\mathrm{d}\boldsymbol{y}}<br>$$</p>
+<p>确实是 PDE 的一个解。至于它是满足归一化和一些弱性质的唯一解，这里不证明。至此我们证明了</p>
+<div class="note info"><p><strong>定理 3.1.</strong> Langevin 扩散的稳态正是 $(\ref{expdist})$</p>
+</div>
+
+<p>而 Langevin 扩散的混合时间，一般情况下是难的。我们只证明</p>
+<div class="note info"><p><strong>定理 3.2.</strong> 若 $f$ 是强凸的（即存在 $\lambda &gt; 0$ 使得 $\lambda \mathbf{I} \prec \nabla^2 f$），则 Langevin 扩散的分布与稳态分布的 Wasserstein 距离指数级收敛于 $0$。</p>
+</div>
+
+<p><strong>证明.</strong> 考虑两个随机过程，一个是从 $\boldsymbol{x}$ 开始游走的 Langevin 扩散，一个是初始点服从稳态分布的 Langevin 扩散，让他们公用一个布朗运动（synchronous coupling）：</p>
+<p>$$<br>\begin{aligned}<br>    \mathrm{d}\boldsymbol{X}_t   &amp;&#x3D; -\nabla f(\boldsymbol{X}_t)\mathrm{d}t + \sqrt 2\mathrm{d}\boldsymbol{B}_t   &amp; \boldsymbol{X}_0 &#x3D; \boldsymbol{x} \\<br>    \mathrm{d}\boldsymbol{X}^*_t &amp;&#x3D; -\nabla f(\boldsymbol{X}^*_t)\mathrm{d}t + \sqrt 2\mathrm{d}\boldsymbol{B}_t &amp; \boldsymbol{X}^*_0 \sim \pi<br>\end{aligned}<br>$$</p>
+<p>定义 $H_t :&#x3D; \mathbb{E}\left[\left\lVert\boldsymbol{X}_t - \boldsymbol{X}_t^*\right\rVert^2 \right]$ 则容易算出</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t} H_t &#x3D; -2\mathbb{E}\left[(\boldsymbol{X}_t - \boldsymbol{X}_t^*)^\top (\nabla f(\boldsymbol{X}_t) - \nabla f(\boldsymbol{X}_t^*))\right]<br>$$</p>
+<p>众所周知强凸性蕴含</p>
+<p>$$<br>(\boldsymbol{x} - \boldsymbol{y})^\top (\nabla f(\boldsymbol{x}) - \nabla f(\boldsymbol{y})) \geq \lambda \left\lVert\boldsymbol{x} - \boldsymbol{y}\right\rVert^2<br>$$</p>
+<p>因此我们得到了</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}H_t \leq -2\lambda H_t<br>$$</p>
+<p>根据 Grownwall 不等式 $H_t$ 不会超过取等给出的微分方程的解，即 </p>
+<p>$$<br>H_t \leq \exp(-\lambda t) \mathbb{E}\left[\left\lVert\boldsymbol{x} - \boldsymbol{X}^*\right\rVert\right]^2 &#x3D; O\left(\exp(-\lambda t)\right)<br>$$</p>
+<p>确实是指数级收敛的。$\blacksquare$</p>
+<hr>
+<p>最后我们给出一个新的扩散过程：<strong>弱粘滞 Langevin 扩散</strong>。其扩散方程是一个方程组</p>
+<p>$$<br>\begin{cases}<br>    \mathrm{d}\boldsymbol{v}_t &#x3D; -\gamma \boldsymbol{v}_t\mathrm{d}t - u\nabla f(\boldsymbol{x}_t)\mathrm{d}t + \sqrt{2\gamma u}\mathrm{d}\boldsymbol{B}_t \\<br>    \mathrm{d}\boldsymbol{x}_t &#x3D; \boldsymbol{v}_t\mathrm{d}t<br>\end{cases}<br>$$</p>
+<p>即一个质点在运动中受到三方面的力：</p>
+<ol>
+<li>一个正比于速度的粘滞力；</li>
+<li>来自一个势能场的力；</li>
+<li>来自周遭分子热运动的挤压。</li>
+</ol>
+<p>其 Fokker-Plank 方程为</p>
+<p>$$<br>\partial_t \pi_t &#x3D; \gamma \nabla_v(\pi\boldsymbol{v}) + u\nabla_v(\pi\nabla f(\boldsymbol{x})) - \nabla_x(\pi \boldsymbol{v}) + \gamma u \nabla_v\pi<br>$$</p>
+<p>可以验证一个解是</p>
+<p>$$<br>\pi(\boldsymbol{x}, \boldsymbol{v}) \propto \exp\left(-\left(f(\boldsymbol{x}) + \frac{\left\lVert\boldsymbol{v}\right\rVert^2}{2u}\right)\right)<br>$$</p>
+<p>至于其（假设势能强凸时的）混合时间，我们日后再谈。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/07/14/ContinuosTimeDiffusion1/" rel="prev" title="PKU Summer School 2025 | 1 基础知识">
+                  <i class="fa fa-angle-left"></i> PKU Summer School 2025 | 1 基础知识
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

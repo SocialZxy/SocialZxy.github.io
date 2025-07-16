@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 主要包括可能使用的布朗运动、伊藤积分、随机微分方程等内容。受限于水平只能暂时略去一切严格推导，仅给出直觉和应用此种工具之手段。    布朗运动 伊藤积分 随机微分方程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PKU Summer School 2025 | 1 基础知识">
+<meta property="og:url" content="http://example.com/2025/07/14/ContinuosTimeDiffusion1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 主要包括可能使用的布朗运动、伊藤积分、随机微分方程等内容。受限于水平只能暂时略去一切严格推导，仅给出直觉和应用此种工具之手段。    布朗运动 伊藤积分 随机微分方程">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-14T10:30:21.000Z">
+<meta property="article:modified_time" content="2025-07-14T14:47:04.111Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/07/14/ContinuosTimeDiffusion1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/07/14/ContinuosTimeDiffusion1/","path":"2025/07/14/ContinuosTimeDiffusion1/","title":"PKU Summer School 2025 | 1 基础知识"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PKU Summer School 2025 | 1 基础知识 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">布朗运动</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">伊藤积分</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">随机微分方程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/14/ContinuosTimeDiffusion1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PKU Summer School 2025 | 1 基础知识 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PKU Summer School 2025 | 1 基础知识
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-07-14 18:30:21 / Modified: 22:47:04" itemprop="dateCreated datePublished" datetime="2025-07-14T18:30:21+08:00">2025-07-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 主要包括可能使用的布朗运动、伊藤积分、随机微分方程等内容。受限于水平只能暂时略去一切严格推导，仅给出直觉和应用此种工具之手段。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%B8%83%E6%9C%97%E8%BF%90%E5%8A%A8">布朗运动</a></li>
+<li><a href="#%E4%BC%8A%E8%97%A4%E7%A7%AF%E5%88%86">伊藤积分</a></li>
+<li><a href="#%E9%9A%8F%E6%9C%BA%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">随机微分方程</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="布朗运动">布朗运动</span></h1><div class="note "><p><strong>动机.</strong> 考虑一个数轴上的简单随机游走过程：$X_1 &#x3D; 0, X_{n + 1} &#x3D; X_n + Z_{n + 1}$，其中 $Z_{n + 1}$ 以均匀的概率取 $\pm 1$。根据中心极限定理</p>
+<p>$$<br>\frac{X_{\lfloor nt\rfloor}}{\sqrt n} \xrightarrow{d} \mathcal{N}(0, t)<br>$$</p>
+<p>这样 rescale 之后的“不规则运动”就是布朗运动。</p>
+</div>
+
+<p>等价地，将布朗运动定义做如下的高斯过程：</p>
+<div class="note success"><p><strong>定义 1.1（布朗运动）.</strong> 布朗运动 $(B_t : t\geq 0)$ 是满足如下条件的随机过程：</p>
+<ol>
+<li>对于任意互不相同的 $t_1, …, t_n$，有 $(B_{t_1}, …, B_{t_n})$ 是一个期望为 $\boldsymbol{0}$ 的高斯向量；</li>
+<li>（独立增量）对于任意的 $s &lt; t$，有 $B_t - B_s$ 与 $B_s$ 独立；</li>
+<li>$\mathbb{E}[B_tB_s] &#x3D; \min(s, t)$；</li>
+<li>以概率 $1$ 有 $B(t)$ 是一个连续函数。</li>
+</ol>
+</div>
+
+<p>可以证明满足以上四条条件的随机过程存在且唯一，这里受限于个人水平略去证明。以下是一些布朗运动的性质：</p>
+<ol>
+<li>以概率 $1$ 有 $B(t)$ 处处连续，处处不可导；</li>
+<li>$B(t)$ 是一个鞅。</li>
+</ol>
+<h1><span id="伊藤积分">伊藤积分</span></h1><p>回忆我们曾在高等数学课程中学习过 Riemann-Stieltjes 积分：对于 $h\in \mathrm{C}^1$，</p>
+<p>$$<br>\int_0^t f(s)\mathrm{d}h(s) :&#x3D; \lim_{n\rightarrow \infty, \max(s_{i + 1} - s_i) \rightarrow 0} \sum_{i&#x3D;1}^{n - 1}f(\xi_i)(h(s_{i + 1}) - h(s_i)), \quad \text{ where } \xi_i\in [s_i, s_{i + 1}]<br>$$</p>
+<p>出于以下动机，希望将 $h$ 改作一个布朗运动作为一个新的工具，“随机积分”，来使用：</p>
+<div class="note "><p><strong>赌博策略.</strong> 考虑某通货的价格由一个定义在滤子 $(\mathcal{F}_{t} : t\geq 0)$ 随机过程 $(B_t : t\geq 0)$ 给出，你采取如下策略进行交易，$T$ 时间后平仓：</p>
+<ol>
+<li>将 $[0, T]$ 划分成若干个区间，断点为 $0 &#x3D; t_0 &lt; t_1 &lt; \cdots &lt; t_{n} &#x3D; T$。</li>
+<li>在 $t_i$ 时间买入 $Y_{t_i}$ 单位该商品，在 $t_{i + 1}$ 时间全部卖出，其中 $Y_{t_i}$ 是 $\mathcal{F}_{t}$ 可测的。（$Y_{t_i}$ 描述了你在 $[t_i, t_{i + 1}]$ 时间内的仓位，只能通过此前的曲线决定，这种性质称为）</li>
+</ol>
+<p>整个过程的收益如下：</p>
+<p>$$<br>X_n &#x3D; \sum_{i&#x3D;1}^n Y_{t_i} (B_{t_{i + 1}} - B_{t_i})<br>$$</p>
+<p>这个式子形似 R-S 积分的离散化手法。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 遗憾的是，可以验证，如果 $(B_t)$ 是一个鞅，那么 $(X_n)$ 也是一个鞅。根据可选停时定理，即使采取一定的策略，期望意义下也无法赚钱。</p>
+</blockquote>
+<p>然而 R-S 积分的结论并不能直接应用到随机积分之中。因为布朗运动处处不可导，并且，对于布朗运动，离散化后求和的极限取决于你如何选择 $\xi_i$。考虑如下例子：</p>
+<div class="note warning"><p><strong>例子 2.1.</strong> 对于积分</p>
+<p>$$<br>\int_0^1 B_t \mathrm{d}B_t<br>$$</p>
+<p>设 $I_1(n), I_2(n)$ 分别是将 $\xi_i$ 取作对应区间左端点和右端点后求和的结果。容易验证</p>
+<p>$$<br>I_2(n) - I_1(n) &#x3D; \sum_{i &#x3D; 0}^{n - 1} (B(s_{i + 1}) - B(s_i))^2<br>$$</p>
+<p>取期望后知道这两者的差距为 $1$。事实上有 $I_1(n)\xrightarrow{P} \frac 12 (B_1^2 - 1)$ 和 $I_2(n)\xrightarrow{P} \frac 12 (B_1^2 + 1)$。</p>
+</div>
+
+<p>根据我们的动机，我们将始终取左端点。另有一种将 $\xi_i$ 取作区间中点的随机积分，称为 Stratorovich 积分。</p>
+<div class="note success"><p><strong>定义 2.1（伊藤积分）.</strong> 对于布朗运动 $(B_t : t\geq 0)$，定义 </p>
+<p>$$<br>\int_0^t Y_s\mathrm{d}B_s :&#x3D; \lim_{n\rightarrow \infty}\sum_{i&#x3D;1}^n Y_{t_i}(B_{t_{i + 1}} - B_{t_i})<br>$$</p>
+<p>其中 $Y_{s}$ 是 $\{B_t : t\leq s\}$ 可测的。</p>
+</div>
+
+<p>可以证明该极限是良定义的。接下来，我们希望在伊藤积分中模拟经典微积分的结果，如牛顿-莱布尼兹公式等。然而，牛顿-莱布尼兹公式对于伊藤积分并不成立，事实上还需要补正一个修正项。</p>
+<p>首先考虑 $Y_s$ 是 $B_s$ 的函数（即 $Y_s &#x3D; f(B_s)$，而与 $s$ 本身无关）的情形，称此类积分为<strong>时间齐性</strong>的。我们从推导牛顿-莱布尼兹公式的方法入手，将和式每一项展开至二阶小量</p>
+<p>$$<br>\begin{aligned}<br>    f(B_{t_{i + 1}}) - f(B_{t_i}) &#x3D; (B_{t_{i + 1}} - B_{t_i}) f’(B_{t_i}) + \frac{1}{2}(B_{t_{i + 1}} - B_{t_i})^2 f’’(B_{t_i}) + o\left(\sum_{i&#x3D;1}^{n - 1} \left| B_{t_{i + 1}} - B_{t_i}\right|^2\right)<br>\end{aligned}<br>$$</p>
+<p>容易发现第一项提供了牛顿-莱布尼兹公式的形式，第三项是 $o(1)$ 的，第二项就是我们想要的修正项。可以证明：</p>
+<p>$$<br>\sum_{i&#x3D;1}^{n - 1} (B_{t_{i + 1}} - B_{t_i})^2 f’’(B_{t_i}) \xrightarrow{P} \int_0^t f’’(B_s)\mathrm{d}s \qquad (n\rightarrow \infty)<br>$$</p>
+<p>这里的直觉是 $(B_{t_{i + 1}} - B_{t_i})^2$ 是高度集中于 $t_{i + 1} - t_i$ 的。综上直觉上有</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 在伊藤积分的意义下有</p>
+<p>$$<br>f(B_t) - f(B_0) &#x3D; \int_0^t f’(B_s)\mathrm{d}B_s + \frac{1}{2}\int_0^t f’’(B_s)\mathrm{d}s<br>$$</p>
+<p>或者写作微分的形式有</p>
+<p>$$<br>\mathrm{d} f(B_t) &#x3D; f’(B_t)\mathrm{d}B_t + \frac 12 f’’(B_t)\mathrm{d}t<br>$$</p>
+</div>
+
+<hr>
+<p>此外我们还想要模拟链式法则：若 $\mathrm{d}f(t) &#x3D; g(t)\mathrm{d}t$，则 $\mathrm{d} h(f(t)) &#x3D; h’(f(t))g(t)\mathrm{d}t$。在随机微分的情形下，希望知道若 $\mathrm{d}X_t &#x3D; Y_t\mathrm{d}t + Z_t\mathrm{d}B_t$，$\mathrm{d}f(X_t)$ 几何？</p>
+<p>仿造先前的思路，注意 </p>
+<p>$$<br>f(X_{t_{i + 1}}) - f(X_{t_i}) &#x3D; f’(X_{t_i})(X_{t_{i + 1}} - X_{t_i}) + \frac{1}{2} f’’(X_{t_i})(X_{t_{i + 1}} - X_{t_i})^2 + o\left(\left|X_{t_{i + 1}} - X_{t_i}\right|^2\right)<br>$$</p>
+<p>换入 $X_{t_{i + 1}} - X_{t_i} &#x3D; Y_{t_i}(t_{i + 1} - t_i) + Z_{t_i}(B_{t_{i + 1}} - B_{t_i}) + o(?)$，第一项立即可以求和，第三项求和后为小量，兹重点考虑第二项，有</p>
+<p>$$<br>\frac{1}{2} f’’(X_{t_i})\left(Y_{t_i}(t_{i + 1} - t_i) + Z_{t_i}(B_{t_{i + 1}} - B_{t_i})\right)^2 \approx \frac 12 f’’(X_{t_i})Z_{t_i}^2(B_{t_{i + 1}} - B_{t_i})^2<br>$$</p>
+<p>（注意除了第二项的平方外，其余乘积都产生高阶小量）。同样可以证明</p>
+<p>$$<br>\sum_{i&#x3D;1}^{n - 1}f’’(X_{t_i})Z_{t_i}^2(B_{t_{i + 1}} - B_{t_i})^2 \xrightarrow{P}\int_0^t f’’(X_{t_i}) Z_s^2 \mathrm{d}s<br>$$</p>
+<p>据此直觉可总结出</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 在伊藤积分的意义下有</p>
+<p>$$<br>f(X_t) - f(X_0) &#x3D; \int_0^t f’(X_s)\mathrm{d}X_s + \frac 12\int_0^t f’’(X_s)Z_s^2\mathrm{d}s<br>$$</p>
+<p>或者写作微分的形式有</p>
+<p>$$<br>\mathrm{d}f(X_t) &#x3D; f’(X_t)\mathrm{d}X_t + \frac 12 f’’(X_t)Z_t^2\mathrm{d}t<br>$$</p>
+</div>
+
+<p>另外可以定义 $X_t$ 的二次变差</p>
+<p>$$<br>\langle X\rangle_t :&#x3D; \lim_{n\rightarrow \infty} \sum_{i&#x3D;1}^{n - 1} (X_{t_{i + 1}} - X_{t_i})^2<br>$$</p>
+<p>可以验证 $\mathrm{d}\langle X\rangle_t &#x3D; Z_t^2\mathrm{d}t$，因此</p>
+<p>$$<br>\mathrm{d}f(X_t) &#x3D; f’(X_t)\mathrm{d}X_t + \frac 12 f’’(X_t)\mathrm{d}\langle X\rangle_t<br>$$</p>
+<hr>
+<p>最后谈几个伊藤积分得其他结论。</p>
+<div class="note "><p><strong>拓展到时间非齐性的情形.</strong> 有 </p>
+<p>$$<br>\mathrm{d}f(t, X_t) &#x3D; \frac{\partial f}{\partial t}(t, X_t)\mathrm{d}t + \frac{\partial f}{\partial x}(t, x_t)\mathrm{d}X_t + \frac{1}{2}\frac{\partial^2 f}{\partial x^2}(t, X_t)\mathrm{d}\langle X\rangle_t \label{non-homogenuous}<br>$$</p>
+<p>以及对应的积分形式</p>
+<p>$$<br>f(t, X_t) - f(0, X_0) &#x3D; \int_0^t \left(\frac{\partial f}{\partial t}(t, X_t) + \frac{Z_t^2}{2}\frac{\partial^2 f}{\partial x^2}(t, X_t)\right)\mathrm{d}t + \int_0^t \frac{\partial f}{\partial x}(t, x_t)\mathrm{d}X_t<br>$$</p>
+</div>
+
+<div class="note "><p><strong>拓展到高维.</strong> 若 $\mathrm{d}\boldsymbol{X}_t &#x3D; \boldsymbol{Y}_t\mathrm{d}t + \mathbf{Z}_t\mathrm{d}\boldsymbol{B}_t$，其中 $\boldsymbol{X}_t, \boldsymbol{Y}_t\in \mathbb{R}^d$，$\mathbf{Z}_t\in \mathbb{R}^{d\times d}$，$\boldsymbol{B}_t$ 为 $d$ 维布朗运动。则</p>
+<p>$$<br>\mathrm{d}f(\boldsymbol{X}_t) &#x3D; \nabla f(\boldsymbol{X}_t)^\top \boldsymbol{Y}_t\mathrm{d}t + \nabla f(\boldsymbol{X}_t)^\top \mathbf{Z}_t \mathrm{d}\boldsymbol{B}_t + \frac 12 \mathrm{tr}\left(\mathbf{Z}_t^\top \nabla^2 f(\boldsymbol{X}_t) \mathbf{Z}_t\right)\mathrm{d}t<br>$$</p>
+</div>
+
+<div class="note "><p><strong>Ito Isometry.</strong> 令 $B_t$ 是一个布朗运动，则</p>
+<p>$$<br>\mathbb{E}\left[\left(\int_0^t \Delta(s)\mathrm{d} B_s\right)^2\right] &#x3D; \mathbb{E}\left[\int_0^t \Delta(s)^2 \mathrm{d}s\right]<br>$$</p>
+</div>
+
+<h1><span id="随机微分方程">随机微分方程</span></h1><p>本课程中我们将经常遇到如下的方程，即扩散过程的随机微分方程</p>
+<p>$$<br>\mathrm{d}X_t &#x3D; b_t(X_t)\mathrm{d}t + \Sigma_t(X_t)^{\frac 12}\mathrm{d}B_t<br>$$</p>
+<p>其中 $b_t(X_t)\mathrm{d}t$ 称为漂移项，$\Sigma_t(X_t)^{\frac 12}\mathrm{d}B_t$ 称为噪声项。本节来看几个此类随机微分方程。</p>
+<div class="note warning"><p><strong>例子 3.1（Ornstein-Uhlembeck 过程）.</strong> 解</p>
+<p>$$<br>\mathrm{d}X_t &#x3D; -X_t\mathrm{d}t + \mathrm{d}B_{t}<br>$$</p>
+<p>其中 $X_0 &#x3D; 0$。</p>
+</div>
+
+<p>解这个 SDE 用的技巧类似于用凑微分法解 ODE，首先根据 $\ref{non-homogenuous}$ 注意到</p>
+<p>$$<br>\mathrm{d} e^t X_t &#x3D; e^t\mathrm{d}X_t + e^t X_t \mathrm{d}t<br>$$</p>
+<p>因此只需解</p>
+<p>$$<br>\mathrm{d}e^t X_t &#x3D; e^t\mathrm{d}B_t<br>$$</p>
+<p>两边取伊藤积分，得解是</p>
+<p>$$<br>X_t &#x3D; e^{-t}\int_0^t e^s \mathrm{d}B_s<br>$$</p>
+<p>现在要计算后面的积分，绕来绕去似乎没什么好办法，但可以注意到它一定是一个正态分布（拆成求和由独立增量性看出），因此我们只需要分析其期望和方差。显然其期望为 $0$，方差可用 Ito isometry 算出是</p>
+<p>$$<br>\mathbb{E}\left[\left(\int_0^t e^s\mathrm{d}B_s\right)^2\right] &#x3D; \int_0^t e^{2s}\mathrm{d}s &#x3D; \frac{e^{2t} - 1}{2}<br>$$</p>
+<p>因此有</p>
+<p>$$<br>\boldsymbol{X}_t \sim \mathcal{N}\left(0, \frac{1 - e^{-2t}}{2}\right)<br>$$</p>
+<div class="note warning"><p><strong>例子 3.2（Langevin 扩散）.</strong> 解</p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; -\frac 12 \nabla f(\boldsymbol{X}_t) + \mathrm{d}\boldsymbol{B}_t<br>$$</p>
+</div>
+
+<p>Non-trivial，日后再谈。</p>
+<div class="note warning"><p><strong>例子 3.3（Black-Scholes 模型）.</strong> 解 </p>
+<p>$$<br>\mathrm{d}X_t &#x3D; \mu X_t\mathrm{d}t + \sigma X_t \mathrm{d}B_t<br>$$</p>
+</div>
+
+<p>注意此方程产生的解将满足：</p>
+<ol>
+<li>初值为 $X_0$；</li>
+<li>永远为正；</li>
+<li>大面上为指数级增长，附加噪声。</li>
+</ol>
+<p>据此使用解 ODE 的经典技术，猜</p>
+<p>$$<br>X_t &#x3D; X_0\exp\left(at + bB_t\right)<br>$$</p>
+<p>后用时间非齐性的 Ito 公式 $(\ref{non-homogenuous})$ 算出</p>
+<p>$$<br>\begin{aligned}<br>    \mathrm{d}S_t &amp;&#x3D; \left(a + \frac{b^2}{2}\right) x_0\exp(at + bB_t)\mathrm{d}t + bx_0\exp(at + bB_t)\mathrm{d}B_t \\<br>    &amp;&#x3D; \left(a + \frac{b^2}{2}\right)X_t\mathrm{d}t + bX_t\mathrm{d}t<br>\end{aligned}<br>$$</p>
+<p>对比系数知道取 $a &#x3D; \mu - \sigma^2 &#x2F; 2, b &#x3D; \sigma$ 便找到一组解</p>
+<p>$$<br>X_t &#x3D; \exp\left(\left(\mu - \frac{\sigma^2}{2}\right)t + \sigma B_t\right)<br>$$</p>
+<p>这个随机过程称为<strong>几何布朗运动</strong>。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/07/14/ContinuousTimeDiffusionIndex/" rel="prev" title="PKU 暑期学校“机器学习理论中的连续时间扩散过程”">
+                  <i class="fa fa-angle-left"></i> PKU 暑期学校“机器学习理论中的连续时间扩散过程”
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/07/15/ContinuosTimeDiffusion2/" rel="next" title="PKU Summer School 2025 | 2 扩散过程及其收敛性">
+                  PKU Summer School 2025 | 2 扩散过程及其收敛性 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

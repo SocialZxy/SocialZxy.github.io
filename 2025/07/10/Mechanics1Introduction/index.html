@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 简单介绍分析力学的思路。    引入 约束与广义坐标 虚功原理与达朗贝尔原理 弱耗散系统的运动方程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力学 | 1 分析力学导论">
+<meta property="og:url" content="http://example.com/2025/07/10/Mechanics1Introduction/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 简单介绍分析力学的思路。    引入 约束与广义坐标 虚功原理与达朗贝尔原理 弱耗散系统的运动方程">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-10T14:31:07.000Z">
+<meta property="article:modified_time" content="2025-07-10T16:32:53.186Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/07/10/Mechanics1Introduction/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/07/10/Mechanics1Introduction/","path":"2025/07/10/Mechanics1Introduction/","title":"力学 | 1 分析力学导论"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>力学 | 1 分析力学导论 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">约束与广义坐标</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">虚功原理与达朗贝尔原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">弱耗散系统的运动方程</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">70</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">42</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/10/Mechanics1Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="力学 | 1 分析力学导论 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          力学 | 1 分析力学导论
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-07-10 22:31:07" itemprop="dateCreated datePublished" datetime="2025-07-10T22:31:07+08:00">2025-07-10</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-11 00:32:53" itemprop="dateModified" datetime="2025-07-11T00:32:53+08:00">2025-07-11</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 简单介绍分析力学的思路。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
+<li><a href="#%E7%BA%A6%E6%9D%9F%E4%B8%8E%E5%B9%BF%E4%B9%89%E5%9D%90%E6%A0%87">约束与广义坐标</a></li>
+<li><a href="#%E8%99%9A%E5%8A%9F%E5%8E%9F%E7%90%86%E4%B8%8E%E8%BE%BE%E6%9C%97%E8%B4%9D%E5%B0%94%E5%8E%9F%E7%90%86">虚功原理与达朗贝尔原理</a></li>
+<li><a href="#%E5%BC%B1%E8%80%97%E6%95%A3%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%BF%90%E5%8A%A8%E6%96%B9%E7%A8%8B">弱耗散系统的运动方程</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="引入">引入</span></h1><p>考虑经典的双摆问题。</p>
+<div class="note "><p><strong>题 1.1.</strong> 在均匀重力场中，一个定点下以一长为 $l_1$ 的轻绳悬挂一质量为 $m_1$ 的质点，而这个质点下又以一长为 $l_2$ 的轻绳悬挂一质量为 $m_2$ 的质点，绳均不可拉伸。现在从某一处状态（如轻绳 $1$ 与竖直方向夹角为 $\theta_1$，轻绳 $2$ 与竖直方向夹角为 $\theta_2$）释放之，求两个质点运动的轨迹方程。</p>
+</div>
+
+<p>如果使用牛顿力学的方法来解此问题，免不了讨论绳的张力等，需要及其繁琐的受力分析。然而如果使用分析力学的方法，从广义坐标和拉格朗日量出发，就可以规避对张力的讨论，运动方程可直接从欧拉 - 拉格朗日方程中解出。总的来说，这一套方法将有如下优点：</p>
+<ol>
+<li>在经典力学范畴中与牛顿力学等价；</li>
+<li>能体现对称性和守恒定律的深刻关联；</li>
+<li>能处理更一般的力学系统（e.g. 考虑相对论等）。</li>
+</ol>
+<h1><span id="约束与广义坐标">约束与广义坐标</span></h1><p>我们从牛顿力学出发推导分析力学的框架。本章考虑的力学系统中 $n$ 个质点，其坐标依次为 $\boldsymbol{x_1}, …, \boldsymbol{x}_n$。然而该力学系统中可能存在各种各样的约束（例如在题 1.1 中，绳不可拉伸）。这些约束可以被含坐标（甚至其高阶导数）和时间的等式或不等式刻画。其中，形式最好的一类约束称作<strong>完整约束</strong>，它可以被坐标和时间的方程刻画：</p>
+<p>$$<br>f(\boldsymbol{x}_1, \boldsymbol{x}_2, …, \boldsymbol{x}_n, t) \equiv 0<br>$$</p>
+<p>如果约束是含时的，则称为<strong>不稳定约束</strong>，反之称为<strong>稳定约束</strong>。约束，即使是最好的完整约束，将为力学问题的求解带来两方面的麻烦：</p>
+<ol>
+<li>坐标之间的独立性不复存在（$\boldsymbol{x}_1, …, \boldsymbol{x}_{n}$ 的范围不再是 $(\mathbb{R}^3)^n$，而是所有约束的解集）；</li>
+<li>约束必将引入约束力。</li>
+</ol>
+<p>我们在后面的讨论中逐步解决这两个问题。</p>
+<p>第一个问题的解决办法是引入<strong>广义坐标</strong>。本章先假设只有 $k$ 个完整约束。考虑将约束的解集写成关于 $f &#x3D; 3n - k$ 个独立变量 $q_1, …, q_f$ 和 $t$ 的参数方程</p>
+<p>$$<br>\begin{cases}<br>    \boldsymbol{x}_1 &#x3D; \boldsymbol{x}_1(q_1, …, q_f, t) \\<br>    \vdots \\<br>    \boldsymbol{x}_n &#x3D; \boldsymbol{x}_n(q_1, …, q_f, t)<br>\end{cases}<br>$$</p>
+<p>这个参数方程将等价于原来的 $k$ 个完整约束。注意这只能处理完整约束。对于有非完整约束的情形，广义坐标的维数往往大于自由度 $f$，然而仍然可以用拉格朗日乘子之类的办法来解决。</p>
+<h1><span id="虚功原理与达朗贝尔原理">虚功原理与达朗贝尔原理</span></h1><p>本节解决约束力的问题。设作用在质点 $i$ 上的合力为 $\boldsymbol{F}_i$。它可以被分解为<em>约束力</em>和其他力（所谓的<em>主动力</em>）：$\boldsymbol{F}_i &#x3D; \boldsymbol{F}_i^c + \boldsymbol{F}_i^a$。根据牛顿第二定律有</p>
+<p>$$<br>\boldsymbol{F}_i - \dot{\boldsymbol{p}}_i &#x3D; 0<br>$$</p>
+<p>取坐标的<em>变分</em> $\delta \boldsymbol{x}_i$，称作<strong>虚位移</strong>，有</p>
+<p>$$<br>\sum_{i&#x3D;1}^n (\boldsymbol{F}_i - \dot{\boldsymbol{p}}_i)\cdot \delta\boldsymbol{x}_i &#x3D; 0 \label{newton-equ}<br>$$</p>
+<div class="note "><p><strong>注.</strong> 这里的变分系指使得约束仍然满足的无穷小增量。你可以验证链式法则（据 Einstein Summation Convention 略去 $\Sigma$，应当不影响理解）</p>
+<p>$$<br>\delta \boldsymbol{x}_i &#x3D; \frac{\partial \boldsymbol{x}_i}{\partial q_l} q_l<br>$$</p>
+</div>
+
+<p>为了进一步消除约束力，我们考察约束力在虚位移上做的功，称作<strong>虚功</strong>。注意在一类理想的约束（轻的、刚性的、光滑的物体相互作用产生的约束）下，整个系统的虚功总是为 $0$。比如一个一端锚定的可转动轻杆连接一个质点，杆对质点的作用力总是径向的，而运动方向总是切向的，因此约束力不做功。据此提炼出假设</p>
+<div class="note info"><p><strong>假设 2.1（虚功原理）.</strong> 假设对于一切约束都有</p>
+<p>$$<br>\sum_{i&#x3D;1}^n \boldsymbol{F}_i^c\cdot \delta \boldsymbol{x}_i \equiv 0<br>$$</p>
+</div>
+
+<p>将其代入 $\ref{newton-equ}$ 中得到</p>
+<div class="note info"><p><strong>推论 2.2（达朗贝尔原理）.</strong> </p>
+<p>$$<br>\sum_{i&#x3D;1}^n (\boldsymbol{F}_i^a - \dot{\boldsymbol{p}}_i) \cdot \delta \boldsymbol{x}_i &#x3D; 0 \label{dalembert}<br>$$</p>
+</div>
+
+<p>尝试向上式中换入广义坐标。先考察主动力的虚功</p>
+<p>$$<br>\boldsymbol{F}_i^a\cdot \delta \boldsymbol{x} &#x3D; \boldsymbol{F}_i^a \cdot \frac{\partial \boldsymbol{x}_i}{\partial q_l} q_l :&#x3D; Q_l \delta q_l \label{active-force}<br>$$</p>
+<p>这里定义了广义力 $Q_l :&#x3D; \boldsymbol{F}_i^a \cdot \frac{\partial \boldsymbol{x}_i}{\partial q_l}$，你可以理解为这只是一个长得像力一样的坐标变换。接着考虑动量一项，有</p>
+<p>$$<br>\begin{aligned}<br>\dot{\boldsymbol{p}}_i \cdot \delta \boldsymbol{x}_i &amp;&#x3D; m_i \ddot{\boldsymbol{x}}_i\cdot \frac{\partial \boldsymbol{x}_i}{\partial q_l} q_l \\<br>&amp;&#x3D; \left(\frac{\mathrm{d}}{\mathrm{d}t}\left(m_i\dot{\boldsymbol{x}}_i\cdot \frac{\partial \boldsymbol{x}_i}{\partial q_l}\right) - m_i\dot{\boldsymbol{x}}_i\cdot \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial\boldsymbol{x}_i}{\partial q_l}\right)\right)q_l \\<br>&amp;&#x3D; \left(\frac{\mathrm{d}}{\mathrm{d}t}\left(m_i\dot{\boldsymbol{x}}_i\cdot \frac{\partial \boldsymbol{x}_i}{\partial q_l}\right) - m_i\dot{\boldsymbol{x}}_i\cdot \frac{\partial\dot{\boldsymbol{x}}_i}{\partial q_l}\right)q_l<br>\end{aligned} \label{moment-term}<br>$$</p>
+<p>注意到</p>
+<p>$$<br>\boldsymbol{v}_i &#x3D; \frac{\mathrm{d}x}{\mathrm{d}t} &#x3D; \frac{\partial \boldsymbol{x}_i}{q_l}\dot{q}_l + \frac{\partial \boldsymbol{x}_i}{\partial t} \quad \Rightarrow \quad \frac{\partial \boldsymbol{v}_i}{\partial \dot{q}_l} &#x3D; \frac{\partial \boldsymbol{x}_i}{\partial q_l} \label{lagrange}<br>$$<br>将 $(\ref{lagrange}), (\ref{moment-term}), (\ref{active-force})$ 一并换入 $(\ref{dalembert})$ 中，设系统的总动能为 $T :&#x3D; \sum_{i&#x3D;1}^n \frac{1}{2}m_i \boldsymbol{v}_i^2$，得到</p>
+<p>$$<br>\left(\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial T}{\partial \dot{q}} - \frac{\partial T}{\partial q_j} - Q_j\right)\delta q_j &#x3D; 0<br>$$</p>
+<p>因为 $q_j$ 是独立变量，可以为任意方向，所以有</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial T}{\partial \dot{q}} - \frac{\partial T}{\partial q_j} &#x3D; Q_j \label{euler-lagrange}<br>$$</p>
+<p>这类似于著名的欧拉-拉格朗日方程，只是等式右边多了一个 $Q_j$。若主动力来自一个势能 $V$，即 </p>
+<p>$$<br>\boldsymbol{F}_i^a &#x3D; -\frac{\partial V}{\partial \boldsymbol{x}_i} \quad \Rightarrow \quad  Q_j &#x3D; -\frac{\partial V}{\partial q_j}<br>$$</p>
+<p>定义拉格朗日量 $L &#x3D; T - V$，则显然 $\ref{euler-lagrange}$ 等价于</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}} - \frac{\partial L}{\partial q_j} &#x3D; 0<br>$$</p>
+<p>正是原汁原味的欧拉-拉格朗日方程。</p>
+<h1><span id="弱耗散系统的运动方程">弱耗散系统的运动方程</span></h1><p>上述推导中考虑的系统都是无耗散的（主动力只和势能有关）。本节我们考虑质点在介质中运动的耗散情况，即主动力除了来自势能以外，还可以来自一个粘滞力 $\boldsymbol{F}^D$，这里 $\boldsymbol{F}^D$ 是 $v_1, …, v_n$ 的函数，且 $\mathbf{F}$ 是一个小量，可取一阶近似</p>
+<p>$$<br>\boldsymbol{F}^D &#x3D; -\frac{\partial \mathcal{F}}{\partial \boldsymbol{v}}, \quad \text{ where } \mathcal{F} :&#x3D; \sum_{i&#x3D;1}^n \frac{1}{2}\left(k_1 v_{i, 1}^2 + k_2 v_{i, 2}^2 + k_3 v_{i, 3}^2\right)<br>$$</p>
+<p>其中 $k_1, k_2, k_3$ 分别是各个方向上的粘滞系数，$\mathcal{F}$ 称作<strong>瑞利耗散函数</strong>。其物理意义为时间微元内抵抗耗散力所做的功，注意 $\mathrm{d}W &#x3D; -\boldsymbol{F}\cdot \mathrm{d}\boldsymbol{x} &#x3D; 2\mathcal{F}\mathrm{d}t$。现在，来自粘滞力部分的主动力对应的广义力即为</p>
+<p>$$<br>\boldsymbol{F}^D\cdot \frac{\partial x_i}{\partial q_j} &#x3D; -\frac{\partial \mathcal{F}}{\partial \dot{q_j}}<br>$$</p>
+<p>从而弱耗散系统中的拉格朗日方程为</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}} - \frac{\partial L}{\partial q_j} + \frac{\partial \mathcal{F}}{\partial \dot{q_j}} &#x3D; 0<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/07/10/PhysicsIndex/" rel="prev" title="物理学习笔记">
+                  <i class="fa fa-angle-left"></i> 物理学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/07/14/ContinuousTimeDiffusionIndex/" rel="next" title="PKU 暑期学校“机器学习理论中的连续时间扩散过程”">
+                  PKU 暑期学校“机器学习理论中的连续时间扩散过程” <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

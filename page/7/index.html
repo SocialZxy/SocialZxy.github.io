@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">63</span>
+          <span class="site-state-item-count">70</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,846 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/27/AgdaInductionWithPatternMatching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/27/AgdaInductionWithPatternMatching/" class="post-title-link" itemprop="url">Agda 定义中带 with 的函数的归纳：with inspect 和 ⊥ 的使用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-27 21:45:54" itemprop="dateCreated datePublished" datetime="2023-12-27T21:45:54+08:00">2023-12-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-17 16:12:04" itemprop="dateModified" datetime="2024-01-17T16:12:04+08:00">2024-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 写 Agda 大作业的时候遇到的傻逼问题，解决过程中用到了一些深刻的东西。感觉搞清楚之后对 Pattern Matching 的理解提高了一些。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#with-inspect-%E7%9A%84%E4%BD%BF%E7%94%A8">With inspect 的使用</a></li>
+<li><a href="#%E7%9A%84%E4%BD%BF%E7%94%A8">⊥ 的使用</a></li>
+<li><a href="#final-solution">Final Solution</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/27/AgdaInductionWithPatternMatching/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/25/AdvMathRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/25/AdvMathRevision/" class="post-title-link" itemprop="url">Revision | 高等数学 A I（期末）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-25 16:51:50" itemprop="dateCreated datePublished" datetime="2023-12-25T16:51:50+08:00">2023-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-03-26 22:02:52" itemprop="dateModified" datetime="2024-03-26T22:02:52+08:00">2024-03-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 高等数学复习笔记，参考资料是李忠, 周建莹. 高等数学（上）。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BE%AE%E5%88%86%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86">微分中值定理</a><ul>
+<li><a href="#%E6%B4%9B%E5%BF%85%E8%BE%BE%E6%B3%95%E5%88%99">洛必达法则</a></li>
+<li><a href="#darboux-%E5%AE%9A%E7%90%86">Darboux 定理</a></li>
+<li><a href="#%E6%9D%82%E9%A2%98">杂题</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%A3%E6%9E%90%E5%87%A0%E4%BD%95">解析几何</a><ul>
+<li><a href="#%E4%BA%8C%E6%AC%A1%E6%9B%B2%E9%9D%A2%E7%9A%84%E5%BD%A2%E7%8A%B6%E5%88%A4%E5%AE%9A">二次曲面的形状判定</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E5%BE%AE%E5%88%86%E5%AD%A6">多元函数微分学</a><ul>
+<li><a href="#%E7%AE%80%E5%8D%95%E7%82%B9%E9%9B%86%E6%8B%93%E6%89%91">简单点集拓扑</a></li>
+<li><a href="#%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E7%9A%84%E6%9E%81%E9%99%90%E4%B8%8E%E8%BF%9E%E7%BB%AD%E6%80%A7">多元函数的极限与连续性</a></li>
+<li><a href="#%E5%81%8F%E5%AF%BC%E6%95%B0-%E5%85%A8%E5%BE%AE%E5%88%86">偏导数 全微分</a></li>
+<li><a href="#%E6%96%B9%E5%90%91%E5%AF%BC%E6%95%B0-%E6%A2%AF%E5%BA%A6">方向导数 梯度</a></li>
+<li><a href="#%E4%B8%AD%E5%80%BC%E5%AE%9A%E7%90%86-%E6%B3%B0%E5%8B%92%E5%85%AC%E5%BC%8F">中值定理 泰勒公式</a></li>
+<li><a href="#%E9%9A%90%E5%87%BD%E6%95%B0%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86-%E9%80%86%E6%98%A0%E5%B0%84%E5%AD%98%E5%9C%A8%E5%AE%9A%E7%90%86">隐函数存在定理 逆映射存在定理</a></li>
+<li><a href="#%E6%9E%81%E5%80%BC">极值</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/25/AdvMathRevision/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/19/LinearAlgeRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/19/LinearAlgeRevision/" class="post-title-link" itemprop="url">Revision | 线性代数 A（期末）</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-19 17:27:51" itemprop="dateCreated datePublished" datetime="2023-12-19T17:27:51+08:00">2023-12-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-12 15:55:09" itemprop="dateModified" datetime="2024-01-12T15:55:09+08:00">2024-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <!-- toc -->
+
+<ul>
+<li><a href="#%E5%88%86%E5%9D%97%E7%9F%A9%E9%98%B5">分块矩阵</a><ul>
+<li><a href="#%E4%B9%A0%E9%A2%98">习题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%AD%A3%E4%BA%A4%E7%A9%BA%E9%97%B4%E7%9B%B8%E5%85%B3">正交空间相关</a><ul>
+<li><a href="#%E4%B9%A0%E9%A2%98-1">习题</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E7%9B%B8%E6%8A%B5%E4%B8%8E%E7%9B%B8%E4%BC%BC">矩阵的相抵与相似</a><ul>
+<li><a href="#%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%B9%E8%A7%92%E5%8C%96">实对称矩阵的对角化</a></li>
+<li><a href="#%E4%B9%A0%E9%A2%98-2">习题</a></li>
+</ul>
+</li>
+<li><a href="#%E7%9F%A9%E9%98%B5%E7%9A%84%E5%90%88%E5%90%8C">矩阵的合同</a><ul>
+<li><a href="#%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5">正定矩阵</a></li>
+<li><a href="#%E4%B9%A0%E9%A2%98-3">习题</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/19/LinearAlgeRevision/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/04/InfoAndEntropy45/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/12/04/InfoAndEntropy45/" class="post-title-link" itemprop="url">Infomation and Entropy (4 ~ 5) Errors & Probablities</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-12-04 17:24:06" itemprop="dateCreated datePublished" datetime="2023-12-04T17:24:06+08:00">2023-12-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-17 16:10:23" itemprop="dateModified" datetime="2024-01-17T16:10:23+08:00">2024-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Information-and-Entropy/" itemprop="url" rel="index"><span itemprop="name">Information and Entropy</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 两章好像都没有什么深刻的内容，所以写一起。摘录一些有价值的内容。</p>
+<p>Chapter 4. Error 讲了 error detection and correction。其中一个重点是 Hamming 码，一种很妙的朴素编码，可以纠正一位的错误。</p>
+<p>Chapter 5. Probability 讲了一些基础的概率。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#errors">Errors</a><ul>
+<li><a href="#hamming-distance">Hamming Distance</a></li>
+<li><a href="#single-bits">Single Bits</a></li>
+<li><a href="#multiple-bits">Multiple Bits</a><ul>
+<li><a href="#parity">Parity</a></li>
+<li><a href="#rectangular-code">Rectangular Code</a></li>
+<li><a href="#hamming-code">Hamming Code</a></li>
+<li><a href="#block-code">Block Code</a></li>
+<li><a href="#advanced-code">Advanced Code</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#probability">Probability</a><ul>
+<li><a href="#information">Information</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/12/04/InfoAndEntropy45/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/28/PhyInInfo1Mechanics/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/28/PhyInInfo1Mechanics/" class="post-title-link" itemprop="url">Revision | 信息科学中的物理学（上）力学</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-28 11:45:14" itemprop="dateCreated datePublished" datetime="2023-11-28T11:45:14+08:00">2023-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-12 15:55:18" itemprop="dateModified" datetime="2024-01-12T15:55:18+08:00">2024-01-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 信息科学中的物理学（上）的复习笔记，内容是一些力学。</p>
+<p>因为在另一篇笔记里面突然讲了一些力学所以把这一篇也放上来。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%BF%90%E5%8A%A8%E5%AD%A6">运动学</a><ul>
+<li><a href="#%E6%9B%B2%E7%BA%BF%E8%BF%90%E5%8A%A8">曲线运动</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B4%A8%E7%82%B9%E7%B3%BB">质点系</a><ul>
+<li><a href="#%E8%B4%A8%E5%BF%83-%E8%B4%A8%E5%BF%83%E8%BF%90%E5%8A%A8%E5%AE%9A%E7%90%86">质心 质心运动定理</a></li>
+<li><a href="#%E7%A2%B0%E6%92%9E">碰撞</a></li>
+<li><a href="#%E7%81%AB%E7%AE%AD%E9%A3%9E%E8%A1%8C">火箭飞行</a></li>
+</ul>
+</li>
+<li><a href="#%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%9A%E7%90%86-%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92">角动量定理 角动量守恒</a><ul>
+<li><a href="#%E8%A7%92%E5%8A%A8%E9%87%8F%E5%AE%88%E6%81%92">角动量守恒</a></li>
+<li><a href="#%E6%8E%A8%E5%AF%BC%E7%94%B5%E5%AD%90%E7%BB%95-h-%E6%A0%B8%E8%BF%90%E5%8A%A8%E5%8D%8A%E5%BE%84">推导电子绕 H 核运动半径</a></li>
+<li><a href="#%E8%BD%AC%E5%8A%A8%E5%8F%82%E8%80%83%E7%B3%BB%E4%B8%AD%E7%9A%84%E6%83%AF%E6%80%A7%E5%8A%9B">转动参考系中的惯性力</a></li>
+<li><a href="#%E5%BC%80%E6%99%AE%E5%8B%92%E7%AC%AC%E4%B8%80%E5%AE%9A%E5%BE%8B%E7%9A%84%E8%AF%81%E6%98%8E">开普勒第一定律的证明</a><ul>
+<li><a href="#%E5%8F%AF%E7%94%A8%E7%9A%84%E6%9D%90%E6%96%99">可用的材料</a></li>
+<li><a href="#%E5%BE%84%E5%90%91%E5%8A%A0%E9%80%9F%E5%BA%A6%E7%9A%84%E6%8E%A8%E5%AF%BC">径向加速度的推导</a></li>
+<li><a href="#%E6%B1%82%E8%A7%A3%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">求解微分方程</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E8%83%BD%E9%87%8F%E5%AE%88%E6%81%92">能量守恒</a><ul>
+<li><a href="#%E4%BF%9D%E5%AE%88%E5%8A%9B">保守力</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%9A%E8%BD%B4%E8%BD%AC%E5%8A%A8">定轴转动</a><ul>
+<li><a href="#%E8%BD%AC%E5%8A%A8%E6%83%AF%E9%87%8F">转动惯量</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%9A%E4%BD%93%E7%9A%84%E5%B9%B3%E9%9D%A2%E5%B9%B3%E8%A1%8C%E8%BF%90%E5%8A%A8">刚体的平面平行运动</a><ul>
+<li><a href="#%E5%88%86%E8%A7%A3%E6%96%B9%E6%B3%95">分解方法</a></li>
+<li><a href="#%E5%85%B3%E9%94%AE%E7%BB%93%E8%AE%BA">关键结论</a></li>
+<li><a href="#%E5%90%84%E5%AE%88%E6%81%92%E9%87%8F%E7%9A%84%E8%A1%A8%E7%A4%BA">各守恒量的表示</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B5%81%E4%BD%93%E5%8A%9B%E5%AD%A6%E5%85%A5%E9%97%A8">流体力学入门</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/28/PhyInInfo1Mechanics/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/27/InfoAndEntropy3Comp/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/27/InfoAndEntropy3Comp/" class="post-title-link" itemprop="url">Infomation and Entropy (3) Compression</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-27 17:03:19" itemprop="dateCreated datePublished" datetime="2023-11-27T17:03:19+08:00">2023-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-17 16:10:11" itemprop="dateModified" datetime="2024-01-17T16:10:11+08:00">2024-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Information-and-Entropy/" itemprop="url" rel="index"><span itemprop="name">Information and Entropy</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 为了支持更有效的传输、存储和处理，我们需要对数据进行压缩（即，不简单地逐位翻译每个符号，而是用一串字符代表一段连续的符号）。</p>
+<p>这一章前面讲的内容比较宝宝巴士，后面的宝宝巴士可拓展性比较强。整体难度中等。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#variable-length-encoding">Variable-Length Encoding</a></li>
+<li><a href="#run-length-encoding">Run Length Encoding</a></li>
+<li><a href="#static-dictionary">Static Dictionary</a></li>
+<li><a href="#semi-adaptive-dictionary">Semi-adaptive Dictionary</a></li>
+<li><a href="#dynamic-dictionary-lzw-compression">Dynamic Dictionary, LZW Compression</a><ul>
+<li><a href="#encoder">Encoder</a></li>
+<li><a href="#decoder">Decoder</a></li>
+</ul>
+</li>
+<li><a href="#discrete-cosine-transformation">Discrete Cosine Transformation</a><ul>
+<li><a href="#discrete-linear-transformation">Discrete Linear Transformation</a></li>
+<li><a href="#discrete-cosine-transformation-1">Discrete Cosine Transformation</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/27/InfoAndEntropy3Comp/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/22/TensorAnal2GBTN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2023/11/22/TensorAnal2GBTN/" class="post-title-link" itemprop="url">Tensor Analysis (2) General Bases and Tensor Notation</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-11-22 22:32:02" itemprop="dateCreated datePublished" datetime="2023-11-22T22:32:02+08:00">2023-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-01-17 16:11:48" itemprop="dateModified" datetime="2024-01-17T16:11:48+08:00">2024-01-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/" itemprop="url" rel="index"><span itemprop="name">Basic</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Basic/Tensor-Analysis/" itemprop="url" rel="index"><span itemprop="name">Tensor Analysis</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 我们常常需要分量式（Component）以便于计算。为了兼容任意的坐标系，我们需要引入 General Bases，并推导向量和张量的坐标表示和坐标变换。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#general-bases">General Bases</a></li>
+<li><a href="#the-jacobian-of-a-basis-is-nonzero">The Jacobian of a Basis Is Nonzero</a></li>
+<li><a href="#the-summation-convention">The Summation Convention</a></li>
+<li><a href="#computing-the-dot-product-in-a-general-basis">Computing the Dot Product in a General Basis</a></li>
+<li><a href="#reciprocal-base-vectors">Reciprocal Base Vectors</a></li>
+<li><a href="#the-roof-contravariant-and-cellar-covariant-components-of-a-vector">The Roof (Contravariant) and Cellar (Covariant) Components of a Vector</a></li>
+<li><a href="#simplification-of-the-component-form-of-the-dot-product-in-a-general-basis">Simplification of the Component Form of the Dot Product in a General Basis</a></li>
+<li><a href="#computing-the-cross-product-in-a-general-basis">Computing the Cross Product in a General Basis</a></li>
+<li><a href="#a-second-order-tensor-has-four-sets-of-components-in-general">A Second Order Tensor Has Four Sets of Components in General</a></li>
+<li><a href="#change-of-basis">Change of Basis</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2023/11/22/TensorAnal2GBTN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
