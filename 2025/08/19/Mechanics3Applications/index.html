@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 一些拉格朗日力学的应用。主要有以下三个方面：  中心力场中粒子的运动。 小振动。 刚体运动。  本章似乎不涉及本质问题，我们在茶余饭后慢慢看，目前尚未更新完毕。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力学 | Lecture 3. 简单应用">
+<meta property="og:url" content="http://example.com/2025/08/19/Mechanics3Applications/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 一些拉格朗日力学的应用。主要有以下三个方面：  中心力场中粒子的运动。 小振动。 刚体运动。  本章似乎不涉及本质问题，我们在茶余饭后慢慢看，目前尚未更新完毕。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-19T06:59:17.000Z">
+<meta property="article:modified_time" content="2025-08-20T07:47:37.005Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/08/19/Mechanics3Applications/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/08/19/Mechanics3Applications/","path":"2025/08/19/Mechanics3Applications/","title":"力学 | Lecture 3. 简单应用"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>力学 | Lecture 3. 简单应用 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">中心力场中粒子的运动</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">开普勒问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">潮汐现象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">近日点进动</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/19/Mechanics3Applications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="力学 | Lecture 3. 简单应用 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          力学 | Lecture 3. 简单应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-08-19 14:59:17" itemprop="dateCreated datePublished" datetime="2025-08-19T14:59:17+08:00">2025-08-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-20 15:47:37" itemprop="dateModified" datetime="2025-08-20T15:47:37+08:00">2025-08-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 一些拉格朗日力学的应用。主要有以下三个方面：</p>
+<ol>
+<li>中心力场中粒子的运动。</li>
+<li>小振动。</li>
+<li>刚体运动。</li>
+</ol>
+<p>本章似乎不涉及本质问题，我们在茶余饭后慢慢看，目前尚未更新完毕。</p>
+<span id="more"></span>
+
+<h1><span id="目录">目录</span></h1><!-- toc -->
+
+<ul>
+<li><a href="#%E4%B8%AD%E5%BF%83%E5%8A%9B%E5%9C%BA%E4%B8%AD%E7%B2%92%E5%AD%90%E7%9A%84%E8%BF%90%E5%8A%A8">中心力场中粒子的运动</a><ul>
+<li><a href="#%E5%BC%80%E6%99%AE%E5%8B%92%E9%97%AE%E9%A2%98">开普勒问题</a></li>
+<li><a href="#%E6%BD%AE%E6%B1%90%E7%8E%B0%E8%B1%A1">潮汐现象</a></li>
+<li><a href="#%E8%BF%91%E6%97%A5%E7%82%B9%E8%BF%9B%E5%8A%A8">近日点进动</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<h1><span id="中心力场中粒子的运动">中心力场中粒子的运动</span></h1><p>所谓中心力场即两个粒子之间的势能仅与其距离有关。换言之，此时拉格朗日量写作</p>
+<p>$$<br>L &#x3D; \frac 12 m_1 \boldsymbol{v}_1^2 + \frac 12 m_2 \boldsymbol{v}_2^2 + V(\left\lVert\boldsymbol{x}_1 - \boldsymbol{x}_2\right\rVert)<br>$$</p>
+<p>明显此时拉格朗日量有空间平移对称性，系统动量守恒。因此系统的质心速度是常矢量，取与质心重合的惯性参考系，令 $\boldsymbol{x} &#x3D; \boldsymbol{x}_1 - \boldsymbol{x}_2$ 重写坐标</p>
+<p>$$<br>\boldsymbol{x}_1 &#x3D; \frac{m_2}{m_1 + m_2}\boldsymbol{x}, \boldsymbol{x}_2 &#x3D; -\frac{m_1}{m_1 + m_2}\boldsymbol{x}<br>$$</p>
+<p>代入重写拉格朗日量为</p>
+<p>$$<br>L &#x3D; \frac 12 m \dot{\boldsymbol{x}}^2 - V(r)<br>$$</p>
+<p>其中 $m &#x3D; m_1m_2 &#x2F; (m_1 + m_2)$，$r &#x3D; \left\lVert\boldsymbol{x}\right\rVert$。明显地此时拉格朗日量有旋转对称性，因此角动量守恒。取角动量方向为 $z$ 轴便可变成二维问题。用极坐标重写拉格朗日量</p>
+<p>$$<br>L &#x3D; \frac 12 m(\dot{r}^2 + r^2 \dot{\phi}^2) - V(r)<br>$$</p>
+<p>用诺特守恒荷算出对应的守恒的广义角动量：</p>
+<p>$$<br>J &#x3D; \frac{\partial L}{\partial \dot{\phi}} &#x3D; mr^2 \dot{\phi}<br>$$</p>
+<p>对时间积分便得到开普勒第二定律。</p>
+<p>另外此时拉格朗日量不含时间，因此能量守恒</p>
+<p>$$<br>E &#x3D; \frac 12 m(\dot{r}^2 + r^2 \dot{\phi}^2) + V(r)<br>$$</p>
+<p>现在便可以列出两个微分方程</p>
+<p>$$<br>\begin{aligned}<br>\frac{\mathrm{d}r}{\mathrm{d}t} &amp;&#x3D; \sqrt{\frac 2m(E - V(r)) - \frac{J^2}{m^2r^2}} \\<br>\frac{\mathrm{d}\phi}{\mathrm{d}t} &amp;&#x3D; \frac{J}{mr^2}<br>\end{aligned} \label{centralfieldeq}<br>$$</p>
+<p>容易从中分离出 $\mathrm{d}r$ 和 $\mathrm{d}\phi$ 的方程解出轨道。</p>
+<p>单独考察径向方程，这无非是一个一维的运动方程，不过等效地，粒子的势能为</p>
+<p>$$<br>V_{eff}(r) &#x3D; V(r) + \frac{J^2}{2mr^2}<br>$$</p>
+<p>这个势能称为<strong>有效势能</strong>，$\frac{J^2}{2mr^2}$ 称为<strong>离心势</strong>。</p>
+<h2><span id="开普勒问题">开普勒问题</span></h2><p>势能反比于距离时的问题称作开普勒问题，万有引力给出的引力势能和点电荷的电势能都是这种形式。此时有效势能为</p>
+<p>$$<br>V_{eff} &#x3D; -\frac{\alpha}{r} + \frac{J^2}{2mr^2} \quad, \alpha &gt; 0<br>$$</p>
+<p>这个有效势能在 $r \rightarrow 0$ 时为正无穷，在 $r \rightarrow \infty$ 时从负数趋向 $0$，仅有一个负的极值点。因此，从径向运动方程可以初步得到如下定性结果：</p>
+<ol>
+<li>若 $E \geq 0$，则数学上没有任何限制阻碍粒子滑向无穷远处，逃脱该中心力场。</li>
+<li>若 $E &lt; 0$，则根据动能的范围是 $[0, +\infty)$，粒子的可能运动范围必被限制在某一范围之内。</li>
+</ol>
+<p>严格的计算流程则是直接解微分方程 $(\ref{centralfieldeq})$。经过一些颇为琐碎的三角换元积分，我们得到粒子的运动方程为</p>
+<p>$$<br>\frac{l_0}{r} &#x3D; 1 + e\cos \phi \quad \text{,where $l_0 &#x3D; \frac{J^2}{m\alpha}, e &#x3D; \sqrt{1 + \frac{2EJ^2}{m\alpha^2}}$}<br>$$</p>
+<p>标准的圆锥曲线极坐标方程，$l_0$ 是半焦点弦长，$e$ 是离心率。熟知，$e &#x3D; 0$ 时轨道为正圆；$0 &lt; e &lt; 1$ 时轨道为椭圆，$e &#x3D; 1$ 时轨道为抛物线，$e &gt; 1$ 时轨道为双曲线。此时其他轨道参数的计算也是琐碎的，这里仅罗列如下：</p>
+<ul>
+<li><strong>半长轴、半短轴.</strong> $a &#x3D; \frac{\alpha}{2|E|}, b &#x3D; \frac{J}{\sqrt{2m|E|}}$；</li>
+<li><strong>近点、远点距离.</strong> $r_\min &#x3D; a(1 - e), r_\max &#x3D; a(1 + e)$；</li>
+<li><strong>周期.</strong> $T &#x3D; 2\pi a^{3&#x2F;2}\sqrt{m &#x2F; \alpha}$。</li>
+</ul>
+<p>至此，开普勒三大定律均已被囊括。</p>
+<p>双曲线的情形，参数的计算也是类似的，这里不再赘述。如果 $\alpha &lt; 0$，即势是排斥的，解出的轨道必然是双曲线，这里也不再赘述。</p>
+<p>最后，我们给出一个开普勒问题中的重要守恒量。注意，解是椭圆的开普勒问题中的轨道近点是不进动的。这即使在有心力场问题中，也是极其特殊的。稍后我们会看到即使势能稍微偏离一次反比形式，近日点也会发生进动。这提示了一个基于动力学对称性的守恒量。</p>
+<div class="note info"><p><strong>定理 1.1（拉普拉斯-龙格-楞次矢量）.</strong> 下面的矢量守恒。</p>
+<p>$$<br>\boldsymbol{M} &#x3D; \boldsymbol{p}\times \boldsymbol{L} + m\alpha \frac{\boldsymbol{x}}{r}<br>$$</p>
+<p>此处 $\boldsymbol{L}$ 为角动量。注意这个矢量指向轨道近点。</p>
+</div>
+
+<p><strong>证明.</strong> 注意这些基本关系：$\boldsymbol{L} &#x3D; \boldsymbol{x}\times m\dot{\boldsymbol{x}}$ 守恒，$\dot{\boldsymbol{p}} &#x3D; (\alpha &#x2F; r^3)\boldsymbol{x}$ 为运动方程。因此 </p>
+<p>$$<br>\begin{aligned}<br>    \frac{\mathrm{d}}{\mathrm{d}t} \boldsymbol{p}\times \boldsymbol{L} &amp;&#x3D; \frac{\alpha m}{r^3} \boldsymbol{x}\times (\boldsymbol{x}\times \dot{\boldsymbol{x}}) \\<br>    &amp;&#x3D; \frac{m\alpha}{r^3}\left((\boldsymbol{x}\cdot \dot{\boldsymbol{x}})\boldsymbol{x} - r^2 \dot{\boldsymbol{x}}\right) \\<br>    &amp;&#x3D; -m\alpha\frac{\mathrm{d}}{\mathrm{d}t}\frac{\boldsymbol{x}}{r}<br>\end{aligned}<br>$$</p>
+<p>整理后直接得证。$\blacksquare$</p>
+<p>已知拉普拉斯-龙格-楞次矢量和角动量大小，即可快速求解轨道。只需注意到如下方程：</p>
+<p>$$<br>\boldsymbol{x}\cdot \boldsymbol{M} &#x3D; rM\cos\phi &#x3D; \boldsymbol{x}\cdot (\boldsymbol{p}\times \boldsymbol{L}) + m\alpha r<br>$$</p>
+<p>其中的向量混合积恰是角动量大小的平方。得到轨道方程为</p>
+<p>$$<br>r\left(1 + \frac{M}{m|\alpha|}\cos\phi\right) &#x3D; \frac{J^2}{m|\alpha|}<br>$$</p>
+<p>然而当势能不是反比例函数时，轨道近点将会发生进动。具体内容在 2.4 节详细叙述。</p>
+<h2><span id="潮汐现象">潮汐现象</span></h2><p>本节解释</p>
+<h2><span id="近日点进动">近日点进动</span></h2><p>众所周知水星的近日点进动是广义相对论的经典实证之一。而广义相对论对水星近日点进动的一部分而已。其近日点进动的主项还是来源于太阳系其他行星造成的引力场与开普勒问题不一致。</p>
+<p>首先来计算这个主项，即一阶近似。现在假设中心势的形式为</p>
+<p>$$<br>V(r) &#x3D; -\frac{\alpha}{r} + \delta V(r)<br>$$</p>
+<p>其中 $\delta V(r)$ 是一个小量。则进动的角度无非是</p>
+<p>$$<br>\Delta \phi &#x3D; 2\int_{r_\min}^{r_\max} \frac{(J &#x2F; r^2)\mathrm{d}r}{\sqrt{2m(E - V(r)) - \frac{J^2}{r^2}}}<br>$$</p>
+<p>我们这里只考虑一阶近似，直接使用泰勒展开。一般为了式子形式简单，写成如下的形式，你当然可以自行验证确实就是一阶估计的结果。</p>
+<p>$$<br>\delta \phi &#x3D; 2m\frac{\partial}{\partial J}\int_{r_\min}^{r^\max} \frac{\delta V(r)\mathrm{d}r}{\sqrt{2m\left(E - \frac1{\alpha}\right) - \frac{J^2}{r^2}}}<br>$$</p>
+<p>这里 $r_\min, r_\max, r$ 都应代入开普勒问题的解。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/14/Mechanics2Lagrangian/" rel="prev" title="力学 | Lecture 2. 力学系统的作用量与运动方程">
+                  <i class="fa fa-angle-left"></i> 力学 | Lecture 2. 力学系统的作用量与运动方程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/20/Mechanics4Hamiltonian/" rel="next" title="力学 | Lecture 4. 哈密顿力学">
+                  力学 | Lecture 4. 哈密顿力学 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Introduction Classic Cryptography Perfectly Secret Cryptography   Private Key Cryptography Computational Security Extend to Multi-message CPA-Security CCA-Security，Message Authentication Code   The">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 密码学基础（上）">
+<meta property="og:url" content="http://example.com/2025/10/24/CryptoRevision1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Introduction Classic Cryptography Perfectly Secret Cryptography   Private Key Cryptography Computational Security Extend to Multi-message CPA-Security CCA-Security，Message Authentication Code   The">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/FeistelNetwork.png">
+<meta property="og:image" content="http://example.com/picture/CryptoMap.png">
+<meta property="article:published_time" content="2025-10-24T06:22:43.000Z">
+<meta property="article:modified_time" content="2025-11-04T17:03:41.965Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Cryptography">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/FeistelNetwork.png">
+
+
+<link rel="canonical" href="http://example.com/2025/10/24/CryptoRevision1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/10/24/CryptoRevision1/","path":"2025/10/24/CryptoRevision1/","title":"Revision | 密码学基础（上）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 密码学基础（上） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">Classic Cryptography</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">Perfectly Secret Cryptography</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Private Key Cryptography</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Computational Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Extend to Multi-message</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">CPA-Security</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">CCA-Security，Message Authentication Code</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Theoretical Constructions</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">One-Way Function</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Pseudorandomness</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Appendix</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">Map of Reductions</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">H-Coefficient Technique</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/10/24/CryptoRevision1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 密码学基础（上） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 密码学基础（上）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-10-24 14:22:43" itemprop="dateCreated datePublished" datetime="2025-10-24T14:22:43+08:00">2025-10-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-05 01:03:41" itemprop="dateModified" datetime="2025-11-05T01:03:41+08:00">2025-11-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#classic-cryptography">Classic Cryptography</a></li>
+<li><a href="#perfectly-secret-cryptography">Perfectly Secret Cryptography</a></li>
+</ul>
+</li>
+<li><a href="#private-key-cryptography">Private Key Cryptography</a><ul>
+<li><a href="#computational-security">Computational Security</a></li>
+<li><a href="#extend-to-multi-message">Extend to Multi-message</a></li>
+<li><a href="#cpa-security">CPA-Security</a></li>
+<li><a href="#cca-securitymessage-authentication-code">CCA-Security，Message Authentication Code</a></li>
+</ul>
+</li>
+<li><a href="#theoretical-constructions">Theoretical Constructions</a><ul>
+<li><a href="#one-way-function">One-Way Function</a></li>
+<li><a href="#pseudorandomness">Pseudorandomness</a></li>
+</ul>
+</li>
+<li><a href="#appendix">Appendix</a><ul>
+<li><a href="#map-of-reductions">Map of Reductions</a></li>
+<li><a href="#h-coefficient-technique">H-Coefficient Technique</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="introduction">Introduction</span></h1><h2><span id="classic-cryptography">Classic Cryptography</span></h2><h2><span id="perfectly-secret-cryptography">Perfectly Secret Cryptography</span></h2><p>现代密码学对加密方案（Encryption Scheme）作如下形式化定义：</p>
+<div class="note success"><p><strong>定义 1.2.1（Encryption Scheme）.</strong> 一个 encryption scheme $\Pi$ 包含以下资料：</p>
+<ul>
+<li>集合 $\mathscr{K}$，称为<em>密钥空间</em>；</li>
+<li>集合 $\mathscr{M}$，称为<em>消息空间</em>；</li>
+<li>集合 $\mathcal{C}$，称为<em>密文空间</em>；</li>
+<li>算法 $\mathsf{Enc}: \mathscr{K}\times \mathscr{M}\rightarrow \mathscr{C}$，称为<em>加密函数</em>；</li>
+<li>算法 $\mathsf{Dec}: \mathscr{K}\times \mathscr{C}\rightarrow \mathscr{M}$，称为<em>解密函数</em>；</li>
+<li>算法 $\mathsf{Gen} : \mathscr{K}$，称为<em>密钥生成函数</em>。记随机变量 $K\sim\mathsf{Gen}$，表示密钥。</li>
+</ul>
+<p>此处 $\mathsf{Enc}, \mathsf{Dec}, \mathsf{Gen}$ 都可以是随机算法。</p>
+</div>
+
+<p>我们期待一个加密方案是正确且安全的。正确性之形式化是自然的。</p>
+<div class="note success"><p><strong>定义 1.2.2（Perfect Correctness）.</strong> 称一个 encryption scheme $\Pi &#x3D; (\mathscr{K}, \mathscr{M}, \mathscr{C}, \mathsf{Enc}, \mathsf{Dec}, \mathsf{Gen})$ 具有 perfect correctness 性质，当且仅当：</p>
+<p>$$<br>\forall k\in \mathscr{K}, m\in \mathscr{M}, \quad \Pr[\mathsf{Dec}_k(\mathsf{Enc}_k(m)) &#x3D; m] &#x3D; 1<br>$$</p>
+</div>
+
+<p>而安全性自然是希望密码能够抵御各种攻击，如：</p>
+<ul>
+<li><strong>Key Recovery Attack.</strong> 从 $c$ 中猜出 $k$；</li>
+<li><strong>Message Recovery Attack.</strong> 从 $c$ 中猜出 $m$；</li>
+<li>……</li>
+</ul>
+<p>最理想的情况下，我们期待一个攻击者 Eve 从 $m$ 中无法得出任何信息。此处有三种殊途同归的形式化方法，其直觉分别为：</p>
+<ol>
+<li>攻击者即使看见了密文，对“关于消息 $m$ 的信息 $f$”之了解程度也不多于瞎猜；</li>
+<li>消息和密文独立；</li>
+<li>攻击者无法区分密文是由哪条消息加密而来。</li>
+</ol>
+<p>形式化定义如下</p>
+<div class="note success"><p><strong>定义 1.2.3$^1$（Perfect Semantic Secrecy）.</strong> 称 $\Pi$ 具有 Perfect Semantic Secrecy 性质，若对于任意 $\mathscr{M}$ 上的概率分布 $\mathrm{P}$ 任意的集合 $\Omega$、任意的攻击者 $\mathsf{Eve}: \mathscr{C}\rightarrow \Omega$ 和谓词 $f : \mathscr{M}\rightarrow \Omega$，都存在一个看不到密文的攻击者 $\mathsf{Eve}^D : \Omega$ 满足 </p>
+<p>$$<br>\Pr_{m\sim \mathrm{P}}[\mathsf{Eve}(\mathsf{Enc}_k(m)) &#x3D; f(m)] &#x3D; \Pr_{m\sim \mathrm{P}}[\mathsf{Eve}^D &#x3D; f(m)]<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.3$^2$（Perfect Secrecy）.</strong> 称 $\Pi$ 具有 Perfect Secrecy 性质，若对于任意 $\mathscr{M}$ 上的概率分布 $\mathrm{P}$，都有</p>
+<p>$$<br>\forall \alpha\in \mathscr{M}, \beta\in \mathscr{C}, \quad \Pr_{m\sim \mathrm{P}}[m &#x3D; \alpha] &#x3D; \Pr_{m\sim \mathrm{P}, c &#x3D; \mathsf{Enc}_K(m)}[m &#x3D; \alpha | c &#x3D; \beta]<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.3$^3$（Perfect Adversarial Indistinguishability）.</strong> 定义 Distinguishability Game 为如下的交互过程：其中 adversary 持有一个算法 $\mathcal{A}: \mathscr{M}\times \mathscr{M}\times \mathscr{C}\rightarrow \{0, 1\}$，challenger 持有加密方案 $\Pi$：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Round</th>
+<th align="center">Adversary</th>
+<th align="center">Challenger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">选定 $m_0, m_1\in \mathscr{M}$，发送给 Dealer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center">采样 $k\sim \mathsf{Gen}, b\sim \mathrm{Bern}(1&#x2F;2)$ <br> 发送 $c &#x3D; \mathsf{Enc}_k(m_b)$ 给 adversary</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">猜测 $\hat{b} &#x3D; \mathcal{A}(m_0, m_1, c)$</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>称 adversary 赢了这个游戏，若 $\hat{b} &#x3D; b$，记作事件 $\mathsf{PrivK}_{\mathcal{A}, \Pi}$。</p>
+<p>称 $\Pi$ 具有 Perfect Adversarial Indistinguishability 性质，若对于任意的算法 $\mathcal{A}$，都有</p>
+<p>$$<br>\Pr[\mathsf{PrivK}_{\mathcal{A}, \Pi}] \leq \frac 12<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.2.1.</strong> 定义 1.2.3$^{1}$，1.2.3$^2$，1.2.3$^3$ 等价。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p><strong>Perfect Secrecy $\Rightarrow$ Perfect Semantic Secrecy.</strong> 注意到</p>
+<p>$$<br>\Pr[C &#x3D; c | M &#x3D; m] &#x3D; \frac{\Pr[M &#x3D; m | C &#x3D; c]\Pr[C &#x3D; c]}{\Pr[M &#x3D; m]} &#x3D; \Pr[C &#x3D; c]<br>$$ </p>
+<p>即 $m$ 和 $\mathsf{Enc}_k(m)$ 独立。因此 $\mathsf{Eve}^D$ 只需要自己 sample $C$，即可获得与 $\mathsf{Eve}$ 同分布的输出。</p>
+<p><strong>Perfect Semantic Secrecy $\Rightarrow$ Perfect Adversarial Indistinguishability.</strong> 取 $\mathrm{P}$ 为 $m_0, m_1$ 上的均匀分布，$f$ 为 $m_b \mapsto b$ 易见。</p>
+<p><strong>Perfect Adversarial Indistinguishability $\Rightarrow$ Perfect Secrecy.</strong> 注意 indistinguishability 蕴含</p>
+<p>$$<br>\forall m_0, m_1\in \mathscr{M}, c\in \mathscr{C}, \quad \Pr[C &#x3D; c | M &#x3D; m_0] &#x3D; \Pr[C &#x3D; c | M &#x3D; m_1]<br>$$</p>
+<p>将 $m_1$ 在 $\mathrm{P}$ 上累加后使用 Bayes 公式立即得证。<div style="text-align: right">$\blacksquare$</div></p>
+
+</details>
+
+<div class="note info"><p><strong>定理 1.2.2.</strong> 存在具有 perfect correctness 和 perfect secrecy 性质的 encryption scheme。</p>
+</div>
+
+<p><strong>证明（One-time Pad）.</strong> 令 $\mathscr{K} &#x3D; \mathscr{C} &#x3D; \mathscr{M}$ 为某一阿贝尔群。三个算法：</p>
+<ul>
+<li>$\mathsf{Gen}$ 为 $\mathscr{K}$ 上的均匀分布；</li>
+<li>$\mathsf{Enc}_k(m) &#x3D; m + k$；</li>
+<li>$\mathsf{Dec}_k(m) &#x3D; m - k$。</li>
+</ul>
+<p>容易证明无论 $M$ 是什么，$C$ 都是均匀分布。<div style="text-align: right">$\blacksquare$</div></p>
+<h1><span id="private-key-cryptography">Private Key Cryptography</span></h1><p>实践中，我们希望短密钥能够加密长消息。直观的想法是，放宽正确性和安全性的概率限制。对于 $\varepsilon \in (0, 1)$，我们可以得到</p>
+<div class="note success"><p><strong>定义 2.0.1（$\varepsilon$-Statistical Correctness）.</strong> 称 $\Pi$ 是 $\varepsilon$-statistical correct 的，若 </p>
+<p>$$<br>\Pr[\textsf{Dec}_k(\textsf{Enc}_k(m)) &#x3D; m] \geq 1 - \varepsilon<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.0.2（$\varepsilon$-Statistical Semantic Secrecy）.</strong> 称 $\Pi$ 是 $\varepsilon$-statistical semantic secret 的，若对于任意 $\mathscr{M}$ 上的概率分布 $\mathrm{P}$ 任意的集合 $\Omega$、任意的攻击者 $\mathsf{Eve}: \mathscr{C}\rightarrow \Omega$ 和谓词 $f : \mathscr{M}\rightarrow \Omega$，都存在一个看不到密文的攻击者 $\mathsf{Eve}^D : \Omega$ 满足 </p>
+<p>$$<br>|\Pr_{m\sim \mathrm{P}}[\mathsf{Eve}(\mathsf{Enc}_k(m)) &#x3D; f(m)] - \Pr_{m\sim \mathrm{P}}[\mathsf{Eve}^D &#x3D; f(m)]| &lt; \varepsilon<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.0.3（$\varepsilon$-Statistical Secrecy）.</strong> 称 $\Pi$ 是 $\varepsilon$-statistical secret 的，若对于任意的 $m_0, m_1$，都有</p>
+<p>$$<br>\Delta_{TV}(\textsf{Enc}_K(m_0), \textsf{Enc}_K(m_1)) \leq \varepsilon<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.0.4（$\varepsilon$-Statistical Indistinguishability）。</strong> 称 $\Pi$ 是 $\varepsilon$-statistical indistinguishable 的，若对于任意的 $\mathcal{A}$，都有</p>
+<p>$$<br>\Pr[\textsf{PrivK}_{\mathcal{A}, \Pi}] \leq \frac 12(1 + \varepsilon)<br>$$</p>
+</div>
+
+<div class="note "><p><strong>Remark.</strong> 以上尝试均只是杯水车薪。可以证明：</p>
+<ol>
+<li>Statistical semantic secrecy，statistical secrecy，statistical indistinguishability 相互等价；</li>
+<li>满足 statistical secrecy 和 perfect correctness 的 encryption scheme 中 $|\mathscr{K}| &#x2F; |\mathscr{M}|$ 之下界为 $1 - \varepsilon$；</li>
+<li>满足 statistical correctness 和 perfect secrecy，且 $\mathsf{Enc}$ 和 $\mathsf{Dec}$ 均为确定性算法的 encryption scheme 中 $|\mathscr{K}| &#x2F; |\mathscr{M}|$ 之下界为 $1 - \varepsilon$。</li>
+</ol>
+<p>而且这些界都是紧的，即确实存在相应的 encryption scheme。</p>
+</div>
+
+<p>因此，必须对安全性的定义再做进一步的让步。接下来我们将会发现，限制前文所述所有算法的计算能力（攻击者必须是高效的算法），即可让缩短密钥长度称为可能。</p>
+<h2><span id="computational-security">Computational Security</span></h2><p>此后我们以「p.p.t」代指多项式时间随机（算法），即 probabilistic polynomial time。本节如果没有特别说明，所谓“算法”都是 non-uniform 的（i.e. 电路族 &#x2F; 带多项式长度建议的算法），毕竟现实中攻击某个密码可以对于每个长度逐个击破。</p>
+<p>我们接下来将会从两个方面放松安全性条件：</p>
+<ol>
+<li>要求所有算法都是高效的（i.e. p.p.t）；</li>
+<li>容许攻击以可忽略的概率成功。</li>
+</ol>
+<p>首先规定何种概率是“可忽略的”。</p>
+<div class="note success"><p><strong>定义 2.1.1（Negligible Function）.</strong> 函数 $\mathrm{negl}(n)$ 被称为可忽略的，若对于任意的 $k$，都有</p>
+<p>$$<br>\mathrm{negl}(n) &#x3D; o(n^{-k})<br>$$</p>
+</div>
+
+<p>这是一个介于多项式级别递减和指数级递减之间的一种递减速度。接下来加密方案的定义将被修正为</p>
+<div class="note success"><p><strong>定义 2.1.2（Private-Key Encryption Scheme）.</strong> 一个 private-key encryption scheme $\Pi$ 包含以下资料：</p>
+<ol>
+<li>p.p.t 算法 $\textsf{Gen}$。该算法输入 $1^\lambda$ 之后输出一个密钥 $k$，其中 $|k|\geq \lambda$。</li>
+<li>p.p.t 算法 $\textsf{Enc}$。该算法输入 $k, m$ 之后输出密文 $c$。</li>
+<li>p.p.t 算法 $\textsf{Dec}$。该算法输入 $k, c$ 之后输出原文 $m$。</li>
+</ol>
+<p>$\Pi$ 必须是正确的。即对于任意的 $k \leftarrow \mathsf{Gen}(1^\lambda)$ 和 $m$，必须有 $\textsf{Dec}_k(\textsf{Enc}_k(m)) &#x3D; m$。</p>
+</div>
+
+<p>通常情况下，我们考虑的加密方案都满足这些附加条件：</p>
+<ol>
+<li>$\textsf{Gen}(1^\lambda)$ 的输出服从 ${0, 1}^n$ 上的均匀分布。</li>
+<li>$\textsf{Enc}_k(m)$ 只加密 $|m| &#x3D; \ell(|k|)$ 的消息。此处 $\ell$ 是一个多项式时间可计算的函数。</li>
+</ol>
+<p>以后，这样的加密方案称为 $\ell$-private-key encryption scheme</p>
+<p>现在定义计算安全性。Perfect Secrecy 似乎比较没救，这里都不采用。</p>
+<div class="note success"><p><strong>定义 2.1.3$^1$（Computational Indistinguishability）.</strong> 考虑如下参数化的 Indistinguishability Game（$\textsf{PrivK}_{\mathcal{A}, \Pi}(\lambda)$）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Round</th>
+<th align="center">Adversary</th>
+<th align="center">Challenger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">用多项式时间，在 $1^\lambda$ 上计算 $m_0, m_1$（满足 $|m_0| &#x3D; |m_1| &#x3D; \ell(\lambda)$），发送给 Dealer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center">采样 $k\sim \mathsf{Gen}(1^\lambda), b\sim \mathrm{Bern}(1&#x2F;2)$ <br> 发送 $c &#x3D; \mathsf{Enc}_k(m_b)$ 给 Challenger</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">猜测 $\hat{b} &#x3D; \mathcal{D}(c, 1^\lambda)$</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>称加密方案 $\Pi$ 满足 Computational Indistinguishability，若对于任意的 p.p.t distinguisher $\mathcal{D}$，都存在一个 negligible function $\mathrm{negl}(n)$ 使得对于任意的 $\lambda$，</p>
+<p>$$<br>\Pr\left[\textsf{PrivK}_{\mathcal{A}, \Pi}(\lambda)\right] \leq \frac 12 + \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>以及相应的 Semantic Secrecy：</p>
+<div class="note success"><p><strong>定义 2.1.3$^2$（Computational Semantic Security）.</strong> 若对于任意 $\lambda$，$\{0, 1\}^{\ell(\lambda)}$ 上的概率分布 $\mathrm{P}$，可用多项式时间算法刻画的谓词 $f : \{0, 1\}^{\ell(\lambda)}\rightarrow \Omega$，p.p.t adversary $\mathcal{A}$，都存在一个 negligible function $\mathrm{negl}(n)$ 和 p.p.t 算法 $\mathcal{A}’$ 使得</p>
+<p>$$<br>\left|\Pr[\mathcal{A}(1^\lambda, c) &#x3D; f(m)] - \Pr[\mathcal{A}’(1^\lambda) &#x3D; f(m)]\right| \leq \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.1.1.</strong> 定义 2.1.3$^1$ 等价于定义 2.1.3$^2$。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明（Sketch）.</strong></p>
+</summary>
+<p>Computational indistinguishability 蕴含 computational semantic security 显然的。这里重点证明反方向结论。</p>
+<p>施反证法。假设不存在 p.p.t distinguisher，但是存在谓词 $f$，分布 $\mathrm{P}$ 和 p.p.t 算法 $\mathcal{A}$，使得对于任意的 $\mathcal{A}’$ 都有</p>
+<p>$$<br>|\Pr[\mathcal{A}(1^\lambda, c) &#x3D; f(m)] - \Pr[\mathcal{A}’(1^\lambda) &#x3D; f(m)]| &gt; \frac{1}{\lambda^k}<br>$$</p>
+<p>对于无穷多个 $\lambda$ 成立。任选 $m_0$，取 $\mathcal{A}’$ 为如下算法：</p>
+<ol>
+<li>在输入 $1^\lambda$ 上：</li>
+<li>采样 $k\leftarrow \textsf{Gen}(1^\lambda)$；</li>
+<li>输出 $\mathcal{A}(1^\lambda, \textsf{Enc}(k, m_0))$。</li>
+</ol>
+<p>根据 probabilistic method 经典结论，必存在一系列 $m_1$ 使得</p>
+<p>$$<br>|\Pr[\mathcal{A}(1^\lambda, \mathsf{Enc}_k(m_1)) &#x3D; f(m_1)] - \Pr[\mathcal{A}’(1^\lambda) &#x3D; f(m_1)]| &gt; \frac{1}{\lambda^k}<br>$$</p>
+<p>对无穷多个 $\lambda$ 成立。考虑如下的算法 $\mathcal{D}^1$：</p>
+<ol>
+<li>在输入 $c, 1^\lambda$ 上：</li>
+<li>计算 $y \leftarrow \mathcal{A}(, 1^\lambda)$；</li>
+<li>若 $y &#x3D; f(m_1)$，输出 $1$；否则输出 $0$。</li>
+</ol>
+<p>若 $b &#x3D; 1$，算法输出 $1$ 的概率为 $\Pr[\mathcal{A}(1^\lambda, c) &#x3D; f(m_1)]$；若 $b &#x3D; 0$，算法输出 $1$ 的概率为 $\Pr[\mathcal{A}(1^\lambda) &#x3D; f(m_1)]$。这两个概率之间存在 $1 &#x2F; \lambda^k$ 的 separation，因此通过重复多项式次 $\mathcal{D}$ 采样估计概率，判断和重复运行 $\mathcal{A}’$ 得到 $f(m_1)$ 的概率是否相近，从而做出一个 distinguisher。</p>
+<blockquote>
+<p><strong>Remark.</strong> 实际上这里有一个要点是高效找到 $m_1$。我们的做法是直接随机，看起来多项式次随机总能打中一个概率 separation 大的？</p>
+</blockquote>
+<div style="text-align: right">$\blacksquare$</div>
+</details>
+
+<p>本节末尾，我们展示密钥长度远小于消息长度的安全的加密方案之存在性依赖于 $\mathbf{P} \ne \mathbf{NP}$。</p>
+<div class="note info"><p><strong>定理 2.1.2.</strong> 若 $\mathbf{P} &#x3D; \mathbf{NP}$，则不存在 computational indistinguishable 的 encryption scheme，其 $\mathsf{Enc}$ 和 $\mathsf{Dec}$ 都是确定性算法，且 $\ell(\lambda) &gt; 2\lambda$。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>关于 $\ell$ 的限制相当于 $|\mathscr{K}|^2 &lt; |\mathscr{M}|$。</p>
+<p>任取一条消息 $m_0$。它用 $|\mathscr{K}|$ 个密钥加密得到 $|\mathscr{K}|$ 个密文，这 $|\mathscr{K}|$ 个密文解码之后共计可能有 $|\mathscr{K}|^2$ 种消息。然而 $|\mathscr{K}|^2 &lt; |\mathscr{M}|$，因此存在一个 $m_1$，使得 </p>
+<p>$$<br>\{\textsf{Enc}_k(m_0) : k\in \mathscr{K}\} \cap \{\textsf{Enc}_k(m_1) : k \in \mathscr{K}\} &#x3D; \varnothing<br>$$</p>
+<p>那么 distinguisher 无非是要判定这样一个问题：</p>
+<p>$$<br>\exists k, \textsf{Enc}_k(m_1) &#x3D; c<br>$$</p>
+<p>这是一个 $\mathbf{NP}$ 问题，根据假设也是一个 $\mathbf{P}$ 问题，因此 distinguisher 存在。<div style="text-align: right">$\blacksquare$</div></p>
+
+</details>
+
+<p>欲构造 computational indistinguishable 的 encryption scheme，一个直接的想法是推广 one-time pad。此时亟需用少量随机种子生成长随机串，因此我们定义 <strong>P</strong>seudo<strong>R</strong>andom <strong>G</strong>enerator：</p>
+<div class="note success"><p><strong>定义 2.1.4（Pseudorandom Generator）.</strong> 令 $\ell(n)$ 是一个多项式。确定性多项式大小电路族 $\mathcal{G}(n)$ 被称为 $\ell(n)$-PRG，若对于任意 p.p.t distinguisher $\mathcal{D}$（也是多项式大小电路族 &#x2F; 带多项式建议的算法），都存在一个 negligible function $\mathrm{negl}(n)$ 使得 </p>
+<p>$$<br>\left\lvert\Pr_{s\sim \mathrm{Uniform}(2^n)}[\mathcal{D}(\mathcal{G}(s))] - \Pr_{r\sim \mathrm{Uniform}(2^{\ell(n)})}\left[\mathcal{D}(r) &#x3D; 1\right]\right\rvert \leq \mathrm{negl}(n)<br>$$</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 该定义比计算理论中的 PRG 定义弱。计算理论中仅要求 PRG 是 $\mathbf{P}&#x2F;\mathrm{poly}$ 的算法，我们这里要求它是 $\mathbf{P}$ 的。</p>
+</blockquote>
+<p>一旦存在 PRG，便可构造 computational indistinguishable 的 encryption scheme：</p>
+<div class="note info"><p><strong>定理 2.1.3.</strong> 若存在 $\ell$-PRG $\mathcal{G}$，则存在 computational indistinguishable 的 $\ell$-private-key encryption scheme。</p>
+</div>
+
+<p><strong>证明（One-Time Pad）.</strong> $\textsf{Enc}_k(m) &#x3D; m \oplus \mathcal{G}(k)$，$\textsf{Dec}_k(c) &#x3D; c \oplus \mathcal{G}(k)$。</p>
+<p>如能 distinguish 这个 encryption scheme，必能 distinguish 该 PRG，矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="extend-to-multi-message">Extend to Multi-message</span></h2><p>然而，One-Time Pad，顾名思义，仅能进行一轮通信。不妨将 indistinguishability 之定义拓展至多消息：</p>
+<div class="note success"><p><strong>定义 2.2.1（Multi-message Indistinguishability）</strong> $\textsf{PrivK}_{\mathcal{A}, \Pi}^{\text{multi-msg}}(\lambda)$ 流程如下，Adversary 是一个具有如下模板的多项式电路族，其胜利当且仅当猜对 $b$：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Round</th>
+<th align="center">Adversary</th>
+<th align="center">Challenger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">用多项式时间，在 $1^\lambda$ 上计算两列 $m_0^i, m_1^i$ ($i &#x3D; 1, 2, …, t$)，发送给 Dealer</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center"></td>
+<td align="center">采样 $k\sim \mathsf{Gen}(1^\lambda), b\sim \mathrm{Bern}(1&#x2F;2)$ <br> 发送 $c &#x3D; \mathsf{Enc}_k(m_b)$ 给 Adversary</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">猜测 $\hat{b} &#x3D; \mathcal{A}(c, 1^\lambda)$</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>称加密方案 $\Pi$ 满足 multi-message security，若存在 negligble funcion $\mathrm{negl}(n)$ 使得</p>
+<p>$$<br>\Pr\left[\textsf{PrivK}_{\mathcal{A}, \Pi}^{\text{multi-msg}}(\lambda)\right] \leq \frac 12 + \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>我们可以将多消息加密方案分为两类：</p>
+<ul>
+<li><strong>状态有关.</strong> 加密、解密算法内置一个状态机，每加密一条消息，做相应转移；</li>
+<li><strong>状态无关.</strong> 加密、解密算法对任何时间的输入都一视同仁。</li>
+</ul>
+<p>下方罗列的几个构造，均有各自的问题：</p>
+<div class="note "><p><strong>尝试 2.2.1（状态无关确定性加解密算法）.</strong> 任意的状态无关的加密方案，其中 $\mathsf{Enc}$ 和 $\mathsf{Dec}$ 都是确定性算法。</p>
+<p><em>攻击.</em> 考虑取 $m_0^1 &#x3D; m_0^2 &#x3D; \$, m_1^1 &#x3D; \$, m_2^1 &#x3D; \$$。其中 $\$$ 指独立随机采样（今后也将使用此记号）。如果 $c^1 &#x3D; c^2$，猜 $b &#x3D; 0$；否则猜 $b &#x3D; 1$。</p>
+</div>
+
+<p>对于尝试 2.2.1 中所给的算法，我们可以将其抽象成如下的伪随机排列（<strong>P</strong>seudo<strong>R</strong>andom <strong>P</strong>ermutation）。</p>
+<div class="note success"><p><strong>定义 2.2.2（Pseudorandom Permutation）.</strong> 函数 $\mathcal{F}: \{0, 1\}^\lambda\times \{0, 1\}^{\ell(\lambda)}\rightarrow \{0, 1\}^{\ell(\lambda)}$ 是 PRP 当且仅当：</p>
+<ol>
+<li>$\mathcal{F}_k$ 和 $\mathcal{F}_k^{-1}$ 都是多项式时间可计算的。</li>
+<li>对于任意的 p.p.t oracle distinguisher $\mathcal{D}^{\mathcal{O}}$，都有</li>
+</ol>
+<p>$$<br>\left|\Pr_{k}\left[\mathcal{D}^{\mathcal{F}(k, \cdot)}(1^\lambda) &#x3D; 1\right] - \Pr_f\left[\mathcal{D}^{f(\cdot)}(1^\lambda) &#x3D; 1\right]\right| &lt; \mathrm{negl}(\lambda)<br>$$</p>
+<p>其中 $f$ 从全体 $\{0, 1\}^{\ell(\lambda)}\rightarrow \{0, 1\}^{\ell(\lambda)}$ 的排列中均匀随机抽取。特别地，若允许 $\mathcal{D}$ 调用逆函数，即 </p>
+<p>$$<br>\left|\Pr_{k}\left[\mathcal{D}^{\mathcal{F}(k, \cdot), \mathcal{F}^{-1}(k, \cdot)}(1^\lambda) &#x3D; 1\right] - \Pr_f\left[\mathcal{D}^{f(\cdot), f^{-1}(\cdot)}(1^\lambda) &#x3D; 1\right]\right| &lt; \mathrm{negl}(\lambda)<br>$$</p>
+<p>则 $\mathcal{F}$ 称为强 PRP。</p>
+</div>
+
+<div class="note "><p><strong>尝试 2.2.2（Stream Cipher）.</strong> 这是一种状态有关的加密方案。基于一个 $\ell(n)T$-PRG $\mathcal{G}$，记</p>
+<p>$$<br>\mathcal{G}(s) &#x3D; r_1 \Vert r_2 \Vert \cdots \Vert r_T<br>$$</p>
+<p>其中，$|r_i| &#x3D; \ell(n)$，我们可以令：</p>
+<p>$$<br>\mathsf{Enc}(m^i) &#x3D; m^i \oplus \mathcal{G}(k)_i<br>$$</p>
+<p>该加密方案确实是 multi-message indistinguishable 的，可惜实践中我们希望加密方案是状态无关的。</p>
+</div>
+
+<div class="note "><p><strong>尝试 2.2.3（一个状态无关的尝试）.</strong> 基于一个 $\ell(n)T$-PRG $\mathcal{G}$，同样将其输出记作上方的 slice 形式。考虑 $\mathsf{Enc}$ 为如下算法，对应的 $\mathsf{Dec}$ 是容易写出的：</p>
+<ol>
+<li>采样 $r \sim \mathrm{Uniform}([T])$；</li>
+<li>输出 $(r, \mathcal{G}(k)_r)$。</li>
+</ol>
+<p><em>攻击.</em> 这里 $T$ 必须是多项式大小的，否则算不动。若 $T$ 是多项式大小的，则可以进行生日悖论攻击：令 $m_0^1, …, m_0^{\sqrt T} &#x3D; \$, m_1^i &#x3D; \$$。若发现返回的密文不是两两不同的，猜 $b &#x3D; 0$；否则猜 $b &#x3D; 1$。</p>
+</div>
+
+<p>如果能将尝试 2.2.3 中的 $T$ 拓展至指数级，那么生日悖论攻击将不再成立。此时，我们需要一个结构是 <strong>P</strong>seudo<strong>R</strong>andom <strong>F</strong>unction：</p>
+<div class="note success"><p><strong>定义 2.2.3（Pseudorandom Function）.</strong> 满足如下条件的确定性多项式大小电路族 $\mathcal{F}: \{0, 1\}^\lambda \rightarrow \{0, 1\}^{\ell_1(\lambda)}\rightarrow \{0, 1\}^{\ell_2(\lambda)}$ 被称为一个 $(\ell_1, \ell_2)$-PRF 当且仅当对于带 oracle 访问的 p.p.t 算法 $\mathcal{D}^{\mathcal{O}}$（上指标表示该算法对 oracle $\mathcal{O}$ 有访问权限），都存在 negligible function $\mathrm{negl}(n)$ 使得</p>
+<p>$$<br>\left|\Pr_{k}\left[\mathcal{D}^{\mathcal{F}(k, \cdot)}(1^\lambda) &#x3D; 1\right] - \Pr_f\left[\mathcal{D}^{f(\cdot)}(1^\lambda) &#x3D; 1\right]\right| &lt; \mathrm{negl}(\lambda)<br>$$</p>
+<p>其中 $f$ 从全体 $\{0, 1\}^{\ell_1(\lambda)}\rightarrow \{0, 1\}^{\ell_2(\lambda)}$ 的函数中均匀随机抽取（下文中方便起见，称为纯随机函数）。</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.2.1.</strong> 存在 $(\lambda, \ell(\lambda))$-PRF，便存在状态无关的 multi-message indistinguishable 加密方案。</p>
+</div>
+
+<p><strong>证明.</strong> $\Pi$ 的 $\mathsf{Enc}$ 为如下算法，对应的 $\mathsf{Dec}$ 是容易写出的：</p>
+<ol>
+<li>采样 $r \sim \mathrm{Uniform}(2^\lambda)$；</li>
+<li>输出 $(r, \mathcal{F}(k, r))$。</li>
+</ol>
+<p>下证其安全性。考虑另一个加密方案 $\Pi’$，和 $\Pi$ 的唯一区别是将 PRF 换成纯随机函数。那么，任意的 adversary $\mathcal{A}$ 都只是收到一堆独立随机的数，$\Pr[\mathsf{PrivK}_{\Pi’, \mathcal{A}}^{\text{multi-msg}}] \leq \frac 12$。由于 $\mathcal{F}$ 是个 PRF，必有 $\Pr[\mathsf{PrivK}_{\Pi, \mathcal{A}}^{\text{multi-msg}}] \leq \frac 12 + \mathrm{negl}(\lambda)$，否则 indistinguishability game 的流程稍加改造便可作为 $\mathcal{F}$ 的 distinguisher。<div style="text-align: right">$\blacksquare$</div></p>
+<hr>
+<p>最后，常见的通信场景是使用某确定长度的加密方案（比如 AES-128）加密任意长度的消息，且有多次发送。此时，除了使用 Stream Cipher，有以下几种状态无关的基于给定的 PRF &#x2F; encryption scheme 的做法，统称为 <strong>Block Cipher</strong> 的几种加密模式（Mode of Operations）：</p>
+<div class="note "><p><strong>Electronic Code Book (ECB).</strong> 设 $\mathsf{Enc}$ 是 multi-message indistinguishable 的加密函数。</p>
+<ol>
+<li>在输入 $m^1, …, m^t$ 上：</li>
+<li>输出 $\mathsf{Enc}_k(m^1), …, \mathsf{Enc}_k(m^t)$。</li>
+</ol>
+</div>
+
+<div class="note "><p><strong>Cipher Book Chaining (CBC).</strong> 给定一个安全的 $\mathsf{Enc}$，本模式的 $\mathsf{Enc}$ 如下，相应 $\mathsf{Dec}$ 的编写是容易的。</p>
+<ol>
+<li>在输入 $m^1, …, m^t$ 上：</li>
+<li>随机采样 $\mathrm{IV}\sim \mathrm{Uniform}(2^{\ell(\lambda)})$，置 $c_0 &#x3D; \mathrm{IV}$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, t$：</li>
+<li>$\qquad$ $c_i \leftarrow \mathsf{Enc}_k(c_{i - 1}\oplus m^i)$；</li>
+<li>输出 $c_0, …, c_t$。</li>
+</ol>
+<p><em>Remark.</em> 这个模式其实没那么安全。很明显他防不住 CPA（定义见下一节），所以我不知道怎么讲。</p>
+</div>
+
+<div class="note "><p><strong>Output Feedback (OFB).</strong> 给定 PRF $\mathcal{F}$。$\mathsf{Enc}$ 如下，相应的 $\mathsf{Dec}$ 的编写是容易的。</p>
+<ol>
+<li>在输入 $m^1, …, m^t$ 上：</li>
+<li>随机采样 $\mathrm{IV}\sim \mathrm{Uniform}(2^{\ell(\lambda)})$，置 $y_0 &#x3D; c_0 &#x3D; \mathrm{IV}$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, t$：</li>
+<li>$\qquad$ $y_i \leftarrow \mathcal{F}_k(y_{i - 1})$；</li>
+<li>$\qquad$ $c_i \leftarrow y_i \oplus m_i$；</li>
+<li>输出 $c_0, …, c_t$。</li>
+</ol>
+</div>
+
+<div class="note "><p><strong>Counter（CTR）.</strong> 给定 PRF $\mathcal{F}$。$\mathsf{Enc}$ 如下，相应的 $\mathsf{Dec}$ 的编写是容易的。</p>
+<ol>
+<li>在输入 $m^1, …, m^t$ 上：</li>
+<li>随机采样 $\mathrm{IV}\sim \mathrm{Uniform}(2^{\ell(\lambda)})$，置 $c_0 &#x3D; \mathrm{IV}$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, t$：</li>
+<li>$\qquad$ $c_i &#x3D; m_i\oplus \mathcal{F}_k(\mathrm{IV} + i - 1)$。</li>
+<li>输出 $c_0, …, c_t$。</li>
+</ol>
+</div>
+
+<h2><span id="cpa-security">CPA-Security</span></h2><p>如果泄露了 $\mathsf{Enc}$ 的接口，密码是否仍然安全？在此情况下，攻击者可以对密码实施选择明文攻击（<strong>C</strong>hosen <strong>P</strong>laintext <strong>A</strong>ttack），为此定义相应的安全性：</p>
+<div class="note success"><p><strong>定义 2.3.1（CPA-Security）.</strong> 考虑如下的安全性游戏 $\mathsf{PrivK}_{\Pi, \mathcal{A}}^{\mathrm{CPA}}$：</p>
+<table>
+<thead>
+<tr>
+<th align="center">Stage</th>
+<th align="center">Adversary</th>
+<th align="center">Challenger</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">1</td>
+<td align="center">多项式轮，询问 $\hat{m}_i$ 的密文</td>
+<td align="center">回答 $\hat{m}_i$ 的密文</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">发送 $m_0, m_1$ 给 Challenger</td>
+<td align="center"></td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center"></td>
+<td align="center">采样 $k\sim \mathsf{Gen}(1^\lambda), b\sim \mathrm{Bern}(1&#x2F;2)$ <br> 发送 $c &#x3D; \mathsf{Enc}_k(m_b)$ 给 Adversary</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">多项式轮，询问 $\hat{m}_i$ 的密文</td>
+<td align="center">回答 $\hat{m}_i$ 的密文</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">猜测 $\hat{b} &#x3D; \mathcal{A}(c, 1^\lambda)$</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<p>称 $\Pi$ 是 CPA-Secure 的，当且仅当对于任意的 p.p.t adversary $\mathcal{A}$，都存在 negligble function $\mathrm{negl}$ 使得</p>
+<p>$$<br>\Pr\left[\textsf{PrivK}_{\mathcal{A}, \Pi}^{\mathrm{CPA}}(\lambda)\right] \leq \frac 12 + \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>当然，你在提出 $m_0, m_1$ 的时候，是禁止提出已经问过或将要询问的东西的，不然就没有意义了。</p>
+<div class="note info"><p><strong>定理 2.3.1.</strong> 存在 indistinguishable，但是没有 CPA 安全性的密码。</p>
+</div>
+
+<p><strong>证明（Backdoor Attack）.</strong> 假设存在 indistinguishable encryption scheme $\Pi &#x3D; (\mathsf{Enc}, \mathsf{Dec})$。构造如下加密方案 $\Pi’ &#x3D; (\mathsf{Enc}’, \mathsf{Dec}’)$：</p>
+<ul>
+<li>将密钥 $k$ 视作 $k’\Vert r’$，分割线位于正中央。</li>
+<li>令 $\mathsf{Enc}’$ 为<br>$$<br>\mathsf{Enc}’_k(x\Vert t) &#x3D; \begin{cases}<br>  \mathsf{Enc}_{k’}(x) \Vert r’ &amp; t \ne r’ \\<br>  k &amp; t &#x3D; r’<br>\end{cases}<br>$$</li>
+</ul>
+<p>$\Pi’$ 显然是 indistinguishable 的，因为只有一轮交互 w.h.p 猜不到 $r’$。但是若可以进行 CPA，就可以通过预先询问套出密钥 $k$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>之所以在 CPA 定义中仅仅发送 $m_0, m_1$ 而不是两列明文，是因为直觉上既然能事先事后多次询问，那么区分两个明文和两列明文的难度应当完全一致。形式化地，</p>
+<div class="note info"><p><strong>定理 2.3.2.</strong> 将上述 CPA Game 的 stage 2 修改作</p>
+<blockquote>
+<p>Adversary：发送两列 $m_0^i, m_1^i$ 给 Challenger</p>
+</blockquote>
+<p>得到另一种 CPA Game $\mathsf{PrivK}_{\mathcal{A}, \Pi}^{\mathrm{LR-CPA}}$ 和相应的安全性（暂时称为 CPA$^{\dagger}$ Secure）。则有 CPA Secure 等价于 CPA$^{\dagger}$ Secure。</p>
+</div>
+
+<p>这里的安全性游戏本质上是 $\mathcal{A}$ 可以访问一个 oracle $\mathrm{LR}_b(m_0, m_1)$，challenger 会将 $\mathsf{Enc}_k(m_b)$ 答复给 $\mathcal{A}$，最后 $\mathcal{A}$ 猜测 $b$。以后我们将分析这个等价的游戏。</p>
+<details class="note "><summary><p><strong>证明（Hybrid Argument）.</strong></p>
+</summary>
+<p>CPA$^\dagger$ Secure 蕴含 CPA Secure 是显然的。此处着重证明反向的结论。考虑任意一个 CPA$^\dagger$ Game 的 Adversary $\mathcal{A}’$。在其基础上构造 $\mathcal{A}$：</p>
+<ol>
+<li>模拟 $\mathcal{A}’$ 的同时：</li>
+<li>随机采样 $i\sim \mathrm{Uniform}([T])$，其中 $T$ 为 $\mathcal{A}$ 的询问次数上界；</li>
+<li>对于 $\mathcal{A}’$ 的第 $j$ 次对 $\mathrm{LR}_b$ 的访问：</li>
+<li>$\qquad$ 若 $j &lt; i$，查询 $\mathsf{Enc}_k(m_0^j)$ 并发送给 $\mathcal{A}’$；</li>
+<li>$\qquad$ 若 $j &#x3D; i$，给 challenger 发送 $(m_0^i, m_1^i)$，将 challenger 的回复转发给 $\mathcal{A}’$；</li>
+<li>$\qquad$ 若 $j &gt; i$，查询 $\mathsf{Enc}_k(m_0^j)$ 并发送给 $\mathcal{A}’$。</li>
+<li>猜测结果 $b$ 为 $\mathcal{A}’$ 的最终输出。</li>
+</ol>
+<p>由于对于任意的固定的 $i$，$\mathcal{A}$ 都是一个 CPA Game 的 Adversary，由于 $\Pi$ 是 CPA Secure 的，我们有</p>
+<p>$$<br>\forall \hat{i},\quad  \left|\Pr[\mathcal{A} \rightarrow 0 | i &#x3D; \hat{i}, b &#x3D; 0] - \Pr[\mathcal{A} \rightarrow 0 | i &#x3D; \hat{i}, b &#x3D; 0]\right| \leq \mathrm{negl}(\lambda)<br>$$</p>
+<p>现在考虑一系列虚拟的安全性游戏：$\mathrm{Hybrid}^0_{\mathcal{A}’, \Pi}, …, \mathrm{Hybrid}^{T - 1}_{\mathcal{A}’, \Pi}$。其中在游戏 $\mathrm{Hybrid}^i_{\mathcal{A}’, \Pi}$ 中，$\mathcal{A}’$ 将会有机会访问 oracle $\mathrm{LR}_b^i(m_0, m_1)$：该 oracle 将会在前 $i - 1$ 次询问时回答 $\mathsf{Enc}_k(m_0)$，第 $i$ 次回答 $\mathsf{Enc}_k(m_b)$，以后回答 $\mathsf{Enc}_k(m_1)$。注意，$\mathrm{LR}_1^i &#x3D; \mathrm{LR}_0^{i + 1}$，因此有：</p>
+<p>$$<br>\begin{align}<br>\Pr[\mathsf{PrivK}_{\mathcal{A’}, \Pi}^{\text{LR-CPA}}] &amp;&#x3D; \frac 12 + \left|\Pr\left[\mathcal{A}’^{\mathrm{LR}_b}\rightarrow 0 | b &#x3D; 0\right] - \Pr\left[\mathcal{A}’^{\mathrm{LR}_b}\rightarrow 0 | b &#x3D; 1\right]\right| \\<br>&amp;&#x3D; \frac 12 + \left|\Pr\left[\mathcal{A}’^{\mathrm{LR}_b^0}\rightarrow 0 | b &#x3D; 0\right] - \Pr\left[\mathcal{A}’^{\mathrm{LR}_b^{T - 1}}\rightarrow 0 | b &#x3D; 1\right]\right| \\<br>&amp;&#x3D; \frac 12 + \left|\sum_{i&#x3D;0}^{T - 1}\Pr\left[\mathcal{A}’^{\mathrm{LR}_b^i}\rightarrow 0 | b &#x3D; 0\right] - \Pr\left[\mathcal{A}’^{\mathrm{LR}_b^i}\rightarrow 0 | b &#x3D; 1\right]\right| \\<br>&amp;\leq \frac 12 + \mathrm{negl}(\lambda)<br>\end{align}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+</details>
+
+<p>定理 2.2.1. 中构造证明就是 CPA 安全的。</p>
+<h2><span id="cca-securitymessage-authentication-code">CCA-Security，Message Authentication Code</span></h2><p>如果你甚至泄露了 $\mathsf{Dec}$ 的接口，则攻击者可以进行 CCA 攻击。</p>
+<div class="note success"><p><strong>定义 2.4.1（CCA-Security）.</strong> 在 $\mathsf{PrivK}^{\mathcal{A, \Pi}^{\mathrm{CCA}}}$ 中，一个对 $\mathsf{Enc}$，$\mathsf{Dec}$ 有 oracle 访问权限的 adversary 需要在进行多项式次询问（Stage 1）之后提出 $m_0, m_1$（和此前询问均不相同，Stage 2），然后收到来自 challenger 的 $c_b$。之后，adversary 还可以进行若干询问（Stage 3），最后猜测 $b$。</p>
+<p>如果 Stage 3 中只能访问 $\mathsf{Enc}$，所得安全性称为 CCA$^1$ Secure；若还能访问 $\mathsf{Dec}$，所得安全性称为 CCA$^2$ Secure。</p>
+</div>
+
+<p>我们之前的一切构造都不是 CCA Secure 的。要防御 CCA，一个直接的想法是让所有的 $\mathsf{Dec}$ 查询都失效。这样一来，原来是 CPA 安全的 encryption scheme 即变为 CCA 安全的。为此，考虑设计一个机制，使得 $\mathsf{Enc}$ 产生的消息能通过校验，但是 adversary 伪造的消息不能通过校验。形式化地，定义 <strong>M</strong>essage <strong>A</strong>uthentication <strong>C</strong>ode：</p>
+<div class="note success"><p><strong>定义 2.4.2（MAC）.</strong> 一个 MAC scheme $\Pi$ 包含以下资料：</p>
+<ul>
+<li>$\mathsf{Gen}$：生成密钥；</li>
+<li>p.p.t 电路族 $\mathsf{MAC}(k, m)$：根据密钥 $t$ 和消息 $m$，输出一个标签 $t$；</li>
+<li>p.p.t 电路族 $\mathsf{Verify}(k, m, t)$：判断标签 $t$ 是否是由 $m$ 产生的合法标签。</li>
+</ul>
+<p>一个 $\mathsf{MAC}$ 须满足：</p>
+<ol>
+<li><strong>正确性.</strong> 对于任意的 $k, m$ 有<br>  $$<br>  \Pr[\mathsf{Verify}(k, m, \mathsf{MAC}(k, m)) &#x3D; 1] &#x3D; 1<br>  $$</li>
+<li><strong>（强）不可伪造性.</strong> 对于任意的 p.p.t adversary $\mathcal{A}^{\textsf{Dec}_k}(1^{\lambda})$，存在 negligible function $\mathrm{negl}$，使得在 $\mathcal{A}$ 成功伪造一个新的$^1$ $(m, t)$，使得 $\mathsf{Verify}(k, m, t) &#x3D; 1$ 的概率不超过 $\mathrm{negl}(\lambda)$。</li>
+</ol>
+<p>$^1$：这里的“新的”有两种释义。假设你询问了一列 $(m_i, t_i)$。若要求 $m \ne m_i$，则称为不可伪造性。若仅要求 $(m, t)\ne (m_i, t_i)$，则称为强不可伪造性。</p>
+</div>
+
+<p>容易发现，如果 $\mathsf{MAC}$ 是确定性算法，则显然存在一种校验方法，称为标准校验（canonical $\mathsf{Verify}$ algorithm）：直接判断是否有 $t &#x3D; \mathsf{MAC}(k, m)$。对于这种确定性的 $\mathsf{MAC}$，不可伪造性即是强不可伪造性。</p>
+<div class="note info"><p><strong>定理 2.4.1.</strong> 若存在 PRF，则存在 MAC。</p>
+</div>
+
+<p><strong>证明.</strong> 假设存在 PRF $\mathcal{F}$，则明显 $\mathcal{F}$ 本身加上标准校验就是 MAC。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 2.4.2.</strong> 若存在 CPA 安全的 $\Pi_1$ 和 MAC $\Pi_2$，则存在 CCA$^1$ 安全的 $\Pi’$；进一步，若 $\Pi_2$ 是强 MAC，则 $\Pi’$ 是 CCA$^2$ 安全的。</p>
+</div>
+
+<p><strong>证明.</strong> $\Pi’$ 的构造如下：</p>
+<ul>
+<li>$\mathsf{Gen}(1^k)$：独立地生成 $k_{\text{CPA}}$ 和 $k_{\text{MAC}}$；</li>
+<li>$\mathsf{Enc}((k_1, k_2), m)$：输出 $\mathsf{Enc}_{\mathrm{CPA}}(k_1, m), \mathsf{MAC}(\mathsf{Enc}_{\mathrm{CPA}}(k_1, m))$；</li>
+<li>$\mathsf{Dec}(k, (c, t))$：若 $\mathsf{Verify}(k, c, t) &#x3D; 0$，输出 $\bot$，否则正常解密 $c$。</li>
+</ul>
+<p>若 $\mathsf{MAC}$ 是安全的，一切 $\mathsf{Dec}$ 调用高概率收到 $\bot$，便无用。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note "><p><strong>Remark.</strong> 为了加深理解，这里展示两种错误的构造：</p>
+<ul>
+<li>输出 $\mathsf{Enc}(k_1, m\Vert \mathsf{MAC}(k, m))$。注意这个 $\mathsf{MAC}$ 屁用没有。</li>
+<li>输出 $\mathsf{MAC}(k_2, m)\Vert \mathsf{Enc}(k_1, m)$。注意没有任何限制规定 $\mathsf{MAC}$ 不能泄露消息。</li>
+</ul>
+</div>
+
+<p>事实上，我们构造的这个 $\Pi’$，不但是 CCA 安全的，而且是不可伪造的。即你不可能经过多项式次询问之后伪造一条使得 $\mathsf{Dec}$ 不输出 $\bot$ 和已经问过的 $m$ 的密文。满足这种条件的 encryption scheme 称作 <strong>A</strong>uthenticated <strong>E</strong>ncryption，属最理想的安全性。</p>
+<p>最后，既然我们有多消息的 Block Cipher，也就需要多消息的 MAC。参考 Block Cipher 的 mode of operations，可以提出若干方案。这里我们首先展示三种正确的方法：</p>
+<div class="note "><p><strong>双密钥 CMC-MAC</strong> 设 $\mathcal{F}$ 是一个 PRF。</p>
+<ol>
+<li>随机密钥 $k_1, k_2$；令 $v \leftarrow 0$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n - 1$：</li>
+<li>$\quad$ $v\leftarrow \mathcal{F}(k_1, m_i \oplus v)$；</li>
+<li>输出 $t &#x3D; \mathcal{F}(k_2, m_n\oplus v)$</li>
+</ol>
+</div>
+
+<div class="note "><p><strong>NMAC.</strong> 设 $\mathcal{F}$ 是一个 PRF。</p>
+<ol>
+<li>随机密钥 $k, k’$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n$：</li>
+<li>$\quad$ $k \leftarrow \mathcal{F}(k, m_i)$；</li>
+<li>输出 $t &#x3D; \mathcal{F}(k’, k)$。</li>
+</ol>
+</div>
+
+<div class="note "><p><strong>PMAC.</strong> 设 $\mathcal{F}$ 是一个 PRF。</p>
+<ol>
+<li>随机密钥 $k, k’, k’’$；</li>
+<li>令<br>  $$<br>  s \leftarrow \bigoplus_{i&#x3D;1}^m \mathcal{F}(k’, m + ik)<br>  $$</li>
+<li>输出 $t &#x3D; \mathcal{F}(k’’, s)$。</li>
+</ol>
+</div>
+
+<p>这些构造的中心思想大同小异，都是首先用一个结构做出不碰撞的输出，然后过一个 PRF。证明安全性只需要着眼于“没有碰撞”，和 Ruby-Lackoff 定理（参见定理 3.2.5）中没有碰撞的证明大同小异。一切归结为找到一个抗碰撞哈希函数（<strong>C</strong>ollision <strong>R</strong>esistant <strong>H</strong>ash <strong>F</strong>unction）$\mathcal{H}$。那么，$\mathcal{F}\circ\mathcal{H}$ 就是一个安全的 MAC。</p>
+<p>提到抗碰撞哈希函数，又不得不提一个经典的构造：Merkle-Damgard 变换。它将一个 $2n\mapsto n$ 的 CRHF 变成 $*\mapsto n$ 的 CRHF。形式化地，有 </p>
+<div class="note info"><p><strong>定理 2.4.3.</strong> 若存在 $2n \mapsto n$ 的 CRHF，则存在 $*\mapsto n$ 的 CRHF。</p>
+</div>
+
+<p><strong>证明（Merkle-Damgard）.</strong> 若存在 CRHF，则显然存在输出不包含 $0$ 的 CRHF $h$。则考虑哈希函数 $H$，定义为：</p>
+<ol>
+<li>令 $v \leftarrow \mathrm{IV} &#x3D; 0$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n$：</li>
+<li>$\qquad$ $v\leftarrow h(v\Vert m_i)$；</li>
+<li>输出 $h(v, n)$。</li>
+</ol>
+<p>容易证明这个确实是 CRHF。</p>
+<blockquote>
+<p><strong>Remark.</strong> IV 和 n 的加入分别防止了取前缀和取后缀的攻击，缺一不可。</p>
+</blockquote>
+<p>为了加强理解，最后给出几个不安全的多消息 MAC 并给出攻击方法。</p>
+<div class="note "><p><strong>Unsafe Example 2.4.1（ECB Mode）.</strong> 直接对每条消息分别作用 MAC。注意这样一来，询问 $t\leftarrow \mathsf{MAC}(m)$ 之后可以伪造 $(m\Vert m, t\Vert t)$。</p>
+<p>将其改进为首先随机采样 $r$，然后把每条消息变成 $m_1 \Vert r\Vert n \Vert i$ 后对其作 ECB，就是安全的。</p>
+</div>
+
+<div class="note "><p><strong>Unsafe Example 2.4.2（CBC Mode）.</strong> 将双密钥 CBC 修改为只是用同一个密钥。</p>
+<p>令 $\mathsf{MAC}(m_1m_2m_3) &#x3D; t$，则注意到 $\mathsf{MAC}(m_1, m_2, m_3, m_4) &#x3D; \mathsf{m_4\oplus t}$。询问一者，伪造另一者。</p>
+<p>当然，你可以证明如果询问必须是前缀无关的，那么双密钥 CBC 就确实是安全的。这种 MAC 称为 <strong>Prefix-Free MAC</strong>。</p>
+</div>
+
+<h1><span id="theoretical-constructions">Theoretical Constructions</span></h1><p>针对前文使用的 PRG、PRF、PRP 等工具，我们将给出一系列构造。</p>
+<h2><span id="one-way-function">One-Way Function</span></h2><p>密码学中所用工具，归根结底具有一种“可以高效加密、难以高效解密”的性质。将具备此类性质的函数称为“单向函数（<strong>O</strong>ne-<strong>W</strong>ay <strong>F</strong>unction）”，形式化地定义如下：</p>
+<div class="note success"><p><strong>定义 3.1.1（One-Way Function）.</strong> 函数 $f : \{0, 1\}^*\rightarrow \{0, 1\}^*$ 是单向函数，当且仅当</p>
+<ol>
+<li>$f$ 可以给 $\mathbf{P} &#x2F; \mathrm{poly}$ 的算法计算。</li>
+<li>对于任意的 p.p.t adversary $\mathcal{A}$，有<br>$$<br>\Pr_{x\sim \mathrm{Uniform}(2^n)}\left[\mathcal{A}(1^n, f(x)) \in f^{-1}(f(x))\right] \leq \mathrm{negl}(n)<br>$$</li>
+</ol>
+<p>上式中的 $\mathrm{negl}$ 被换成 $1 &#x2F; \mathrm{poly}(n)$ 得到的函数称为 Weak OWF。</p>
+</div>
+
+<p>此类函数，还可进一步配备以下几个性质：</p>
+<ul>
+<li><strong>保长度（length-preserving）.</strong> 即 $|f(x)| &#x3D; |x|$ 总是成立；</li>
+<li><strong>双射.</strong> 如果 $f(x)$ 是保长度的双射，而且是 OWF，则 $f(x)$ 也称为 <strong>O</strong>ne-<strong>W</strong>ay <strong>P</strong>ermutation。</li>
+</ul>
+<p>离散对数问题就是一个 OWP 的候选，质因数分解问题是 Weak OWF 的候选。事实上：</p>
+<div class="note info"><p><strong>定理 3.1.1.</strong> 若存在 Weak OWF，则存在 OWF。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明（Yao）.</strong></p>
+</summary>
+<p>【FIXME】</p>
+
+</details>
+
+<p>函数的单向性意味着它能藏住关于输入的信息。为了此后的应用，我们想要找到它具体能藏住什么样的信息，因此定义 </p>
+<div class="note success"><p><strong>定义 3.1.2（Hardcore Predicate）.</strong> 函数 $\mathsf{hc}: \{0, 1\}^*$ 被称为 $f$ 的一个 hardcore-predicate，当且仅当 </p>
+<ol>
+<li>它可以被一族多项式大小电路计算；</li>
+<li>对于任意的 p.p.t adversary $\mathcal{A}$，$\mathcal{A}$ 对 $\mathsf{hc}$ 所知甚少：<br>$$<br>\Pr_{x\leftarrow \mathrm{Uniform}(2^n)}[\mathcal{A}(1^n, f(x)) &#x3D; \mathsf{hc}(x)] \leq \frac 12 + \mathrm{negl}(n)<br>$$</li>
+</ol>
+</div>
+
+<p>可以证明，Hardcore Predicate 是存在的。</p>
+<div class="note info"><p><strong>定理 3.1.2（Goldreich-Levin Theorem）.</strong> 若存在 OWF（OWP），则存在能藏住 hardcore predicate $\mathsf{hc}$ 的 OWF（OWP）$g$。</p>
+</div>
+
+<p>我们首先给出 $g$ 和 $\mathsf{hc}$ 的构造。假设存在 OWF $f(x)$。令</p>
+<p>$$<br>g(x\Vert r) &#x3D; f(x)\Vert r, \quad \textsf{hc}(x\Vert r) &#x3D; \langle x, r\rangle &#x3D; \bigoplus_{i&#x3D;1}^n x_ir_i \quad \text{where $|x| &#x3D; |r| &#x3D; n$}<br>$$</p>
+<p>这显然是一个 OWF。接下来我们逐步发掘 G-L 定理的真相。先证明一个弱一点的结论：</p>
+<div class="note info"><p><strong>引理 3.1.4.</strong> 不存在 p.p.t adversary $\mathcal{A}$ 使得 </p>
+<p>$$<br>\Pr_{x, y\sim \mathrm{Uniform}(2^n)}[\mathcal{A}(1^{2n}, x, f(y)) &#x3D; \langle x, y\rangle] &gt; \frac 34 + \frac{1}{p(n)}<br>$$</p>
+<p>对无穷多个 $n$ 成立。其中 $p(n)$ 为任意多项式。</p>
+</div>
+
+<details class="note "><summary><p><strong>证明.</strong></p>
+</summary>
+<p>施反证法，我们将证明上述 $\mathcal{A}$ 存在蕴含 $f$ 不是 OWF。核心想法是如果你能算 $\langle x, y\rangle$ 和 $\langle x\oplus e_i, y\rangle$，你就能算出 $y$ 的第 $i$ 位。朝此目标前进，我们将证明</p>
+<ol>
+<li>对于很大一部分 $y$，随机 $x$，猜对 $\langle x, y\rangle$ 的概率很大。</li>
+<li>对于很大一部分 $y$，随机 $x$，同时猜对 $\langle x, y\rangle$ 和 $\langle x\oplus e_i, y\rangle$ 的概率很大。</li>
+</ol>
+<p>形式化地：</p>
+<p><strong>断言 1.</strong> 定义 </p>
+<p>$$<br>S_n &#x3D; \left\{y : \Pr_{x\sim\mathrm{Uniform}(2^n)}\left[\mathcal{A}(1^{2n}, x, f(y)) &#x3D; \langle x, y\rangle\right] \geq \frac 34 + \frac{1}{2p(n)}\right\}<br>$$</p>
+<p>则 $|S_n| \geq 2^n &#x2F; 2p(n)$。</p>
+<p><strong>断言 1 的证明.</strong> 这无非是个 Markov 不等式。</p>
+<p><strong>断言 2.</strong> 定义 </p>
+<p>$$<br>S’_n &#x3D; \left\{y : \forall i, \Pr_{x\sim \mathrm{Uniform}(2^n)}\left[\mathcal{A}(1^{2n}, x, f(y)) &#x3D; \langle x, y\rangle \wedge \mathcal{A}(1^{2n}, x \oplus e_i, f(y)) &#x3D; \langle x \oplus e_i, y\rangle\right] \geq \frac 12 + \frac{1}{p(n)}\right\}<br>$$</p>
+<p>则 $|S’_n|\geq 2^n &#x2F; 2p(n)$。</p>
+<p><strong>断言 2 的证明.</strong> 只需证明 $S_n \subseteq S’_n$。这无非是个 union bound（两边错的概率都不超过 $1&#x2F;4 - \frac{1}{2p(n)}$）。</p>
+<p>有了断言 2，我们可以构造 $f$ 的 adversary $\mathcal{A}$ 如下：</p>
+<ol>
+<li>在输入 $f(y)$ 上：</li>
+<li>**For $i &#x3D; 1, 2, …, n$**：</li>
+<li>$\qquad$ <strong>For</strong> $j &#x3D; 1, 2, …, n p^2(n)$：</li>
+<li>$\qquad \qquad$ 随机 $x\sim \mathrm{Uniform}(2^n)$；</li>
+<li>$\qquad \qquad$ 令 $\hat{y}_{i,j} &#x3D; \mathcal{A}(1^{2n}, x, f(y)) \oplus \mathcal{A}(1^{2n}, x\oplus e_i, f(y))$；</li>
+<li>$\qquad$ 取 $y_i\leftarrow \mathrm{Majority}(\hat{y}_i)$。</li>
+</ol>
+<p>Chernoff Bound 告诉我们 $\hat{y}_{i, j}$ 里高概率有一半以上都是对的，union bound 告诉我们 $y_i$ 高概率全是对的。<div style="text-align: right">$\blacksquare$</div></p>
+
+</details>
+
+<p>上面的证明弱就弱在断言 2 的 union bound。回到原定理，我们用一种聪明的办法来 amplify 成功概率：</p>
+<hr>
+<p><strong>定理 3.1.2 的最终证明.</strong> 施反证法，假设存在 p.p.t adversary $\mathcal{A}$ 使得</p>
+<p>$$<br>\Pr_{x, y\sim \mathrm{Uniform}(2^n)}[\mathcal{A}(1^{2n}, x, f(y)) &#x3D; \langle x, y\rangle] &gt; \frac 12 + \frac{1}{p(n)}<br>$$</p>
+<p>由 Markov Bound 可知，定义集合 </p>
+<p>$$<br>S_n &#x3D; \left\{y : \Pr_{x\sim\mathrm{Uniform}(2^n)}\left[\mathcal{A}(1^{2n}, x, f(y)) &#x3D; \langle x, y\rangle\right] \geq \frac 12 + \frac{1}{2p(n)}\right\}<br>$$</p>
+<p>有 $|S_n| &gt; 2^n &#x2F; 2p(n)$。</p>
+<blockquote>
+<p><strong>Remark 3.1.1.</strong> 如果在此照搬断言 2 的 union bound，你会得到 $\Pr[…] \geq 1&#x2F;p(n)$，没什么作用。这里的主要矛盾是 $x$ 和 $x\oplus e_i$ 不独立导致难以分析。而解决的办法，是利用 $\langle\cdot, \cdot\rangle$ 的线性性直接随机去猜 $\langle x, y\rangle$，调用 $\mathcal{A}$ 去算 $\langle x\oplus e_i, y\rangle$。</p>
+</blockquote>
+<p><strong>算法.</strong> 在输入 $f(y)$ 上：</p>
+<ol>
+<li>令 $\ell &#x3D; \lceil\log(2np^2(n) + 1)\rceil$，均匀随机采样 $s_1, …, s_\ell \leftarrow \mathrm{Uniform}(2^n)$。</li>
+<li>随机猜 $t_i \leftarrow \{0, 1\}$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n$：</li>
+<li>$\qquad$<strong>For</strong> $\varnothing \subsetneq T \subseteq \{1, 2, …, \ell\}$：</li>
+<li>$\qquad\qquad$ $x_T \leftarrow \oplus_{j\in T} s_j$；</li>
+<li>$\qquad\qquad$ $\varphi_T \leftarrow \oplus_{j\in T} t_j$；</li>
+<li>$\qquad\qquad$ $\hat{y}_{i, T}\leftarrow \varphi_T \oplus \mathcal{A}(x_T\oplus e_i, f(y))$；</li>
+<li>$\qquad$ 猜 $y_i &#x3D; \mathrm{Majority}(\hat{y}_i)$。</li>
+</ol>
+<p><strong>分析.</strong> $t_i$ 有 $1 &#x2F; \mathrm{poly}(n)$ 的概率全猜对。若 $t_i$ 全猜对，只要 $\mathcal{A}(x_T\oplus e_i, f(y))$ 的中位数对，答案就对。而显然 $x_T$ <strong>两两独立</strong>，由 Chebyshev Bound 可知 $\mathcal{A}(x_T\oplus e_i, f(y))$ 的中位数高概率对。</p>
+<p>因此，我们得到了求 $f$ 的逆的、成功概率为 $\frac{1}{\mathrm{poly}(n)}$ 的算法，与 $f$ 是 OWF 矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="pseudorandomness">Pseudorandomness</span></h2><p>上一节已经证明了存在 OWF（OWP）便存在 OWF（OWP） w&#x2F; hardcore predicate。而这将直接导向 PRG：</p>
+<div class="note info"><p><strong>定理 3.2.1.</strong> 若存在 OWP w&#x2F; hardcore predicate，则存在 $(n + 1)$-PRG。</p>
+</div>
+
+<p><strong>证明.</strong> 设 $f$ 是一个带有 hardcore predicate $\mathsf{hc}$ 的 OWP。则 </p>
+<p>$$<br>\mathcal{G}(s) &#x3D; f(s)\Vert \mathsf{hc}(s)<br>$$</p>
+<p>是 PRG。注意因为 $f$ 是排列，有对于任意的 $\mathcal{D}$，</p>
+<p>$$<br>\Pr_{r\leftarrow \mathrm{Uniform}(2^{n + 1})}[\mathcal{D}(r) &#x3D; 1] &#x3D; \Pr_{s\leftarrow \mathrm{Uniform}(2^n), b\leftarrow \mathrm{Uniform}(2)}[\mathcal{D}(f(s)\Vert b) &#x3D; 1]<br>$$</p>
+<p>后者和</p>
+<p>$$<br>\Pr_{s\leftarrow \mathrm{Uniform}(2^n)}[\mathcal{D}(f(s)\Vert \mathsf{hc}(s))]<br>$$</p>
+<p>必然差不多，不然能以不可忽略的概率优势猜对 $\mathsf{hc}$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>但凡能将随机种子拉长 1 位，便能拉长任意多项式位。这也是符合直觉的。</p>
+<div class="note info"><p><strong>定理 3.2.2.</strong> 存在 $(n + 1)$-PRG 等价于存在 $\ell(n)$-PRG。</p>
+</div>
+
+<p><strong>证明（Hybrid Argument）.</strong> 存在 $\ell(n)$-PRG 蕴含存在 $(n + 1)$-PRG 显然——只需要截前 $n + 1$ 位即可。重点证明反向结论。</p>
+<p>假设存在 $(n + 1)$-PRG $\mathcal{G}$，记 $\mathcal{G}(s) &#x3D; \mathcal{G}_1(s)\Vert \mathcal{G}_2(s)$，其中 $|\mathcal{G}_1(s)| &#x3D; 1$。构造 $\mathcal{G}’$ 为在输入 $s$ 上：</p>
+<ol>
+<li>$y_0 \leftarrow s$</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, \ell(n) - n$：</li>
+<li>$\qquad$ $x_i \Vert y_i \leftarrow \mathcal{G}_1(y_{i - 1})\Vert \mathcal{G}_2(y_{i - 1})$；</li>
+<li>输出 $x_1, …, x_{\ell(n) - n}, y_{\ell(n) - n}$。</li>
+</ol>
+<p>假设存在 $\mathcal{G}’$ 的 p.p.t distinguisher $\mathcal{A}’$，构造如下的 $\mathcal{G}$ 的 p.p.t distinguisher $\mathcal{A}$：在输入 $t$ 上</p>
+<ol>
+<li>随机 $i \leftarrow \mathrm{Uniform}(1, 2, …, \ell(n) - n + 1)$。</li>
+<li>令 $y_0$ 为均匀随机数。</li>
+<li><strong>For</strong> $j &#x3D; 1, 2, …, \ell(n) - n$：</li>
+<li>$\qquad$ 若 $j &lt; i$，令 $x_j\Vert y_j \leftarrow \$$；</li>
+<li>$\qquad$ 若 $j &#x3D; i$，令 $x_j\Vert y_j \leftarrow t$；</li>
+<li>$\qquad$ 若 $j &gt; i$，令 $x_j\Vert y_j \leftarrow \mathcal{G}_1(y_{j - 1})\Vert \mathcal{G}_2(y_{j - 1})$；</li>
+<li>输出 $\mathcal{A}’(x_1, …, x_{\ell(n) - n}, y_{\ell(n) - n})$。</li>
+</ol>
+<p>注意 $\Pr[\mathcal{A}(r) &#x3D; 1 | i &#x3D; \hat{i}] &#x3D; \Pr[\mathcal{A}(\mathcal{G}(s)) &#x3D; 1 | i &#x3D; \hat{i} + 1]$，$i &#x3D; \ell(n) - n + 1$ 将生成纯随机串，$i &#x3D; 1$ 将模拟 $\mathcal{G}’$。因此</p>
+<p>$$<br>\begin{aligned}<br>&amp;\left|\Pr[\mathcal{A}(r) &#x3D; 1] - \Pr[\mathcal{A}(\mathcal{G}(s)) &#x3D; 1]\Pr\right| \\<br>&amp;&#x3D; \frac{1}{\ell(n) - n + 1}\left|\sum_{t &#x3D; 1}^{\ell(n) - n + 1}\Pr[\mathcal{A}(r) &#x3D; 1 | i &#x3D; t] - \Pr[\mathcal{A}(\mathcal{G}(s)) &#x3D; 1 | i &#x3D; t]\right| \\<br>&amp;&#x3D; \frac{1}{\ell(n) - n + 1}\left|\Pr[\mathcal{A}(r) &#x3D; 1 | i &#x3D; 1] - \Pr[\mathcal{A}(\mathcal{G}(s)) | i &#x3D; \ell(n) - n + 1]\right| \\<br>&amp;&#x3D; \frac{1}{\ell(n) - n + 1}\left|\Pr[\mathcal{A}’(r) &#x3D; 1] - \Pr[\mathcal{A}’(\mathcal{G}’(s)) &#x3D; 1]\right|<br>\end{aligned}<br>$$</p>
+<p>不是不可忽略的。<div style="text-align: right">$\blacksquare$</div></p>
+<p>有了 PRG，就可以构造 PRF。回忆在尝试 2.2.3，我们有一个串行地构造 PRF 的方法。该算法的问题是太慢，解决的办法是像线段树一样算函数值。</p>
+<div class="note info"><p><strong>定理 3.2.3.</strong> 若存在 $2n$-PRG，则存在 $(n, n)$-PRF。</p>
+</div>
+
+<p><strong>证明（Goldreich-Goldwasser-Micali Tree）.</strong> 假设存在 $2n$-PRG $\mathcal{G}$，记 $\mathcal{G}(s) &#x3D; \mathcal{G}_0(s)\Vert \mathcal{G}_1(s)$，其中 $\mathcal{G}_0(s) &#x3D; \mathcal{G}_1(s) &#x3D; n$。构造 $\mathcal{F}$：在密钥 $k$ 和输入 $x$ 下：</p>
+<ol>
+<li>令 $u\leftarrow k$；</li>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n$：</li>
+<li>$\qquad$ $u\leftarrow \mathcal{G}_{x_i}(u)$；</li>
+<li>输出 $u$。</li>
+</ol>
+<p>证明是在查询走过的路上用 Hybrid Argument，这里省略。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 3.2.4.</strong> 若存在 $(2&#x2F;3n, 2&#x2F;3n)$-PRF，则存在 $n$-PRP。若存在 $(2n, 2n)$-PRF，则存在 $n$-强 PRP。</p>
+</div>
+
+<p>这个构造是所谓的 Feistel Network。</p>
+<div class="note success"><p><strong>定义 3.2.2（Feistel Network）.</strong> 设 $\mathcal{F}$ 是 PRF。如下的结构称作 $n$-Feistel Network（$\Psi^n(\mathcal{F}_{k_1}, \mathcal{F}_{k_2}, …, \mathcal{F}_{k_n})$）：设 $k &#x3D; k_1\Vert k_2\Vert \cdots \Vert k_n$，在输入 $x &#x3D; L_0 \Vert R_0$ 上：</p>
+<ol>
+<li><strong>For</strong> $i &#x3D; 1, 2, …, n$：</li>
+<li>$\qquad$ $L_i \leftarrow R_{i - 1}$；</li>
+<li>$\qquad$ $R_i \leftarrow L_{i - 1}\oplus \mathcal{F}(k_i, R_{i - 1})$；</li>
+<li>输出 $L_n\Vert R_n$。</li>
+</ol>
+<p>一个 Feistel Network 的输入记作 $[L, R]$，输出记作 $[S, T]$</p>
+</div>
+
+<p>下图来自 Introduction to Modern Cryptography。</p>
+<p><img src="/../picture/FeistelNetwork.png"></p>
+<p>首先讨论一下怎么 Hack Feistel Network。这个套路是所谓的“字节反转攻击”，给输入异或上某个东西，然后观察输出的变化。</p>
+<ul>
+<li><strong>$\Psi$ 不是 PRG.</strong> 注意总有 $S &#x3D; R$；</li>
+<li><strong>$\Psi^2$ 不是 PRP.</strong> 注意<br>$$<br>\Psi^2([L, R]) &#x3D; [L \oplus f_1(R), R \oplus f_2(L \oplus f_1(R))]<br>$$<br>因此 $\Psi^2([L, R]) \oplus \Psi^2([L’, R]) &#x3D; [L\oplus L’, …]$，可被区分。</li>
+<li><strong>$\Psi^3$ 不是强 PRP.</strong> 注意<br>$$<br>\begin{aligned}<br>\Psi^3([L, R]) &amp;&#x3D; [R\oplus f_2(L\oplus f_1(R)), L \oplus f_1(R) \oplus f_3(R\oplus f_2(L\oplus f_1(R)))] \\<br>(\Psi^3)^{-1}([S, T]) &amp;&#x3D; [T \oplus f_3(S)\oplus f_1(S \oplus f_2(T \oplus f_3(S))), S \oplus f_2(T \oplus f_3(S))]<br>\end{aligned}<br>$$<br>那么考虑做两个正向询问 $[L, R]$ 和 $[L \oplus b, R]$ 得到 $[S, T]$ 和 $[S’, T’]$，你会发现有<br>$$<br>(\Phi^3)^{-1}(S, T’\oplus b) &#x3D; […, R \oplus S \oplus S’]<br>$$<br>而正常排列高概率没有这种性质，因此 $\Psi^3$ 不是强 PRF。</li>
+</ul>
+<p>然后来证明 Feistel Network 的安全性。</p>
+<div class="note info"><p><strong>定理 3.2.5（Ruby-Lackoff）.</strong> 若 $\mathcal{F}$ 是 PRF，则 $\Psi^3(\mathcal{F}_{k_1}, \mathcal{F}_{k_2}, \mathcal{F}_{k_3})$ 是 PRP。</p>
+</div>
+
+<p><strong>证明（Sketch）.</strong> 首先因为 $\mathcal{F}$ 是 PRF，可以用 Hybrid Argument 证明不可区分 $\Psi^3(\mathcal{F}_{k_1}, \mathcal{F}_{k_2}, \mathcal{F}_{k_3})$ 和 $\Psi^3(f_1, f_2, f_3)$（此处 $f_1, f_2, f_3$ 是三个真随机函数）。对于后者，高概率有 $R_1$ 两两不同，因此 $L_3 &#x3D; R_2$ 和独立随机不可区分（自然也是两两不同），$R_3$ 和独立随机不可区分。这个证明是可以形式化的，具体参见附录。</p>
+<div class="note info"><p><strong>定理 3.2.6（Ruby-Lackoff）.</strong> 若 $\mathcal{F}$ 是 PRF，则 $\Psi^4(\mathcal{F}_{k_1}, \mathcal{F}_{k_2}, \mathcal{F}_{k_3}, \mathcal{F}_{k_4})$ 是强 PRP。</p>
+</div>
+
+<p>连 Sketch 都不想写了。</p>
+<h1><span id="appendix">Appendix</span></h1><h2><span id="map-of-reductions">Map of Reductions</span></h2><p><img src="/../picture/CryptoMap.png"></p>
+<h2><span id="h-coefficient-technique">H-Coefficient Technique</span></h2><p>本节严格化 Ruby Lackoff 定理的证明。首先是一些记号。</p>
+<ul>
+<li>记全体 $2^N\rightarrow 2^N$ 的函数为 $\mathscr{F}_N$；</li>
+<li>$G: K\rightarrow \mathscr{F}_N$ 称为函数构造子。其中 $K$ 是密钥集合。这里 $K$ 可以是：<ul>
+<li>$(2^N)^k$：$k$ 个狭义上的密钥；</li>
+<li>$(\mathscr{F}_N)^k$：$f$ 个真随机函数，用于证明时将 PRF 替换为纯随机函数。</li>
+</ul>
+</li>
+</ul>
+<div class="note success"><p><strong>定义 4.2.1.</strong> 设 $q$ 是一个整数（i.e. 询问次数），$G$ 是一个函数构造子，$\{a_i\}_{1\leq i\leq q}$ 是 $\{0, 1\}^N$ 中一列互不相同的数，$\{b_i\}$ 是 $\{0, 1\}^N$ 中一列数。定义 $H(\boldsymbol{a}, \boldsymbol{b})$，或简明地记作 $H$，为使得 $G$ 把 $\boldsymbol{a}$ 映到 $\boldsymbol{b}$ 的密钥集合大小，即</p>
+<p>$$<br>H(\boldsymbol{a}, \boldsymbol{b}) &#x3D; |\{(f_1, …, f_r) : \forall 1\leq i\leq q,  G(f_1, …, f_r)(a_i) &#x3D; b_i\}|<br>$$</p>
+</div>
+
+<p>直觉上，纯随机函数的 $H$ 都是一样大的（$2^N &#x2F; 2^q$），如果没有一个 $H$ 差的特别远，就没法区分。以下为证明的主定理。</p>
+<div class="note info"><p><strong>定理 4.2.1（H-Coefficient Technique for CPA）.</strong> 设 $\alpha, \beta$ 为两个正实数。$E$ 是 $\{0, 1\}^{Nq}$ 的一个子集，满足 $|E| &gt; (1-\beta)\cdot 2^{Nq}$。</p>
+<p>若：对于任意长度为 $q$ 的序列 $a_i$（两两不同），和长度为 $q$ 的序列 $b_i$（$b_i\in E$），都有</p>
+<p>$$<br>H(\boldsymbol{a}, \boldsymbol{b})\geq \frac{|K|}{2^{Nq}}(1 - \alpha)<br>$$</p>
+<p>则：对于任意进行 $q$ 次询问的 p.p.t adversary $\mathcal{A}$，都有</p>
+<p>$$<br>\left|\Pr_{f_1, …, f_r\sim \mathscr{F}_N} \left[\mathcal{A}^{G(f_1, …, f_r)}(1^N) &#x3D; 1\right] - \Pr_{f\sim \mathscr{F}_N}\left[\mathcal{A}^f(1^N) &#x3D; 1\right]\right| \leq \alpha + \beta<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 注意，因为我们讨论的攻击都是 $\mathbf{P}&#x2F;\mathrm{poly}$ 的，所以完全没有必要采用 p.p.t 的电路族，而是可以把最好的随机种子焊在电路里。对于一个确定性的 distinguisher $\mathcal{D}$，定义</p>
+<p>$$<br>P^* &#x3D; \frac{|f \in \mathscr{F}_N : \mathcal{D}^f(1^N) &#x3D; 1|}{|\mathscr{F}_N|}, P &#x3D; \frac{|\{(f_1, …, f_r)\in K : \mathcal{D}^{G(f_1, …, f_r)} &#x3D; 1\}|}{|K|}<br>$$</p>
+<p>欲证结论无非是 $|P^* - P|\leq \alpha + \beta$。这样一来，$P^*$ 的计算无需多言：$\mathcal{D}$ 既然是一个 oracle machine，那么抛开 oracle 访问就完全是一个正常的函数，假设其输入为 $\sigma_1, …, \sigma_q$，对应 $\mathcal{D}$ 对 $C_1, …, C_n$ 做了 oracle 访问（因为 $\mathcal{D}$ 是确定性算法，这两个序列是一一对应的）。设</p>
+<p>$$<br>\mathscr{N} &#x3D; |\{(\sigma_1, …, \sigma_q) \in \{0, 1\}^{Nq} : \mathcal{D}(\sigma_1, …, \sigma_q) &#x3D; 1\}|<br>$$</p>
+<p>则 $P^* &#x3D; \frac{\mathcal{N}}{2^{Nq}}$。$P$ 的下界也是好算的。我们仅计算 $\in E$ 的 $(\sigma_1, …, \sigma_q)$，有 </p>
+<p>$$<br>\begin{aligned}<br>  P&amp;&#x3D; \frac{1}{|\mathscr{K}|}\sum_{(\sigma_1, …, \sigma_n)\in \{0, 1\}^{Nq}} \mathbf{1}[\mathcal{D}(\sigma_1, …, \sigma_q) &#x3D; 1 {\color{red}\wedge (\sigma_1, …, \sigma_q)\in E}]\cdot H(\boldsymbol{C}, \boldsymbol{\sigma}) \\<br>  &amp;\geq \frac{(\mathscr{N} - \beta \cdot 2^{Nq})\cdot \frac{|K|}{2^{Nq}}(1 - \alpha)}{|K|} \\<br>  &amp;\geq (P^* - \beta)(1 - \alpha) \geq P^* - \alpha - \beta<br>\end{aligned}<br>$$</p>
+<p>注意这个算法跟 $\mathscr{N}$ 是什么完全没有关系。因此如果我定义 </p>
+<p>$$<br>\mathscr{N} &#x3D; |\{(\sigma_1, …, \sigma_q) \in \{0, 1\}^{Nq} : \mathcal{D}(\sigma_1, …, \sigma_q) &#x3D; 0\}|<br>$$</p>
+<p>便对称地得到 $P \leq P^* + \alpha + \beta$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>现在，我们算 $\Psi^3$ 的 H-Coefficient。设算法问了 $q$ 次 $(L_0^i, R_0^i)$，得到结果为 $(L_3^i, R_3^i)$。我们来逐条翻译 Proof Scketch：</p>
+<p><strong>$R_1$ 高概率两两不同.</strong> 只需要计算使得存在 $i\ne j, R_1^i &#x3D; R_1^j$ 的 $f_1$ 数量。注意 $R_1 &#x3D; L_0 \oplus f(R_0)$。因此固定 $i, j$，分类讨论：</p>
+<ul>
+<li>若 $R_0^i &#x3D; R_0^j$，因为你必须问不同的位置，所以必须有 $L_0^i\ne L_0^j$，进而有 $R_1^i\ne R_1^j$；</li>
+<li>否则，有 $f_1(R_0^i) \oplus f_1(R_0^j) &#x3D; L_0^i \oplus L_0^j$。这样的 $f_1$ 的个数仅有 $\frac{|\mathscr{F}_N|}{2^N}$。</li>
+</ul>
+<p>因此，至少有这么多的 $f_1$ 使得 $R_0$ 两两不同。</p>
+<p>$$<br>|\mathscr{F}_n|\left(1 - \frac{q(q - 1)}{2^{N + 1}}\right)<br>$$</p>
+<p><strong>$R_2$ 近乎完全随机.</strong> 对于任意的输入，只要 $R_1$ 均两两不同，使得输出为 $R_2^1, …, R_2^q$ 为某个特定序列的 $f_2$ 数量就是 $\frac{|\mathscr{F}_n|}{2^{Nq}}$。</p>
+<p><strong>$R_3$ 近乎完全随机.</strong> 对于任意的输入，只要 $R_2$ 均两两不同，使得输出为 $R_3^1, …, R_3^q$ 为某个特定序列的 $f_3$ 数量同上。</p>
+<p>然而，这里 $R_2$ 均两两不同就很难讨论了。不过我们特别引入了一个参数 $\beta$。于是可以取 $E$ 集合为 $L_3^i \ne L_3^j$ 的集合，这个集合的大小满足</p>
+<p>$$<br>|E| \geq 2^{Nq}\cdot \left(1 - \frac{q(q - 1)}{2^{N + 1}}\right) \quad \Rightarrow \quad \beta &#x3D; \frac{q(q - 1)}{2^{N + 1}} \<br>$$</p>
+<p>上面的推导表明对于任意的 $(\boldsymbol{L}_i, \boldsymbol{R}_0)$ 和 $(\boldsymbol{L}_3, \boldsymbol{R}_3)\in E$ 都有</p>
+<p>$$<br>$$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Cryptography/" rel="tag"># Cryptography</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/20/Mechanics4Hamiltonian/" rel="prev" title="力学 | Lecture 4. 哈密顿力学">
+                  <i class="fa fa-angle-left"></i> 力学 | Lecture 4. 哈密顿力学
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/11/02/ArchRevision1/" rel="next" title="Revision | 计算机组成与体系结构（上）">
+                  Revision | 计算机组成与体系结构（上） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 拉格朗日力学。    最小作用量原理 相对论性自由粒子的作用量 粒子与外场的相互作用 标量场 四矢量场   非相对论极限 自由粒子 标量场 矢量场   对称性与守恒律 非惯性系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="力学 | Lecture 2. 力学系统的作用量与运动方程">
+<meta property="og:url" content="http://example.com/2025/08/14/Mechanics2Lagrangian/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 拉格朗日力学。    最小作用量原理 相对论性自由粒子的作用量 粒子与外场的相互作用 标量场 四矢量场   非相对论极限 自由粒子 标量场 矢量场   对称性与守恒律 非惯性系">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-08-14T06:47:55.000Z">
+<meta property="article:modified_time" content="2025-08-19T14:24:05.436Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/08/14/Mechanics2Lagrangian/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/08/14/Mechanics2Lagrangian/","path":"2025/08/14/Mechanics2Lagrangian/","title":"力学 | Lecture 2. 力学系统的作用量与运动方程"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>力学 | Lecture 2. 力学系统的作用量与运动方程 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">最小作用量原理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">相对论性自由粒子的作用量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">粒子与外场的相互作用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">标量场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">四矢量场</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">非相对论极限</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">自由粒子</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">标量场</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">矢量场</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">对称性与守恒律</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">非惯性系</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/08/14/Mechanics2Lagrangian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="力学 | Lecture 2. 力学系统的作用量与运动方程 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          力学 | Lecture 2. 力学系统的作用量与运动方程
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-08-14 14:47:55" itemprop="dateCreated datePublished" datetime="2025-08-14T14:47:55+08:00">2025-08-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-08-19 22:24:05" itemprop="dateModified" datetime="2025-08-19T22:24:05+08:00">2025-08-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 拉格朗日力学。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%9C%80%E5%B0%8F%E4%BD%9C%E7%94%A8%E9%87%8F%E5%8E%9F%E7%90%86">最小作用量原理</a></li>
+<li><a href="#%E7%9B%B8%E5%AF%B9%E8%AE%BA%E6%80%A7%E8%87%AA%E7%94%B1%E7%B2%92%E5%AD%90%E7%9A%84%E4%BD%9C%E7%94%A8%E9%87%8F">相对论性自由粒子的作用量</a></li>
+<li><a href="#%E7%B2%92%E5%AD%90%E4%B8%8E%E5%A4%96%E5%9C%BA%E7%9A%84%E7%9B%B8%E4%BA%92%E4%BD%9C%E7%94%A8">粒子与外场的相互作用</a><ul>
+<li><a href="#%E6%A0%87%E9%87%8F%E5%9C%BA">标量场</a></li>
+<li><a href="#%E5%9B%9B%E7%9F%A2%E9%87%8F%E5%9C%BA">四矢量场</a></li>
+</ul>
+</li>
+<li><a href="#%E9%9D%9E%E7%9B%B8%E5%AF%B9%E8%AE%BA%E6%9E%81%E9%99%90">非相对论极限</a><ul>
+<li><a href="#%E8%87%AA%E7%94%B1%E7%B2%92%E5%AD%90">自由粒子</a></li>
+<li><a href="#%E6%A0%87%E9%87%8F%E5%9C%BA-1">标量场</a></li>
+<li><a href="#%E7%9F%A2%E9%87%8F%E5%9C%BA">矢量场</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%8E%E5%AE%88%E6%81%92%E5%BE%8B">对称性与守恒律</a></li>
+<li><a href="#%E9%9D%9E%E6%83%AF%E6%80%A7%E7%B3%BB">非惯性系</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<p>从本章开始，我们均不从牛顿定律出发，而是从最小作用量原理和狭义相对论出发推导分析力学。因此，从此处开始，读者应当直接忘记“力”这个概念，转而接受一切相互作用都是以作用量刻画的。</p>
+<h1><span id="最小作用量原理">最小作用量原理</span></h1><div class="note info"><p><strong>原理 1.1（最小作用量原理）.</strong> 一个力学系统在给定时刻 $t_1, t_2$ 的位形由广义坐标 $q^{(1)}$ 和 $q^{(2)}$ 描写。该力学系统的作用量 $S$ 为连结这两个位形之间各种可能轨道的泛函：</p>
+<p>$$<br>S :&#x3D; \int_{t_1}^{t_2} L(q, \dot{q}, t)\mathrm{d}t<br>$$</p>
+<p>此处 $L$ 称为系统的拉格朗日量，该系统的真实运动轨道即为使得 $S$ 取极值的轨道。</p>
+</div>
+
+<p>如果包含非完整约束，只需要引入拉格朗日乘子即可。</p>
+<p>依据最小作用量原理，一旦知道了系统的拉格朗日量（即，系统满足何种物理规律），就可以用变分法求出运动轨迹。</p>
+<p>将力学系统的真实轨道记作 $q_c(t)$，满足边值条件 $q_c(t_1) &#x3D; q^{(1)}, q_c(t_2) &#x3D; q^{(2)}$。考虑对作用量的变分</p>
+<p>$$<br>\delta S :&#x3D; \int_{t_1}^{t_2} L(q_c + \delta q, \dot{q}_c + \delta \dot{q}, t)\mathrm{d}t - \int_{t_1}^{t_2} L(q, \dot{q}, t)\mathrm{d}t<br>$$</p>
+<p>当 $\delta q$ 为无穷小量时，用中值定理算出</p>
+<p>$$<br>\begin{aligned}<br>\delta S &amp;&#x3D; \int_{t_1}^{t_2} \left(\frac{\partial L}{\partial q_i}\delta q_i + \frac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i\right)\mathrm{d}t \\<br>&amp;&#x3D; \int_{t_1}^{t_2} \left(\frac{\partial L}{\partial q_i}\delta q_i + {\color{blue} \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial L}{\partial \dot{q}_i}\delta q_i\right)} - \left(\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial L}{\partial \dot{q}_i}\right)\delta q_i\right)\mathrm{d}t \\&amp;&#x3D; \int_{t_1}^{t_2} \left(\frac{\partial L}{\partial q_i} - \left(\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial L}{\partial \dot{q}_i}\right)\right)\delta q_i\mathrm{d}t<br>\end{aligned}<br>$$</p>
+<p>注意蓝色的项积分为 $0$，因为边值条件要求 $\delta q(t_1) &#x3D; \delta q(t_2) &#x3D; 0$。那么，要让 $S$ 取极值，唯一的可能就是</p>
+<p>$$<br>\frac{\partial L}{\partial q_i} - \left(\frac{\mathrm{d}}{\mathrm{d}t} \frac{\partial L}{\partial \dot{q}_i}\right) \equiv 0<br>$$</p>
+<p>因此，只要知道了系统的拉格朗日量，求解运动方程的工作便无非是求解一个二阶常微分方程的问题。需要注意的是，只要 $S$ 是洛伦兹标量，$q$ 的变换服从洛伦兹变换，欧拉-拉格朗日方程就可以用于推导运动方程，无论是否考虑相对论。</p>
+<p>这里的 $\frac{\partial L}{\partial \dot{q}_i}$ 长得像能量对速度求导即动量，称为<strong>广义动量</strong>，记作 $p_i$；$\frac{\partial L}{\partial q_i}$ 长得像能量的梯度即力，称为<strong>广义力</strong>。此时力学系统的运动方程可以简记作</p>
+<p>$$<br>\frac{\mathrm{d}p_i}{\mathrm{d}t} &#x3D; \frac{\partial L}{\partial q_i}<br>$$</p>
+<p>这和牛顿力学中的动量定理形式如出一辙。</p>
+<p>当然，容易发现你对拉格朗日量乘常数或者加一个 $\frac{\mathrm{d}}{\mathrm{d}t} f(q, t)$ 都不会影响运动方程。经典（相对于量子情况下），我们可以认为只要运动方程不变，两个拉格朗日量就等价。</p>
+<h1><span id="相对论性自由粒子的作用量">相对论性自由粒子的作用量</span></h1><p>现在回到狭义相对论的时空观中。此时最小作用量原理变成作用量对一切可能的世界线取极值。</p>
+<p>最小作用量作为一条物理规律，我们至少希望它的解在不同参考系之间的变换服从洛伦兹变换。换言之我们要求系统的作用量必须满足以下几条要求：</p>
+<ol>
+<li>作用量应当是一个世界线上的线积分；</li>
+<li>作用量应当是一个洛伦兹标量；</li>
+<li>作用量应当满足时空平移对称性。</li>
+</ol>
+<p>因此作用量的定理几乎（似乎可以严格证明，但我暂时没看懂）只能是如下形式</p>
+<p>$$<br>S :&#x3D; \alpha\int \mathrm{d}s<br>$$</p>
+<p>这里 $\mathrm{d}s$ 是 $\sqrt{\mathrm{d}x_\alpha \mathrm{d}x^{\alpha}}$，$\alpha$ 是满足时空平移对称性的洛伦兹标量。一般取作 $-mc$ 以将量纲凑成和能量相同。</p>
+<p>现在尝试从中推出粒子的拉格朗日量、广义动量等，空进而得到其运动方程。注意 </p>
+<p>$$<br>\begin{aligned}<br>    S &amp;&#x3D; -mc \int \mathrm{d}s \\<br>      &amp;&#x3D; -mc^2 \int \frac{1}{\gamma}\mathrm{d}t<br>\end{aligned}<br>$$</p>
+<p>可知一个相对论性自由粒子的拉格朗日量为</p>
+<p>$$<br>L(v) &#x3D; -\frac{mc^2}{\gamma}<br>$$</p>
+<p>于是其广义动量为</p>
+<p>$$<br>\boldsymbol{p} &#x3D; \frac{\partial L}{\partial v} &#x3D; \gamma m\boldsymbol{v}<br>$$</p>
+<p>完全符合预期（这正是四维动量的表达式）。因此粒子的运动方程为</p>
+<p>$$<br>\frac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} &#x3D; 0 \label{freeparequ}<br>$$</p>
+<p>即匀速直线运动。</p>
+<hr>
+<p>最后在此展示如何不依赖于拉格朗日量，直接在四维协变形式做变分。当然，这将得到完全一致的结果。</p>
+<p>$$<br>\begin{aligned}<br>\delta S &amp;&#x3D; -mc\int \delta\left(\sqrt{\frac{\mathrm{d}x_\mu}{\mathrm{d}\tau}\frac{\mathrm{d}x^\mu}{\mathrm{d}\tau}}\right)\mathrm{d}\tau \\<br>&amp;&#x3D; -mc\int \frac{(\delta u_\mu)u^\mu}{\sqrt{u_\mu u^\mu}}\mathrm{d}\tau &amp; \color{blue}{\text{(Recall $u_\mu\delta u^\mu &#x3D; u^\mu \delta u_\mu$)}} \\<br>&amp;&#x3D; -m\int {u^\mu}\frac{\mathrm{d}}{\mathrm{d}\tau}(\delta x_\mu)\mathrm{d}\tau &amp; \color{blue}{\text{(Recall $\sqrt{u_\mu u^\mu} &#x3D; c$)}}\\<br>&amp;&#x3D; m \int \left(\frac{\mathrm{d}}{\mathrm{d}\tau} u^\mu\right) \delta x_\mu \mathrm{d}\tau &amp; \color{blue}{\text{(Integral by parts)}}<br>\end{aligned}<br>$$</p>
+<p>这表明 $\mathrm{d}u^\mu &#x2F; \mathrm{d}\tau &#x3D; 0$，这无非是方程 $(\ref{freeparequ})$ 的变形。</p>
+<h1><span id="粒子与外场的相互作用">粒子与外场的相互作用</span></h1><h2><span id="标量场">标量场</span></h2><p>先考虑一个粒子处于一个标量场 $\Phi$ 之中。该场对粒子的影响可以由如下作用量刻画：</p>
+<p>$$<br>S &#x3D; -mc \int e^{\Phi(x)}\mathrm{d}s<br>$$</p>
+<p>直接对其变分导出粒子的运动方程为</p>
+<p>$$<br>\frac{\partial \Phi}{\partial x^\nu}\frac{\mathrm{d}x^\nu}{\mathrm{d}s}\frac{\mathrm{d}x^\mu}{\mathrm{d}s} + \frac{\mathrm{d}^2 x^\mu}{\mathrm{d}s^2} &#x3D; \frac{\partial \Phi}{\partial x^\mu}<br>$$</p>
+<details class="note "><summary><p>计算细节</p>
+</summary>
+<p>$$<br>\begin{aligned}<br>\delta S &amp;&#x3D; -mc \int \delta \left(e^{\Phi(x)}\sqrt{u_\mu u^\mu}\right)\mathrm{d}\tau \\<br>        &amp;&#x3D; -mc \int \left(c e^{\Phi(x)}\frac{\partial \Phi}{\partial x^\mu} \delta x^\mu + e^{\Phi(x)}u^\mu \frac{\mathrm{d}}{\mathrm{d}\tau} (\delta x_\mu)\right)\mathrm{d}\tau \\<br>&amp;&#x3D; -mc \int \left(<br>    c e^{\Phi(x)}\frac{\partial \Phi}{\partial x^\mu}<br>    - \frac 1c u^\mu e^{\Phi(\boldsymbol{x})} \frac{\partial \Phi}{\partial x^\nu} \frac{\mathrm{d}x^\nu}{\mathrm{d}\tau}<br>    - \frac 1c e^{\Phi(x)}\frac{\mathrm{d}u^\mu}{\mathrm{d}\tau}<br>\right) \delta x^\mu \mathrm{d}\tau<br>\end{aligned}<br>$$</p>
+<p>括号里面必须是 $0$，我们把 $\mathrm{d}\tau$ 全部整理成 $\mathrm{d}s$ 即可。</p>
+
+</details>
+
+<p>当然，很显然，系统的拉格朗日量如下，套上欧拉-拉格朗日方程可以得到完全一样的运动方程。</p>
+<p>$$<br>L &#x3D; -mc^2e^{\Phi(x, t)} &#x2F; \gamma<br>$$</p>
+<blockquote>
+<p><strong>Remark.</strong> 其实我没搞清楚四维情况下怎么用欧拉-拉格朗日方程算运动方程。</p>
+</blockquote>
+<h2><span id="四矢量场">四矢量场</span></h2><p>考虑一个粒子处于一个洛伦兹四矢量场 $A_\mu$ 中。该场对粒子的影响可能会由如下作用量（显然是个洛伦兹标量）刻画。</p>
+<p>$$<br>S &#x3D; -mc\int\mathrm{d}s - \frac{e}{c}\int A_\mu(x)\mathrm{d}x^\mu<br>$$</p>
+<p>电场对粒子的作用量便是这样的形式。其中四矢量场可分为两个部分 $A^\mu &#x3D; (\Phi(x), \mathbf{A}(x))$，分别称为标势和矢势。</p>
+<p>那么拉格朗日量为</p>
+<p>$$<br>L &#x3D; -mc^2 &#x2F; \gamma + \frac{e}{c}\boldsymbol{v}\cdot \boldsymbol{A} - e\Phi<br>$$</p>
+<div class="note danger"><p>后面没看明白，先摆了。</p>
+</div>
+
+<h1><span id="非相对论极限">非相对论极限</span></h1><p>后面讨论的基本上都是宏观低速的东西，所以取 $c\rightarrow +\infty$ 时的<strong>近似</strong>足矣。</p>
+<blockquote>
+<p><strong>Remark.</strong> 此处我使用「近似」而非「极限」，在下面的例子中就将看到此用词的准确性所在。</p>
+</blockquote>
+<h2><span id="自由粒子">自由粒子</span></h2><p>$$<br>L &#x3D; -\frac{mc^2}{\gamma} &#x3D; -mc^2 + \frac{1}{2} mv^2 + o\left(\frac{v}{c}\right)<br>$$</p>
+<p>当 $c$ 为大常数时，只有中间的项有用。因此自由粒子的拉格朗日量为</p>
+<p>$$<br>L &#x3D; \frac 12 mv^2<br>$$</p>
+<p>很明显解就是匀速直线运动。</p>
+<h2><span id="标量场">标量场</span></h2><p>假设 $\Phi(x, t) &#x3D; V(x, t) &#x2F; (mc^2)$，常数用途是凑能量量纲。</p>
+<p>现在有</p>
+<p>$$<br>\begin{aligned}<br>L &amp;&#x3D; -mc^2 e^{\Phi(x, t)} &#x2F; \gamma \\<br>&amp;&#x3D; -mc^2 \left(1 + \frac{V(x, t)}{mc^2} + o(1 &#x2F; c^2)\right)\left(-mc^2 + \frac{1}{2}\frac{v^2}{c^2} + o(1 &#x2F; c^2)\right) \\<br>&amp;\approx \frac 12 mv^2 - V(x, t)<br>\end{aligned}<br>$$</p>
+<p>类似于动能减势能。对应运动方程（欧拉-拉格朗日方程）为</p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t}(m\boldsymbol{v}) &#x3D; -\nabla_x V<br>$$</p>
+<p>即标量场中的牛顿定律方程。如果这里的 $V$ 和时间无关，则粒子和场构成的系统称为保守系统。此时拉格朗日量永不发生变化，即能量守恒。</p>
+<h2><span id="矢量场">矢量场</span></h2><p>拉格朗日量的极限显然是</p>
+<p>$$<br>L &#x3D; \frac 12 m\boldsymbol{v}^2 + \frac{e}{c}\boldsymbol{v}\cdot \boldsymbol{A} - e\Phi(x, t)<br>$$</p>
+<p>此拉格朗日量对应的方程是非相对论性粒子在洛伦兹力作用下的牛顿方程。</p>
+<h1><span id="对称性与守恒律">对称性与守恒律</span></h1><p>在上一节中，我们看到了保守系统中的能量守恒。本质上，这就是：如果 $L$ 对 $t$ 的导数恒为 $0$，则能量守恒。这个结论似乎可以自然地推广到其他情形：如果 $L$ 对某个参数导数为 $0$，则必然有一个与之对应的守恒量。归纳为如下定理：</p>
+<div class="note info"><p><strong>定理（Noether，1918）.</strong> 一个由广义坐标 $\boldsymbol{q} &#x3D; (q_1, …, q_f)$ 和拉格朗日量 $L$ 刻画的经典力学系统。令 $q$ 是一族由 $\xi$ 参数化的坐标变换</p>
+<p>$$<br>q_i \mapsto \tilde{q}_i(\boldsymbol{q}, \xi), \qquad \tilde{q}_i(\boldsymbol{q}, 0) &#x3D; q_i<br>$$</p>
+<p>若在此变换下，拉格朗日量不变，则称 $\tilde{q}_i$ 为系统的一个对称性。若一个与系统状态有关的量不随时间变化，则称其为一个守恒量。</p>
+<p><em>对于系统的每个对称性，都有一个守恒量与之对应。</em></p>
+</div>
+
+<p><strong>证明.</strong> 对称性表明</p>
+<p>$$<br>\frac{\partial L}{\partial \xi} &#x3D; 0<br>$$</p>
+<p>使用链式法则和欧拉-拉格朗日方程直接计算</p>
+<p>$$<br>\begin{aligned}<br>\frac{\partial L}{\partial \xi}<br>&amp;&#x3D; \frac{\partial L}{\partial q}\frac{\partial \tilde{q}}{\partial \xi} + \frac{\partial L}{\partial \dot{q}}\frac{\partial \dot{\tilde{q}}}{\partial \xi} \\<br>&amp;&#x3D; \left(\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial \dot{q}}\right)\frac{\partial \tilde{q}}{\partial \xi} + \frac{\partial L}{\partial\dot{q}}\left(\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial \tilde{q}}{\partial \xi}\right) \\<br>&amp;&#x3D; \frac{\mathrm{d}}{\mathrm{d}t}\left(\frac{\partial L}{\partial \dot{q}}\frac{\partial \tilde{q}}{\partial \xi}\right)<br>\end{aligned}<br>$$</p>
+<p>因此</p>
+<p>$$<br>Q :&#x3D; \frac{\partial L}{\partial \dot{q}}\frac{\partial \tilde{q}}{\partial \xi}<br>$$</p>
+<p>不随时间变化。这个 $Q$ 称为诺特守恒荷。$\blacksquare$</p>
+<p>最后容易验证以下几个对称性对应的守恒量正是我们所熟悉的：</p>
+<ul>
+<li><strong>时间平移对称性.</strong> 能量守恒。</li>
+<li><strong>空间平移对称性.</strong> 动量守恒。</li>
+<li><strong>空间旋转对称性.</strong> 角动量守恒。</li>
+</ul>
+<p>后两者都是 Noether 定理的直接推论，前者含时间，可能形式上不太一样，但本质上思路一样，这里推一下</p>
+<p>$$<br>\begin{aligned}<br>\frac{\mathrm{d} L}{\mathrm{d} t} &amp;&#x3D; \frac{\partial L}{\partial x_i} \dot{x}_i + \frac{\partial L}{\partial \dot{x}_i}\ddot{x}_i \\<br>&amp;&#x3D; \frac{\mathrm{d}}{\mathrm{d}t} (\boldsymbol{p}\cdot \dot{\boldsymbol{x}})<br>\end{aligned}<br>$$</p>
+<p>因此下面的量守恒</p>
+<p>$$<br>E :&#x3D; \boldsymbol{p}\cdot \boldsymbol{v} - L<br>$$</p>
+<p>可以验证，对于经典的拉格朗日量 $L &#x3D; \frac 12 m\boldsymbol{v}^2 - V$，推出的 $E$ 正好就是我们熟悉的动能加势能。</p>
+<blockquote>
+<p><strong>Remark.</strong> 需要注意的是，反过来，守恒量不一定对应一个对称性。守恒量还可能源自势能的特殊形式。统一起见，这类特殊形式称为“动力学对称性”。一个著名的代表就是拉普拉斯-龙格-楞次矢量，下一章会对其进行详细的阐述。</p>
+</blockquote>
+<h1><span id="非惯性系">非惯性系</span></h1><p>最后简单讨论一下非惯性系中的拉格朗日量和相应的运动方程。在宏观低速情况下，这无非是做一个坐标变换然后计算。考虑在惯性系 $K_0$ 中质点的拉格朗日量为</p>
+<p>$$<br>L_0 &#x3D; \frac{1}{2} m\boldsymbol{v}_0^2 - V<br>$$</p>
+<p>现在有另一个参考系 $K’$ 相对于 $K_0$ 以速度 $\boldsymbol{V}$（关于时间的函数）平动，则有 </p>
+<p>$$<br>\boldsymbol{v}_0 &#x3D; \boldsymbol{v}’ + \boldsymbol{V}<br>$$</p>
+<p>代入得到 $K’$ 中系统的拉格朗日量为</p>
+<p>$$<br>L’ &#x3D; \frac 12 m \boldsymbol{v}’^2 + \frac 12 m \boldsymbol{V}^2 + m\boldsymbol{v}’\boldsymbol{V} - V<br>$$</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里你可以注意 $\boldsymbol{V}$ 和 $\boldsymbol{V}\boldsymbol{x}’$ 都是只和时间、坐标有关的函数，因此在拉格朗日量上加其对时间求导丝毫不影响运动方程。据此，你也可以将拉格朗日量整理成<br>$$<br>  L’ &#x3D; \frac 12 m \boldsymbol{v}’^2 - m\frac{\mathrm{d}\boldsymbol{V}}{\mathrm{d}t}\cdot \boldsymbol{x}’ - V<br>$$</p>
+</blockquote>
+<p>运动方程为</p>
+<p>$$<br>\frac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} &#x3D; - m\frac{\mathrm{d}\boldsymbol{V}}{\mathrm{d}t} -\nabla_x V<br>$$</p>
+<p>现在加上转动。假设 $K$ 和 $K’$ 中心重合，但是以角速度 $\boldsymbol{\Omega}$ 转动。则有</p>
+<p>$$<br>\boldsymbol{v}’ &#x3D; \boldsymbol{v} + \boldsymbol{\Omega}\times \boldsymbol{x}<br>$$</p>
+<p>整理拉格朗日量（注意省略一切只和 $\boldsymbol{x}, t$ 有关的时间导数）</p>
+<p>$$<br>L &#x3D; \frac 12 m\boldsymbol{v}^2 + \frac 12 m (\boldsymbol{\Omega}\times \boldsymbol{x})^2 + m \boldsymbol{v}\cdot (\boldsymbol{\Omega}\times \boldsymbol{x})  - m\dot{\boldsymbol{V}}\cdot \boldsymbol{x} - V<br>$$</p>
+<p>经过一些颇为琐碎的矢量分析得到运动方程为</p>
+<p>$$<br>\frac{\mathrm{d}\boldsymbol{p}}{\mathrm{d}t} &#x3D; -\nabla_x V - m\dot{\boldsymbol{V}} + m\boldsymbol{x}\times \dot{\boldsymbol{\Omega}} + m\boldsymbol{\Omega}\times (\boldsymbol{x}\times \boldsymbol{\Omega}) + 2m\boldsymbol{v}\times \boldsymbol{\Omega}<br>$$</p>
+<p>右侧除了场的作用力之外，依次是平动惯性力，转动惯性力，惯性离心力，科里奥利力。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/08/05/Mechanism-RelTheory/" rel="prev" title="力学 | 补充内容：狭义相对论简介">
+                  <i class="fa fa-angle-left"></i> 力学 | 补充内容：狭义相对论简介
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/19/Mechanics3Applications/" rel="next" title="力学 | Lecture 3. 简单应用">
+                  力学 | Lecture 3. 简单应用 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

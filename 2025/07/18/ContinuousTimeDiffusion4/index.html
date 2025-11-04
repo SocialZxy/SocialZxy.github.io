@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    扩散过程的稳态分布与优化问题 前向欧拉方法 Langevin 扩散 欠阻尼 Langevin 扩散   参考资料">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PKU Summer School 2025 | 4 从理论到算法：扩散过程的离散化">
+<meta property="og:url" content="http://example.com/2025/07/18/ContinuousTimeDiffusion4/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    扩散过程的稳态分布与优化问题 前向欧拉方法 Langevin 扩散 欠阻尼 Langevin 扩散   参考资料">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-07-18T14:50:53.000Z">
+<meta property="article:modified_time" content="2025-07-19T15:29:25.436Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/07/18/ContinuousTimeDiffusion4/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/07/18/ContinuousTimeDiffusion4/","path":"2025/07/18/ContinuousTimeDiffusion4/","title":"PKU Summer School 2025 | 4 从理论到算法：扩散过程的离散化"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>PKU Summer School 2025 | 4 从理论到算法：扩散过程的离散化 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">扩散过程的稳态分布与优化问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">前向欧拉方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Langevin 扩散</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">欠阻尼 Langevin 扩散</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/07/18/ContinuousTimeDiffusion4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PKU Summer School 2025 | 4 从理论到算法：扩散过程的离散化 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PKU Summer School 2025 | 4 从理论到算法：扩散过程的离散化
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-07-18 22:50:53" itemprop="dateCreated datePublished" datetime="2025-07-18T22:50:53+08:00">2025-07-18</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-07-19 23:29:25" itemprop="dateModified" datetime="2025-07-19T23:29:25+08:00">2025-07-19</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E6%89%A9%E6%95%A3%E8%BF%87%E7%A8%8B%E7%9A%84%E7%A8%B3%E6%80%81%E5%88%86%E5%B8%83%E4%B8%8E%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98">扩散过程的稳态分布与优化问题</a></li>
+<li><a href="#%E5%89%8D%E5%90%91%E6%AC%A7%E6%8B%89%E6%96%B9%E6%B3%95">前向欧拉方法</a><ul>
+<li><a href="#langevin-%E6%89%A9%E6%95%A3">Langevin 扩散</a></li>
+<li><a href="#%E6%AC%A0%E9%98%BB%E5%B0%BC-langevin-%E6%89%A9%E6%95%A3">欠阻尼 Langevin 扩散</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="扩散过程的稳态分布与优化问题">扩散过程的稳态分布与优化问题</span></h1><p>扩散过程的稳态分布究竟给我们带来什么？考虑光滑非凸函数 $f$ 无约束优化问题：</p>
+<p>$$<br>\mathrm{minimize} \quad f(\boldsymbol{x})<br>$$</p>
+<p>考虑跑一个 $f$ 给出的（带温度的）Langevin 扩散过程来进行采样：</p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; -\nabla f(\boldsymbol{X}_t)\mathrm{d}t + \sqrt{\frac{2}{\beta}}\mathrm{d}\boldsymbol{B}_t<br>$$</p>
+<p>可以算出该扩散过程的稳态是</p>
+<p>$$<br>\pi(\boldsymbol{x}) &#x3D; \frac{\exp(-\beta f(\boldsymbol{x}))}{\int \exp(-\beta f(\boldsymbol{y}))\mathrm{d}\boldsymbol{y}}<br>$$</p>
+<p>方便起降将归一化因子记作 $z_\beta$。换言之，$f(\boldsymbol{x})$ 越小，从中采出 $\boldsymbol{x}$ 的概率越大。现在来考察采样的效果：希望分析 $\mathbb{E}_\pi[f(\boldsymbol{x})] - f_\min$。</p>
+<p>$$<br>\begin{aligned}<br>\int \pi(\boldsymbol{x})f(\boldsymbol{x})\mathrm{d}\boldsymbol{x} &amp;&#x3D; \int \pi(\boldsymbol{x})\left(-\frac{1}{\beta}\log \pi(\boldsymbol{x}) - \frac{1}{\beta}z_{\beta}\right)\mathrm{d}\boldsymbol{x} \\<br>&amp;&#x3D; \frac{1}{\beta}\mathrm{Ent}[\pi(\boldsymbol{x})] - \frac{1}{\beta} z_{\beta}<br>\end{aligned}<br>$$</p>
+<p>第一项可以用最大熵估计（熟知正态分布熵最大）证明其不超过 $\frac{d}{2}\log \mathbb{E}_\pi[\boldsymbol{x}^2]$。<em>据说这个很小，但我算不来。</em></p>
+<p>第二项可以用光滑性硬算一下</p>
+<p>$$<br>\begin{aligned}<br>    z_\beta &amp;&#x3D; f_\min - \frac{1}{\beta}\log \int e^{-\beta (f(\boldsymbol{z}) - f_\min)}\mathrm{d}\boldsymbol{z} \\<br>    &amp;&#x3D; f_\min - \frac{1}{\beta}\log \int e^{-\frac{\beta}{2}L(\boldsymbol{z} - \boldsymbol{z}^*)^2}\mathrm{d}\boldsymbol{z} \\<br>    &amp;&#x3D; f_\min + \frac{d}{\beta}\log(\cdots)<br>\end{aligned}<br>$$</p>
+<p>因此误差基本上是 $\mathbb{E}_\pi[f(\boldsymbol{x})] - f_\min \leq \frac{d}{\beta}\log(\cdots)$ 级别，这里 $\cdots$ 里面是某些高斯积分的结果，总之为常数。</p>
+<h1><span id="前向欧拉方法">前向欧拉方法</span></h1><p>在上述推导中我们知道扩散过程确实可以用来做优化问题。但是为了用计算机模拟扩散过程，（除 Ornstein-Uhlembeck 过程有美观的闭式解外）需将其离散化。离散化之后，随机过程发生了变化，但是仍然希望它（在 Wasserstein 距离等意义下）能收敛于稳态分布。得到的算法的开销可基于如下两个方面：</p>
+<ul>
+<li>总时间；</li>
+<li>维度。</li>
+</ul>
+<h2><span id="langevin-扩散">Langevin 扩散</span></h2><p>先考虑</p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; -\nabla f(\boldsymbol{X}_t)\mathrm{d}t + \sqrt 2 \mathrm{d}\boldsymbol{B}_t<br>$$</p>
+<p>其中 $f(\cdot)$ 是一个强凸光滑函数（参数为 $\lambda, L$）。以时间步长 $\eta$ 做离散化：</p>
+<p>$$<br>\widetilde{\boldsymbol{X}}_{(k + 1)\eta} &#x3D; \widetilde{\boldsymbol{X}}_{k\eta} - \eta\nabla f(\widetilde{\boldsymbol{X}}_{k\eta}) + \sqrt{2\eta} \xi_k<br>$$</p>
+<p>其中 $\xi_k$ 服从标准正态分布 $\mathcal{N}(0, \mathbf{I})$。现在，随机过程发生了变化。为了方便进行耦合，我们写出等价的连续时间过程 </p>
+<p>$$<br>\widetilde{\boldsymbol{X}}_{t} &#x3D; -\nabla f(\widetilde{\boldsymbol{X}}_t)\mathrm{d}t + \sqrt 2 \mathrm{d}\boldsymbol{B}_t \qquad \text{for $t\in [k\eta, (k + 1)\eta)$}<br>$$</p>
+<p>做同步耦合，计算</p>
+<p>$$<br>\begin{aligned}<br>\frac{\mathrm{d}}{\mathrm{d}t} \mathbb{E}\left[\left\lVert \widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t \right\rVert^2\right] &amp;&#x3D;<br>-2\mathbb{E}\left[\langle\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t, \nabla f(\widetilde{\boldsymbol{X}}_{k\eta}) - \nabla f(\boldsymbol{X}_t)\rangle\right] \\<br>&amp;&#x3D;<br>-2\mathbb{E}\left[\langle\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t, \nabla f(\widetilde{\boldsymbol{X}}_{t}) - \nabla f(\boldsymbol{X}_t)\rangle\right] -<br>2\mathbb{E}\left[\langle\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t, \nabla f(\widetilde{\boldsymbol{X}}_{k\eta}) - \nabla f(\widetilde{\boldsymbol{X}}_t)\rangle\right]<br>\end{aligned}<br>$$</p>
+<p>第一项，依强凸性不会超过 $-\lambda \mathbb{E}\left[\left\lVert\boldsymbol{X}_t - \widetilde{\boldsymbol{X}}_t\right\rVert^2\right]$，而第二项</p>
+<p>$$<br>\begin{aligned}<br>-2\mathbb{E}\left[\langle\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t, \nabla f(\widetilde{\boldsymbol{X}}_{k\eta}) - \nabla f(\widetilde{\boldsymbol{X}}_t)\rangle\right]<br>&amp;\leq 2\sqrt{\mathbb{E}\left[\left\lVert\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t\right\rVert^2\right]} \cdot \sqrt{\mathbb{E}\left[\left\lVert\nabla f(\widetilde{\boldsymbol{X}}_{k\eta}) - \nabla f(\widetilde{\boldsymbol{X}}_t)\right\rVert^2\right]} &amp; \color{blue}{\text{(Cauchy-Schwartz)}} \\<br>&amp;\leq 2L^2 \sqrt{\mathbb{E}\left[\left\lVert\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t\right\rVert^2\right]} \cdot {\color{red}\sqrt{\mathbb{E}\left[\left\lVert\widetilde{\boldsymbol{X}}_{k\eta} - \widetilde{\boldsymbol{X}}_t\right\rVert^2\right]}} &amp; \color{blue}{\text{(Smoothness)}}<br>\end{aligned}<br>$$</p>
+<p>红色部分里面的差实际上来自于一个黎曼积分和一个随机积分</p>
+<p>$$<br>\widetilde{\boldsymbol{X}}_{k\eta} - \widetilde{\boldsymbol{X}}_t &#x3D; \underbrace{-(k\eta - t) \nabla f(\widetilde{\boldsymbol{X}}_{k\eta})}_{\text{$O(\eta \sqrt d)$ by smoothness}} + \underbrace{\sqrt 2 \int_t^{k\eta} \mathrm{d}\boldsymbol{B}_t}_{\text{$O(\sqrt{\eta d})$ in expectation}}<br>$$</p>
+<p>定义 $\Phi_t &#x3D; \mathbb{E}\left[\left\lVert\widetilde{\boldsymbol{X}}_t - \boldsymbol{X}_t\right\rVert^2\right]$。综合以上结果有</p>
+<p>$$<br>\begin{aligned}<br>    \frac{\mathrm{d}\Phi_t}{\mathrm{d}t} &amp;\leq -\lambda \Phi_t + 2\sqrt{\Phi_t}\cdot O(\sqrt{\eta d}) \\<br>    &amp;\leq -\lambda \Phi_t + \frac{\lambda}{2}\Phi_t + \frac{2}{\lambda}O(d\eta) &amp; \color{blue}{\text{(AM-GM)}}<br>\end{aligned}<br>$$</p>
+<p>解上述微分不等式得到</p>
+<p>$$<br>\Phi_t \leq \exp\left(-\frac{\lambda t}{2}\right)\Phi_0 + O\left(\frac{\eta}{\lambda}\right)<br>$$</p>
+<p>因此我们得到了</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 取 $\eta &#x3D; O\left(\frac{\varepsilon^2}{d}\right)$，$t &#x3D; \Omega\left(\frac{1}{\lambda}\log \frac{1}{\varepsilon}\right)$，有</p>
+<p>$$<br>\mathcal{W}_2\left(\widetilde{\pi}_t, \pi\right) \leq \varepsilon<br>$$</p>
+<p>因此我们得到了所谓的“朴素 Langevin 算法（Unadjusted Langevin Algorithm，ULA）”。其查询一个正态分布采样器的 oracle 的次数为</p>
+<p>$$<br>O\left(\frac{d}{\varepsilon^2}\log\frac{1}{\varepsilon^2}\right)<br>$$</p>
+</div>
+
+<div class="note "><p><strong>补充 2.1.</strong> 严格意义上来说，我们还需要算复杂度对 $\kappa &#x3D; L &#x2F; \lambda$ 的依赖性。但上述分析中，简便起见将其当作常数。实际上你加进去算也是容易的。</p>
+</div>
+
+<div class="note "><p><strong>补充 2.1.</strong> 回忆随机游走里面有一个经典的操作叫做 Metropolis 过程：在转移之后以概率</p>
+<p>$$<br>\min\left(1, \frac{p(x | y)\pi(x)}{p(y | x)\pi(y)}\right)<br>$$</p>
+<p>接受转移。在 Langevin 过程中，$p(x | y) &#x2F; p(y | x)$ 是容易求的（两个正态分布的商）。因此可以离散化 Langevin 扩散作为转移概率，运行一个 Metropolis 过程（Metropolis Adjusted Langevin Algorithm，MALA）。文献 [1] 证明了热启动 MALA 在 $\Delta_{TV}$ 意义下达到误差不超过 $\varepsilon$ 只需要 $O(d\log (1 &#x2F; \varepsilon))$ 次迭代，显著快于 ULA。（似乎对关于 $\kappa$ 的优化也有所改进）</p>
+</div>
+
+<h2><span id="欠阻尼-langevin-扩散">欠阻尼 Langevin 扩散</span></h2><p>考虑（其中 $f$ 仍然光滑强凸）</p>
+<p>$$<br>\begin{cases}<br>    \mathrm{d}\boldsymbol{v}_t &#x3D; -\gamma \boldsymbol{v}_t\mathrm{d}t - u\nabla f(\boldsymbol{x}_t)\mathrm{d}t + \sqrt{2\gamma u}\mathrm{d}\boldsymbol{B}_t \\<br>    \mathrm{d}\boldsymbol{x}_t &#x3D; \boldsymbol{v}_t\mathrm{d}t<br>\end{cases}<br>$$</p>
+<div class="note danger"><p><strong>警告.</strong> 下面的推导是课上讲的，skip 了莫名其妙的一步（$(\ref{waht})$ 中动能的估计）。但是得到的结果确实是一个和文献 [2] 一样的结果。该文献的方法又不一样，没有时间看。</p>
+</div>
+
+<p>还是考虑之前的那个函数，并采纳记号 $\boldsymbol{z}_t &#x3D; \widetilde{\boldsymbol{x}}_t - \boldsymbol{x}_t, \boldsymbol{y}_t &#x3D; \widetilde{\boldsymbol{v}}_t - \boldsymbol{v}_t$：</p>
+<p>$$<br>\Phi_t &#x3D; \mathbb{E}\left[\left\lVert\begin{pmatrix}<br>    1 &amp; 1 \\ 1 &amp; 0<br>\end{pmatrix}\begin{pmatrix}<br>    \widetilde{\boldsymbol{x}}_t - \boldsymbol{x}_t \\ \widetilde{\boldsymbol{v}}_t - \boldsymbol{v}_t<br>\end{pmatrix}\right\rVert^2\right]<br>$$</p>
+<p>计算 </p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t} \Phi_t &#x3D; \mathbb{E}\left[\begin{pmatrix}<br>    \boldsymbol{z}_t + \boldsymbol{y}_t \\ \boldsymbol{z}_t<br>\end{pmatrix}^\top \begin{pmatrix}<br>    (1 - \gamma) \boldsymbol{y}_t - u(\nabla f(\widetilde{\boldsymbol{x}}_{k\eta}) - \nabla f(\boldsymbol{x}_t)) \\<br>    - \boldsymbol{y}_t<br>\end{pmatrix}\right]<br>$$</p>
+<p>这里如果是 $\nabla f(\tilde{\boldsymbol{x}}_t) - \nabla f(\boldsymbol{x}_t)$，就和我们在<a href="../../../../2025/07/15/ContinuosTimeDiffusion2/">第二节课</a>拿到的东西一模一样（一个 $\boldsymbol{v}^\top \mathbf{Q}_t \boldsymbol{v}$，其中 $\mathbf{Q}$ 是正定矩阵，最小特征值为 $\frac{\lambda}{2L}$ 级别，称为“something nice”），于是</p>
+<p>$$<br>\begin{aligned}<br>\frac{\mathrm{d}}{\mathrm{d}t} \Phi_t &amp;&#x3D; - {\color{blue} \text{(something nice)}} + u\mathbb{E}\left[<br>\begin{pmatrix}<br>    \boldsymbol{z}_t + \boldsymbol{y}_t \\ \boldsymbol{z}_t<br>\end{pmatrix}^\top<br>\begin{pmatrix}<br>-(\nabla f(\widetilde{\boldsymbol{x}}_{k\eta}) - \nabla f(\widetilde{\boldsymbol{x}}_t)) \\ 0<br>\end{pmatrix}\right] \\<br>&amp;\leq -\frac{\lambda}{2L}\Phi_t + uL^2\sqrt{\Phi_t \cdot \mathbb{E}\left[\left\lVert \widetilde{\boldsymbol{x}}_{k\eta} - \widetilde{\boldsymbol{x}}_t  \right\rVert^2\right]}<br>\end{aligned}<br>$$</p>
+<p>然后是喜闻乐见的积分环节</p>
+<p>$$<br>\begin{aligned}<br>    \widetilde{\boldsymbol{x}}_t - \widetilde{\boldsymbol{x}}_{k\eta} &amp;&#x3D; \int_t^{k\eta} \widetilde{\boldsymbol{v}}_t\mathrm{d}t<br>\end{aligned}<br>$$</p>
+<p>因此 </p>
+<p>$$<br>\begin{aligned}<br>    \mathbb{E}\left[\left\lVert\widetilde{\boldsymbol{x}}_t - \widetilde{\boldsymbol{x}}_{k\eta}\right\rVert^2\right]<br>    &amp;\leq \eta^2 \max \mathbb{E}\left[\widetilde{\boldsymbol{v}}^2\right]<br>\end{aligned} \label{waht}<br>$$</p>
+<p>可以证明，$\mathbb{E}\left[\widetilde{\boldsymbol{v}}^2\right] &#x3D; O(d)$。这倒是很符合直觉。但我想了半天没想明白具体怎么证。到这里和 Langevin 扩散的区别是常数项从 $O(d\eta)$ 变成了 $O(d\eta^2)$，现在我们拿到了和前面相似的微分不等式，解出</p>
+<p>$$<br>\Phi_t \leq \exp\left(-\frac{\lambda}{2L}t\right)\Phi_0 + O(\eta^2 d)<br>$$</p>
+<p>现在有</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 取 $\eta &#x3D; O\left(\frac{\varepsilon}{\sqrt{d}}\right)$，$t &#x3D; \Omega\left(\frac{1}{\lambda}\log(1 &#x2F; \varepsilon)\right)$，有</p>
+<p>$$<br>\mathcal{W}_2\left(\widetilde{\pi}_t, \pi\right) \leq \varepsilon<br>$$</p>
+<p>得到的算法查询一个正态分布采样器的 oracle 的次数为如下值，比 ULA 收敛更快</p>
+<p>$$<br>O\left(\frac{\sqrt d}{\varepsilon}\log\frac{1}{\varepsilon}\right)<br>$$</p>
+</div>
+
+<h1><span id="参考资料">参考资料</span></h1><ol>
+<li>Raaz Dwivedi, Yuansi Chen, Martin J. Wainwright, Bin Yu.  <em>Log-concave sampling: Metropolis-Hastings algorithms are fast</em>, JMLR (2019)</li>
+<li>Xiang Cheng, Niladri S. Chatterji, Peter L. Bartlett, Michael I. Jordan. <em>Underdamped Langevin MCMC: A non-asymptotic analysis</em>, arxiv: 1707.03663</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/07/17/ContinuousTimeDiffusion3/" rel="prev" title="PKU Summer School 2025 | 3 扩散过程收敛性进阶内容">
+                  <i class="fa fa-angle-left"></i> PKU Summer School 2025 | 3 扩散过程收敛性进阶内容
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/08/05/Mechanism-RelTheory/" rel="next" title="力学 | 补充内容：狭义相对论简介">
+                  力学 | 补充内容：狭义相对论简介 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

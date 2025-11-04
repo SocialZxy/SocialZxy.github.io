@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 计算机组成与体系结构（上）">
+<meta property="og:url" content="http://example.com/2025/11/02/ArchRevision1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/MIPS.png">
+<meta property="article:published_time" content="2025-11-02T05:05:22.000Z">
+<meta property="article:modified_time" content="2025-11-03T17:23:42.172Z">
+<meta property="article:author" content="King Strange">
+<meta property="article:tag" content="Architecture">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/MIPS.png">
+
+
+<link rel="canonical" href="http://example.com/2025/11/02/ArchRevision1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/11/02/ArchRevision1/","path":"2025/11/02/ArchRevision1/","title":"Revision | 计算机组成与体系结构（上）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 计算机组成与体系结构（上） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">计算机的基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">CISC 与 x86 指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">x86 寄存器和访存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">x86 指令选讲</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">RISC 与代表指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">RISC-V 和 ARM</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/02/ArchRevision1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 计算机组成与体系结构（上） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 计算机组成与体系结构（上）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-11-02 13:05:22" itemprop="dateCreated datePublished" datetime="2025-11-02T13:05:22+08:00">2025-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-04 01:23:42" itemprop="dateModified" datetime="2025-11-04T01:23:42+08:00">2025-11-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Revision-Notes/" itemprop="url" rel="index"><span itemprop="name">Revision Notes</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%86%E5%8F%B2">历史</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%BB%93%E6%9E%84">计算机的基本结构</a></li>
+<li><a href="#cisc-%E4%B8%8E-x86-%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F">CISC 与 x86 指令系统</a><ul>
+<li><a href="#x86-%E5%AF%84%E5%AD%98%E5%99%A8%E5%92%8C%E8%AE%BF%E5%AD%98%E6%A8%A1%E5%9E%8B">x86 寄存器和访存模型</a></li>
+<li><a href="#x86-%E6%8C%87%E4%BB%A4%E9%80%89%E8%AE%B2">x86 指令选讲</a></li>
+</ul>
+</li>
+<li><a href="#risc-%E4%B8%8E%E4%BB%A3%E8%A1%A8%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F">RISC 与代表指令系统</a><ul>
+<li><a href="#mips">MIPS</a></li>
+<li><a href="#risc-v-%E5%92%8C-arm">RISC-V 和 ARM</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="历史">历史</span></h1><p>世界上第一台通用电子计算机是 ENIAC（Electronic Numerical Integrator And Computer，电子数字积分器和计算机）。该计算机于 1946 年 2 月 14 日建成于美国宾夕法尼亚大学，主要设计者是 John Mauchly 和 John Presper Eckert Jr.，现存于美国硅谷计算机博物馆。其性能参数如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center">性能</th>
+<th align="center">电子管数</th>
+<th align="center">功率</th>
+<th align="center">占地面积</th>
+<th align="center">重量</th>
+<th align="center">成本</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">5000 次加法 &#x2F; 秒</td>
+<td align="center">18000</td>
+<td align="center">150 千瓦</td>
+<td align="center">170 平方米</td>
+<td align="center">30 吨</td>
+<td align="center">40 万美元</td>
+</tr>
+</tbody></table>
+<p>事实上，被认为是世界上第一台电子计算机的是 ABC（Atanasoff-Berry Computer），该计算机设计于 1937 年，并在 1942 年成功测试。电子管、二进制、逻辑单元、存储器等技术均在该计算机中应用。但该计算机并不通用，不可编程，仅能用于求解线性方程组。</p>
+<p>1945 年 6 月 30 日，“计算机之父”，美籍匈牙利数学家冯·诺伊曼向美国陆军机械部提出《关于 EDVAC 的报告草案》。该草案指出</p>
+<blockquote>
+<p>ENIAC 的开关定位和转插线只不过代表着一些数字信息，完全可以像受程序管理的数据一样存放于主存储器中。</p>
+</blockquote>
+<p>这便是“存储程序”，也即冯诺依曼结构之核心思想的渊源。该报告催生的计算机 EDVAC（Electronic Discrete Variable Automatic Computer，离散变量电子计算机）于 1949 年 8 月交付，但直至 1951 年才正式运行，并于 1962 年退役。其主要特点为</p>
+<ul>
+<li>实现了存储程序概念，提升了任务效率；</li>
+<li>使用二进制存储数据，简化了逻辑线路；</li>
+<li>由五个基本部分构成：运算器、控制器、存储器、输入设备、输出设备。</li>
+</ul>
+<p>由于 EDVAC 的延迟正式运行，世界上第一台冯诺伊曼结构的电子计算机之桂冠为英国剑桥大学数学实验室的莫里斯·威尔克斯主导设计的 EDSAC（Electronic Delay Storage Automatic Calculator，电子延迟存储自动计算器）所截胡。冯诺伊曼结构的五个基本成分，在 EDSAC 中的实现情况依次为：运算器、控制器（电子管），存储器（水银延迟线），输入设备（打孔纸带），输出设备（电传打印机）。</p>
+<p>电子计算机的商用之帷幕，为由埃克特-莫克利（即 ENIAC 的设计者）计算机公司（EMCC）设计、雷明顿·兰德公司建造建造的 UNIVAC（Universal Automatic Computer）所拉开。该型计算机主要面向商业和行政管理类用户、强调快速数据传输和大量简单运算的能力、设计时即考虑量产的要求。最后，总计售出 46 套，并于 1952 年准确预报了美国总统选举结果，一夜成名。</p>
+<p>此后的 1950 年代中，众多公司进入电子计算机领域。值得一提的是，IBM 公司于 1953 年成功转型，并在 1955 年占据了 70% 的市场份额。</p>
+<hr>
+<p>计算机按照尺寸主要分为四类：<strong>超级计算机 &#x2F; 巨型机</strong>、<strong>大型计算机 &#x2F; 主机</strong>、<strong>小型计算机 &#x2F; 中型机</strong>、<strong>微型计算机 &#x2F; 微机</strong>。</p>
+<div class="note "><p><strong>大型计算机</strong></p>
+<ul>
+<li>使用所在时代的先进技术构成的一类高性能、大容量通用计算机。</li>
+<li>强调告诉输入输出、海量存储空间和并行事务处理等方面的特性。</li>
+<li>以面向大容量数据的事务处理为主，兼顾科学计算。</li>
+</ul>
+<p>代表机器：</p>
+<ul>
+<li>IBM S&#x2F;360（1964）。其每秒可只需 34000 条指令。</li>
+<li>IBM zEC12（当代）。6 核处理器，主频 5.5GHz，高速缓存 2MB L2 &#x2F; 48MB L3 &#x2F; 384MB L4，3040GB 内存。</li>
+</ul>
+</div>
+
+<div class="note "><p><strong>超级计算机.</strong></p>
+<ul>
+<li>运算速度最快、性能最高、技术最复杂的一类计算机；</li>
+<li>代表该时期处理能力（尤其是运算速度）巅峰；</li>
+<li>解决科技领域中某些巨大的挑战性问题的关键工具。</li>
+<li>适用于高度计算密集型的科学计算任务。</li>
+</ul>
+<p>代表机器：</p>
+<ul>
+<li>CDC600（西摩·克雷，1964）</li>
+</ul>
+</div>
+
+<h1><span id="计算机的基本结构">计算机的基本结构</span></h1><p>此处考虑冯·诺伊曼结构的计算机。在这种结构中，计算机应当由五大部分组成：运算器（CA）、控制器（CC）、存储器（M）、输入设备（I）、输出设备（O）。除开这个组成，该结构的要点是</p>
+<ol>
+<li>数据和程序以二进制形式不加区别地存放在存储器中，位置由地址指定；</li>
+<li>计算机工作时能够自动地从存储器中取出指令加以执行。</li>
+</ol>
+<p>现实中的计算机将这些组成部分放置在主板上。早期的主板布局包含：</p>
+<ul>
+<li><strong>CPU</strong></li>
+<li><strong>北桥芯片.</strong> 其中包含 PCIe 控制器、集成显卡、主存控制器。主存控制器连接主存；PCIe 控制器可连接 PCIe 显卡，进而连接显示器。</li>
+<li><strong>南桥芯片.</strong> 主管 I&#x2F;O，连接硬盘、网络、音箱、键盘、USB 设备、PCI 卡等。</li>
+</ul>
+<p>后来，主存控制器首先被集成到 CPU 中。接下来，北桥芯片消失，其中的 PCIe 控制器被集成到 CPU 中；集成显卡被分成图形模块和显示模块；前者被合并进 CPU后者被合并进原南桥（合并后称为 <strong>P</strong>latform <strong>C</strong>ontroller <strong>H</strong>ub）</p>
+<p>将整个计算机集成为单一芯片的集成电路称为系统芯片（System-on-a-Chip，Soc），在智能手机和平板电脑上应用广泛。得益于技术进步，集成电路能够越做越小。关于这个现象，一个知名的表述是<strong>摩尔定律</strong>：价格不变时，集成电路上可容纳的晶体管数目倍增，性能随之倍增。</p>
+<p>值得一提的是，随着计算机图形学的发展，一类专用于图形处理的芯片，GPU，应运而生。这类芯片几乎处处为高吞吐量而非低延迟服务以适应图形处理任务中大量的数学运算。其和 CPU 的对比由下表直观展示：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">CPU</th>
+<th align="center">GPU</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ALU</td>
+<td align="center">少量，低延迟</td>
+<td align="center">大量，节能，高延迟，但高度流水线化</td>
+</tr>
+<tr>
+<td align="center">控制</td>
+<td align="center">复杂。含有分支预测、数据转发等</td>
+<td align="center">简单。无分支预测、数据转发</td>
+</tr>
+<tr>
+<td align="center">Cache</td>
+<td align="center">大</td>
+<td align="center">小</td>
+</tr>
+</tbody></table>
+<p>可见在 GPU 上必须仔细设计高度并行的算法，方可转代价为优势。</p>
+<hr>
+<p>最后简述一下计算机上执行指令的过程。执行一条指令分为四个阶段：取指（F）、译码（D）、执行（E）、写回（W）。各阶段中计算机的行为如下：</p>
+<ol>
+<li><strong>取指.</strong> 控制器将指令地址送至存储器，存储器按照地址读取内容送回控制器。下面是详细的流程，注意 2，3，行本质上是一次访存操作的模板，此后不再赘述。<ul>
+<li>PC 寄存器的值经内部总线发送至 CPU 中的 MAR 寄存器；</li>
+<li>MAR 寄存器中的值经地址总线发送至存储器中的 MAR 寄存器，同时控制电路通过控制总线发送 <code>Read</code> 信号至存储器的控制逻辑；</li>
+<li>存储器的地址译码器读取 MAR，计算出对应位置存储的值，放在 MDR 处；</li>
+<li>存储器的控制逻辑经控制总线发送信号 Ready 给 CPU，同时 MDR 通过数据总线发送至 CPU 的 MDR 寄存器；</li>
+<li>CPU 中的 MDR 寄存器的值经内部总线发送至 IR 寄存器，取指结束。</li>
+</ul>
+</li>
+<li><strong>译码.</strong> IR 寄存器中的指令发送至 CPU 的指令译码器，然后控制电路发送相关信号。</li>
+<li><strong>执行.</strong> 控制器从寄存器或存储器中取出操作数（回忆取出操作数之后结果存在 MDR 中），将相应寄存器的值经内部总线发送至 ALU 的输入。</li>
+<li><strong>写回.</strong> 将 ALU 的输出经内部总线送至对应的寄存器（如果要写回内存，则送至 MDR）。</li>
+</ol>
+<h1><span id="cisc-与-x86-指令系统">CISC 与 x86 指令系统</span></h1><p>CISC（Complex Instruction Set Computer）乃是两大主流体系结构之一。而 x86 又是 CISC 中最有代表性的一种指令系统。每一款 x86 处理器都包含该系列早期处理器的全部指令、寄存器和操作方式<strong>（兼容性）</strong>，仅进行已有指令的功能改进和新增新指令。x86 发展历程中的代表 CPU 及其参数如下表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center">型号</th>
+<th align="center">位数</th>
+<th align="center">地址位数</th>
+<th align="center">年代</th>
+<th align="center">备注</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">Intel 8086</td>
+<td align="center">16</td>
+<td align="center">20</td>
+<td align="center">1978</td>
+<td align="center">物理地址采用段 + 偏移</td>
+</tr>
+<tr>
+<td align="center">Intel 8088</td>
+<td align="center">16</td>
+<td align="center">8</td>
+<td align="center">1981</td>
+<td align="center">8086 的简化版</td>
+</tr>
+<tr>
+<td align="center">Intel 80286</td>
+<td align="center">16</td>
+<td align="center">24</td>
+<td align="center">1982</td>
+<td align="center">以“实模式 &#x2F; 保护模式”兼容 8086 的工作方式</td>
+</tr>
+<tr>
+<td align="center">Intel 80386</td>
+<td align="center">32</td>
+<td align="center">32</td>
+<td align="center">1985</td>
+<td align="center">增加“V8086”模式，可模拟多个 8086 处理器</td>
+</tr>
+<tr>
+<td align="center">AMD Opteron</td>
+<td align="center">64</td>
+<td align="center">64</td>
+<td align="center">2003</td>
+<td align="center"></td>
+</tr>
+</tbody></table>
+<ul>
+<li><strong>实模式.</strong> 80286 以上的处理器采用 8086 的工作模式，即为实模式。</li>
+<li><strong>保护模式.</strong> 80386 及以上处理器的主要工作模式，引入了：多任务、设置特权级、特权指令执行、访问权限检查、4GB 访存、虚拟存储器。</li>
+</ul>
+<p>处理器通电 &#x2F; 复位之后首先进入实模式，然后操作系统将运行在保护模式下。V8086 模式为保护模式下的一种特殊工作状态，与实模式类似，不同之处在于中断处理。</p>
+<h2><span id="x86-寄存器和访存模型">x86 寄存器和访存模型</span></h2><p>这里以 8086 为例介绍 x86 结构的寄存器模型。其寄存器可以分类整理作</p>
+<ul>
+<li><strong>通用寄存器.</strong> 可以存储一切数据，但是各有特殊用途。进一步细分为：<ul>
+<li><strong>数据寄存器.</strong> 每个都可以分为 <code>*H</code> 和 <code>*L</code> 两个 8 位寄存器使用。<ul>
+<li><code>AX</code> （Accumulator）存放乘除的操作数；</li>
+<li><code>BX</code> （Base）存放存储单元的偏移地址；</li>
+<li><code>CX</code> （Count）存放计数值；</li>
+<li><code>DX</code> （Data）乘法运算产生的部分积和除法运算的部分被除数。</li>
+</ul>
+</li>
+<li><strong>指针和变址寄存器.</strong> 均为 16 为，<code>SP</code> 和 <code>BP</code> 用于堆栈操作，<code>DI</code> 和 <code>SI</code> 用于串操作。<ul>
+<li><code>SP</code> （Stack Pointer）堆栈指针寄存器；</li>
+<li><code>BP</code> （Base Pointer）堆栈基址寄存器；</li>
+<li><code>SI</code> （Source Index）源变址寄存器；</li>
+<li><code>DI</code> （Destination Index）目的变址寄存器。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>指令指针寄存器.</strong> <code>IP</code>。</li>
+<li><strong>标志寄存器.</strong> <code>FLAGS</code>。其中包含若干标志位，可分为状态标志和控制标志。<ul>
+<li><strong>状态标志.</strong> 反应 CPU 的工作状态。<ul>
+<li><code>CF</code> （进位标志）第 0 位；</li>
+<li><code>PF</code> （奇偶标志）第 2 位；</li>
+<li><code>AF</code> （半进位标志）第 4 位；</li>
+<li><code>ZF</code> （零标志）第 6 位；</li>
+<li><code>SF</code> （符号标志）第 7 位</li>
+<li><code>OF</code> （溢出标志）第 11 位；</li>
+</ul>
+</li>
+<li><strong>控制标志.</strong> 对 CPU 的运行起特定控制作用。<ul>
+<li><code>TF</code> （跟踪标志）第 8 位；</li>
+<li><code>IF</code> （中断标志）第 9 位；</li>
+<li><code>DF</code> （方向标志）第 10 位。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>段寄存器.</strong> <code>CS</code>，<code>DS</code>，<code>ES</code>，<code>SS</code>。这几个寄存器的用途在后面的访存模型中说明。</li>
+</ul>
+<p>至于 32 位和 64 位，无非是将通用寄存器、指针和变址寄存器、标志寄存器拓宽（同时增加了一些标志），并增加一些段寄存器。IA32 增加了两个段寄存器 FS 和 GS。</p>
+<hr>
+<p>x86 的访存采用经典的“段：偏移”方式。逻辑地址由两部分构成：<code>[Base:Offset]</code> 段基址、偏移量，经过地址加法器计算得到物理地址。</p>
+<p>对于 8086，其段基址存在于段寄存器之中。各寄存器的含义为：<code>CS</code>（代码段寄存器），<code>DS</code>（数据段寄存器）、<code>ES</code>（附加段寄存器）、<code>SS</code>（堆栈段寄存器）。地址加法器通过段基址乘以 16 加偏移量来计算物理地址。</p>
+<p>进入 IA32 的保护模式，寻址仍然采用段：偏移模式。然而需要察觉如下要素：</p>
+<ol>
+<li>寻址允许段基址是任何 32 位整数；</li>
+<li>段寄存器只有 16 位。</li>
+<li>偏移量为 32 位；</li>
+<li>段偏移不应当超过段长度，这里段长度也不是 $2^32$。</li>
+</ol>
+<p>看似两两矛盾。解决方案是段基址不被存在段寄存器中，而是被存在存储器中。实践中，CPU 首先拿着全局描述符表寄存器 <code>GDTR</code> 找到全局描述符表 GDT 的起始地址，然后以段寄存器乘以 8 作为偏移（可以认为，GDT 是一个每项 64 位的数组），找到对应的表项，然后从表项中找到段基址和段界限（Segment Limit，即段长），再交给地址加法器得到物理地址。</p>
+<p>GDT 表项的 8 个字节从低到高依次是：段界限（2 字节），基地址低位（3）字节，权限（1 字节），其他（1 字节），基地址高位（1）字节。</p>
+<h2><span id="x86-指令选讲">x86 指令选讲</span></h2><p>众所周知，汇编语言乃是机器码的助记词写成的较低级编程语言。在讲解 x86 指令时，我们必不可能直接对着机器码说明，而是对着汇编语言说明。</p>
+<p>x86 的汇编语言主流格式分为 Intel 格式和 AT&amp;T 格式。前者为 Intel 所制定，主要应用在 MS-DOS 和 Windows 系统中；后者由 AT&amp;T 制定，源自贝尔实验室研发的 UNIX，最初哟弄个在 PDP-11 &#x2F; VAX 等机型，后来迁移到 x86，现在主要用在 UNIX &#x2F; Linux 系统中。两者的主要区别罗列如下：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">Intel</th>
+<th align="center">AT&amp;T</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">操作数前后缀</td>
+<td align="center">没有前缀，后缀（H &#x2F; O）指示立即数进制</td>
+<td align="center">立即数前缀 <code>$</code>，寄存器前缀 <code>%</code>，<code>0x</code> 指示十六进制</td>
+</tr>
+<tr>
+<td align="center">操作数方向</td>
+<td align="center">先目的后源</td>
+<td align="center">先源后目的</td>
+</tr>
+<tr>
+<td align="center">内存偏移量</td>
+<td align="center">用 <code>[base + index * scale + disp]</code> 标识</td>
+<td align="center">用 <code>disp(base, index, scale)</code> 标识</td>
+</tr>
+<tr>
+<td align="center">操作码后缀</td>
+<td align="center">操作码无后缀，用内存单元操作数前缀指明操作数大小 <br> 如 <code>mov eax, dword ptr [ebx]</code></td>
+<td align="center">操作码后缀指明大小 <br> 如 <code>movl (%ebx), %eax</code></td>
+</tr>
+</tbody></table>
+<p>早期的汇编语言按分段结构进行组织。每段格式为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(NAME) SEGMENT </span><br><span class="line">        ...   ; 代码</span><br><span class="line">(NAME) END</span><br></pre></td></tr></table></figure>
+
+<p>对应 x86-64 汇编中的</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">section .(name)</span><br><span class="line">        ...   ; 代码</span><br></pre></td></tr></table></figure>
+
+<p>本文汇编均用 Intel 格式。由于指令编码确实太阴间了，这里就不考虑了。</p>
+<div class="note "><p><strong>传送指令.</strong> <code>MOV dst, src</code>，将 src 中的数据传送到 dst 中。</p>
+<p>注意传送方向有以下限制：</p>
+<ul>
+<li>立即数不能作为 dst；</li>
+<li>dst 和 src 不能同是存储单元；</li>
+<li>立即数不能传到段寄存器；</li>
+<li><code>CS</code> 不能作为目的寄存器；</li>
+<li>段寄存器之间不能相互传送。</li>
+</ul>
+</div>
+
+<div class="note "><p><strong>交换指令.</strong> <code>XCHG opr1, opr2</code>，交换两个操作数。</p>
+<ul>
+<li>不允许交换两个存储器；</li>
+<li>不允许使用段寄存器。</li>
+</ul>
+</div>
+
+<div class="note "><p><strong>加法指令.</strong> <code>ADD dst, src</code> &#x2F; <code>ADC dst, src</code> &#x2F; <code>INC dst</code>，表示加法 &#x2F; 带进位加法（<code>dst += src + cf</code>） &#x2F; 加 1。</p>
+<p>仅有以下三种：</p>
+<ul>
+<li>存储器 &#x2F; 寄存器加给寄存器；</li>
+<li>立即数加给存储器 &#x2F; 寄存器；</li>
+<li>立即数加给 ax。</li>
+</ul>
+<blockquote>
+<p>注意这里看似第三类被第二类包含，实则不然。第三类的指令长度显著短，这是出于缩短平均程序长度之考虑。</p>
+</blockquote>
+</div>
+
+<p>关于逻辑运算、栈操作指令，我们在 ICS 中已经学过，这里不再谈论。</p>
+<div class="note "><p><strong>查表指令.</strong> <code>XLAT</code>。假设数据段存在一个每项一字节的表。本指令从 <code>BX</code> 中取得表起始地址，<code>AX</code> 中取得下标，查到结果后存入 <code>AL</code>。</p>
+</div>
+
+<div class="note "><p><strong>加法十进制调整指令.</strong> <code>DAA</code>。将 <code>AL</code> 转成 BCD 码。</p>
+</div>
+
+<div class="note "><p><strong>无条件转移.</strong> <code>JMP LABEL</code>。分为直接转移和间接转移。直接转移包括</p>
+<ol>
+<li><em>短转移.</em> <code>JMP   SHORT LABEL</code> $\mathrm{IP}\leftarrow \mathrm{IP} + \text{Offset ($8$ bit)}$；</li>
+<li><em>近转移.</em> <code>JMP   NEAR PTR LABEL</code> $\mathrm{IP}\leftarrow \mathrm{IP} + \text{Offset ($8$ bit)}$；</li>
+<li><em>远转移.</em> <code>JMP   FAR PTR LABEL</code> 查询 Label 所在的段基址 CS 和偏移量 Offset，$\mathrm{IP}\leftarrow \mathrm{CS:Offset}$</li>
+</ol>
+<p>可以想象，自上而下这几个指令的长度为 2 byte，3 byte，5 byte。</p>
+<p>间接转移形如 <code>JMP   DWORD PTR opr</code>。作用为寻址到 opr 指定的存储器单元所在的双字，将低位传送到 IP，将高位传送到 CS。</p>
+</div>
+
+<div class="note "><p><strong>条件转移指令.</strong> <code>JXX LABEL</code>。诸条件跳转的含义和对应的判断条件在 ICS 里已经学过了。这里只需记住无符号数是 <code>JA</code> &#x2F; <code>JB</code>，有符号数是 <code>JL</code> &#x2F; <code>JG</code>。</p>
+</div>
+
+<div class="note "><p><strong>循环控制指令.</strong> <code>LOOPXX LABEL</code>。令 <code>CX</code> 减 1 并改变条件码。当 <code>XX</code> 指出的条件成立时跳转到 <code>LABEL</code>。</p>
+</div>
+
+<div class="note "><p><strong>处理器控制指令.</strong> 包括一系列改变条件码的指令，以及 <code>HLT</code>（暂停），<code>WAIT</code>（等待），<code>ESC</code>（交权），指令前缀 <code>LOCK</code>（封锁总线），<code>NOP</code>（空操作）等。</p>
+</div>
+
+<p><strong>串操作指令</strong> 是一类复杂的 x86 指令。总体上，包含以下的指令：</p>
+<ul>
+<li><strong>串操作指令.</strong> 助记词后面加 <code>B</code> &#x2F; <code>W</code>，表示串元素是字节还是字。<ul>
+<li><code>MOVS</code> 串传送；</li>
+<li><code>CMPS</code> 串比较；</li>
+<li><code>SCAS</code> 串扫描；</li>
+<li><code>LODS</code> 取串；</li>
+<li><code>STOS</code> 存串；</li>
+</ul>
+</li>
+<li><strong>重复前缀.</strong><ul>
+<li><code>REP</code> 无条件重复；</li>
+<li><code>REPE</code> &#x2F; <code>REPZ</code> 相等 &#x2F; 为零时重复；</li>
+<li><code>REPNE</code> &#x2F; <code>REPNZ</code> 不相等 &#x2F; 不为零时重复。</li>
+</ul>
+</li>
+</ul>
+<p>串操作指令隐含了源的地址为 <code>DS:SI</code>，目的地址为 <code>ES:DI</code>，串长存在 <code>CX</code> 中。运行一次串操作指令，处理器除了会完成字面上的操作之外，还会<strong>更新</strong> <code>SI</code> 和 <code>DI</code> 并将 <code>CX</code> 减 1。此处，<code>SI</code> 和 <code>DI</code> 更新的方向（加或是减）由方向标志 <code>DF</code> 指定。若 <code>DF</code> 为 0，其将增加；若 <code>DS</code> 为 1，其将减少。回忆 <code>DF</code> 可以用处理器控制指令设置，具体地，<code>STD</code> 置 <code>DF</code> 为 1，<code>CLD</code> 置 <code>DF</code> 为 0。</p>
+<blockquote>
+<p>此处之所以指定方向，是为了处理源串和目的串地址交叠的情况。</p>
+</blockquote>
+<h1><span id="risc-与代表指令系统">RISC 与代表指令系统</span></h1><p>RISC 与 CISC 之争是体系结构领域老生常谈的问题。CISC 的兼容性和设计思路决定了其复杂程度必然高，RISC 则反其道而行之。本节将简述三类 RISC 指令系统。</p>
+<h2><span id="mips">MIPS</span></h2><p>无流水线互锁微处理器（<strong>M</strong>icroprocessor without <strong>I</strong>nterlocked <strong>P</strong>ipe <strong>S</strong>tages）是 RISC 已经不再流行的开创性工作。历史上，两个 32 位的版本，MIPS I 和 MIPS II 分别于 1985 年被应用于 R2000 CPU、于 1990 年被应用于 R3000 CPU。1992 年的 R4000 上的 MIPS III、1994 年 R8000 上的 MIPS IV 和 1996 年的 MIPS V 为拓展至 64 位的版本。1999 年的、分别以 MIPS II 和 MIPS V 为基础，融合诸版本特性的 MIPS32 和 MIPS64 是最后的现代化版本。此后，MIPS 逐渐推出历史舞台。</p>
+<p>MIPS 主要关注减少指令类型和降低指令复杂度。其主要特点为：</p>
+<ol>
+<li><strong>指令等长。</strong> 这将简化取指。</li>
+<li><strong>只要 Load 和 Store 能访存。</strong></li>
+<li><strong>寻址模式简单。</strong> 仅支持 <code>($r)</code> 和 <code>d($r)</code>。</li>
+<li><strong>指令数量少，功能简单。</strong> 这将简化指令的执行过程。</li>
+</ol>
+<p>由此可见，本指令系统对应的 CPU 设计简单且快速，但是编程复杂、程序更长且需要优秀的编译器。</p>
+<p>MIPS 的寄存器模型为 32 个 32 位宽的通用寄存器（此表和网络上的某个版本不一致，我们仅能以课程为准）：</p>
+<table>
+<thead>
+<tr>
+<th align="center">编号</th>
+<th align="center">名称</th>
+<th align="center">用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">0</td>
+<td align="center"><code>$zero</code></td>
+<td align="center">常量 $0$</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center"><code>$at</code></td>
+<td align="center">（Assembler Temporary）汇编暂存，保留给汇编器使用</td>
+</tr>
+<tr>
+<td align="center">2-3</td>
+<td align="center"><code>$v0</code>，<code>$v1</code></td>
+<td align="center">存储子程序返回值</td>
+</tr>
+<tr>
+<td align="center">4-7</td>
+<td align="center"><code>$a0</code> - <code>$a3</code></td>
+<td align="center">调用函数的前 4 个参数</td>
+</tr>
+<tr>
+<td align="center">8-15</td>
+<td align="center"><code>$t0</code> - <code>$t7</code></td>
+<td align="center">临时变量</td>
+</tr>
+<tr>
+<td align="center">16-23$^*$</td>
+<td align="center"><code>$s0</code> - <code>s7</code></td>
+<td align="center">临时变量</td>
+</tr>
+<tr>
+<td align="center">24-25</td>
+<td align="center"><code>$t8</code> - <code>$t9</code></td>
+<td align="center">临时变量</td>
+</tr>
+<tr>
+<td align="center">26-27</td>
+<td align="center"><code>$k0</code> - <code>$k1</code></td>
+<td align="center">为内核预留</td>
+</tr>
+<tr>
+<td align="center">28$^*$</td>
+<td align="center"><code>$gp</code></td>
+<td align="center">全局指针</td>
+</tr>
+<tr>
+<td align="center">29$^*$</td>
+<td align="center"><code>$sp</code></td>
+<td align="center">栈指针</td>
+</tr>
+<tr>
+<td align="center">30$^*$</td>
+<td align="center"><code>$fp</code></td>
+<td align="center">帧指针</td>
+</tr>
+<tr>
+<td align="center">31$^*$</td>
+<td align="center"><code>$ra</code></td>
+<td align="center">返回地址</td>
+</tr>
+</tbody></table>
+<p>其中标注 $^*$ 的表示调用者保存寄存器。对应的指令非常简单，完整的手册仅一页纸：</p>
+<p><img src="/../picture/MIPS.png"></p>
+<p>指令的分类、作用在表中一目了然，这里不再重复。</p>
+<h2><span id="risc-v-和-arm">RISC-V 和 ARM</span></h2><p>摆了。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Architecture/" rel="tag"># Architecture</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/10/24/CryptoRevision1/" rel="prev" title="Revision | 密码学基础（上）">
+                  <i class="fa fa-angle-left"></i> Revision | 密码学基础（上）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
