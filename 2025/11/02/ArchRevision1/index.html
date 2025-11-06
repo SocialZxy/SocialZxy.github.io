@@ -19,16 +19,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM">
+    <meta name="description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM   运算器 基础 加法器 乘法器 除法器   单周期中央处理器 控制器">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 计算机组成与体系结构（上）">
 <meta property="og:url" content="http://example.com/2025/11/02/ArchRevision1/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM">
+<meta property="og:description" content="历史 计算机的基本结构 CISC 与 x86 指令系统 x86 寄存器和访存模型 x86 指令选讲   RISC 与代表指令系统 MIPS RISC-V 和 ARM   运算器 基础 加法器 乘法器 除法器   单周期中央处理器 控制器">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/MIPS.png">
+<meta property="og:image" content="http://example.com/picture/CMOSGate.png">
+<meta property="og:image" content="http://example.com/picture/1TCPU.jpg">
 <meta property="article:published_time" content="2025-11-02T05:05:22.000Z">
-<meta property="article:modified_time" content="2025-11-03T17:23:42.172Z">
+<meta property="article:modified_time" content="2025-11-05T17:26:59.087Z">
 <meta property="article:author" content="King Strange">
 <meta property="article:tag" content="Architecture">
 <meta name="twitter:card" content="summary">
@@ -116,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">计算机的基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">CISC 与 x86 指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">x86 寄存器和访存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">x86 指令选讲</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">RISC 与代表指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">RISC-V 和 ARM</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">计算机的基本结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">CISC 与 x86 指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">x86 寄存器和访存模型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">x86 指令选讲</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">RISC 与代表指令系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">MIPS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">RISC-V 和 ARM</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">运算器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">基础</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">加法器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.3.</span> <span class="nav-text">乘法器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.4.</span> <span class="nav-text">除法器</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">单周期中央处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">控制器</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -237,7 +239,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-04 01:23:42" itemprop="dateModified" datetime="2025-11-04T01:23:42+08:00">2025-11-04</time>
+      <time title="Modified: 2025-11-06 01:26:59" itemprop="dateModified" datetime="2025-11-06T01:26:59+08:00">2025-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -273,6 +275,15 @@
 <li><a href="#risc-v-%E5%92%8C-arm">RISC-V 和 ARM</a></li>
 </ul>
 </li>
+<li><a href="#%E8%BF%90%E7%AE%97%E5%99%A8">运算器</a><ul>
+<li><a href="#%E5%9F%BA%E7%A1%80">基础</a></li>
+<li><a href="#%E5%8A%A0%E6%B3%95%E5%99%A8">加法器</a></li>
+<li><a href="#%E4%B9%98%E6%B3%95%E5%99%A8">乘法器</a></li>
+<li><a href="#%E9%99%A4%E6%B3%95%E5%99%A8">除法器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8D%95%E5%91%A8%E6%9C%9F%E4%B8%AD%E5%A4%AE%E5%A4%84%E7%90%86%E5%99%A8">单周期中央处理器</a></li>
+<li><a href="#%E6%8E%A7%E5%88%B6%E5%99%A8">控制器</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -699,6 +710,189 @@
 <p><img src="/../picture/MIPS.png"></p>
 <p>指令的分类、作用在表中一目了然，这里不再重复。</p>
 <h2><span id="risc-v-和-arm">RISC-V 和 ARM</span></h2><p>摆了。</p>
+<h1><span id="运算器">运算器</span></h1><h2><span id="基础">基础</span></h2><p>现代集成电路通常使用 MOS（金属-氧化物-半导体）晶体管。MOS 管共有两种，分别为 NMOS 和 PMOS。这个原件有三个针脚，称为门极（Gate），源极（Source）和漏极（Drain）。NMOS 在 Gate 为高电位时，Source 和 Drain 导通；PMOS 在 Gate 为低电位时，Source 和 Drain 导通。由 NMOS 和 PMOS 构成的集成电路称为互补 MOS（CMOS）集成电路。两种晶体管的符号想必大家非常熟悉，PMOS 比 NMOS 多了一个圈，这里不写。</p>
+<p>众所周知 $\{\mathrm{NOT}, \mathrm{NAND}, \mathrm{NOR}\}$ 是一个完备的门集合。这几个门可以直接用 CMOS 实现：</p>
+<p><img src="/../picture/CMOSGate.png"></p>
+<p>可以发现，如果将 $\mathrm{NAND}$ 的 PMOS 和 NMOS 互换，则可以得到 $\mathrm{AND}$。然而之所以不这么做，是因为 NMOS 不能接电源、PMOS 不能接地，否则会发生电压衰减。至此，逻辑运算可以通过并联位数多个逻辑门来实现。ALU 乃是一个多功能的元件，其内部包含多种并联的运算和一个多路复用器：首先计算所有种运算的结果，然后用多路复用器选出特定运算的结果。</p>
+<p>为了实现寄存器等工具，需要使用 RS Latch 构造 D Latch，进而构造 D flip-flop。D flip-flop 这个元件的功能是在始终上升沿将输入传播到输出并锁存。关于其构造，我们在 ICS 课程中已经见过，因此这里不写。</p>
+<p>可以想象，并联 D flip-flop 将得到通用寄存器；串联 D flip-flop 将得到移位寄存器：在始终上升沿寄存器内存储的数据右移一位。想要实现任意多位的移位寄存器，可以考虑两条朴素的路线：</p>
+<ol>
+<li>等待 $x$ 周期，将输出 <code>a &gt;&gt; x</code>；</li>
+<li>做 $32$ 个移位寄存器来移动 $0, 1, …, 31$ 位，用多路复用器选择结果。注意多路复用器可能很慢。</li>
+</ol>
+<p>一个平衡周期数和延迟的方法是使用 $\log n$ 层二路复用器网络。第 $i$ 层决定要不要右移 $2^{i - 1}$ 位。这样一来，你确实可以用低延迟 $1$ 周期完成任意的移位。</p>
+<h2><span id="加法器">加法器</span></h2><p>实现加法器从<strong>半加器</strong>开始。半加器这个元素在输入 $A, B$ 上计算 $(A\oplus B, A\wedge B)$。容易发现，前后两分量分别是加法的本位结果和进位。为了构造完整的加法器，需要把进位也考虑在内。一个全加器 $\mathscr{A}(A, B, C_{in})$ 将计算 </p>
+<p>$$<br>(S, C_{out}) &#x3D; (A\oplus B \oplus C, (A \wedge B) \vee ((A\oplus B)\wedge C))<br>$$</p>
+<p>那么容易想到下面的这些 $n$ 位全加器构造：</p>
+<div class="note "><p><strong>行波进位加法器</strong> 首先考虑有 $n$ 个 1 位全加器 $\mathscr{A}^1, …, \mathscr{A}^n$。直接将 $C_{out}^i$ 和 $C_{in}^{i + 1}$ 连接，便得到一个 $n$ 位全加器。这个构造称为行波进位加法器（RCA）。</p>
+</div>
+
+<p>RCA 的缺陷在于其关键路径（延迟最长，i.e 经过门数量最多的路径）为 </p>
+<p>$$<br>A^1\rightarrow C_{out}^1\rightarrow C_{in}^2 \rightarrow C_{out}^2 \rightarrow \cdots \rightarrow C_{out}^n<br>$$</p>
+<p>这条路径的长度为 $3 + 2(n - 1) &#x3D; (2n + 1)$。我们说 RCA 的总延迟为 $(2n + 1)T$，其中 $T$ 为门延迟。在 28mn 制程下，这个值是 0.02ns。众所周知 CPU 的主频取决于各阶段的延迟之最大值，为了设计高频率的 CPU，务必要优化这个延迟。</p>
+<p>一个直接的想法就是优化进位的计算。注意进位 </p>
+<p>$$<br>C_i &#x3D; (A_i \wedge B_i) \vee ((A_i \oplus B_i) \wedge C_{i - 1})<br>$$</p>
+<p>定义生成信号 $G_i &#x3D; A_i \wedge B_i$，传播信号 $P_i &#x3D; A_i \oplus B_i$，有（这里简明起见，把 $\vee$ 写作 $+$，把 $\wedge$ 写作 $\cdot$）</p>
+<p>$$<br>C_i &#x3D; G_i + P_i \cdot C_i<br>$$</p>
+<p>将 $C_i$ 的逻辑表达式暴力算出后，可以展开成关于 $G_i, P_i$ 的析取范式。注意 $n$-bit $\mathrm{AND}$ 和 $n$-bit $\mathrm{OR}$ 都被视为 $1T$ 的门，因此只需要 $3T$ 便可计算 $C_i$。</p>
+<div class="note "><p><strong>超前进位加法器.</strong> 首先利用上述办法算出 $C_i$，然后用全加器算出 $C$。这种加法器称作 CLA。</p>
+</div>
+
+<p>注意到无论 $n$ 几何，超前进位加法器的延迟都是 $4T$。然而，进位计算器的宽度是指数爆炸的，且 $n$-bit 逻辑门很难做。因此实践中的折衷办法是串联几个 CLA，称作 $k$ 级 CLA。容易算出 $k$ 级 CLA 的延迟为 $2(k + 1)T$。因此，如果用 4 级 CLA 实现 32 位加法器，则延迟为 $10T$，而如果单纯用 RCA，延迟为 $65T$，提升显著。</p>
+<h2><span id="乘法器">乘法器</span></h2><p>乘法的计算无非是列竖式。因此容易想到这种最简单的乘法器构造：</p>
+<div class="note "><p><strong>$N$ 位乘法器.</strong> 考虑两个移位寄存器，称作乘数寄存器和被乘数寄存器，和一个普通寄存器，称为乘积寄存器，位数依次为 $N, 2N, 2N$。给定一个 $N$ 位的加法器。可通过这样一个控制逻辑来计算乘法：</p>
+<ol>
+<li><strong>If</strong> 乘数寄存器最低位为 $1$：</li>
+<li>$\qquad$ 令乘积寄存器变为乘数寄存器加被乘数寄存器；</li>
+<li>令乘数寄存器右移一位；</li>
+<li>令被乘数寄存器左移一位。</li>
+<li><strong>If</strong> 已经是第 $n$ 轮循环：结束。否则继续循环。</li>
+</ol>
+</div>
+
+<p>其中 If 判断无非是一些组合逻辑，但是加法、左移、右移都需要一个周期。因此我们得到了一个 $3N$ 周期的 $N$ 位乘法器。最直接的优化便是将加法和移位并行，若乘数寄存器最低位是 $0$，令乘积寄存器锁存，周期结束时令乘数寄存器和被乘数寄存器移位。新的乘法器为 $N$ 周期。</p>
+<p>更给力的优化是考虑计算资源。注意到被乘数寄存器（$M$）和乘积寄存器（$A$）的<strong>有效位数互补</strong>，且加法总是只需要 $n$ 位加法（低位不影响），可以将 $Q\Vert A$ 拼在一起放在一个 $2N$ 位寄存器中，控制逻辑变成：</p>
+<ol>
+<li>将乘积寄存器初始化为乘数；</li>
+<li><strong>If</strong> 乘积寄存器最低位为 $1$；</li>
+<li>$\qquad$ 令乘积寄存器的高 $N$ 位加上乘数寄存器；</li>
+<li>令乘积寄存器右移一位。</li>
+</ol>
+<p>现在只需要一个 $2N$ 位的移位寄存器、一个 $N$ 位的普通寄存器和一个 $N$ 位加法器，并且仍然可以用此前的手法并行化加法和位移，总周期数为 $N$，但是硬件资源显著减少。</p>
+<p>最后，如果你能看被乘数的后两位，就可以想到这样的一个构造：若最后两位是 $10$，让乘积寄存器减去乘数寄存器；若最后两位是 $01$，让乘积寄存器加上乘数寄存器。本质上这就是 $1^n &#x3D; 10^n - 1$。这样的构造称为 <strong>Booth 乘法器</strong>，可以减少加法次数。</p>
+<h2><span id="除法器">除法器</span></h2><p>除法器所作工作是模拟所谓的“厂除法”。假设你有一个 $2N$ 位的除数寄存器，一个 $2N$ 位的余数寄存器，一个 $N$ 位的商和一个 $2N$ 位的加减法 ALU。容易写出如下的控制逻辑：</p>
+<ol>
+<li>令余数 $\leftarrow$ 余数 $-$ 除数；</li>
+<li><strong>If</strong> 余数 $ \geq 0$：</li>
+<li>$\qquad$ 商左移一位或上 $1$；</li>
+<li><strong>Else</strong>：</li>
+<li>$\qquad$ 回滚操作；</li>
+<li>$\qquad$ 商左移一位；</li>
+<li>除数右移一位。</li>
+<li><strong>If</strong> 已是第 $33$ 轮：退出；否则继续循环。</li>
+</ol>
+<p>观察到余数寄存器有效位数和商的有效位数互补，且仅需要对余数有效位数最高的 $N$ 位做加减。此时惯用的手法是将其拼接，然后除数寄存器便无需 $64$ 位，并且无需支持移位；ALU 只需要 32 位。</p>
+<p>回忆乘法中也有一个拼接的寄存器。实践中，这两个拼接寄存器是同一个位置。因此，这个寄存器需要同时支持左右移动。</p>
+<p>注意，这里你必须要先知道余数 $-$ 除数的结果，才能知道要不要回滚操作。因此，无法像乘法一样并行。</p>
+<h1><span id="单周期中央处理器">单周期中央处理器</span></h1><p>现在，想要设计一个完整的单周期处理器。应当遵从的步骤为：</p>
+<ol>
+<li>分析指令系统，得出对数据通路的需求；</li>
+<li>为数据通路选择合适的组件；</li>
+<li>连接组件建立数据通路；</li>
+<li>分析每条指令的实现，以确定控制信号；</li>
+<li>集成控制信号，形成完整的控制逻辑。</li>
+</ol>
+<p>为了搭建一个示例的 CPU，我们仅考虑 MIPS 指令集的下面几个指令：</p>
+<ul>
+<li><strong>无符号数加减.</strong> <code>addu</code>，<code>subu</code>；</li>
+<li><strong>立即数逻辑或.</strong> <code>ori</code>；</li>
+<li><strong>访存指令.</strong> <code>lw</code>，<code>sw</code>；</li>
+<li><strong>条件分支.</strong> <code>beq</code>。</li>
+</ul>
+<p>那么，显然除了 32 位的存储器和 IR 之外，还可以根据指令的操作内容梳理出以下这些需求：</p>
+<table>
+<thead>
+<tr>
+<th align="center">指令</th>
+<th align="center">操作</th>
+<th align="center">需求</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><code>addu / subu rd, rs, rt</code></td>
+<td align="center"><code>R[rd] &lt;- R[rs] + R[rt], PC &lt;- PC + 4</code></td>
+<td align="center">32 位可修改、同时访问两个位置的寄存器；ALU</td>
+</tr>
+<tr>
+<td align="center"><code>ori rd, rs, imm16</code></td>
+<td align="center"><code>R[rd] &lt;- R[rs] | zeroExt(imm16), PC &lt;- PC + 4</code></td>
+<td align="center">零扩展器，ALU，运算操作数可以是扩展后的立即数</td>
+</tr>
+<tr>
+<td align="center"><code>lw / sw rt, imm16(rs)</code></td>
+<td align="center"><code>R[rt] &lt;- MEM[R[rs] + signExt(imm16)]; PC &lt;- PC + 4</code></td>
+<td align="center">符号扩展器</td>
+</tr>
+<tr>
+<td align="center"><code>beq rs, rt, imm16(rs)</code></td>
+<td align="center"><code>PC &lt;- PC + (rs == rt)? signExt(imm16)|00 : 4</code></td>
+<td align="center">比较两个数，两种修改 PC 的模式</td>
+</tr>
+</tbody></table>
+<p>总的来说，我们将需要这些组件：</p>
+<ul>
+<li><strong>ALU.</strong> 支持加减或；</li>
+<li><strong>立即数扩展组件.</strong> 支持零扩展和符号扩展；</li>
+<li><strong>PC 寄存器.</strong> 支持两种加法，加 $0$ 或者加立即数；</li>
+<li><strong>寄存器堆.</strong> 支持读 <code>rs</code> 和 <code>rt</code>，写 <code>rs</code> 或 <code>rt</code>。因此，需要两个读口一个写口（寄存器编号），一个写使能信号，一个数据接口 <code>busW</code>，两个出口 <code>busA</code>，<code>busB</code>。</li>
+<li><strong>存储器.</strong> 一个只读指令存储器，一个可读写数据存储器，均为 $32$ 位；因此，需要地址接口，一个写使能信号，一个数据接口 <code>DataIn</code> 和一个输出 <code>DataOut</code>。</li>
+</ul>
+<p>根据指令，可以知道我们所需要的连线无非是这样：</p>
+<p><img src="/../picture/1TCPU.jpg"></p>
+<p>当然，你还需要一个称为 IFU（Instruction Fetch Unit）的东西来根据指令的 opcode 生成图中的这些信号。这个就是一些组合逻辑，这里不谈。</p>
+<h1><span id="控制器">控制器</span></h1><p>在上一节中，可以看到控制器和 ALU 非常耦合。我们现在让控制器更加独立一点，我们期望获得一个结构，能够根据指令顺次发送一系列命令。命令的执行交由下层硬件（包括总线）完成。</p>
+<p>现在想象指令 <code>LOAD R1, M1</code> 被从存储空间中取出并执行的过程。它可以被拆解成：</p>
+<ol>
+<li><strong>控制器发指令 $\mathrm{PC}_{out}$ 和 $\mathrm{MAR}_{in}$ 信号。</strong> 内部总线将 PC 传送到 MAR；</li>
+<li><strong>控制器发指令 $\mathrm{M}_{read}$ 信号。</strong> 数据总线将 $M[MAR]$ 传送到 MDR；</li>
+<li><strong>控制器发指令 $\mathrm{PC}_{add}$ 信号。</strong> 某个运算单元使 $PC \leftarrow PC + n$，其中 $n$ 为指令长度；</li>
+<li><strong>控制器发指令 $\mathrm{MDR}_{out}$ 和 $\mathrm{IR}_{in}$ 信号。</strong> 内部总线将 MDR 送到 IR；</li>
+</ol>
+<p>至此取指完成。然后控制器发现指令是这条 <code>LOAD R1, M1</code>，于是：</p>
+<ol>
+<li><strong>控制器发指令 $\mathrm{IR}_{out}$ 和 $\mathrm{MAR}_{in}$。</strong> 内部总线将要读的地址送到 MAR；</li>
+<li><strong>控制器发指令 $\mathrm{M}_{read}$ 信号。</strong> 数据总线将 $M[MAR]$ 传送到 $MDR$；</li>
+<li><strong>控制器发指令 $\mathrm{MDR}_{out}$ 和 $\mathrm{R1}_{in}$。</strong> 内部总线将 MDR 传到 R1。</li>
+</ol>
+<p>这些指令，又称为<strong>微命令</strong>。顾名思义，即比指令还要小的机器层面的原子操作。</p>
+<p>指令执行完成。其余指令的执行，大同小异，这里不再赘述。</p>
+<p>注意到，为了实现这样的一个结构，有两种显然的选择：</p>
+<ol>
+<li>把控制器的写死在电路板上。这种控制器称作<strong>硬布线控制器</strong>；</li>
+<li>在一个叫做 MicroROM 的结构上存储控制器的软件代码，然后控制器相当于一个小 CPU 来执行这些代码。这种控制器称为<strong>微程序控制器</strong>。</li>
+</ol>
+<div class="note "><p><strong>硬布线控制器.</strong> 主要包含以下结构：</p>
+<ul>
+<li><strong>环形脉冲发生器.</strong> 循环地产生信号 $T1, T2, T3, …$，接收到 End 信号就复位。</li>
+<li><strong>指令译码器.</strong> 确定 IR 里面是哪条指令；</li>
+<li><strong>微命令编码器.</strong> 一个组合逻辑，根据环形脉冲发生器生成的脉冲信号和指令译码器的结果同步产生相应的控制信号。</li>
+</ul>
+<p>之所以容易这样做，是因为你注意到比如 Load 指令执行过程中要顺次发出 $8$ 组信号（上面 $7$ 条加一个 End），则</p>
+<p>$$<br>\mathrm{MAR}_{in} &#x3D; (\mathrm{Load} \wedge (T1 \vee T5)) \bigwedge \text{Similar DNF from another instruction}<br>$$</p>
+<p>控制信号可以方便地写成逻辑表达式，从而写成电路。</p>
+</div>
+
+<p>此类控制器的优缺点相当明显：</p>
+<ul>
+<li><strong>优点.</strong> 指令执行速度快；</li>
+<li><strong>缺点.</strong> 电路复杂，设计和验证难度大，难以扩充和修改。</li>
+</ul>
+<div class="note "><p><strong>微程序控制器.</strong> 主要包含以下组件：</p>
+<ul>
+<li><strong>控制存储器（CM）.</strong> 一个 ROM，里面存放微程序。其中每个条目为以下格式：（微操作控制字段：顺序控制字段）。前者将给出对应需要发送的信号（既可以直接存，也可以编码之后存），后者包含微地址给定部分和顺序控制方式指出下一条指令应如何找到；</li>
+<li><strong>微地址形成电路.</strong> 根据顺序控制字段给出的<em>微地址给定部分</em>、<em>顺序控制方式</em>，以及 <em>机器指令代码</em>、<em>机器运行状态</em> 形成下一条指令的微地址；</li>
+<li><strong>微地址寄存器.</strong> 保存微指令对应的微地址，指向对应的 CM。</li>
+</ul>
+<p>本质上这就是你把状态机的内容写在了 ROM 里，然后做了一个模拟状态机的程序。</p>
+</div>
+
+<p>这种控制器执行机器指令时，会：</p>
+<ol>
+<li>从存储控制器中读取“取机器指令用的微指令”，然后执行该微程序；</li>
+<li>根据 IR 中的 opcode，经微地址形成电路，找到该指令对应的微程序入口，执行完该程序；</li>
+<li>回到“取机器指令用的微指令”，重复。</li>
+</ol>
+<p>为什么顺序控制字段包含一个控制方式和一个给定部分？这是因为如此一来我们可以完成这种操作：</p>
+<ol>
+<li>若顺序控制方式为 $0$，直接转移到微地址给定部分。</li>
+<li>若顺序控制方式为 $1$，转移到 xx:微地址给定部分的后几位，其中 xx 藏在操作码中。</li>
+<li>…</li>
+</ol>
+<p>这样可以优化 ROM 的大小。这种控制器的优缺点如下：</p>
+<ul>
+<li><strong>缺点.</strong> 慢；</li>
+<li><strong>优点.</strong> 线路规整，灵活（方便增加指令）。</li>
+</ul>
 
     </div>
 
