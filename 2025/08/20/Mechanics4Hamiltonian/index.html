@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 本节讲一套和拉格朗日力学等价的体系——哈密顿力学。除了加深对经典力学的理解之外，其重要性在进入量子力学之后展现的淋漓尽致。    哈密顿正则方程">
+    <meta name="description" content="Abstract. 本节讲一套和拉格朗日力学等价的体系——哈密顿力学。除了加深对经典力学的理解之外，其重要性在进入量子力学之后展现的淋漓尽致。    哈密顿正则方程 刘维尔定理 泊松括号 正则变换">
 <meta property="og:type" content="article">
 <meta property="og:title" content="力学 | Lecture 4. 哈密顿力学">
 <meta property="og:url" content="http://example.com/2025/08/20/Mechanics4Hamiltonian/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 本节讲一套和拉格朗日力学等价的体系——哈密顿力学。除了加深对经典力学的理解之外，其重要性在进入量子力学之后展现的淋漓尽致。    哈密顿正则方程">
+<meta property="og:description" content="Abstract. 本节讲一套和拉格朗日力学等价的体系——哈密顿力学。除了加深对经典力学的理解之外，其重要性在进入量子力学之后展现的淋漓尽致。    哈密顿正则方程 刘维尔定理 泊松括号 正则变换">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-08-20T07:42:52.000Z">
-<meta property="article:modified_time" content="2025-08-20T08:29:03.326Z">
+<meta property="article:modified_time" content="2025-11-12T09:55:15.091Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">哈密顿正则方程</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">哈密顿正则方程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">刘维尔定理</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">泊松括号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">正则变换</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">78</span>
+          <span class="site-state-item-count">79</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -226,9 +226,15 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2025-08-20 15:42:52 / Modified: 16:29:03" itemprop="dateCreated datePublished" datetime="2025-08-20T15:42:52+08:00">2025-08-20</time>
+      <time title="Created: 2025-08-20 15:42:52" itemprop="dateCreated datePublished" datetime="2025-08-20T15:42:52+08:00">2025-08-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-12 17:55:15" itemprop="dateModified" datetime="2025-11-12T17:55:15+08:00">2025-11-12</time>
     </span>
 
   
@@ -245,6 +251,9 @@
 
 <ul>
 <li><a href="#%E5%93%88%E5%AF%86%E9%A1%BF%E6%AD%A3%E5%88%99%E6%96%B9%E7%A8%8B">哈密顿正则方程</a></li>
+<li><a href="#%E5%88%98%E7%BB%B4%E5%B0%94%E5%AE%9A%E7%90%86">刘维尔定理</a></li>
+<li><a href="#%E6%B3%8A%E6%9D%BE%E6%8B%AC%E5%8F%B7">泊松括号</a></li>
+<li><a href="#%E6%AD%A3%E5%88%99%E5%8F%98%E6%8D%A2">正则变换</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -258,12 +267,59 @@
 <p>$$<br>\mathrm{d}L &#x3D; \frac{\partial L}{\partial t}\mathrm{d}t + p_i\mathrm{d}\dot{q}_i + \dot{p}_i \mathrm{d}q_i<br>$$</p>
 <p>定义一个新的物理量，它是 $\boldsymbol{q}$ 和 $\boldsymbol{p}$ 的函数。</p>
 <p>$$<br>H(\boldsymbol{p}, \boldsymbol{q}, t) &#x3D; p_i\dot{q}_i - L<br>$$</p>
-<p>$H$ 即为勒让德变换的结果，称为<strong>哈密顿量</strong>。对于时间平移不变的系统而言，这个值恰好就是系统的能量，但它和能量之间存在本质区别。现在考察其全微分：</p>
-<p>$$<br>\mathrm{d}H &#x3D; \dot{q_i}\mathrm{d}p_i - \dot{p}_i\mathrm{d}q_i - \frac{\partial L}{\partial t}\mathrm{d}t<br>$$</p>
+<p>$H$ 即为勒让德变换的结果，称为<strong>哈密顿量</strong>。现在考察其全微分，代入拉格朗日方程得到：</p>
+<p>$$<br>\mathrm{d}H &#x3D; \dot{q_i}\mathrm{d}p_i - \dot{p}_i\mathrm{d}q_i - \frac{\partial L}{\partial t}\mathrm{d}t \label{dham}<br>$$</p>
 <p>从中便可抽出运动方程</p>
-<p>$$<br>\frac{\partial H}{\partial p_i} &#x3D; \dot{q}_i, \qquad \frac{\partial H}{\partial q_i} &#x3D; -\dot{p}_i<br>$$</p>
-<p>这个方程称为<strong>哈密顿正则方程</strong>，为一阶常微分方程组。</p>
+<p>$$<br>\frac{\partial H}{\partial p_i} &#x3D; \dot{q}_i, \qquad \frac{\partial H}{\partial q_i} &#x3D; -\dot{p}_i  \label{hameq}<br>$$</p>
+<p>这个方程称为<strong>哈密顿正则方程</strong>，为一阶常微分方程组。此处引入两个术语：一个力学系统的状态可以被 $\boldsymbol{p}, \boldsymbol{q}$ 两组独立的变量描述，其全体可能的状态集合称作相空间。$\boldsymbol{p}, \boldsymbol{q}$ 关于时间的函数称作相轨道。从相空间中的给定点出发，力学系统的相轨道由哈密顿正则方程确定。</p>
+<p>另外如果考察 $H$ 关于 $t$ 的变化量，则有</p>
+<p>$$<br>\begin{align}<br>    \frac{\mathrm{d}H}{\mathrm{d}t} &amp;&#x3D; \frac{\partial H}{\partial t} + \frac{\partial H}{\partial q_i}\dot{q}_i + \frac{\partial H}{\partial p_i}\dot{p}_i \\<br>    &amp;&#x3D; \frac{\partial H}{\partial t} &amp; \color{blue}{\text{from (\ref{hameq})}} \\<br>    &amp;&#x3D; -\frac{\partial L}{\partial t} &amp; \color{blue}{\text{from (\ref{dham})}}<br>\end{align}<br>$$</p>
+<p>可见若哈密顿量不含时，则它是一个守恒量。又考察其定义和 <a href="../../../../2025/08/14/Mechanics2Lagrangian/#%E5%AF%B9%E7%A7%B0%E6%80%A7%E4%B8%8E%E5%AE%88%E6%81%92%E5%BE%8B">第二讲</a> 中关于能量守恒的论述，此时哈密顿量数值上就等于能量。</p>
+<h1><span id="刘维尔定理">刘维尔定理</span></h1><p>本节来理解相空间的结构。我们将证明，<strong>如果一个系统按照哈密顿正则方程演化，则体积元大小不变（刘维尔定理）</strong>。</p>
+<p>首先将 $p, q$ 统一至一个长度为 $2n$ 的变量中：</p>
+<p>$$<br>\xi^j &#x3D; \begin{cases}<br>    q^j &amp; j &#x3D; 1, 2, …, n \\<br>    p_{j - n} &amp; j &#x3D; n + 1, n + 2, …, 2n<br>\end{cases}<br>$$</p>
+<p>则此时哈密顿正则方程的形式为</p>
+<p>$$<br>\dot{\xi}^j &#x3D; \omega^{jk}\partial_k H \qquad \text{ or } \qquad\omega_{jk}\dot{\xi}^j &#x3D; \partial_k H<br>$$</p>
+<p>其中 $\omega$ 是这样的一个正交的斜对称矩阵：</p>
+<p>$$<br>\omega &#x3D; \begin{pmatrix}<br>    &amp; \mathbf{I}_{n\times n} \\<br>    -\mathbf{I}_{n\times n} &amp;<br>\end{pmatrix}<br>$$</p>
+<p>现在考察一个体积元 $\mathrm{d}\xi(0)$ 演化时间 $t$ 之后所得的体积元。众所周知，原来的体积元和新的体积元之间差了 Jacobian 倍。一切归结为计算</p>
+<p>$$<br>J(t) &#x3D; \det \mathbf{J}(t), \text{ where } \mathbf{J}(t)_{i, j} &#x3D; \frac{\partial \xi^i(t)}{\partial \xi_j(0)}<br>$$</p>
+<p>当然这里你要和哈密顿正则方程扯上关系，必须做一些微分。下面的推导可能是操作矩阵行列式的导数的常见手法，因为 $\mathrm{tr}$ 比 $\det$ 好操作得多：</p>
+<p>$$<br>\begin{align}<br>\frac{\mathrm{d}J}{\mathrm{d}t} &amp;&#x3D; \frac{\mathrm{d}}{\mathrm{d}t} \exp( \ln \det \mathbf{J}(t) ) \\<br>&amp;&#x3D; J(t)\cdot \frac{\mathrm{d}}{\mathrm{d}t} \mathrm{tr}( \ln(\mathbf{J}(t)) ) \\<br>&amp;&#x3D; J(t)\cdot \mathrm{tr}(\mathbf{J}^{-1}(t)\dot{\mathbf{J}}(t))<br>\end{align}<br>$$</p>
+<p>而 Jacobi 矩阵的求逆和求导都是我们熟悉的：有 </p>
+<p>$$<br>\begin{align}<br>\mathrm{tr}(\mathbf{J}^{-1}(t)\dot{\mathbf{J}}(t)) &amp;&#x3D; \frac{\partial \xi^i(0)}{\partial \xi^j(t)}\frac{\partial \dot{\xi}^j(t)}{\partial \xi^i(0)} \\<br>&amp;&#x3D; \frac{\partial \xi^i(0)}{\partial \xi^j(t)}\frac{\partial \dot{\xi}^j(t)}{\partial \xi^k(t)}\frac{\partial \xi^k(t)}{\partial \xi^i(0)} &amp; \color{blue}{\text{by chain rule}} \\<br>&amp;&#x3D; \delta_j^k \frac{\partial \dot{\xi}^j(t)}{\partial \xi^k(t)} &amp; \color{blue}{\text{by inversion of Jacobi matrix}} \label{beforehameq} \\<br>&amp;&#x3D; \omega^{jk}\partial_j \partial_k H(t) &amp; \color{blue}{\text{ by Hamiltonian equation}} \label{afterhameq} \\<br>&amp;&#x3D; 0<br>\end{align}<br>$$</p>
+<p>最后系一个对称矩阵与一个斜对称矩阵的 Frobenius 内积，自然是 $0$。至此我们得到的结论总结为</p>
+<div class="note info"><p><strong>定理 2.1（刘维尔定理）.</strong> 对于哈密顿系统（即便是非保守的），始终有 </p>
+<p>$$<br>\frac{\mathrm{d}}{\mathrm{d}t} J(t) &#x3D; 0<br>$$</p>
+<p>成立。直观地，哈密顿系统的相空间体积元不随时间演化改变。</p>
+</div>
 
+<p>对于非哈密顿系统，$(\ref{beforehameq}) \Rightarrow (\ref{afterhameq})$ 的推导将不复存在。当然，你也可以对 $(\ref{beforehameq})$ 里面那个东西积分来获得 $J(t)$ 的值，进而得到体积元变化量，但实际上这也没什么意思。</p>
+<h1><span id="泊松括号">泊松括号</span></h1><p>考虑一个力学量（广义坐标、广义动量、时间的函数） $f(\boldsymbol{p}, \boldsymbol{q}, t)$。其随时间的变化率为</p>
+<p>$$<br>\begin{align}<br>\frac{\mathrm{d}f}{\mathrm{d}t} &amp;&#x3D; \frac{\partial f}{\partial t} + \frac{\partial f}{\partial q_i}\dot{q}_i + \frac{\partial f}{\partial p_i} \dot{p}_i \\<br>&amp;&#x3D; \frac{\partial f}{\partial t} + \frac{\partial f}{\partial q_i}\frac{\partial H}{\partial p_i} - \frac{\partial H}{\partial q_i}\frac{\partial f}{\partial p_i} &amp; \color{blue}{\text{by Hamiltonian equation}}<br>\end{align}<br>$$</p>
+<p>因此一个力学量是守恒量（或者称为运动积分）的充分必要条件是</p>
+<p>$$<br>-\frac{\partial f}{\partial t} &#x3D; \frac{\partial f}{\partial q_i}\frac{\partial H}{\partial p_i} - \frac{\partial H}{\partial q_i}\frac{\partial f}{\partial p_i}<br>$$</p>
+<p>等式右侧是一个相当（斜）对称的形式，也是我们本节重点研究的对象。</p>
+<div class="note success"><p><strong>定义 3.1（泊松括号）.</strong> 对于两个力学量 $f, g$，其泊松括号定义做</p>
+<p>$$<br>[f, g] :&#x3D; \frac{\partial f}{\partial q_i}\frac{\partial g}{\partial p_i} - \frac{\partial f}{\partial p_i}\frac{\partial g}{\partial q_i} &#x3D; (\partial_j f) \omega^{jk} (\partial_k g)<br>$$</p>
+</div>
+
+<p>易见：</p>
+<p><strong>泊松括号是斜对称双线性形式.</strong> 这由 $\partial, \omega$ 的线性性立即得到。</p>
+<p><strong>两函数乘积的泊松括号满足乘法法则.</strong> 即 $[f_1f_2, g] &#x3D; f_1[f_2, g] + f_2[f_1, g]$。这由偏微分的乘法法则立即得到。</p>
+<p><strong>泊松括号满足雅可比等式.</strong> 即对于三个力学量 $f, g, h$，有</p>
+<p>$$<br>[f, [g, h]] + [g, [h, f]] + [h, [f, g]] &#x3D; 0<br>$$</p>
+<p>验证即可，这里不多费笔墨。</p>
+<div class="note info"><p><strong>定理 3.1（泊松定理）.</strong> 设 $f, g$ 是两个的力学量。若 $f, g$ 都是守恒量，则 $[f, g]$ 也是守恒量。</p>
+</div>
+
+<p><strong>证明.</strong> 注意到一个力学量是守恒量的充分必要条件是</p>
+<p>$$<br>[f, H] &#x3D; -\frac{\partial f}{\partial t}<br>$$</p>
+<p>由雅可比等式立即得到</p>
+<p>$$<br>\begin{aligned}<br>    &amp;[f, [g, H]] + [g, [H, f]] + [H, [f, g]] &#x3D; 0 \\<br>    &amp;\Rightarrow \left[f, -\frac{\partial g}{\partial t}\right] + \left[g, -\frac{\partial f}{\partial t}\right] + [H, [f, g]] &#x3D; 0 \\<br>    &amp;\Rightarrow [[f, g], H] &#x3D; -\frac{\partial}{\partial t}[f, g]<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<h1><span id="正则变换">正则变换</span></h1>
     </div>
 
     

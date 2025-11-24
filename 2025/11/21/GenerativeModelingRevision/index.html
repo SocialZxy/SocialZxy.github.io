@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概要 自编码器 Transformer 和自回归模型 生成式对抗网络 标准化流模型 扩散模型 附录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 生成模型基础">
+<meta property="og:url" content="http://example.com/2025/11/21/GenerativeModelingRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="概要 自编码器 Transformer 和自回归模型 生成式对抗网络 标准化流模型 扩散模型 附录">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2025-11-21T04:54:24.000Z">
+<meta property="article:modified_time" content="2025-11-24T15:49:53.481Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2025/11/21/GenerativeModelingRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/11/21/GenerativeModelingRevision/","path":"2025/11/21/GenerativeModelingRevision/","title":"Revision | 生成模型基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 生成模型基础 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">概要</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">自编码器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Transformer 和自回归模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">生成式对抗网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">标准化流模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">扩散模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">附录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">79</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/21/GenerativeModelingRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 生成模型基础 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 生成模型基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-11-21 12:54:24" itemprop="dateCreated datePublished" datetime="2025-11-21T12:54:24+08:00">2025-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-11-24 23:49:53" itemprop="dateModified" datetime="2025-11-24T23:49:53+08:00">2025-11-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
+<li><a href="#%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8">自编码器</a></li>
+<li><a href="#transformer-%E5%92%8C%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B">Transformer 和自回归模型</a></li>
+<li><a href="#%E7%94%9F%E6%88%90%E5%BC%8F%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C">生成式对抗网络</a></li>
+<li><a href="#%E6%A0%87%E5%87%86%E5%8C%96%E6%B5%81%E6%A8%A1%E5%9E%8B">标准化流模型</a></li>
+<li><a href="#%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B">扩散模型</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="概要">概要</span></h1><p>【FIXME：说两句批话】</p>
+<h1><span id="自编码器">自编码器</span></h1><p><strong>自编码器（Autoencoder）</strong>是生成式模型的一个早期的尝试。经验上，我们假设需要生成的数据（比如说手写数字图像）集中分布在一个由少量几个广义坐标决定的位形空间（称为潜空间，Latent Space）上<strong>（流形假设）</strong>。这里我们并不尝试从数学上给流形假设一个更深刻的解读，只将其形象地理解为：对于一种需要生成的数据的全体 $\mathcal{D}\subseteq \mathbb{R}^n$，都存在 $d$ 和一个映射 $f: \mathbb{R}^n\rightarrow \mathbb{R}^d$，$f$ 在 $f(\mathcal{D})$ 上有逆映射 $g$，满足 $g(f(\boldsymbol{x})) &#x3D; \boldsymbol{x}$（这种在部分位置可逆的性质，我们权且称作共轭），对于任意的 $\boldsymbol{x}\in \mathcal{D}$。</p>
+<p>照深度学习之惯例，我们用参数化的神经网络 $f(\boldsymbol{x}; \theta)$ 和 $g(\boldsymbol{z}; \theta)$ 来刻画这两个函数，并分别称其为 Encoder 和 Decoder，然后在 $\mathcal{D}$ 中采样出的数据集 $\mathcal{D}_{data}$ 上优化</p>
+<p>$$<br>\mathbb{E}_{x\sim \mathcal{D}_{data}} \left[\frac 12\left\Vert \boldsymbol{x} - g(f(\boldsymbol{x}))\right\Vert^2\right]<br>$$</p>
+<p>这两个神经网络的复合 $g\circ f$ 就称为自编码器。</p>
+<div class="note "><p><strong>最简单的自编码器</strong> 假设 $f, g$ 都是线性映射，可用矩阵 $\mathbf{V}\in M^{d\times n}$ 和 $\mathbf{U}\in M^{n\times d}$ 刻画。令数据集中的数据 $\boldsymbol{x}_1, …, \boldsymbol{x}_n$ 排成了矩阵 $\mathbf{X}\in M^{n\times N}$，则优化目标是</p>
+<p>$$<br>\left\lVert \mathbf{X} - \mathbf{UVX}\right\rVert_F^2<br>$$</p>
+<p>此处 $\left\lVert\cdot\right\rVert_F$ 是 Frobenius 范数。可以证明【FIXME】这个问题的一个最优解是</p>
+<p>$$<br>\mathbf{U} &#x3D; \mathbf{V}_p^\top, \mathbf{V} &#x3D; \mathbf{V}_p<br>$$</p>
+<p>其中 $\mathbf{V}_p$ 源自 $\mathbf{X}$ 的奇异值分解 $\mathbf{X} &#x3D; \mathbf{U}_p^\top \boldsymbol{\Sigma}\mathbf{V}_p$，因此线性自编码器等价于主成分分析（PCA）。</p>
+</div>
+
+<p>在自编码器中，需要注意 <strong>$f, g$ 结构不宜过于复杂、能力不宜过强。</strong> 否则容易过拟合，或者学到平凡的潜空间。实践中一般将其取作浅层神经网络，然后用梯度下降训练。</p>
+<hr>
+<p>可以想象的构造生成模型的方法是，使用一个自编码器的 Decoder 部分。如能构造潜空间上的一个采样器 $\boldsymbol{Z}$，和 $f(\boldsymbol{D})$ 近似同分布（$\boldsymbol{D}$ 是真实数据对应的随机变量），便能实现 $g(\boldsymbol{Z})$ 和 $\boldsymbol{D}$ 近似同分布，从而得到数据 $\boldsymbol{D}$ 的一个生成式模型。对于一般的模型，高效的采样器是难以构造的。所幸我们可以控制 $f$ 的结构和参数，使得 $f(\boldsymbol{D})$ 近似于一个标准正态分布 $\mathcal{N}(0, \mathbf{I})$，这样一来只需要实现 $\mathcal{N}(0, \mathbf{I})$ 的采样器即可。由此，我们得以窥见变分自编码器（VAE）的原始直觉：</p>
+<ul>
+<li><strong>神经网络.</strong> $f$ 由两对神经网络 $\boldsymbol{\mu}(\boldsymbol{x}; \theta)$ 和 $\sigma(\boldsymbol{x}; \theta)$ 确定的高斯分布刻画。潜变量 $\boldsymbol{z}\sim \mathcal{N}(\boldsymbol{\mu}(\boldsymbol{x}; \theta), \sigma(\boldsymbol{x}; \theta))\mathbf{I}$。$g$ 由一个神经网络 $\boldsymbol{g}(\boldsymbol{z}; \theta)$ 刻画，输出为 $\boldsymbol{x}’ &#x3D; \boldsymbol{g}(\boldsymbol{z})$</li>
+<li><strong>优化目标.</strong> 损失函数自然地需要分为两部分：<ul>
+<li><strong>重建损失.</strong> 和 Autoencoder 一样，我们需要优化<br>$$<br>L_c &#x3D; \mathbb{E}[\left\lVert\boldsymbol{x} - \boldsymbol{x’}\right\rVert_2^2]<br>$$</li>
+<li><strong>正则损失.</strong> 我们此前谈到我们需要令 $\boldsymbol{z}$ 的分布接近于标准正态分布，换言之即 $\boldsymbol{z}$ 到标准正态分布的 KL 散度不宜过大。然而在我们的建模中，$\boldsymbol{z}$ 的分布是一个混合高斯分布，其与标准正态分布的 KL 散度难以计算，所幸根据 KL 散度的凸性，下面的式子是其上界<br>$$<br>L_r &#x3D; \mathbb{E}_{\boldsymbol{x}\sim \boldsymbol{D}}\left[D_{KL}(\mathcal{N}(\boldsymbol{\mu}(\boldsymbol{x}; \theta), \sigma(\boldsymbol{x}; \theta))\Vert \mathcal{N}(0, \mathbf{I}))\right]<br>$$<br>两个优化目标借助一个可调参数 $\lambda$ 结合为一个完整的优化目标：<br>$$<br>L &#x3D; \mathbb{E}\left[\left\lVert\boldsymbol{x} - \boldsymbol{x’}\right\rVert_2^2 + \lambda D_{KL}(\mathcal{N}(\boldsymbol{\mu}(\boldsymbol{x}; \theta), \sigma(\boldsymbol{x}; \theta))\Vert \mathcal{N}(0, \mathbf{I}))\right] \label{vaeloss}<br>$$</li>
+</ul>
+</li>
+<li><strong>优化方法（重参数化技巧）.</strong> 注意我们将 $f$ 建模为随机函数后，需要使用一个采样操作。这个操作将阻断梯度的传播！但注意到 $\boldsymbol{z}$ 服从 $\mathcal{N}(\boldsymbol{\mu}(\boldsymbol{x}; \theta), \sigma(\boldsymbol{x}; \theta))$，该随机变量和 $\boldsymbol{\mu}(\boldsymbol{x}; \theta) + \sigma(\boldsymbol{x}, \theta)\cdot \boldsymbol{\varepsilon}$（其中 $\boldsymbol{\varepsilon}$ 服从标准正态分布）是同分布。如此我们可以采样随机变量 $\boldsymbol{\varepsilon}$ 来估计 $L$（此时 $L$ 关于 $\theta$ 完全是可导的），进而进行梯度下降。</li>
+</ul>
+<hr>
+<p>在上面的直觉的优化目标中，有几处难以绕过的批话。本段将从另一个角度审视 VAE，并说明 VAE 本质上是在优化数据样本 $D$ 的最大似然。</p>
+<p>我们现在要构造真实分布 $\mathcal{D}$ 的一个生成式模型。为此，我们从 $\mathcal{D}$ 中采集了一系列样本，$D &#x3D; \{\boldsymbol{x}_i\}$。从流形假设出发，我们假设潜变量 $\boldsymbol{z}$ 是一个服从低维标准高斯分布的随机变量，$\mathcal{D}$ 可由一个“很集中的随机函数” $f$ 作用于 $\boldsymbol{z}$ 给出。用一个参数化的分布 $p_\theta(\boldsymbol{x} | \boldsymbol{z})$ 来刻画这个函数 $f$。现在，采出样本 $\boldsymbol{x}_i$ 的概率就是</p>
+<p>$$<br>P(\boldsymbol{x}_i) &#x3D; \int p_\theta(\boldsymbol{x} | \boldsymbol{z})p(\boldsymbol{z})\mathrm{d}z<br>$$</p>
+<p>最大似然的对数即为 $\sum_{i&#x3D;1}^n \log P(\boldsymbol{x}_i)$。然而，这个最大似然在计算上有以下几方面问题：</p>
+<ul>
+<li>积分包在对数里面，你必须准确估计积分。</li>
+<li>首先因为 $p(\boldsymbol{x})$ 是个神经网络，自然难以期待积分有解析解。</li>
+<li>此外仅采样了有限个点作为样本，且根据流形假设 $f$ “很集中”，直觉上这个被积函数只在一些小区域上非常大，在其他地方都几乎是 $0$，因此是难以通过采样计算的。</li>
+</ul>
+<p>为此，我们引入另一个参数化的分布 $q_\theta(\boldsymbol{x} | \boldsymbol{z})$，称为<strong>变分后验分布（variational posterior）</strong>，目的是给出这些小区域的位置。由 log 的凸性自然有</p>
+<p>$$<br>\log P(\boldsymbol{x})\geq \int_z q_\theta(\boldsymbol{z} | \boldsymbol{x})\log \frac{p_\theta(\boldsymbol{x} | \boldsymbol{z})p(\boldsymbol{z})}{q_\theta(\boldsymbol{z} | \boldsymbol{x})}\mathrm{d}\boldsymbol{z} \label{elbo}<br>$$</p>
+<blockquote>
+<p><strong>Remark.</strong> 这里可以从另一个角度来审视这个 $q_{\theta}$。注意根据贝叶斯公式，$P(\boldsymbol{x}) &#x3D; \dfrac{p_\theta(\boldsymbol{x} | \boldsymbol{z})p(\boldsymbol{x})}{p_\theta(\boldsymbol{z} | \boldsymbol{x})}$ 对于任意的 $\boldsymbol{z}$ 都成立。那么做差可知，不等式右侧和左侧之差恰好是<br>$$<br>\int_z q_\theta(\boldsymbol{z} | \boldsymbol{x}) \log \frac{q_\theta(\boldsymbol{z} | \boldsymbol{x})}{p_\theta(\boldsymbol{z} | \boldsymbol{x})} &#x3D; D_{KL}(q\Vert p) \geq 0<br>$$<br>一方面，这表明不等式 $(\ref{elbo})$ 确实成立，另一方面，它表明只要 $q_{\theta}$ 准确地估计了后验分布，这个下界就是紧的。因此如果 $p_{\theta}(\boldsymbol{z} | \boldsymbol{x})$ 在 $q_\theta$ 的表征范围内，就有优化该下界所得的 $p_\theta$ 和原问题等价。</p>
+</blockquote>
+<p>不等式 $(\ref{elbo})$ 称为对数似然的<strong>置信下界（ELB）</strong>。在上面的注脚中我们论证了引入这个新变量后的优化问题答案和原来一样，这种优化方法以 ELBO 著称。为了避免神经网络参数化的概率分布的归一化系数没法算等一系列问题，我们用如下的方式来参数化 $p, q$：</p>
+<ul>
+<li>$p_\theta(\boldsymbol{x} | \boldsymbol{z}) &#x3D; \mathcal{N}(\boldsymbol{\mu}_d(\boldsymbol{z}), \sigma\mathbf{I})$，$\sigma$ 为超参数，$\boldsymbol{\mu}_d$ 为神经网络；</li>
+<li>$q_\theta(\boldsymbol{z} | \boldsymbol{x}) &#x3D; \mathcal{N}(\boldsymbol{\mu}_e(\boldsymbol{x}), \sigma_e(\boldsymbol{x}))$，$\boldsymbol{\mu}_e, \sigma_e$ 为神经网络。</li>
+</ul>
+<p>现在你已经可以发现要<strong>最小化</strong>的损失函数就是</p>
+<p>$$<br>L &#x3D; \mathbb{E}_{x\in \mathcal{D}}\left[\left\lVert \boldsymbol{\mu}_d(\boldsymbol{x}, \boldsymbol{z}) - \boldsymbol{x}\right\rVert_2^2 + \frac{1}{\sigma}D_{KL}(\mathcal{N}(\boldsymbol{\mu}_e(\boldsymbol{x}), \sigma(\boldsymbol{x}))\Vert \mathcal{N}(0, \mathbf{I}))\right]<br>$$</p>
+<p>这和 $(\ref{vaeloss})$ 形式完全一致。注意，两个 Gaussian 的 KL 散度有闭式解因此无需采样计算：</p>
+<div class="note info"><p><strong>定理 2.1（KL of Gaussians）.</strong> 设 $p, q$ 是两个 $d$ 维高斯分布，则有</p>
+<p>$$<br>D_{KL}(q\Vert p) &#x3D; -\frac 12\log \frac{\det \boldsymbol{\Sigma}_q}{\det \boldsymbol{\Sigma}_p} - \frac d2 + \frac 12 \mathrm{tr}(\boldsymbol{\Sigma}_p^{-1}\boldsymbol{\Sigma}_q) + \frac 12(\boldsymbol{\mu_q} - \boldsymbol{\mu}_p)^\top \boldsymbol{\Sigma}_p^{-1}(\boldsymbol{\mu}_q - \boldsymbol{\mu}_p)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> <em>Exercise.</em> 爆算即可。</p>
+<div class="note "><p><strong>注释与扩展.</strong> 历史上，关于 VAE 的研究指出：</p>
+<ul>
+<li>VAE 不能叠深（David Wipf）；</li>
+<li>VAE 对 latent space 的维数非常敏感（David Wipf）；</li>
+<li>VAE 没法算 $P(\boldsymbol{x})$ 的值。</li>
+<li>VAE 一般应当作为系统的一个组成成分，而非单独出现。</li>
+</ul>
+<p><strong>去噪自编码器（DAE）</strong>是一类自编码器的变种。回忆我们之前讲过为了避免过拟合和学到平凡映射，自编码器一般是采取降维 - 升维的瓶颈结构。如果我们将 Encoder 固定成某种加噪声的方式，进行自监督学习，Decoder 便可学会完成某些任务。比如你将 Encoder 建模成随机 Mask 图上的某些区块，Decoder 便可学会去掉图上的黑条，etc。这时，Decoder 通常需要是非常深的网络，且需要大量训练数据。尽管 DAE 确实可以补全图像的缺失部分，但我们一般墨守成规地照定义不认为 DAE 是生成式模型。</p>
+<p><strong>VQ-VAE</strong> 是一种学习离散潜空间的自编码器。我们有以下的需求和直觉：</p>
+<ul>
+<li><strong>图像和语言是两种不同的模态。</strong> 如果你想要训练一个视觉 - 语言模型，需要把图片信息和单词统一为一个（离散的）词表。</li>
+<li><strong>要表达一个图片的语义，只需离散的向量。</strong> 比如你要描述一个人像，只需声明其性别、年龄、神态等，这些都是离散的信息。</li>
+</ul>
+<p>据此，VAE 将潜空间定义为 $[K]$，并附加一个可学习的词嵌入 $\boldsymbol{e}_1, …, \boldsymbol{e}_K \in \mathbb{R}^D$，称为 codebook。Encoder 经一个神经网络把图片映射成 $D$ 维向量，然后查询结果在 codebook 中的最近邻；Decoder 经一个神经网络将 $\boldsymbol{e}_z$ 还原成图片。其 pipeline 可以被描述作</p>
+<p>$$<br>\boldsymbol{x} \xrightarrow{\text{neural network}} \boldsymbol{z}_e \xrightarrow{\text{nearest neighbor}} \boldsymbol{z}_d \xrightarrow{\text{neural network}} \boldsymbol{x}’<br>$$</p>
+<p>重建损失 $L_c &#x3D; \left\lVert\boldsymbol{x} - \boldsymbol{x}’\right\rVert_2^2$ 是明显需要的组成部分，此外训练过程中有以下要点：</p>
+<ol>
+<li><strong>Encoder 的参数更新.</strong> 注意最近邻求解阻断了重建损失的梯度向 Encoder 的传播。这里我们使用一种类似于重参数化的操作。$\mathrm{sg}(\cdot)$ 表示不考虑括号内的梯度，则有 $\boldsymbol{z}_d &#x3D; \boldsymbol{z}_e + \mathrm{sg}(\boldsymbol{z}_d - \boldsymbol{z}_e)$。现在整个计算图接通，可以计算 Encoder 的梯度。</li>
+<li><strong>Codebook 的更新.</strong> 我们引入 codebook 损失<br>$$<br>L_r &#x3D; \lambda_1 \left\lVert \mathrm{sg}(\boldsymbol{z}_e) - \boldsymbol{z}_e \right\rVert^2 + \lambda_2 \left\lVert \boldsymbol{z}_e - \mathrm{sg}(\boldsymbol{z}_d) \right\rVert^2<br>$$<br>简要理解这个损失：第一项类似于 VAE 的正则损失，第二项是让 $\boldsymbol{e}$ 对 Encoder 的结果做 $k$-Means 聚类。</li>
+</ol>
+<p>VQ-VAE 之所以可以被称为生成式模型，是因为经过训练之后你想要估计潜变量的概率分布相对来说是容易的，因为这只是一个离散的概率分布。</p>
+</div>
+
+<h1><span id="transformer-和自回归模型">Transformer 和自回归模型</span></h1><p>在以 NLP 为代表的序列生成任务中，我们的目标是从联合分布</p>
+<p>$$<br>p(x_1, …, x_n)<br>$$</p>
+<p>中采样一个序列。为此，容易想到的思路是拟合条件分布</p>
+<p>$$<br>p(x_i | x_1, …, x_{i - 1})<br>$$</p>
+<p>然后迭代采样生成完整序列。根据链式法则，这样做是正确的。通过这种思路构造出的模型就称为<strong>自回归模型</strong>。早期的自回归模型的代表是 $n$-gram。其依赖自然语言的马尔可夫假设，认为</p>
+<p>$$<br>p(x_i | x_{1}, …, x_{i - 1}) \approx p(x_i | x_{i-k}, …, x_{i - 1})<br>$$</p>
+<p>后者直接从语料样本中以频率估计。现代的模型都是参数化的神经网络，包括 RNN 和 Transformer。参数的优化目标是语料样本的最大似然</p>
+<p>$$<br>\sum_{i&#x3D;1}^n -\log P_\theta(x_i | x_1, …, x_{i - 1})<br>$$</p>
+<p>这个 Loss 称为 NLL Loss。注意训练时，为了防止 Transformer 学会 cheat，必须在计算注意力矩阵时加下三角的 Mask。容易发现 RNN 的训练和推理时间都是线性的，Transformer 的训练和推理都是平方的，但是后者训练时可以并行。因此通常认为 RNN 训练低效、推理高效，Transformer 训练高效、推理低效。</p>
+<hr>
+<p>Transformer 的结构想必已经路人皆知。我们在此只强调以下要点。</p>
+<ul>
+<li>首先是 Attention 的计算：<br>$$<br>\mathrm{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) &#x3D; \mathrm{Softmax}\left(\frac{\mathbf{K}^\top \mathbf{Q}}{\sqrt{D}}\right)\mathbf{V}<br>$$<br>此处 $\sqrt D$ 是为了保证矩阵元素期望为 $1$，防止指数爆炸。</li>
+<li>FFN 层的激活函数一般使用 GeLU，Normalization 时使用 Layer normalization。</li>
+<li>优化时学习率 Scheduling 一般是先 warm-up（线性增长），然后平滑下降。<div class="note "><p><strong>关于 Normalization.</strong> 假设某个 FFN 层的输出是一个形状为 $\text{Batch size}\times \text{Sequence Length}\times \text{Embed Dim}$ 的三维数组。Normalization 是在特定的维度上求<br>$$<br>y &#x3D; \gamma\frac{x - \mathbb{E}[x]}{\sqrt{\mathrm{Var}[x] + \varepsilon}} + \beta<br>$$<br>维度选取第一、二、三维的 Normalization 分别称为 Batch Normalizatoin、Layer Normalization、Instance Normalization。</p>
+</div></li>
+<li>FFN 层是所谓的逐位前馈网络，其对序列中的每个位置都一视同仁。为此需要给输入向量叠加<strong>位置编码</strong>，常用的位置编码方案有：<ol>
+<li><strong>（绝对位置编码）</strong>设计一个 $\boldsymbol{p}_i$ 表示 $i$ 位置的位置编码，在模型最下方的 Embedding 之后，将 $\boldsymbol{x}_i + \boldsymbol{p}_i$ 输入给模型。可以选择置<br> $$<br> \boldsymbol{p}_{i, j} &#x3D; \begin{pmatrix}<br>   \sin(i &#x2F; 10000^{2\cdot 1&#x2F;d}) \\<br>   \cos(i &#x2F; 10000^{2\cdot 1&#x2F;d}) \\<br>   \vdots \\<br>   \sin(i &#x2F; 10000^{2\cdot \frac d2&#x2F;d}) \\<br>   \cos(i &#x2F; 10000^{2\cdot \frac d2&#x2F;d}) \\<br> \end{pmatrix}<br> $$<br> 亦可将其设为可学习参数。实践中，这种方法在长序列上效果不好（可学习的位置编码更是直接限制了序列长度）。</li>
+<li><strong>（相对位置编码）</strong> 给出函数 $f(x)$，定义矩阵 $b_{ij} &#x3D; f(i - j)$，注意力矩阵改为<br> $$<br> \mathbf{A}_{RPE}^h(\mathbf{Q}, \mathbf{K}) &#x3D; \mathrm{Softmax}\left(\frac{\mathbf{K}^\top \mathbf{Q}}{\sqrt D} + \mathbf{B}\right)<br> $$<br> 或者在计算内积时，使用自定义的度量矩阵：<br> $$<br> \langle \mathbf{K}_i, \mathbf{Q}_j\rangle :&#x3D; \mathbf{K}_i^\top \mathbf{R}_{ij} \mathbf{Q}<br> $$<br> 其中<br> $$<br> \mathbf{R}_{ij} &#x3D; \mathrm{diag}(\mathbf{Rot}((i - j)\theta_1),\cdots,  \mathbf{Rot}((i - j)\theta_{d &#x2F; 2})), \qquad \theta_m &#x3D; 10000^{-2(m - 1) &#x2F; d}, \qquad \mathbf{Rot}(\theta) &#x3D; \begin{pmatrix}<br>   \cos \theta &amp; -\sin \theta \\<br>   \sin \theta &amp; \cos \theta<br> \end{pmatrix}<br> $$<br> 这种位置编码称为 RoPE。</li>
+</ol>
+</li>
+</ul>
+<h1><span id="生成式对抗网络">生成式对抗网络</span></h1><p>考虑最直接的构造生成式模型的思路。我们 sample 一个 $\boldsymbol{z}\sim \mathcal{N}(0, \mathbf{I})$，然后经由一个神经网络 $p(\boldsymbol{z}; \theta)$ 将其映射到 $\mathcal{D}$。现在希望这个生成式模型生成的样本确实和数据 $D$ 同分布，可取一个衡量分布差异的度量 &#x2F; 散度 $d(\cdot, \cdot)$，然后优化</p>
+<p>$$<br>\min_\theta d(p(\boldsymbol{z}; \theta), D)<br>$$</p>
+<p>两个分布之间的 $d$ 和其<strong>不可区分性</strong>之间存在千丝万缕的联系。形式化地，对于某些度量 $d$，会存在一个 $\{0, 1\}^2$ 上的度量 $\Delta$，使得对于任意随机变量 $x, y$，都有</p>
+<p>$$<br>d(x, y) &#x3D; \sup_{\text{all adversaries w&#x2F; some constraint }\mathcal{A}: \mathcal{D}\rightarrow \{0, 1\}}\Delta(\mathcal{A}(x), \mathcal{A}(y))<br>$$</p>
+<p>例如若取 $d &#x3D; \Delta_{TV}$，则可限制 $\mathcal{A}$ 为确定性算法并取 $\Delta &#x3D; \Delta_{TV}$，这是因为确定性的 Adversary 只能决定在每个 $\boldsymbol{x}$ 上输出 $1$ 与否，而熟知</p>
+<p>$$<br>\Delta_{TV}(x, y) &#x3D; \sup_{E}|P_x(E) - P_y(E)|<br>$$</p>
+<p>右侧括号内正是 Adversary 输出结果的 $\Delta_{TV}$。<strong>生成式对抗网络（GAN）</strong>正是这样的一种范式：</p>
+<ol>
+<li>找到一个度量 $d$ 和相应的由度量 $\Delta$ 刻画的不可区分性；</li>
+<li>用神经网络刻画 $p(\boldsymbol{z}; \theta)$（称为 Generator）和 adversary $q(D; \theta)$（称为 Discriminator）；</li>
+<li>优化<br>$$<br>\min_p \max_q \Delta(q(p(\boldsymbol{z})), q(D))<br>$$</li>
+</ol>
+<div class="note "><p><strong>Remark 4.1.</strong> 直觉上，这就是引入了一个判别器，它的目标是判断一个样本是由生成式模型伪造的还是真实的。$\Delta$ 就是它的损失函数。</p>
+</div>
+
+<p><strong>$f$-散度</strong>是一类刻画分布之间差异的常见方式。</p>
+<div class="note info"><p><strong>定理 4.1（$f$-散度）.</strong> 对于非负凸函数 $f$，满足 $f(1) &#x3D; 0$，下面的关于两个概率密度 $P, Q$ 的函数</p>
+<p>$$<br>D_f(P\Vert Q) :&#x3D; \int f\left(\frac{P(x)}{Q(x)}\right)Q(x) \mathrm{d}x<br>$$</p>
+<p>是非负的、关于两个变量凸的函数。</p>
+</div>
+
+<p><strong>证明.</strong> 可以参考 $KL$ 散度的这两个性质的证明。</p>
+<p>我们知道的若干分布间的度量其实都是 $f$-散度，例如：</p>
+<ul>
+<li><strong>KL 散度.</strong> 取 $f(x) &#x3D; x\log x$ 得到 KL 散度 $\mathbb{E}_Q[\log Q(x) &#x2F; P(x)]$；</li>
+<li><strong>Total Variance.</strong> 取 $f(x) &#x3D; \frac 12 |x - 1|$ 得到 Total Variance $\frac 12 \sum |p(x) - q(x)|$；</li>
+<li><strong>JS 散度.</strong> 取 $f(x) &#x3D; -(x + 1)\log \frac{x + 1}{2} + x\log x$ 得到 Jensen-Shannon 散度 $D_{KL}(P\Vert M) + D_{KL}(Q\Vert M)$，其中 $M &#x3D; \frac{P + Q}{2}$。</li>
+</ul>
+<p>通常意义下的 GAN 是指取 JS 散度作为度量 $d$。我们有如下引理</p>
+<div class="note info"><p><strong>引理 4.2.</strong> JS 散度满足</p>
+<p>$$<br>D_{JS}(P\Vert Q) &#x3D; \sup_{\text{probabilistic adversary }\mathcal{D}}\mathbb{E}_{x\sim P}[\log \mathcal{D}(x)] + \mathbb{E}_{y\sim Q}[\log (1 - \mathcal{D}(y))] + 2\log 2<br>$$</p>
+<p>这里 $\mathcal{D}(x)$ 表示 $\mathcal{D}$ 输入 $x$ 时输出 $1$ 的概率。</p>
+</div>
+
+<p><strong>证明.</strong> </p>
+<p>$$<br>\begin{align}<br>    \mathrm{RHS} &amp;&#x3D; \sup \int (P(x)\log \mathcal{D}(x) + Q(x)\log (1 - \mathcal{D}(x)))\mathrm{d}x + 2\log 2 \\<br>    &amp;&#x3D; \int \sup (P(x)\log \mathcal{D}(x) + Q(x)\log (1 - \mathcal{D}(x)))\mathrm{d}x + 2\log 2 \\<br>    &amp;&#x3D; \int \left( P(x) \log \frac{P(x)}{P(x) + Q(x)} + Q(x)\log \frac{Q(x)}{P(x) + Q(x)}\right) \mathrm{d}x + 2\log 2 \\<br>    &amp;&#x3D; \int P(x)\log \frac{2P(x)}{P(x) + Q(x)}\mathrm{d}x + \int Q(x)\log \frac{2Q(x)}{P(x) + Q(x)}\mathrm{d}x \\<br>    &amp;&#x3D; D_{JS}(P\Vert Q)<br>\end{align}<br>$$</p>
+<p>用神经网络刻画 Generator $\mathcal{G}_\theta$ 和 Discriminator $\mathcal{D}_\theta$，即得到我们的目标是解一个双层优化问题</p>
+<p>$$<br>\min_{\mathcal{G}_\theta} \max_{\mathcal{D}_\theta} \mathbb{E}_{x\leftarrow D} \log \mathcal{D}(x) + \mathbb{E}_{\boldsymbol{z}\leftarrow \mathcal{N}(0, \mathbf{I})}[\log (1 - \mathcal{D}(\mathcal{G}(\boldsymbol{z})))]<br>$$</p>
+<p>解双层优化的办法一般是对 $\mathcal{D}$ 做一轮梯度下降，对 $\mathcal{G}$ 做一轮梯度下降。至此，我们得到了经典的 GAN 的损失函数和全套训练流程。然而，GAN 是出了名的难训，因为这里要解一个非凸双层优化，其问题包括但不限于：</p>
+<ul>
+<li><strong>对超参数极其敏感.</strong> 原论文找了一套非常阴间的超参数。</li>
+<li><strong>难以避免模式塌陷问题.</strong> 模式塌陷是指，本来真实数据可能有多种模式，比如它是多个 Gaussian 的混合，然而模型只学到了一个峰值。本质上，这就是优化算法找到了原问题的一个 local minima。</li>
+</ul>
+<div class="note "><p><strong>注释与扩展.</strong></p>
+<ul>
+<li>引理 2 看起来是极不自然的。历史上 GAN 的发明很可能是先想到了 Remark 4.1 的直觉，然后照惯例优化 $\mathcal{D}$ 在真实样本和合成样本组成的混合数据集上的交叉熵损失，然后证明了最终 GAN 将会最小化合成分布和真实分布的 JS 散度，从而表明理想情况下它确实构造了数据的一个生成式模型。然而，下文介绍的 WGAN 表明欲得到高明的生成式对抗网络，还需采取最小化度量、找 indistinguishability 的理解。</li>
+<li>事实上 $f$-divergence 都可以推出相应的 $f$-GAN，参见 1606.00709。</li>
+</ul>
+<p><strong>Wasserstein GAN.</strong> 在上面的过程中，找一个 $f$-散度对应的不可区分性似乎还是过于 adhoc。那么，有没有什么度量自带一个不可区分性状物呢？回忆我们有</p>
+<div class="note success"><p><strong>定义 4.1（Wasserstein $2$-distance）.</strong> 设 $\Gamma(P, Q)$ 为边缘分布分别为 $P, Q$ 的全体联合分布。定义</p>
+<p>$$<br>\mathcal{W}_2(P, Q) &#x3D; \inf_{\gamma \in \Gamma(P, Q)} \mathbb{E}_{(X, Y)\sim \gamma} \left\lVert X - Y\right\rVert_2<br>$$</p>
+</div>
+
+<p>Wasserstein 的组合意义是把质量从 $x$ 处移动到 $y$ 处，单位质量代价为 $\left\lVert x - y\right\rVert_2$，规划一个最优的移动方案（将 $x$ 处 $\gamma(x, y)$ 单位质量移动到 $y$），使得分布 $P$ 变成分布 $Q$ 的代价最小化。这里 $\gamma$ 似乎有点难以参数化（唯一的方法是建模条件分布 $p(\boldsymbol{y} | \boldsymbol{x})$，但是难以约束其边缘分布为正态分布）。所幸我们有 Kantorovich-Rubinstein 对偶：</p>
+<div class="note info"><p><strong>定理 4.3（Kantorovich-Rubinstein 对偶）.</strong> 设 $L_1$ 表示全体 $1$-Lipschitz 函数。有</p>
+<p>$$<br>\inf_{\gamma \in \Gamma(P, Q)} \mathbb{E}_{(X, Y)\sim \gamma} \left\lVert X - Y\right\rVert_2 &#x3D; \sup_{f\in L_1} \left|\mathbb{E}_{X\sim P}[f(X)] - \mathbb{E}_{X\sim Q}[f(X)]\right|<br>$$</p>
+</div>
+
+<p>证明参见附录。这样一来，我们得到了 Wasserstein distance 的 adversary 形式，据此设计出的生成式对抗网络称为 WGAN。剩余的问题是如何构造 $1$-Lipschitz 神经网络。平凡的方法是直接裁剪参数大小，另一个方法是用一个正则化项惩罚网络的梯度的模，比较现代的方法是 2210.01787。</p></div>
+
+<h1><span id="标准化流模型">标准化流模型</span></h1><p>仍然是从 sample $\boldsymbol{z}\sim \mathcal{N}(0, \mathbf{I})$，然后经由一个神经网络 $f(\boldsymbol{x}; \theta)$ 将其映射到 $\mathcal{D}$ 的思路出发。除了优化生成数据的分布和 $\mathcal{D}$ 的散度之外，另一个方向是做最大似然估计。如何求一个样本的似然？注意我们有从正态分布中采出的样本周围的概率密度，只要 $f(\boldsymbol{x}; \theta)$ 是可逆的，而且其 Jacobian 可以高效估计 &#x2F; 计算，就可以估计生成样本的似然，因为 </p>
+<div class="note info"><p><strong>定理 5.1（概率密度变换公式）.</strong> 设 $\boldsymbol{Z}$ 是一个随机向量，其概率密度为 $p_Z(\boldsymbol{z})$。$g : \mathbb{R}^n \rightarrow \mathbb{R}^n$ 是一个几乎处处可逆的函数，将 $\mathbf{Z}$ 映射到随机变量 $\mathbf{X} :&#x3D; g(\boldsymbol{Z})$。则有</p>
+<p>$$<br>p_X(\boldsymbol{x}) &#x3D; p_Z(g^{-1}(\boldsymbol{z}))\frac{1}{\det \mathbf{J}_g(g^{-1}(\boldsymbol{z}))}<br>$$</p>
+<p>其中 $\mathbf{J}_g$ 是 $\mathbf{J}$ 的雅可比矩阵。</p>
+</div>
+
+<p>照深度学习之惯例，我们用可逆的神经网络来刻画这个可逆函数。为此需要找到一系列积木（一类参数化函数 $\mathcal{F}$），使得 $\mathcal{F}$ 中的每个函数都是可逆的，Jacobian 可以高效计算，且表达能力足够强。整个神经网络的 Jacobian 可以用链式法则算出，求逆也是容易的。我们构造的 $\mathcal{F}$ 可分为两种：</p>
+<ul>
+<li><strong>激活函数（Elementwise Flow）.</strong> $\boldsymbol{g}(\boldsymbol{z}) &#x3D; (h(z_1), …, h(z_d))$。只要激活函数 $h$ 可逆，$g$ 就可逆。$h$ 可导，其 Jacobian 就可以高效计算。</li>
+<li><strong>线性函数（Linear Flow）.</strong> 只要矩阵 $\mathbf{A}$ 可逆，仿射变换 $\boldsymbol{x} \mapsto \mathbf{A}\boldsymbol{x} + \boldsymbol{b}$ 就可逆。其 Jacobian 就是 $\mathbf{A}$。正常来讲一个矩阵的求逆和求行列式都是 $O(n^3)$ 的。但是有两种解决办法：<ul>
+<li>要求 $\mathbf{A}$ 是上三角。此时求行列式为 $O(n)$，求逆为 $O(n^2)$。</li>
+<li>要求 $\mathbf{A}$ 正交，可用 Householder Transform 实现。此时行列式就是 $1$，求逆为 $O(n^2)$（转置）。</li>
+</ul>
+</li>
+</ul>
+<p>然而直接堆叠线性函数和上述激活函数，是 not practical 的，大概率会有梯度消失之类的问题导致没法叠深。如何构造类似于残差连接的机制？</p>
+<p>回忆一个经典的带残差连接的可逆函数是 Feistel Network（参阅 <a href="../../../../2025/10/24/CryptoRevision1/#pseudorandomness">密码学笔记，定义 3.2.2</a>）。我们可以用一个两层的 Feistel Network 作为一个 Flow 块。设向量维数 $n &#x3D; d_1 + d_2$，$\boldsymbol{h}_1: \mathbb{R}^{d_2}\rightarrow \mathbb{R}^{d_1}$，$\boldsymbol{h}_2: \mathbb{R}^{d_1} \rightarrow \mathbb{R}^{d_2}$，下面的方法给出了一个 Residual Block：</p>
+<ol>
+<li>在输入 $\boldsymbol{z} &#x3D; \boldsymbol{z}_1 | \boldsymbol{z}_2$ 上：</li>
+<li>$\boldsymbol{x}_1 \leftarrow \boldsymbol{z}_1 + \boldsymbol{h}_1(\boldsymbol{z}_2)$；</li>
+<li>$\boldsymbol{x}_2 \leftarrow \boldsymbol{z}_2 + \boldsymbol{h_2}(\boldsymbol{x}_1)$；</li>
+<li>输出 $\boldsymbol{x}_1 | \boldsymbol{x}_2$。</li>
+</ol>
+<p>另一种建模可逆残差连接的方法是限制 Lipschitz 常数。有若 $h(x)$ 是 $\ell$-Lipschitz 函数（$\ell$ &lt; 1），则 $g(\boldsymbol{x}) &#x3D; \boldsymbol{x} + h(\boldsymbol{x})$ 可逆。假设 $g$ 不是单的，则有</p>
+<p>$$<br>\frac{h(\boldsymbol{x}_1) - h(\boldsymbol{x}_2)}{\boldsymbol{x}_1 - \boldsymbol{x})_2} &#x3D; 1<br>$$</p>
+<p>这和 Lipschitz 常数不超过 $1$ 矛盾。</p>
+<h1><span id="扩散模型">扩散模型</span></h1><p>标准化流模型启发我们，如果我们能求一个把样本映射到高斯噪声的过程的逆，就能实现生成式模型。前者当中，可逆的前向过程由参数化模型给出。然而存在一类最简单的把样本映射到高斯噪声的过程，即逐步添加噪声：</p>
+<p>$$<br>\boldsymbol{x}_{t + 1} &#x3D; \sqrt{1 - \beta_t} x_t + \beta_t \boldsymbol{\varepsilon} \label{diffusion_forward_ori1}<br>$$</p>
+<p>或者写成封闭形式，定义 $\alpha_t &#x3D; 1 - \beta_t, \bar{\alpha}_t &#x3D; \prod_{i&#x3D;1}^t \alpha_i$：</p>
+<p>$$<br>\boldsymbol{x}_t \sim \mathcal{N}(\sqrt{\alpha_t} \boldsymbol{x}_0, (1 - \bar{\alpha}_t)\mathbf{I}) \label{diffusion_forward_ori2}<br>$$</p>
+<p>如果每步添加的噪声都很小，我们可以期待一个模型确实可以学会怎么去噪；如果添加的噪声总量很大，那么 $\boldsymbol{x}_T$ 和标准正态分布相差无几，我们从标准正态分布中采样潜变量后运行逆过程，便可知最后所得分布与真实分布相差无几，从而得到生成式模型。求这个过程的逆过程的办法有很多理解方法，比如 </p>
+<ul>
+<li>使用 Denoising Score Matching，用 Langevin Dynamics 采样（Song et al. 2019）；</li>
+<li>考虑连续时间扩散过程（Ornstein-UhlenBeck 过程），将其求逆可以发现这是另一个连续时间扩散过程。用神经网络拟合其中关键项。</li>
+</ul>
+<p>首先讲一种基于最大似然估计的 ELBO 的方法，该方法以 DDPM（Denoising Diffusion Probabilistic Model，去噪扩散模型）著称。前向过程的概率分布记作 $q$，式 $(\ref{diffusion_forward_ori1})$ 和 $(\ref{diffusion_forward_ori2})$ 给出 $q$ 的条件分布的递推式和封闭形式</p>
+<p>$$<br>q(\boldsymbol{x}_t | \boldsymbol{x}_0) &#x3D; \mathcal{N}(\boldsymbol{x}_t; \sqrt{1 - \beta_t}\boldsymbol{x}_{t - 1}; \beta_t \mathbf{I}) &#x3D; \mathcal{N}(\boldsymbol{x}_t; \sqrt{\alpha_t} \boldsymbol{x}_0, (1 - \bar{\alpha}_t)\mathbf{I})<br>$$</p>
+<p>我们用神经网络刻画逆过程的条件分布。令 </p>
+<p>$$<br>\boldsymbol{x}_{t - 1} \sim \mathcal{N}(\boldsymbol{\mu}_\theta(\boldsymbol{x}_t, t), \sigma_t^2 \mathbf{I}) :&#x3D; p(\boldsymbol{x}_{t} | \boldsymbol{x}_{t}; \theta)<br>$$</p>
+<p>从前向过程中采样，并优化样本的最大似然</p>
+<p>$$<br>\min L &#x3D; \mathbb{E}_{\boldsymbol{x}_0\sim q(\boldsymbol{x}_0)}[-\log p(\boldsymbol{x}_0; \theta)]<br>$$</p>
+<p>熟知的问题是 $p_0(\boldsymbol{x}_0; \theta)$ 的计算需要在整个空间上积分，而这是难以计算的。此处我们直接用前向概率分布 $q(\boldsymbol{x}_{1:T} | \boldsymbol{x}_0)$ 作为变分后验导出 ELB：</p>
+<p>$$<br>\begin{align}<br>L &amp;\geq \mathbb{E}_{\boldsymbol{x}_{0}\sim q(\boldsymbol{x}_{0}), \boldsymbol{x}_{1:T}\sim q(\boldsymbol{x}_{1:T} | \boldsymbol{x}_0)}\left[-\log\frac{p(\boldsymbol{x}_{0:T})}{q(\boldsymbol{x}_{1:T} | \boldsymbol{x}_0)}\right] \\<br>&amp;&#x3D; \mathbb{E}_q\left[-\log p(\boldsymbol{x}_T; \theta) + \log q(\boldsymbol{x}_T | \boldsymbol{x}_0) - p(\boldsymbol{x}_0 | \boldsymbol{x}_1; \theta) - \sum_{t&#x3D;2}^T \log\frac{q(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t, \boldsymbol{x}_0)}{p(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t; \theta)}\right] \\<br>&amp;\approx \mathbb{E}_q\left[-\log p(\boldsymbol{x}_0 | \boldsymbol{x}_1; \theta) + \sum_{t&#x3D;2}^T D_{KL}(q(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t) \Vert p(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t; \theta))\right]<br>\end{align}<br>$$</p>
+<div class="note "><p><strong>Remark 6.1.</strong> 这里的 $\boldsymbol{x}_{1:T}$ 的地位和式 $\ref{elbo}$ 中的 $\boldsymbol{z}$ 等同，且经混合大量噪声 $q(\boldsymbol{x}_T | \boldsymbol{x}_0)$ 都相差无几，经如此提示想必读者容易理解第一行的放缩和第二行的近似。</p>
+</div>
+
+<p>第一项实践中可以吸收进后面的求和，因此惟须计算两组高斯分布的 KL 散度。首先，用 Bayes 公式算 $q(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t, \boldsymbol{x}_0)$：</p>
+<p>$$<br>\begin{align}<br>    &amp;q(x_{t - 1} | x_0, x_t) \\ &amp;&#x3D; \frac{q(x_t | x_{t - 1}) q(x_{t - 1} | x_0)}{q(x_{t} | x_0)} \\<br>    &amp;\propto \exp\left(-\frac{\left\lVert x_t - \sqrt{1 - \beta_t} x_{t - 1}\right\rVert^2}{2\beta_t} - \frac{\left\lVert x_{t - 1} - \sqrt{\bar{a}_{t - 1}} x_0\right\rVert^2}{2(1 - \bar{\alpha}_{t - 1})} + \frac{\left\lVert x_t - \sqrt{\bar{a}_{t}} x_0\right\rVert^2}{2(1 - \bar{\alpha}_{t})}\right) \\<br>    &amp;\propto \exp\left(-\left(\frac{1 - \beta_t}{2\beta_t} + \frac{1}{2(1 - \bar{\alpha}_{t - 1})}\right)\left\lVert x_{t - 1}\right\rVert^2<br>    + \left(\frac{\sqrt{1 - \beta_t}}{\beta_t}x_t + \frac{\sqrt{\alpha_{t - 1}}}{(1 - \bar\alpha_{t - 1})}x_0\right)^\top x_{t - 1}<br>    \right)<br>\end{align}<br>$$</p>
+<p>这一定也是一个正态分布 $\mathcal{N}(\tilde{\boldsymbol{\mu}}(\boldsymbol{x}_t, \boldsymbol{x}_0), \tilde{\beta}_t)$，其中</p>
+<p>$$<br>\begin{align}<br>    \tilde{\beta}_t &amp;&#x3D; \frac{1 - \bar{\alpha}_{t - 1}}{1 - \bar{\alpha}_t}\beta_t \\<br>    \tilde{\boldsymbol{\mu}}(x_0, x_t) &amp;&#x3D; \frac{\sqrt{\alpha_{t - 1}}\beta_t}{1 - \bar{\alpha}_t} x_0 + \frac{(1 - \bar{\alpha}_{t - 1})\sqrt{\bar{\alpha}_{t - 1}}}{1 - \bar{\alpha}_t}x_t<br>\end{align}<br>$$</p>
+<p>取 $\sigma_t &#x3D; \tilde{\beta}_t$ 可以简化计算让这个 KL 散度只包含二次项</p>
+<p>$$<br>D_{KL}(q(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t) \Vert p(\boldsymbol{x}_{t - 1} | \boldsymbol{x}_t; \theta)) &#x3D; \frac{1}{2\sigma_t^2} \left\lVert \boldsymbol{\mu}_\theta(\boldsymbol{x}_t, t) - \tilde{\boldsymbol{\mu}}(\boldsymbol{x}_0, \boldsymbol{x}_t)\right\rVert^2<br>$$</p>
+<p>回忆 $\boldsymbol{x}_t &#x3D; \sqrt{\bar{\alpha}_t}\boldsymbol{x}_0 + \sqrt{1 - \bar{\alpha}_t}\boldsymbol{\varepsilon}$。以此消除 $\boldsymbol{x}_0$ 有 </p>
+<p>$$<br>\tilde{\boldsymbol{\mu}}(\boldsymbol{x}_0, \boldsymbol{x}_t) &#x3D; \frac{1}{\sqrt{1 - \beta_t}}\left(\boldsymbol{x}_t - \frac{\beta_t}{\sqrt{1 - \alpha_t}}\boldsymbol{\varepsilon}\right)<br>$$</p>
+<p>为了对齐这个形式，令 </p>
+<p>$$<br>\boldsymbol{\mu}_\theta(\boldsymbol{x}_t, t) &#x3D; \frac{1}{\sqrt{1 - \beta_t}}\left(\boldsymbol{x}_t - \frac{\beta_t}{\sqrt{1 - \alpha_t}}\boldsymbol{\varepsilon}_\theta(\boldsymbol{x}_t, t)\right) \qquad \Rightarrow \qquad D_{KL}(p\Vert q) &#x3D; {\color{orange} \frac{\beta_t^2}{2\sigma^2(1 - \beta_t)(1 - \alpha_t)}} \left\lVert\boldsymbol{\varepsilon} - \boldsymbol{\varepsilon}_\theta(\boldsymbol{x}_t, t)\right\rVert_2^2 \label{diffusion_ave}<br>$$</p>
+<p>至此，我们推出了熟知的预测噪声的损失函数。实践中，不考虑橙色的系数也能取得很好的效果，Diffusion Model 的训练代码如下：</p>
+<ol>
+<li><strong>Repeat until</strong> $converged$：</li>
+<li>$\qquad$ $x_0\sim q(\boldsymbol{x}_0)$；</li>
+<li>$\qquad$ $t \sum \mathrm{Uniform}(\{1, …, T\})$；</li>
+<li>$\qquad$ $\boldsymbol{\varepsilon}\sim \mathcal{N}(0, \mathbf{I})$；</li>
+<li>$\qquad$ 做梯度下降，梯度为 $\nabla_\theta \left\lVert \boldsymbol{\varepsilon} - \boldsymbol{\varepsilon}_\theta(\sqrt{\alpha_t}\boldsymbol{x}_0 + \sqrt{1 - \alpha_t}\boldsymbol{\varepsilon}, t) \right\rVert^2$。</li>
+</ol>
+<p>$\boldsymbol{\varepsilon}_\theta$ 的结构取作 UNet，用 MLP 编码 $t$ 后注入每一层再为恰当不过。推理时，只需枚举 $t &#x3D; T, …, 1$，每轮从一个方差为 $\sigma_t$ 的正态分布中采样（均值由式 $\ref{diffusion_ave}$ 结合 $\boldsymbol{\varepsilon}_\theta$ 的推理结果给出）：</p>
+<ol>
+<li>$\boldsymbol{x} \sim \mathcal{N}(0, \mathbf{I})$；</li>
+<li><strong>For</strong> $t &#x3D; T, T - 1, …, 1$：</li>
+<li>$\qquad$ $\boldsymbol{x}\sim \mathcal{N}\left(\frac{1}{\sqrt{1 - \beta_t}}\left(\boldsymbol{x} - \frac{\beta_t}{\sqrt{1 - \alpha_t}}\boldsymbol{\varepsilon}_\theta(\boldsymbol{x}_t, t)\right), \sigma_t \mathbf{I}\right)$</li>
+<li><strong>Return</strong> $\boldsymbol{x}$</li>
+</ol>
+<div class="note "><p><strong>注释与拓展.</strong> 此处我们从连续时间扩散过程离散化的角度理解一下 Diffusion Model。因为我的那一系列博客鸽了，所以先在这里写一点。</p>
+<p>考虑 $\boldsymbol{X}_0$ 为真实的数据分布，其经 Ornstein-UhlenBeck 过程扩散充分长时间，其分布将接近 Ornstein-Uhlenbeck 过程的稳态分布——标准正态分布。若能求其逆过程，自然得到真是数据分布的生成式模型。Ornstein-Uhlenbeck 过程服从随机微分方程</p>
+<p>$$<br>\mathrm{d}X_t &#x3D; -\boldsymbol{X}_t + \sqrt 2\mathrm{d}\boldsymbol{B}_t<br>$$</p>
+<p>其中 $\boldsymbol{B}_t$ 是布朗运动。想要求这个扩散过程的逆，只需要拿到 $\boldsymbol{X}_t$ 类似信息（比如其在 $t$ 时刻的概率密度 $\pi_t$）关于 $t$ 的偏微分，然后按照该偏微分方程演化。前向 OU 过程的 Fokker-Planck 方程（参阅 <a href="../../../../2025/07/15/ContinuosTimeDiffusion2/">关于 Fokker-Planck 方程的笔记</a>）为</p>
+<p>$$<br>\partial_t \pi_t &#x3D; \nabla \cdot(\boldsymbol{x}\pi_t) + \Delta \pi_t<br>$$</p>
+<p>那么逆过程的 Fokker-Planck 方程无非是这东西倒过来：</p>
+<p>$$<br>\partial_t \pi_t &#x3D; -\nabla \cdot (\boldsymbol{x}\pi_t) - \Delta \pi_t<br>$$</p>
+<p>现在想要从 FP 方程还原扩散过程，对其进行一系列恒等变换使得它符合扩散过程的 FP 方程的形式即可：</p>
+<p>$$<br>\begin{align}<br>  &amp;\partial_t \pi_t &#x3D; -\nabla \cdot (\boldsymbol{x}\pi_t) - \Delta \pi_t \\<br>  &amp;\Rightarrow \qquad \partial_t \pi_t &#x3D; \Delta \pi_t + (-\nabla \cdot (\boldsymbol{x}\pi_t) - 2\nabla \cdot \nabla \pi_t) \\<br>  &amp;\Rightarrow \qquad \partial_t \pi_t &#x3D; \Delta \pi_t + (-\nabla \cdot (\boldsymbol{x} + 2\nabla \log \pi_t)\pi_t)<br>\end{align}<br>$$</p>
+<p>因此逆过程可以用如下的 SDE 刻画：</p>
+<p>$$<br>\mathrm{d}\boldsymbol{X}_t &#x3D; (\boldsymbol{X} + 2\nabla \log \pi_t)\mathrm{d}t + \sqrt 2\mathrm{d}\boldsymbol{B}_t<br>$$</p>
+<p>因此，只需要拿着一个模型 $s_\theta(\boldsymbol{x}_t, t)$ 去拟合 $t$ 时刻的分布的 score function，即可离散化这个扩散过程得到生成式模型。那么这个 score function 本质上是什么？（下面的计算中，有些系数懒得写了，只提示精旨奥义）</p>
+<p>$$<br>\begin{aligned}<br>\nabla \log \pi_t(\boldsymbol{x}_t) &amp;&#x3D; \mathbb{E}_{\boldsymbol{X}_0}[\nabla \log \pi_t(\boldsymbol{x}_t | \boldsymbol{x}_0)] \\<br>&amp;\propto \left\lVert\boldsymbol{x}_t - \boldsymbol{x}_0\right\rVert^2 &amp; \color{blue}{\text{($\pi_t(\boldsymbol{x}_t | \boldsymbol{x}_0)$ is gaussian)}} \\<br>&amp;&#x3D; \boldsymbol{x}_t - \boldsymbol{x}_0 \\<br>&amp;&#x3D; \boldsymbol{\varepsilon}<br>\end{aligned}<br>$$</p>
+<p>因此，DDPM 和这种理解本质相同：拟合噪声本质上就是在拟合 $\boldsymbol{X}_t$ 分布的 score function。</p>
+</div>
+
+<h1><span id="附录">附录</span></h1><p>【FIXME：写一些上面没证的结论】</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/02/ArchRevision1/" rel="prev" title="Revision | 计算机组成与体系结构（上）">
+                  <i class="fa fa-angle-left"></i> Revision | 计算机组成与体系结构（上）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
