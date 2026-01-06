@@ -27,7 +27,7 @@
 <meta property="og:description" content="Public Key Encryption Computational Hardness and Public-Key Encryption Number Theoretic Hardness Lattice Based Hardness   Advanced Techniques Identity-Based encryption Fully Homomorphic encryption">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-04T06:05:08.000Z">
-<meta property="article:modified_time" content="2026-01-06T13:21:41.946Z">
+<meta property="article:modified_time" content="2026-01-06T15:54:25.676Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-06 21:21:41" itemprop="dateModified" datetime="2026-01-06T21:21:41+08:00">2026-01-06</time>
+      <time title="Modified: 2026-01-06 23:54:25" itemprop="dateModified" datetime="2026-01-06T23:54:25+08:00">2026-01-06</time>
     </span>
 
   
@@ -727,6 +727,72 @@
 <div style="text-align: right">$\blacksquare$</div>
 
 <p>这个构造，如果双方都是 semi-honest 的，在 Sender 一侧是 Perfect Secure，在 Receiver 一侧是 Computational Secure。</p>
+<p>此外如果有 FHE，也可以得到 Oblivious Transfer。</p>
+<div class="note info"><p><strong>定理 3.5.3.</strong> 若存在一个 homomorphic encryption，则存在 Oblivious Transfer。</p>
+</div>
+
+<p><strong>构造.</strong> 协议内容如下：</p>
+<ul>
+<li>Receiver 给 Sender 发送 $\textsf{Enc}(b)$；</li>
+<li>Sender 发送 $\textsf{Enc}(m_0) + (m_1 - m_0)\textsf{Enc}(b) &#x3D; \textsf{Enc}(m_b)$。</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>一个类似于 OT 的东西是 Oblivious Linear Function Evaluation（OLE）。这是一个 2PC 问题，双方要计算函数</p>
+<p>$$<br>f: ((a, b), x) \mapsto (\bot, ax + b)<br>$$</p>
+<p>其中 $a, b, x$ 都是某个 $\mathbb{F}_p$ 中的元素。</p>
+<p>基于 Pallier 可以构造 OLE（其中 $g, h$ 为两个 hard subgroup 的生成元）。</p>
+<ul>
+<li>Receiver 采样 $s, s’, r$，发送 $c :&#x3D; g^sh^{-r}, c’ &#x3D; g^{s’}h^{-x + r}$ 给 Sender；</li>
+<li>Sender 采样 $t, w$，发送<br>$$<br>\begin{aligned}<br>&amp;g^t \\<br>&amp;\textsf{Enc}(a) &#x3D; h^t(N + 1)^a \\<br>&amp;\textsf{Enc}(w) &#x3D; c^t(N + 1)^2 \\<br>&amp;\textsf{Enc}(b - w) &#x3D; c’^t(N + 1)^{b - w}<br>\end{aligned}<br>$$</li>
+<li>Receiver 计算收到的三个 $\textsf{Enc}$ 的积，发现这是<br>$$<br>(N + 1)^{ax + b}g^{t(s + s’)}<br>$$<br>因为 Receiver 知道 $s + s’$，也收到了 $g^t$，便可知道 $ax + b$。</li>
+</ul>
+<hr>
+<p>最后我们来讨论 Yao’s Garbled Circuit（混淆电路）。这个密码学原素的用途是在加密过的函数上计算加密过的输入，只暴露输出。用 Garbled Circuit 和 Oblivious Transfer 可以实现常数轮交互的 MPC。</p>
+<div class="note success"><p><strong>定义 3.5.3（Garbling Scheme）.</strong> 一个 Garbling Scheme 包含以下几个算法：</p>
+<ul>
+<li>$\textsf{Gb}$：随机算法，读入一个布尔电路 $f: \{0, 1\}^n\rightarrow \{0, 1\}^n$，输出 $(F, e, d)$，表示混淆后的电路、编码信息和解码信息。</li>
+<li>$\textsf{ev}$：用于计算明文电路的算法，即 $\textsf{ev}(f, x) &#x3D; f(x)$。</li>
+<li>$\textsf{En}$：给输入加密的算法，$\textsf{En}(e, x) \rightarrow X$。其中 $e &#x3D; (L_i^0, L_i^1)_{i &#x3D; 1, 2, …, n}$，$X &#x3D; (L_i^{x_i})_{i &#x3D; 1, 2, …, n}$；</li>
+<li>$\textsf{Ev}$ 用混淆后电路 $F$ 和混淆后的输入计算一个混淆后的输出 $Z’$ 的算法。</li>
+<li>$\textsf{De}$ 用解码信息 $d$ 将 $Z’$ 解码成明文输出 $z$ 的函数。一般 $d &#x3D; (Z_0, Z_1)$，解码就是若 $Z’ &#x3D; Z_i$ 就输出 $i$，否则输出 $\bot$。</li>
+</ul>
+</div>
+
+<p>$\textsf{En}, \textsf{De}, \textsf{ev}$ 在混淆电路中基本上都是固定的方法，已经在上面给出。在构造混淆电路时我们只重点关注 $\textsf{Gb}$ 和 $\textsf{Ev}$ 两个函数。</p>
+<p>算法应当满足正确性和安全性。正确性的定义为：</p>
+<p>$$<br>\textsf{De}(\textsf{Ev}(\textsf{Gb}(C), \textsf{En}(x))) \rightarrow C(x) \text{ with $1 - \mathrm{negl}$ probability}<br>$$</p>
+<p>安全性的定义是存在一个 simulator $\mathcal{S}$，使得 </p>
+<p>$$<br>\mathcal{S}(C, C(x)) \approx_c (\hat{C}, \hat{x})<br>$$</p>
+<p>即混淆后的输入和混淆后的电路只泄露了电路结构和输出的信息。混淆电路的一个实际应用就是做 2PC：</p>
+<div class="note info"><p><strong>定理 3.5.4.</strong> 若存在 Garble Scheme 和 $1$-out-of-$2$ OT，则对于任意的布尔电路 $f(x, y)$，存在一个 2PC 协议计算：</p>
+<p>$$<br>(x, y) \mapsto (\bot, f(x, y))<br>$$</p>
+</div>
+
+<p><strong>构造.</strong> </p>
+<ul>
+<li>Sender 计算 $\textsf{Gb}(f) &#x3D; (\hat{f}, (e_x \Vert e_y), d)$，发送 $\hat{f}, d$ 给 Receiver；</li>
+<li>Sender 发送 $\hat{y}$ 给 Receiver；</li>
+<li>Sender 通过 OT 发送 $\hat{x}$ 给 Receiver；</li>
+<li>Receiver 用 $\textsf{Ev}$ 算出结果，然后自己解码。</li>
+</ul>
+<p>在这个协议中，Garble Scheme 的安全性保证了 Receiver 不知道 $x$，OT 的安全性保证了 Sender 不知道 $y$。</p>
+<p>接下来我们构造一个 Garble Circuit 的方案。对于一个 circuit $f$，其中有 $T$ 条线（wire），WLOG 设 $f$ 里面都是 NAND Gate。假设我们有一个 PRF $G: 2^k\times 2^k\times T\rightarrow 2^{2k}$，你可以理解为前两项都是密钥，只要藏住一个密钥，这个 PRF 就和随机的看起来差不多。一个构造是</p>
+<p>$$<br>G(A, B, i) &#x3D; \mathcal{F}(A, i)\oplus \mathcal{F}(B, i)<br>$$</p>
+<p>其中 $\mathcal{F}$ 就是一个 PRF。</p>
+<ul>
+<li><strong>Garbling.</strong> 算法 $\textsf{Gb}$ 如下：<ul>
+<li>对于每条 wire，产生两个随机串 $(K_0^i, K_1^i)$；所有的输入 wire 的随机串作为 $e$ 暴露出去。</li>
+<li>对于每个门，定义一个混淆表 $(C_0^i, C_1^i, C_2^i, C_3^i)$ 如下：<ul>
+<li>对于任意 $(a, b)\in \{0, 1\}\times \{0, 1\}$，计算<br>$$<br>C’_{(a, b)} &#x3D; G(K_a^{L(i)}, K_b^{(R_i)}, i)\oplus (K_{\neg ab}^i, 0^k)<br>$$<br>此处 $L(i), R(i)$ 表示输入这个门的两条线的编号。</li>
+<li>选一个随机排列 $\pi: \{0, 1, 2, 3\}\rightarrow \{0, 1\}\times \{0, 1\}$，将 $C’_{i, j}$ 填入表的第 $\pi(i, j)$ 项。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Evaluate.</strong> 对于一个门，其混淆表中的四个数为 $C_0^i, C_1^i, C_2^i, C_3^i$。对于 $j &#x3D; 0, 1, 2, 3$，计算<br>$$<br>(K_j’, \tau_j) &#x3D; G(K^{L(i)}, K^{R(i)}, i)\oplus C_j^{i}<br>$$<br>若存在唯一的 $\tau_j &#x3D; 0^k$，则定义 $K^i &#x3D; K_j’$，否则输出 $\bot$。</li>
+</ul>
+<p>这东西的正确性是显然的。其安全性来源于如下直觉：在 Evaluate 一个 Garbled Circuit 的时候，你可以知道 $K^i_{\neg ab}$，但是没法知道 $K^i_{ab}$：在转发表的其他三项中，信息都被一个遮住了密钥的 PRF 给 one-time pad 住了。因此 Adversary 不能区分转发表的其他三项和三个随机数。容易据此原理设计 Simulator $\mathcal{S}$。</p>
 
     </div>
 
