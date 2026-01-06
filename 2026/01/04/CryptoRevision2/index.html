@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Public Key Encryption Computational Hardness and Public-Key Encryption Number Theoretic Hardness Lattice Based Hardness   Advanced Techniques Identity-Based encryption Fully Homomorphic encryption">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 密码学基础（下）">
+<meta property="og:url" content="http://example.com/2026/01/04/CryptoRevision2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Public Key Encryption Computational Hardness and Public-Key Encryption Number Theoretic Hardness Lattice Based Hardness   Advanced Techniques Identity-Based encryption Fully Homomorphic encryption">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-01-04T06:05:08.000Z">
+<meta property="article:modified_time" content="2026-01-06T13:21:41.946Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/01/04/CryptoRevision2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/01/04/CryptoRevision2/","path":"2026/01/04/CryptoRevision2/","title":"Revision | 密码学基础（下）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 密码学基础（下） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Public Key Encryption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Computational Hardness and Public-Key Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Number Theoretic Hardness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Lattice Based Hardness</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Advanced Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Identity-Based encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Fully Homomorphic encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">Digital Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">Zero-Knowledge Proof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/04/CryptoRevision2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 密码学基础（下） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 密码学基础（下）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-01-04 14:05:08" itemprop="dateCreated datePublished" datetime="2026-01-04T14:05:08+08:00">2026-01-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-06 21:21:41" itemprop="dateModified" datetime="2026-01-06T21:21:41+08:00">2026-01-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#public-key-encryption">Public Key Encryption</a></li>
+<li><a href="#computational-hardness-and-public-key-encryption">Computational Hardness and Public-Key Encryption</a><ul>
+<li><a href="#number-theoretic-hardness">Number Theoretic Hardness</a></li>
+<li><a href="#lattice-based-hardness">Lattice Based Hardness</a></li>
+</ul>
+</li>
+<li><a href="#advanced-techniques">Advanced Techniques</a><ul>
+<li><a href="#identity-based-encryption">Identity-Based encryption</a></li>
+<li><a href="#fully-homomorphic-encryption">Fully Homomorphic encryption</a></li>
+<li><a href="#digital-signature">Digital Signature</a></li>
+<li><a href="#zero-knowledge-proof">Zero-Knowledge Proof</a></li>
+<li><a href="#secure-multi-party-computation-fixmerandom-encoding-garble-circuit">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="public-key-encryption">Public Key Encryption</span></h1><div class="note success"><p><strong>定义 1.1（Public Key Encryption Scheme）.</strong> 一个公钥加密方案包含以下资料：</p>
+<ul>
+<li>算法 $\textsf{Gen}(1^\lambda) \rightarrow (pk, sk)$；</li>
+<li>算法 $\textsf{Enc}(pk, m) \rightarrow c$；</li>
+<li>算法 $\textsf{Dec}(sk, c) \rightarrow m$。</li>
+</ul>
+<p>谈及公钥加密方案时，默认它是<strong>正确</strong>的，即 $\textsf{Dec}(sk, \textsf{Enc}(pk, m)) &#x3D; m$。</p>
+</div>
+
+<p>接下来定义公钥加密方案的安全性。注意因为公钥 $pk$ 是众所周知的，所以公钥加密是计算上不可区分的自然是 CPA 安全的。</p>
+<div class="note success"><p><strong>定义 1.2（Indistinguishability of PKES）.</strong> 考虑如下的 indistinguishability game：</p>
+<ol>
+<li>Challenger 采样 $(pk, sk) \leftarrow \textsf{Gen}(1^\lambda)$ 并公开 $pk$；</li>
+<li>$\mathcal{A}$ 选择一对同样长度的消息 $(m_0, m_1)$ 发送给 challenger；</li>
+<li>Challenger 采样 $b\leftarrow {0, 1}$，发送 $\textsf{Enc}(pk, m_b)$ 给 $\mathcal{A}$；</li>
+<li>$\mathcal{A}$ 给出猜测 $b’$。</li>
+</ol>
+<p>称 Adversary $\mathcal{A}$ 赢下了 indistinguishability game（事件 $\textsf{PrivK}_{\mathcal{A}, \Pi}^{eav}(1^\lambda)$）若 $b’ &#x3D; b$。称 $\Pi$ 是不可区分的，若对于任意 p.p.t 的算法 $\mathcal{A}$，存在可忽略的函数 $\mathrm{negl}$ 使得：</p>
+<p>$$<br>\Pr[\textsf{PrivK}_{\mathcal{A}, \Pi}^{eav}(1^\lambda)] \leq \frac 12 + \text{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>进一步，说 $\Pi$ 是 CCA 安全的，若 $\mathcal{A}$ 拥有对 $\textsf{Dec}(sk, \cdot)$ 的 oracle 访问。</p>
+<p>一个事实是，如果有一个安全的私钥加密方案和某种密钥交换机制（双方根据自己的公钥和私钥，计算一个相同的 $k$，这个 $k$ 近乎随机），就能组装一个安全的公钥加密方案，以得到一种公钥加密方案构造的范式，这种方式当然还有一些好处，比如比一般构造的公钥加密方案高效等。首先定义需要的原素：密钥封装机制。</p>
+<div class="note success"><p><strong>定义 1.3（Key Encapsulation）.</strong> 一个密钥封装机制 $\Pi$ 包含以下资料：</p>
+<ul>
+<li>算法 $\textsf{Gen}(1^\lambda)\rightarrow (pk, sk)$；</li>
+<li>算法 $\textsf{Encap}(pk)\rightarrow \{k, cap(k)\}$；</li>
+<li>算法 $\textsf{Decap}(sk, cap(k))\rightarrow k$。</li>
+</ul>
+</div>
+
+<p>默认这东西是正确的。其安全性是任意的 p.p.t Adversary $\mathcal{A}$ 在看到 $pk$ 和 $cap(k)$ 之后，不能以不可忽略的概率区分 $k$ 和随机数。细节需要用 security game 定义，这里节省篇幅不写。</p>
+<p>而密钥封装机制可以用如下的理论工具实现：</p>
+<div class="note success"><p><strong>定义 1.4（Trapdoor Permutation）.</strong> 由某个算法 $\textsf{Gen}(1^\lambda)$ 给出的二元组 $(f, t)$ 被称为一个 trapdoor permutation，若 </p>
+<ul>
+<li>$f: \mathcal{D}\rightarrow \mathcal{D}$，其中 $\mathcal{D}$ 接近 $\{0, 1\}^\lambda$；</li>
+<li>存在高效算法 $\textsf{invert}: (t, f(x))\mapsto x$；</li>
+<li>对于任意 p.p.t 的 adversary $\mathcal{A}$，$\Pr[\mathcal{A}(f, f(x))\rightarrow x]\leq \mathrm{negl}(\lambda)$。</li>
+</ul>
+</div>
+
+<div class="note info"><p><strong>定理 1.1.</strong> 存在 Trapdoor Permutation 便存在 Key Encapsulation。</p>
+</div>
+
+<p><strong>构造.</strong> 令 </p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)$ 生成 $(f, t)$；</li>
+<li>$\textsf{Encap}(f) \rightarrow (h(k), c &#x3D; f(k))$，其中 $h(k)$ 是一个 hardcore function，如 $f$ 的一个 hardcore predicate，可以是一个安全的 hash 函数，最理想的建模是一个 random oracle。</li>
+<li>$\textsf{Decap}(t, c) \rightarrow h(\textsf{invert}(t, c))$。</li>
+</ul>
+<p>根据 hardcore predicate 的定义，即便给定 $f, f(k)$，$h(k)$ 确实和随机生成的数不可区分。</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note info"><p><strong>定理 1.2.</strong> 存在 Key Encapsulation 和安全的 Private Key Encryption Scheme 便存在安全的 Public Key Encryption。 </p>
+</div>
+
+<p><strong>构造.</strong> 串联这两个原素即可。让 Private Key Encryption 用 Key Encapsulation 算出的 $k$ 做密钥。</p>
+<p>安全性证明考虑一个 Hybrid World $W’$，即用于 Public Key Encryption 的密钥真的是随机生成的。$W’$ 和 real world $W$ 依 key encapsulation 的安全性不可区分，$W’$ 中安全性游戏的 advantage 依 private key encryption 的安全性是可忽略的。</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<h1><span id="computational-hardness-and-public-key-encryption">Computational Hardness and Public-Key Encryption</span></h1><p>本节基于几个困难性假设构造一些公钥加密方案。</p>
+<h2><span id="number-theoretic-hardness">Number Theoretic Hardness</span></h2><div class="note info"><p><strong>假设 2.1.1（Dlog Assumption）.</strong> 离散对数的求解是困难的，即给定一个由 $g$ 生成的有限群 $G$，对于任意的 p.p.t adversary $\mathcal{A}$</p>
+<p>$$<br>\Pr_{(G, g)\leftarrow \textsf{Gen}(1^\lambda), t\leftarrow {0, …, |G| - 1}}[\mathcal{A}(G, g, g^t)\rightarrow t] \leq \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>这里的群除了采用 $\mathbb{Z}_N^*$ 之类的群之外，还可以用椭圆曲线群。</p>
+<div class="note info"><p><strong>假设 2.1.2（Diffie-Hellman Assumption）.</strong> CDH 问题和 DDH 问题是困难的，即：</p>
+<ul>
+<li><strong>Computational Diffie-Hellman Assumption.</strong> 对于任意 p.p.t adversary $\mathcal{A}$，$\Pr[\mathcal{A}(g, g^x, g^y)\rightarrow g^{xy}]\leq \mathrm{negl}(\lambda)$；</li>
+<li><strong>Decisional Diffie-Hellman Assumption.</strong> $(G, g, g^x, g^y, g^{xy}) \approx_c (G, g, g^x, g^y, g^r)$，其中 $r$ 为随机数。</li>
+</ul>
+</div>
+
+<p>这里我们使用了记号 $\approx_c$，它表示 computational indistinguishable。以后我们会常常使用这个简写。注意如果能计算离散对数，则 DHA 都会迎刃而解。而这里群的阶数是有讲究的。我们将证明：</p>
+<div class="note info"><p><strong>定理 2.1.3（特殊阶群上的 DlogA 和 DDHA）.</strong> 若 $|G| &#x3D; O(2^\lambda)$ 满足：</p>
+<ul>
+<li>$|G|$ 的质因子大小均为 $\lambda$ 的多项式级别，则存在高效算法求 $G$ 上的离散对数；</li>
+<li>$|G|$ 存在一个 $\lambda$ 的多项式级别的质因子，则存在高效算法能解决 DDH 问题。</li>
+</ul>
+</div>
+
+<p><strong>证明.</strong> 只需要证明如下核心结论：对于多项式大小的质因子 $p_i$ 和任意的 $t\leq \alpha_i$（$|G| &#x3D; \prod p_i^{\alpha_i}$），存在高效算法求 $(\log_g a) \bmod p_i^t$。注意：</p>
+<ul>
+<li><strong>若 $t &#x3D; 0$.</strong> $\log_g a \bmod p_i^0 &#x3D; 0$ 是自然成立的。</li>
+<li><strong>若已经知道了 $r &#x3D; \log_g a\bmod p_i^{t - 1}$.</strong> 那么 $\log_g a \bmod p_i^t$ 无非是 $r + d\cdot p_i^{t - 1}$，其中 $d &lt; p$。这里因为 $p_i$ 大小只有多项式级别，可以硬枚举 $d$ 检验。</li>
+</ul>
+<p>要判断 $\log_g a \bmod p_i^t &#x3D; r$ 是否成立，只需要查看 $(a &#x2F; g^r)^{|G| &#x2F; p_i^t}$ 是否是单位元 $1$ 即可。此时：</p>
+<ul>
+<li>若所有质因子大小都是多项式级别，可以求出所有的 $\log_g a \bmod p_i^{\alpha_i}$，用 CRT 合并立即得到 $\log_g a$。</li>
+<li>若有一个质因子 $p_i$ 大小为多项式级别，则可以求出 $x\bmod p_i, y\bmod p_i$ 和 $r\bmod p_i$。判断 $r$ 和 $xy$ 是否同余，即可高概率（$1 - 1 &#x2F; p_i$）成功解决 DDH。</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>若 DDHA 成立，拿着一个 random oracle $h$，可以构造 CCA 安全的密钥封装机制：</p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda) &#x3D; (pk &#x3D; (G, g, g^x), sk &#x3D; x)$，其中 $x$ 均匀随机采样；</li>
+<li>$\textsf{Encap}(pk) \rightarrow (h((g^y)^x), g^y)$，其中 $y$ 均匀随机采样；</li>
+<li>$\textsf{Decap}(sk, c)\rightarrow h(c^x)$。</li>
+</ul>
+<p>选 One-time Pad 作为相应的 Private Encryption Scheme，得到一套基于 Diffie-Hellman 的加密方案：</p>
+<div class="note "><p><strong>DH Based Public Key Encryption.</strong></p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda) \rightarrow (pk &#x3D; (G, g, g^x), sk &#x3D; x)$，其中 $x$ 均匀随机采样；</li>
+<li>$\textsf{Enc}(pk, m) \rightarrow (g^y, h(g^{xy})\cdot m)$，其中 $y$ 均匀采样；</li>
+<li>$\textsf{Dec}(sk, (c_k, c_m)) \rightarrow h(c_k^x)^{-1}\cdot c_m$。</li>
+</ul>
+</div>
+
+<p>另外还有一些假设，也能推出相应的加密方案，比如：</p>
+<div class="note info"><p><strong>假设 2.1.4.</strong> 质因数分解是困难的。即令 $p, q$ 在 $\lambda$ 位素数中产生，有对于任意 p.p.t adversary $\mathcal{A}$ 都有 </p>
+<p>$$<br>\Pr_{p, q\leftarrow \mathrm{Primes}(\lambda)}[\mathcal{A}(p, q)\rightarrow (p, q)] \leq \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>注意求 $\varphi(N)$ 和质因数分解等难。因为若 $N &#x3D; pq$，有 $p + q &#x3D; N - \varphi(N) + 1$，便获得了两个方程，可以解出 $p, q$。</p>
+<p>基于这个直觉，提出 RSA 假设和强 RSA 假设：</p>
+<div class="note info"><p><strong>假设 2.1.5（RSA Assumption）.</strong> 给定 $(N, e, m^e)$，则 $m$ 不易求，即对于任意 p.p.t 的 adversary $\mathcal{A}$ 都有 </p>
+<p>$$<br>\Pr_{p, q\leftarrow \mathrm{Prime}(\lambda), N &#x3D; pq}[\mathcal{A}(N, e, m^e)\rightarrow m]\leq \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>假设 2.1.6（Strong RSA Assumption）.</strong> 给定任意的 $N, y$，则任意非平凡的 $(m, e)$ 使得 $m^e &#x3D; y$ 都是难求的。即</p>
+<p>$$<br>\Pr_{p, q\leftarrow \mathrm{Prime}(\lambda), N &#x3D; pq}[\mathcal{A}(N, y) \rightarrow (m, e) \wedge e\ne 1 \wedge m^e &#x3D; y] \leq \mathrm{negl}(\lambda)<br>$$</p>
+</div>
+
+<p>基于此，有如下加密方案：</p>
+<div class="note "><p><strong>Encapsulation RSA.</strong> </p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda) \rightarrow (pk &#x3D; (N &#x3D; pq, e), sk &#x3D; d &#x3D; e^{-1}\bmod \varphi(N))$；</li>
+<li>$\textsf{Enc}(pk, m)\rightarrow (r^e \bmod N, h(r)\oplus m)$，其中 $r$ 从 $\mathbb{Z}_N^*$ 中均匀随机采样；</li>
+<li>$\textsf{Dec}(sk, (c_k, c_m)) \rightarrow h(c_k^d \bmod N)\oplus c_m$。</li>
+</ul>
+</div>
+
+<p>根据 RSA Assumption，这里 $r$ 是不好求的，所以 $h(r)$ 把 $m$ 给 one-time pad 住实现安全加密。</p>
+<p>还有一套加密方案依赖于二次剩余。考虑 $N &#x3D; pq$，其中 $p, q$ 都是安全素数（i.e. $p &#x3D; 2p’ + 1, q &#x3D; 2q’ + 1$），定义 $a$ 的 Jacobi 记号为：</p>
+<p>$$<br>\left(\frac{a}{N}\right) &#x3D; \left(\frac ap\right) \left(\frac aq\right)<br>$$</p>
+<p>其中若 $p$ 是素数，Jacobi 记号就是 Legendre 记号 </p>
+<p>$$<br>\left( \frac ap\right) &#x3D; \begin{cases}<br>    0 &amp; a &#x3D; 0 \<br>    1 &amp; \exists x\in \mathbb{Z}_p^*, a &#x3D; x^2 \<br>    -1 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>定义 $\mathbb{QR}_p$ 为模 $p$ 的全体二次剩余。</p>
+<div class="note info"><p><strong>假设 2.1.7（Quadratic Remainder Assumption）.</strong> 定义 $\mathbb{QR}_N :&#x3D; \{a\in \mathbb{QR}_p\wedge a\in \mathbb{QR}_q : a\in \mathbb{Z}_N^*\}$ 和 $\text{pseudo-}\mathbb{QR}_{N} :&#x3D; \{a\notin \mathbb{QR}_p\wedge a\notin \mathbb{QR}_q : a\in \mathbb{Z}_N^*\}$。注意 $a$ 的 Jacobi 记号是 $1$ 则它要么是 $\mathbb{QR}_N$ 的元素，要么是 $\text{pseudo-}\mathbb{QR}_N$ 的元素。二次剩余假设是说：如果不知道 $p, q$ 则 $\mathbb{QR}_N$ 和 $\text{pseudo-}\mathbb{QR}_N$ 是难以区分的。（如果知道 $p, q$，则 Cipolla 算法之类的东西可以容易地求二次剩余）</p>
+</div>
+
+<p>由此得到以下的加密方案：</p>
+<div class="note "><p><strong>Rabin Encryption.</strong> </p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)\rightarrow (pk &#x3D; (N &#x3D; pq, g\in \text{pseudo-}\mathbb{QR}_N), sk &#x3D; (p, q))$；</li>
+<li>$\textsf{Enc}(pk, m) \rightarrow r^2 \cdot g^m$，其中 $r$ 在 $\mathbb{Z}_N^*$ 中均匀随机采样，$m \in \{0, 1\}$ 为欲加密的消息；</li>
+<li>$\textsf{Dec}(sk, c)$ 检查 $c$ 是否属于 $\mathbb{QR}_N$，便可知道 $m$ 的值。</li>
+</ul>
+</div>
+
+<h2><span id="lattice-based-hardness">Lattice Based Hardness</span></h2><p>上面讲的数论上的困难性基本上都挡不住量子计算机。而基于格的困难性暂时还能挡得住量子计算机。</p>
+<div class="note success"><p><strong>定义 2.2.1（Lattice）.</strong> 给定 $\mathbb{R}^n$ 上的一组基 $\boldsymbol{v}_1, …, \boldsymbol{v}_n$。则</p>
+<p>$$<br>L :&#x3D; \{a_1\boldsymbol{v}_1 + \cdots + a_n \boldsymbol{v}_n: a_i\in \mathbb{Z}\}<br>$$</p>
+<p>称为 $\mathbb{R}^n$ 上的一个格（Lattice）。</p>
+</div>
+
+<p>格上的 SVP（找 $L$ 中的最短向量）、CVP（找 $L$ 中 $\boldsymbol{v}$ 的最近邻） 之类的问题是众所周知的难题。我们这里主要使用以下的假设</p>
+<div class="note info"><p><strong>假设 2.2.1（Learning with Error Assumption）.</strong> 随机取 $\boldsymbol{s}\in \mathbb{Z}_p^n$，$\mathbf{A}\in \mathbb{Z}_p^{n\times m}$，对于非常短的 $\boldsymbol{\varepsilon}$，有</p>
+<p>$$<br>(\mathbf{A}, \mathbf{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}^\top)\approx_c (\mathbf{A}, \boldsymbol{r}^\top)<br>$$</p>
+<p>其中 $\boldsymbol{r}^\top$ 均匀随机。</p>
+</div>
+
+<p>这本质上就是 CVP 不好做。以此得到可以加密一位消息的加密方案：</p>
+<div class="note "><p><strong>LWE Based Public-Key Encryption.</strong> </p>
+<ul>
+<li>私钥为 $\boldsymbol{s}$，公钥为 $\mathbf{A}, \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{e}^\top$，其中 $\boldsymbol{e}$ 在方差很小的正态分布中采样；</li>
+<li>$\textsf{Enc}(pk, m) \rightarrow (\mathbf{A}\boldsymbol{r}, (\boldsymbol{s}\mathbf{A} + \boldsymbol{e})^\top \boldsymbol{r}’ + \frac{p}{2}m’ + e’)$，其中 $e’$ 非常小，$r’$ 随机。</li>
+</ul>
+</div>
+
+<p>在不知道私钥的人眼里看来，$(\boldsymbol{s}\mathbf{A} + \boldsymbol{e})^\top \boldsymbol{r}’$ 均匀随机，将后面的信息都 one-time pad 住了。</p>
+<h1><span id="advanced-techniques">Advanced Techniques</span></h1><h2><span id="identity-based-encryption">Identity-Based encryption</span></h2><p>本节讨论所谓的身份加密，即可以任意选择公钥的公钥加密系统。在传统的公钥加密系统中，如果 Alice 想要给 Bob 发送信息，他需要知道 Bob 的公钥是否确实是 Bob 本人的，这就需要第三方签发的证书。我们现在希望把这个机制改成：Alice 只需要 Bob 的名字（比如 <code>bob@email.com</code>）就可以加密密文，而 Bob 在解密需要证明自己是 Bob 才可以解密，具体地，我们需要以下几个函数：</p>
+<div class="note success"><p><strong>定义 4.1.1（Identity-Based Encryption）.</strong> 一个基于身份的加密方案包含以下几个算法：</p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)\rightarrow (pk, msk)$，称为主公钥和主私钥，对所有人可见；</li>
+<li>$\textsf{Enc}(pk, \mathrm{ID}, m) \rightarrow c$；</li>
+<li>$\textsf{Dec}(sk_{\mathrm{ID}}, c) \rightarrow m$；</li>
+<li>$\textsf{Extract}(msk, \mathrm{ID})\rightarrow sk_{\mathrm{ID}}$。</li>
+</ul>
+</div>
+
+<p>若任意的 p.p.t adversary $\mathcal{A}$ 无法以不可忽略的优势赢得如下的 CPA Game，则称这个 IBE 是 CPA 安全的：</p>
+<ol>
+<li>Challenger 生成 $pk, msk$，发送 $pk$ 给 Adversary；</li>
+<li>Adversary 询问若干个 $\mathrm{ID}_i$，challenger 回答 $sk_{\mathrm{ID}_i}$；</li>
+<li>Adversary 发送 $m_0, m_1, \mathrm{ID}$，challenger 回复 $c&#x3D;  \textsf{Enc}(pk, \mathrm{ID}, m_b)$；</li>
+<li>Adversary 询问若干个 $\mathrm{ID}_i$，challenger 回答 $sk_{\mathrm{ID}_i}$；</li>
+<li>Adversary 猜测 $b$。</li>
+</ol>
+<p>这里 $\textsf{ID}$ 和 $\textsf{ID}_i$ 不可重复。</p>
+<p>IBE 基本上都是基于所谓的 Pairing，即某种双线性映射的构造的。</p>
+<div class="note success"><p><strong>定义 4.1.2（Pairing）.</strong> 给定两个群 $G, G_T$，他们都同构于某个 $\mathbb{Z}_q$，生成元分别为 $g, g_T$。他们之间的一个 pairing 为一个可以快速计算的映射 $e: G\times G \rightarrow G_T$，满足：</p>
+<ul>
+<li>$e(g, g) &#x3D; g_T$；</li>
+<li>$e(g^a, g^b) &#x3D; g_T^{ab}$。</li>
+</ul>
+</div>
+
+<p>实践中，这两个群都可以在椭圆曲线上找到。</p>
+<p>定义这个东西，是希望通信双方拿着 $g^a, g^b$，可以借助一个拿着 $msk &#x3D; c, pk &#x3D; g^c$ 的第三方进行密钥交换，算出一个近乎随机的 $g_T^{abc} &#x3D; e(g^a, g^b)^c$，然后套上一个 Private Key Encryption 实现 IBE。我们考虑以下的假设</p>
+<div class="note info"><p><strong>假设 4.1.1（Decisional Bilinear Diffie-Hellman Assumption）.</strong> 对于同构于 $\mathbb{Z}_q$ 的群 $G, G_T$，pairing $e$ 和生成元 $g, g_T$，有 </p>
+<p>$$<br>(G, G_T, e, g, q, g^a, g^b, g^c, g_T^{abc})\approx_c(G, G_T, e, g, q, g^a, g^b, g^c, g_T^{abc})<br>$$</p>
+</div>
+
+<p>注意在这种 pairing 里面，“DDH”是不成立的，因为 $e(g^x, g^y) &#x3D; e(g, g^{xy}) &#x3D; g^{xy}_T$，据此可以区分 $g^x, g^y, g^{xy}$ 和随机数。</p>
+<p>基于此，有如下的 IBE：</p>
+<div class="note "><p><strong>Paring-Based IBE.</strong> </p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)\rightarrow (pk &#x3D; G, G_T, g, g_T, e, g^S, msk &#x3D; s)$；</li>
+<li>$\textsf{Extract}(msk, \mathrm{ID}) \rightarrow h_{\mathrm{ID}} &#x3D; H(\mathrm{ID})^{s}$，其中 $H$ 是 random oracle；</li>
+<li>$\textsf{Enc}(pk, \mathrm{ID}, m) &#x3D; (g^r, H(e(h_{\mathrm{ID}}, g^s)^r)\cdot m)$；</li>
+<li>$\textsf{Dec}(sk_{\mathrm{ID}}, c) &#x3D; H(e(h_{\mathrm{ID}}^2, g^r))^{-1} \cdot c$。</li>
+</ul>
+</div>
+
+<p>首先所有的 $sk_{\mathrm{ID}}$ 询问都是没用的，因为我们用 random oracle 保护了 $\mathrm{ID}$。根据 DBDHA，$g^s, h_{\mathrm{ID}} &#x3D; g^{y_{\mathrm{ID}}}, g^r, H(g_T^{y_{\mathrm{ID}}rs})$ 和 $(g^s, g^{y_{\mathrm{ID}}}, g^r, h(g_T^w))$ 不可区分，后者完全就是随机四元组，因此将 $m$ one-time pad 住。</p>
+<h2><span id="fully-homomorphic-encryption">Fully Homomorphic encryption</span></h2><p>如果希望直接用密文做计算而不暴露输入信息，我们就需要加密方案具有某种同态性质，即希望找一个加密方案，对于 $x, y\in R$（$R$ 是一个环），给定 $\textsf{Enc}(x)$ 和 $\textsf{Enc}(y)$，希望能够计算 $\textsf{Enc}(x + y)$ 和 $\textsf{Enc}(xy)$。进而，可以安全地计算 $R$ 上的算术电路。</p>
+<p>我们改进 2.2 中所述地 LWE-Based Public Key Encryption 来得到一种全同态加密方案。</p>
+<p>首先做一些尝试：考虑公钥 $\mathcal{A}$ 是一个 $n\times (n + 1)$ 的矩阵。令 $sk &#x3D; \boldsymbol{s}\in \mathbb{R}^n, t &#x3D; (\boldsymbol{s}, -1)$。</p>
+<p>$$<br>\begin{aligned}<br>    \textsf{Enc}(pk, m) &amp;&#x3D; \begin{pmatrix}<br>        \mathbf{A} \\<br>        \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}<br>    \end{pmatrix} + m\mathbf{I} \\<br>    \textsf{Dec}(sk, m) &amp;&#x3D; \boldsymbol{t}^\top \boldsymbol{c}<br>\end{aligned}<br>$$</p>
+<p>那么假如有两个密文 $\boldsymbol{c}_1, \boldsymbol{c}_2$，计算 </p>
+<p>$$<br>\boldsymbol{t}^\top(\boldsymbol{c}_1 + \boldsymbol{c}_2) &#x3D; -\boldsymbol{\varepsilon}_1 - \boldsymbol{\varepsilon}_2 + (m_1 + m_2) \boldsymbol{t}^\top<br>$$</p>
+<p>因为 $\boldsymbol{\varepsilon_1}, \boldsymbol{\varepsilon_2}$ 都小，所以容易解密出 $m_1 + m_2$。但计算乘法发现</p>
+<p>$$<br>\begin{aligned}<br>&amp;\boldsymbol{t}^\top\left(\begin{pmatrix}<br>        \mathbf{A} \\<br>        \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}_1<br>    \end{pmatrix} + m_1\mathbf{I}\right)\left(\begin{pmatrix}<br>        \mathbf{B} \\<br>        \boldsymbol{s}^\top \mathbf{B} + \boldsymbol{\varepsilon}_2<br>    \end{pmatrix} + m_2\mathbf{I}\right) \\<br>&amp;&#x3D; {\color{red} \boldsymbol{\varepsilon}_1 \begin{pmatrix}<br>    \mathbf{B} \\<br>    \boldsymbol{s}^\top \mathbf{B} + \boldsymbol{e}_2<br>\end{pmatrix}} + m_2\boldsymbol{\varepsilon}_1 + m_1 \boldsymbol{\varepsilon}_2 + m_1m_2 \boldsymbol{t}^\top<br>\end{aligned}<br>$$</p>
+<p>红色项的大小是 Bound 不住的。解决方法如下：定义 Gadget Matrix 为：</p>
+<p>$$<br>\mathbf{G} &#x3D; \begin{pmatrix}<br>    1, 2, …, 2^{\log p} &amp;  &amp; \\<br>    &amp; 1, 2, …, 2^{\log p} &amp; \\<br>    &amp; &amp; 1, 2, …, 2^{\log p}<br>\end{pmatrix}<br>$$</p>
+<p>另外，定义 $\mathbf{G}^{-1}$ 为这样的一个变换：将矩阵的每个元拆成其二进制分解对应的列向量。注意 $\mathbf{G}\cdot \mathbf{G}^{-1}(\mathbf{M}) &#x3D; \mathbf{M}$ 对于任意 $\mathbf{M}$ 成立。公钥 $\mathbf{A}$ 替换为 $n\times n\log p$ 的的矩阵，加密时的 $\mathbf{I}$ 换成 $\mathbf{G}$，然后这样构造同态运算：</p>
+<ul>
+<li><strong>加法.</strong> $C_1, C_2 \mapsto C_1 + C_2$；</li>
+<li><strong>乘法.</strong> $C_1, C_2 \mapsto C_1\cdot \mathbf{G}^{-1}(C_2)$。</li>
+</ul>
+<p>现在我们来算一下乘法的结果：</p>
+<p>$$<br>\begin{aligned}<br>    &amp;\left(\begin{pmatrix}<br>        \mathbf{A} \\ \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}_1<br>    \end{pmatrix} + m_1\mathbf{G}\right)\cdot \mathbf{G}^{-1} \left(\begin{pmatrix}<br>        \mathbf{B} \\ \boldsymbol{s}^\top \mathbf{B} + \boldsymbol{\varepsilon}_2<br>    \end{pmatrix} + m_2\mathbf{G}\right) \\<br>    &amp;&#x3D; \begin{pmatrix}<br>        \mathbf{A} \\ \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}<br>    \end{pmatrix}\cdot \mathbf{G}^{-1}(\boldsymbol{C}_2) + m_1 \mathbf{C}_2 \\<br>    &amp;\approx \begin{pmatrix}<br>        \mathbf{D} \\<br>        \boldsymbol{s}^\top \mathbf{D} + \boldsymbol{\varepsilon}’<br>    \end{pmatrix} + xy\mathbf{G}<br>\end{aligned}<br>$$</p>
+<p>这里在算的时候，若两个矩阵 $\mathbf{A}, \mathbf{B}$ 满足 $\boldsymbol{t}^\top (\mathbf{A} - \mathbf{B})$ 非常小，就称 $\mathbf{A}\approx \mathbf{B}$。</p>
+<p>至此我们构造了一个不是很 practical 的 Homomorphic Encryption，我们主要会担心 $\boldsymbol{\varepsilon}$ 随着运算次数累积。最后我们来考虑设计一种机制，能够提高密文的信噪比。</p>
+<blockquote>
+<p>下面的东西没学懂，很可能是假的。</p>
+</blockquote>
+<div class="note info"><p><strong>定理 3.2.1（Bootstrapping）.</strong> 若一个 Homomorphic Encryption 满足：</p>
+<ul>
+<li><strong>Circular Security.</strong> 存在 Simulator $\mathcal{S}$，$\mathcal{S}(1^\lambda) \approx_c \textsf{Enc}(sk, sk)$。</li>
+<li><strong>Somehow Homomorphic.</strong> 若对于任意不超过某个 $d$ 次运算的密文，都有一个同态的解密方案 $\textsf{Dec}(sk, \textsf{Enc}(sk, m)) &#x3D; m$。</li>
+</ul>
+<p>则可以基于此 Homomorphic Encryption 构造 Fully Homomorphic Encryption</p>
+</div>
+
+<p><strong>证明.</strong> 注意因为 $\textsf{Dec}(\cdot, \textsf{Enc}(sk, m)) &#x3D; m$ 是同态，所以 </p>
+<p>$$<br>\textsf{Dec}(\textsf{Enc}(sk, sk), \textsf{Enc}(sk, m)) &#x3D; \textsf{Dec}(sk, \textsf{Enc}(sk, m)) &#x3D; \textsf{Enc}(sk, m)<br>$$</p>
+<p>如果 $d$ 比 $\textsf{Dec}$ 函数的计算次数略大，则你可以一直用这种方法来刷新密文。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="digital-signature">Digital Signature</span></h2><p>数字签名是 MAC 在公钥密码学中的对应。其形式定义为</p>
+<div class="note success"><p><strong>定义 3.3.1（Digital Signature）.</strong> 一个数字签名方案包含以下三个算法：</p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)\rightarrow (pk, sk)$；</li>
+<li>$\textsf{Sign}(sk, m) \rightarrow \sigma$；</li>
+<li>$\textsf{Verify}(pk, m, \sigma) \rightarrow 0&#x2F;1$。</li>
+</ul>
+</div>
+
+<p>其安全性定义为任意的 p.p.t adversary $\mathcal{A}$ 都不能以不可忽略的概率赢得如下的安全性游戏：</p>
+<ol>
+<li>Challenger 生成 $(pk, sk)$，发送 $pk$ 给 Adversary；</li>
+<li>Challenger 多次询问 $m_i$，Adversary 须回复 $\sigma_i$；</li>
+<li>Adversary 尝试伪造 $m, \sigma$。</li>
+</ol>
+<p>$\mathcal{A}$ 胜利当且仅当 $\textsf{Verify}(pk, m, \sigma) \rightarrow 1$ 且 $m\notin \{m_i\}$。更强的安全性要求 $(m, \sigma)\notin \{m_i, \sigma_i\}$。</p>
+<p>可以发现，Trapdoor Permutation 非常适合做这件事情。据此，我们用 RSA 构造一个 Trapdoor Permutation，然后以此构造一个 Signature：</p>
+<div class="note "><p><strong>RSA Based Digital Signature.</strong></p>
+<ul>
+<li>$\textsf{Gen}(1^\lambda)\rightarrow (pk &#x3D; (N, e), sk &#x3D; d)$，其中 $N &#x3D; pq, de \equiv 1 \pmod \varphi(N)$；</li>
+<li>$\textsf{Sign}(sk, m) &#x3D; H(m)^d$，其中 $H$ 是 Random Oracle；</li>
+<li>$\textsf{Verify}(pk, m, \sigma)$ 判断是否有 $H(m) &#x3D; \sigma^e$</li>
+</ul>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这里 random oracle $H$ 实乃必要。否则，你问 $m_1, m_2$ 就可以 forge 一个 $m_1m_2$。</p>
+</blockquote>
+<p>其 unforgeability 的证明的核心就是你可以耦合 RSA 假设和 random oracle 的随机性。具体证明这里摆了。</p>
+<h2><span id="zero-knowledge-proof">Zero-Knowledge Proof</span></h2><p>本节讨论所谓的零知识证明：一个 Prover 想要向 Verifier 证明他有一个 NP 问题的 witness，但不想让 NP 问题知道这个 witness。形式化地：</p>
+<div class="note success"><p><strong>定义 4.4.1（ZKP Protocol）.</strong> 语言 $L$ 的一个 ZKP Protocol 指定了两个可以通信的 p.p.t 算法 $\mathcal{P}, \mathcal{V}$ 之间的交互方式，双方的交互结果（包括聊天记录和 Verifier 是否接受）合记作 $\langle \mathcal{P}(x, w), \mathcal{V}(x)\rangle$，$\mathcal{V}$ 能看到的全部信息记作 $\textsf{View}_V(\langle \mathcal{P}(x, w), \mathcal{V}(x)\rangle)$，满足：</p>
+<ul>
+<li><strong>Completeness.</strong> 对于任意的 $x\in L$ 和相应的 witness $w$，有 $\Pr[\langle \mathcal{P}(x, w), \mathcal{V}(x)\rangle\rightarrow 1] &#x3D; 1$ 即有 witness 时 Verifier 必然接受这个证明；</li>
+<li><strong>Soundness.</strong> $\forall x\notin L, \forall \mathcal{P}^*, \Pr[\langle P^*(x), \mathcal{V}(x)\rightarrow 1\rangle] \leq \frac 12$，即没有 witness 时 Verifier 高概率拒绝这个证明。</li>
+<li><strong>Honest Verifier (Perfect) Zero Knowledge.</strong> 存在一个 p.p.t simulator $\mathcal{S}$，使得 $\forall x\in L, \forall w, S(x) &#x3D;_d \textsf{View}_V(\langle \mathcal{P}(x, w), \mathcal{V}(x)\rangle)$，即不知道 witness 者可以在同分布意义下模拟出 $V$ 看到的聊天记录。</li>
+</ul>
+<p>其中第三个条件可以弱化成 $&#x3D;_s$（statistical）乃至 $&#x3D;_c$（computational）。</p>
+</div>
+
+<p>注意 soundness 里的 $\frac 12$ 可以改成任意的 $1 - 1 &#x2F; \mathrm{poly}(n)$，因为否则通过多项式次重复即可把这个概率 amplitude 到 $1 &#x2F; \mathrm{e}$。amplitude 的方式可以是 parallel（同时独立地 run 多个证明）和 sequential（进行多轮交互，每轮交互是一次证明）。两者看似没有差别，实际上在我们引入了 malicious verifier 和 rewind 之后可见仅有 sequential 是合适的。</p>
+<p>以下是几个 ZKP 的例子。</p>
+<div class="note "><p><strong>Graph Isomorphism.</strong> $L &#x3D; \{\left(G, G’\right): \exists \pi, G’ &#x3D; \pi(G)\}$，即图同构问题，witness 为 $\pi$。</p>
+</div>
+
+<p>协议如下：</p>
+<ul>
+<li>Prover sample 一个排列 $\pi’$，得到 $G’’ &#x3D; \pi’(G) \cong G$，将 $G’’$ 发送给 Verifier；</li>
+<li>Verifier sample 一个随机比特 $b$ 发送给 Prover；</li>
+<li>若 $b &#x3D; 0$，Prover 发送 $\pi’$；否则，Prover 发送 $\pi’ \circ \pi^{-1}$。</li>
+<li>若 $b &#x3D; 0$，Verifier 检查是否收到 $G$ 和 $G’’$ 间的同构映射；若 $b &#x3D; 1$，Verifier 检查是否收到 $G’$ 和 $G’’$ 之间的同构映射。</li>
+</ul>
+<p>显然这是一个满足 completeness、soundness 和 honest verifier zero-knowledge 的协议。</p>
+<div class="note "><p><strong>Quadratic Remainder.</strong> 语言 $\mathbb{QR} :&#x3D; \{(G, x) : \exists y\in G, y^2 &#x3D; x\}$。</p>
+</div>
+
+<ul>
+<li>Prover sample 一个 $r\in G$，发送 $xr^2$ 给 Verifier；</li>
+<li>Verifier sample $b\in \{0, 1\}$。</li>
+<li>若 $b &#x3D; 0$，Prover 发送 $r^2$ 给 Verifier（用于检验 $xr^2$ 是真的还是假的）；若 $b &#x3D; 1$，Prover 发送 $yr$ 给 Verifier（用于检验 $x &#x3D; y^2$ 是真的还是假的）。</li>
+</ul>
+<p>显然这是一个 complete，sound 和 honest verifier zero-knowledge 的协议。</p>
+<p>关于 ZKP 的一个重要结果是：</p>
+<div class="note info"><p><strong>定理 4.4.1.</strong> $\mathbf{ZKP} &#x3D; \mathbf{NP}$。</p>
+</div>
+
+<p>方法是给出 $\mathrm{3COL}\in \mathbf{ZKP}$。直觉上，你要证明一个图有三染色，只需要把这个三染色加密之后放在桌子上，然后 Verifier 抽一条边解密来看是不是不是同色。这里需要保证 Prover 解密出的结果必须是加密时的结果，因此需要如下原素：</p>
+<div class="note success"><p><strong>定义 4.4.2（commitment）.</strong> 一个 commitment 机制包含以下两个操作：</p>
+<ul>
+<li><strong>Commit.</strong> 根据 $m$ 和密钥，计算 $\hat{m}$；</li>
+<li><strong>Open.</strong> 根据 $\hat{m}$ 和密钥，计算 $m$。</li>
+</ul>
+<p>满足以下两个条件（Perfect，Statistical，Computational）：</p>
+<ul>
+<li><strong>Hiding.</strong> 从 $\hat{m}$ 中不能拿到 $m$ 的信息；</li>
+<li><strong>Binding.</strong> 在 commitment 之后，$m$ 不能被篡改。</li>
+</ul>
+</div>
+
+<div class="note info"><p><strong>定理 4.4.2.</strong> 存在 OWP &#x2F; CRHF 则存在 commitment。</p>
+</div>
+
+<p><strong>构造.</strong> </p>
+<ul>
+<li><strong>基于 OWP 的 commitment.</strong> perfect binding，computational hiding。<ul>
+<li><strong>commit.</strong> 采样 $r, z$，发送 $f(r), b &#x3D; h(r)\oplus m$。其中 $h$ 是一个 hardcore predicate。</li>
+<li><strong>open.</strong> 发送 $r$。</li>
+</ul>
+</li>
+<li><strong>基于 CRHF 的 commitment.</strong> statistical hiding, computational binding。<ul>
+<li><strong>commit.</strong> 采样 $r, z$，发送 $H(r), z, \langle r, z\rangle\oplus m$；</li>
+<li><strong>open.</strong> 发送 $r$。</li>
+</ul>
+</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>最后我们证明 $\text{3COL}\in \mathbf{ZKP}$ 来完成定理 4.4.2 的证明。</p>
+<ul>
+<li>Prover commit 每条点的颜色作用一个随机置换的结果；</li>
+<li>Verifier 随机 sample 一条边，open 这两个点的颜色；</li>
+<li>Verifier 检查颜色是否相同。</li>
+</ul>
+<p>这个证明的 completeness 和 soundness 比较显然，需要着重说明 $\mathcal{S}$ 的构造。</p>
+<ul>
+<li>$\mathcal{S}$ 首先随机 sample 那条边。</li>
+<li>如果 $v$ 不是这条边的端点，$\mathcal{S}$ 生成一个 commit $0$；</li>
+<li>如果 $a, b$ 是这两条边的端点，则 $\mathcal{S}$ 随机两个 $c_1\ne c_2$，生成 commit $c_1$ 和 commit $c_2$。</li>
+</ul>
+<p>注意 commitment 的 statistical hiding 表明对于没有 open 的 commitment，它分布上和均匀随机几乎无异，因此全部 commit $0$ 仍然保证了 statistical honest verifier zero knowledge。</p>
+<p>至此，因为 $\mathrm{3COL}$ 是 NPC 问题，$\mathbf{ZKP} &#x3D; \mathbf{NP}$ 得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>考虑到实践中，一个恶意的 Verifier 可以不按照协议要求的概率分布采样。这样的 Verifier 称为 Malicious Verifier $\mathcal{V}^*$，其交互框架相同，但是使用的随机性不同。定义 Malicious Verifier Zero Knowledge 为：对于任意的 malicious verifier $\mathcal{V}^*$，存在一个 p.p.t Simulater $\mathcal{S}$ 使得</p>
+<p>$$<br>\textsf{View}_V(\langle P(x, w), \mathcal{V}^*\rangle) \approx \mathcal{S}(x)<br>$$</p>
+<p>其中 $\mathcal{S}$ 有模拟和<strong>回退（rewind）</strong>交互流程的权限。以 QR 的ZKP 为例，一个针对 Malicious Verifier 的 simulator 可以形如：</p>
+<ol>
+<li>$\mathcal{S}$ 自己均匀随机 sample 一个 $\hat{b}$，据此模拟出一个 view $\Pi$；</li>
+<li>$\mathcal{S}$ 模拟 $\mathcal{V}^*$ 到输出 $b$ 这一步：<ol>
+<li>如果 $b &#x3D; \hat{b}$，输出 $\Pi$；</li>
+<li>否则，rewind $\mathcal{V}^*$ 到最开头，然后自己回到 1. 一步。</li>
+</ol>
+</li>
+</ol>
+<hr>
+<p>以上的所有构造都是基于 commitment - challenge - response 这样的三轮交互的范式。如何将其修改成所谓的 Non-interactive ZKP？有两种方法：</p>
+<ul>
+<li><strong>Fiat-Shamir Transform.</strong> 在第二轮 challenge 环节中，改为由 Prover 本人调用一个 Random Oracle $\mathcal{O}(\mathrm{commitment})$ （实践中使用哈希函数近似）来生成 challenge 的信息（即 $b$，或者 $\mathrm{3COL}$ 中的那条边）。Verifier 需要额外检查 $b$ 是否确实是调用 random oracle 产生的；</li>
+<li><strong>Common Reference String Model.</strong> 没看懂。</li>
+</ul>
+<h2><span id="secure-multi-party-computation-fixmerandom-encoding-garble-circuit">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</span></h2><p>本节考虑所谓的多方计算：有 $n$ 个参与方计划共同计算一个函数 $f: F^n \rightarrow F^n$，但是不希望其他人知道自己的输入。</p>
+<p>一个老生常谈的例子是现在 $n$ 个人想要计算他们手里的数之和。一个经典的协议是第一个人 sample 一个数 $r$，然后将 $r + a_1$ 发给下一个人；每个人将收到的数加上自己手里的数 $a_i$ 发给下一个人，转一圈之后便得到了答案。这个协议的问题是 $i, i + 2$ 两个人联合起来可以知道 $i + 1$ 手里的数字。</p>
+<p>我们现在来形式化多方计算、“联合起来”知道某人的输入这些事情。</p>
+<div class="note success"><p><strong>定义 4.5.1（MPC Protocol）.</strong> 一个 MPC Protocol 指定了多个参与方 $1, 2, …, n$。如何完成对函数 $f$ 的计算，包括计算和通信过程。一个子集 $S \subseteq \{1, 2, …, n\}$ 可见的全部信息（包括输入、聊天记录、计算结果）记作 $\textsf{View}_S$。</p>
+<p>称一个 MPC 是对子集 $S$ 安全的，若对于任意的输入 $x_1, …, x_n$，存在一个 simulator $\mathcal{S}$ 使得</p>
+<p>$$<br>\mathcal{S}((x_i)_{i\in S}, (y_i)_{i\in S}) &#x3D;_d \textsf{View}_S<br>$$</p>
+<p>即，$S$ 中的参与方联合起来也无法知道其私人信息和众所周知的信息以外的任何额外信息。 当然这里 $&#x3D;_d$ 可以改成 $\approx_s$ 或者 $\approx_c$</p>
+</div>
+
+<p>现在回到之前那个求和的问题。</p>
+<div class="note "><p><strong>MPC for Summation.</strong> 令 $f: \mathbb{Z}_p^n\rightarrow \mathbb{Z}_p^n$，其中</p>
+<p>$$<br>f(x_1, …, x_n)_i &#x3D; \sum_{j&#x3D;1}^n x_i<br>$$</p>
+<p>构造一个对于任意 $[n]$ 的真子集都安全的 MPC 协议。</p>
+</div>
+
+<p>对于参与方 $P_i$：</p>
+<ol>
+<li>采样 $x_{i1}, …, x_{in}$，满足 $\sum_{j}x_{ij} &#x3D; x_i$，把 $x_{ij}$ 发给 $P_j$；</li>
+<li>收到 $x_{1i}, …, x_{ni}$ 之后，将其和记作 $s_i$，广播 $s_i$；</li>
+<li>收到所有 $s_i$ 之后，将其求和得到答案。</li>
+</ol>
+<p>Simulator 的构造是平凡的：注意 $x_{i1}, …, x_{in}$ 是 $(n - 1)$-wise 独立的，故对于任意的真子集 $S$，$j$ 发送给 $i\in S$ 的数字都是独立均匀随机的。</p>
+<p>上述构造展示了 MPC 的如下范式：</p>
+<ul>
+<li>将自己的输入用一种具有同态性质的 Secret Sharing 方法发给其他人，其中任意 $S$ 个人联合起来算不出 secret 的内容，但是收集充分多的 sharing 之后自己可以计算出 secret；</li>
+<li>完成计算之后收集 Secret Sharing 的结果，并复原。</li>
+</ul>
+<p>这里提到了一个重要的原素 Secret Sharing。</p>
+<div class="note success"><p><strong>定义 4.5.2（Secret Sharing）.</strong> 一个 $t$-out-of-$n$ 秘密共享机制包含如下两个算法：</p>
+<ul>
+<li>算法 $\textsf{Distr}(s)\rightarrow [s] :&#x3D; (s_1, …, s_n)$；</li>
+<li>算法 $\textsf{Rec}(S, (s_i)_{i\in S})\rightarrow s$，其中 $|S|\geq t$。</li>
+</ul>
+<p>需满足正确性（常规自然的定义）和安全性：对于任意 $T\subseteq [n], |T| &lt; t$，有 $(s_i)_{i\in T}$ 这个联合分布和 $s$ 独立。</p>
+</div>
+
+<p>有一些显然的 Secret Sharing 方案：</p>
+<ul>
+<li><strong>Trivial Secret Sharing.</strong> 直接把秘密 $s$ 广播出去，就是一个 $1$-out-of-$n$ secret sharing。</li>
+<li><strong>Additive Secret Sharing.</strong> 随机 $s_1, …, s_n$ 使得 $s_1 + \cdots + s_n &#x3D; s$。这是 $n$-out-of-$n$ secret sharing，但是没有同态性质。</li>
+<li><strong>Shamir Secret Sharing.</strong> 令 $f$ 是度数不超过 $t$ 的，常数项为 $s$ 的随机多项式。令 $s_i &#x3D; f(i)$。注意任意 $t$ 个人可以联合起来插出多项式 $f$ 从而知道 $s$，但是不超过 $t$ 个人的话常数项和点值都是独立的。</li>
+</ul>
+<p>注意，Shamir secret sharing 具有良好的同态性质：$[x + y] &#x3D; [x] + [y]$，$[xy] &#x3D; [x][y]$。但是这里隐藏了一个问题：如果你将两个多项式乘起来，其度数将会倍增，这导致你调用了一次 $[xy]$ 之后，参数 $t$ 会倍增。一旦解决了这个问题，我们便可以做任意的多项式函数的 MPC。</p>
+<p>这里记 $[x]^{(t)}$ 为 $x$ 的一个 $t$-out-of-n secret sharing，$[x]^{(t)}_i$ 表示其散发给第 $i$ 个人的分量。</p>
+<p>考虑你现在手里有一个 $[x]^{(t)}$ 和一个 $[y]^{(t)}$，那么直接将其乘起来，即可得到 $[xy]^{(2t - 1)}$。但我们不希望得到 $[xy]^{(2t - 1)}$ 而是 $[xy]^{(2t)}$，怎么实现？注意，根据拉格朗日插值公式：</p>
+<p>$$<br>f(0) &#x3D; \sum_{i&#x3D;1}^n f(i) {\color{blue} \prod_{j\ne i} \frac{-j}{i - j}} :&#x3D; \sum_{i&#x3D;1}^n {\color{blue} a_i} f(i)<br>$$</p>
+<p>是关于 $f(x_i)$ 的线性函数，系数是容易计算的。而加法不会让 $t$ 改变。因此可以想到这样的乘法协议：给定 $[x]^{(t)}, [y]^{(t)}$：</p>
+<ol>
+<li>各方在本地计算 $[xy]^{(2t - 1)}$，方法是 $[xy]^{(2t - 1)}_i \leftarrow [x]^{(t)}_i[y]^{(t)}_i$。记 $z_i :&#x3D; [xy]^{(2t - 1)}_i$</li>
+<li>对于所有的参与方 $i$，散发 secret sharing $\left[z_i\right]^{(t)}$。</li>
+<li>所有参与方在本地计算<br>$$<br>[xy]^{(t)} &#x3D; \sum_{i&#x3D;1}^n a_i [z_i]^{(t)}<br>$$</li>
+</ol>
+<p>最后临近输出时，想要从 $[x]$ 中知道 $x$。但此时当然不可以把 $[x]_i$ 发给所有人，这样就泄露了信息。有两种方法来做保护：</p>
+<ol>
+<li>这本质上就是每个人输入是 $a_i[x]_i$，要求和的问题。调用之前的求和 Protocol 即可。</li>
+<li>所有人广播一个 $0$ 的 secret sharing $[0_i]^{(t)}$，然后在本地计算 $[\text{fresh $x$}] &#x3D; [x] + \sum [0_i]$，广播 fresh $x$ 的 secret sharing 后可以解出 $x$。注意，在广播了 $[0_i]^{(t)}$ 和已知答案之后，fresh $x$ 完全可以由插值算出，因此广播 fresh $x$ 的 secret sharing 完全没有问题。</li>
+</ol>
+<p>以上的 Shamir secret sharing、degree reduction 操作并上 2. 的 open 构成了著名的 BGW Protocol，其解决了如下问题：</p>
+<div class="note info"><p><strong>定理 4.5.1.</strong> 对于任意的算术电路 $f: \mathbb{F}_p^n\rightarrow \mathbb{F}_p$，存在对于任意大小不超过 $(n - 1) &#x2F; 2$ 的子集都安全的 MPC。</p>
+</div>
+
+<hr>
+<p>接下来讨论一些具体的 MPC（实际上是 2PC）。首先是所谓的 <strong>不经意传输（Oblivious Transfer）</strong>，即有一个发送方和一个接收方，发送方手里持有 $m_0, m_1$ 两个消息，接收方手里有一个索引 $b$。希望用安全 MPC 计算一个函数</p>
+<p>$$<br>f: ((m_0, m_1), b) \mapsto (\bot, m_b)<br>$$</p>
+<p>这称为 $1$-out-of-$2$ Oblivious Transfer。可以将角标拓展至 $0, 1, …, t - 1$ 的 $1$-out-of-$t$ Oblivious Transfer。显然有如下定理：</p>
+<div class="note info"><p><strong>定理 3.5.2.</strong> 若存在 $1$-out-of-$2$ Oblivious Transfer，便对于任意常数 $t$ 存在 $1$-out-of-$t$ Oblivious Transfer。</p>
+</div>
+
+<p><strong>构造.</strong> WLOG 假设消息 $m_i$ 都只有一个 bit。则我们可以进行 $t$ 轮 $1$-out-of-$2$ Oblivious Transfer，其中第 $i$ 轮时 $\hat{m}_0 &#x3D; 0, \hat{m}_1 &#x3D; m_i$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>OT 可以由 Trapdoor OWP 得来。</p>
+<div class="note info"><p><strong>定理 3.5.3.</strong> 若存在 Trapdoor OWP，则存在 $1$-out-of-$2$ Oblivious Transfer。</p>
+</div>
+
+<p><strong>构造.</strong> 协议内容如下：</p>
+<ul>
+<li>Sender 持有一个 trapdoor OWP $f$ 和相应的 trapdoor $t$。Sender 随机 sample 一个 $\Delta$，发送 $f, \Delta$ 给 Receiver。</li>
+<li>Receiver 采样 $x_b$，计算 $y_b &#x3D; f(x_b)$，令 $y_{1 - b} &#x3D; \Delta - y_b$。发送 $y_0, y_1$ 给 Sender；</li>
+<li>Sender 用 trapdoor 还原 $x_0 &#x3D; f^{-1}(y_0), x_1 &#x3D; f^{-1}(y_1)$，发送 $h(x_0)\oplus m_0$ 和 $h(x_1)\oplus m_1$ 给 Receiver。这里 $h$ 是 $f$ 的一个 harcore bit。</li>
+<li>Receiver 知道 $x_b$，因此可以计算 $m_b$，但另一个则看起来是完全随机的。</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>这个构造，如果双方都是 semi-honest 的，在 Sender 一侧是 Perfect Secure，在 Receiver 一侧是 Computational Secure。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/12/30/EconomicsRevision/" rel="prev" title="Revision | 经济学原理">
+                  <i class="fa fa-angle-left"></i> Revision | 经济学原理
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

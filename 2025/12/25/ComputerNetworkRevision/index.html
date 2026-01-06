@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述 实体 服务 网络协议   应用层 Web 与 HTTP 协议 域名系统（DNS） 电子邮件 其他应用层协议   传输层 UDP 协议 TCP 协议 新型传输层技术   网络层 相关协议 路由 软件定义网络 其他技术   链路层 有线局域网络">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 计算机网络">
+<meta property="og:url" content="http://example.com/2025/12/25/ComputerNetworkRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="概述 实体 服务 网络协议   应用层 Web 与 HTTP 协议 域名系统（DNS） 电子邮件 其他应用层协议   传输层 UDP 协议 TCP 协议 新型传输层技术   网络层 相关协议 路由 软件定义网络 其他技术   链路层 有线局域网络">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/DNS_Query.gif">
+<meta property="og:image" content="http://example.com/picture/TCPHead.png">
+<meta property="og:image" content="http://example.com/picture/Reno.png">
+<meta property="og:image" content="http://example.com/picture/AIMD.png">
+<meta property="og:image" content="http://example.com/picture/IPv4.png">
+<meta property="og:image" content="http://example.com/picture/IPv6.png">
+<meta property="article:published_time" content="2025-12-25T01:47:29.000Z">
+<meta property="article:modified_time" content="2025-12-29T03:34:16.154Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/DNS_Query.gif">
+
+
+<link rel="canonical" href="http://example.com/2025/12/25/ComputerNetworkRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/12/25/ComputerNetworkRevision/","path":"2025/12/25/ComputerNetworkRevision/","title":"Revision | 计算机网络"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 计算机网络 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">实体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">服务</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">网络协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">应用层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Web 与 HTTP 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">域名系统（DNS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">电子邮件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.4.</span> <span class="nav-text">其他应用层协议</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">传输层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">UDP 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">TCP 协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">新型传输层技术</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">网络层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">相关协议</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">路由</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">软件定义网络</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">其他技术</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">链路层</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">有线局域网络</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">82</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/12/25/ComputerNetworkRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 计算机网络 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 计算机网络
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-12-25 09:47:29" itemprop="dateCreated datePublished" datetime="2025-12-25T09:47:29+08:00">2025-12-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-12-29 11:34:16" itemprop="dateModified" datetime="2025-12-29T11:34:16+08:00">2025-12-29</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a><ul>
+<li><a href="#%E5%AE%9E%E4%BD%93">实体</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1">服务</a></li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE">网络协议</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BA%94%E7%94%A8%E5%B1%82">应用层</a><ul>
+<li><a href="#web-%E4%B8%8E-http-%E5%8D%8F%E8%AE%AE">Web 与 HTTP 协议</a></li>
+<li><a href="#%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9Fdns">域名系统（DNS）</a></li>
+<li><a href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">电子邮件</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE">其他应用层协议</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BC%A0%E8%BE%93%E5%B1%82">传输层</a><ul>
+<li><a href="#udp-%E5%8D%8F%E8%AE%AE">UDP 协议</a></li>
+<li><a href="#tcp-%E5%8D%8F%E8%AE%AE">TCP 协议</a></li>
+<li><a href="#%E6%96%B0%E5%9E%8B%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8A%80%E6%9C%AF">新型传输层技术</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a><ul>
+<li><a href="#%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE">相关协议</a></li>
+<li><a href="#%E8%B7%AF%E7%94%B1">路由</a></li>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C">软件定义网络</a></li>
+<li><a href="#%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF">其他技术</a></li>
+</ul>
+</li>
+<li><a href="#%E9%93%BE%E8%B7%AF%E5%B1%82">链路层</a><ul>
+<li><a href="#%E6%9C%89%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%BB%9C">有线局域网络</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="概述">概述</span></h1><p>计算机网络是当今最重要的技术之一。作为一门学科而言，计算机网络中的主要问题包括以下几类：</p>
+<ul>
+<li><strong>实体.</strong> 网络中的实体的识别、命名和组织形式；</li>
+<li><strong>服务.</strong> 传输接口、服务性能、可靠性 &#x2F; 安全性；</li>
+<li><strong>协议.</strong> 传输内容的格式、语义、顺序；</li>
+<li><strong>实现与管理.</strong> 功能和协议如何在实体上体现，以及资源如何分配和调度。</li>
+</ul>
+<h2><span id="实体">实体</span></h2><p>众所周知，当今的计算机网络是“网络的网络”。其网络中的网络按照规模分为个域网（PAN）、局域网（LAN）、城域网（MAN）和广域网（WAN），其中的网络接入和互连服务由被称为 ISP（Internet Service Provider）的一众机构提供。从结构上看，计算机网络由以下三部分构成：</p>
+<ol>
+<li><strong>网络边缘.</strong> 包括一众<em>端系统</em>。所谓端系统即位于互联网边缘、与互联网相连的计算机和其他设备，比如桌面计算机、移动计算机、服务器、其他智能终端设备等，有时也称为<em>主机（host）</em>。</li>
+<li><strong>接入网.</strong> 将端系统物理连接到其<em>边缘路由器</em>的网络。边缘路由器系指端系统到任何远程端系统的路径上须经过的第一台路由器。</li>
+<li><strong>网络核心.</strong> 由互联端系统的<em>分组交换设备</em>（包括路由器、链路层交换机）和<em>通信链路</em>构成的网状结构。</li>
+</ol>
+<p>接下来的一段内容将讨论这三个组件中包含的诸实体如何逐步构成了实际上的互联网。</p>
+<p>对于主机本身，为了实现主机的对外通信，主机都配备了网络设备硬件（即所谓的<strong>网卡</strong>），并配备了一系列内核软件（包括针对网卡的<em>内核驱动</em>和处理网络数据、与网卡无关的<em>内核协议栈</em>）。用户软件调用内核提供的接口（socket）进行数据的发送和接收。</p>
+<p>每一个网卡都有唯一的设备 ID（48 位的 MAC 地址）。每个主机将配备由一串数字构成的 IP 地址，这个地址可以根据需要配置，方便管理；以及一个字符串，称为主机名，为方便记忆。这部分细节在后续章节中讨论。</p>
+<p>接下来，要通过接入网将主机连接至边缘路由器。这时，信号将经过一段<em>物理介质</em>由发射机传递到接收机。大体上来说，物理介质可以分为<strong>引导型介质</strong>（信号在固体中传播，如双绞铜线、光纤、同轴电缆）、<strong>非引导型介质</strong>（信号自由传播，如无线电）。因为网络产生之际，已经有了电话线等线路，故最初的接入网技术经常复用这些线路，代表性技术包括：</p>
+<ul>
+<li><strong>数字用户线（DSL）.</strong> 家庭通过电话线连接到<em>数字用户线接入复用器（DSLAM）</em>，每户线路都独立。DSLAM 同时通向电话网络和数据网络（即互联网，以下所提“数据”均特指互联网数据）。早期的拨号上网中无法支持语音和数据同时传输，而现代 DSL 已经支持语音和数据在电话线上同时传输。当前步数最广泛的方案为 <em>ADSL</em>，即上下行速率不对称的数字用户线技术。</li>
+<li><strong>同轴电缆.</strong> 家庭通过<em>有线电视信号线</em>接入<em>头端</em>上网，数据和电视信号以不同的频率在共享电缆上传输，然后通过分路器和调制解调器转换为数字信号连接到电视和主机上。多个家庭共享有线电视的头端。现代常使用<em>混合光纤同轴电缆（HFC）</em>，指先用同轴电缆接入光纤节点，再用光纤连接到头端。</li>
+<li><strong>光纤到户（FTTH）.</strong> 顾名思义。主要分为<em>有源光纤网络（AON）</em>和<em>无源光纤网络（PON）</em>。这里的中文名有明显的错乱翻译之嫌，因为 A 和 P 实际上是 Active 和 Passive 之简称。AON 我们将在后续章节中讨论，其本质就是交换以太网。PON 的线路为：互联网数据的电信号在 ISP 侧的光线路端接器（OLT）中转化为光信号，经过 POS（无源分光器）复制发送至个家庭的光纤网络端接器（ONT）中。</li>
+<li><strong>无线接入.</strong> 包括无线局域网和广域蜂窝接入网等，即俗称的 Wifi 和流量。</li>
+</ul>
+<p>实际上的家庭网络采取有线、无线多种技术混合，企业网络通常是先将主机连接到交换机，再直接通过专线接入 ISP。</p>
+<p>现在，我们已经将主机接入了其所在区域的<strong>本地网络提供商（Access ISP）</strong>。为了构成<em>完整的 Internet 架构</em>，还需将本地网络提供商之间相互连接。这里当然不能采用 $O(N^2)$ 条边的完全图式连接——实际上的互联网大致上形成了本地 ISP 先连接到<strong>区域 ISP</strong>，区域 ISP 接入<strong>全局 ISP</strong>（即中国电信、中国联通、美国 AT&amp;T 一类的最高级别 ISP）的层次结构。各 ISP 之间通过 Peering Link 和 IXP（Internet Exchange Point）相互连接。此外，互联网公司也会组建自己的网络，将自己的数据中心与 Internet 相连，但不服务于其他流量，称为<strong>内容提供网络</strong>，在层次中与全局 ISP 地位接近。当然，现实中的具体情况十分复杂，涉及大量的政治经济因素，难以短时间描述清楚，这里放弃。</p>
+<h2><span id="服务">服务</span></h2><p>本节讨论计算机网络的服务问题，包括网络的功能，提供的接口和如何评估质量。</p>
+<p>网络的功能，归根究底就是<strong>将数据发往目标主机</strong>。为了实现这个最终目的，现代的网络技术将其拆分成两个子任务并完成：</p>
+<ol>
+<li><strong>路由.</strong> 计算通往目标主机的路径，结果存储在路由表中。</li>
+<li><strong>转发.</strong> 每个节点将数据交付给路径上的下一跳。</li>
+</ol>
+<p>按照数据发送的单元来看，网络可以以两种方式工作：</p>
+<ol>
+<li><strong>分组交换.</strong> 主机将数据分成分组（Packet）发送到网络。网络在每个分组地首部包上含有源地址、目的地址的头，将每个分组独立地选择传输路径发送至目的地址。在这样的机制之下，两主机的分组可以自然地共享带宽，实现<em>统计多路复用</em>。</li>
+<li><strong>电路交换.</strong> 首先呼叫建立连接，实现端到端的资源（带宽和交换机的交换能力）预留，然后以连续比特流发送数据。此时如果有多条连接经过同一链路，可以以<em>频分多路复用</em>和<em>时分多路复用</em>的形式实现资源共享。</li>
+</ol>
+<p>由上可知，电路交换有包括保证不丢包、不乱序到达、保证带宽等在内的性能保障，但是难以实现灵活服用和处理突发流量。现代为了处理大量的突发数据，基本上舍弃了电路交换，采用分组交换。然而分组交换容易拥塞、引起排队延迟甚至丢包的特性客观存在，需要设计可靠性机制和拥塞控制机制。其无法提供服务质量保障的问题更是至今没有公认的解决方案，只能<em>尽力而为</em>。</p>
+<p>接下来我们来刻画网络的性能。主要包含以下几个指标：</p>
+<ul>
+<li><strong>带宽.</strong> 指网络中一条信道单位时间内所能通过的最大数据量，单位为 bit &#x2F; s（类似于 Channel Capacity）。</li>
+<li><strong>包转发率（PPS）.</strong> 表示交换机、路由器等设备转发的速率，单位是包 &#x2F; 秒。</li>
+<li><strong>比特率.</strong> 单位时间主机网信道上传输的数据量，单位为 bit &#x2F; s（类似于 Source Entropy）。</li>
+<li><strong>吞吐量.</strong> 单位时间内，通过某个网络位置（或信道、接口）的数据量，单位为 bit &#x2F; s。</li>
+<li><strong>有效吞吐量.</strong> 单位时间内，目的地正确接收到的有用信息的数目，单位为 bit &#x2F; s。</li>
+<li><strong>利用率.</strong> 信道利用率指某信道被利用的时间比例，即其吞吐量除以带宽，整个网络的利用率为信道利用率的加权平均。</li>
+<li><strong>丢包率.</strong> 丢失数据包数量占发送数据包的比例。</li>
+<li><strong>时延</strong> 指数据从链路的一端传送到另一端所需的时间，也成为延迟。很显然，时延可由以下成分引起：<ol>
+<li><em>传输时延 $d_{trans}$.</em> 数据从节点进入介质所需的时间；</li>
+<li><em>传播时延 $d_{prop}$.</em> 信息在信道中传播需要花费的时间；</li>
+<li><em>处理时延 $d_{proc}$.</em> 主机或路由器收到分组后处理分组花费的时间；</li>
+<li><em>排队时延 $d_{queue}$.</em> 分组在路由器输入输出队列中排队等待处理所经历的时间。<br>排队时延是最不确定的因素。一个经验公式是 Little’s Law（1961）：令 $L$ 为平均队列长度，$A$ 为平均到达速率，$W$ 为平均等待时间，有<br>$$<br>L &#x3D; A\times W<br>$$<br>然而现实中仅有 $L$ 是容易测到的，$A, W$ 相对困难。</li>
+</ol>
+</li>
+<li><strong>时延带宽积.</strong> 链路的传播时延乘以带宽。其组合意义为发送端连续发送数据，则在发送的第一个 bit 到达终点时，发送端已经发送的 bit 数目。</li>
+</ul>
+<p>除此之外，还有一些指标刻画网络在性能之外的质量，比如可靠性、完整性、隐私性、可审计性等，这里不多赘述。</p>
+<h2><span id="网络协议">网络协议</span></h2><p>本节讨论网络协议的基本概念。</p>
+<p>为了进行数据交换，通信双方通常会制定一些约定，即网络协议。一般情况下，如果要发送数据 $D$，发送者实际上会发送 $H | D$，其中 $H$ 是协议规定的头部。接收者需要按照 $H$ 的内容处理数据，并完成后续操作。</p>
+<p>现实中的网络是一个巨大的复杂系统。为了解决这种复杂系统，我们将网络分成不同的层次。每个层次提供特定<strong>功能与服务的保障</strong>，层与层之间通过<strong>接口</strong>调用，同层的实体之间通过该层<strong>协议</strong>进行对话，并屏蔽各层的实现细节。</p>
+<p>广为人知的分层模型包含 OSI 模型和 TCP &#x2F; IP 模型。本课程采用 TCP &#x2F; IP 作为参考模型，因此我们在这里只阐释后者的内容：TCP &#x2F; IP 协议包含如下层次：</p>
+<ul>
+<li><strong>应用层.</strong> 封装典型的网络业务（Web、文件下载等），该层实体为应用程序，命名为域名 + 端口；</li>
+<li><strong>传输层.</strong> 封装主机之间的端到端通信，屏蔽具体的网络路径。该层实体为套接字，命名为 IP 地址 + 端口；</li>
+<li><strong>网络层.</strong> 封装主机之间的多跳链路通信，屏蔽链路。该层实体为主机，命名为 IP 地址；</li>
+<li><strong>接入层（数据链路层 + 物理层）.</strong> 封装单条链路通信，该层实体为网卡，命名为物理地址（MAC）。</li>
+</ul>
+<p>所有的端系统都要实现五层协议，交换机需要实现接入层协议，路由器需要实现接入层和网络层协议（当然，现代交换机和路由器都要求实现下三层协议）。</p>
+<h1><span id="应用层">应用层</span></h1><p>不同主机之间的程序之间需要完成交互。为此，应用层运行在端系统的各类软件之中，负责与网络进行通信，但屏蔽底层网络细节（比如众所周知，传输层提供 TCP 和 UDP 两种传输，在应用层则屏蔽掉 TCP 和 UDP 的差异）。</p>
+<p>此前，我们已经说过应用层的实体是应用程序。而一个主机可能运行多个应用程序，一个应用程序也可以创建多个套接字。因此，需用 IP 地址 + 端口号为应用命名。</p>
+<p>按照对话方式，应用可以以两种方式组织：</p>
+<ul>
+<li><p><strong>客户端 &#x2F; 服务器（C&#x2F;S）方式.</strong> 客户端进程主动请求服务，服务器进程被动接受服务请求并提供服务。</p>
+<p>在这种模式下，客户端可以临时接入，使用动态的 IP 地址和端口，互相之间不通信；服务器必须始终在线，使用固定的 IP 和端口，可以扩展多个实体共同完成服务。</p>
+<p>按照是否建立连接，C&#x2F;S 可以分为面向连接的（TCP）和无连接的（UDP）。根据服务进程的实现方式，可以分为循环方式和并发方式。尽管理论上有四种组合，但是：</p>
+<ul>
+<li><strong>面向连接的服务进程通常工作在并发方式，并可采用循环方式。</strong>因为可以 listen 一个熟知端口，收到连接请求之后通过 fork 创建一个从属服务进程，然后把连接 accept 到一个临时套接字上，以防用户一直不断开连接造成堵塞。循环方式无非是效率欠佳。</li>
+<li><strong>无连接的服务进程只能采用循环方式。</strong> 因为 UDP 没有所谓的 accept 的概念，只能通过一些操作系统功能假装并发。</li>
+</ul>
+</li>
+<li><p><strong>对等（P2P）方式.</strong> 进程通信时不区分服务的请求方和提供方。</p>
+<p>虽然本质上，通信还是 C&#x2F;S 方式，但每个 P2P 进程既是客户端，也是服务器。且任意一个实体可以随时进出、改变 IP 地址，任意两个实体都可以直接通信。</p>
+</li>
+</ul>
+<h2><span id="web-与-http-协议">Web 与 HTTP 协议</span></h2><p>World Wide Web 是一个<em>在 IP 网络之上的网络</em>（也称为 Overley 网络），由 HTTP 服务器和客户端、以 URL 定位的 Web 对象和 HTTP 协议构成。其中，服务器负责存储 Web 对象（包括 HTML 文档、媒体、脚本等），客户端发出请求，接收响应，解释 HTML 文档并显示。</p>
+<p>Web 对象以<strong>统一资源定位器（URLs）</strong>描述。其格式为：<code>协议类型://主机名:端口/路径和文件名</code>。分为：</p>
+<ul>
+<li><strong>静态对象.</strong> 文本、表格、多媒体，以及其布局信息（CSS）；</li>
+<li><strong>动态对象.</strong> 交互信息，比如用户注册登录等；</li>
+<li><strong>超链接.</strong> 指向其他对象的 URL。</li>
+</ul>
+<p>当然，现代 Web 技术不是本课关注的重点。接下来我们重点讨论 <strong>HTTP（HyperText Transfer Protocol） 协议</strong>。HTTP 协议是定义如何访问 Web 资源的协议，在传输层使用 TCP 协议，默认使用 80 端口。现在已经有 HTTP&#x2F;1.0，HTTP&#x2F;1.1，HTTP&#x2F;2 等版本，以下是诸版本的演进过程。</p>
+<p>首先，我们以如下例子为例说明 HTTP&#x2F;1.0 的执行过程之大致框架。</p>
+<div class="note "><p><strong>例子 2.1.1（HTTP&#x2F;1.0 的执行）.</strong> 考虑一个 URL 为 <a target="_blank" rel="noopener" href="http://cs.pku.edu.cn/index.html">http://cs.pku.edu.cn/index.html</a> 的页面，其中包含 1 幅 jpg 图。</p>
+<p>交互过程如下：</p>
+<ul>
+<li>客户端通过三次握手与服务器建立 TCP 连接。</li>
+<li>客户端请求 <code>GET /index.html</code>，服务器应答 <code>RESPONSE &lt;页面内容&gt;</code>；</li>
+<li>关闭连接。</li>
+<li>发现页面中还有一个以某 URL 描述的图片。客户端再通过三次握手与服务器建立 TCP 连接。</li>
+<li>客户端请求 <code>GET /image.jpg</code>，服务器应答 <code>RESPONSE &lt;图片内容&gt;</code>；</li>
+<li>关闭连接。</li>
+</ul>
+</div>
+
+<p>如果有 $n$ 张图片，将进行 $n$ 次建立连接、请求应答、关闭连接的循环。这称为<strong>非持久连接</strong>，是 HTTP&#x2F;1.0 的固有特性。显然，这导致了大量的无谓损失。据此，HTTP&#x2F;1.1 改为持久连接，并拓展出了 HTTP&#x2F;1.1-pipeline，其执行过程为：</p>
+<ul>
+<li><strong>HTTP&#x2F;1.1 的执行.</strong> 建立 TCP 连接，然后进行若干轮请求、应答过程。</li>
+<li><strong>HTTP&#x2F;1.1-pipeline 的执行.</strong> 建立 TCP 连接后，客户端可以连续发送多个请求，服务器按顺序应答。</li>
+</ul>
+<p>为了进一步优化，HTTP 2 应运而生。再这个版本中，请求 &#x2F; 响应允许交错（不一定要按顺序应答），且可以自定义优先级。服务器可以主动推送消息，以确认客户端存活和预测资源请求。这样一来，应用层可以实现对流量的更灵活的控制，而非如 HTTP&#x2F;1.x 一般仅依赖 TCP 的流量控制。</p>
+<p>后续的 HTTP 3 主要是传输层变化，将 TCP 替换为 UDP + QUIC。</p>
+<hr>
+<p>为了向服务器发送请求，客户端应当发送如下格式的请求报文：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;方法&gt; &lt;URL&gt; &lt;版本&gt;</span><br><span class="line">&lt;首部字段名&gt;: &lt;值&gt;</span><br><span class="line">...</span><br><span class="line">&lt;首部字段名&gt;: &lt;值&gt;</span><br><span class="line"></span><br><span class="line">&lt;实体主体（通常不用）&gt;</span><br></pre></td></tr></table></figure>
+
+<p>其中换行符均是 CRLF。其中诸成分的细节如下：</p>
+<ul>
+<li><strong>方法.</strong> 对所请求对象进行的操作。包括 <code>OPTION</code>（请求选项信息）、<code>GET</code>（请求读取该对象）、<code>HEAD</code>（请求读取该对象的首部）、<code>POST</code>（向 URL 提交数据，如参数、注释，<em>注意要提交的参数也是放在实体主体部分而非 URL 中</em>）、<code>PUT</code>（在指定 URL 下存储文档）、<code>DELETE</code>（删除该资源）、<code>TRACE</code>（用于进行环回测试的请求报文）、<code>CONNECT</code>（用于代理服务器）。</li>
+<li><strong>URL.</strong> URL 中可以携带一些参数。参数以 <code>?arg1=value1&amp;arg2=value2&amp;...</code> 的形式组织。</li>
+<li><strong>首部字段.</strong> 包含 <code>Date</code>、<code>Server</code>、<code>Content-Length</code>、<code>Content-Type</code> 之类的东西。</li>
+</ul>
+<p>服务器响应时，应当发送如下结构的报文：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;版本&gt; &lt;状态码&gt; &lt;短语&gt;</span><br><span class="line">&lt;首部字段名&gt;: &lt;值&gt;</span><br><span class="line">...</span><br><span class="line">&lt;首部字段名&gt;: &lt;值&gt;</span><br><span class="line"></span><br><span class="line">&lt;实体主体&gt;</span><br></pre></td></tr></table></figure>
+
+<p>诸成分的细节如下：</p>
+<ul>
+<li><strong>状态码以及相应短语.</strong> 三位数字和文字说明。其中 <ul>
+<li><strong>1xx</strong> 表示通知信息，如请求收到了或正在处理；</li>
+<li><strong>2xx</strong> 成功，如接受了或知道了。例如 <code>200 OK</code>，被请求的对象包含在该相应的主体部分。</li>
+<li><strong>3xx</strong> 表示重定向，要完成请求还需要采取进一步操作。如 <code>301 Moved Permanently</code> 表示请求的对象被移走，新的位置为 <code>Location: </code> 字段的值。</li>
+<li><strong>4xx</strong> 表示客户的差错。比如 <code>400 Bad Request</code> 表示服务器不能解读请求报文，<code>404 Not Found</code> 表示找不到请求的文档。这个字段也经常用于页面访问权限：用户在请求时包含关键字 <code>authorization: </code>；若请求头中没有该字段，则服务器拒绝访问并返回 <code>401 authorazation req.</code>，并在 <code>WWW-Authenticate</code> 首部字段中指明应当以何种方式加密传输用户名和密码。</li>
+<li><strong>5xx</strong> 表示服务器的差错。比如 <code>505 HTTP Version Not Supported</code> 表示服务器不支持相应的版本呢。</li>
+</ul>
+</li>
+</ul>
+<p>Web 应用中经常通过<strong>缓存</strong>的方式来提高访问效率。包括两种：</p>
+<ul>
+<li><strong>浏览器缓存.</strong> 在浏览器所在主机中保存用户访问过的 Web 页面副本。再次访问时，向服务器发送条件 GET 命令（包含 <code>If-modified-since: &lt;date&gt;</code> 字段），服务器回复页面未改变（<code>304 Not Modified</code>）或者响应改变之后的内容（<code>200 OK &lt;data&gt;</code>）。这样便可以节省发送的报文长度，提高访问速率。</li>
+<li><strong>代理服务器缓存.</strong> 代理服务器缓存已经访问过的 Web 页副本，用户浏览器从代理服务器获取页面，减少原始服务器参与。比如在校园网中就可以安置代理服务器，缓存页面，加快校内用户访问原始服务器的速率。总时延可以用如下式子估计：<br>$$<br>d_{total} &#x3D; (1 - p) RTT_1 + p\cdot RTT_2<br>$$<br>其中 $p$ 为缓存命中率，$RTT_1, RTT_2$ 分别是访问原始页面的 RTT 和访问代理服务器的 RTT。显然局域网比访问公共互联网快，因此确实缓存命中率越大，总时延越小。</li>
+</ul>
+<hr>
+<p>从 HTTP 协议的诸请求方法可见，HTTP 是一种<strong>无状态协议</strong>。换言之，服务器需要采取额外的办法来为用户提供自适应的服务。为此，Cookie 应运而生。如果服务器维护一个状态机，标记每个用户的所处节点并提供相应服务，可以采用如下形式：</p>
+<ul>
+<li>当收到一个 HTTP 请求时，在响应时设置首部字段 <code>Set-Cookie: &lt;cookie&gt;</code>；</li>
+<li>用户拿到 Cookie <code>&lt;cookie&gt;</code> 之后，将其保存在主机中，由浏览器管理。</li>
+<li>后续发送的 HTTP 请求中，包含首部字段 <code>Cookie: &lt;cookie&gt;</code>。</li>
+</ul>
+<p>本地存储的 Cookies 为一个五元组，包含以下资料：</p>
+<ul>
+<li><strong>域.</strong> 指明这个 Cookie 来自何处（哪个网站的 Cookie）；</li>
+<li><strong>路径.</strong> 服务器的文件树中哪个子树可以使用该 Cookie；</li>
+<li><strong>内容.</strong> 即上方所述 <code>&lt;cookie&gt;</code>。一个字典，以 <code>name1=value1; name2=value2; ...</code> 的形式表示，该字符串长度最大为 4K。</li>
+<li><strong>有效时间.</strong> Cookie 的有效时间；</li>
+<li><strong>安全.</strong> 若为是，则仅在使用 HTTPS 协议时发送该 Cookie。</li>
+</ul>
+<p>这个机制简化了用户操作、减少了开销，服务器现在可以直接获取用户浏览位置、推荐偏好，但是会泄露用户隐私：查看本地 Cookie 可以知道用户浏览过哪些网站，且可以通过 Cookie 伪造用户请求。</p>
+<h2><span id="域名系统dns">域名系统（DNS）</span></h2><p>域名系统是互联网重要的基础设施，负责维护域名和 IP 地址的映射关系，支持双向查询。众所周知一个主机可以有多个别名（多个域名映射到统一 IP），同一个域名也可以由多个主机进行服务（一个域名对应多个 IP）。</p>
+<p>早期时，<code>hosts.txt</code> 列出了所有计算机名称及其 IP 地址，所有的主机从指定站点上获取 hosts.txt 文件。然而随着互联网发展，hosts 文件变得越来越大，需要集中管理以防止主机名冲突。1987 年发布了 DNS 的 RFC 文档，采用一种层次的、基于域的命名方式，并使用分布式数据库系统实现。当然，hosts 文件现在还是存在于计算机中，且其优先级高于 DNS。</p>
+<p>域名查询任务的特性决定了它不可能是中心化的。注意：</p>
+<ul>
+<li>域名映射记录数量巨大；</li>
+<li>每天需要万亿次查询，读操作远大于写操作；</li>
+</ul>
+<p>而采用分布式的方式，可以避免单点故障并能够处理海量流量。</p>
+<p>在 Internet 中，采用了<strong>层次树状结构的命名方法</strong>，该树状结构称为<strong>域树</strong>。域名形如：<code>···.三级域名.二级域名.顶级域名</code>，其中各级域名不超过 $63$ 字符，在合法域名中至少应有一个 <code>.</code>，刻画了树上的一条链。众所周知的顶级域名有 <code>cn, com</code> 之类，二级域名有 <code>edu, gov</code> 之类。我们只关心域名系统中的技术，而域名如何管理在我们这里不是关注的重点，因此此处不讨论。</p>
+<p>域名的解析过程基于<strong>域名服务器</strong>，或称为名字服务器。全体名字服务器组织成<strong>根名字服务器</strong>、<strong>顶级域名服务器</strong>、<strong>二级域名服务器（权威域名服务器）</strong>、本地域名服务器（递归域名服务器）的层次结构，通常说的 DNS 不包含本地服务器。诸层服务器的责任细节如下：</p>
+<ul>
+<li><strong>根服务器.</strong> 最高层次的名字服务器，每个根服务器都知道所有的顶级域名服务器的域名及其 IP 地址。其中 IPv4 根服务器共有 13 套，域名从 <code>a.rootservers.net</code> 至 <code>m.rootservers.net</code>。更改根服务器只能在 <code>a.rootservers.net</code> 上进行，然后同步到另外 13 套中。根服务器不负责直接把主机用户所查的域名转换成 IP 地址。</li>
+<li><strong>顶级域名字服务器.</strong> 负责管理在该顶级域名服务器注册的所有二级域名。收到 DNS 请求时，能够给出相应的回答（对应域名的 IP 地址或者下一步应当找的二级域名字服务器的 IP 地址）。</li>
+<li><strong>二级域名字服务器.</strong> 每个主机都必须在某个二级域名字服务器处注册登记。二级域名单位根据具体情况把所属域名划分成若干个<em>区</em>，每个区设置相应的服务器。</li>
+<li><strong>本地 DNS 服务器.</strong> 任何一个 ISP 都至少有一个本地 DNS 服务器，距离用户主机较近。其作用详见下方的域名解析过程。</li>
+</ul>
+<p>有了以上基础设施之后，可以按照如下大致过程进行域名解析：</p>
+<ul>
+<li>当某一进程需要进行域名解析时，将域名放在 DNS 请求报文中发送给本地 DNS 服务器。</li>
+<li>本地 DNS 服务器得到查询结果后将 IP 地址放在应答报文中返回给应用进程。</li>
+</ul>
+<p>显然，可能需要向更上层的服务器进一步查询。容易想象这里又有两种方式：<strong>递归查询</strong>（后续向上查询均有 DNS 服务器代劳）和<strong>迭代查询</strong>（服务器告知客户端下一步要查询哪个服务器）。其中主机向本地 DNS 服务器的查询一般是：</p>
+<ul>
+<li>本地 DNS 服务器若有多层结构，则首先进行递归查询。本层没有解析结果，逐级向上递归查询。</li>
+<li>若在查到最上层本地服务器仍没有查到结果，则向上层域名服务器迭代查询。顺序是跟服务器、顶级域名字服务器、二级域名字服务器。</li>
+</ul>
+<p>DNS 报文，无论是请求还是响应，其格式基本相同，如下所示：</p>
+<p><img src="/../picture/DNS_Query.gif"></p>
+<p>前三行合称基础结构部分，第四行称问题部分，后三行合称资源部分。各字段的具体含义和值太细节了，这里摆了。</p>
+<hr>
+<p>最后一个需要仔细审视的问题是 DNS 的安全问题。在协议设计之初，DNS 协议没有过多考虑安全问题。一切 DNS 流量都是基于 UDP 明文传输的，且 DNS 资源记录未附加任何认证和加密措施。这导致一方面用户隐私容易泄露，另一方面可以伪造 DNS 记录。后者的补救是公钥密钥学中经常使用的数字签名，这个机制称为 DNSSEC。具体地，如果你要请求 <code>www.test.net</code> 的 IP 地址，那么 <code>.test.net</code> 的域名服务器会给你返回对应的资源记录（RR）和该记录的数字签名（RRSIG）。然后你需要请求该前面的公钥，服务器会返回公钥（DNSKEY）和该公钥的数字签名。此后，拿着 DNSKEY，RR 和 RRSIG 就可以验证该记录的真实性。</p>
+<p>注意现在还需要确保 DNSKEY 是对的。做法是维护<em>信任链</em>，<code>.net</code> 服务器也需要支持查询 DNSKEY 和 DNSKEY 的 RRSIG（用 <code>test.net</code> 的私钥加密）。向 <code>.net</code> 服务器查询这两条记录，可以知道 DNSKEY 的正确性。</p>
+<h2><span id="电子邮件">电子邮件</span></h2><p>电子邮件是一种异步通讯媒介。一个电子邮件系统包括用户代理（User Agent，地位是邮件客户端），传送代理（Message Transfer Agent，地位是邮件服务器）。一封电子邮件发送时经过的典型路径是：</p>
+<p>$$<br>发送端用户代理 \xrightarrow{(1) 提交邮件} 邮件传送代理 \xrightarrow{(2) 传送邮件} 邮件传送代理 \xrightarrow{(3) 最终传递} 接收端用户代理<br>$$</p>
+<p>所谓的电子邮箱，就是邮件服务器中的一块内存区域，其标识为形如 <code>local-part@domain-name</code> 的<strong>电子邮件地址</strong>。</p>
+<p>一封电子邮件应当按照如下基本格式组织（类似于网页应该用 HTML 写）：</p>
+<ul>
+<li><strong>首部.</strong> 必须包含一个 <code>From: </code> 行和一个 <code>To: </code> 行，可以选择包含 <code>Subject: </code> 之类的行。</li>
+<li><strong>消息体.</strong> 邮件正文。</li>
+</ul>
+<p>Ascii 邮件格式的细节应参考由前身是 RFC 822 的 RFC 5322。若要传输多媒体消息，须参考 MIME（Multipurpose Internet Mail Extensions），比如你可能需要把二进制文件转为 Base64。</p>
+<p>接下来我们将描述发送邮件使用的应用层协议。</p>
+<hr>
+<p><strong>SMTP 协议</strong> 指示了如何传递邮件，这是一个邮件的端到端交付协议。基本上包括 3 个阶段：</p>
+<ol>
+<li>客户端和服务器的 25 端口建立 TCP 连接；</li>
+<li>客户端通过发送一些命令发送 Ascii 邮件，服务器通过状态码 + 短语回应；</li>
+<li>客户端关闭 TCP 连接。</li>
+</ol>
+<p>SMTP 的命令十分简单易懂。下面是一些例子（换行都是 CRLF，<code>&lt;&lt;...&gt;&gt;</code> 表示该成分实际需要用 <code>&lt;...&gt;</code> 包裹）：</p>
+<ul>
+<li><code>HELO &lt;domain&gt;</code>。如果成功，服务器回复 <code>250 Hello &lt;domain&gt;, pleased to meet you</code>；</li>
+<li><code>MAIL FROM: &lt;&lt;reverse-path&gt;&gt;</code>。其中 <code>&lt;reverse-path&gt;</code> 是一个邮箱地址。如果成功，服务器回复 <code>&lt;reverse-path&gt;... Sender ok</code>；</li>
+<li><code>RECP TO: &lt;&lt;forward-path&gt;&gt;</code>。如果成功，服务器回复 <code>&lt;forward-path&gt;... Recipent ok</code>；</li>
+<li><code>DATA</code>，表明将要发送邮件。接下来服务器会回复 <code>354 Enter main, end with &quot;.&quot; on a line by itself</code>。接下来客户端按照要求发送若干行邮件正文，然后服务器回复 <code>250 Message accepted for delivery</code>。</li>
+<li><code>QUIT</code> 关闭连接。客户端回复 <code>221 &lt;server-domain&gt; closing connection</code>。</li>
+<li>…</li>
+</ul>
+<p>可见此协议<strong>完全没有认证</strong>（From 可以声称来自任何人），<strong>传输 ASCII 而非二进制数据</strong>（编码效率将其地下），<strong>邮件内容以明文传输</strong>。</p>
+<p>显然，需要保证交付对象时刻在线，但是这不符合日常规律。解决办法是引入<strong>最后传递协议</strong>，包括 POP3、IMAP、Webmail 等。</p>
+<p><strong>POP3 协议</strong>是一个非常简单的最终交付协议。用户代理打开一个到期邮件服务器 110 端口的 TCP 连接后，依次以用户发送命令、服务器回复 <code>+OK</code> &#x2F; <code>-ERR</code> + 短语的形式运行以下三个阶段：</p>
+<ul>
+<li><strong>认证（Authorization）.</strong> 登录。这部分使用的命令包括：<code>USER</code>、<code>PASS</code>。</li>
+<li><strong>事务处理（Transactions）.</strong> 用户收取电子邮件，并将邮件标记为删除。这部分命令包括：<code>LIST</code>（列出邮件列表）、<code>RETR</code>（通过编号检索邮件）、<code>DELE</code>（删除）、<code>QUIT</code>（推出更新阶段）。</li>
+<li><strong>更新（Update）.</strong> 删除标记为删除的电子邮件。</li>
+</ul>
+<p><strong>IMAP 协议</strong>是最终交付的主要协议，由 POP 改进而来，允许用户在不同的地方使用不同的计算机阅读和处理邮件，并支持用户将邮箱分成文件夹。其细节比较繁琐，只需要注意以下几个与 POP3 的区别：</p>
+<ul>
+<li>端口：POP3 使用 110，IMAP 使用 143；</li>
+<li>负责备份邮箱：POP3 由用户负责备份邮箱，IMAP 由 ISP 负责；</li>
+<li>IMAP 方便移动设备用户。</li>
+</ul>
+<h2><span id="其他应用层协议">其他应用层协议</span></h2><p><strong>P2P</strong> 是单一中心化节点造成性能瓶颈的解决方案。考虑一个上传带宽为 $u_s$ 的服务器要把一个大小为 $F$ 的文件分发给 $N$ 个下载带宽为 $d_1, …, d_N$ 的客户端，显然若使用 CS 架构，总耗时</p>
+<p>$$<br>D\geq \max\left(\frac{NF}{u_s}, \frac{F}{d_\min}\right)<br>$$</p>
+<p>而若允许客户端之间互相传输文件，这个下界可以改成如下的粗略估计：</p>
+<p>$$<br>D_{p2p}\geq \max\left(\frac{F}{u_s}, \frac{F}{d_\min}, \frac{NF}{u_s + \sum_{i&#x3D;1}^N u_i}\right)<br>$$</p>
+<p>为了实现允许客户端之间传输文件的 P2P 协议，核心问题是资源索引，即给定资源，查询拥有该资源的 peer，注意 peer 可以随时加入或者退出，也可以动态更改 ip 地址。</p>
+<p>实现资源索引最简单粗暴的办法是中心化索引，将资源-所有者 IP 的映射储存于一个中心化服务器中。显然这样难以处理单点故障，也还是有一个中心化的性能瓶颈。</p>
+<p>如果要彻底取消中心化服务器，可让每个 peer 独立建立索引记录自身拥有的资源。Peer 之间以 TCP 连接构成一个 Overley 网络，每个 Peer 连接了少量邻居（不超过 10 个），查询时在网络搜索（洪泛 Query Flood，向邻居询问资源，如果邻居没有，则邻居询问邻居的邻居）。很明显，这样的方法将产生大量的网络消息，可扩展性有限。现实中的做法是采用混合索引，将网络组织为超级节点和普通节点。普通节点向其超级节点中心化索引，超级节点之间用 Query Flood 索引。</p>
+<p>而这个 Overley 网络的建立也是一个洪泛过程。新加入的节点 Alice 首先拿到一个 <em>candidate peers 列表</em>，遍历这张表中的每个 peer，直到和某个 Bob 建立 TCP 连接。接下来以如下形式进行洪泛：Alice 发送 Ping 消息给 Bob，Bob 将 Ping 转发给所有邻居，邻居转发给邻居的邻居。若一个 peer 收到 Ping，向 Alice 回复 Pong。Alice 收到 Pong 后，可建立新的 TCP 连接。以上所有技术构成了 <strong>Gnutella 协议</strong>。以下是一些其他 P2P 技术。</p>
+<div class="note "><p><strong>BitTorrent</strong> 是基于 P2P 思想的文件分发协议。</p>
+<p>所有正在交换某个文件的 peer 组成一个 torrent。另外有一个中心化的跟踪器（tracker），这是一个独立的服务器，维护正在上传和下载该内容的所有其他 peer 的列表。一个 peer 可以通过 tracker 找到其他 peers。细节上，BitTorrent 协议按照如下流程工作：</p>
+<ul>
+<li>文件被划分成 256Kb 大小的 chunk。</li>
+<li>一个 peer 向 tracker 注册，加入 torrent，其初始时没有任何块。</li>
+<li>peers 之间交换各自拥有的块清单、邻居列表，并同时上传和下载块。</li>
+<li>节点动态加入和退出。</li>
+</ul>
+<p>用以下两个启发式策略防止某一块过于稀有和激励用户共享文件：</p>
+<ol>
+<li><strong>请求文件块策略.</strong> Alice 周期性地向 peers 查询其文件块列表，选择子集缺失的、最稀有地文件块请求下载。</li>
+<li><strong>发送文件块策略.</strong> 向给自己发送数据最快地 4 个 peers 发送 chunks。此外每隔 30s，随机向一个 peer 发送数据。</li>
+</ol>
+</div>
+
+<div class="note "><p><strong>分布式哈希表.</strong> 是缺少 tracker 的情况下，洪泛请求方案的替代。注意 P2P 系统是将一个 $key$ 集合分布置于多个 peer 上，维护 $key\rightarrow peer$ 之映射。分布式哈希表的核心想法是要求那个 Overley 网络有良好的结构，然后将这个映射分布式地存储在网络上。</p>
+<p>Chord（SIGCOMM 2001）是一个代表性的实现。其中心思想是：</p>
+<ul>
+<li>对所有 peers 的地址和 key 计算哈希值（如 SHA256）。按哈希值取模 $2^m$ 后的大小关系排成一个环。每个 key 由换上顺时针方向下一个 peer 负责存储。查询时，沿着顺时针方向查询。</li>
+</ul>
+<p>假设你接受 SUHA，容易证明高概率有一个节点负责的 keys 数量不超过 $(1 + \varepsilon)K &#x2F; N$，增减一个 node 时，需要转移的 keys 数量为 $O(k &#x2F; n)$。</p>
+<p>现在考虑动态加入和退出。此时需要维护这个环结构。当新的 Peer 加入时，唯一的核心是求其 Successor。Chord 上哈希值为 $x$ 的 peer 维护一个称为 finger table 的倍增表，$f_{x, i} &#x3D; \mathrm{succ}(x + 2^i)$。拿着这个表倍增即可找到 successor。接下来只需通知前驱后继更新邻居和迁移数据即可。至于节点的异常退出，ppt 说将数据备份在多个 peer 上，我不知道这个具体怎么实现。</p>
+<p>还有一个值得考虑的问题是 peer 之间能力可能不一样，朴素的 Chord 难以物尽其用。此时最简单的解法是 peer 能力越大，创建越多的<strong>虚拟节点</strong>。在 Amazon Dynamo 中便实现了这种做法。</p>
+</div>
+
+<hr>
+<p><strong>流媒体</strong> 系指连续的媒体（音频、视频等）经过压缩编码、打包后经过网络发送给接收方。接收方须对数据进行重组、解码和播放。其具有以下特性：</p>
+<ul>
+<li>端到端性能约束。</li>
+<li>时序性约束。</li>
+<li>一定容错性（如果丢包也可能完成基本功能）。</li>
+</ul>
+<p>工作模式包括媒体点播、媒体直播、实时交互等。</p>
+<p>流媒体有几个代表协议：</p>
+<ul>
+<li><strong>实时传输协议（RTP）.</strong> 使用 UDP，为实时应用提供端到端的数据传输，但不提供任何服务质量保证。</li>
+<li><strong>实时传输控制协议（RTCP）.</strong> 使用 UDP，是配合 RTP 的辅助控制协议。其主要功能为：服务质量的监视与反馈、媒体间的同步、播组中成员的表示。RTCP 分组周期性地在网上传颂，带有发送端和接收端对服务质量的统计信息报告。</li>
+<li><strong>实时流式协议（RTSP）.</strong> 为多媒体播放控制协议（功能包括暂停 &#x2F; 继续、前进、后退等）。其内容就是一些命令（<code>SETUP</code> 建立连接，<code>PLAY</code> 播放，<code>TEARDOWN</code> 断开连接等），服务器以 <code>RESPONSE</code> 报文响应后，用 RTP 协议发送视频内容。显然，通信既有 TCP（命令）也有 UDP（RTP 协议）。</li>
+</ul>
+<h1><span id="传输层">传输层</span></h1><p><strong>传输层</strong>位于应用层和网络层之间。向上屏蔽应用的复杂性，向下屏蔽底层网络的复杂性。传输层应当提供<strong>进程间通信</strong>的抽象，即运行在不同终端上的应用进程仿佛是直接连在一起的。具体地，传输层负责：通过条用网络层接口，实现主机上一对应用程序之间的同行，并进行必要的增强。</p>
+<p>Internet 的网络层提供<em>尽力而为</em>的服务，即尽最大努力在终端间交付分组，但<strong>不</strong>提供任何包括交付成功、按序交付、数据完整、延迟、带宽等在内的承诺。而传输层可以通过差错恢复、重排序等手段提供可靠、按序的交付，但不提供延迟保证和带宽保证。</p>
+<p>传统的 Internet 提供两种传输层协议：</p>
+<ul>
+<li><strong>UDP：最低限度的传输服务.</strong> 对网络层接口（主机到主机的数据交付）进行最简单的封装得到进程到进程的数据交付，并完成报文检错。发送、接受数据的单位是数据报（datagram），应用层需要处理报文边界（每次 recv 一个报文）。</li>
+<li><strong>TCP：最低限度服务和增强服务.</strong> 以字节流形式发送和接受数据。应用层感受不到报文边界（每次 recv 若干字节）。保证可靠数据传输，并提供流量控制和拥塞控制。</li>
+</ul>
+<p><strong>套接字</strong>是应用层与网络层之间的接口。每个套接字在本地关联一个<strong>端口号</strong>。端口号是一个 16 比特的数，分为<em>熟知端口</em>（0 ~ 1023，由公共域协议使用）、<em>注册端口</em>（1024 ~ 49151，须向互联网数字分配机构 IANA 注册）、<em>动态 &#x2F; 私有端口</em>（49152 ~ 65535，一般程序使用）。TCP 和 UDP 报文形如：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 0         15 16        31</span><br><span class="line">+------------+------------+</span><br><span class="line">| src port # | dst port # |</span><br><span class="line">+------------+------------+</span><br><span class="line">|   other header fields   |</span><br><span class="line">+-------------------------+</span><br><span class="line">|     application data    |</span><br><span class="line">|        (message)        |</span><br><span class="line">+-------------------------+</span><br></pre></td></tr></table></figure>
+
+<p>其中包含源和目的两个端口号。在创建套接字时，如果不指定端口号，将由操作系统从动态段中分配，这在客户端上是常见的。而服务器需要在创建套接字时指定端口号。</p>
+<p>无论是 TCP 还是 UDP，都是基于<strong>多路复用</strong>和<strong>分用</strong>来实现进程到进程的数据交付。其中复用系指传输层从多个套接字收集数据交给网络层发送，分用系指传输层从网络层收到数据，交付给正确的套接字。但细节有所不同：</p>
+<ul>
+<li><strong>UDP 分用.</strong> UDP 套接字由二元组 $(ip, port)$ 来标识。接收方传输层收到一个 UDP 报文段之后，将 UDP 报文段交付到具有该端口号的套接字。报文段中的 $(ip_{src}, port_{src})$ 与报文段的交付无关，仅被接收进程用于发送响应报文。</li>
+<li><strong>TCP 分用.</strong> 注意 TCP 服务器为了同时服务多个用户，一般使用两种套接字：监听套接字和连接套接字。服务器在收到发给监听套接字的连接请求后，将创建一个连接套接字，但是使用原监听端口号。此时，TCP 的连接套接字需要用四元组 $(ip_{src}, port_{src}, ip_{dst}, port_{dst})$ 标识，一个连接套接字仅接受四个分量全部对上的报文。</li>
+</ul>
+<h2><span id="udp-协议">UDP 协议</span></h2><p>上方的概述中已经说到 UDP 协议提供对网络层协议的最简单的封装。因此，UDP 协议应当实现如下功能：</p>
+<ul>
+<li>复用和分用。</li>
+<li>（可选）报文完整性检查：检测并丢弃出错的报文。</li>
+</ul>
+<p>UDP 报文格式如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> 0         15 16        31</span><br><span class="line">+------------+------------+</span><br><span class="line">| src port # | dst port # |</span><br><span class="line">+------------+------------+</span><br><span class="line">|   length   |  checksum  |</span><br><span class="line">+------------+------------+</span><br><span class="line">|     application data    |</span><br><span class="line">|        (message)        |</span><br><span class="line">+-------------------------+</span><br></pre></td></tr></table></figure>
+
+<p>唯一需要着重解释的字段是 <strong>checksum</strong>。这个字段被用于（配合 length）检查报文错误。对于一段长度为 16 bit 之倍数的消息，计算其 checksum 的办法是将所有长度为 16 进制的段相加，进位加到最低位，最后取反（$x &#x3D; \texttt{0xFFFF} - x$）后填入 checksum 字段。接收方检查时，只需将该消息全部加起来看是否是 0xFFFF 即可。在 UDP 协议中，若要使用 checksum，应当先在数据包前面包上一个<strong>伪头</strong>（32 位源 IP，32 位目的 IP，8 个 0，8 位协议代码，16 位长度），然后按上述算法计算。注意伪头是不发送的，仅在计算 checksum 时使用，目的是检测误投递。</p>
+<p>当然，checksum 可能检查不出错误。这是考虑到链路层已经处理了大部分网络传输错误，传输层错误一般来自主机软件 bug 或者硬件故障，概率小。因此只需考虑一种计算开销小的简单方法即可。</p>
+<p>在常见的端系统中，无发送缓冲区，仅有接受缓冲区。发送方从应用层获取数据后，加上 UDP 头直接交给网络层。而接收方的每个 socket 都有一个缓冲区，存储来自不同发送方的报文。</p>
+<p>至此可见，UDP 协议有如下特点：</p>
+<ul>
+<li>应用可以尽可能快地发送报文（无建立连接地延迟，不限制发送速率）；</li>
+<li>报头开销小；</li>
+<li>协议处理简单。</li>
+</ul>
+<p><strong>因此适用于容忍丢包但对延迟敏感的应用</strong>（流媒体）、<strong>以单次请求 &#x2F; 响应为主的应用</strong>（DNS）。若应用要求基于 UDP 进行可靠传输，由应用层实现可靠性。</p>
+<h2><span id="tcp-协议">TCP 协议</span></h2><p>TCP 协议的目标是在一对通信的进程之间提供一条理想（全双工、可靠、有序）的字节流（不保留报文边界）管道。其应当实现如下功能：</p>
+<ul>
+<li><strong>建立连接.</strong> 通信双方为本次通信建立数据传输所需的状态；</li>
+<li><strong>可靠数据传输.</strong> 流水线式发送，报文段检错，丢失重传；</li>
+<li><strong>流量控制.</strong> 发送方不会令接收方缓存溢出；</li>
+<li><strong>拥塞控制.</strong> 发送方不会造成网络拥塞。</li>
+</ul>
+<p>由于报文在网络层会走多条路径、链路过载等原因，数据的丢失和乱序是极常见的现象。<strong>可靠传输</strong>系指通信双方基于一个不可靠信道（RDT）构造一个字节流管道的问题。此处所谓的不可靠信道模型，包含以下假设：</p>
+<ul>
+<li>通讯链路会丢失信息；</li>
+<li>消息会乱序；</li>
+<li>可能发生能被校验技术检测的随即错误；</li>
+<li>不考虑 fogery attack 和 adversarial attack。</li>
+</ul>
+<p>解决可靠传输问题的核心思路是构造一对有限状态机（FSM），输入发生的事件（比如发送方收到了一个包、接收方报告收到了某个包），并定义个状态下双方的行为，论证这对 FSM 配合良好。</p>
+<p>首先我们讨论一般情况下如何构造可靠传输。为此，我们逐步添加不可靠信道的漏洞，并增补 FSM。</p>
+<div class="note "><p><strong>完美信道.</strong> 报文永远不会丢失或受损，发送和接收方始终处于就绪状态，带宽无限大。</p>
+<p>此时两边的 FSM 都是带自环的单点，发送方重复从上一层获得消息，发给下一层；接收方重复从下一层收到消息，提取消息，转发给上一层。</p>
+</div>
+
+<div class="note "><p><strong>有错但不丢包的信道.</strong> 乍一看此时传输数据只需如下流程（自动重传请求 ARQ）：</p>
+<ul>
+<li>发送方发送一个数据包之后暂停，等待 ACK 或者 NAK；</li>
+<li>接收方若查到数据包有错，返回 NAK，否则返回 ACK；</li>
+<li>若收到 NAK，重发，否则发送新数据。</li>
+</ul>
+<p>此类协议称为停-等式协议。此处 ACK、NAK 的内容无关紧要，称为哑帧（dummy frame）。</p>
+<p>但是这里出现了显然的问题：如果 NAK 和 ACK 出错，发送方无从得知实际上的情况。现在发送方不能通知接收方重传 ACK 或 NAK（这条消息也可能出错，陷入死循环），也不希望使用纠错码（引入额外计算开销），因此最直接的选择是若 NAK 和 ACK 出错，发送方选择直接重发数据包即可。</p>
+<p>那么现在，接收方可能会收到重复发送的数据包，他不知道这是一个新的但完全相同的数据包，还是因为 ACK&#x2F;NAK 出错而重发的数据包。为此，引入序号 <code>seq</code>。若序号与上一次发送的相同，则为重复数据包；若序号不同，则为新数据包。注意在停等式协议当中，只需要区分本次发送和上次发送是否相同，因此 <code>seq</code> 在 $\mathbb{F}_2$ 中循环即可。</p>
+<p>更进一步，现在 ACK 和 NAK 可以通过 <code>seq</code> 区分（而非消息内容）。接收方可以发送 <code>ACK(seq)</code>，其中 <code>seq</code> 是最近接受的 seq。若 ACK 出错或者 ACK.seq 不是先前发送的 seq，发送方重传数据包。</p>
+</div>
+
+<div class="note "><p><strong>有错有丢包信道.</strong> 为了处理丢包，只需要在发送方处设置一个计时器，如果该计时器超时，则认为发生了丢包，直接重传；接收方进行重复检测即可。此时重传新增了三方面原因：</p>
+<ul>
+<li>数据包丢失，接收方没有回复 ACK；</li>
+<li>ACK 丢失；</li>
+<li>ACK 延迟。</li>
+</ul>
+<p>仔细讨论发现计时 + 重复检测能够保证双方 FSM 的一致性。这里我觉得重复检测需要把 seq 开大，否则如果延迟了两个计时器事件就爆了，但是课件上没写。</p>
+</div>
+
+<p>现在，我们已经设计了一个可以对抗有错有丢包的信道的可靠停等式协议。可以用此前所讲的 metric 度量停等式协议的效率：设 $F$ 为数据大小，$R$ 为信道发送速率，$I$ 为传播延迟，$RTT &#x3D; 2I$，则此时的信道利用率为</p>
+<p>$$<br>U &#x3D; \frac{F}{F + R\cdot RTT}<br>$$</p>
+<p>可见在信道的延迟带宽积大的情况（长肥网络）下信道利用率低。解决的办法是将传输过程流水线化：每次发送 $P$ 个数据包，然后等待接收方发送 ACK。不考虑诸错误且 $nF &#x2F; R \leq RTT$的情况下，信道利用率为</p>
+<p>$$<br>U &#x3D; \frac{nF}{F + R\cdot RTT}<br>$$</p>
+<p>现在需要考虑差错检测、反馈重传。思路是双方维护一个 <code>seq</code> 的滑动窗口，每次尝试发送和接受窗口内的数据包。有两种主要算法：</p>
+<ul>
+<li><strong>回退 N.</strong> 接收端收到出错或乱序的报文，直接丢弃，不发送确认（接收端总是确认窗口的一段前缀）。发送端超时后，重传窗口内所有未确认的报文。发送端收到重复或错误的 ACK 都直接忽略。</li>
+<li><strong>选择重传.</strong> 接收端独立确认每个数据包，为滑动窗口中每个包都维护一个计时器，并<em>缓存窗口内的数据包</em>。接收端只重传没有 ACK 的数据包。</li>
+</ul>
+<p>显而易见这两个算法之间的 tradeoff 前者发送的包多但是接收端负担小，后者发送的包少但是接收端需要独立计时器、缓存数据包之类的额外开销。</p>
+<hr>
+<p>在 TCP 协议中，为了实现可靠传输，ACK 报文需要附带想要收到的下一个字节的序号。</p>
+<div class="note "><p><strong>发送端.</strong> 收到应用数据时，创建并发送 TCP 报文段。若没有正在运行的定时器，启动定时器。若定时器超时，重传包含最小序号的、未确认的报文段并重启定时器；若确认序号大于滑动窗口的最小序号，更新滑动窗口。若滑动窗口已至末尾，重启定时器，否则终止定时器。</p>
+<p>一个细节是 TCP 协议采用了流水线发送，累计确认的方式。在重传时，只重传一个包，避免了向回退 N 一样发一堆没用的东西。并且，采取了以下优化手段：</p>
+<ul>
+<li><strong>超时值设置.</strong> 不应过小也不应过大。方法是使用指数移动加权平均估计 RTT：<br>$$<br>\widehat{RTT} &#x3D; (1 - \alpha) \widehat{RTT} + \alpha RTT^*<br>$$<br>一般取 $\alpha &#x3D; 1&#x2F;8$。然后估计 RTT 的标准差：<br>$$<br>DevRTT &#x3D; (1 - \beta)DevRTT + \beta |RTT^* - \widehat{RTT}|<br>$$<br>将超时值设为 $\widehat{RTT} + 4DevRTT$。</li>
+<li><strong>快速重传.</strong> 因为发送方通常连续发送许多报文段，所以如果编号为 $n$ 的包丢了，接收方会连续发送多个 ACK &#x3D; $n$。此时 TCP 协议规定：若发送方收到对统一序号的 3 此重复确认时，立即重发包含该序号的报文。</li>
+</ul>
+</div>
+
+<div class="note "><p><strong>接收端.</strong> 若收到期待的报文段，发送更新的确认序号，否则重复当前确认序号。同时，接收端可以缓存失序的分组。</p>
+<p>为了减少通信量，TCP 允许接收端推迟确认：在收到若干个报文之后，发送一个累积确认的报文段（类似于回退 N）。</p>
+<p>当然，推迟确认会带来两个新问题：</p>
+<ul>
+<li>若延迟太大，会导致不必要的重传；</li>
+<li>RTT 估计不准。</li>
+</ul>
+<p>TCP 协议规定推迟确认事件最多 500ms，且至少每隔一个报文段使用正常方式确认一次。</p>
+</div>
+
+<p>由此可见，TCP 的差错恢复机制类似于 GBN 和 SR 的混合体：只使用一个定时器，只重传部分数据，缓存失序报文。在重传开销方面，因为采用了超时值测定和快速重传等优化，优于 GBN 和 SR。</p>
+<hr>
+<p>接下来我们考察 TCP 的连接管理过程。首先，TCP 的报文段形如：</p>
+<p><img src="/../picture/TCPHead.png"></p>
+<p>选项段可以包括：</p>
+<ul>
+<li><strong>最大段长度（MSS）.</strong> TCP 段中可以携带的最大数据字节数；</li>
+<li><strong>窗口比例因子（window scale）.</strong> 建立连接时双否可以协商一个窗口比例因子。世纪接收窗口大小为 $\textsf{window size}\times 2^{\textsf{window scale}}$；</li>
+<li><strong>允许选择确认（SACK）.</strong> 最初的 TCP 协议只是用累积确认。改进的 TCP 协议引入选择确认，允许接收端指出缺失的数据字节。</li>
+</ul>
+<p>发送序号和确认序号分别指数据载荷中第一个字节在字节流中的序号和期望接受的下一个字节的序号。</p>
+<p>建立 TCP 连接时，双方需要确定连接意愿并商定初始连接参数，如 MSS、序号等。这至少需要连接请求、客户端确认服务器在线、服务器确认客户端在线三步，称为三次握手。具体操作如下：</p>
+<ul>
+<li>客户端向服务器发送 SYN 报文，置 Seq 为 $x$；</li>
+<li>服务器向客户端发送 SYNACK 报文，置 Seq 为 $y$，ACKnum 为 $x + 1$；</li>
+<li>客户端向服务器发送 ACK 报文，置 ACKnum 为 $y + 1$。</li>
+</ul>
+<p>此处 $x, y$ 的选择是为了同一对套接字之间的新旧两次连接发生重叠，导致延迟到达的包影响接收。这里 $x, y$ 的选取可以考虑基于始终的起始序号选取：每 $\Delta T$ 时间，计数器 $+1$，本地计数器值最低的 32 位为起始序号。其中 $\Delta T$ 一般是 $4\mu \mathrm{s}$。这种办法的问题是支持的网络带宽有限，且序列号可以预测。现代操作系统通常使用安全的哈希函数，随机抽取序号。</p>
+<p>断开连接需要 4 次握手：双方各自发送 FIN 报文，然后 ACK 对方的 FIN 报文。</p>
+<p>在建立和断开连接的过程中所有的报文都可能丢包，处理方法是重传。如果一端异常下线，另一端不断重试发送报文。失败若干次后，要么放弃连接，要么等待重新建立连接（取决于操作系统实现）。</p>
+<p>注意 TCP 的机制注定了它可以被以下的两种方式攻击：</p>
+<ul>
+<li><strong>SYN 洪泛攻击.</strong> 攻击者使用伪造的源 IP 地址，给服务器发送大量的 SYN，但是不发送 ACK。此时服务器需要维护一个巨大的半连接表，耗尽计算资源，不能处理正常客户的连接请求。</li>
+<li><strong>TCP 端口扫描.</strong> 扫描程序依次与目标机器的各个端口进行 TCP 通信，以此获知端口信息（收到 SYNACK 表明有服务在允许，收到 RST 表明没有服务运行，没有响应说明路径上存在防火墙等）。</li>
+</ul>
+<hr>
+<p>现在来考察 TCP 的<strong>流量控制</strong>。这对于 TCP 而言实乃必要。UDP 不需要流量控制，因为 UDP 根本不保证交付，若因为接收方缓冲区溢出导致丢包，UDP 不需要负责。在 GBN 和 SR 中也没有考虑流量控制，因为假设正确分组立刻被交付给上级。然而实际情况是收到的数据等待被应用程序消费。</p>
+<p>流量控制的基本想法是：定义<strong>接收窗口（RcvWindow）</strong>为接收方缓冲区的可用空间大小。接收方将 RcvWindow 放在报头中，向发送方通告接收缓存的可用空间。发送方限制未确认的字节数不超过接收窗口大小。</p>
+<p>TCP 采取的措施称为<strong>非零窗口通告</strong>。当接收窗口为 $0$ 时（发送方收到<em>零窗口通告</em>），发送方必须停止发送，并启动一个<em>坚持定时器</em>，该定时器超时后，发送一个<em>零窗口探测</em>报文。当接收窗口非零时，接收方应当通告增大的窗口（这条消息的触发方式是发送方发送<em>零窗口探测</em>报文段，注意 TCP 都是一唱一和的）。若发送端仍然收到零窗口通告，重新启动坚持定时器。</p>
+<p>当数据的消费速度很慢时，接收方将不断发送微小窗口通告，发送方不断发送很小的数据分组，带宽被首部浪费，这种情况称为<strong>糊涂窗口综合征</strong>。解决方案是采用启发式策略：</p>
+<ul>
+<li><strong>接收方.</strong> <em>（Clark 策略）</em>若窗口大小不是显著增加，继续发零窗口通告。<em>（推迟确认）</em>推迟发送 ACK，期待推迟间隔内有更多数据被消费。</li>
+<li><strong>发送方.</strong> <em>（Nagle 算法）</em> 核心想法是积攒足够多的数据再发送。在新建连接上，应用数据到来是，组成一个 TCP 段发送。若有未确认数据，后续到来的数据放在发送缓存中。当数据量达到一个 MSS 且窗口大小大于等于 MSS 或收到所有已发数据的确认，用一个 TCP 段将缓存的字节全部发走。这种方法常规情况下不会降低网络吞吐量，但是在和延迟确认共同使用时会增加延迟，而且没有考虑接收端是否真的消费了数据（？）。</li>
+</ul>
+<hr>
+<p>最后来讨论 TCP 的拥塞控制方法。当网络拥塞时，大量网络资源用于重传丢失的分组，恶性循环，因此 TCP 的拥塞控制实属必要。</p>
+<p>一种想法是借助网络内部反馈（ECN），由路由器和交换机向端系统提供显式的反馈。这里我们主要考虑端到端的拥塞控制：网络层不向端系统提供反馈，端系统通过观察丢包和延迟，自行推断拥塞的发生。这也是传统 TCP 采用的方法。需要回答以下三个问题：</p>
+<ul>
+<li><strong>发送方的拥塞感知.</strong> 发送方通过丢包事件感知拥塞。</li>
+<li><strong>限制发送速率的机制.</strong> 发送方使用拥塞窗口 cwnd 限制已发送未确认的数据量（LastByteSent $-$ Last ByteAcked）不超过 cwnd。其中 cwnd 随网络用色程度变化。</li>
+<li><strong>根据丢包调整 cwnd.</strong> 基本想法是 AIMD（Additive Increase Multiplicative Decrease），若丢包，将 cwnd 减半，若无丢包，每个 RTT 将 cwnd 增大一个 MSS 直到丢包。</li>
+</ul>
+<p>关于 cwnd 的调整有如下细节：注意若 cwnd 非常小（例如刚启动时），则需要很长时间才能增长到合理的位置。此时采取<em>慢启动策略</em>，初始时按指数增大发送速率。当 cwnd 增大到一定程度时，此时距离拥塞可能并不遥远。此时应当将指数增长改为线性增长，一种实现方法是当 $cwnd \geq ssthresh$ 时，每次收到 ACK，令 $cwnd &#x3D; cwnd + MSS^2 &#x2F; cwnd$。</p>
+<p>注意连续收到三个 ACK 和超时反映了不同的拥塞程度。前者表明网络尚有传输能力，后者表明网络十分拥堵。无论何时都令 cwnd 除以 2 显然并不是最佳方案。为此，1990 年 TCP Reno 在 TCP Tahoe（即朴素的慢启动、拥塞避免、3 ACK 判断丢包）基础上增加了快速恢复阶段，提出以下转移策略（截图自课件，这里第一行似乎应该是 cwnd &#x3D; cwnd + cwnd？）：</p>
+<p><img src="/../picture/Reno.png"></p>
+<p>此外，AIMD 策略还使得 TCP 连接之间具有公平性。直觉如下：</p>
+<p><img src="/../picture/AIMD.png"></p>
+<h2><span id="新型传输层技术">新型传输层技术</span></h2><p>首先是三个新型拥塞控制算法。</p>
+<ul>
+<li><strong>TCP BIC.</strong> 注意到本质上拥塞控制就是在找一个合理的 cwnd。因此其使用二分查找来搜索合适的 cwnd。其过程为：<ul>
+<li>发生丢包时窗口大小为 $W_1$，说明最佳窗口大小应当在 $W_1$ 以下，得到 $W_\max &#x3D; W_1$。将窗口 MD 到 $W_2$ 之后收到了 ACK，那么说明最佳窗口大小应当在 $W_2$ 以上，得到 $W_\max &#x3D; W_2$。</li>
+<li>接下来每一个 RTT 进行一次二分查找，check 函数就是是否丢包。</li>
+<li>当 cwnd 超过 $W_\max$ 时，说明 $W_\max$ 应当继续增大。此时做法是记录刚才二分时的时间-cwnd 图像，将其旋转 180 得到今后的规划（cwnd 指数级收敛到 $W_\max$，然后指数级增大直到丢包）。</li>
+</ul>
+</li>
+<li><strong>TCP CUBIC.</strong> 注意 BIC 的时间-cwnd 图像大致是一个 concave 地增长，然后 convex 地增长的形状，这和<em>三次函数</em>类似。因此 CUBIT 用三次函数<br>$$<br>W(t) &#x3D; C(t - K)^3 + W_\max<br>$$<br>拟合这个形状。其中 $K &#x3D; \sqrt[3]{\frac{W_\min}{C}}$，$C$ 是超参数。$t$ 时刻，将窗口大小设置为 $W(t)$ 即可。</li>
+<li><strong>TCP DCTCP.</strong> 一种面向数据中心的 TCP 拥塞控制。数据中心需要容忍高突发流量、低时延、高吞吐的传输层协议。为此，传输层协议必须将缓冲区队列长度维持在一个较低的水平。这需要交换机、接收端和发送端协作。其中：<ul>
+<li><strong>交换机.</strong> 当队列长度超过 $K$，给后来的包标记 ECN（Explicit Congestion Notification）。</li>
+<li><strong>接收端.</strong> 当 ECN 报文出现或消失时，立即发送 ACK。其余时候延迟接受。</li>
+<li><strong>发送端.</strong> 根据丢包时拥塞程度（一个和 $\frac{|\text{marked ACKs}|}{|\text{Ack}|}$ 有关的 $\alpha$）更新 cwnd。方法为令 $cwnd \leftarrow \left(1 - \frac\alpha 2\right)cwnd$。</li>
+</ul>
+</li>
+</ul>
+<p>接下来是新型传输层协议 <strong>QUIC</strong>。QUIC 可用于替代 TCP、TLS（传输层安全性协议，用于对数据进行加密）和部分 HTTP 的功能。其底层基于 UDP，是现在用户态中，可以模块化地使用各种 TCP 拥塞控制。</p>
+<p>QUIC 可以做到：</p>
+<ul>
+<li><strong>一个 QUIC 连接传输多个独立的多字节流。</strong></li>
+<li><strong>无队头阻塞的多流复用</strong>（对头阻塞只多流复用时，若一个数据流的数据包丢失，如果采用传统 TCP 协议，所有数据流都需要等待）。</li>
+<li><strong>明确的包序号和更精确的 RTT。</strong> 即使重传，packet number 也递增，解决重传歧义问题。</li>
+<li><strong>IP 地址 &#x2F; 端口切换无需重新连接。</strong></li>
+<li><strong>易于部署和更新.</strong> QUIC 是现在用户态中，方便自定义。</li>
+<li><strong>整个 QUIC 包都被加密传输。</strong></li>
+</ul>
+<p>具体实现方法摆了。</p>
+<h1><span id="网络层">网络层</span></h1><p>网络层实现在主机和诸路由器中，负责主机到主机的多跳数据传输。当然，这里可以选择面向连接的电路交换、无连接的分组交换，选择有无服务质量保证等。我们只讨论 Internet 采用的无连接的、尽力而为交付的数据报服务。</p>
+<p>无论何种网络层模型，都需要实现两个核心功能：<strong>路由</strong>和<strong>转发</strong>。据此，可以将网络层分为<strong>控制平面</strong>（负责路由，系全网计算，有分布式计算和软件定义网络两种手段）和<strong>数据平面</strong>（单个路由器上的功能）。</p>
+<blockquote>
+<p><strong>Remark.</strong> 所谓的路由就是 Routing，决定每个数据包走哪一条路径。据此理解以后的内容。</p>
+</blockquote>
+<p><strong>路由器</strong>时互联网最主要的网络设备。其架构大体上是由一个<strong>路由处理器</strong>（控制平面，负责路由算法计算，附加网络管理功能）控制一个<strong>高速交换结构</strong>和相应的<strong>输入输出端口</strong>（数据平面）。其大致工作方式是控制层上运行多个路由协议，根据优先级选择最佳路由，形成路由核心表，下发到数据层，形成转发表（FIB）。数据平面的输入端口拿着 IP 地址查询转发表，根据查询结果找到下一跳的输出端口，通过交换结构进行转发。</p>
+<h2><span id="相关协议">相关协议</span></h2><p>本节介绍网络层所用协议。</p>
+<hr>
+<p><strong>IPv4 协议</strong> 互联网中最重要的协议。其协议头为</p>
+<p><img src="/../picture/IPv4.png"></p>
+<p>其中几个重要字段的功能如下：</p>
+<ul>
+<li><strong>目的 IP 地址.</strong> 支持多跳寻路将 IP 数据包发送到目的端；</li>
+<li><strong>源 IP 地址.</strong> 表明发送端身份；</li>
+<li><strong>协议（Protocol）.</strong> 根据 IP 头部协议类型，提交给不同的上层协议处理；</li>
+<li><strong>标识、标志、片偏移.</strong> 用于实现分片机制；</li>
+<li><strong>生存时间（TTL）.</strong> 限制跳数，防止浪费网络资源。</li>
+</ul>
+<p>这里我们只考察其核心思想。</p>
+<p>由于数据链路中的数据报大小是有限制的（MTU，Maximum Transmission Unit），所以要求网络层协议对网络层进行<strong>分片</strong>（将数据报分成大小至多为 MTU 的片，每一层都包上相同的 IP 头部标识，并附加相应的片偏移）和<strong>重组</strong>。容易想象有两种分片策略：<em>允许途中分片</em>（根据下一条链路的 MTU 实施分片）和<em>不允许途中分片</em>（发出的数据包长度不超过路径 MTU，需要路径 MTU 发现机制）。重组策略包含中途重组和目的端种族，其中途中重组太难，因此 IPv4 采用目的端重组的方式。</p>
+<p>IP 协议的重要组成部分是 IP 地址。<strong>接口</strong>系指连接主机 &#x2F; 路由器和物理链路之间的模块，接口之间通过链路层技术相互连接，每个接口都被分配了一个 IP 地址。每个 IP 地址有 32 位，是<strong>网络号</strong>与<strong>主机号</strong>的二元组。其中网络号长度不固定，由前几位决定（如 0 开头的 A 类 IP 前 8 位是网络地址，10 开头的 B 类 IP 前 16 位是网络地址，……）。具有相同网络号的接口构成子网。标记网络位（1&#x3D;网络为）的 32 位数称为子网掩码。我们后续只关注网络地址长度任意的路由问题，称为无类域间路由（CIDR）。</p>
+<p>CIDR 子网内的地址，可以进一步划分子网。但对外只暴露一个 CIDR 网络地址（CIDR 网络地址格式为 网络号 <code>/</code> 网络前缀位数）。这种机制称为<strong>地址聚合</strong>。现在通过最长前缀匹配查询路由表，就可以把数据包发送到正确的子网。若子网内有多个主机，可以考虑以下两种方法：</p>
+<ul>
+<li>使用网络层路由器，对目的 IP 地址进行最长前缀匹配，转发到正确主机；</li>
+<li>使用链路层交换机维护的 MAC-接口 映射，根据目的 MAC 地址转发到正确主机。</li>
+</ul>
+<p>由于子网规模有限，采用第二种方法成本更低。</p>
+<p>现在我们已经建立了给定路由表，主机到主机发送消息的框架。为了填充这个框架，在数据平面上还需要补充若干协议。</p>
+<hr>
+<p>回忆子网内转发需要使用 MAC 地址。<strong>ARP 协议</strong>是给定 IP 地址，获取 MAC 地址的协议。地址解析过程如下（现有 $A$ 已知 $B$ 的 IP，欲获得其 MAC）：</p>
+<ol>
+<li>若 $A$ 的 ARP 表中缓存有该映射，直接从 ARP 表中获取。</li>
+<li>若未缓存，则 $A$ 在局域网内广播包含 $B$ 的 IP 地址的 ARP query packet。</li>
+<li>$B$ 收到 ARP Query 后，将 MAC 地址单播发送给 $A$。</li>
+<li>$A$ 在 ARP 表中缓存该条目。</li>
+</ol>
+<hr>
+<p>当主机加入 IP 网络时，需要获取其 IP 地址。此时使用的协议是 <strong>DHCP 协议</strong>。交互方式为：</p>
+<ul>
+<li>DHCP 客户从 UDP 端口 68 以广播形式向 DHCP 服务器发送 <code>DHCP OFFER</code> 报文；</li>
+<li>DHCP 服务器广播或单播 <code>DHCP OFFER</code> 报文。</li>
+<li>DHCP 客户从多个 DHCP 服务器中选择一个，向其以广播形式发送 <code>DHCP REQUEST</code> 报文；</li>
+<li>被选择的 DHCP 服务器广播或单播发送 <code>DHCP ACK</code> 报文。</li>
+</ul>
+<p>其中 DHCP 服务器架设在局域网中，网络通过 MAC 地址确定发送和接受目标。</p>
+<hr>
+<p>可以发现如果内网和外网用一样的 IP 地址，则 DHCP 协议可以分配的 IP 地址不多。解决的办法 <strong>NAT 协议</strong>，这是一种将私有 IP 地址（如常见的 <code>10.xx</code>,<code>172.xx</code>,<code>192.168.xx</code>）转化为公有 IP 的技术。</p>
+<p>回忆使用 IP 聚合时，一个本地网络发出的报文只暴露一个 IP。NAT 协议包含以下概念：</p>
+<ul>
+<li><strong>出数据报.</strong> 外出数据包用 NAT IP 地址，新 port num 代替私有 IP 地址，port num；</li>
+<li><strong>NAT 转换表.</strong> 维护上述映射关系；</li>
+<li><strong>入数据报.</strong> 每个入数据报的地址字段通过查 NAT 转换表替换为源 IP 地址，port num。</li>
+</ul>
+<hr>
+<p>为了允许主机或路由器报告差错和异常，需要 <strong>ICMP 协议</strong>。ICMP 报文可以由 IP 数据报携带：将协议字段置为 1。其类型包括：</p>
+<ul>
+<li><strong>ICMP 差错报告报文.</strong> 报告重点不可达的原因（不可达主机、不可达网络、无效端口、协议等）；</li>
+<li><strong>ICMP 询问报文.</strong> 供 ping 使用的回送请求 &#x2F; 回答。</li>
+</ul>
+<p>有了 ICMP，可以实现两个关键操作：</p>
+<ul>
+<li><strong>主机连通性测试 ping.</strong> 使用回送请求 &#x2F; 回答报文实现。可以获得回答报文的 TTL 值、测定 RTT 等。</li>
+<li><strong>追踪链路上的所有路由器 Traceroute.</strong> 源向目的地发送 TTL &#x3D; $1, 2, …$ 的包，当第 $n$ 个包到达第 $n$ 个路由器，路由器丢弃该数据报，并向源发送一个 ICMP 报文。报文的源 IP 地址指示了该路由器的 IP 地址。</li>
+</ul>
+<h2><span id="路由">路由</span></h2><p>本节考虑路由的问题。按照每个路由器所知信息，可以分为<strong>全局路由算法</strong>（每个路由器都有完整的网络信息，包括拓扑和每条链路的开销）和<strong>局部路由算法</strong>（每个路由器只知道另据节点和到邻居的链路开销）。</p>
+<hr>
+<p><strong>距离向量算法</strong>是一种局部路由算法。其核心是每个节点维护一个距离向量表。距离向量（DV）定义为</p>
+<p>$$<br>\boldsymbol{D}_x &#x3D; [D_x(y) : y\in N]<br>$$</p>
+<p>其刻画了 $x$ 对到 $y$ 的最短路的估计。每个节点的距离向量表包含它自身和每个邻居的距离向量。该算法的过程为：每个节点重复</p>
+<ul>
+<li><strong>发送.</strong> 每个节点像邻居发送自己到某些节点的距离向量。触发条件为本地链路代价改变或收到邻居 DV 造成的 DV 变化。</li>
+<li><strong>接收.</strong> 节点 $x$ 接收到邻居 $y$ 的新 DV，更新自己距离向量表中 $y$ 的那一行。</li>
+<li><strong>计算.</strong> 用 Bellman-Ford 方程更新自己的 DV。</li>
+</ul>
+<p>显然迭代执行上述过程，$\boldsymbol{D}_x$ 收敛于单源最短路。</p>
+<p>然而注意到如果一个链路代价忽然变小，那么只需 $O(nm)$ 轮便可收敛；但如果一个链路代价忽然变大（极端情况是变为 $\infty$），则需要非常多轮才能收敛。这个问题称为<strong>无穷计数</strong>问题。一个启发式的解决方法是<strong>毒性逆转</strong>，即每个点维护最短路上的 successor。若 $a$ 给 $b$ 发送 DV 时注意到 $a\rightarrow c$ 路径上的 successor 正是 $b$，则发送时置 $D_a(c) &#x3D; \infty$。你可以自行模拟发现毒性逆转能够缓解无穷计数。</p>
+<p><strong>链路状态算法</strong>是一种全局路由算法。其做法是先广播链路状态，然后每个节点用 Dijkstra 算法算最短路。</p>
+<p>根据最短路，容易拿到转发表。</p>
+<hr>
+<p>现在，我们将上述两算法封装成路由协议。</p>
+<p>首先，互联网由大量不同的网络相连，每个管理机构控制的网络是自治的，称为<strong>自治系统（AS）</strong>。基于此，为了避免海量子网造成的路由表过于庞大，我们仅在路由表中存储：</p>
+<ul>
+<li>到本 AS 内一切子网的下一跳；</li>
+<li>到其他 AS 中所有网络的下一条。</li>
+</ul>
+<p>这种做法称为<strong>层次路由</strong>。在 AS 内部，可以使用自己的<strong>内部网关路由协议（IGP）</strong>，自治系统之间使用<strong>外部网关路由协议（EGP）</strong>。</p>
+<p>典型的 IGP 有：</p>
+<ul>
+<li><strong>RIP.</strong> 封装最经典的距离向量法，距离度量为跳数，现在已经不再使用。</li>
+<li><strong>EIGRP.</strong> 基于 DV 的算法；</li>
+<li><strong>OSPF.</strong> 链路状态算法，由 ISO 标准规定；</li>
+<li><strong>IS-IS</strong> 本质和 OSPF 一样，但使用 RFC 标准。</li>
+</ul>
+<p>具体细节不讲。</p>
+<p>EGP 是一个很复杂的问题。其面临如下挑战：AS 数量非常庞大、AS 认可的链路代价不一致、每个 AS 不仅决定流量发往何处，还需考虑哪些流量可以发到自身。这注定了继续采用链路状态算法和距离向量算法是不可行的。</p>
+<p><strong>边界网关协议（BGP）</strong>是互联网中唯一实际运行的 AS 间路由协议。其功能包括 <strong>eBGP</strong>（从相邻的 AS 获得网络可达信息）、<strong>iBGP</strong>（将网络可达信息传播给 AS 内的路由器）。AS 的边界路由器上通常要允许 eBGP、iBGP 和一个 IGP。</p>
+<p>BGP 的基础是路径通告。具体操作方式是 BGP 路由器之间建立 179 端口之间的 TCP 连接，交换 BGP 报文。比如 AS3 的路由器向 AS2 的路由器通告路径 <code>AS3, X</code>，标识 AS3 向 AS2 承诺会转发通往 X 的数据包，AS2 可以根据<strong>策略</strong>选择接受或者拒绝这条路径。具体的 BGP 报文包括：</p>
+<ul>
+<li><strong>Open 报文.</strong> 用于建立连接，协商 BGP 参数（需要认证）；</li>
+<li><strong>Update 报文.</strong> 通告和撤销路径；</li>
+<li><strong>Keepalive 报文.</strong> 用于保持 BGP 会话连接；</li>
+<li><strong>Notificatoin 报文.</strong> 用于差错报告和关闭连接。</li>
+</ul>
+<p>一条 BGP 路径由<strong>路径前缀（目的网络）</strong>和<strong>属性</strong>刻画。其中有两个重要的属性：</p>
+<ul>
+<li><strong>AS-PATH</strong> 想要到达某个目的网络，需要经过的所有 AS 号。</li>
+<li><strong>NEXT-HOP</strong> 想要使用这条路径，下一跳的 IP 地址。</li>
+</ul>
+<p>建立了以上基础之后，我们就知道路径通告如何在 AS 间网络中传播。不妨考虑 3 个 AS。可能发生以下事件：</p>
+<ul>
+<li>AS2 收到 AS3 的路径通告 <code>AS3, X</code>。</li>
+<li>根据 AS2 的策略，AS2 的边缘路由器接受路径 <code>AS3, X</code>，通过 iBGP 传播给 AS2 的所有路由器。</li>
+<li>AS2 与 AS1 相邻的边缘路由器通过 eBGP 向 AS1 的路由器通告 <code>AS2, AS3, X</code>。</li>
+</ul>
+<p>BGP 路由策略分为两大部分：</p>
+<ul>
+<li><strong>AS 间策略.</strong> 路由器基于策略决定接受或拒绝路径通告，基于策略决定向其他 AS 通告路径。在收到针对统一 IP 的多挑路径之后，可以依次考虑以下因素进行选择：<em>政策、最短 AS-PATH、最近 NEXT-HOP、附加标准、最低路由器 ID</em>。</li>
+<li><strong>AS 内策略.</strong> 各个 AS 自己决定。实际上常用的是 Hot Potato 策略：选择最近的 BGP 出口，最小化报文在本 AS 的停留时间。</li>
+</ul>
+<hr>
+<p>最后讨论部分其他路由技术。</p>
+<p><strong>广播路由.</strong> 有时源主机需要给全部目标地址发送同一个数据包。此时不希望逐个发送，因为效率低。又难以实现多目标路由。此时的做法就是直接用泛洪法。当然，网络中有环。如果不加去重，显然会爆炸。此时有以下几种去重方法：</p>
+<ol>
+<li><strong>序号控制泛洪。</strong>给每个广播数据包一个序号，每个路由器先检查该序号是否被转发过再转发。</li>
+<li><strong>逆向路径转发。</strong>若广播来源于数据包 $S$，则只转发来自最短路树父亲来的消息。注意你有距离向量，就容易知道最短路树的父亲。</li>
+<li><strong>生成树法.</strong> 维护网络的一个生成树，只在树边上转发。</li>
+</ol>
+<p><strong>组播路由.</strong> 给一组目标用户发送同一个数据包。</p>
+<p>具体实现方法摆了。感觉就是一个组给一个组 IP（IGMP），每个路由器可以查询组播组成员，然后在生成树上发消息。</p>
+<h2><span id="软件定义网络">软件定义网络</span></h2><p>传统的网络层中，每个路由器都允许一个路由算法模块，协作完成主机到主机的路径计算。在其实现中，难免</p>
+<ul>
+<li>数据平面、操作系统和网络应用三部分紧耦合，形成封闭系统，互相不兼容，难以配置和管理；</li>
+<li>不可编程，难以实现高效、按需的数据传输；</li>
+<li>路由计算效率低；</li>
+<li>网络设备不断增加，划分 AS 与区域无法解决根本问题；</li>
+<li>最短路算法本质是近似，实际上需要允许网络流。</li>
+</ul>
+<p>一种更灵活的实现是<strong>软件定义网络（SDN）</strong>，由一个远程控制器（逻辑上的中心系统，实际上可能是多个物理服务器的集群）和各个路由器（上方运行轻量级控制代理）交互。路由器基于<strong>流表</strong>进行转发。</p>
+<p>SDN 的数据平面核心组件是 SDN 交换机。SDN 交换机有以下特征：</p>
+<ul>
+<li><strong>简单、高性能的交换机架构.</strong> 实现了通用的数据平面处理功能，并使用流表；</li>
+<li><strong>流表提供 API.</strong> 允许程序定义部分流表功能；</li>
+<li><strong>流表由控制器计算并安装</strong>；</li>
+<li><strong>流表和控制器通过开放协议交互.</strong> 比如 OpenFlow；</li>
+<li><strong>SDN 交换机可以来自不同厂商.</strong></li>
+</ul>
+<p>SDN 的控制平面是<strong>网络操作系统</strong>和 <strong>SDN 应用程序</strong>。网络操作系统负责：</p>
+<ul>
+<li><strong>维护全网状态信息</strong>。</li>
+<li><strong>与数据平面 SDN 交换机交互.</strong> 接口称为“南向接口”，如 OpenFlow；</li>
+<li><strong>为上层应用提供接口.</strong> 上层应用可以写负载均衡、路由算法等功能。这里的接口称为“北向接口”。</li>
+<li><strong>以分布式系统的形式实现.</strong> 高性能、可扩展、故障容错；</li>
+<li><strong>可以与 SDN 交换机来自不同厂商</strong>。</li>
+</ul>
+<p>而 SND 应用程序基于北向接口，实现各类网络功能，可以由第三方开发者提供。</p>
+<hr>
+<p><strong>流表</strong>是 SDN 数据平面采用的重要技术。目前最流行的流表是 OpenFlow 的流表。其每个表项由四部分组成：</p>
+<ul>
+<li><strong>模式.</strong> 用于匹配报头的一个串（比如，形如 <code>src = 1.2.*.*, dst = 3.4.5.*</code> 状）；</li>
+<li><strong>动作.</strong> 对于成功匹配的报文执行的操作，包括转发、修改、丢弃、送往控制器；</li>
+<li><strong>优先级.</strong> 当一个报文有多个成功匹配项，定义优先顺序；</li>
+<li><strong>计数器.</strong> 报文数、字节数。</li>
+</ul>
+<p>根据这样的抽象，可以实现各类网络设备：</p>
+<ul>
+<li><strong>网络层路由器.</strong> 匹配最长 IP 地址前缀，转发到输出端口；</li>
+<li><strong>防火墙.</strong> 匹配到特定 IP 地址或端口，选择通过或丢弃；</li>
+<li><strong>链路层交换机.</strong> 匹配目的 MAC 地址，转发到输出端口或复制到所有端口；</li>
+<li><strong>NAT.</strong> 匹配 IP 地址和端口，修改 IP 地址与端口并转发。</li>
+</ul>
+<hr>
+<p>SDN 控制器和 SDN 交换机之间通过 OpenFlow 协议交互。控制器到交换机支持如下操作：</p>
+<ul>
+<li><strong>读状态.</strong> 查询交换机状态或数据，交换机回复；</li>
+<li><strong>配置.</strong> 设置交换机相关参数；</li>
+<li><strong>修改状态.</strong> 添加、删除、修改流表项；</li>
+<li><strong>Packet-Out.</strong> 控制器通过交换机某个接口发送数据报，即流量注入。</li>
+</ul>
+<p>交换机到控制器支持如下操作：</p>
+<ul>
+<li><strong>流删除.</strong> 通知某个流表项已经删除；</li>
+<li><strong>端口状态.</strong> 上报交换机某个状态或统计信息；</li>
+<li><strong>Packet-in.</strong> 将报文发送给控制器，通常用于匹配失败的报文。</li>
+</ul>
+<h2><span id="其他技术">其他技术</span></h2><p><strong>IPv6</strong> 是 IETF 设计用于替代 IPv4 的下一代协议。其动机是解决 32 位 IP 地址耗尽问题，但后来又致力于简化头部、加快处理与转发，提升服务质量。</p>
+<p>IPv6 地址为 128bit，用冒分十六进制标识。其首部结构如下：</p>
+<p><img src="/../picture/IPv6.png"></p>
+<p>着重解释几个没见过的字段：</p>
+<ul>
+<li><strong>流量类型.</strong> 区分数据报类型或优先级；</li>
+<li><strong>流标签.</strong> 标识同一个数据流；</li>
+<li><strong>下一个首部.</strong> IPv6 报头后面的协议类型，可以是 TCP &#x2F; UDP &#x2F; ICMP 等，也可以是扩展头。</li>
+</ul>
+<p>其中相较于 IPv4 有以下区别：</p>
+<ul>
+<li>去掉了首部长度。选项都位于 IPv6 扩展头中，通过下一个首部字段表明；</li>
+<li>去掉了首部校验和。</li>
+<li>去掉了分片字段。全部移入扩展头。</li>
+</ul>
+<p>IPv6 不允许在传输途中分片，只能在源端分片；设计了专门的分片扩展头，分片字段不在 IPv6 头部中；支持 Path MTU 发现机制。</p>
+<p>IPv6 报文可以承载多个扩展头，每个扩展头都包含下一个首部字段，最后一个扩展头指明传统上层协议类型 TCP &#x2F; UDP &#x2F; ICMP，若有多个扩展头，需要按照逐跳扩展头、路由头、分段头、目的地选项头…的顺序组织。</p>
+<p>配置 IPv6 地址可以手动配置、使用 DHCPv6 或者无状态地址自动配置（基于邻居节点 IPv6 前缀信息，结合自己的链路层地址生成 IPv6 地址）。</p>
+<p>现在 IPv4 和 IPv6 并不兼容。<strong>隧道技术</strong>是一个现在使用的过渡方案。隧道技术指两个相同类型的网络设备，中间跨异构类型网络进行通信。比如 IPv6-in-IPv4 隧道就是，你要从一个 IPv6 路由器向另一个 IPv6 路由器发送消息，逻辑上是经过 IPv4 隧道；物理实现是先发送给一个 IPv4 路由器，然后 IPv4 路由器给数据包一个 IPv4 头发给另一个 IPv4 路由器，另一个 IPv4 路由器再发给目的 IPv6 路由器。</p>
+<p>注意这会导致报文长度在传输途中增大导致分片问题。解决方法是提前分片，这需要 Path MTU 发现机制。</p>
+<hr>
+<p>接下来是几个面向连接的增强。</p>
+<ul>
+<li><p><strong>虚电路.</strong> 建立在 Internet 分组交换之上，逻辑上提供电路交换的抽象，目标是让 $H_1$ 发送给 $H_2$ 的所有分组都沿着同一条虚电路传送。</p>
+<p>虚电路的转发决策基于分组标签，即虚电路号。在路由器中会有一个表，每一项形如输入端口+输入标签+输出端口+输出标签，刻画了从某个输入端口来的虚电路数据应该去某个出口，并将标签修改为输出标签。</p>
+<p>虚电路的建立分为两个阶段：首先是发送方向接收方发送<em>请求分组</em>，此时路由过程中，路由器可以拿到那个表的前三项；然后接收方向发送方发<em>确认分组</em>，确认分组原路返回便可拿到表的第四项。虚电路的释放也是先发送<em>拆除分组</em>，然后另一方回复<em>确认分组</em>。</p>
+</li>
+<li><p><strong>多协议标签交换 MPLS.</strong> 希望将基于 IP 转发改成基于标签转发。MPLS 需要标签交换路由器 LSR，LSR 构成的连通区域称为 MPLS 域，并有一个标签分配协议 LDP 用来在 LSR 之间建立会话并传播 Label 映射信息。</p>
+<p>其工作过程为：在 MPLS 域的入口处，给每个 IP 数据包包上 MPLS 头，其中包含一个 20 位的标签；每个 LSR 上都有一个和虚电路转发表一样的表，根据此表转发；最后在 MPLS 域的出口处把 MPLS 头去掉。</p>
+<p>这里，MPLS 域对同样的标签做同样的操作，称为<em>转发等价类</em>。可以想象，你可以把这些东西定义成转发等价类分配相同的标签：组播报文、IP 地址匹配上某个前缀的报文、属于同一个 VPN 的报文、报文目的 IP 属于 BPG 学到的路由且下一条相同的报文等。</p>
+</li>
+<li><p><strong>VPN.</strong> VPN 是内部人员想要在公网上访问内网需要的技术。其实现就是用隧道技术在发送端 $R_1$ 和内网网关 $R_2$ 之间打一条隧道。在发送消息时，先对数据报进行加密和认证，然后包上一个 IP 头发给 $R_2$。</p>
+</li>
+</ul>
+<hr>
+<p>最后是几个面向服务质量的增强。</p>
+<ul>
+<li><strong>数据包调度.</strong> 路由器输出端口可以决定把缓冲区的哪些数据包发送到输出链路上。可以采取的方法包括先来先服务 FCFS、公平队列、加权公平队列、优先级调度等。</li>
+<li><strong>流量工程.</strong> 在 SDN 那一节已经讲过基本概念了。本质上你就是要将需要传输的流量分配到各条路径上，你可以优化：最小化最大链路利用率、最大化总吞吐、最大化满足“源-目的”传输需求之类的目标函数，总的来说都是线性的，可以用线性规划解决。</li>
+<li><strong>流量整形.</strong> 限制流出某一网络的某一连接的突发流量，使这类报文以比较均匀的速度向外发送。自然的方法是：<ul>
+<li><em>漏桶算法.</em> 到达的数据被放在一个缓冲区中，数据包从缓冲区中匀速发出。</li>
+<li><em>令牌桶算法.</em> 周期性地向令牌桶中增加令牌。输入数据包需要消耗令牌，越大的数据包消耗越多的令牌。当输入一个数据包时，若令牌足够，消耗之并输出；否则将数据包丢弃。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="链路层">链路层</span></h1><p>链路层实现在每一台主机和网络内部设备上，向下利用物理层提供的比特流服务，向上向网络层提供明确的服务接口，负责在物理相连的两个节点之间进行数据传输。其传输单元称为<strong>帧</strong>，帧封装了网络层数据报。链路层提供以下服务：</p>
+<ul>
+<li><strong>成帧.</strong> 将比特流划分成帧，加上纠错码等；</li>
+<li><strong>差错控制.</strong> 处理错误；</li>
+<li><strong>流量控制.</strong> 确保发送方发送述律不大于接收方的处理速率。</li>
+</ul>
+<p>若信道误码率低，可以提供无确认无连接的服务；若信道不可靠（无线信道），可以提供有确认无连接服务；在长延迟的不可靠信道上，可以提供有确认有连接的服务。</p>
+<hr>
+<p>链路层的传输单元帧形如头标+载荷（分组）+尾标。接收方必须能从物理层接收的比特流中区分一帧的开始和结束，这就是成帧面临的关键问题。此时有以下几种方法：</p>
+<ul>
+<li><strong>字节计数法.</strong> 如果传输无差错，可以在开头第一个字节指出帧的大小。但这样如果可以出错，错了一个计数字节就全炸了。</li>
+<li><strong>带字节填充的定界符法.</strong> 定界符 FLAG 是一个特殊字节，比如 0x7E。用这个 FLAG 来标志帧的头尾。注意此时如果数据包里有 FLAG 就炸了。方法是使用转义字节 ESC，类似于日常编程所用的转移字符 <code>\</code>。你可以把 <code>$</code> 写成 <code>\$</code>，把 <code>\</code> 写成 <code>\\</code>。</li>
+<li><strong>带比特填充的定界符法.</strong> 另一种解决数据包中含有 FLAG 的操作。方法是一旦发现 5 个连续的 1，就在后面加一个 $0$。这保证了 0x7E 只在定界符中出现，而且是可逆的。</li>
+<li><strong>物理编码违例.</strong> 核心思想是让选择的定界符不在数据部分出现。一个代表例子是 4B&#x2F;5B 编码，把 4B 数据映射成 5B 编码，其中一半码字没有用，可以用作定界符。</li>
+</ul>
+<hr>
+<p>注意信道噪声可能导致数据传输问题，包括差错、丢失、乱序、重复等。解决方案是进行<strong>差错检测与纠正、确认重传</strong>。</p>
+<ul>
+<li><strong>确认.</strong> 接收方检验数据并应答；</li>
+<li><strong>定时器.</strong> 发送方启动定时器，防止丢失；</li>
+<li><strong>顺序号.</strong> 接收方检查序号，防止乱序、重复。</li>
+<li><strong>差错检测与纠正.</strong> 使用信息论科技，因为很熟悉这里直接跳过。</li>
+</ul>
+<hr>
+<p>显然实际场景中会有多个用户共享一根信道的情况，此时必须进行<strong>访问控制</strong>：决定某个时刻谁来访问共享信道。这本质上是一个分布式共识选择问题，但挑战是节点间协同也要用信道，但是没有为节点间协同架设专用信道。</p>
+<p>理想的访问控制需要达到：若广播信道速率为 $R$ bps，则<em>（性能）</em>若只有一个节点需要传输，发送速率为 $R$；<em>（公平）</em>若有 $M$ 个节点需要传输，则发送速率为 $R &#x2F; M$；<em>（去中心化）</em>无需节点协调、全局时钟以及其他全局信息；简单易实现。</p>
+<p>主要的多路访问控制方法有：</p>
+<ul>
+<li><strong>简单的信道划分.</strong> 时分频率复用 TDMA 和频分频率复用 FDMA。这种分配方式比较 Trivial，有资源浪费（延迟要 $\times N$），仅适用于用户少、数量固定，通信量大、流量稳定的情况。</li>
+<li><strong>CDMA.</strong> 为每个站点分配一种编码，即使发生冲突，接收方也能解码。</li>
+<li><strong>随机访问.</strong> 核心思想是只要有站点要发数据，就全速发送。这样自然会产生冲突，我们关注冲突检测和恢复（比如等一段时间后重发）。这里将信道建模成以下模型：一个信道随时处于三种状态之一：<em>传输周期</em>（一个站点使用信道，其他禁止使用）；<em>竞争周期</em>（所有站点有权尝试使用信道）；<em>空闲周期</em>（所有站点都不使用信道）。典型算法包括：<ul>
+<li><strong>ALOHA 协议.</strong> 收到上层数据包立即发送，没有任何同步和信号协议。若某个时刻有两个或以上的帧，则发生冲突，一旦冲突就收不到回应，要重传。这里粗糙地估计以下传输成功的概率。假设有 $N$ 个站点，在单位时间内发生传输的概率为 $p$。则某个站点成功传输当且仅当其他站点在 $[t - 1, t + 1]$ 都不传输：<br>$$<br>\Pr[\text{success}] &#x3D; p(1 - p)^{2(N - 1)}<br>$$<br>考虑 $N$ 个人同时发送，“吞吐率”期望为 $Np(1 - p)^{2(N - 1)}$，可以放出来这东西最优不超过 $1 &#x2F; 2e$。当然严格来说你需要算一个泊松过程，这太难了，这里不讲。</li>
+<li><strong>时隙 ALOHA.</strong> 将事件划分成登场的时间槽，每个帧发送事件都是一个时间槽。如果冲突了，以概率 $p$ 在下一个时间槽重传。容易发现这东西的改进就是概率因子少了一个 $p^{N- 1}$，可以算出来传输成功概率上界是 $1 &#x2F; e$。</li>
+<li><strong>载波侦听多路访问协议 CSMA.</strong> 先侦听介质是否空闲，若空闲，则以概率 $p$ 发送消息；若没有发送消息，则等待一个随机分布的时间，重复上述操作。这称为 $p$-持续 CSMA。CSMA 一般配合冲突检测使用，称为 CSMA&#x2F;CD</li>
+</ul>
+</li>
+<li><strong>轮流协议.</strong> 摆了。</li>
+</ul>
+<h2><span id="有线局域网络">有线局域网络</span></h2><p>现在考虑局域网内如何传输数据。</p>
+<p><strong>以太网</strong>是当前最主流的有线局域网技术。一个以太网帧为以下资料的顺序排列：</p>
+<ul>
+<li><strong>Preamble（前同步码）.</strong> 前 7 个字节为 10101010，第八个字节为 10101011，以字节填充。</li>
+<li><strong>dest address，source address.</strong> 各 6 字节的 MAC 地址。当且仅当目的地址为自身或广播地址，才将帧交付给网络层。否则丢弃帧。</li>
+<li><strong>type.</strong> 2 字节，表示网络层报文类型，大部分情况下为 0x0800，表示 IP 协议。</li>
+<li><strong>data.</strong> 载荷。若不足 46 字节，须填充 Padding 至 64 字节。</li>
+<li><strong>CRC 校验码.</strong> 4 位检错码。如果校验失败，直接丢弃帧。</li>
+</ul>
+<p>以太网认为一切长度小于 64 字节的帧都是因为冲突而异常终止的无效帧。</p>
+<p>以太网提供无连接、不可靠的服务，依赖上层协议进行丢失数据恢复。用 CSMA&#x2F;CD 进行多路访问控制，重传次数 $k\leq 10$，随机等待时间位 $r\tau$，其中 $r$ 从 $0, 1, …, (2^k - 1)$ 中随机抽取。</p>
+<p>以太网通过链路层交换机进行数据交换，期间维护 MAC 地址表（MAC-端口的映射）。如果一个帧的目的地址能在 MAC 地址表里查到，则若入境口不是出境口，转发；否则丢弃帧。如果是广播帧或者查不到，则进行洪泛转发。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/11/21/GenerativeModelingRevision/" rel="prev" title="Revision | 生成模型基础">
+                  <i class="fa fa-angle-left"></i> Revision | 生成模型基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2025/12/30/EconomicsRevision/" rel="next" title="Revision | 经济学原理">
+                  Revision | 经济学原理 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
