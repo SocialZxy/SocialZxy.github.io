@@ -27,7 +27,7 @@
 <meta property="og:description" content="Public Key Encryption Computational Hardness and Public-Key Encryption Number Theoretic Hardness Lattice Based Hardness   Advanced Techniques Identity-Based encryption Fully Homomorphic encryption">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-04T06:05:08.000Z">
-<meta property="article:modified_time" content="2026-01-06T15:54:25.676Z">
+<meta property="article:modified_time" content="2026-01-07T04:04:06.493Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Public Key Encryption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Computational Hardness and Public-Key Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Number Theoretic Hardness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Lattice Based Hardness</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Advanced Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Identity-Based encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Fully Homomorphic encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">Digital Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">Zero-Knowledge Proof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Public Key Encryption</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Computational Hardness and Public-Key Encryption</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Number Theoretic Hardness</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Lattice Based Hardness</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Advanced Techniques</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Identity-Based encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Fully Homomorphic encryption</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">Digital Signature</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">Zero-Knowledge Proof</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">Secure Multi-Party Computation</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Appendix: Techniques from Homeworks</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-06 23:54:25" itemprop="dateModified" datetime="2026-01-06T23:54:25+08:00">2026-01-06</time>
+      <time title="Modified: 2026-01-07 12:04:06" itemprop="dateModified" datetime="2026-01-07T12:04:06+08:00">2026-01-07</time>
     </span>
 
   
@@ -260,9 +260,10 @@
 <li><a href="#fully-homomorphic-encryption">Fully Homomorphic encryption</a></li>
 <li><a href="#digital-signature">Digital Signature</a></li>
 <li><a href="#zero-knowledge-proof">Zero-Knowledge Proof</a></li>
-<li><a href="#secure-multi-party-computation-fixmerandom-encoding-garble-circuit">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</a></li>
+<li><a href="#secure-multi-party-computation">Secure Multi-Party Computation</a></li>
 </ul>
 </li>
+<li><a href="#appendix-techniques-from-homeworks">Appendix: Techniques from Homeworks</a></li>
 </ul>
 <!-- tocstop -->
 
@@ -644,7 +645,7 @@
 <li><strong>Fiat-Shamir Transform.</strong> 在第二轮 challenge 环节中，改为由 Prover 本人调用一个 Random Oracle $\mathcal{O}(\mathrm{commitment})$ （实践中使用哈希函数近似）来生成 challenge 的信息（即 $b$，或者 $\mathrm{3COL}$ 中的那条边）。Verifier 需要额外检查 $b$ 是否确实是调用 random oracle 产生的；</li>
 <li><strong>Common Reference String Model.</strong> 没看懂。</li>
 </ul>
-<h2><span id="secure-multi-party-computation-fixmerandom-encoding-garble-circuit">Secure Multi-Party Computation 【FIXME：Random Encoding、Garble Circuit】</span></h2><p>本节考虑所谓的多方计算：有 $n$ 个参与方计划共同计算一个函数 $f: F^n \rightarrow F^n$，但是不希望其他人知道自己的输入。</p>
+<h2><span id="secure-multi-party-computation">Secure Multi-Party Computation</span></h2><p>本节考虑所谓的多方计算：有 $n$ 个参与方计划共同计算一个函数 $f: F^n \rightarrow F^n$，但是不希望其他人知道自己的输入。</p>
 <p>一个老生常谈的例子是现在 $n$ 个人想要计算他们手里的数之和。一个经典的协议是第一个人 sample 一个数 $r$，然后将 $r + a_1$ 发给下一个人；每个人将收到的数加上自己手里的数 $a_i$ 发给下一个人，转一圈之后便得到了答案。这个协议的问题是 $i, i + 2$ 两个人联合起来可以知道 $i + 1$ 手里的数字。</p>
 <p>我们现在来形式化多方计算、“联合起来”知道某人的输入这些事情。</p>
 <div class="note success"><p><strong>定义 4.5.1（MPC Protocol）.</strong> 一个 MPC Protocol 指定了多个参与方 $1, 2, …, n$。如何完成对函数 $f$ 的计算，包括计算和通信过程。一个子集 $S \subseteq \{1, 2, …, n\}$ 可见的全部信息（包括输入、聊天记录、计算结果）记作 $\textsf{View}_S$。</p>
@@ -793,6 +794,114 @@
 <li><strong>Evaluate.</strong> 对于一个门，其混淆表中的四个数为 $C_0^i, C_1^i, C_2^i, C_3^i$。对于 $j &#x3D; 0, 1, 2, 3$，计算<br>$$<br>(K_j’, \tau_j) &#x3D; G(K^{L(i)}, K^{R(i)}, i)\oplus C_j^{i}<br>$$<br>若存在唯一的 $\tau_j &#x3D; 0^k$，则定义 $K^i &#x3D; K_j’$，否则输出 $\bot$。</li>
 </ul>
 <p>这东西的正确性是显然的。其安全性来源于如下直觉：在 Evaluate 一个 Garbled Circuit 的时候，你可以知道 $K^i_{\neg ab}$，但是没法知道 $K^i_{ab}$：在转发表的其他三项中，信息都被一个遮住了密钥的 PRF 给 one-time pad 住了。因此 Adversary 不能区分转发表的其他三项和三个随机数。容易据此原理设计 Simulator $\mathcal{S}$。</p>
+<h1><span id="appendix-techniques-from-homeworks">Appendix: Techniques from Homeworks</span></h1><p>这一节写一些零散的作业里面讲的东西。</p>
+<div class="note info"><p><strong>定理 4.1（Leftover Hash Lemma）.</strong> 设 $X$ 是一个 $k$-source 随机变量，即对于任意的 $x$，有 $\Pr[X &#x3D; x] \leq 2^{-k}$。</p>
+<p>哈希函数族 $\mathcal{H} &#x3D; \{h : \{0, 1\}^n \rightarrow \{0, 1\}^\ell\}$ 是通用的，即 $\Pr[h(x) &#x3D; h(y)] &#x3D; 2^{-\ell}$。</p>
+<p>若 $\ell &#x3D; k - 2\log(1 &#x2F; \varepsilon) - O(1)$，则有 </p>
+<p>$$<br>\Delta((H, H(X)), (H, U)) \leq \frac{\varepsilon}{2}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 根据 $X$ 是 $k$-source 随机变量和 $\mathcal{H}$ 是通用哈希函数族有 </p>
+<p>$$<br>\begin{aligned}<br>\Pr[(H, H(X)) &#x3D; (H’, H’(X’))] &amp;&#x3D; |\mathcal{H}|^{-1}\Pr[H(X) &#x3D; H(X’)] \\<br>&amp;\leq |\mathcal{H}|^{-1}(\Pr[X &#x3D; X’] + \Pr[H(X) &#x3D; H(X’) | X \ne X’]) \\<br>&amp;\leq |\mathcal{H}|^{-1}(2^{-k} + 2^{-\ell})<br>\end{aligned}<br>$$</p>
+<p>据此可以知道这两个分布的 $L_2$ 距离不大：</p>
+<p>$$<br>\begin{aligned}<br>    \left\lVert (H, H(X)) - (H, U)\right\rVert_2^2 &amp;&#x3D; \sum_{h\in \mathcal{H}, s\in \{0, 1\}^\ell}\left(\Pr[(H, H(X)) &#x3D; (h, x)] - \frac{1}{|\mathcal{H}|2^{\ell}}\right)^2 \\<br>    &amp;\leq |\mathcal{H}|^{-1}(2^{-k} + 2^{-\ell}) + \frac{1}{|\mathcal{H}|2^{\ell}} - \frac{2}{|\mathcal{H}|2^{\ell}} \\<br>    &amp;&#x3D; \frac{\varepsilon^2}{|\mathcal{H}|2^\ell}<br>\end{aligned}<br>$$</p>
+<p>最后 $L_2$ 距离和 $L_1$ 距离之间的 bound 由 Cauchy-Schwartz 不等式给出：</p>
+<p>$$<br>\Delta_{TV}((H, H(X)) , (H, U)) \leq \sqrt{|\mathcal{H}|2^\ell}\cdot \sqrt{\left\lVert (H, H(X)) - (H, U) \right\rVert_2^2} \leq \frac{\varepsilon}{2}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>有了 Leftover Hash Lemma，我们可以证明 LWE-based Encryption 的 CPA 安全性。考虑以下 Hybrid Argument：</p>
+<ul>
+<li><strong>Hybrid 0.</strong> distinguisher 收到 $pk &#x3D; (\mathbf{A}, \boldsymbol{b}) &#x3D; (\mathbf{A}, \boldsymbol{s}^\top \mathbf{A} + \boldsymbol{\varepsilon}^\top)$ 和 $c &#x3D; \mathbf{A}\boldsymbol{r}, \boldsymbol{b}^\top \boldsymbol{r} + \lceil p &#x2F; 2\rceil x$</li>
+<li><strong>Hybrid 1.</strong> disgintuisher 收到 $pk &#x3D; (\mathbf{A}, \boldsymbol{b})$（$\mathbb{b}$ 纯随机）和 $c &#x3D; \mathbf{A}\boldsymbol{r}, \boldsymbol{b}^\top \boldsymbol{r} + \lceil p &#x2F; 2\rceil x$；</li>
+<li><strong>Hybrid 2.</strong> distinguisher 收到 $(\mathbf{A}, \boldsymbol{b})$ 和 $c &#x3D; \boldsymbol{a}, v + \lceil p &#x2F; 2\rceil x$，其中 $\boldsymbol{a}, v$ 纯随机。</li>
+</ul>
+<p>Hybrid 0 和 Hybrid 1 不可区分，因为 LWE Assumption。Hybrid 1 和 Hybrid 2 不可区分，因为 $\mathcal{H} :&#x3D; \{\boldsymbol{r}\mapsto \mathbf{A}\boldsymbol{r}, \boldsymbol{b}^\top \boldsymbol{r} + \lceil p &#x2F; 2\rceil x\}$ 是 universal hash，套用 leftover hash lemma 得证。</p>
+<hr>
+<p><strong>Pallier Encryption</strong> 是另一种加密方案。设 $p, q$ 是两个安全素数（i.e. $p &#x3D; 2p’ + 1, q &#x3D; 2q’ + 1$），$N &#x3D; pq$，考虑群 $\mathbb{Z}_{N^2}^{*}$，其所有二次剩余 $\mathbb{QR}_{N^2}$ 也构成一个群，而且显然 $\mathbb{QR}_{N^2}\cong \mathbb{QR}_{p^2}\times \mathbb{QR}_{q^2}$。</p>
+<p>注意群 $\mathbb{Z}_{p^2}^*$ 中 $x\rightarrow x^2$ 是一个 2 对 1 的映射。因此 $|\mathbb{QR}_{p^2}| &#x3D; \frac 12 |\mathbb{Z}_{p^2}^*| &#x3D; pp’$，根据有限阿贝尔群分解定理，$\mathbb{QR}_{p^2}\cong \mathbb{Z}_p\times \mathbb{Z}_{p’}$，综上</p>
+<p>$$<br>\mathbb{QR}_{N^2} \cong \mathbb{Z}_p\times \mathbb{Z}_{p’}\times \mathbb{Z}_q\times \mathbb{Z}_{q’}\cong \mathbb{Z}_N \times \mathbb{Z}_{p’q’}<br>$$</p>
+<p>因此 $\mathbb{QR}_{N^2}$ 可以被分解成两个群 $\mathbb{G}_N$ 和 $\mathbb{H}_N$ 的内置积，其中 $\mathbb{G}_N$ 是唯一的大小为 $n$ 的子群，$\mathbb{H}_N$ 是唯一的大小为 $p’q’$ 的子群，分别称为 easy subgroup 和 hard subgroup。显然，$N + 1$ 是 $\mathbb{G}_N$ 的一个生成元（因为 $(1 + N)^k &#x3D; 1 + kN \pmod{N^2}$），$\mathbb{G}_N$ 中的离散对数容易求解。$\mathbb{H}_N$ 则没什么结构，但是给定 $N$ 容易在 $\mathbb{H}_N$ 中 sample 元素：先随机 sample $\mathbb{QR}_N$ 的元素和 $\mathbb{G}_N$ 的元素然后做除法。</p>
+<p>至此我们准备完了 Pallier 加密所需的工具。基于如下假设：</p>
+<div class="note info"><p><strong>假设 4.2（Decisional Composite Residuosity Assumption）.</strong> 设 $h$ 从 $\mathbb{H}_N$ 中随机抽取，$x$ 从 $\mathbb{QR}_{N^2}$ 中随机抽取，$(N, h)\approx_c (N, x)$。</p>
+</div>
+
+<p>提出如下加密方案：</p>
+<ul>
+<li>$\textsf{Gen}(1^n) \rightarrow (pk &#x3D; N, sk &#x3D; p’q’)$；</li>
+<li>$\textsf{Enc}(pk, m)\rightarrow h\cdot (1 + N)^m$，其中 $h$ 从 $\mathbb{H}_N$ 中均匀随机采样。</li>
+<li>$\textsf{Dec}(sk, c) \rightarrow (p’q’)^{-1}\cdot \log_{1 + N}(c^{p’q’})$。</li>
+</ul>
+<p>根据 DCRH，$h$ 把密文 one-time pad 住了，因此具有 CPA 安全性。</p>
+<hr>
+<p><strong>关于 Circular Security.</strong> CPA 安全的加密方案不一定是 Circular Secure 的。具体地</p>
+<div class="note info"><p><strong>定理 4.3.</strong> 只要存在 CPA 安全的加密方案，便存在 CPA 安全但是不 circular secure 的加密方案。</p>
+</div>
+
+<p><strong>构造.</strong> 假设已经有一个 CPA 安全的加密方案 $\textsf{Enc}, \textsf{Dec}$，新的加密方案如下：</p>
+<ul>
+<li>随机 sample $x_1, x_2$；</li>
+<li>判断是否有 $\textsf{Dec}(m, \textsf{Enc}(pk, x_i)) &#x3D; x_i$ 成立（$\star$）。<ul>
+<li>若是，直接泄露私钥；</li>
+<li>否则，正常加密。</li>
+</ul>
+</li>
+</ul>
+<p>注意 $\star$ 发生的概率必是 negligible 的，然而这个加密方案加密 $sk$ 必然泄露 $sk$ 本身。<div style="text-align: right">$\blacksquare$</div></p>
+<hr>
+<p><strong>Linear Relation 的零知识证明.</strong> 一个 $p$ 阶群 $G$ 上，$m\times n$ 的矩阵 $g_{ij}$ 和 $u_1, …, u_m$、$x_1, …, x_n$ 间的 Linear Relation 是这样的一个表达式：</p>
+<p>$$<br>\boldsymbol{u} &#x3D; \mathbf{G}\boldsymbol{x} :&#x3D; \left(\forall i &#x3D; 1, 2, …, m, \qquad \prod_{j&#x3D;1}^n g_{ij}^{x_j} &#x3D; u_i\right)<br>$$</p>
+<p>令 $L: \{(\mathbf{G}, \boldsymbol{u}): \exists \boldsymbol{x}, \boldsymbol{u} &#x3D; \mathbf{G}\boldsymbol{x}\}$。</p>
+<div class="note info"><p><strong>定理 4.4.</strong> 存在 $L$ 的零知识证明。</p>
+</div>
+
+<p><strong>构造.</strong></p>
+<ul>
+<li>Prover 采样 $y_1, …, y_n$，发送 $\{v_i\} &#x3D; \{\prod_{i&#x3D;1}^n g_{ij}^{y_j}\}$ 给 Verifier；</li>
+<li>Verifier 采样 $r$ 发送给 Prover；</li>
+<li>Prover 发送 $\{x_i + ry_i\}$ 给 Verifier；</li>
+<li>Verifier 验证是否有 $\prod_{j&#x3D;1}^n g_{ij}^{x_{j}r + y_j}$ 是否就是 $u_i^r v_i$</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>实际上，这是一个 Zero-Knowledge Proof of Knowledge（ZKPoK）。ZKPoK 要求：存在一个 Extractor，该 Extractor 有 Prover 的 oracle access 和 rewind 权限，若 Prover 的证明被拒绝的概率充分小，则 Extractor 可以拿到 witness。这个问题的 Extractor 如下：</p>
+<ul>
+<li>首先照常跑一轮 Verifier；</li>
+<li>把 Prover rewind 到第二步交互，向其发送 $r’ \ne r$。</li>
+<li>现在就收到了 $x_i r + y_i$ 和 $x_i r’ + y_i$，其中 $r’ \ne r$，容易反解出 witness $x_i$。</li>
+</ul>
+<p>注意，以下的问题都可以翻译作 Linear Relation，翻译方法类似于线性规划转换成标准型。</p>
+<ul>
+<li><strong>DH Triple.</strong> $(a, b, c)$ 是 DH-Triple，即存在 $x, y, z$，$a &#x3D; g^x, b &#x3D; g^y, c &#x3D; g^{xy}$；</li>
+<li><strong>Encrypted DH-Triple.</strong> Alice 手里有三个二元组 $(v_1, e_1), …, (v_3, e_3)$，欲证明这是一个 DH-Triple 用一个公钥为 $u$ 的 Diffie-Hellman 加密得到的结果，即 $\exists \beta_1, \beta_2, \beta_3, x, y, z$ 使得<br>$$<br>\begin{aligned}<br>  (v_1, e_1) &#x3D; (g^{\beta_1}, u^{\beta_1}g^x) \\<br>  (v_2, e_2) &#x3D; (g^{\beta_2}, u^{\beta_2}g^y) \\<br>  (v_3, e_3) &#x3D; (g^{\beta_3}, u^{\beta_3}g^{xy})<br>\end{aligned}<br>$$</li>
+</ul>
+<hr>
+<p><strong>Threshold Secret Sharing Lower Bound.</strong> 这里证明安全的 $t$-out-of-$n$ secret sharing 的密文空间不能过小，即</p>
+<div class="note info"><p><strong>定理 4.4.</strong> 设 $\textsf{Share}: \{0, 1\}\times \mathcal{R} \rightarrow \mathcal{S}_1\times \cdots \times \mathcal{S}_n$ 是一个利用 $\mathcal{R}$ 中的随机性的、Perfect Correct 且 Perfect Private 的 $t$-out-of-$n$ secret sharing，则 $\sum_i \log |\mathcal{S}_i| \geq \Omega((n - t)\log (n - t))$。</p>
+</div>
+
+<p><strong>证明.</strong> 这里先考虑 $2$-out-of-$n$。从 $2$-out-of-$n$ 加强到 $t$-out-of-$n$ 只需要 conditional on 前 $t - 1$ 个人即可。</p>
+<p>根据 Perfect Correctness，任意两个人联合起来必须要能知道一条消息是哪个秘密得到的。因此对于任意两个随机种子 $r, r’$</p>
+<p>$$<br>\sum_{i&#x3D;1}^n \mathbf{1}\{\textsf{Share}_i(0, r) &#x3D; \textsf{Share}_i(1, r’)\} \leq 1<br>$$</p>
+<p>如果左边大于 1，则对其产生两个贡献的人联合起来不能知道这个消息是 $0$ 在随机种子 $r$ 下生成的还是 $1$ 在随机种子 $r’$ 下生成的。令 $r, r’$ 独立均匀随机求期望，得到</p>
+<p>$$<br>\begin{aligned}<br>    1&amp;\geq \sum_{i&#x3D;1}^n \mathbb{E}[\mathbf{1}\{\textsf{Share}_i(0, r) &#x3D; \textsf{Share}_i(1, r’)\}] \\<br>    &amp;&#x3D; \sum_{i&#x3D;1}^m \sum_{s\in \mathcal{S}_i} \Pr[\textsf{Share}_i(0, r) &#x3D; s]\Pr[\textsf{Share}_i(1, r’) &#x3D; s] \\<br>    &amp;&#x3D; \sum_{i&#x3D;1}^m \sum_{i&#x3D;1}^n \Pr[\textsf{Share}_i(0, r) &#x3D; s]^2 \\<br>    &amp;\geq \sum_{i&#x3D;1}^m \frac{1}{|\mathcal{S}_i|}\sqrt{\sum_{s\in \mathcal{S}} \Pr[\textsf{Share}_i(x, r) &#x3D; s]} \\<br>    &amp;&#x3D; \sum_{i&#x3D;1}^n \frac{1}{|\mathcal{S}_i|}<br>\end{aligned}<br>$$</p>
+<p>第三行是 Perfect Privacy，第四行是 Cauchy-Schwartz 不等式，第五行是概率归一化。至此我们知道了 $\sum_{i&#x3D;1}^n \frac{1}{|\mathcal{S}_i|}\leq 1$，这和欲证结论之间就差一个 Log-sum inequality。<div style="text-align: right">$\blacksquare$</div></p>
+<blockquote>
+<p><strong>Remark.</strong> [Bogdanov-Guo-Komargodski 2016] 证明了 $\sum_i \log |\mathcal{S}_i|\geq t\log t$，因此 $\sum_i \log |\mathcal{S}_i| \geq \Omega(n\log n)$，Shamir Secret Sharing 是最优的。</p>
+</blockquote>
+<hr>
+<p><strong>MPC 的存在性.</strong> 我们将证明 MPC 并非万能。</p>
+<div class="note info"><p><strong>定理 4.5.</strong> 不存在一个安全（Perfect Secure against semi-honest adversaries）2PC 能够计算</p>
+<p>$$<br>f: (a, b) \mapsto (a\wedge b, a\wedge b)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 施归纳于消息条数 $T$。</p>
+<ul>
+<li><strong>不存在 $0$ 条消息交互的协议.</strong> 显然。</li>
+<li><strong>不存在 $T$ 条消息交互的协议.</strong> WLOG 设第一轮 $P_2$ 给 $P_1$ 发消息。若 $x_1 &#x3D; 0$，则 $a\wedge b &#x3D; 0$。因为这个 2PC 是 Perfect Secure 的，所以存在一个 simulator $\mathcal{S}(x_1, y_1)$ 能精确求出第一条消息的分布。因此，第一条消息的分布就是 $\mathcal{S}(0, 0)$ 给出的那个分布，$T$ 条消息的交互等价于 $P_1$ 自己从 $\mathcal{S}(0, 0)$ 中采样一条消息，然后双方进行 $T - 1$ 条消息的交互，这也是不存在的。</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p><strong>Remark.</strong> 然而存在安全的 2PC 能够计算不对称的 AND，即 $f: (a, b)\mapsto (\bot, a\wedge b)$。方法是 $P_1$ 令 $(m_0, m_1) &#x3D; (0, a)$，用 oblivious transfer 发送 $m_b$ 给 $P_2$。</p>
 
     </div>
 
