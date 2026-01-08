@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="流水线处理器 存储器技术【FIXME】 中断和异常 输入输出设备 总线">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 计算机组成与体系结构（下）">
+<meta property="og:url" content="http://example.com/2026/01/07/ArchRevision2/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="流水线处理器 存储器技术【FIXME】 中断和异常 输入输出设备 总线">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/juhualianluoji.png">
+<meta property="article:published_time" content="2026-01-07T11:37:50.000Z">
+<meta property="article:modified_time" content="2026-01-08T02:42:21.974Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/juhualianluoji.png">
+
+
+<link rel="canonical" href="http://example.com/2026/01/07/ArchRevision2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/01/07/ArchRevision2/","path":"2026/01/07/ArchRevision2/","title":"Revision | 计算机组成与体系结构（下）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 计算机组成与体系结构（下） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">流水线处理器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">存储器技术【FIXME】</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">中断和异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">输入输出设备</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">总线</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/07/ArchRevision2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 计算机组成与体系结构（下） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 计算机组成与体系结构（下）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-01-07 19:37:50" itemprop="dateCreated datePublished" datetime="2026-01-07T19:37:50+08:00">2026-01-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-08 10:42:21" itemprop="dateModified" datetime="2026-01-08T10:42:21+08:00">2026-01-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E6%B5%81%E6%B0%B4%E7%BA%BF%E5%A4%84%E7%90%86%E5%99%A8">流水线处理器</a></li>
+<li><a href="#%E5%AD%98%E5%82%A8%E5%99%A8%E6%8A%80%E6%9C%AFfixme">存储器技术【FIXME】</a></li>
+<li><a href="#%E4%B8%AD%E6%96%AD%E5%92%8C%E5%BC%82%E5%B8%B8">中断和异常</a></li>
+<li><a href="#%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E8%AE%BE%E5%A4%87">输入输出设备</a></li>
+<li><a href="#%E6%80%BB%E7%BA%BF">总线</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="流水线处理器">流水线处理器</span></h1><p>将单周期处理器流水线化是我们在 ICS 中已经学过的技术。做法是在 CPU 中插入流水线寄存器，这样串联的线路上可以提升指令的吞吐量。</p>
+<p>历史上，Intel 80486 是第一台流水线 x86 CPU，采用五级流水线。Pentinium 是第一台超标量流水线，它有 U、V 两条流水线，每个时钟周期可以发送两条指令。流水线深度的纪录保持者是 2004 年的 Pentinium 4（Prescott）处理器，有 31 级流水线。现在的 Intel Core i7 是 4 发射，16 级流水线。</p>
+<p>MIPS 的 CPU 可以被划分成以下 5 个阶段，因此可以被划分成五级流水线：</p>
+<ul>
+<li><strong>取指.</strong> 从存储器取指令，更新 PC；</li>
+<li><strong>译码.</strong> 指令译码，从寄存器读出寄存器的值；</li>
+<li><strong>执行.</strong> 进行算术逻辑运算或者计算存储器地址；</li>
+<li><strong>访存.</strong> 从存储器读入或向其中写入数据；</li>
+<li><strong>写回.</strong> 将数据写入寄存器堆。</li>
+</ul>
+<p>现在，假设第 $i$ 个阶段线路的时延是 $D_i$，流水线寄存器本身有时延 $D_p$，则我们可以将时钟周期置为 $T &#x3D; \max D_i + D_p$，一条指令的完整执行时间变为 $ST$，其中 $S$ 为流水线级数。显然 $ST$ 大于原来线路的延迟，但是现在指令的吞吐量将变为 $1 &#x2F; T$，较原来实际上缩小了。</p>
+<p>现代 CPU 通常采取的结构是<strong>超标量结构</strong>，即一个 CPU 里有几条流水线。这和流水线属于两个独立的结构。</p>
+<p>容易发现，流水线的一个问题就是某一条指令没有执行完可能会导致后面的指令无法执行。比如前一条指令 $A$ 将运算结果写入 <code>$1</code> 寄存器，后一条指令 $B$ 需要 <code>$1</code> 作为运算数。此时在 $A$ 写回之前，$B$ 不应当运行。此类组织下一条指令在下一个时钟周期开始执行的情况，称为<strong>冒险</strong>。具体可以分为三类：</p>
+<ul>
+<li><strong>结构冒险.</strong> 所需的硬件不见正在为之前的指令工作；<ul>
+<li>假设指令和数据放在同一个存储器中。设当前指令是一个 <code>lw</code>，则三个周期后该指令运行到访存阶段，新的一条指令的读取无法执行。（解决方法是流水线停顿，插入 bubble，或者使用哈佛结构）；</li>
+<li>还可能同时读寄存器和写寄存器。方法是前半个周期用来读，后半个周期用来写，寄存器堆中设置独立的读写口。</li>
+</ul>
+</li>
+<li><strong>数据冒险.</strong> 需要等待之前的指令完成数据的读写；<ul>
+<li>有些指令要写回的数在执行阶段就算好了。此时可以进行数据前递；</li>
+<li>如果一条指令需要之前的访存结果（Load-Use Harzard），则数据前递也不能解决。只能插入一些 bubble，尽量前递（让下一条指令的执行阶段对齐本条指令的写回阶段，可以节省一个 bubble）。</li>
+</ul>
+</li>
+<li><strong>控制冒险.</strong> 需要根据之前指令的结果决定下一步的行为。<ul>
+<li>最 trivial 的方法就是直接 bubble。</li>
+<li>高级的做法是进行分支预测。</li>
+</ul>
+</li>
+</ul>
+<p>接下来着重讨论分支预测。引发控制冒险的转移指令在程序中占比巨大。且流水线越深、超标量数越多，转移指令影响越大，因此转移预测是必要的。</p>
+<p>当转移指令被执行，且确实发生转移时，将会产生开销。因为此时流水线需要将按顺序预取的指令全部废除（排空流水线）、从转移目标地址重新取指令。转移开销主要有两个来源：</p>
+<ul>
+<li>转移条件判定引起的开销；</li>
+<li>生成目标地址引起的开销。</li>
+</ul>
+<p>降低转移开销的技术主要有两类。第一类称为<strong>延迟转移</strong>。其做法是，在编译过程中，通过编译器调度，在转移指令之后插入一条或者几条适当的指令。比如一段代码本来形如 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">     INC AX </span><br><span class="line">     INC BX</span><br><span class="line">     DEC CX</span><br><span class="line">     JNZ NEXT</span><br><span class="line">     ...</span><br><span class="line">NEXT:ADD DX, 2 </span><br></pre></td></tr></table></figure>
+
+<p>如果正常执行，会在 <code>JNZ</code> 后面插入两个 bubble。但是 AX 和 BX 和转移没有什么关系，因此编译器通过将 AX 和 BX 的修改调度到 JNZ 后面，便可以节省这两个 bubble。</p>
+<p>另一类技术称为<strong>转移预测</strong>。须对转移条件判定和目标地址做出预测。</p>
+<ul>
+<li><strong>转移条件判定的预测.</strong> 分为静态的、动态的，硬件的、软件的。<ul>
+<li><strong>硬件固定预测不转移</strong> 实现简单，但是效果不佳。</li>
+<li><strong>编译制导的预测.</strong> 转移指令增加一位，由编译器设置，通知硬件预测跳转还是不跳转。其优点是软件可以根据指令类型和历史信息对不同指令进行不同预测；但缺点是需要软件支持，需要修改 ISA，且可能不能适应多变的执行环境。</li>
+<li><strong>基于偏移的预测.</strong> 如果转移指令地址和转移目标地址的相对偏移为负，则转移（很可能是循环），否则不转移。</li>
+<li><strong>基于历史信息的预测（现在主流的技术）.</strong> 一般的做法是搓一个 DFA 来判断要不要转移。Pentium 中，考察前两次转移是否发生，分为四个状态：00（强不发生转移），01（弱发生转移），10（发生转移），11（强发生转移），在强发生转移和弱发生转移是都预测转移，其他预测不发送转移。当然，你可以取更多历史位数。实践证明位数 $\geq 4$ 后也能继续提升，但是很微弱。</li>
+</ul>
+</li>
+<li><strong>转移目标地址的预测.</strong><ul>
+<li><strong>转移目标缓冲器（BTB）.</strong> 一张表，表项为 $(BTA_i, T&#x2F;NT, BIA_1)$，其中 $BTA$ 是转移目标地址，$T &#x2F; NT$ 是是否发生，$BIA$ 是转移指令地址。其工作方式为（查表得时机可以在取指时、译码完成后，或将其权衡地，预译码完成后，取值的同时。）：<ol>
+<li>在表中查当前指令地址，如果没查到，新建一项；</li>
+<li>若有一项匹配，称为 BTB 命中。若该指令转移条件的预测结果为“发生转移”，则将 $BTA$ 作为下一条指令地址。</li>
+<li>若最终结果和 BTB 不匹配，更新 BTB。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<p>注意 RET 指令的返回地址都是从栈里拉的，因此有一个专门的预测部件<strong>返回地址栈 RAS</strong>用于 RET 的跳转地址预测。</p>
+<h1><span id="存储器技术fixme">存储器技术【FIXME】</span></h1><h1><span id="中断和异常">中断和异常</span></h1><p>异常处理起源于 UNIVAC。当发生算术运算溢出时，转向地址 $0$ 执行两条修复功能，或者停机。后来大家发现这个机制可以用来执行如下一般的机制：</p>
+<ul>
+<li>程序运行时，系统外部、内部或者现行程序本身出现需要特殊处理的“事件”；</li>
+<li>CPU 立即强行终止现行程序的运行，改变机器的工作状态并启动相应的程序来处理这些“事件”。</li>
+<li>处理完成后，CPU 恢复原来的程序运行。</li>
+</ul>
+<p>这些事件就是所谓的“中断”或者“异常”。当然还有一些别的叫法，比如“外部中断”、“内部终端”，或者“硬件终端”、“软件终端”。此后我们会混用这些名词。</p>
+<p>软件可以使用 INT n 指令调用中断服务程序。其应用就是</p>
+<ol>
+<li>BIOS 功能都由中断程序实现。</li>
+<li>可以通过 DOS 中断调用诸如文件管理、存储管理、作业管理和设备管理等功能。</li>
+</ol>
+<p>为了处理异常，需要向流水线中增加如下要素：</p>
+<ul>
+<li>寄存器 EPC 和 Cause，存放出现异常的指令的地址，和产生异常的原因。</li>
+<li>PC update 中接入一根线，表示处理异常的程序入口地址。</li>
+</ul>
+<p>在 MIPS CPU 中，如果发生异常，执行如下操作：</p>
+<ul>
+<li>在 EPC 中保存出现异常的指令的地址；</li>
+<li>清空流水线中之后的指令；</li>
+<li>在 Cause 中记录产生异常的原因；</li>
+<li>将控制权转交给操作系统的特定地址。</li>
+</ul>
+<p>检测终端的办法是使用 CPU 内部的终端逻辑。这个模块连接了状态码（TF、OF 等）、译码电路（INT 3 指令等）、一条叫做 NMI 的线（传递外设的非屏蔽终端请求）和一条叫做 INTR 的线（传递外设的可屏蔽中断请求）。注意外设可能同时发出多个中断请求（比如网卡、显卡和键盘同时请求中断），此时为了决定这些中断的优先级，有以下几种办法：</p>
+<ol>
+<li><p><strong>软件查询确定中断优先级.</strong> 将所有中断信号 OR 起来通过 INTR 发送给 CPU。在这种模式下，中断服务程序的开始部分需要安排一段查询程序。一般来说，优先查询速度较快或者实时性较高的设备。</p>
+</li>
+<li><p><strong>硬件中断优先级编码电路.</strong> 所谓的菊花链优先级排队电路。在每个设备接口设置一个简单的逻辑电路，根据优先级顺序来传递传递或者截留 CPU 发出的中断响应信号，如图所示：<br><img src="/../picture/juhualianluoji.png"></p>
+<p>其中菊花链逻辑需要实现：若 INTA 是 $1$，向后传递 $1$，并且将中断响应（低电平为有效）置为 $1$。否则，若中断请求是 $1$，向后传递 $1$，并将中断响应信号置为低电平。这容易通过几个 or 门实现。</p>
+</li>
+<li><p><strong>可编程中断控制器（现代 PC 机常用，如 8295A）.</strong> 这个控制器连接了诸外设的请求信号，并且可以通过系统总线和 CPU 与设备交互。现在 PC 机的中断控制器称为高级中断控制器（APIC），分布于南桥（IO APIC）和 CPU 中（Local APIC），APIC 之间互相连接。</p>
+</li>
+</ol>
+<p>至此我们已经接通了中断产生这一侧。当 CPU 侦测到中断，其将按顺序进行以下操作：</p>
+<ul>
+<li><strong>关中断.</strong> CPU 关闭中断响应，不再接受其他外部中断请求。</li>
+<li><strong>保存断点.</strong> 将发生中断处的指令地址压栈。</li>
+<li><strong>识别中断源.</strong> CPU 识别中断的来源，确定中断类型号，从而找到响应的中断服务程序的入口地址。</li>
+<li><strong>保护现场.</strong> 将有关寄存器和标志寄存器压栈。比如 CS&#x2F;IP，还有中断服务程序可能用到的通用寄存器。</li>
+<li><strong>执行中断服务程序.</strong> 转到中断服务程序的入口开始执行。可以适时重新开放中断，以便允许响应较高优先级的外部中断。开放和关闭中断响应的方法是设置 IF 寄存器。（IF &#x3D; 1 则允许 CPU 响应可屏蔽中断请求，否则不允许 CPU 响应可屏蔽中断请求，用 STI 和 CLI 指令设置该寄存器，注意 IF 对非屏蔽中断和内部终端不起作用）。</li>
+<li><strong>恢复现场并返回.</strong> 字面意思，归纳为 IRET 指令。</li>
+</ul>
+<p>前三项一般是硬件电路，后三项都由软件完成。</p>
+<p>其中，确定终端服务程序的地址使用所谓的中断向量表。以 Intel 8086 为例，存储器中保留了两个专用区域。地址最低的 1KB 用于存放中断向量表，地址最高的 16B 存放了一个初始化程序（CPU 复位后从这里取第一条指令）。</p>
+<p>中断向量表由中断向量构成。一个中断向量指示中断服务程序的逻辑地址，可想而知一个中断向量有 4 字节（CS:IP），具体地从低到高依次是 IP 和 CS，低字节在前，高字节在后。</p>
+<blockquote>
+<p><strong>例子.</strong> 现在一个中断类型码是 20H。则中断向量存放在 0000:0080H 开始的 4 字节（注意一个中断向量 4 字节，因此要乘 4）。若上述四个字节内容为 10H，20H，30H，40H，则中断服务程序的入口地址为 4030:2010H。</p>
+</blockquote>
+<p>在保护模式下，中断向量表的形式和全局描述符表类似，称为中断描述符表，其基地址存在 IDTR 寄存器中。</p>
+<p>最后着重阐述一下几个内部中断。</p>
+<ul>
+<li><strong>类型 0：除法搓中断.</strong> 执行除法指令后，所得商超过了目标寄存器所能表示的范围，如除以 $0$，立刻产生一个类型 $0$ 中断。</li>
+<li><strong>类型 1：单步中断.</strong> 若标志寄存器中的跟踪标志 TF 设置为 1，则 CPU 处于单步工作模式。此时 CPU 没执行完一条指令，便自动产生一个类型 1 中断，进入中断服务程序。常用于调试。</li>
+<li><strong>类型 3：断电中断.</strong> 调试手段。</li>
+<li><strong>类型 4：溢出中断.</strong> 执行 INTO 指令时，若 OF 为 $1$，触发类型为 $4$ 的内部中断，否则空转。这在 sanitizer 里面很常用。</li>
+</ul>
+<p>内部中断较外部中断的区别主要体现在：</p>
+<ul>
+<li>中断类型号直接由 CPU 产生，而不是需要从外设中读取。</li>
+<li>除了单步中断外，所有内部中断都不可以用软件方法禁止。（单步中断可以将 TF 清空嘞禁止）。</li>
+<li>除单步中断外，所有内部中断优先级高于外部中断。</li>
+</ul>
+<hr>
+<p>回忆有一个重要的信号是 SIG ALRM。这个信号的实现方法是有一个定时器连接到 PIC 上面。这一小节我们着重考察计数器和定时器的概念和实现。</p>
+<p>现在的可编程定时器的内部主要包含数据总线缓冲器、读&#x2F;写逻辑、控制字寄存器、多个计数器、内部总线这几个结构。首先着重讲计数器的外部接线和响应功能，我们将略过内部逻辑。一个计数器连接以下几个线：</p>
+<ul>
+<li><strong>时钟输入信号 CLK$_i$.</strong> 作为技术脉冲，可以是非周期性脉冲和频率精确的周期性脉冲；</li>
+<li><strong>门控输入信号 GATE$_i$.</strong> 对计数过程进行控制，具体作用视工作方式而定。</li>
+<li><strong>输出信号 OUT$_i$.</strong> 计数到 $0$ 或者定时时间到时输出。具体形式视工作方式而定。</li>
+</ul>
+<p>回到完整的定时器其基本操作就是：</p>
+<ol>
+<li>WR 中写入控制字 CW 后，OUT 端进入已知初始状态；</li>
+<li>写入计数初值 CR 后，经过一个 CLK 下跳沿，CR 装入 CE；</li>
+<li>每输入一个 CLK 脉冲，CE 减 1；</li>
+<li>中途用 GATE 信号进行控制。</li>
+</ol>
+<p>以 8253 芯片为例，你可以通过控制字选择 3 个计数通道和 6 种工作方式，指定计数初值和装入顺序甚至计数值是二进制还是 BCD。某些具体的工作方式如下：</p>
+<ul>
+<li><strong>方式 0：计数到 $0$ 产生中断请求.</strong> 在这种工作方式下，OUT 初值为 $0$。计数结束后 OUT 设置为 $1$。可以用 GATE 控制计数过程：当 GATE 变低，暂停计数。当 GATE 变高，继续计数。</li>
+<li><strong>方式 2：分频器.</strong> 每输入 $N$ 个 CLK 脉冲，输出 $1$ 个 CLK 周期的负脉冲。主要用于 DRAM 的定时刷新等。</li>
+<li><strong>方式 3：方波发生器.</strong> 输出周期为 $N$ 的对称方波或者基本对称的矩形波（$N$ 为奇数做不到完全对称）。主要用于系统时钟和扬声器发声控制。</li>
+</ul>
+<h1><span id="输入输出设备">输入输出设备</span></h1><p>本节讨论计算机中输入输出设备的实现。理想中的输入输出接口应当拥有以下基本功能：</p>
+<ol>
+<li><strong>数据缓冲.</strong> 解决 CPU 和外设之间的速度差距；</li>
+<li><strong>提供联络信息.</strong> 协调与同步数据交换过程；</li>
+<li><strong>信号与信息格式的转换.</strong> 数字信号和模拟信号的转换、串行和并行转换、电平转换；</li>
+<li><strong>设备选择、中断管理、可编程功能.</strong> 一些附加要求。</li>
+</ol>
+<p>这决定了其基本结构大致是：连接地址总线、数据总线和控制总线，内部有数据输入寄存器、数据输出寄存器、状态寄存器、控制寄存器、中断控制逻辑，并与外设相连。计算机就是通过从这个数据输入寄存器读东西、向数据输出寄存器写东西来实现读写。具体地，一个 I&#x2F;O 接口内部包含一组称为 <strong>I&#x2F;O 端口</strong>的寄存器。这两个寄存器不在 CPU 内部，所以 CPU 通过访问 I&#x2F;O 端口的<strong>端口地址</strong>来访问 I&#x2F;O 端口。这里就涉及到第一个问题：如何编排 I&#x2F;O 接口的端口地址？</p>
+<ul>
+<li><strong>和存储器分开编址.</strong> x86 使用该模式；<ul>
+<li><em>优点.</em> I&#x2F;O 端口不占用存储器地址；I&#x2F;O 指令编码短、执行速度快；I&#x2F;O 指令的地址码较短，地址译码方便；I&#x2F;O 指令独立，使程序中 I&#x2F;O 操作和其他操作层次清晰，便于理解；</li>
+<li><em>缺点.</em> 课件没写，我觉得是有悖于 RISC 精神。</li>
+</ul>
+</li>
+<li><strong>和存储器统一编址.</strong> ARM，MIPS 等使用该方式。<ul>
+<li><em>优点.</em> 直接使用访存指令访问 I&#x2F;O 端口；可以将 CPU 中的 I&#x2F;O 操作与访存操作统一设计为一套逻辑，简化内部结构和 CPU 引脚数目。</li>
+<li><em>缺点.</em> 占用存储器地址空间；指令更长，执行时间更长。</li>
+</ul>
+</li>
+</ul>
+<p>分开编址模式下，程序通过如下两个指令来进行 I&#x2F;O：</p>
+<ul>
+<li><strong>IN AC, PORT</strong> 其中 AC 可以是 AL 或者 AX，PORT 可以是立即数或者 DX。如果是 DX 表示用 DX 的内容指定端口地址。将端口 PORT 的内容输入到 AC。</li>
+<li><strong>OUT PORT, AC</strong> 其中 AC 可以是 AL 或者 AX，PORT 可以是立即数或者 D，表示将 AC 的内容输出到 PORT。</li>
+</ul>
+<p>现在要将一列数据送到 I&#x2F;O 设备实现输入输出。这里，输入输出的控制方式有以下三种：</p>
+<div class="note "><p><strong>程序控制方式.</strong> 进一步细分为无条件传送和程序查询传送。</p>
+<p><em>无条件传送</em> 假定外设已经准备好，直接使用指令与外设传送数据，不假设外设的工作状态。</p>
+<p><em>程序查询传送方式.</em> CPU 通过执行一段程序，不断查询外设的工作状态，在确定外设已经准备就绪时，才进行数据传送。以输出数据为例，程序查询方式的工作流程如下：</p>
+<ol>
+<li>CPU 将控制字写入接口的控制寄存器，设置接口的工作模式；</li>
+<li>CPU 执行指令，将数据写到接口的输出缓冲寄存器；</li>
+<li>接口将数据发送到“并行数据输出”信号线上，并将“输出准备好”信号设置为有效；</li>
+<li>外设发现“输出准备好”信号有效之后，从并行数据输出信号线上接受数据，并将“输出回答”信号置为有效。</li>
+<li>接口发现“输出回答”有效后，将状态寄存器中的状态位“输出缓冲空”置为有效。</li>
+<li>此过程中，CPU 反复查询“输出缓冲空”，该信号有效之后才继续输出新数据。</li>
+</ol>
+<p>输入的过程是对称的。</p>
+<ol>
+<li>系统初始化时，CPU 执行指令，将控制字写入接口的控制寄存器，设置接口的工作模式。</li>
+<li>外设将数据发送到“并行数据输入”信号线上，并将“输入准备好”信号置为有效；</li>
+<li>接口发现“输入准备好”信号有效之后，从“并行数据输入”接受数据，放入“输入缓冲寄存器”，并将“输出回答”信号置为有效，阻止外设输入新数据。</li>
+<li>接口将“状态寄存器”中的状态位“输入缓冲满”置为有效；</li>
+<li>CPU 反复执行指令直到发现“输入缓冲满”，从“输入缓冲寄存器”中读出数据。</li>
+<li>接口将“输入回答”信号置为无效，等待外设输入新设备。</li>
+</ol>
+<p>这东西的优点是对外设的要求低，操作流程清晰；缺点是由 CPU 进行数据传送，占用了宝贵的运算资源。</p>
+</div>
+
+<div class="note "><p><strong>中断控制方式.</strong> 直接把程序查询中的 CPU 反复查询改成外设通过“中断控制逻辑”，用中断提醒 CPU。</p>
+<p>这种方式使得 CPU 和外设可以并行工作，外设可以主动申请服务，一定程度上满足了 I&#x2F;O 处理的实时性要求；但是外设和存储器之间的数据交换仍然由 CPU 承担，进入和退出中断服务程序还需要额外的指令。</p>
+</div>
+
+<div class="note "><p><strong>直接存储器访问方式（DMA）.</strong> 一种数据传送不需要 CPU 干预的方式。专门控制这件事情的一个控制器叫做 DMAC。 以使用 DMAC 进行外设到内存的传送为例，其工作步骤为：</p>
+<ol>
+<li>CPU 设置 DMAC 内部配置寄存器；</li>
+<li>DMAC 处于空闲等待状态；</li>
+<li>I&#x2F;O 接口向 DMAC 发出 DMA 传送申请；</li>
+<li>DMAC 响应 I&#x2F;O 接口的申请；</li>
+<li>DMAC 向 I&#x2F;O 接口发起总线读传输；</li>
+<li>DMAC 向存储器发起总线写传输；</li>
+<li>重复 5~6 直至本次 DMA 传送完成；</li>
+<li>返回 2 等待下一次 DMA 传送申请。</li>
+</ol>
+<p>在第一步，CPU 设置的参数包括：</p>
+<ol>
+<li>源地址（I&#x2F;O 端口），以及传送时的地址增减方式；</li>
+<li>目的地址（存储器地址），以及地址增减方式；</li>
+<li>待传送数据的长度。</li>
+</ol>
+<p>有的 I&#x2F;O 设备也可以自带 DMAC。</p>
+</div>
+
+<hr>
+<p>最后在硬件层面上，值得说明一下并行通信和串行通信的区别。在古老计算机上，提供诸如 9 针 RS-232、25 针 RS-232 之类的串口和 25 针 IEEE-1284 之类的并口。串行通信系指数据在单条一位宽的传输线上按时间先后一位一位地进行传送；并行通信系指数据在多位宽地传输线上各位同时进行传送。其权衡是显而易见的：</p>
+<table>
+<thead>
+<tr>
+<th align="center">串行通信</th>
+<th align="center">并行通信</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center"><strong>传输线数量少</strong></td>
+<td align="center">传输线数量多</td>
+</tr>
+<tr>
+<td align="center">同频率下，数据传输率较低</td>
+<td align="center"><strong>同频率下，数据传输率较高</strong></td>
+</tr>
+<tr>
+<td align="center">需要进行复杂的串 &#x2F; 并转换（用移位寄存器实现）</td>
+<td align="center"><strong>无需串 &#x2F; 并转换</strong></td>
+</tr>
+<tr>
+<td align="center"><strong>避免信号线之间的串扰</strong></td>
+<td align="center">存在信号线之间的串扰</td>
+</tr>
+</tbody></table>
+<p>串行通信抗干扰的一个操作是差分信号传输技术。这里，发送端在两根线上发送同幅反相的两个信号。接收端通过比较两个电压的差值，判断发送端发送的是 0 还是 1。这时候，串扰会发生抵消，从而实现抗干扰。</p>
+<p>【FIXME：8255A】</p>
+<h1><span id="总线">总线</span></h1><p>总线是多于两个模块之间传送信息的公共通路。要设计一条总线，需要设计传输信息的电路和管理信息的协议两个成分。在现代微信计算机上，有几种不同层次的总线：</p>
+<ol>
+<li><strong>片上总线.</strong> 如 CPU 内部的总线。</li>
+<li><strong>系统总线.</strong> 计算机系统个插件板之间的通路；</li>
+<li><strong>通信总线.</strong> 计算机系统之间或计算机系统与其他系统（仪器、仪表、控制装置）之间信息传输的通路。</li>
+</ol>
+<p>拥有总线控制能力、在获得总线控制权之后能启动总线传输的模块称为<strong>总线主模块</strong>（CPU、DMAC）；能够对总线传输做出响应，包括接受写数据、返回读数据、返回错误等，但是不具备总线控制能力的称为<strong>总线从模块</strong>（存储器）。以下是总线的几个关键部件：</p>
+<ul>
+<li><strong>总线译码器.</strong> 根据当前控制总线主模块提供的地址，选择作为本次总线传输目标的从模块；</li>
+<li><strong>总线仲裁器.</strong> 当总线上有多个主模块同时请求使用总线时，决定由哪个主模块获得总线控制权。</li>
+</ul>
+<p>容易想象总线本身就是一堆 multiplexer（以译码器和仲裁器作为选择信号）。</p>
+<p>最早的 80386DX 芯片上，仲裁器被收纳在 CPU 上。现在的计算机系统有多条总线，总线之间可以通过总线桥接器相连接。</p>
+<p>总线标准（协议？）需要规定以下内容：</p>
+<ul>
+<li><strong>机械特性.</strong> 模块插件的机械尺寸、总线插头、插座的规格及位置；</li>
+<li><strong>电气特性.</strong> 规定总线信号的逻辑电平以及负载能力；</li>
+<li><strong>功能特性.</strong> 给出各总线信号的名称及功能定义；</li>
+<li><strong>规程特性.</strong> 对各总线信号的总动作过程及时序关系进行说明。</li>
+</ul>
+<p>历史上的总线标准有：</p>
+<ul>
+<li><strong>ISA 总线.</strong> 由 IBM PC&#x2F;XT、PC&#x2F;AT 计算机的总线规范标准化而来，16 位。</li>
+<li><strong>EISA 总线.</strong> ISA 拓展到 32 位得到，用于 80386 CPU。2000 年前后退出市场。</li>
+<li><strong>PCI 总线.</strong> 用于 80486 CPU。</li>
+<li><strong>AGP 总线.</strong> Accelerated Graphics Port，专用于显卡的告诉点对点通道。基于 PCI 研发。</li>
+<li><strong>PCI-E.</strong> 2002 年由 PCI-SIG 组织正是推出，串行、全双工、点对点连接。采用差分信号传输。</li>
+</ul>
+<p>我们这里讲一个具体简单的协议，<strong>AHB 总线</strong>的内容。AHB 总线的核心结构就是三个 multiplexer，分别称为 address and contoll mux（由仲裁器控制）、write data mux（由仲裁器控制）、read data mux（由译码器控制）。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/04/CryptoRevision2/" rel="prev" title="Revision | 密码学基础（下）">
+                  <i class="fa fa-angle-left"></i> Revision | 密码学基础（下）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
