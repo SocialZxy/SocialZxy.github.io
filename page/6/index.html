@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">83</span>
+          <span class="site-state-item-count">85</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,237 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/11/QuantumStringMatching/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/11/QuantumStringMatching/" class="post-title-link" itemprop="url">H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-11 11:15:30" itemprop="dateCreated datePublished" datetime="2024-11-11T11:15:30+08:00">2024-11-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-27 17:06:47" itemprop="dateModified" datetime="2024-11-27T17:06:47+08:00">2024-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1016/S1570-8667(03)00010-8">https://doi.org/10.1016/S1570-8667(03)00010-8</a> 的阅读笔记。他们尝试把 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他们重新算一遍。最后一节“处理周期性串”看起来比较对，但我们放弃仔细验证了。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a></li>
+<li><a href="#%E6%9C%B4%E7%B4%A0%E7%9A%84-tildeosqrtnm-%E7%9A%84%E7%AE%97%E6%B3%95">朴素的 $\tilde{O}(\sqrt{nm})$ 的算法</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E9%9D%9E%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2%E7%9A%84-tildeosqrt-n-%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">针对非周期性模式串的 $\tilde{O}(\sqrt n)$ 文本分析</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9%E9%9D%9E%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2%E7%9A%84-tildeosqrt-m-%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90">针对非周期性模式串的 $\tilde{O}(\sqrt m)$ 模式分析</a></li>
+<li><a href="#%E5%A4%84%E7%90%86%E5%91%A8%E6%9C%9F%E6%80%A7%E6%A8%A1%E5%BC%8F%E4%B8%B2">处理周期性模式串</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/11/QuantumStringMatching/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/08/DeterministicSampling/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/08/DeterministicSampling/" class="post-title-link" itemprop="url">Uzi Vishkin. Deterministic Sampling–A New Technique for Fast Pattern Matching (1991)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-08 14:14:49" itemprop="dateCreated datePublished" datetime="2024-11-08T14:14:49+08:00">2024-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-09 21:20:50" itemprop="dateModified" datetime="2024-11-09T21:20:50+08:00">2024-11-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的阅读笔记。文中提出了一种确定性的采样方法用于加速字符串匹配，由此得到了操作次数 $O(n)$ 时间 $O(\log^* n)$ 的并行算法。</p>
+<p>文中用到了大量的分治、分块、复杂度平衡、递归的技巧，虽然这些无非是思考并行算法的时候的重点考虑方向，但第一次见的时候感觉还是比较奇妙，整个论文读完像做了一道超大的构造题。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a><ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E5%91%A8%E6%9C%9F%E6%80%A7">字符串的周期性</a></li>
+<li><a href="#crcw-pram-%E7%9A%84%E9%80%89%E6%8B%A9">CRCW PRAM 的选择</a></li>
+<li><a href="#%E5%89%8D%E7%BC%80%E5%92%8C%E9%97%AE%E9%A2%98">前缀和问题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A8%A1%E5%BC%8F%E5%88%86%E6%9E%90">模式分析</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">基本文本分析</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%B8%B8%E6%95%B0%E6%97%B6%E9%97%B4%E7%AE%97%E6%B3%95">基本常数时间算法</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%9C%80%E4%BC%98%E5%8A%A0%E9%80%9F%E7%AE%97%E6%B3%95">基本最优加速算法</a></li>
+<li><a href="#%E6%A8%A1%E5%BC%8F%E4%B8%B2%E6%9C%89%E5%91%A8%E6%9C%9F%E6%80%A7%E7%9A%84%E6%83%85%E5%86%B5">模式串有周期性的情况</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%B9%B3%E8%A1%A1%E5%90%8E%E7%9A%84-olog-n-%E6%96%87%E6%9C%AC%E5%88%86%E6%9E%90">复杂度平衡后的 $O(\log^* n)$ 文本分析</a></li>
+<li><a href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%AE%A8%E8%AE%BA">进一步讨论</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/08/DeterministicSampling/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
@@ -1043,225 +1274,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/09/07/ODE1PrimaryTricks/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/08/19/Schreier-Sims/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/08/19/Schreier-Sims/" class="post-title-link" itemprop="url">The Schreier-Sims Algorithm</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-08-19 16:38:36" itemprop="dateCreated datePublished" datetime="2024-08-19T16:38:36+08:00">2024-08-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-23 17:00:49" itemprop="dateModified" datetime="2024-08-23T17:00:49+08:00">2024-08-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文将浅谈计算群论中的 Schreier-Sims 算法，该算法的核心思想是将群 $G$ 的信息表示为一列正规子群 $1 &#x3D; G_1 \subset G_2 \subset \cdots \subset G_k &#x3D; G$，通过 $G_i$ 在 $G_{i+1}$ 中的截面，回答一些重要的问题如某元素是否在群当中、某给定生成元的有限群的阶数是多少等。</p>
-<p>本文的第二节介绍该算法使用的重要技术截面（Transversal）和 Schreier 引理，第三节介绍该算法的核心技术 BSGS，但是很遗憾我们暂时没能看懂如何求解一组 BSGS，只能给出一类大多数应用问题的简单快速的下替算法（参见第 3.3 节）。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%A3%B0%E6%98%8E%E4%B8%8E%E8%AE%B0%E5%8F%B7">声明与记号</a></li>
-<li><a href="#%E6%88%AA%E9%9D%A2transversal%E5%92%8C%E7%A8%B3%E5%AE%9A%E5%AD%90%E9%9B%86%E5%90%88%E7%9A%84%E7%94%9F%E6%88%90%E5%85%83">截面（Transversal）和稳定子集合的生成元</a></li>
-<li><a href="#%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86">基和强生成集</a><ul>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">基本定义</a></li>
-<li><a href="#%E7%AE%80%E5%8D%95%E5%BA%94%E7%94%A8">简单应用</a></li>
-<li><a href="#%E6%9E%84%E9%80%A0%E5%AD%90%E7%BE%A4%E9%93%BE%E7%9A%84%E9%80%9A%E4%BF%97%E7%AE%97%E6%B3%95">构造子群链的通俗算法</a></li>
-<li><a href="#%E6%B1%82%E5%9F%BA%E5%92%8C%E5%BC%BA%E7%94%9F%E6%88%90%E9%9B%86%E6%9C%AA%E5%AE%8C%E6%88%90">求基和强生成集（未完成）</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/08/19/Schreier-Sims/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/07/16/Z-Zhou-ML2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/07/16/Z-Zhou-ML2/" class="post-title-link" itemprop="url">Machine Learning (2)（支持向量机）</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-07-16 16:18:03" itemprop="dateCreated datePublished" datetime="2024-07-16T16:18:03+08:00">2024-07-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-08-23 11:35:17" itemprop="dateModified" datetime="2024-08-23T11:35:17+08:00">2024-08-23</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- toc -->
-
-<ul>
-<li><a href="#%E9%A2%84%E5%A4%87%E7%9F%A5%E8%AF%86%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E5%AD%90kkt-%E6%9D%A1%E4%BB%B6%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E5%AF%B9%E5%81%B6">预备知识：拉格朗日乘子，KKT 条件，拉格朗日对偶</a></li>
-<li><a href="#svm">SVM</a><ul>
-<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A8%A1%E5%9E%8B">基本模型</a></li>
-<li><a href="#%E8%BD%AF%E9%97%B4%E9%9A%94">软间隔</a></li>
-<li><a href="#%E6%A8%A1%E5%9E%8B%E6%B1%82%E8%A7%A3">模型求解</a></li>
-<li><a href="#%E6%A0%B8%E5%87%BD%E6%95%B0">核函数</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/07/16/Z-Zhou-ML2/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

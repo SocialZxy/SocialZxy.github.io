@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    引子：从经典纠错码到量子纠错码 QEC 的错误模型 稳定子体系 典型的纠错码 Shor Code Steane Code Five Qubit Code Surface Code">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QEC Workshop | 1 Introduction">
+<meta property="og:url" content="http://example.com/2026/01/23/QECNote1Introduction/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    引子：从经典纠错码到量子纠错码 QEC 的错误模型 稳定子体系 典型的纠错码 Shor Code Steane Code Five Qubit Code Surface Code">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/quantum-repitition.png">
+<meta property="og:image" content="http://example.com/picture/bit-flip-code.png">
+<meta property="og:image" content="http://example.com/picture/phase-flip-code.png">
+<meta property="og:image" content="http://example.com/picture/XXXXXX-measurement.png">
+<meta property="og:image" content="http://example.com/picture/five-qubit-syndrome.png">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-cdedcad0e21311c9db3b60c5c1d7b67b_1440w.jpg">
+<meta property="og:image" content="http://example.com/picture/surface-code-check.png">
+<meta property="article:published_time" content="2026-01-23T14:09:37.000Z">
+<meta property="article:modified_time" content="2026-01-25T17:09:13.134Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/quantum-repitition.png">
+
+
+<link rel="canonical" href="http://example.com/2026/01/23/QECNote1Introduction/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/01/23/QECNote1Introduction/","path":"2026/01/23/QECNote1Introduction/","title":"QEC Workshop | 1 Introduction"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>QEC Workshop | 1 Introduction | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">引子：从经典纠错码到量子纠错码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">QEC 的错误模型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">稳定子体系</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">典型的纠错码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">Shor Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">Steane Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">Five Qubit Code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.4.</span> <span class="nav-text">Surface Code</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/01/23/QECNote1Introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="QEC Workshop | 1 Introduction | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QEC Workshop | 1 Introduction
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-01-23 22:09:37" itemprop="dateCreated datePublished" datetime="2026-01-23T22:09:37+08:00">2026-01-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-01-26 01:09:13" itemprop="dateModified" datetime="2026-01-26T01:09:13+08:00">2026-01-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BC%95%E5%AD%90%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BA%A0%E9%94%99%E7%A0%81%E5%88%B0%E9%87%8F%E5%AD%90%E7%BA%A0%E9%94%99%E7%A0%81">引子：从经典纠错码到量子纠错码</a></li>
+<li><a href="#qec-%E7%9A%84%E9%94%99%E8%AF%AF%E6%A8%A1%E5%9E%8B">QEC 的错误模型</a></li>
+<li><a href="#%E7%A8%B3%E5%AE%9A%E5%AD%90%E4%BD%93%E7%B3%BB">稳定子体系</a></li>
+<li><a href="#%E5%85%B8%E5%9E%8B%E7%9A%84%E7%BA%A0%E9%94%99%E7%A0%81">典型的纠错码</a><ul>
+<li><a href="#shor-code">Shor Code</a></li>
+<li><a href="#steane-code">Steane Code</a></li>
+<li><a href="#five-qubit-code">Five Qubit Code</a></li>
+<li><a href="#surface-code">Surface Code</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="引子从经典纠错码到量子纠错码">引子：从经典纠错码到量子纠错码</span></h1><p>我们从经典的有噪信道和作为应对的经典纠错码谈起。在一个信道中，一种“错误”可以被一个函数 $E: x\mapsto x_{\text{err}}$ 刻画，其中 $x$ 是欲通过信道发送的内容，$x_{\text{err}}$ 是实际上传输到信道另一端的内容。例如，“传输的第一位发生翻转”就是一种可能的错误，对应的函数是 $x_1…x_n \mapsto (\neg x_1)…x_n$。</p>
+<p>考虑最简单的 $p$-binary symmetric channel，即通过该信道发送的每个比特有 $p$ 的概率发生翻转。在经典信道上，一个老生常谈的纠错码是$3$<strong>-重复码</strong>：</p>
+<p>$$<br>\begin{aligned}<br>\textsf{Enc}(0) &#x3D; 000 \quad {\color{lightgray} \text{denoted $0_L$ (the logical $0$)} } \\<br>\textsf{Enc}(1) &#x3D; 111 \quad {\color{lightgray} \text{denoted $1_L$ (the logical $1$)} }<br>\end{aligned},\qquad\begin{aligned}<br>    \textsf{Dec} &#x3D; \text{Majority}<br>\end{aligned}<br>$$</p>
+<p>当然，这个纠错码只能应对错误不超过 $1$ 位（或者 $\lfloor (r - 1) &#x2F; 2 \rfloor$，对于 $r$-重复码）。在经典情况下，我们用以下定义来刻画一个纠错码可以纠正的错误：</p>
+<div class="note success"><p><strong>定义 1.1.</strong> 我们称一个纠错码 $(\cdot)_L$ 能够纠正一个集合 $\mathcal{E}$ 中的错误，当且仅当</p>
+<p>$$<br>\forall E_1, E_2\in \mathcal{E}, \forall x, y,  \qquad E_1(x_L) \ne E_2(y_L)<br>$$</p>
+</div>
+
+<p>显然重复码不能直接应用到量子纠错之中，因为有我们熟知的不可克隆性定理。当然，你可以考虑如下的电路</p>
+<p><img src="/../picture/quantum-repitition.png"></p>
+<p>这会将 $|\varphi\rangle :&#x3D; \alpha |0\rangle + \beta |1\rangle$ 映射到 $\alpha |000\rangle + \beta|111\rangle$ 而非 $|\varphi\rangle|\varphi\rangle|\varphi\rangle$，和经典情况下不完全相同。</p>
+<p>此处我们尚且没有定义什么是“错误”，姑且将其理解为一个复线性映射（在第 2 节中将给出详细阐释）。如果错误只能具有以下形式：$\mathcal{U}_1\otimes\mathcal{U_2}\otimes\mathcal{U_3}$，其中 $\mathcal{U}_i$ 要么是 $\mathcal{I}$，要么是 Pauli $\mathcal{X}$，且 $\mathcal{X}$ 至多有一个，那么，我们还是可以通过测量这三个物理比特是否两两不同来知道发生了两类错误。具体地，引入两个辅助比特，定义 $s_1 &#x3D; \varphi_{L1}\oplus \varphi_{L2}, s_2 &#x3D; \varphi_{L2} \oplus \varphi_{L3}$（可以用 $\mathcal{CNOT}$ 门计算），测量得到 $s_1, s_2$ 之后，有</p>
+<ul>
+<li>若测出 $00$，便知道错误是 $\mathcal{III}$；</li>
+<li>若测出 $01$，便知道错误是 $\mathcal{IIX}$；</li>
+<li>若测出 $10$，便知道错误是 $\mathcal{XII}$；</li>
+<li>若测出 $11$，便知道错误是 $\mathcal{IXI}$。</li>
+</ul>
+<p>因此，我们可以使用 Toffoli 门进行纠错。此处的测量结果在量子纠错中有专门的术语，称为<strong>症状（Syndrome）</strong>。完整的实现纠错的电路如下所示：</p>
+<p><img src="/../picture/bit-flip-code.png"></p>
+<p>该纠错方法因为能够纠正比特翻转错误（Pauli $\mathcal{X}$）而得名 bit-flip code。当然因为它能纠正的错误过少，所以不 practical。如果将错误的形式改成 $\mathcal{U}_i$ 要么是 $\mathcal{I}$ 要么是 $\mathcal{Z}$，且 $\mathcal{Z}$ 至多有一个，则惟须做一次 phase kickback。具体来说，就是如下电路。这个电路被称为 phase-flip code。</p>
+<p><img src="/../picture/phase-flip-code.png"></p>
+<p>将这两种纠错码结合起来，得到所谓的 Shor Code（参见第 3 节）。在下文中我们会看到，这种纠错码能够纠正的错误相当广泛。</p>
+<p>接下来的篇幅中，我们的主要任务是补上本节中的几个未形式化的洞（什么是量子计算过程中的错误、怎么定义一个纠错码能够纠正某错误），以及讲解几个常用的纠错码。</p>
+<h1><span id="qec-的错误模型">QEC 的错误模型</span></h1><p>量子计算以何故产生错误？因为我们难以实现真正的孤立系统。因此演化时，某酉变换 $\mathcal{U}_{SE}$ 将作用于系统的态和环境的态之张量积 $|\varphi\rangle_S|0^n\rangle_E$，导致出现错误。不妨先考虑最简单的单量子比特的系统，此时写出 $\mathcal{U}_{SE}$ 作用的表达式：</p>
+<p>$$<br>\begin{aligned}<br>|0\rangle_S|0^n\rangle_E \xmapsto{\mathcal{U}_{SE}} \alpha_{00}|0\rangle_S|\phi_{00}\rangle_E + \alpha_{01}|1\rangle_S|\phi_{11}\rangle_E \\<br>|1\rangle_S|0^n\rangle_E \xmapsto{\mathcal{U}_{SE}} \alpha_{10}|0\rangle_S|\phi_{10}\rangle_E + \alpha_{11}|1\rangle_S|\phi_{11}\rangle_E<br>\end{aligned}<br>$$</p>
+<p>其中 $\alpha_{i0}^2 + \alpha_{i1}^2 &#x3D; 1$。观察形式，忽略环境态可见，本质上，这还是该 qubit 以一定概率发生了某种“翻转”。受此启发，我们尝试将 Error 建模成 Pauli 算符之线性组合，毕竟 Pauli 算符构成二维复线性变换的一组基。不妨设 $|\psi\rangle_S :&#x3D; \beta |0\rangle_S + \gamma|1\rangle_S$，则有</p>
+<p>$$<br>\begin{aligned}<br>&amp;\mathcal{U}_{SE}|\psi\rangle_S|0^n\rangle_E \\<br>&amp;&#x3D; \beta(\alpha_{00}|0\rangle_S|\phi_{00}\rangle_E + \alpha_{01}|1\rangle_S|\phi_{11}\rangle_E) + \gamma(\alpha_{10}|0\rangle_S|\phi_{10}\rangle_E + \alpha_{11}|1\rangle_S|\phi_{11}\rangle_E) \\<br>&amp;&#x3D; (\beta|0\rangle_S + \gamma |1\rangle_S)\frac{\alpha_{00}|\phi_{00}\rangle_E + \alpha_{11}|\phi_{11}\rangle_E}{2} + (\beta|1\rangle_S + \gamma |0\rangle_S)\frac{\alpha_{01}|\phi_{01}\rangle_E + \alpha_{10}|\phi_{10}\rangle_E}{2} \\<br>&amp;+ (\beta|0\rangle_S - \gamma |1\rangle_S)\frac{\alpha_{00}|\phi_{00}\rangle_E - \alpha_{11}|\phi_{11}\rangle_E}{2} + (\beta|1\rangle_S - \gamma |0\rangle_S)\frac{\alpha_{01}|\phi_{01}\rangle_E - \alpha_{10}|\phi_{10}\rangle_E}{2}\\<br>&amp;&#x3D; \alpha_I|\psi\rangle_S|\phi_I\rangle_E + \alpha_XX|\psi\rangle_S|\phi_X\rangle_E + \alpha_ZZ |\psi\rangle_S|\phi_Z\rangle_E + \alpha_{XZ}XZ|\psi\rangle_S|\phi_{XZ}\rangle_E<br>\end{aligned}<br>$$</p>
+<p>当然，对于多个量子比特的系统，也不外乎是这样。至此，我们知道了量子演化过程中的任何一个错误，都是 <strong>Pauli 门的线性组合</strong>（相较于经典情况下，错误是一个 01 串到 01 串的函数）。并可以用以下定义来刻画一个纠错码能够纠正的错误：</p>
+<div class="note success"><p><strong>定义 2.1.</strong> 令 $E$ 是 Pauli 算符的线性组合的一个子集。称一个纠错码 $(\cdot)_L$ 能够纠正 $E$ 中的全部错误，若对于任意的态 $|x\rangle, |y\rangle$</p>
+<p>$$<br>\forall \mathcal{E}_i, \mathcal{E}_j\in E, \quad \langle x_L|\mathcal{E}_i^\dagger \mathcal{E}_j |y_L\rangle &#x3D; c_{ij}\langle x_L|y_L\rangle<br>$$</p>
+<p>此处 $c$ 仅取决于错误类型而不取决于逻辑比特的内容。在一些文献中也称 $\langle (\cdot)_L, E \rangle$ 构成一个量子纠错码（QECC）。</p>
+</div>
+
+<p>可以毫不费力的证明以下结论：</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 若 $(\cdot)_L$ 能纠正 $E$ 中的错误，则能纠正 $\mathrm{span}(E)$ 中的错误。</p>
+</div>
+
+<p><strong>证明（Sketch）.</strong> 验算。</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>于是，我们只需要聚焦在“纠正线性组合中的每一项对应的错误”这一工作之上。对于 $n$ 量子比特的系统，刻画“错误”的那个线性组合中的各项都是 Pauli 算符的张量积，即 Pauli 群中的元素。</p>
+<div class="note success"><p><strong>定义 2.2（Pauli Group）.</strong> $n$ 个 Pauli 算符的张量积，配上 $\pm 1, \pm 1$ 的系数在乘法运算下构成一个群。这个群称为 Pauli 群 $P_n$：</p>
+<p>$$<br>P_n :&#x3D; \{ \alpha \mathcal{P}_1\mathcal{P}_2 \cdots \mathcal{P}_n : \alpha_i \in \{\pm 1, \pm i\}, P_i \in \{\mathcal{I}, \mathcal{X}, \mathcal{Y}, \mathcal{Z}\}\}<br>$$</p>
+<p>Pauli 群的元素中，非平凡的 Pauli 算符个数称为该元素的权重（$\mathrm{wt}$）。例如 $\mathrm{wt}(\mathcal{ZZIIX}) &#x3D; 3$。这个记号用于定义后文中的码距。</p>
+<blockquote>
+<p>注：本文中基本上不涉及 $n$ 个线性变换的复合。因此方便起见，这类 $\mathcal{P}_1…\mathcal{P}_n$ 状的记号，均表示<strong>张量积</strong>。若要表示复合，将特别用 $\circ$ 标出。</p>
+</blockquote>
+</div>
+
+<h1><span id="稳定子体系">稳定子体系</span></h1><p>量子纠错有一套常用的范式，称为 <strong>Stabilizer Formalism（稳定子体系）</strong>。我们逐步建立这一套体系。</p>
+<p>我们先来考察 Syndrome 的本质。以 bit-flip code 为例，我们计算了 $\psi_1\oplus \psi_2$、$\psi_2\oplus \psi_3$ 的奇偶性。用一个更加量子的语言来说，我们判断了 $|\psi\rangle$ 是 $\mathcal{ZZI}$ 和 $\mathcal{IZZ}$ 的特征值为多少（$1$ 还是 $-1$）的特征向量。且如果没有发生任何错误 $\mathcal{E} &#x3D; \mathcal{III}$，则 $|\psi\rangle$ 是两者的特征值为 $1$ 的特征向量。具体地：</p>
+<ul>
+<li>$\mathcal{E} &#x3D; \mathcal{III}$（不发生错误），特征值为 $\{+1, +1\}$；</li>
+<li>$\mathcal{E} &#x3D; \mathcal{XII}$（第一位翻转），特征值为 $\{-1, +1\}$；</li>
+<li>$\mathcal{E} &#x3D; \mathcal{IXI}$（第二位翻转），特征值为 $\{-1, -1\}$；</li>
+<li>$\mathcal{E} &#x3D; \mathcal{IIX}$（第三位翻转），特征值为 $\{+1, -1\}$；</li>
+</ul>
+<p>对于任意 Pauli 群中的元素，测量一个态是其特征值为多少的特征向量可以用 Phase-Kickback 配合 Controled Pauli Gate 实现。比如你现在要判断一个 $6$-qubit 态 $|\psi\rangle$ 是 $\mathcal{XXXXXX}$ 的特征值为多少的特征向量，可以使用以下电路：</p>
+<p><img src="/../picture/XXXXXX-measurement.png"></p>
+<p>此类操作称为 <strong>Pauli Measurement</strong>。这启发我们已经有了一族码字 $C &#x3D; \{|\psi_L\rangle\}$，要构造一个 QECC，可以采取以下范式：</p>
+<ul>
+<li>找到 Pauli 群中，全体保持码字不变的元素 $S &#x3D; \{\mathcal{P}\in P_n : \forall |\psi_L\rangle\in C, \mathcal{P}|\psi_L\rangle &#x3D; |\psi_L\rangle\}$。 </li>
+<li>Syndrome 以 $S$ 中各元素的特征值来表示，这可以通过 Pauli Measurement 来得到。</li>
+<li>找到每一种 Syndrome 对应了何种错误。</li>
+</ul>
+<p>上述 $S$ 便是所谓的 Stabilizer。</p>
+<div class="note success"><p><strong>定义 3.1（Stabilizer）.</strong> 一组码字 $C :&#x3D; \{|\psi_L\rangle\}$ 的稳定子集合定义为</p>
+<p>$$<br>S &#x3D; \{\mathcal{P}\in P_n : \forall |\psi_L\rangle\in C, \mathcal{P}|\psi_L\rangle &#x3D; |\psi_L\rangle\}<br>$$</p>
+</div>
+
+<p>另一方面，只要给出了一组 stabilizer，这组 stabilizer 的不变子空间之交集便给出了一组合法的码字。</p>
+<p>这个范式以下述定理之故比直观看起来更为高效：</p>
+<div class="note info"><p><strong>定理 3.1.</strong> $S$ 满足以下条件：</p>
+<ol>
+<li>$-\mathcal{I}\notin S$；</li>
+<li>$S$ 是有限阿贝尔群。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 1 显然成立。视 $P_n$ 为集合 $C$ 上的作用可见，$S$ 无非是 $C$ 中全体元素的稳定子群之交集，故必然是群。这里着重证明它是阿贝尔群。</p>
+<p>回忆 Pauli 群的重要性质。Pauli 群中的元素只有特征值 $\pm 1$，且互相之间或者对易，或者反对易（注意 $\mathcal{I}$ 和 $\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ 对易，$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ 互相反对易）。因此对于任意的 $\mathcal{M}_1, \mathcal{M}_2\in S$，有或者 $[\mathcal{M}_1, \mathcal{M}_2] &#x3D; 0$，或者 $\{\mathcal{M}_1, \mathcal{M}_2\} &#x3D; 0$。只需排除后者。</p>
+<p>首先观察到对于任意的 $|\psi_L\rangle\in C$ 有 $[\mathcal{M}_1, \mathcal{M}_2]|\psi_L\rangle &#x3D; |\psi_L\rangle - |\psi_L\rangle &#x3D; 0$，然而若 $\{\mathcal{M_1}, \mathcal{M}_2\} &#x3D; 0$，则 $[\mathcal{M}_1, \mathcal{M}_2] &#x3D; 2\mathcal{M}_1\mathcal{M}_2$ 得 $[\mathcal{M}_1, \mathcal{M}_2]|\psi_L\rangle &#x3D; 2|\psi_L\rangle$ 导出矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<p>因此根据有限生成阿贝尔群的分解定理，我们只需对 $S$ 的生成元做 Pauli Measurement 即可。那么，如果一个码字集合 $C$ 的 Stabilizer 是 $S$，它能够纠正何种错误？显而易见，如果 Syndrome 测出来全是 $1$，即 $\mathcal{E}|\psi_L\rangle$ 是所有 stabilizer 的特征值为 $1$ 的特征向量，则没法纠正这种错误。这蕴含 $\mathcal{S}\mathcal{E}|\psi\rangle &#x3D; \mathcal{E}|\psi\rangle &#x3D; \mathcal{E}\mathcal{S}|\psi\rangle$，即 $\mathcal{E}$ 和 $\mathcal{S}$ 可交换。综上所述，此纠错码<strong>不能纠正</strong>的错误无非是 $S$ 的中心化子群，总结成如下定理：</p>
+<div class="note info"><p><strong>定理 3.2.</strong> 若一个纠错码的 Stabilizer 是 $S$。$S$ 的中心化子群是 $N(S) :&#x3D; \{\mathcal{E}\in P_n : \forall \mathcal{S}\in S, [\mathcal{E}, \mathcal{S}] &#x3D; 0\}$。该纠错码不能纠正的错误集合为 $N(S)\setminus S$。</p>
+</div>
+
+<p><strong>证明.</strong> 前文之述备矣。注意我们从集合中刨掉了 $S$，因为其中的元素不会改变码字，故难以称得上“错误”。<div style="text-align: right">$\blacksquare$</div></p>
+<p>另外还需要区分不同的错误。如果两个错误具有相同的 Syndrome，那么我们也无法纠正之。事实上，我们有：</p>
+<div class="note info"><p><strong>定理 3.3.</strong> 一个纠错码可以纠正 $E\subseteq P_n$ 中的错误，当且仅当</p>
+<p>$$<br>\forall \mathcal{E}, \mathcal{F}\in E,\qquad \mathcal{E}^\dagger \mathcal{F}\notin N(S)\setminus S<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 显然如果 $\mathcal{E}, \mathcal{F}$ 有相同的症状，则 $\mathcal{E}^\dagger \mathcal{F}$ 有平凡的症状（所有特征值都是 $1$）。而如果 $\mathcal{E}^\dagger \mathcal{F}\in S$，则该错误可以通过同一种方式纠正。<div style="text-align: right">$\blacksquare$</div></p>
+<blockquote>
+<p><strong>Remark.</strong> 这里显然就显然在若 $[\mathcal{E}, \mathcal{S}] &#x3D; 0$ 则 $[\mathcal{E}, \mathcal{S}^\dagger] &#x3D; 0$，对于反对易性也有相同结论。读者不妨自行补充论证，此外需要时刻记住 $\mathcal{S}|\psi_L\rangle &#x3D; |\psi_L\rangle$ 和 Pauli 群中元素要么对易要么反对易。</p>
+</blockquote>
+<p>现在我们完全建立了纠错码和可纠正的错误之间的桥梁。仿照经典编码理论的定义，我们定义</p>
+<div class="note success"><p><strong>定义 3.2.</strong> 称 ${S}$ 是某纠错码的 Stabilizer。记该纠错码的码距为</p>
+<p>$$<br>\min \{\mathrm{wt}(\mathcal{G}) : \mathcal{G}\in N(S) \setminus S\}<br>$$</p>
+<p>如果一个纠错码使用 $n$ 个物理比特编码了 $k$ 个逻辑比特，其码距为 $d$，则该纠错码称为一组 $[[n, k, d]]$-码。</p>
+</div>
+
+<p>由定理 3.3 立即知道，一个纠错码能纠正权重不超过 $t$ 的错误当且仅当 $d\geq 2t + 1$。</p>
+<h1><span id="典型的纠错码">典型的纠错码</span></h1><h2><span id="shor-code">Shor Code</span></h2><p>Shor Code 是 Shor 于 1995 年提出的一种量子纠错码。其定义为</p>
+<p>$$<br>\begin{aligned}<br>    |0_L\rangle &#x3D; \frac{1}{2\sqrt 2}(|000\rangle + |111\rangle)(|000\rangle + |111\rangle)(|000\rangle + |111\rangle) \\<br>    |1_L\rangle &#x3D; \frac{1}{2\sqrt 2}(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)(|000\rangle - |111\rangle)<br>\end{aligned}<br>$$</p>
+<p>本质上，这就是把 phase-flip code 的三个物理比特都用 bit-flip code 编码。则该编码的 Syndrome 和对应的纠错可以通过以下方法完成：</p>
+<ul>
+<li><strong>$\mathcal{X}$ Error.</strong> 查看第 $1, 2$、$2, 3$、$4, 5$、$5, 6$、$7, 8$、$8, 9$ 位的奇偶性。</li>
+<li><strong>$\mathcal{Z}$ Error.</strong> 查看第 $1, 2$、$2, 3$ 块的相位（用 phase-flip code 的方式）。</li>
+<li><strong>$\mathcal{XZ}$ Error.</strong> 纠正了前两个问题之后立即解决。</li>
+</ul>
+<p>这个检查 Syndrome 的方式对应着 Shor Code 的 Stabilizer 群的 $8$ 个生成元：</p>
+<p>$$<br>\begin{matrix}<br>    S_1: &amp; Z &amp; Z &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   \\<br>    S_2: &amp;   &amp; Z &amp; Z &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   \\<br>    S_3: &amp;   &amp;   &amp;   &amp; Z &amp; Z &amp;   &amp;   &amp;   &amp;   \\<br>    S_4: &amp;   &amp;   &amp;   &amp;   &amp; Z &amp; Z &amp;   &amp;   &amp;   \\<br>    S_5: &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp; Z &amp; Z &amp;   \\<br>    S_6: &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp;   &amp; Z &amp; Z \\<br>    S_7: &amp; X &amp; X &amp; X &amp; X &amp; X &amp; X &amp;   &amp;   &amp;   \\<br>    S_8: &amp;   &amp;   &amp;   &amp; X &amp; X &amp; X &amp; X &amp; X &amp; X \\<br>\end{matrix}<br>$$</p>
+<p>Shor Code 可以纠正 $1$ 位错误，因此 $d\geq 3$。另外注意 $\mathcal{ZIIZIIZII}$ 是 $N(S)\setminus S$ 中的元素，因此 $d &#x3D; 3$。综上，Shor Code 是 $[[9, 1, 3]]$-码。</p>
+<h2><span id="steane-code">Steane Code</span></h2><p>这是一种 Hamming 码的量子推广。其定义为 </p>
+<p>$$<br>\begin{aligned}<br>|0_L\rangle &#x3D; \frac{1}{2\sqrt 2}(|0000000\rangle + |1010101\rangle + |0110011\rangle + |1100110\rangle + |0001111\rangle + |1011010\rangle + |0111100\rangle + |1101001\rangle) \\<br>|1_L\rangle &#x3D; \frac{1}{2\sqrt 2}(|1111111\rangle + |0101010\rangle + |1001100\rangle + |0011001\rangle + |1110000\rangle + |0100101\rangle + |1000011\rangle + |0010110\rangle)<br>\end{aligned}<br>$$</p>
+<p>它有 $6$ 个 Stabilizer 生成元：</p>
+<p>$$<br>\begin{matrix}<br>    S_1: &amp; X &amp; X &amp; X &amp; X &amp;   &amp;   &amp;   \\<br>    S_2: &amp; X &amp; X &amp;   &amp;   &amp; X &amp; X &amp;   \\<br>    S_3: &amp; X &amp;   &amp; X &amp;   &amp; X &amp;   &amp; X \\<br>    S_4: &amp; Z &amp; Z &amp; Z &amp; Z &amp;   &amp;   &amp;   \\<br>    S_5: &amp; Z &amp; Z &amp;   &amp;   &amp; Z &amp; Z &amp;   \\<br>    S_6: &amp; Z &amp;   &amp; Z &amp;   &amp; Z &amp;   &amp; Z \\<br>\end{matrix}<br>$$</p>
+<p>由上可见，这种纠错码像 Hamming Code 一样侦测 $\mathcal{X}$ 错误和 $\mathcal{Z}$ 错误的发生位置，从而实现 $1$-qubit 的纠错。此外 $\mathcal{IIIIXXX}$ 与所有生成元都对易，因此 Steane Code 是 $[[7, 1, 3]]$-码。</p>
+<h2><span id="five-qubit-code">Five Qubit Code</span></h2><p>这是一种 Shor Code 提出后不久新发现的纠错码。其 Stabilizer 生成元为</p>
+<p>$$<br>\begin{matrix}<br>    S_1: &amp; Z &amp; X &amp; X &amp; Z &amp;   \\<br>    S_2: &amp; X &amp; X &amp; Z &amp;   &amp; Z \\<br>    S_3: &amp; X &amp; Z &amp;   &amp; Z &amp; X \\<br>    S_4: &amp; Z &amp;   &amp; Z &amp; X &amp; X<br>\end{matrix}<br>$$</p>
+<p>两个码字非常长，这里有一种简单的记法</p>
+<p>$$<br>\begin{aligned}<br>|0_L\rangle &#x3D; \frac 14(\mathcal{I} + S_1)\circ (I + S_2) \circ (I + S_3) \circ (I + S_4) |00000\rangle \\<br>|1_L\rangle &#x3D; \frac 14(\mathcal{I} + S_1)\circ (I + S_2) \circ (I + S_3) \circ (I + S_4) |11111\rangle<br>\end{aligned}<br>$$</p>
+<p>这个码的 Syndrome 如下表所示，因此也能纠正所有的 1 qubit 错误。</p>
+<p><img src="/../picture/five-qubit-syndrome.png"></p>
+<p>然而，$\mathcal{XIZIX}$ 和所有的生成元都对易，因此码距为 $3$。</p>
+<h2><span id="surface-code">Surface Code</span></h2><p>以上的编码都具有固定的码距 $3$。实际上我们希望编码能随着码距 $d$ scale up。另外，为了能在具体的硬件上实现纠错码，我们希望 Stabilizer 的测量在几何上具有局部性。本人水平暂时不足以洞悉 Surface Code 构造的直觉，这里只谈论其构造。</p>
+<p>一个表面码被组织成一个 2D 的周期性网格图，格子的每条边上都放置了一个 qubit。引自知乎的下图展示了 Surface Code 的布局：</p>
+<p><img src="https://pic4.zhimg.com/v2-cdedcad0e21311c9db3b60c5c1d7b67b_1440w.jpg"></p>
+<p>Surface Code 的 Stabilizer 分为两类。一类位于方格 $p$ 的中心，对方格上四条边上的四个 qubit 作用 $Z$ 门，称为<strong>板检查（Plaquette Check）</strong>，记作 $B_p$，对应上图中的橘色板；另一类位于个格点 $v$ 上，对邻接的四个 qubit 作用 $X$ 门，称为<strong>星检查（Star Check）</strong>，对应上图中的蓝色板。</p>
+<p><img src="/../picture/surface-code-check.png"></p>
+<p>注意 $A_p$ 和 $B_v$ 相互之间都对易，因为其交于 $2$ 点或者 $0$ 点。注意，一个 $X$ error 使得与该 qubit 相邻的两个板检查测出 $-1$ 特征值，一个 $Z$ error 使得与该 qubit 相邻的两个星检查测出 $-1$ 特征值。注意，只有 $X$ 错误连接了两条相对的边的时候，这个 $X$ 错误才属于 $N(S) \setminus S$。因此只需要 $O(d^2)$ 个逻辑比特便可构造码距为 $d$ 的表面码。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/23/QECNotes/" rel="prev" title="量子纠错研讨班学习笔记">
+                  <i class="fa fa-angle-left"></i> 量子纠错研讨班学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
