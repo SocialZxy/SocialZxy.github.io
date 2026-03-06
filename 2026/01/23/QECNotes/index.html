@@ -27,7 +27,7 @@
 <meta property="og:description" content="Abstract. 寒假期间组里开了一个 QEC 讨论班，主要学习 Daniel Gottesman 的讲义 https:&#x2F;&#x2F;www.cs.umd.edu&#x2F;~dgottesm&#x2F;QECCbook-2024.pdf 。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-01-23T14:01:47.000Z">
-<meta property="article:modified_time" content="2026-01-25T17:03:04.222Z">
+<meta property="article:modified_time" content="2026-03-06T03:29:40.546Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -100,7 +100,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -113,6 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">目录</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">缺失内容</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -127,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -233,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-26 01:03:04" itemprop="dateModified" datetime="2026-01-26T01:03:04+08:00">2026-01-26</time>
+      <time title="Modified: 2026-03-06 11:29:40" itemprop="dateModified" datetime="2026-03-06T11:29:40+08:00">2026-03-06</time>
     </span>
 
   
@@ -248,7 +249,7 @@
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 寒假期间组里开了一个 QEC 讨论班，主要学习 Daniel Gottesman 的讲义 <a target="_blank" rel="noopener" href="https://www.cs.umd.edu/~dgottesm/QECCbook-2024.pdf">https://www.cs.umd.edu/~dgottesm/QECCbook-2024.pdf</a> 。</p>
 <span id="more"></span>
 
-<table>
+<h1><span id="目录">目录</span></h1><table>
 <thead>
 <tr>
 <th align="center">#</th>
@@ -259,11 +260,47 @@
 </thead>
 <tbody><tr>
 <td align="center">Lecture 1</td>
-<td align="left">Introduction</td>
-<td align="center">主要是我校量子计算课讲义的第 11 章 <br> 而该资料又主要参考 Daniel Gottesman 的 2、3 章</td>
+<td align="left">概述</td>
+<td align="center">主要是我校量子计算课讲义的第 11 章而该资料又主要参考 <br>  Daniel Gottesman 的 2、3 章，但似乎略过了相当重要的内容。</td>
 <td align="center"><a href="../../../../2026/01/23/QECNote1Introduction/">Link</a></td>
 </tr>
+<tr>
+<td align="center">Lecture *</td>
+<td align="left">Guest Lecture</td>
+<td align="center">2601.09131</td>
+<td align="center">暂无</td>
+</tr>
+<tr>
+<td align="center">Lecture 2</td>
+<td align="left">量子纠错码的构造</td>
+<td align="center">主要是 Daniel Gottesman 4, 5, 9.1、9.2</td>
+<td align="center"><a href="../../../../2026/02/02/QECNote2Classical/">Link</a></td>
+</tr>
+<tr>
+<td align="center">Lecture 3</td>
+<td align="left">Clifford 群，QEC Bounds</td>
+<td align="center">Daniel Gottesman 6, 7</td>
+<td align="center"><a href="../../../../2026/02/07/QECNote3CliffordGroupandBounds/">Link</a></td>
+</tr>
 </tbody></table>
+<h1><span id="缺失内容">缺失内容</span></h1><p>尚未更新的章节（这些内容比较紧迫，应该尽快整理完）：</p>
+<ol>
+<li>Guest Lecture 的论文阅读；</li>
+<li>Lecture 4：Fault Tolerance，Transversal Gates；</li>
+<li>Lecture 5：Fault Tolerance Error Correction and Measurement, Magic State Preparation；</li>
+</ol>
+<p>已更新的章节内的缺失内容（这些内容缺少前置知识，看的很难受）：</p>
+<ol>
+<li>Lecture 2 的 Convolution Code；</li>
+<li>Lecture 3 的 Clifford 群生成元；</li>
+<li>Lecture 3 的 Quantum Singleton Bound、Linear Programming Bound；</li>
+</ol>
+<p>这些内容需要我们仔细审视几个部分，然后单开一篇文章，在上方讲义中补充交叉引用：</p>
+<ol>
+<li>Quantum Error Correction 的形式化里面的几个结论（QECC Conditions），Daniel Gottesman 前两章；</li>
+<li>Stabilizer 中心化子的那几个结论：主要是 $N(\textsf{S}) &#x2F; \textsf{S} \cong \textsf{P}_k$，以回答 $N(S)$ 的大小，码字空间的大小，逻辑门从何而来之类的内容，Daniel Gottesman 第 3 章；</li>
+<li>非二元量子比特（qudit）以及其上的 Stabilizer Code，Daniel Gottesman 的第 8 章。</li>
+</ol>
 
     </div>
 
@@ -282,8 +319,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2026/01/23/QECNote1Introduction/" rel="next" title="QEC Workshop | 1 Introduction">
-                  QEC Workshop | 1 Introduction <i class="fa fa-angle-right"></i>
+                <a href="/2026/01/23/QECNote1Introduction/" rel="next" title="QEC Workshop | 1 概述">
+                  QEC Workshop | 1 概述 <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>

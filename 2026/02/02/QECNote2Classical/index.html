@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本节讨论：如何基于经典线性码构造 Stabilizer Code，Steane Code 和 Five Qubit Code 均属此类；如何构造大规模的量子纠错码，代表性的方法包括拼接码和卷积码。    经典信息论重要结论 线性码 经典编码的几个重要界   从经典纠错码构造量子纠错码 Calderbank-Shor-Steane Co">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QEC Workshop | 2 量子纠错码的简易构造">
+<meta property="og:url" content="http://example.com/2026/02/02/QECNote2Classical/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本节讨论：如何基于经典线性码构造 Stabilizer Code，Steane Code 和 Five Qubit Code 均属此类；如何构造大规模的量子纠错码，代表性的方法包括拼接码和卷积码。    经典信息论重要结论 线性码 经典编码的几个重要界   从经典纠错码构造量子纠错码 Calderbank-Shor-Steane Co">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/5qubitconcat.png">
+<meta property="article:published_time" content="2026-02-02T05:33:51.000Z">
+<meta property="article:modified_time" content="2026-03-06T03:16:12.320Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/5qubitconcat.png">
+
+
+<link rel="canonical" href="http://example.com/2026/02/02/QECNote2Classical/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/02/02/QECNote2Classical/","path":"2026/02/02/QECNote2Classical/","title":"QEC Workshop | 2 量子纠错码的简易构造"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>QEC Workshop | 2 量子纠错码的简易构造 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">经典信息论重要结论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">线性码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">经典编码的几个重要界</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">从经典纠错码构造量子纠错码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Calderbank-Shor-Steane Codes</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Perfect Qubit Codes</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">从量子纠错码构造更好的量子纠错码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">拼接码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">卷积码</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/02/02/QECNote2Classical/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="QEC Workshop | 2 量子纠错码的简易构造 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QEC Workshop | 2 量子纠错码的简易构造
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-02-02 13:33:51" itemprop="dateCreated datePublished" datetime="2026-02-02T13:33:51+08:00">2026-02-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-06 11:16:12" itemprop="dateModified" datetime="2026-03-06T11:16:12+08:00">2026-03-06</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QECNotes/">合集（量子纠错研讨班学习笔记）</a>。本节讨论：如何基于经典线性码构造 Stabilizer Code，Steane Code 和 Five Qubit Code 均属此类；如何构造大规模的量子纠错码，代表性的方法包括拼接码和卷积码。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E4%BF%A1%E6%81%AF%E8%AE%BA%E9%87%8D%E8%A6%81%E7%BB%93%E8%AE%BA">经典信息论重要结论</a><ul>
+<li><a href="#%E7%BA%BF%E6%80%A7%E7%A0%81">线性码</a></li>
+<li><a href="#%E7%BB%8F%E5%85%B8%E7%BC%96%E7%A0%81%E7%9A%84%E5%87%A0%E4%B8%AA%E9%87%8D%E8%A6%81%E7%95%8C">经典编码的几个重要界</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%8E%E7%BB%8F%E5%85%B8%E7%BA%A0%E9%94%99%E7%A0%81%E6%9E%84%E9%80%A0%E9%87%8F%E5%AD%90%E7%BA%A0%E9%94%99%E7%A0%81">从经典纠错码构造量子纠错码</a><ul>
+<li><a href="#calderbank-shor-steane-codes">Calderbank-Shor-Steane Codes</a></li>
+<li><a href="#perfect-qubit-codes">Perfect Qubit Codes</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%8E%E9%87%8F%E5%AD%90%E7%BA%A0%E9%94%99%E7%A0%81%E6%9E%84%E9%80%A0%E6%9B%B4%E5%A5%BD%E7%9A%84%E9%87%8F%E5%AD%90%E7%BA%A0%E9%94%99%E7%A0%81">从量子纠错码构造更好的量子纠错码</a><ul>
+<li><a href="#%E6%8B%BC%E6%8E%A5%E7%A0%81">拼接码</a></li>
+<li><a href="#%E5%8D%B7%E7%A7%AF%E7%A0%81">卷积码</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<p>在上一章中，我们介绍的稳定子体系是分析纠错码的良好工具，但并非构造量子纠错码的简易手段。本节介绍两种简易的构造量子纠错码的办法，包括以下两个方面：</p>
+<ol>
+<li>从经典线性码推出量子纠错码；</li>
+<li>从已有量子纠错码推出新的量子纠错码。</li>
+</ol>
+<h1><span id="经典信息论重要结论">经典信息论重要结论</span></h1><h2><span id="线性码">线性码</span></h2><div class="note success"><p><strong>定义 1.1.1（Linear Code）.</strong> $\mathbb{F}_2^n$ 上的一个经典纠错码 $C$ 被称为线性码，若 $\forall \boldsymbol{x}, \boldsymbol{y}\in C, \boldsymbol{x} + \boldsymbol{y}\in C$。</p>
+</div>
+
+<p>即，线性码的全体码字构成 $\mathbb{F}_2^n$ 的线性子空间。那么，求其一组基，便可实现 Encoder。</p>
+<div class="note success"><p><strong>定义 1.1.2（Generator Matrix）.</strong> 令 $C$ 为线性码，$\boldsymbol{x}_1, …, \boldsymbol{x}_k$ 为 $C$ 的一组基。令</p>
+<p>$$<br>\mathbf{G}_C :&#x3D; (\boldsymbol{x}_1, …, \boldsymbol{x}_k)^\top<br>$$</p>
+<p>该矩阵称为 $C$ 的生成元矩阵。</p>
+</div>
+
+<p>$\mathbf{G}_C$ 实际上就是该线性码的 Encoder，将一个 $k$ bit 的原文编做一个 $n$ bit 的码字。那么，线性码的纠错如何进行？注意若 $\boldsymbol{y}$ 不是码字，即 $\boldsymbol{y}\notin \mathrm{Im}~\mathbf{G}_C^\top$，则必有 $\mathrm{Ker}~\mathbf{G}_C$ 中的分量。考虑把 $C$ 的正交补的基拼称一个矩阵，称为校验矩阵。</p>
+<p>如果两个物理比特数相同线性码满足：且生成元矩阵的行向量相互正交且逻辑比特数之和恰为物理比特数，则称这两个线性码<strong>对偶</strong>。若一个码和自己对偶，则称其<em>自对偶</em>，若一个码的一个对偶码包含自身，则称其<em>弱自对偶</em>。</p>
+<div class="note success"><p><strong>定义 1.1.3（Parity Check Matrix）.</strong> 取 $C^\bot$ 的一组基 $\boldsymbol{y}_1, …, \boldsymbol{y}_{n - k}$。令</p>
+<p>$$<br>\mathbf{H}_C &#x3D; (\boldsymbol{y}_1, …, \boldsymbol{y}_{n - k})^\top<br>$$</p>
+<p>该矩阵称为 $C$ 的奇偶校验矩阵。</p>
+</div>
+
+<p>很显然按照定义有 $\mathbf{G}_C^\top \mathbf{H}_C &#x3D; 0$ 和 $\mathbf{H}_C^\top \mathbf{G}_C &#x3D; 0$。若码字 $\boldsymbol{x}_L :&#x3D; \mathbf{G}_C^\top\boldsymbol{x}$ 在演化过程中发生了错误，变成了 $\mathbf{x}_L + \boldsymbol{e}$，那么，对发生错误后的码字作用奇偶校验矩阵立即得到</p>
+<p>$$<br>\mathbf{H}_C(\boldsymbol{x}_L + \boldsymbol{e}) &#x3D; \mathbf{H}_C\boldsymbol{e}<br>$$</p>
+<p>$\mathbf{H}_C\boldsymbol{e}$ 便是线性码的 Syndrome。若检测到这类东西，便说明发生了错误。有 </p>
+<div class="note info"><p><strong>定理 1.1.1.</strong> 令 $C$ 是一个线性码，$C$ 的码距 $d$ 定义为 $\min \{ \Delta(\boldsymbol{x}, \boldsymbol{y}) : \boldsymbol{x}\ne \boldsymbol{y}, \boldsymbol{x}, \boldsymbol{y}\in C \}$，其中 $\Delta$ 是 Hamming 距离。则 $d &#x3D; \min \{ \mathrm{wt}(\boldsymbol{x}) : \boldsymbol{x}\in \mathrm{Ker}~\mathbf{H}_C \}$。</p>
+</div>
+
+<p><strong>证明.</strong> 平凡的线性代数计算。<div style="text-align: right">$\blacksquare$</div></p>
+<p>此外，容易证明，码距为 $d$ 的经典编码等价于：</p>
+<ol>
+<li>该编码可以纠正至多 $\lfloor (d - 1) &#x2F; 2 \rfloor$ 位翻转错误；</li>
+<li>该编码可以纠正至多 $d - 1$ 位擦除错误（该位置从 $0&#x2F;1$ 变成了 $?$）；</li>
+<li>该编码可以发现至多 $d - 1$ 位翻转错误。</li>
+</ol>
+<p>经典的用 $n$ 位编码了 $k$ 个逻辑比特的码距为 $d$ 的线性纠错码记作 $[n, k, d]$ 码。</p>
+<hr>
+<p>现在来考虑一些具体的线性码。</p>
+<p>要纠正 $1$ 位错误，即每个 $\boldsymbol{e}_i$（仅第 $i$ 位为 1 的向量）都具有不同的 Syndrome。注意 $\mathbf{H}_C\boldsymbol{e}_i$ 正是 $\mathbf{H}_C$ 的第 $i$ 列，据此可以构造一个 $2^r - 1$ 列的奇偶校验矩阵，其第 $i$ 列是 $i$ 的二进制表示。</p>
+<p>以 $r &#x3D; 3$ 为例。此时 $\mathbf{H}_C$ 和相应的正交补为</p>
+<p>$$<br>\mathbf{H}_C &#x3D; \begin{pmatrix}<br>    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>    1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\<br>\end{pmatrix}, \qquad \mathbf{G}_C &#x3D; \begin{pmatrix}<br>    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>    1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1<br>\end{pmatrix}<br>$$</p>
+<p>这给出了一个 $[7, 4, 3]$ 码。类似地，设 $\mathbf{H}$ 的行数为 $r$，这样的构造方法能给出 $[2^r - 1, 2^r - r - 1, 3]$ 码。这类纠错码称为 <strong>Hamming 码</strong>。</p>
+<p><strong>Reed-Muller Code</strong> 某种程度上是 Hamming Code 的一种对偶和推广。其构造如下：</p>
+<ul>
+<li>$\mathcal{R}(1, m)$ 码之生成元矩阵共有 $m + 1$ 行 $2^m$ 列。其中第 $1$ 行为 $\boldsymbol{1}$，第 $i + 1$ 行为 $\boldsymbol{v}_i$，其中 $\boldsymbol{v}_i$ 的第 $j$ 元为 $j - 1$ 的二进制第 $i$ 列。</li>
+<li>$\mathcal{R}(r, m)$ 码之生成元矩阵共有 $\sum_{i&#x3D;0}^r \binom mr$ 行 $2^m$ 列。诸行为选择 $\boldsymbol{v}_i$ 中不超过 $r$ 个逐点相乘得到。</li>
+</ul>
+<p>如 $\mathcal{R}(1, 3)$ 码和 $\mathcal{R}(2, 3)$ 的生成元矩阵分别为</p>
+<p>$$<br>\mathbf{G}_{\mathcal{R}(1, 3)} &#x3D;<br>\begin{pmatrix}<br>    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>    0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\<br>\end{pmatrix}~<br>{\color{lightblue}<br>\begin{matrix}<br>    \boldsymbol{1} \\<br>    \boldsymbol{v}_1 \\<br>    \boldsymbol{v}_2 \\<br>    \boldsymbol{v}_3<br>\end{matrix}<br>}, \quad<br>\mathbf{G}_{\mathcal{R}(2, 3)} &#x3D;<br>\begin{pmatrix}<br>    1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>    0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\<br>\end{pmatrix}~<br>{\color{lightblue}<br>\begin{matrix}<br>    \boldsymbol{1} \\<br>    \boldsymbol{v}_1 \\<br>    \boldsymbol{v}_2 \\<br>    \boldsymbol{v}_3 \\<br>    \boldsymbol{v}_1\odot\boldsymbol{v}_2 \\<br>    \boldsymbol{v}_1\odot\boldsymbol{v}_2 \\<br>    \boldsymbol{v_2}\odot\boldsymbol{v}_3<br>\end{matrix}}<br>$$</p>
+<p>可见 $\mathcal{R}(1, m)$ 删掉首行首列后就是 $[2^{m} - 1, 2^m - m - 1, 3]$ Hamming 码的对偶码。</p>
+<div class="note info"><p><strong>定理 1.1.2.</strong> $\mathcal{R}(r, m)$ 是 $[2^m, N(r, m), 2^{m - r}]$ 码。其中 $N(r, m) &#x3D; \sum_{i&#x3D;0}^r \binom mr$。</p>
+</div>
+
+<p><strong>证明.</strong> 须分两部分（逻辑比特数、码距）完成。</p>
+<p><em>逻辑比特数.</em> 惟须证明 $\mathbf{G}_{\mathcal{R}(m, m)}$ 的诸行线性无关，$\mathbf{G}_{\mathcal{R}(r, m)}$ 的行都是其子集。此时只需要注意如果你把 $v_{i_1}, …, v_{i_k}$（$i_1\leq \cdots \leq i_k$）乘起来，其开头定是 $\sum_{j &#x3D; 1}^k 2^{m - i_j}$ 个 $0$ 后面接一个 $1$，因此 $\mathbf{G}_{\mathcal{R}(m, m)}$ 可以排成上三角矩阵，故满秩。</p>
+<p><em>码距.</em> 施归纳法于 $m, r$。边界情况，$\mathcal{R}(r, r)$ 是显然的。接下来我们需要洞察一个 Reed-Muller Code 的递推构造。设 $S(\mathcal{R}(r, m))$ 为 $\mathcal{R}(r, m)$ 的生成元集合，$\Vert$ 为向量拼接。则有</p>
+<p>$$<br>S(\mathcal{R}(r, m + 1)) &#x3D; \{ \boldsymbol{g}\Vert \boldsymbol{g} : \boldsymbol{g}\in S(\mathcal{R}(r, m))\} \cup \{ \boldsymbol{0}\Vert\boldsymbol{g} : \boldsymbol{g}\in S(\mathcal{R}(r - 1, m)) \}<br>$$</p>
+<p>上面的两组生成元，在下文中依次称为“上半部分”和“下半部分”。$\boldsymbol{g}_1\Vert \boldsymbol{g}_2$ 中，$\boldsymbol{g}_1$ 称为“前半部分”，$\boldsymbol{g}_2$ 称为“后半部分”。回忆我们说过码距为 $d$ 等价于能够纠正 $d - 1$ 位擦除错误，换言之擦掉 $d - 1$ 位之后还可以正确解码。现在要证明 $\mathcal{R}(r, m + 1)$ 擦掉 $2^{m + 1 - r} - 1$ 位之后能够正确解码。那么，根据归纳假设，下半部分总是可以正确解码。而擦掉 $2^{m + 1 - r} - 1$ 位意味着要么前半部分擦掉的少于 $2^{m - r} - 1$ 位，要么后半部分擦掉的少于 $2^{m - r} - 1$，无论如何，上半部分总是可以根据前后两半之一正确解码。</p>
+<p>而根据归纳假设擦掉 $2^{m + 1 - r}$ 位之后下半部分必不能解码成功，综上可以完成归纳。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 1.1.3.</strong> $\mathcal{R}(r, m)$ 和 $\mathcal{R}(m - r - 1, m)$ 对偶。若 $m &#x3D; 2r + 1$，则 $\mathcal{R}(r, m)$ 自对偶，$m \geq 2r + 1$，则 $\mathcal{R}(r, m)$ 弱自对偶。</p>
+</div>
+
+<p><strong>证明.</strong> 平凡的验证。<div style="text-align: right">$\blacksquare$</div></p>
+<hr>
+<p>进一步，我们可以将 $\mathbb{F}_2$ 上的线性码推广到 $\mathrm{GF}(q)$ 上去。设 $C$ 是 $\mathrm{GF}(q)^n$ 上的纠错码：</p>
+<ul>
+<li>若 $\boldsymbol{x}, \boldsymbol{y}\in C \Rightarrow \forall a, b\in \mathrm{GF}(q), a\boldsymbol{x} + b\boldsymbol{y}\in C$，则称为<strong>线性码</strong>；</li>
+<li>若 $\boldsymbol{x}, \boldsymbol{y}\in C \Rightarrow \boldsymbol{x} + \boldsymbol{y}\in C$，则称为<strong>加性码</strong>。</li>
+</ul>
+<p>基于此，$q$-Hamming 码的校验矩阵的要求是任意两列不互为倍数。如 $\mathrm{GF}(4)$ 上的 $[5, 3, 3]_4$ Hamming 码的校验矩阵如下：</p>
+<p>$$<br>\begin{pmatrix}<br>    0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>    1 &amp; 0 &amp; 1 &amp; x &amp; x + 1<br>\end{pmatrix}<br>$$</p>
+<div class="note info"><p><strong>定理 1.1.4.</strong> 对于任意 $q, r$，存在 $\mathrm{GF}(q)$ 上的 $\left[\frac{q^r - 1}{q - 1}, \frac{q^r - 1}{q - 1} - r, 3\right]_q$ Hamming 码。</p>
+</div>
+
+<p><strong>证明.</strong> 惟须统计全体 $\mathrm{GF}(q)^n$ 向量在乘以 $x$（$x$ 为 $\mathrm{GF}(q)$ 中的非零元）意义下的等价类个数即可。回忆 $\mathrm{GF}(q) \setminus \{0\}$ 是一个群，将其视为 $\mathrm{GF}(q)^n\setminus \boldsymbol{0}$ 上的作用，根据 Burnside 引理立即知道（只有乘 $1$ 有不动点）等价类个数为 $\frac{q^r - 1}{q - 1}$。另外这个校验矩阵显然是满秩的，因为 $\mathbf{I}_r$ 是其子矩阵。<div style="text-align: right">$\blacksquare$</div></p>
+<p>既然引入了有限域，不难想到用代数方法构造线性码。令 $\alpha_1, …, \alpha_n$ 是 $\mathrm{GF}(q)$ 中 $n$ 个不同元素，$k\leq n$。一个 Reed-Solomon 码将有限域上一个度数不超过 $k$ 的多项式 $f$（亦可看作 $\mathrm{GF}(q)^n$ 中的元素，仅关注系数）编码作 $(f(\alpha_1), …, f(\alpha_n))$。</p>
+<div class="note info"><p><strong>定理 1.1.5.</strong> 取 $n$ 个点，$k$ 度多项式的 Reed-Solomon 码是 $[n, k, n - k + 1]_q$ 码。</p>
+</div>
+
+<p><strong>证明.</strong> 代数基本定理之直接推论。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="经典编码的几个重要界">经典编码的几个重要界</span></h2><p>本节中，$(n, K, d)$ 码指用 $n$ 个物理比特编码了 $K$ 种信息、码距为 $d$ 的编码。</p>
+<div class="note info"><p><strong>定理 1.2.1（Hamming Bound）.</strong> 存在 $(n, K, 2t + 1)_q$ 码的一个必要条件是</p>
+<p>$$<br>K\left(\sum_{i &#x3D; 0}^t \binom ni (q - 1)^i\right) \leq q^n<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 考虑 Hamming 空间中的 Sphere-Packing，仅以体积估计球的数量的上界。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 1.2.2（Gilbert-Varshamov Bound）.</strong> 存在 $(n, K, d)_q$ 码的一个充分条件是</p>
+<p>$$<br>K\left(\sum_{i &#x3D; 0}^{d - 1} \binom ni (q - 1)^i\right) \leq q^n<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 还是考虑 Hamming 空间中的 Sphere-Packing，贪心选择球心，然后覆盖与其 Hamming 距离不超过 $d - 1$ 的球。上式是这个算法选出 $K$ 个球心的充分条件。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 1.2.3（Singleton Bound）.</strong> 存在 $(n, q^k, d)_q$ 码的一个必要条件是</p>
+<p>$$<br>n - k \geq d - 1<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 任意擦掉 $d - 1$ 位之后必须能容纳所有码字，即 $q^{n - d + 1}\geq q^k$。取对数得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>若一个纠错码的 Hamming Bound 取等，则该纠错码是完美码（Perfect Code）；若一个纠错码的 Singleton Bound 取等，则该纠错码是极大距离可分码（<strong>M</strong>aximum <strong>D</strong>istance <strong>S</strong>eparable Code）。显然，MDS 码的对偶还是 MDS 码。</p>
+<h1><span id="从经典纠错码构造量子纠错码">从经典纠错码构造量子纠错码</span></h1><p>首先介绍一个纠错码领域常用的记号。</p>
+<div class="note success"><p><strong>定义 2.1（Binary Sympletic Form）.</strong> 一列 Pauli 门 $\mathcal{P}_1, …, \mathcal{P}_n$，其中 $\mathcal{P}_i &#x3D; \mathcal{X}^{a_i}\mathcal{Z}^{b_i}$ 的二元辛形式记作 $(\boldsymbol{a} | \boldsymbol{b})$。</p>
+</div>
+
+<p>后面我们会看到这个形式之用途：两个 Pauli 群的元素对易当且仅当其二元辛形式之辛内积为 $0$。不过在本节理论上只会用到这个记号本身。首先，以下定理是平凡的，只需要对着定义验证即可：</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 若 $\mathbf{H}_C$ 是线性码 $C$ 的校验矩阵，它可以纠正的错误集合为 $E$。则以 $(\mathbf{0} | \mathbf{H}_C)$ 为 Stabilizer 的量子纠错码能够纠正的错误集合为 $\{(e | 0) : e\in E\}$。</p>
+</div>
+
+<h2><span id="calderbank-shor-steane-codes">Calderbank-Shor-Steane Codes</span></h2><div class="note success"><p><strong>定义 2.1.1（CSS 码）.</strong> 称一个量子纠错码是 CSS 码，若其 Stabilizer 生成元可以被写成如下二元辛形式：</p>
+<p>$$<br>\left(\begin{array}{c|c}<br>0 &amp; \mathbf{A} \\<br>\mathbf{B} &amp; 0<br>\end{array}\right) \label{css_stabilizer}<br>$$ </p>
+</div>
+
+<p>上一章介绍的 <a href="../../../../2026/01/23/QECNote1Introduction/#steane-code">Steane 码</a> 就是一种 CSS 码。其 Stabilizer 生成元正是由 Hamming 码的校验矩阵给出的。</p>
+<p>$$<br>\left(\begin{array}{c|c}<br>0 &amp; \mathbf{H} \\<br>\mathbf{H} &amp; 0<br>\end{array}\right)<br>$$</p>
+<p>CSS 码的直觉就是用 $\mathbf{A}, \mathbf{B}$ 分别来纠正 $\mathcal{X}$ 和 $\mathcal{Z}$ 错误。然而，矩阵 $(\ref{css_stabilizer})$ 确实是一个 Stabilizer 要求 $(0 | \mathbf{A})$ 和 $(\mathbf{B} | 0)$ 对易，这需要 $\mathbf{A}, \mathbf{B}$ 之间存在某种对偶关系。一切归结为以下定理：</p>
+<div class="note info"><p><strong>定理 2.1.1.</strong> 设 $C_1, C_2$ 分别为 $\mathbb{F}_2$ 上的 $[n, k_1, d_1]$、$[n, k_2, d_2]$ 线性码，其校验矩阵分别为 $\mathbf{H}_1, \mathbf{H}_2$，且 $C_1^\bot \subseteq C_2$。则以下生成元生成的 Stabilizer 给出了一个 $[[n, k, d]]$ 码，其中 $k &#x3D; k_1 + k_2 - n, d \geq \min(d_1, d_2)$：</p>
+<p>$$<br>\left(\begin{array}{c|c}<br>0 &amp; \mathbf{H_1} \\<br>\mathbf{H_2} &amp; 0<br>\end{array}\right)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 须分三部分证明。</p>
+<p><em>Stabilizer 之合法性.</em> 由 $C_1^\bot \subseteq C_2$ 可知，因 $\mathbf{H}_1$ 的每一行都是 $C_1^\bot$ 的元素，因此是 $C_2$ 的元素，因此与 $\mathbf{H}_2$ 的每一行（均为 $C_2^\bot$）的元素内积为 $0$，换言之相应的 $\mathcal{Z}$ 生成元和 $\mathcal{X}$ 生成元对易。</p>
+<p><em>可编码的量子比特数.</em> 这里我们知道了 Stabilizer 有 $2n - k_1 - k_2$ 个对易的生成元。因此可以编码 $n - (2n - k_1 - k_2) &#x3D; k_1 + k_2 - n$ 个逻辑比特。【FIXME：这个是需要补充证明的结论】。</p>
+<p><em>码距.</em> $\mathcal{X}$ 错误和 $\mathcal{Z}$ 错误被上下两部分分别纠正。<div style="text-align: right">$\blacksquare$</div></p>
+<p>这和 Steane Code 的结论确实对上了。注意写 $d \geq \min(d_1, d_2)$ 而非 $&#x3D;$ 实乃必要：Shor Code 其实也是 CSS 码，其码距为 $3$，但校验矩阵为</p>
+<p>$$<br>\begin{pmatrix}<br>1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 0 &amp; 0 \\<br>0 &amp; 0 &amp; 0 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 &amp; 1 \\<br>\end{pmatrix}<br>$$</p>
+<p>的线性码码距为 $2$。本质上，这是因为量子纠错码具有简并性：有些不同的 Syndrome 可以被相同的方法检测和纠正。</p>
+<h2><span id="perfect-qubit-codes">Perfect Qubit Codes</span></h2><p>最小的能纠正 1 比特错误的 CSS 码就是 $7$ 物理比特的 Steane 码。CSS 码的格式要求阻止了这个物理比特数目的继续改进。更一般的想法是从 $\mathrm{GF}(4)$ 加性码或者线性码推出量子纠错码，这可能是注意到了 $(P, \times) \cong (\mathrm{GF}(4), +)$。我们首先给出 $\mathrm{GF}(4)$ 域的一个代表。</p>
+<p>$$<br>\mathrm{GF}(4) &#x3D; \{0, 1, \omega, \omega^2\} \qquad \text{where $\omega^2 &#x3D; \omega + 1$}<br>$$</p>
+<p>上面提到的同构是这样给出的：</p>
+<p>$$<br>\rho: \mathcal{I} \leftrightarrow 0, \mathcal{X}\leftrightarrow 1, \mathcal{Z}\leftrightarrow \omega, \mathcal{Y}\leftrightarrow \omega^2<br>$$</p>
+<p>这个同构还能保一些别的信息。</p>
+<div class="note success"><p><strong>定义 2.2.1（$\mathrm{GF}(4)$ 上的 Trace-Hermitian 积）.</strong> $\mathrm{GF}(4)$ 上的共轭定义为</p>
+<p>$$<br>\bar{x} &#x3D; x^2 \qquad {\color{orange}{\bar{0} &#x3D; 0, \bar{1} &#x3D; 1, \bar{\omega} &#x3D; \omega^2, \bar{\omega^2} &#x3D; \omega}}<br>$$</p>
+<p>$\mathrm{GF}(4)$ 上的迹定义为</p>
+<p>$$<br>\mathrm{tr}(x) &#x3D; x + \bar{x} \qquad {\color{orange}{\mathrm{tr}(0) &#x3D; 0, \mathrm{tr}(1) &#x3D; 0, \mathrm{tr}(\omega) &#x3D; 1, \mathrm{tr}(\omega^2) &#x3D; 1}}<br>$$</p>
+<p>然后可以定义 $\boldsymbol{a}, \boldsymbol{b} \in \mathrm{GF}(4)^n$ 的 Trace-Hermitian 积</p>
+<p>$$<br>\boldsymbol{a} * \boldsymbol{b} &#x3D; \mathrm{tr}(\bar{a}\cdot b) &#x3D; \sum_{i&#x3D;1}^n \mathrm{tr}(\overline{a_i}\cdot b_i)<br>$$</p>
+</div>
+
+<p>这个 Trace-Hermitian 实际上刻画了 Paulis 的对易性。注意：$\mathcal{P}_1, \mathcal{P_2}$ 对易当且仅当 $\mathrm{tr}(\overline{\rho(\mathcal{P}_1)}\cdot \rho(\mathcal{P}_2)) &#x3D; 0$。回忆一个集合 $S$ 可以作为 Stabilizer 的充分必要条件是 $S$ 是不包含 $-\mathcal{I}$ 的有限阿贝尔群。如果我们从一个 $\mathrm{GF}(4)$ 上的码出发，自然不会包含 $\mathcal{I}$，余下两个条件可以概括为如下定理：</p>
+<div class="note info"><p><strong>定理 2.2.1.</strong> 设 $C$ 是一个 $\mathrm{GF}(4)$ 上的 $n$ 位、$2^r$ 个码字的加性码，其在 Trace-Hermitian Product 下有弱自对偶性（$C\subseteq C^\bot$），则 $C$ 可以被改造为一个 $[[n, k, d]]$ 码，其中 $k &#x3D; n - r, d &#x3D; \min\{\mathrm{wt}(x) : x\in C^\bot \setminus C\}$。</p>
+</div>
+
+<p><strong>证明（Sketch）.</strong> $\rho^{-1}(C)$ 就是 Stabilizer，$\rho^{-1}(C^\bot)$ 是 Normalizer，弱自对偶性表明 Stabilizer 构成阿贝尔群。<div style="text-align: right">$\blacksquare$</div></p>
+<p>线性码自然也是加性码。下面的定理表明，如果 $C$ 是线性码，那么其经典弱自对偶性结论可以直接套用到 Trace-Hermitian Product 的情形。</p>
+<div class="note info"><p><strong>定理 2.2.2.</strong> 设 $C$ 是一个 $\mathrm{GF}(4)$ 上的线性码。$C^\bot_1, C^\bot_2$ 分别是其在通常意义下的内积（$\langle x, y\rangle &#x3D; \overline{x}\cdot y$）和 Trace-Hermitian 积下的对偶。则 $C^\bot_1 &#x3D; C^\bot_2$。</p>
+</div>
+
+<p><strong>证明.</strong> $C_1^\bot \subseteq C_2^\bot$ 是显然的。反过来，施反证法，设 $x\in C_2^\bot$ 满足 $\forall y \in C, \mathrm{tr}(\overline{x}\cdot y) &#x3D; 0$ 但是 $\exists y\in C, \overline{x}\cdot y &#x3D; 1$（这是初步排除后唯一可能的情况），则 $\overline{x}\cdot \omega y &#x3D; \omega$，$\mathrm{tr}(\overline{x}\cdot (\omega y)) &#x3D; 1$，然而 $\omega y$ 也是 $C$ 的元素，矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<p>实际上，Hamming 码就是 $\mathrm{GF}(4)$ 上的弱自对偶码。因此根据定理 2.2.1，配合上一些琐碎的验证有</p>
+<div class="note info"><p><strong>定理 2.2.3.</strong> 对于任意的 $r$，可基于 $\left[\frac{4^r - 1}{3}, \frac{4^r - 1}{3} - r, 3\right]_4$ Hamming 码构造 $\left[\left[\frac{4^r - 1}{3}, \frac{4^r - 1}{3} - 2r, 3\right]\right]$ Stabilizer 码。</p>
+</div>
+
+<p>以 5 比特的 $\mathrm{GF}(4)$ Hamming 码为例。除了上面的构造之外另一种校验矩阵（只需要保证每个等价类的代表元都存在即可）为 </p>
+<p>$$<br>\begin{pmatrix}<br>    0 &amp; 1 &amp; \omega &amp; \omega &amp; 1 \\<br>    1 &amp; 0 &amp; 1 &amp; \omega &amp; \omega<br>\end{pmatrix}<br>$$</p>
+<p>这给出了一个弱自对偶的线性子空间。综合这个子空间中的 $16$ 个元素，得到一个可以被 $4$ 个生成元生成的 Stabilizer 子群。这四个 Stabilizer 恰好就可以是</p>
+<p>$$<br>\begin{matrix}<br>    S_1: &amp; Z &amp; X &amp; X &amp; Z &amp;   \\<br>    S_2: &amp; X &amp; X &amp; Z &amp;   &amp; Z \\<br>    S_3: &amp; X &amp; Z &amp;   &amp; Z &amp; X \\<br>    S_4: &amp; Z &amp;   &amp; Z &amp; X &amp; X<br>\end{matrix}<br>$$</p>
+<p>正是上一章提到的 5 qubit code。当然 5 qubit code 并不唯一，取决于你怎么选取校验矩阵。</p>
+<h1><span id="从量子纠错码构造更好的量子纠错码">从量子纠错码构造更好的量子纠错码</span></h1><blockquote>
+<p><strong>注.</strong> 本节中使用的记号 $((n, K, d))_q$ 码指该量子纠错码在一个每量子比特有 $q$ 个量子态的系统中，用 $n$ 个物理比特编码了一个 $K$ 个量子态的逻辑比特，码距为 $d$。</p>
+</blockquote>
+<h2><span id="拼接码">拼接码</span></h2><p>直觉上，你用若干物理比特编码了一个逻辑比特之后，再对每个物理比特进行量子纠错，可以进一步减少错误率。</p>
+<div class="note success"><p><strong>定义 3.1.1（Concatenated Code）.</strong> 设 $Q$ 是一个 $((n_1, K, d_1))_{q_1}$ 码，其 encoder 为 $\mathcal{E}_1$；$R$ 是一个 $((n_2, q_1, d_2))_{q_2}$ 码，其 encoder 为 $\mathcal{E}_2$。则以 $Q, R$ 为基础构造的拼接码系一 $((n_1n_2, K, d))_{q_2}$ 码，其 encoder 为 $\mathcal{E}_2^{\otimes n_1}\circ \mathcal{E}_1$。其中 $Q$ 称为内层码，$R$ 称为外层码。</p>
+</div>
+
+<p>自然的解码方法就是逐层解码。在这种码当中，如果你要产生一个不可侦测的错误，就要让内层码产生至少 $d_1$ 个不可侦测的错误，而每个内层码物理比特的错误需要对应的外层码产生 $d_2$ 个错误。合计起来有</p>
+<div class="note info"><p><strong>命题 3.1.1.</strong> $d \geq d_1d_2$。</p>
+</div>
+
+<p>严谨的论证几乎就是在形式化以上的直觉。</p>
+<p>对于那些常见的纠错码，我们可以将其和自己拼接。这样一来你便得到 $n^k$ 个物理比特，但是码距至少为 $d^k$ 的纠错码。在拼接之前，可以估计出现不可纠正的逻辑错误的概率。记 $t &#x3D; (d - 1) &#x2F; 2, P_T &#x3D; \binom{n}{t + 1}^{1 &#x2F; t}$，假设 $p$ 是小量以忽略 $p^{t + 2}$ 及以上的项，有：</p>
+<p>$$<br>p_1 \approx \binom{n}{t + 1} &#x3D; p_T (p &#x2F; p_T)^{t + 1}<br>$$</p>
+<p>而可以归纳证明进行 $k$ 次迭代拼接之后，出现逻辑错误的概率是</p>
+<p>$$<br>p_1 \approx p_T(p &#x2F; p_T)^{(t + 1)^k}<br>$$</p>
+<p>在 $p$ 很小时，这个数随着 $k$ 快速收敛于 $0$。</p>
+<div class="note success"><p><strong>定义 3.1.2.</strong> 设 $Q$ 是一个 $((n, q, d))_q$ 码。定义 </p>
+<ul>
+<li>$Q_1 &#x3D; Q$；</li>
+<li>$Q_k$ 为以 $Q$ 为外层码，$Q$ 为内层码构造的拼接码。</li>
+</ul>
+</div>
+
+<p>可以证明，两个稳定子码经过拼接之后，还是稳定子码，且其 Stabilizer 也是容易知道的。假设我们有以 $S_1$ 为 Stabilizer 的 $[[n_1, 1, d_1]]$ 内层码和以 $S_2$ 为 Stabilizer 的 $[[n_2, 1, d_2]]$ 外层码，其中外层码上的逻辑 Pauli 门记作 $\overline{\mathcal{P}}$，其 Stabilizer $S$ 由以下两部分生成：</p>
+<ol>
+<li>对于 $S_2$ 的每个生成元 $\mathcal{M}$，$S$ 中包含 $\mathcal{M}_i$，即 $\mathcal{M}$ 作用在第 $i$ 块上。</li>
+<li>对于 $S_1$ 的每个生成元 $\mathcal{M}$，将 $\mathcal{M} &#x3D; \mathcal{P}_1\otimes \cdots \otimes \mathcal{P}_{n_1}$ 改成 $\overline{\mathcal{P}_1}\otimes \cdots \otimes \overline{\mathcal{P}_n}$，包含于 $X$ 中。</li>
+</ol>
+<p>将以上元素张成一个群即可。例如 5 qubit code 与自己拼接之后，按上述算法可得到其 Stabilizer 生成元是 </p>
+<p><img src="/../picture/5qubitconcat.png"></p>
+<h2><span id="卷积码">卷积码</span></h2><p>【FIXME】</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/01/23/QECNote1Introduction/" rel="prev" title="QEC Workshop | 1 概述">
+                  <i class="fa fa-angle-left"></i> QEC Workshop | 1 概述
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/02/03/AtomArrayRouting/" rel="next" title="可重排原子阵列的最优 Routing 算法">
+                  可重排原子阵列的最优 Routing 算法 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

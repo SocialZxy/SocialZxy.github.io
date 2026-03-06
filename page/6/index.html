@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,352 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/07/QuantumComputation2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/07/QuantumComputation2/" class="post-title-link" itemprop="url">Revision | 量子计算</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-12-07 15:27:39" itemprop="dateCreated datePublished" datetime="2024-12-07T15:27:39+08:00">2024-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-30 20:55:19" itemprop="dateModified" datetime="2025-06-30T20:55:19+08:00">2025-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Quantum-Computing/" itemprop="url" rel="index"><span itemprop="name">Quantum Computing</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%A6%82%E8%A7%88">基础与概览</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E9%97%A8%E9%80%9A%E7%94%A8%E6%80%A7">量子门通用性</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%87%8F%E5%AD%90%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E7%AE%97%E6%B3%95">基于量子傅里叶变换的算法</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%9B%B8%E4%BD%8D%E4%BC%B0%E8%AE%A1">量子相位估计</a></li>
+<li><a href="#%E6%B1%82%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6">求元素的阶</a></li>
+<li><a href="#shor-%E7%AE%97%E6%B3%95">Shor 算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-su2-%E6%97%8B%E8%BD%AC%E7%9A%84%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">基于 $SU(2)$ 旋转的量子算法</a><ul>
+<li><a href="#grover">Grover</a></li>
+<li><a href="#quantum-random-walk">Quantum Random Walk</a><ul>
+<li><a href="#quantum-random-walk-%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2">Quantum Random Walk 中的旋转变换</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%AE%8C%E5%85%A8%E5%9B%BE%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E6%A0%87%E8%AE%B0">判断完全图中是否有标记</a></li>
+<li><a href="#%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%86%E9%97%AE%E9%A2%98">元素区分问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-hamiltonian-%E6%A8%A1%E6%8B%9F%E7%9A%84%E7%AE%97%E6%B3%95">基于 Hamiltonian 模拟的算法</a><ul>
+<li><a href="#%E4%B9%98%E7%A7%AF%E5%85%AC%E5%BC%8F">乘积公式</a></li>
+<li><a href="#%E7%A8%80%E7%96%8F-hamiltonian-%E6%A8%A1%E6%8B%9F">稀疏 Hamiltonian 模拟</a></li>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E9%87%8F%E5%AD%90%E6%B8%B8%E8%B5%B0">连续时间量子游走</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/07/QuantumComputation2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/28/NearOptimalQuantumStringAlgo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/28/NearOptimalQuantumStringAlgo/" class="post-title-link" itemprop="url">【Hanged】Shyan Akmal, Ce Jin. Near-Optimal Quantum Algorithms for String Problems</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-28 20:10:20" itemprop="dateCreated datePublished" datetime="2024-11-28T20:10:20+08:00">2024-11-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-22 22:25:01" itemprop="dateModified" datetime="2024-12-22T22:25:01+08:00">2024-12-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 解决了三个问题：最长公共子串、最小字典序循环移位、最长平方子串。暂时只看懂了最小字典序循环移位。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86">前置知识</a><ul>
+<li><a href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%9F%BA%E7%A1%80">字符串基础</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%A8%A1%E5%9E%8B">计算模型</a></li>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">量子算法</a></li>
+<li><a href="#%E9%87%8F%E5%AD%90%E6%B8%B8%E8%B5%B0">量子游走</a></li>
+</ul>
+</li>
+<li><a href="#under-construction%E6%9C%80%E9%95%BF%E5%85%AC%E5%85%B1%E5%AD%90%E4%B8%B2%E9%97%AE%E9%A2%98">【Under Construction】最长公共子串问题</a></li>
+<li><a href="#%E6%9C%80%E5%B0%8F%E5%AD%97%E5%85%B8%E5%BA%8F%E5%BE%AA%E7%8E%AF%E7%A7%BB%E4%BD%8D">最小字典序循环移位</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/28/NearOptimalQuantumStringAlgo/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/11/15/FixedpointQuantumSearch/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/11/15/FixedpointQuantumSearch/" class="post-title-link" itemprop="url">【Under Construction】Yoder, Low, Chuang. Fixed-point quantum search with an optimal number of queries</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-11-15 16:45:53" itemprop="dateCreated datePublished" datetime="2024-11-15T16:45:53+08:00">2024-11-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-11-27 17:07:26" itemprop="dateModified" datetime="2024-11-27T17:07:26+08:00">2024-11-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+
+
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/11/15/FixedpointQuantumSearch/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
@@ -943,337 +1289,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2024/09/24/ODE1-5Applications/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/19/CompletenessOfND/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/19/CompletenessOfND/" class="post-title-link" itemprop="url">一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-09-19 22:11:51" itemprop="dateCreated datePublished" datetime="2024-09-19T22:11:51+08:00">2024-09-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-22 16:52:53" itemprop="dateModified" datetime="2024-09-22T16:52:53+08:00">2024-09-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Discrete-Math/" itemprop="url" rel="index"><span itemprop="name">Discrete Math</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文讨论了几个形式系统的语法和语义之间联系的问题，包括证明自然演绎系统的一致性和完备性，以及直觉主义逻辑中不能推导出 $(\neg\neg P)\rightarrow P$。阅读本文需要的对数理逻辑的理解大概与清华大学出版社的“数理逻辑与集合论”前三章一致，如果没有相关知识可以参考<a href="../../../../2024/01/22/Logic1Basic/">这篇笔记</a>。但本文不采用其中定义的公理系统和证明方式，这点在“声明与记号”中有所说明。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%A3%B0%E6%98%8E%E5%92%8C%E8%AE%B0%E5%8F%B7">声明和记号</a></li>
-<li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E">一致性定理的证明</a></li>
-<li><a href="#%E5%AE%8C%E5%A4%87%E6%80%A7%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E">完备性定理的证明</a></li>
-<li><a href="#%E7%9B%B4%E8%A7%89%E4%B8%BB%E4%B9%89%E9%80%BB%E8%BE%91%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E5%8E%BB%E6%8E%89%E5%8F%8D%E8%AF%81%E6%B3%95%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%B8%8D%E5%AE%8C%E5%A4%87%E7%9A%84">直觉主义逻辑：如何证明去掉反证法的系统是不完备的？</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/19/CompletenessOfND/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/10/SomeSetTheory/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/10/SomeSetTheory/" class="post-title-link" itemprop="url">一些集合论内容的笔记</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-09-10 20:27:09" itemprop="dateCreated datePublished" datetime="2024-09-10T20:27:09+08:00">2024-09-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-24 17:07:32" itemprop="dateModified" datetime="2024-09-24T17:07:32+08:00">2024-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Discrete-Math/" itemprop="url" rel="index"><span itemprop="name">Discrete Math</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 因为本学期的离散数学课程讲了一些集合论但是留了很多悬念，所以将暑假时候学习的一些集合论笔记整理之后发出。本篇笔记参考 <em>李文威，代数学方法（第一卷）基础架构，高等教育出版社（2019）</em> 的第一章，刨去了 <em>1.5 Grothendieck 宇宙</em> 一节，因为我也没有看懂。</p>
-<div class="note danger"><p>本文中的观点相比真正的公理化集合论尚属表层，有很多问题在这一层次难以解决，但仅作诸如离散数学、代数与分析之类科目的前置已经足够，仅供参考。</p>
-</div>
-
-<!-- toc -->
-
-<ul>
-<li><a href="#zfc-%E5%85%AC%E7%90%86">ZFC 公理</a></li>
-<li><a href="#%E5%BA%8F%E7%BB%93%E6%9E%84">序结构</a></li>
-<li><a href="#%E8%B6%85%E7%A9%B7%E9%80%92%E5%BD%92">超穷递归</a></li>
-<li><a href="#%E5%9F%BA%E6%95%B0">基数</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/10/SomeSetTheory/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/07/ODE1PrimaryTricks/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/07/ODE1PrimaryTricks/" class="post-title-link" itemprop="url">常微分方程 (1) 初等积分法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-09-07 11:26:34" itemprop="dateCreated datePublished" datetime="2024-09-07T11:26:34+08:00">2024-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-24 22:20:24" itemprop="dateModified" datetime="2024-09-24T22:20:24+08:00">2024-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/ODE/" itemprop="url" rel="index"><span itemprop="name">ODE</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本系列是<em>柳彬，常微分方程，北京大学出版社（2021）</em>的阅读笔记。</p>
-<p>因为第一章没有什么具体的内容所以直接略过，我们对其中提到的“微分方程的几何直观”简单做一个省流，然后直接进入第二章 <em>初等积分法</em>。显然这里需要做大量的实践，但本文仅总结抽象的方法，如果需要实践材料可以回到原书或者参见任意一本习题集。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E7%9A%84%E5%87%A0%E4%BD%95%E7%9B%B4%E8%A7%82">微分方程的几何直观</a></li>
-<li><a href="#%E6%81%B0%E5%BD%93%E6%96%B9%E7%A8%8B">恰当方程</a></li>
-<li><a href="#%E5%8F%98%E9%87%8F%E5%88%86%E7%A6%BB%E6%96%B9%E7%A8%8B">变量分离方程</a></li>
-<li><a href="#%E4%B8%80%E9%98%B6%E7%BA%BF%E6%80%A7%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">一阶线性微分方程</a></li>
-<li><a href="#%E7%A7%AF%E5%88%86%E5%9B%A0%E5%AD%90">积分因子</a></li>
-<li><a href="#%E4%B8%80%E9%98%B6%E9%9A%90%E5%BC%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B">一阶隐式微分方程</a><ul>
-<li><a href="#%E5%BE%AE%E5%88%86%E6%B3%95">微分法</a></li>
-<li><a href="#%E5%8F%82%E6%95%B0%E6%B3%95">参数法</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/07/ODE1PrimaryTricks/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

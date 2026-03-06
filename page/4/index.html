@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">85</span>
+          <span class="site-state-item-count">88</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,341 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/06/04/InformationTheoryIntuitions/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/06/04/InformationTheoryIntuitions/" class="post-title-link" itemprop="url">一些信息论中的直觉</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-06-04 12:29:05" itemprop="dateCreated datePublished" datetime="2025-06-04T12:29:05+08:00">2025-06-04</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-06 20:12:31" itemprop="dateModified" datetime="2025-06-06T20:12:31+08:00">2025-06-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 这是本学期信息论的复习笔记。主干内容是证明有噪信道编码定理，佐以一些神秘小结论。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89">基本定义</a><ul>
+<li><a href="#%E4%BF%A1%E6%81%AF%E7%86%B5">信息熵</a></li>
+<li><a href="#%E4%BA%92%E4%BF%A1%E6%81%AF%E7%9B%B8%E5%AF%B9%E7%86%B5">互信息，相对熵</a></li>
+<li><a href="#%E5%87%B8%E6%80%A7">凸性</a></li>
+<li><a href="#%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E4%B8%8D%E7%AD%89%E5%BC%8F">数据处理不等式</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BF%A1%E6%BA%90%E7%BC%96%E7%A0%81">信源编码</a><ul>
+<li><a href="#kraft-%E4%B8%8D%E7%AD%89%E5%BC%8F">Kraft 不等式</a></li>
+<li><a href="#haffman-%E7%BC%96%E7%A0%81">Haffman 编码</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BA%A0%E9%94%99%E7%A0%81">纠错码</a><ul>
+<li><a href="#non-uniform-%E7%BA%A0%E9%94%99%E7%A0%81%E6%95%88%E7%8E%87%E7%9A%84%E4%B8%8A%E4%B8%8B%E7%95%8C">Non-uniform 纠错码效率的上下界</a></li>
+<li><a href="#%E5%8F%AF%E9%AB%98%E6%95%88%E8%AE%A1%E7%AE%97%E7%9A%84%E7%BA%A0%E9%94%99%E7%A0%81">可高效计算的纠错码</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AE%9A%E7%90%86">信道编码定理</a><ul>
+<li><a href="#%E6%B8%90%E8%BF%9B%E7%AD%89%E5%88%86%E6%80%A7%E8%B4%A8%E5%92%8C%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E5%AD%98%E5%9C%A8%E6%80%A7">渐进等分性质和有噪信道编码存在性</a></li>
+<li><a href="#fano-%E4%B8%8D%E7%AD%89%E5%BC%8F%E5%92%8C%E6%9C%89%E5%99%AA%E4%BF%A1%E9%81%93%E7%BC%96%E7%A0%81%E9%94%99%E8%AF%AF%E7%8E%87%E4%B8%8B%E7%95%8C">Fano 不等式和有噪信道编码错误率下界</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9D%82%E9%A1%B9">杂项</a><ul>
+<li><a href="#%E6%97%A0%E5%81%8F%E4%BC%B0%E8%AE%A1%E5%92%8C-cramer-rao-%E4%B8%8D%E7%AD%89%E5%BC%8F">无偏估计和 Cramer-Rao 不等式</a></li>
+<li><a href="#%E9%80%9A%E4%BF%A1%E5%A4%8D%E6%9D%82%E5%BA%A6">通信复杂度</a></li>
+<li><a href="#%E6%9C%80%E5%A4%A7%E7%86%B5%E4%BC%B0%E8%AE%A1">最大熵估计</a></li>
+<li><a href="#kolmogrov-%E5%A4%8D%E6%9D%82%E5%BA%A6">Kolmogrov 复杂度</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/06/04/InformationTheoryIntuitions/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/26/HeuristicRSMA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/26/HeuristicRSMA/" class="post-title-link" itemprop="url">启发式 RSMA 算法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-26 15:26:50" itemprop="dateCreated datePublished" datetime="2025-05-26T15:26:50+08:00">2025-05-26</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-30 19:57:57" itemprop="dateModified" datetime="2025-06-30T19:57:57+08:00">2025-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文收录于 <a href="../../../../2025/05/11/EDAPaper/">EDA 论文选读</a>，系 Sailesh K. Rao, P. Sadayappan, Frank K. Hwang, Peter W. Shor 所作论文 <em>The Rectilinear Steiner Arborescence Problem</em> 之阅读笔记。</p>
+<!--toc-->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/26/HeuristicRSMA/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2025/05/12/SALT-Algorithm/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2025/05/12/SALT-Algorithm/" class="post-title-link" itemprop="url">SALT Algorithm</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2025-05-12 20:13:16" itemprop="dateCreated datePublished" datetime="2025-05-12T20:13:16+08:00">2025-05-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-30 19:58:12" itemprop="dateModified" datetime="2025-06-30T19:58:12+08:00">2025-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>本文收录于 <a href="../../../../2025/05/11/EDAPaper/">EDA 论文选读</a>，系 Gengjie Chen, Peishan Tu, Evangeline F. Y. Young 所作 ICCAD’17 的论文 <em>SALT: Provably Good Routing Topology by a Novel Steiner Shallow-Light Tree Algorithm</em> 之阅读笔记。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#tldr">TL;DR</a></li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89-%E7%9B%B4%E8%A7%89">基本定义 &amp; 直觉</a></li>
+<li><a href="#es-algorithm">ES Algorithm</a></li>
+<li><a href="#salt-algorithm">SALT Algorithm</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2025/05/12/SALT-Algorithm/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
@@ -952,322 +1287,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2025/03/10/GenerativeModelByEstimatingGradient/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/05/ScoreMatching/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/05/ScoreMatching/" class="post-title-link" itemprop="url">Aapo Hyvärinen, <i>Estimation of Non-Normalized Statistical Models by Score Matching</i> (2005)</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-03-05 08:58:09" itemprop="dateCreated datePublished" datetime="2025-03-05T08:58:09+08:00">2025-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-30 19:57:11" itemprop="dateModified" datetime="2025-06-30T19:57:11+08:00">2025-06-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Papers/" itemprop="url" rel="index"><span itemprop="name">Papers</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>本文收录于 <a href="../../../../2025/03/05/AIPaperReading/">泛 AI 论文选读</a>。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#tldr">TL;DR</a></li>
-<li><a href="#%E5%BC%95%E5%85%A5">引入</a></li>
-<li><a href="#score-matching">Score Matching</a></li>
-<li><a href="#denoising-score-matching">*Denoising Score Matching</a></li>
-<li><a href="#sliced-score-matching">*Sliced Score Matching</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/05/ScoreMatching/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/03/05/AIPaperReading/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/03/05/AIPaperReading/" class="post-title-link" itemprop="url">泛 AI 论文选读</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-03-05 08:53:06" itemprop="dateCreated datePublished" datetime="2025-03-05T08:53:06+08:00">2025-03-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-03-18 15:53:24" itemprop="dateModified" datetime="2025-03-18T15:53:24+08:00">2025-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Index/" itemprop="url" rel="index"><span itemprop="name">Index</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 准备读一些感兴趣的论文，话题主要是围绕机器学习、人工智能之类的东西。现在包含以下线索：</p>
-<ol>
-<li>Generative Models</li>
-<li>Optimization</li>
-</ol>
-<p>因为是 “泛” AI 论文选读，所以一些神秘理论文章 &#x2F; 量子计算文章混入其中属正常现象。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/03/05/AIPaperReading/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/02/08/CS285DRL5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/02/08/CS285DRL5/" class="post-title-link" itemprop="url">CS285 Part 3 - 策略梯度方法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-02-08 13:15:17" itemprop="dateCreated datePublished" datetime="2025-02-08T13:15:17+08:00">2025-02-08</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-30 19:56:19" itemprop="dateModified" datetime="2025-06-30T19:56:19+08:00">2025-06-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- toc -->
-
-<ul>
-<li><a href="#%E7%AD%96%E7%95%A5%E6%A2%AF%E5%BA%A6%E7%9A%84%E6%8E%A8%E5%AF%BC">策略梯度的推导</a></li>
-<li><a href="#%E7%AE%97%E6%B3%95%E7%9A%84%E9%97%AE%E9%A2%98">算法的问题</a><ul>
-<li><a href="#%E9%AB%98%E6%96%B9%E5%B7%AE">高方差</a><ul>
-<li><a href="#baseline-trick">Baseline Trick</a></li>
-<li><a href="#reward-to-go-trick">Reward-to-go Trick</a></li>
-<li><a href="#%E6%8A%98%E6%89%A3%E5%9B%A0%E5%AD%90">折扣因子</a></li>
-</ul>
-</li>
-<li><a href="#%E9%87%87%E6%A0%B7%E6%95%88%E7%8E%87%E4%BD%8E">采样效率低</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/02/08/CS285DRL5/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>
