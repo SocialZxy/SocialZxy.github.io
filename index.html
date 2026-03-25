@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">88</span>
+          <span class="site-state-item-count">91</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,331 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/19/TarskiFixedPoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/03/19/TarskiFixedPoint/" class="post-title-link" itemprop="url">快速上手 Tarski 不动点问题</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-19 20:55:41" itemprop="dateCreated datePublished" datetime="2026-03-19T20:55:41+08:00">2026-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-24 20:51:01" itemprop="dateModified" datetime="2026-03-24T20:51:01+08:00">2026-03-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 这篇综述详细调查了目前 Tarski 不动点问题的研究进展。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+<li><a href="#%E7%9B%AE%E5%89%8D%E7%9A%84%E7%BB%93%E6%9E%9C">目前的结果</a><ul>
+<li><a href="#texttttarskin-2-%E7%9A%84%E7%B4%A7%E4%B8%8B%E7%95%8C">$\texttt{Tarski}(N, 2)$ 的紧下界</a></li>
+<li><a href="#texttttarskin-d-%E7%9A%84-ologd-n-%E7%AE%97%E6%B3%95">$\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法</a></li>
+<li><a href="#texttttarskin-k-%E5%92%8C-texttttarskin-k-%E7%9A%84%E8%81%94%E7%B3%BB">$\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系</a></li>
+<li><a href="#texttttarskin-3-%E7%9A%84-olog2-n-%E7%AE%97%E6%B3%95">$\texttt{Tarski}(N, 3)$ 的 $O(\log^2 N)$ 算法</a></li>
+<li><a href="#%E9%AB%98%E7%BB%B4-tarski-%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E8%A7%A3%E5%BC%95%E7%90%86">高维 Tarski 问题的分解引理</a></li>
+<li><a href="#textsftarskin-4-%E7%9A%84-olog2-n-%E7%AE%97%E6%B3%95">$\textsf{Tarski}(N, 4)$ 的 $O(\log^2 N)$ 算法</a></li>
+<li><a href="#textsftarski-%E5%92%8C-textsfuniquetarski-%E7%9A%84%E5%85%B3%E7%B3%BB">$\textsf{Tarski}$ 和 $\textsf{UniqueTarski}$ 的关系</a></li>
+<li><a href="#textsftarskin-k-%E7%9A%84%E4%B8%80%E4%B8%AA%E4%B8%8B%E7%95%8C">$\textsf{Tarski}(N, k)$ 的一个下界</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9-mathcalf_nk-%E7%9A%84-osqrt-klog-n-%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">针对 $\mathcal{F}_n^k$ 的 $O(\sqrt k\log n)$ 量子算法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/19/TarskiFixedPoint/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/15/TensorCalculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/03/15/TensorCalculus/" class="post-title-link" itemprop="url">【失败作】人工智能用张量分析</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-15 21:33:34" itemprop="dateCreated datePublished" datetime="2026-03-15T21:33:34+08:00">2026-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-16 23:36:20" itemprop="dateModified" datetime="2026-03-16T23:36:20+08:00">2026-03-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 本文是将凸优化课上讲的矩阵求导形式变简明的尝试，然而这个尝试是失败的。我们尝试将矩阵导数推广到了张量到张量的函数的协变导数，然后使用了一些张量分析的记号。但是很遗憾最后的效果是除了省掉了求和符号之外没有任何简化的迹象，主要是因为即便是在恒等函数的协变导数的记法上，普通的符号也很难展示两个二阶张量直积起来的时候新的指标是从哪来的，然而引入彭罗斯的图形化表示又过于繁杂，只能放弃。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86%E8%BF%90%E7%AE%97">张量函数的微分运算</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86%E6%B3%95%E5%88%99">张量函数的微分法则</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B">使用例</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2026/03/15/TensorCalculus/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/06/QECNote4FTQC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2026/03/06/QECNote4FTQC/" class="post-title-link" itemprop="url">QEC Workshop 4 | FTQC 基础，横向门</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-06 11:33:11" itemprop="dateCreated datePublished" datetime="2026-03-06T11:33:11+08:00">2026-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-13 17:02:45" itemprop="dateModified" datetime="2026-03-13T17:02:45+08:00">2026-03-13</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><h1><span id="容错量子计算">容错量子计算</span></h1><p>至此我们已经配备了一些能够纠正 Pauli 错误的工具。然而实际上的错误不可能在 Encode 和 Decode 阶段缺席，因此我们需要考虑更广泛的景观。</p>
+<h2><span id="错误发生的位置">错误发生的位置</span></h2><p><img src="/../picture/qec-location.png"></p>
+<div class="note success"><p><strong>定义 1.1.1（Locations）.</strong> 一个量子线路，无论容错与否，基本上是由各种<strong>位置（locations）</strong>构成的，分为：</p>
+<ul>
+<li><strong>态制备位</strong>（Preparation Location）；</li>
+<li><strong>门位</strong>（Gate Location）；</li>
+<li><strong>存储位</strong>（Wait &#x2F; Storage Location）；</li>
+<li><strong>测量位</strong>（Measurement Location）；</li>
+<li><strong>经典计算位</strong>（Classic Computation Location）。</li>
+</ul>
+</div>
+
+<p>在这个模型下，错误可能发生在每个 Location 上，具体地我们采用这样的错误模型：</p>
+<div class="note success"><p><strong>定义 1.1.2（Base Model for Fault Tolerance）.</strong> 本条定义罗列一些关于错误模型的关键术语。</p>
+<ul>
+<li><strong>独立随机错误模型.</strong> 线路 $C$ 上的一个独立随机错误模型 $\widetilde{C}$ 系指将 $C$ 中每个 Location $L$ 替换做一个相应、独立的 $\widetilde{L}$，其中 $\widetilde{L}$ 以 $1 - p_L$ 的概率执行 $L$ 的操作；以 $p_L$ 的概率输出同样 Hilbert Space 里面的别的酉变换。这个 $\widetilde{C}$ 也称为 $C$ 的含噪实现，$p_L$ 称为错误率，同种 Location 具有相同的错误率。</li>
+<li><strong>独立 Pauli 模型.</strong> $\widetilde{L}$ 总是 $L$ 复合上一个 Pauli 信道。</li>
+<li><strong>错误路径.</strong> 一个 $C$ 中 Location 的子集。</li>
+</ul>
+</div>
+
+<p>注意发生的错误实际上会随着线路传播。比如考虑 $\mathcal{E} &#x3D; \mathcal{X}\otimes \mathcal{I}$ 作用在一个 $\mathcal{CNOT}$ Gate Location 上，有 </p>
+<p>$$<br>\mathcal{CNOT}(\mathcal{E}|\psi\rangle) &#x3D; (\mathcal{CNOT}\cdot \mathcal{E}\cdot \mathcal{CNOT}^\dagger)\mathcal{CNOT}|\psi\rangle<br>$$</p>
+<p>本质上发生的错误是 $\mathcal{CNOT}\cdot \mathcal{E}\cdot \mathcal{CNOT}^\dagger &#x3D; \mathcal{X}\otimes \mathcal{X}$。而单量子门不会传播错误，只会改变错误类型。比如考虑 $[[7, 1, 3]]$ 码，你可以验证 $\mathcal{H}$ 门作用于逻辑比特就等价于给每个物理比特作用 $\mathcal{H}$（这种性质记作“$\mathcal{H}$ 是 $[[ 7, 1, 3]]$ 码上的横向门”，我们稍后展开讲）</p>
+<p>$$<br>\mathcal{H}^{\otimes 7}|0\rangle_L &#x3D; \frac 1{\sqrt 2}(|0\rangle_L + |1\rangle_L), \qquad \mathcal{H}^{\otimes 7} |1\rangle_L &#x3D; \frac{1}{\sqrt{2}}(|0\rangle_L - |1\rangle_L)<br>$$</p>
+<p>现在假设此时发生了一个 $3$ 位置上的比特翻转 $\mathcal{X}_3$，可以算出 $\mathcal{H}^{\otimes 7}\mathcal{X}_3 \mathcal{H}^{\otimes 7\dagger} &#x3D; \mathcal{Z}_3$，并没有造成错误传播。</p>
+<hr>
+<p>为了进行容错量子计算，一个自然的思路是将制备的初态 $|\psi\rangle$ 变成 $|\psi\rangle_L$，所有的门换成逻辑门。此处纠错的基本单元便是 Gadget。</p>
+<div class="note success"><p><strong>定义 1.1.3（Gadgets）.</strong> 对于一个 Location $L$，其 Gadget 系指二元组 $(Q, \mathcal{G}_L)$，其中 $Q &#x3D; (\mathcal{D}, \mathcal{E})$ 是一个 QECC，$\mathcal{G}_L$ 是相应的逻辑操作，即</p>
+<p>$$<br>L &#x3D; \mathcal{D}\circ \mathcal{G}_L \circ \mathcal{E}<br>$$</p>
+</div>
+
+<p>采用统一的 QECC，将所有种类的 Location 集合起来便得到一个<strong>容错计算协议（Fault Tolerant Protocol）</strong>。</p>
+<div class="note success"><p><strong>定义 1.1.4（容错模拟）.</strong> 设 $C$ 是一个线路。根据一个容错计算协议，将 $C$ 中所有 Location 替换为相应的 Gadget 得到 $FT(C)$。这个线路称为 $C$ 的<strong>理想容错模拟</strong>。而对应的含噪版本 $\widetilde{FT(C)}$ 便称为其<strong>容错模拟</strong>。</p>
+<p>这个容错模拟的线路大小开销（circuit size overhead）为 $FT(C)$ 的 Location 数目除以 $C$ 的 Location 数目。类似地可以定义空间开销（qubit 数目相除）、深度开销或时间开销等。</p>
+</div>
+
+<h2><span id="阈值定理的陈述与直觉">阈值定理的陈述与直觉</span></h2><p>在接下来的两三讲中，我们的核心目标是证明以下的阈值定理：</p>
+<div class="note info"><p><strong>Theorem.</strong> 假设一个系统服从独立随机错误模型，其中每种 Location 出错的概率都是 $p$。则存在一族纠错协议 $\mathcal{F}_l$，阈值 $p_T$ 使得：一旦 $p &lt; p_T$，则对于一切始于态制备、终于测量的理想量子线路 $C$ 和任意正数 $\varepsilon &gt; 0$，都存在一个 $l$ 使得 $C$ 在容错计算协议 $\mathcal{F}_l$ 下的容错模拟 $\widetilde{FT_l(C)}$ 中测量结果的分布和 $C$ 的测量结果的分布的统计距离至多相差 $\varepsilon$，且 $FT(C)$ 的 size overhead 为 $O(\mathrm{polylog}(T &#x2F; \varepsilon))$。</p>
+</div>
+
+<p>以下是关于这个定理的一些评论：</p>
+<ul>
+<li><strong>定理的直觉.</strong> 假如你的线路有 $T$ 个 Location，要实现总误差不超过 $\varepsilon$，只需让每个 Locatoin 的误差不超过 $\varepsilon &#x2F; T$（Union Bound）。而一个错误不会传播太远（一个错误仅会扩散到 $O(1)$ 个位置）的情况下，那么现在拿着一个能纠正 $t$ 位错误的 QECC 去纠错一次，每个 Gadget 的错误率就会变成 $p^{O(t)}$ 状物。此时你只需要反复用这个 QECC 去纠错即可（换言之 $\mathcal{F}_l$ 是那个 QECC 的拼接码）。</li>
+<li><strong>所谓“条件”.</strong> 上一条所谓的条件我们将在下一节（“1.3 容错计算的条件”）形式化。</li>
+<li><strong>常数的问题.</strong> 这个 overhead 的常数其实非常大，而且显然取决于 $p &#x2F; p_T$。</li>
+<li><strong>阈值的测算.</strong> 一般我们会想要知道一个码的阈值。当然有一些严格证明的办法，实际上很多文献中常用数值模拟的办法来测量阈值（调节 $p$，算一个线路纠错前后的误差，两条线的交点就是阈值）。数值模拟测出的阈值通常比严格证明放出来的要高一些。</li>
+</ul>
+<h2><span id="容错计算的条件">容错计算的条件</span></h2><p>【FIXME】</p>
+<h1><span id="横向门">横向门</span></h1><p>【FIXME】</p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
@@ -861,322 +1186,8 @@
 
 
     
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/12/30/EconomicsRevision/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/30/EconomicsRevision/" class="post-title-link" itemprop="url">Revision | 经济学原理</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-12-30 15:25:37" itemprop="dateCreated datePublished" datetime="2025-12-30T15:25:37+08:00">2025-12-30</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-01-03 22:12:15" itemprop="dateModified" datetime="2026-01-03T22:12:15+08:00">2026-01-03</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- toc -->
-
-<ul>
-<li><a href="#%E7%BB%8F%E6%B5%8E%E5%AD%A6%E7%9A%84%E6%80%9D%E7%BB%B4%E6%96%B9%E5%BC%8F">经济学的思维方式</a></li>
-<li><a href="#%E5%BE%AE%E8%A7%82%E7%BB%8F%E6%B5%8E%E5%AD%A6">微观经济学</a><ul>
-<li><a href="#%E5%81%8F%E5%A5%BD%E4%B8%8E%E9%80%89%E6%8B%A9">偏好与选择</a></li>
-<li><a href="#%E4%BA%A4%E6%8D%A2-%E5%88%86%E5%B7%A5-%E8%B4%A7%E5%B8%81">交换、分工、货币</a></li>
-<li><a href="#%E6%B6%88%E8%B4%B9%E8%80%85%E9%80%89%E6%8B%A9%E4%B8%8E%E9%9C%80%E6%B1%82%E6%9B%B2%E7%BA%BF">消费者选择与需求曲线</a></li>
-<li><a href="#%E7%94%9F%E4%BA%A7%E5%92%8C%E4%BE%9B%E7%BB%99%E6%9B%B2%E7%BA%BF">生产和供给曲线</a></li>
-<li><a href="#%E4%BE%9B%E6%B1%82%E4%B8%8E%E5%B8%82%E5%9C%BA%E5%9D%87%E8%A1%A1">供求与市场均衡</a></li>
-<li><a href="#%E7%AB%9E%E4%BA%89%E5%92%8C%E5%9E%84%E6%96%AD">竞争和垄断</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/12/30/EconomicsRevision/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/12/25/ComputerNetworkRevision/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/12/25/ComputerNetworkRevision/" class="post-title-link" itemprop="url">Revision | 计算机网络</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-12-25 09:47:29" itemprop="dateCreated datePublished" datetime="2025-12-25T09:47:29+08:00">2025-12-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-29 11:34:16" itemprop="dateModified" datetime="2025-12-29T11:34:16+08:00">2025-12-29</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- toc -->
-
-<ul>
-<li><a href="#%E6%A6%82%E8%BF%B0">概述</a><ul>
-<li><a href="#%E5%AE%9E%E4%BD%93">实体</a></li>
-<li><a href="#%E6%9C%8D%E5%8A%A1">服务</a></li>
-<li><a href="#%E7%BD%91%E7%BB%9C%E5%8D%8F%E8%AE%AE">网络协议</a></li>
-</ul>
-</li>
-<li><a href="#%E5%BA%94%E7%94%A8%E5%B1%82">应用层</a><ul>
-<li><a href="#web-%E4%B8%8E-http-%E5%8D%8F%E8%AE%AE">Web 与 HTTP 协议</a></li>
-<li><a href="#%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9Fdns">域名系统（DNS）</a></li>
-<li><a href="#%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6">电子邮件</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96%E5%BA%94%E7%94%A8%E5%B1%82%E5%8D%8F%E8%AE%AE">其他应用层协议</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BC%A0%E8%BE%93%E5%B1%82">传输层</a><ul>
-<li><a href="#udp-%E5%8D%8F%E8%AE%AE">UDP 协议</a></li>
-<li><a href="#tcp-%E5%8D%8F%E8%AE%AE">TCP 协议</a></li>
-<li><a href="#%E6%96%B0%E5%9E%8B%E4%BC%A0%E8%BE%93%E5%B1%82%E6%8A%80%E6%9C%AF">新型传输层技术</a></li>
-</ul>
-</li>
-<li><a href="#%E7%BD%91%E7%BB%9C%E5%B1%82">网络层</a><ul>
-<li><a href="#%E7%9B%B8%E5%85%B3%E5%8D%8F%E8%AE%AE">相关协议</a></li>
-<li><a href="#%E8%B7%AF%E7%94%B1">路由</a></li>
-<li><a href="#%E8%BD%AF%E4%BB%B6%E5%AE%9A%E4%B9%89%E7%BD%91%E7%BB%9C">软件定义网络</a></li>
-<li><a href="#%E5%85%B6%E4%BB%96%E6%8A%80%E6%9C%AF">其他技术</a></li>
-</ul>
-</li>
-<li><a href="#%E9%93%BE%E8%B7%AF%E5%B1%82">链路层</a><ul>
-<li><a href="#%E6%9C%89%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91%E7%BB%9C">有线局域网络</a></li>
-</ul>
-</li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/12/25/ComputerNetworkRevision/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/11/21/GenerativeModelingRevision/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/11/21/GenerativeModelingRevision/" class="post-title-link" itemprop="url">Revision | 生成模型基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2025-11-21 12:54:24" itemprop="dateCreated datePublished" datetime="2025-11-21T12:54:24+08:00">2025-11-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-11-24 23:49:53" itemprop="dateModified" datetime="2025-11-24T23:49:53+08:00">2025-11-24</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <!-- toc -->
-
-<ul>
-<li><a href="#%E6%A6%82%E8%A6%81">概要</a></li>
-<li><a href="#%E8%87%AA%E7%BC%96%E7%A0%81%E5%99%A8">自编码器</a></li>
-<li><a href="#transformer-%E5%92%8C%E8%87%AA%E5%9B%9E%E5%BD%92%E6%A8%A1%E5%9E%8B">Transformer 和自回归模型</a></li>
-<li><a href="#%E7%94%9F%E6%88%90%E5%BC%8F%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C">生成式对抗网络</a></li>
-<li><a href="#%E6%A0%87%E5%87%86%E5%8C%96%E6%B5%81%E6%A8%A1%E5%9E%8B">标准化流模型</a></li>
-<li><a href="#%E6%89%A9%E6%95%A3%E6%A8%A1%E5%9E%8B">扩散模型</a></li>
-<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2025/11/21/GenerativeModelingRevision/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

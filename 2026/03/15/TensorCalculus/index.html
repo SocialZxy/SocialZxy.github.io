@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文是将凸优化课上讲的矩阵求导形式变简明的尝试，然而这个尝试是失败的。我们尝试将矩阵导数推广到了张量到张量的函数的协变导数，然后使用了一些张量分析的记号。但是很遗憾最后的效果是除了省掉了求和符号之外没有任何简化的迹象，主要是因为即便是在恒等函数的协变导数的记法上，普通的符号也很难展示两个二阶张量直积起来的时候新的指标是从哪来的，然而引入彭罗斯的图形化表示又过于繁杂，只能放弃。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【失败作】人工智能用张量分析">
+<meta property="og:url" content="http://example.com/2026/03/15/TensorCalculus/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文是将凸优化课上讲的矩阵求导形式变简明的尝试，然而这个尝试是失败的。我们尝试将矩阵导数推广到了张量到张量的函数的协变导数，然后使用了一些张量分析的记号。但是很遗憾最后的效果是除了省掉了求和符号之外没有任何简化的迹象，主要是因为即便是在恒等函数的协变导数的记法上，普通的符号也很难展示两个二阶张量直积起来的时候新的指标是从哪来的，然而引入彭罗斯的图形化表示又过于繁杂，只能放弃。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-15T13:33:34.000Z">
+<meta property="article:modified_time" content="2026-03-16T15:36:20.976Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/03/15/TensorCalculus/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/03/15/TensorCalculus/","path":"2026/03/15/TensorCalculus/","title":"【失败作】人工智能用张量分析"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>【失败作】人工智能用张量分析 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">张量函数的微分运算</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">张量函数的微分法则</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">使用例</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/15/TensorCalculus/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="【失败作】人工智能用张量分析 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          【失败作】人工智能用张量分析
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-15 21:33:34" itemprop="dateCreated datePublished" datetime="2026-03-15T21:33:34+08:00">2026-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-16 23:36:20" itemprop="dateModified" datetime="2026-03-16T23:36:20+08:00">2026-03-16</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文是将凸优化课上讲的矩阵求导形式变简明的尝试，然而这个尝试是失败的。我们尝试将矩阵导数推广到了张量到张量的函数的协变导数，然后使用了一些张量分析的记号。但是很遗憾最后的效果是除了省掉了求和符号之外没有任何简化的迹象，主要是因为即便是在恒等函数的协变导数的记法上，普通的符号也很难展示两个二阶张量直积起来的时候新的指标是从哪来的，然而引入彭罗斯的图形化表示又过于繁杂，只能放弃。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86%E8%BF%90%E7%AE%97">张量函数的微分运算</a></li>
+<li><a href="#%E5%BC%A0%E9%87%8F%E5%87%BD%E6%95%B0%E7%9A%84%E5%BE%AE%E5%88%86%E6%B3%95%E5%88%99">张量函数的微分法则</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E4%BE%8B">使用例</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="张量函数的微分运算">张量函数的微分运算</span></h1><p>本节中 $U, V$ 均是线性空间。你可以认为要么是某个 $\mathbb{R}^n$，要么是某个 $\mathbb{R}^n$ 的对偶。此处，我们将会将以下几个概念视作等同，本质上就是要求读者的思维在线性空间和与之同构的向量空间之间自由切换：</p>
+<ul>
+<li>列向量和 $\mathbb{R}^n$ 中的元素，行向量与 $\mathbb{R}^{n*}$ 中的元素，转置和对偶；</li>
+<li>矩阵 $\mathbf{A}$ 与坐标表示为 ${\Gamma^i}_j &#x3D; A_{ij}$ 的二阶混合张量 $\mathbf{\Gamma}$。</li>
+</ul>
+<p>设函数 $\mathbf{f}(\mathbf{x})$ 是一个 $U_1\otimes \cdots \otimes U_n \rightarrow V_1 \otimes \cdots \otimes V_m$ 的函数。其协变导数 </p>
+<p>$$<br>\mathrm{D} \mathbf{f} : U_1\otimes \cdots \otimes U_n \rightarrow U_1^*\otimes \cdots \otimes U_n^* \otimes V_1 \otimes \cdots \otimes V_m<br>$$ </p>
+<p>其中 $\mathrm{D} \mathbf{f}(\mathbf{x})$ 的坐标为</p>
+<p>$$<br>\mathrm{D} \mathbf{f}(\mathbf{x})^{j_1…j_m}_{i_1…i_n} &#x3D; \frac{\partial f(\mathbf{x})^{j_1…j_m}}{\partial x^{i_1…i_n}}<br>$$</p>
+<p>而 $\nabla f$ 是 $\mathrm{D}f$ 的对偶。考虑最简单的例子，比如 $\boldsymbol{f} : \mathbb{R}^n \rightarrow \mathbb{R}$，则 $\mathrm{D} \boldsymbol{f}$ 是一个 $n$ 维行向量，$\nabla \boldsymbol{f}$ 是一个 $n$ 维列向量。</p>
+<h1><span id="张量函数的微分法则">张量函数的微分法则</span></h1><p>接下来推导张量的一些可能有用的微分法则。本节将随时使用 Einstein’s Summation Convention。</p>
+<div class="note info"><p><strong>定理 2.1（常量乘法的微分）.</strong> 设 $\mathbf{f}: U_1\otimes \cdots \otimes U_n \rightarrow V_1 \otimes \cdots \otimes V_m$，$\mathbf{A}$ 是 $W_1\otimes \cdots \otimes W_l\otimes V_1^*\otimes \cdots \otimes V_m^*$ 中的张量，有 $\mathbf{A}$ 与 $f$ 的缩并的协变导数</p>
+<p>$$<br>\mathrm{D}(\mathbf{A\cdot \mathbf{f}}) &#x3D; \mathbf{A}\cdot \mathrm{D} \mathbf{f}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 计算即可。</p>
+<p>$$<br>\begin{aligned}<br>&amp;\frac{\partial}{\partial x^{i_1…i_n}} A^{k_1…k_l}_{j_1…j_m}f^{j_1…j_m}(\mathbf{x}) \\<br>&#x3D;&amp; A^{k_1…k_l}_{j_1…j_m} \frac{\partial}{\partial x_{i_1…i_n}}f^{j_1…j_m}(\mathbf{x}) \\<br>&#x3D;&amp; A^{k_1…k_l}_{j_1…j_m} \mathrm{D} \mathbf{f}(\mathbf{x})^{j_1…j_m}_{i_1…i_n}<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note info"><p><strong>定理 2.2（函数乘法的微分）.</strong> 设 $\mathbf{f}: U_1\otimes \cdots \otimes U_n \rightarrow V_1 \otimes \cdots \otimes V_m$，$\mathbf{g}: U_1\otimes \cdots \otimes U_n \rightarrow W_1\otimes \cdots \otimes W_l\otimes V_1^*\otimes \cdots \otimes V_m^*$。则 $\mathbf{f}$ 和 $\mathbf{g}$ 的缩并的协变导数</p>
+<p>$$<br>\mathrm{D}(\mathbf{f}\cdot \mathbf{g}(\mathbf{x})) &#x3D; (\mathrm{D}\mathbf{f})\cdot \mathbf{g}(\mathbf{x}) + \mathbf{f}\cdot (\mathrm{D}\mathbf{g})(\mathbf{x})<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 这可以根据线性性和定义直接得到，这里不再多算。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 2.3（复合函数的微分链式法则）.</strong> 设 $\mathbf{f}: U_1\otimes \cdots \otimes U_n \rightarrow V_1 \otimes \cdots \otimes V_m$，$\mathbf{g}: V_1 \otimes \cdots \otimes V_m\rightarrow W_1\otimes \cdots \otimes W_l$，则 $\mathbf{g}$ 和 $\mathbf{f}$ 的复合的协变导数</p>
+<p>$$<br>\mathrm{D}(\mathbf{gf}(\mathbf{x})) &#x3D; (\mathrm{D}\mathbf{g})(\mathbf{f}(\mathbf{x}))\cdot (\mathrm{D}\mathbf{f})(\mathbf{x})<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 下面的推导看起来很忙，但不知道在忙什么。这本质上就是一个复合函数全微分而已，推导等式右边已然是上方的形式。</p>
+<p>$$<br>\begin{aligned}<br>\frac{\partial}{\partial x^{i_1…i_n}} \mathbf{g}(\mathbf{f}(\mathbf{x}))^{j_1…j_l} &amp;&#x3D; \frac{\partial}{\partial \mathbf{f}(\mathbf{x})^{k_1…k_m}}\mathbf{g}(\mathbf{f}(\mathbf{x}))^{j_1…j_l}\frac{\partial}{\partial x^{i_1…i_n}}\mathbf{f}(\mathbf{x})^{k_1…k_m}<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<h1><span id="使用例">使用例</span></h1><p>来看几个题目中常见的东西的导数。</p>
+<div class="note warning"><p><strong>例 3.0（单位函数）.</strong> $\mathrm{Id} : \mathbb{R}^n\times \mathbb{R}^{m*}\rightarrow \mathbb{R}^n\times \mathbb{R}^{m*}$。</p>
+</div>
+
+<p>$$<br>\mathrm{D}~\mathrm{Id}(\mathbf{X})_{il}^{jk} &#x3D; \frac{\partial}{\partial X^i_j} X^k_l &#x3D; \delta^j_l\delta^k_i<br>$$</p>
+<p>这个不知道有什么方便的记号来表示。可能是 $\mathbf{II}$，其中乘法是直积？但是直积没法直观地展示下标是哪里来的。</p>
+<div class="note warning"><p><strong>例 3.1（Trace）.</strong> $\mathrm{tr} : \mathbb{R}^n\otimes \mathbb{R}^{n*}\rightarrow \mathbb{R}$，$\mathrm{tr}(\mathbf{X}) &#x3D; {X^i}_i$。 </p>
+</div>
+
+<p>$$<br>\mathrm{D}~\mathrm{tr}(\mathbf{X})_i^j &#x3D; (\mathrm{D} X^k_k)_i^j &#x3D; \delta_i^j<br>$$</p>
+<p>因此 $\mathrm{D}~\mathrm{tr}(\mathbf{X}) &#x3D; \mathbf{I}$。</p>
+<div class="note warning"><p><strong>例 3.2（矩阵左右乘）.</strong> 设 $\mathbf{A}: \mathbb{R}^n \otimes \mathbb{R}^{m*}$，$\mathbf{B} : \mathbb{R}^p\otimes \mathbb{R}^{q^*}$，$f : \mathbb{R}^m\otimes \mathbb{R}^{p*}\rightarrow \mathbb{R}^n\otimes \mathbb{R}^{q*}$，$f(\mathbf{X}) &#x3D; \mathbf{A}\cdot \mathbf{X}\cdot \mathbf{B}$</p>
+</div>
+
+<p>这东西更是没什么好的表示方法了。我们硬算一下坐标：</p>
+<p>$$<br>\mathrm{D} {f(\mathbf{X})^i_j}^k_l &#x3D; {\mathrm{D}(\mathbf{A}\cdot \mathbf{X})^i_j}_a^kB^a_l &#x3D; A^k_b (\mathrm{D}~\mathrm{Id}(\mathbf{X}))_{ja}^{ib}B_{l}^a &#x3D; A^k_j B_{l}^i<br>$$</p>
+<p>硬要说这东西就是 $\mathbf{AB}$（直积），但这样还是不能直观地展示是怎么直起来的。</p>
+<div class="note warning"><p><strong>例子 3.3（经典例子）.</strong> 设 $f(\mathbf{X}) &#x3D; \mathrm{tr}(\mathbf{AXB})$，其中 $\mathbf{A}$ 的行数等于 $\mathbf{B}$ 的列数。</p>
+</div>
+
+<p>这显然就是</p>
+<p>$$<br>\mathcal{D} f(\mathbf{X})^i_j &#x3D; \delta_b^a (\mathrm{D}~\mathbf{AXB})_{ja}^{ib} &#x3D; \delta^a_b A_j^b B_a^i &#x3D; A_j^k B_k^i<br>$$</p>
+<p>也就是 $\mathbf{B}\cdot \mathbf{A}$（这里是矩阵乘法）。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/06/QECNote4FTQC/" rel="prev" title="QEC Workshop 4 | FTQC 基础，横向门">
+                  <i class="fa fa-angle-left"></i> QEC Workshop 4 | FTQC 基础，横向门
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/03/19/TarskiFixedPoint/" rel="next" title="快速上手 Tarski 不动点问题">
+                  快速上手 Tarski 不动点问题 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 这篇综述详细调查了目前 Tarski 不动点问题的研究进展。    问题 应用 目前的结果 $\texttt{Tarski}(N, 2)$ 的紧下界 $\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法 $\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系 $\texttt{Tarski}">
+<meta property="og:type" content="article">
+<meta property="og:title" content="快速上手 Tarski 不动点问题">
+<meta property="og:url" content="http://example.com/2026/03/19/TarskiFixedPoint/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 这篇综述详细调查了目前 Tarski 不动点问题的研究进展。    问题 应用 目前的结果 $\texttt{Tarski}(N, 2)$ 的紧下界 $\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法 $\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系 $\texttt{Tarski}">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/tarski-hardinst.png">
+<meta property="article:published_time" content="2026-03-19T12:55:41.000Z">
+<meta property="article:modified_time" content="2026-03-24T12:51:01.571Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/tarski-hardinst.png">
+
+
+<link rel="canonical" href="http://example.com/2026/03/19/TarskiFixedPoint/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/03/19/TarskiFixedPoint/","path":"2026/03/19/TarskiFixedPoint/","title":"快速上手 Tarski 不动点问题"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>快速上手 Tarski 不动点问题 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">目前的结果</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">$\texttt{Tarski}(N, 2)$ 的紧下界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">$\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">$\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.4.</span> <span class="nav-text">$\texttt{Tarski}(N, 3)$ 的 $O(\log^2 N)$ 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.5.</span> <span class="nav-text">高维 Tarski 问题的分解引理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.6.</span> <span class="nav-text">$\textsf{Tarski}(N, 4)$ 的 $O(\log^2 N)$ 算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.7.</span> <span class="nav-text">$\textsf{Tarski}$ 和 $\textsf{UniqueTarski}$ 的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.8.</span> <span class="nav-text">$\textsf{Tarski}(N, k)$ 的一个下界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.9.</span> <span class="nav-text">针对 $\mathcal{F}_n^k$ 的 $O(\sqrt k\log n)$ 量子算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">91</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/19/TarskiFixedPoint/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="快速上手 Tarski 不动点问题 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          快速上手 Tarski 不动点问题
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-19 20:55:41" itemprop="dateCreated datePublished" datetime="2026-03-19T20:55:41+08:00">2026-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-03-24 20:51:01" itemprop="dateModified" datetime="2026-03-24T20:51:01+08:00">2026-03-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 这篇综述详细调查了目前 Tarski 不动点问题的研究进展。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98">问题</a></li>
+<li><a href="#%E5%BA%94%E7%94%A8">应用</a></li>
+<li><a href="#%E7%9B%AE%E5%89%8D%E7%9A%84%E7%BB%93%E6%9E%9C">目前的结果</a><ul>
+<li><a href="#texttttarskin-2-%E7%9A%84%E7%B4%A7%E4%B8%8B%E7%95%8C">$\texttt{Tarski}(N, 2)$ 的紧下界</a></li>
+<li><a href="#texttttarskin-d-%E7%9A%84-ologd-n-%E7%AE%97%E6%B3%95">$\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法</a></li>
+<li><a href="#texttttarskin-k-%E5%92%8C-texttttarskin-k-%E7%9A%84%E8%81%94%E7%B3%BB">$\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系</a></li>
+<li><a href="#texttttarskin-3-%E7%9A%84-olog2-n-%E7%AE%97%E6%B3%95">$\texttt{Tarski}(N, 3)$ 的 $O(\log^2 N)$ 算法</a></li>
+<li><a href="#%E9%AB%98%E7%BB%B4-tarski-%E9%97%AE%E9%A2%98%E7%9A%84%E5%88%86%E8%A7%A3%E5%BC%95%E7%90%86">高维 Tarski 问题的分解引理</a></li>
+<li><a href="#textsftarskin-4-%E7%9A%84-olog2-n-%E7%AE%97%E6%B3%95">$\textsf{Tarski}(N, 4)$ 的 $O(\log^2 N)$ 算法</a></li>
+<li><a href="#textsftarski-%E5%92%8C-textsfuniquetarski-%E7%9A%84%E5%85%B3%E7%B3%BB">$\textsf{Tarski}$ 和 $\textsf{UniqueTarski}$ 的关系</a></li>
+<li><a href="#textsftarskin-k-%E7%9A%84%E4%B8%80%E4%B8%AA%E4%B8%8B%E7%95%8C">$\textsf{Tarski}(N, k)$ 的一个下界</a></li>
+<li><a href="#%E9%92%88%E5%AF%B9-mathcalf_nk-%E7%9A%84-osqrt-klog-n-%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">针对 $\mathcal{F}_n^k$ 的 $O(\sqrt k\log n)$ 量子算法</a></li>
+</ul>
+</li>
+<li><a href="#%E6%80%BB%E7%BB%93">总结</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="问题">问题</span></h1><div class="note success"><p><strong>定义 1.1（Lattice）.</strong> 二元组 $(\mathscr{L}, \preceq)$ 被称为一个格，若</p>
+<ul>
+<li>$\preceq$ 是 $\mathscr{L}$ 上面的偏序关系；</li>
+<li>对于任意的 $a, b\in \mathscr{L}$，${a, b}$ 在 $\mathscr{L}$ 中有最小上界和最大下界。</li>
+</ul>
+</div>
+
+<p>称一个格是完备的，若对于任意 $S\subseteq \mathscr{L}$，$S$ 在 $\mathscr{L}$ 中有最小上界 $\sup_{\mathscr{L}} S$ 和最大下界 $\inf_{\mathscr{L}} S$。显然有限格必然完备，而譬如 $\mathbb{N}^2$ 配备自然偏序关系构成的格就不是完备的。</p>
+<div class="note success"><p><strong>定义 1.2（Monotone Function）.</strong> 映射 $f: \mathscr{L}\rightarrow \mathscr{L}$ 被称为单调的，若</p>
+<p>$$<br>\forall x, y, \quad x\preceq y \rightarrow f(x)\preceq f(y)<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.1（Tarski 不动点定理）.</strong> 设 $f$ 是完备格 $(\mathscr{L}, \preceq)$ 上的单调函数。$X^* :&#x3D; \{x\in X : f(x) &#x3D; x\}$ 称为 $f$ 的不动点集合，其中元素称为 $f$ 的不动点，有</p>
+<ol>
+<li>$X^* \ne \varnothing$；</li>
+<li>$(X^*, \preceq)$ 是完备格。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 首先构造一个集合 $X’ &#x3D; \{x \in X : x \preceq f(x)\}$。注意 $X’$ 必然非空，其中一个显然的元素是 $X$ 的最小元（因 $X$ 完备必然存在）。令 $x^* &#x3D; \sup_X X’$，则有：</p>
+<ol>
+<li>任取 $x\in X’$ 有 $x \preceq f(x) \preceq f(x^*)$，因此 $f(x^*)$ 是 $X’$ 的上界，然而 $x^*$ 是上确界，因此有 $x^* \preceq f(x^*)$。</li>
+<li>再迭代一轮有 $f(x^*) \preceq f(f(x^*))$，表明 $f(x^*)\in X’$，由于 $x^*$ 是 $X’$ 的上确界，必然有 $f(x^*)\preceq x^*$。</li>
+</ol>
+<p>至此找到了 $x^*\in X^*$。事实上对 $X’$ 的任意一个子集都可以重复上述论证，容易得到 $X^*$ 是完备格。<div style="text-align: right">$\blacksquare$</div></p>
+<p>自然地我们希望能够快速计算不动点：</p>
+<div class="note warning"><p><strong>问题 1.1（Tarski 不动点问题）.</strong> 给定一个格 $(\mathscr{L}, \preceq)$ 和一个单调函数 $f : \mathscr{L}\rightarrow \mathscr{L}$，计算 $f$ 的任意一个不动点 $x^*$。</p>
+</div>
+
+<p>以及相应的判定问题：</p>
+<div class="note warning"><p><strong>问题 1.2（DTarski 问题）.</strong> 给定一个格 $(\mathscr{L}, \preceq)$ 和一个函数 $f : \mathscr{L}\rightarrow \mathscr{L}$，判断 $f$ 是否单调。如果单调输出一个不动点。</p>
+</div>
+
+<p>这个问题在计算机科学中广泛存在。比如说软件分析技术中的数据流分析算法，本质上就是在找这样一个问题的不动点。此外，Tarski 不动点问题有以下两个变种。Tarski* 问题是求解 Tarski 问题的关键子问题。</p>
+<div class="note warning"><p><strong>问题 1.3（Tarski* 问题），</strong> 给定一个格 $(\mathscr{L}, \preceq)$ 和一个单调函数 $f : \mathscr{L}\rightarrow \mathscr{L}$，以及一个单调的函数 $b : \mathscr{L} \rightarrow \{-1, 0, 1\}$。求一个 $x$ 使得以下两条件之一成立：</p>
+<ol>
+<li>$f(x)\preceq x \wedge b(x)\leq 0$；</li>
+<li>$x\preceq f(x) \wedge b(x)\geq 0$。</li>
+</ol>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个问题直接在这里提出是一个无理手。在阅读了 3.2 之后，我们会在 3.3 中阐明这个问题提出的道理。</p>
+</blockquote>
+<p>UniqueTarski 是保证了只有唯一不动点的问题。</p>
+<div class="note warning"><p><strong>问题 1.4（UniqueTarski 问题）.</strong> 给定一个格 $(\mathscr{L}, \preceq)$ 和一个单调函数 $f : \mathscr{L}\rightarrow \mathscr{L}$，保证 $f$ 有且仅有一个不动点，计算该不动点 $x^*$。</p>
+</div>
+
+<p>我们已经学过如下结论：</p>
+<div class="note info"><p><strong>定理 1.2（有限高度格上的 Query Complexity 上界）.</strong> 一个格的高度为其中最长链的长度，记作 $h(X)$。问题 1.1 存在 $O(h(X))$ 的算法。</p>
+</div>
+
+<p><strong>证明.</strong> 随机从一个初始点开始迭代：令 $x^0$ 任取，$x^i &#x3D; f(x^{i - 1})$，迭代直到 $x^i &#x3D; x^{i + 1}$。</p>
+<p>不失一般性设 $x^0 \prec x^1$，则根据 $f$ 的单调性可以归纳出 $x^i \preceq x^{i + 1}$。若 $h(X)$ 次迭代没有找到不动点则构造了长度为 $h(X) + 1$ 的链导致矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<p>注意 Grid Lattice（$[N]^d$ 在自然偏序下导出的格）的高度是 $Nd$。因此 Grid Lattice 上的 Tarski 不动点问题（记作 $\texttt{Tarski}(N, d)$）至少是 $O(Nd)$ 的。<strong>我们的最终目标是知道这个问题能不能被做到 $\mathrm{poly}(d, \log N)$。</strong> 所有的复杂度，不加额外说明都是 query complexity。</p>
+<h1><span id="应用">应用</span></h1><p>这一节简单谈一下 Tarski 不动点在 TCS 中的规约，以指明我们为什么希望有 $\mathrm{poly}(d, \log N)$ 的上界。</p>
+<div class="note warning"><p><strong>问题 2.1（Simple Stochastic Game）.</strong> 给定一个带有一个源点 $s$ 和两个汇点 $t_0, t_1$ 的有向图 $G$，其中每个非汇点 $i$ 都恰有两条出边，记作 $j, k$，且均为 $\min$ 节点 &#x2F; $\max$ 节点 &#x2F; $\mathrm{rand}$ 节点之一。判断是否存在一组标号 $x_i\in [0, 1]$ 使得对于途中所有节点 $i$：</p>
+<ul>
+<li>$x_i &#x3D; 0$，若 $i &#x3D; t_0$；</li>
+<li>$x_i &#x3D; 1$，若 $i &#x3D; t_1$；</li>
+<li>$x_i &#x3D; \max(x_j, x_k)$，若 $i$ 是 $\max$ 节点；</li>
+<li>$x_i &#x3D; \min(x_j, x_k)$，若 $i$ 是 $\min$ 节点；</li>
+<li>$x_i &#x3D; \frac 12(x_j + x_k)$，若 $i$ 是 $\mathrm{rand}$ 节点。</li>
+</ul>
+<p><strong>且 $x_s \geq \frac 12$。</strong></p>
+</div>
+
+<p>这个问题目前被证明是 $\mathbf{NP} \cap \mathbf{coNP}$ 的，但是不知道是不是 $\mathbf{P}$ 的。但它可以被规约到 Tarski 不动点问题，方法如下：</p>
+<ol>
+<li>以精度 $1 &#x2F; 2^{\mathrm{poly}(n)}$ 离散化问题。</li>
+<li>用 Picard 迭代解方程。可以发现迭代的函数是单调的。</li>
+</ol>
+<p>这里问题变成了一个 $\texttt{Tarski}(2^{\mathrm{poly}(n)}, n)$，如果能做出来 $\mathrm{poly}(d, \log N)$ 就可以证明这个问题是 $\mathbf{P}$ 的。</p>
+<div class="note warning"><p><strong>问题 2.2（Arrival）.</strong> 给定一个有向图 $G$，其中每个点出度至多为 $2$，两条边记作 $s_0(v)$ 和 $s_1(v)$。图上有两个特殊节点 $d, \bar{d}$，以及一个起点 $a$，考察如下过程：</p>
+<ol>
+<li>令 $u &#x3D; a$（从 $a$ 出发）。</li>
+<li>令 $u’ \leftarrow s_0(u)$，交换 $s_0(u), s_1(u)$。</li>
+</ol>
+<p>判断最后会走到 $d$ 还是 $\bar{d}$ 还是都不会。</p>
+</div>
+
+<p>这个问题由 Dohrau, Gärtner, Kohler, Matoušek, Welzl, 2016 证明了是 $\mathbf{NP} \cap \mathbf{coNP}$ 的，暂时也不知道是不是 $\mathbf{P}$ 的。然而这个问题实际上也可以转换成一个方程问题：设 $x_v$ 表示访问 $v$ 的次数，那么可以列出一个 $x_v$ 的方程组，解出来看 $x_d$ 是 $0$ 还是 $1$ 即可。</p>
+<p>这个方程也可以 Picard 迭代。而且这个过程如果要终止，必然在 $n2^n$ 轮内终止（总共状态数只有这么多种，没结束表明陷入循环）。因此这归约到了 $\texttt{Tarski}(n2^n, n)$。</p>
+<h1><span id="目前的结果">目前的结果</span></h1><h2><span id="texttttarskin-2-的紧下界">$\texttt{Tarski}(N, 2)$ 的紧下界</span></h2><p>可以证明 $\texttt{Tarski}(N, 2)$ 是 $\Omega(\log^2 N)$ 的。方法是在 Hard Instance 上面做 Adversarial Argument。</p>
+<p>构造的 Hard Instance 主要是以下形式：</p>
+<ul>
+<li>首先取一条左上角到右上角的路径（只能向右或者向上走）；</li>
+<li>在这条路径上构造一个一维的 Binary Search 问题；</li>
+<li>对于其余格点，路径上方的指向其右下方，路径下方的指向其左上方。</li>
+</ul>
+<p>一个例子如下。容易证明这样的构造都是单调的。</p>
+<p><img src="/../picture/tarski-hardinst.png"></p>
+<p>在这些 Hard Instance 上证明结论的手法非常显然。直觉是：</p>
+<ol>
+<li>根据 Binary Search Lowerbound，至少要问到“路径”上的 $O(\log n)$ 个点才行；</li>
+<li>找到路径上的任意一个点都是困难的（至少需要 $O(\log n)$ 次询问）。</li>
+</ol>
+<blockquote>
+<p><strong>Remark.</strong> 证明的时候有一些细节，想不出来可以去看 1909.03210，这里不多赘述。感觉有一个要点就是证这种对数复杂度的东西边界太复杂可以直接根号分治，反正 $\log \sqrt N$ 还是 $\log N$。</p>
+</blockquote>
+<h2><span id="texttttarskin-d-的-ologd-n-算法">$\texttt{Tarski}(N, d)$ 的 $O(\log^d N)$ 算法</span></h2><p>先考虑 $\texttt{Tarski}(N, 1)$。</p>
+<blockquote>
+<p><strong>观察 3.2.1.</strong> 对于任意的 $x\in [N]$，若 $f(x) \leq x$，则 $x$ 左边有不动点，否则 $x$ 右边有不动点。</p>
+</blockquote>
+<p>这给出了显然的二分，因此 $T(N, 1) &#x3D; O(\log N)$。</p>
+<blockquote>
+<p><strong>观察 3.2.2.</strong> 考虑 $\texttt{Tarski}(N, d)$（$d\geq 2$）。固定 $y\in [N]$，对于任意的 $\boldsymbol{x}\in [N]^{d - 1}$，记 $f(\boldsymbol{x}, y) &#x3D; (f^0(\boldsymbol{x}), f^1(y))$。则 $f^0$ 是 $[N]^{d - 1}$ 上的单调函数，因此求 $f^0(\boldsymbol{x})$ 的不动点是 $\texttt{Tarski}(N, d - 1)$ 问题。</p>
+</blockquote>
+<blockquote>
+<p><strong>观察 3.2.3.</strong> 对于任意的 $\boldsymbol{x}\in [N]^{d - 1}, y\in [N]$。若 $f(\boldsymbol{x}, y) &#x3D; \boldsymbol{x}, y’$，其中 $y’ \leq y$，则 $\{(\boldsymbol{x}’, y’) : \boldsymbol{x}’\preceq \boldsymbol{x}, y’ \leq y\}$ 中有不动点，否则 $\{\boldsymbol{x}’, y’ : \boldsymbol{x}\preceq \boldsymbol{x}’, y\leq y’\}$ 中有不动点。</p>
+</blockquote>
+<p>这给出了递归的方案。每次将整个 Grid 拦腰切断，然后找截面上的（投影）不动点，根据这个点的指向判断不动点在上半部分还是下半部分。切成平面之后就实现了降维。因此有</p>
+<p>$$<br>T(N, d) &#x3D; \log N\cdot T(N, d - 1) + T(N, d - 1) &#x3D; O(\log^d N)<br>$$</p>
+<h2><span id="texttttarskin-k-和-texttttarskin-k-的联系">$\texttt{Tarski}(N, k)$ 和 $\texttt{Tarski}^*(N, k)$ 的联系</span></h2><p>3.2 节给我们的启发是，拦腰切断一个超立方体后，可以在截面上找到一个点，依据这个点缩小问题规模。但是 3.2 找到的那个点满足的条件明显过强了。事实上，我们能够将向“左下角”或者“右上角”递归的充分条件松驰成：</p>
+<blockquote>
+<p><strong>观察 3.3.1.</strong> 设 $\mathscr{L}_s &#x3D; \{\boldsymbol{x} : x_i &#x3D; s\}$ 是 $\mathscr{L} &#x3D; [N]^k$ 的一个截面，$\boldsymbol{x}_s$ 表示 $\boldsymbol{x}$ 限制在这个截面上的坐标。则截面上必然至少存在一个点 $\boldsymbol{x}$ 满足以下两个条件之一：</p>
+<ol>
+<li>$\boldsymbol{x}_s \preceq f(\boldsymbol{x})_s$ 且 $s \leq f(\boldsymbol{x})_i$；</li>
+<li>$f(\boldsymbol{x})_s \preceq \boldsymbol{x}_s$ 且 $f(\boldsymbol{x})_i \leq s$。</li>
+</ol>
+</blockquote>
+<p>这个观察的证明是相当容易的，因为观察 3.2.2 给出的那个不动点就是一个满足这个条件的点。而这个问题就是 $\texttt{Tarski}^*(N, k - 1)$（$g$ 指示了 $f(\boldsymbol{x})_i \prec x_i$ &#x2F; $f(\boldsymbol{x})_i &#x3D; x_i$ &#x2F; $s\prec f(\boldsymbol{x})_i$）！</p>
+<blockquote>
+<p><strong>观察 3.3.2.</strong> 设 $\boldsymbol{x}$ 是符合观察 3.3.1 条件的一个点。若它满足的是条件 1，则 $\{\boldsymbol{x}’ \in \mathscr{L} : \boldsymbol{x} \preceq \boldsymbol{x}’\}$ 中有不动点；若它满足的是条件 2，则 $\{\boldsymbol{x}’ \in \mathscr{L} : \boldsymbol{x}’ \preceq \boldsymbol{x}\}$ 中有不动点。</p>
+</blockquote>
+<p>至此我们知道了调用一次 $\texttt{Tarski}^*$ oracle 可以将一个维度的问题规模砍一半。仅需 $k \log N$ 次 oracle 调用就可以将每一维的大小砍到 $\leq 2$，然后用那个平凡的迭代算法去 $O(k)$ 求解这个边界即可。以上结果归结为以下定理：</p>
+<div class="note info"><p><strong>定理 3.3.1.</strong> 若算法 $\mathcal{A}$ 能在 $q(n, k)$ 时间内解决 $\texttt{Tarski}^*(N, k)$，则存在算法在以下时间复杂度内解决 $\texttt{Tarski}(N, k + 1)$：</p>
+<p>$$<br>O(k + k\log n\cdot q(n, k))<br>$$</p>
+</div>
+
+<p>这里我们定义两个集合以备后续使用：</p>
+<div class="note success"><p><strong>定义 3.3.1（Upset，Downset）.</strong> 定义 </p>
+<p>$$<br>\begin{aligned}<br>    &amp; \mathrm{Upset}_f(\mathscr{L}) :&#x3D; \{\boldsymbol{x}\in \mathscr{L} : f(\boldsymbol{x})\preceq \boldsymbol{x}\} \\<br>    &amp; \mathrm{Downset}_f(\mathscr{L}) :&#x3D; \{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{x} \preceq f(\boldsymbol{x})\}<br>\end{aligned}<br>$$</p>
+</div>
+
+<p>$\texttt{Tarski}^*$ 的任务就是在截面上任意找一个 Upset 或者 Downset 的元素。需要熟记的是若 $\boldsymbol{d}\preceq \boldsymbol{u}$ 满足 $\boldsymbol{d}\in \mathrm{Downset}_f(\mathscr{L})$ 且 $\boldsymbol{u}\in \mathrm{Upset}_f(\mathscr{L})$，则 $f$ 封闭于 $\{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{d}\preceq \boldsymbol{x} \preceq \boldsymbol{u}\}$ 中，因此这个子集中有不动点。</p>
+<h2><span id="texttttarskin-3-的-olog2-n-算法">$\texttt{Tarski}(N, 3)$ 的 $O(\log^2 N)$ 算法</span></h2><p>Fearnley, Pálvölgyi, Savani, 2021 提出了一个 $O(\log N)$ 求解 $\textsf{Tarski}^*(N, 2)$ 的算法，据此给出了 $\texttt{Tarski}(N, 3)$ 的 $O(\log^2 N)$ 算法。关于这个问题，折叠部分的尝试是很有启发性的，读者可以阅读这段文字或者自行领悟这个算法的思路。</p>
+<details class="note "><summary><p>一些可能有启发的推理.</p>
+</summary>
+<p>读者可以自行尝试一下取中点分治然后分类讨论。设中点为 $\boldsymbol{m}$，右边界的中点为 $\boldsymbol{r}$。</p>
+<ol>
+<li><strong>若 $f(\boldsymbol{m})_1 \leq m_1, f(\boldsymbol{m})_2 \leq m_2$.</strong> 则 $f$ 限制在 $\{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{x}\preceq \boldsymbol{m}\}$ 上是封闭的，其中必存在解，可以递归；</li>
+<li><strong>若 $f(\boldsymbol{m})_1 &gt; m_1, f(\boldsymbol{m})_2 &gt; m_2$.</strong> 则 $f$ 限制在 $\{\boldsymbol{x} \in \mathscr{L} : \boldsymbol{m}\preceq \boldsymbol{x}\}$ 上是封闭的，其中必存在解，可以递归；</li>
+<li>剩下两种情况对称。不失一般性地，<strong>若 $f(\boldsymbol{m})_1 &gt; m_1, f(\boldsymbol{m})_2 \leq m_2$.</strong> 此时再考虑 $g(\boldsymbol{m})$ 的情况：<ol>
+<li><strong>若 $g(\boldsymbol{m}) \geq 0$.</strong> 则 $g$ 限制在 $\{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{m}\preceq \boldsymbol{x}\}$ 上都非负。现在考虑 $\boldsymbol{r}$ 的情况：<ol>
+<li>若 $f(\boldsymbol{r})_2 \leq r_2$，则 $f$ 限制在 $\{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{x} \preceq \boldsymbol{r}\}$ 上封闭，可以递归；</li>
+<li>若 $f(\boldsymbol{r})_2 &gt; r_2$，则根据单调性在 $\boldsymbol{mr}$ 这一条水平线段上，存在一个临界点 $(t, r_2)$ 使得 $f((t, r_2))_2 \leq r_2$ 且 $f((t + 1, r_2)) &gt; r_2$。<ol>
+<li>若 $f((t, r_2))_1 \leq t$，则 $f$ 限制在 $\{\boldsymbol{x}\in \mathscr{L} : \boldsymbol{x}\preceq (t, r_2)\}$ 上封闭，可以递归；</li>
+<li>否则，$f((t, r_2))_1 &gt; t$，因此 $f((t + 1, r_2))_1 \geq t$，$(t + 1, r_2)$ 是问题的一个解。</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>…</li>
+</ol>
+</li>
+<li>…</li>
+</ol>
+<p>自然，你这个分类讨论可以跑通。但现在以下复杂度的优化空间和 $f$ 的封闭性见合：</p>
+<ul>
+<li>保持整个递归的不变量（$f$ 封闭）不变，上面的递归必然要用一次二分来找到 $t$，复杂度多一个 $\log$ 因子。</li>
+<li>注意上面的 Case 3.1.1，3.1.2.1 和 3.1.2.2 都指示 $\{\boldsymbol{x} \in \mathscr{L} : \boldsymbol{x} \preceq \boldsymbol{r}\}$ 这个范围内有解。如果直接往里面递归，复杂度还是单 $\log$，代价是 $f$ 现在不再封闭于目标区间。</li>
+</ul>
+<p>所幸我们递归时需要的最低限度的要求是 $\texttt{Tarski}^*$ 问题在目标格上面有解，而非 $f$ 封闭。一些弱得多的条件，比如已知限制在 $\mathscr{L}$ 的一个局部上 $f$ 封闭，就可以保证这个要求。这暗示着放弃 $f$ 的封闭性来追求更快的算法的可能性。</p>
+
+</details>
+
+<p>考虑状如上方 Case 3.1.2 中线段 $\boldsymbol{mr}$ 的两个端点的性质实际上给出了一个解或者一个限制在截面上的 Upset 元素，我们管这种线段叫做 Upset Witness（USW）。对称的情况也一并考虑。具体地，我们定义：</p>
+<div class="note success"><p><strong>定义 3.4.1（Witnesses）.</strong> 两个点 $\boldsymbol{d} \preceq \boldsymbol{u}$ 被称为一组 Witness，若以下两条件之一成立：</p>
+<ul>
+<li>$d_1 &#x3D; u_1$ 且 $f(\boldsymbol{d})_2 \geq d_2, f(\boldsymbol{u})_2 \leq u_2$；</li>
+<li>$d_2 &#x3D; u_2$ 且 $f(\boldsymbol{d})_1 \geq d_1, f(\boldsymbol{u})_1 \geq u_1$。</li>
+</ul>
+<p>对于一个 Witness $(\boldsymbol{d}, \boldsymbol{u})$，若：</p>
+<ul>
+<li>$g(\boldsymbol{d})\geq 0\wedge g(\boldsymbol{u}) \geq 0$，则称为 Upset Witness；</li>
+<li>$g(\boldsymbol{u})\leq 0\wedge g(\boldsymbol{u}) \leq 0$，则称为 Downset Witness。</li>
+</ul>
+</div>
+
+<p>然后我们定义如下的递归不变量：称 $\boldsymbol{d} \preceq \boldsymbol{u}$ 框出的子问题满足递归不变量以下条件之一成立：</p>
+<ul>
+<li>$\boldsymbol{d} \in \mathrm{Downset}_f(\mathscr{L})$ 且 $\boldsymbol{u}\in \mathrm{Upset}_f(\mathscr{L})$；</li>
+<li>$\boldsymbol{d} \in \mathrm{Downset}_f(\mathscr{L})$ 且 $(\boldsymbol{b}, \boldsymbol{u})$ 是 Upset Witness 且 $\boldsymbol{d}\preceq \boldsymbol{b}$；</li>
+<li>$(\boldsymbol{d}, \boldsymbol{a})$ 是 Downset Witness 且 $\boldsymbol{u}\in \mathrm{Upset}_f(\mathscr{L})$ 且 $\boldsymbol{a}\preceq \boldsymbol{u}$；</li>
+<li>$(\boldsymbol{d}, \boldsymbol{a})$ 是 Downset Witness 且 $(\boldsymbol{b}, \boldsymbol{u})$ 是 Upset Witness 且 $\boldsymbol{a}\preceq \boldsymbol{b}$。</li>
+</ul>
+<p>显然，如果子问题满足递归不变量，则其中必然有解。读者不妨自行分类讨论这个递归不变量下可能的诸多情况然后得到 $O(\log n)$ 的算法。</p>
+<h2><span id="高维-tarski-问题的分解引理">高维 Tarski 问题的分解引理</span></h2><div class="note info"><p><strong>定理 3.4.1（Theorem 18 of Fearnley, Pálvölgyi, Savani, 2021）.</strong> 若存在一个算法 $\mathcal{A}$ 用 $q(n, a)$ 次询问解决 $\texttt{Tarski}(n, a)$，一个算法 $\mathcal{B}$ 用 $q(n, b)$ 次询问解决 $\texttt{Tarski}(n, a)$，则存在一个算法 $\mathcal{L}$ 用 $O(q(n, a)\cdot q(n, b))$ 次询问解决 $\texttt{Tarski}(n, a + b)$。</p>
+</div>
+
+<p><strong>证明.</strong> 考虑一个 $a + b$ 维的格 $\mathscr{L} &#x3D; \mathscr{L}_a\times \mathscr{L}_b$。我们用 $(\boldsymbol{x}, \boldsymbol{y})$ 表示其中的元素。首先为了利用 $\mathcal{A}$ 这个算法，你至少要有一个 $\mathscr{L}_a$ 上面的 oracle 才行。此外还要让这个函数的输出和 $f$ 产生关系，你需要将输入 $\boldsymbol{x}$ 补充成一对 $\boldsymbol{x}, \boldsymbol{y}$，不难想到这个 $\boldsymbol{y}$ 要从 $\mathcal{B}$ 中寻找。注意，固定 $\boldsymbol{x}$，我们得到了一个低维超平面，便有 $f$ 在这个超平面上的投影</p>
+<p>$$<br>f_{\boldsymbol{x}}(\cdot)_i &#x3D; f((\boldsymbol{y}), \cdot)_{i + a}<br>$$</p>
+<p>这给出了一个最直接的 $\mathcal{L}_a$ 上的函数 $f$ 的（错误的）oracle 的构造：</p>
+<ol>
+<li>对于输入的 $\boldsymbol{x}$，用 $\mathcal{B}$ 找 $f_{\boldsymbol{x}}(\cdot)$ 的不动点 $\boldsymbol{y}^*$；</li>
+<li>返回 $f(\boldsymbol{x}, \boldsymbol{y}^*)$。</li>
+</ol>
+<p>之所以说这个 oracle 是错误的，因为单调性完全得不到保证。因此，<strong>动态地维护构造的 oracle 的单调性</strong>成了眼见的要点。最简明的方法的来自于以下的思路：</p>
+<ul>
+<li>假设你现在已经使用了 $\mathscr{P} \subset \mathscr{L}_a\times \mathscr{L}_b$ 中的点。具体地，$\mathscr{P}$ 中有 $(\boldsymbol{x}, \boldsymbol{y})$ 若：你曾向欲构造的 oracle 提交查询 $\boldsymbol{x}$，此时为了构造一个 $f$ 的输入，你用 $\mathcal{B}$ 找了某个 $\boldsymbol{y}$，然后返回了 $f((\boldsymbol{x}, \boldsymbol{y}))$。</li>
+<li>现在，你又收到了一个 oracle 查询 $\boldsymbol{x}$。为了不产生矛盾，有两个集合值得关注：<ul>
+<li>集合 $\mathscr{D} :&#x3D; \{\boldsymbol{y}’ : \exists (\boldsymbol{x}’, \boldsymbol{y}’)\in \mathscr{P}, \boldsymbol{x}’\preceq \boldsymbol{x}\}$。你返回的 $f(\boldsymbol{x}, \boldsymbol{y})$ 必须满足 $f(\boldsymbol{x}’, \boldsymbol{y}’) \preceq f(\boldsymbol{x}, \boldsymbol{y})$。</li>
+<li>集合 $\mathscr{U} :&#x3D; \{\boldsymbol{y}’ : \exists (\boldsymbol{x}’, \boldsymbol{y}’)\in \mathscr{P}, \boldsymbol{x}\preceq \boldsymbol{x}’\}$。你返回的 $f(\boldsymbol{x}, \boldsymbol{y})$ 必须满足 $f(\boldsymbol{x}, \boldsymbol{y}) \preceq f(\boldsymbol{x}’, \boldsymbol{y}’)$。</li>
+</ul>
+</li>
+<li>为了保证这个性质，我们利用 $f$ 函数的单调性，让 $\boldsymbol{y}$（自变量）介于 $l :&#x3D; \sup \mathscr{D}$ 和 $u :&#x3D; \inf \mathscr{U}$ 之间即可。我们用算法 $\mathcal{B}$ 去找 $f_{\boldsymbol{x}}(\cdot)$ 在 $\mathscr{L}_{l, u} :&#x3D; \{\boldsymbol{y} : \sup \mathscr{D} \leq \boldsymbol{y} \leq \inf \mathscr{U}\}$ 上的不动点 $\boldsymbol{y}^*$。</li>
+</ul>
+<p>显然，如果上面的 oracle 构造中，只要 $\mathcal{B}$ 能一直找到不动点，$\mathcal{A}$ 运行结束之后就会找到 $\mathscr{L}$ 的不动点。而这个东西的证明分成两部分：</p>
+<blockquote>
+<p><strong>观察 3.4.1.</strong> 上述算法 $\mathcal{A}$ 运行并调用我们构造的这个 oracle 的过程中，始终有 $l \preceq u$。</p>
+</blockquote>
+<p>这个观察源于完备格上显然的结论：对于完备格的两个子集 $\mathscr{S}, \mathscr{T}$，若对于任意的 $x\in \mathscr{S}, y\in \mathscr{T}$ 都有 $x\preceq y$，则 $\sup \mathscr{S}\preceq \inf \mathscr{T}$。具体证明读者不妨自己根据维护 $\mathscr{P}$ 的过程分类讨论。</p>
+<blockquote>
+<p><strong>观察 3.4.2.</strong> 上述算法 $\mathcal{A}$ 运行并调用我们构造的这个 oracle 的过程中，$f(\mathscr{L}_{l, u}) \subseteq \mathscr{L}_{l, u}$ 始终成立。 </p>
+</blockquote>
+<p>这源于上确界、下确界的定义。读者可以自行验证。</p>
+<p>至此我们扫除了证明定理 3.4.1 的全部障碍，查询的复杂度也是容易算的。<div style="text-align: right">$\blacksquare$</div></p>
+<p>根据此前的结果，推广到高维有</p>
+<div class="note info"><p><strong>推论 3.4.1.</strong> $\texttt{Tarski}(N, k)$ 有 $O(\log^{2\left\lceil d &#x2F; 3\right\rceil + 1} n)$ 的算法。</p>
+</div>
+
+<p>当然这个推论不是 SOTA，因为对于 Tarski* 问题也有类似结果。</p>
+<div class="note info"><p><strong>定理 3.4.2（Theorem 3 of Chen, Li, 2022）.</strong> 若存在一个算法 $\mathcal{A}$ 用 $q(n, a)$ 次询问解决 $\texttt{Tarski}^*(n, a)$，一个算法 $\mathcal{B}$ 用 $q(n, b)$ 次询问解决 $\texttt{Tarski}^*(n, b)$，则存在一个算法用 $O((b + 1) \cdot q(n, a)\cdot q(n, b))$ 次询问解决 $\texttt{Tarski}^*(n, a + b)$。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】</p>
+<p>根据定理 3.4.2 和 $\texttt{Tarski}^*(N, 2)$ 的 $O(\log n)$ 算法可以得到以下推论：</p>
+<div class="note info"><p><strong>推论 3.4.2.</strong> $\texttt{Tarski}(N, k)$ 有 $O(k\log^{\left\lceil n &#x2F; 2\right\rceil + 1}n)$ 的算法。</p>
+</div>
+
+<p>到这里可以知道给出低维 Tarski 问题的高效算法可以改进指数上的 dependence，但至于怎么把 $k$ 拉下来还是 open 的。</p>
+<h2><span id="textsftarskin-4-的-olog2-n-算法">$\textsf{Tarski}(N, 4)$ 的 $O(\log^2 N)$ 算法</span></h2><p>【FIXME】</p>
+<h2><span id="textsftarski-和-textsfuniquetarski-的关系">$\textsf{Tarski}$ 和 $\textsf{UniqueTarski}$ 的关系</span></h2><p>事实上，Tarski 和 Unique Tarski 很可能“一样难”，这些结果均由 Chen, L., Yannakakis, 2023 给出。主要是 </p>
+<div class="note info"><p><strong>定理 3.7.1.</strong> 若算法 $\mathcal{A}$ 能够解决 $\texttt{UniqueTarski}(N, d)$，则它可以以相同的 query complexity 解决 $\texttt{Tarski}(N, d)$。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】</p>
+<div class="note info"><p><strong>定理 3.7.2.</strong> 若存在 $\texttt{Tarski}$ 到 $\texttt{UniqueTarski}$ 的有效标准规约（efficient standard reduction），则 $\texttt{Tarski}(N, d)$ 有 $\mathrm{poly}(d, \log N)$ 的算法。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】讲道理我现在连这个在说什么都没看懂。</p>
+<h2><span id="textsftarskin-k-的一个下界">$\textsf{Tarski}(N, k)$ 的一个下界</span></h2><div class="note info"><p><strong>定理 3.8.1（Theorem 1 of Branzei, Phillips, Recker, 2025）.</strong> $\textsf{Tarski}(n, k)$ 的随机算法有复杂度下界</p>
+<p>$$<br>\Omega\left(k + \frac{k\log n}{\log k}\right)<br>$$</p>
+</div>
+
+<p>这篇文章构造了一族 Hard Instance：</p>
+<div class="note success"><p><strong>定义 3.8.1（Definition 2 of Branzei, Phillips, Recker, 2025）.</strong> 对于任意的 $\boldsymbol{a}\in \mathscr{L}$（$\mathscr{L} &#x3D; [N]^k$），$\boldsymbol{a}$ 诱导出一个函数 $f^{\boldsymbol{a}}$：</p>
+<p>$$<br>f^{\boldsymbol{a}}(\boldsymbol{v})_i &#x3D; \begin{cases}<br>    v_i - 1 &amp; \text{if $v_i &gt; a_i$ and $\forall j &lt; i, v_j \leq a_j$} \\<br>    v_i + 1 &amp; \text{if $v_i &lt; a_i$ and $\forall j &lt; i, v_j \geq a_j$} \\<br>    v_i     &amp; \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>类 $\mathcal{F}_n^k &#x3D; \{ f^{\boldsymbol{a}} : \boldsymbol{a}\in [N]^k \}$ 是全体这样函数的集合。</p>
+</div>
+
+<p>这是一个单调函数，而且只有唯一的不动点 $\boldsymbol{a}$。对于这个函数我目前只有最低程度的直观，就是它要让所有点汇聚于 $\boldsymbol{a}$，因此把每个点第一个过低或者过高的位置往回拉。</p>
+<p>定理 3.8.1 的证明主要分成以下三个部分。这里涉及到一些随机算法下界证明，我不是很熟悉相关工具因此还不会证明。</p>
+<div class="note info"><p><strong>命题 3.8.1.</strong> $\textsf{Tarski}(2, k)$ 的随机算法复杂度下界是 $\Omega(k)$。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】。</p>
+<div class="note info"><p><strong>命题 3.8.2.</strong> 对于 $N\geq 2$ 有 $\textsf{Tarski}(2, k) \leq_p \textsf{Tarski}(N, k)$。</p>
+</div>
+
+<p><strong>证明.</strong> Trivial。</p>
+<div class="note info"><p><strong>命题 3.8.3.</strong> $\textsf{Tarski}(N, k)$ 的随机算法复杂度有下界 $\Omega\left(\frac{k\log n}{\log k}\right)$。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】。</p>
+<p>可见现在给出的关于 Tarski 不动点问题关于 $n$ 的下界最大仅为 $\log^2 n$。当前还没有找到哪个维度中下界是 $\Omega(\log^3 N)$ 的。</p>
+<h2><span id="针对-mathcalf_nk-的-osqrt-klog-n-量子算法">针对 $\mathcal{F}_n^k$ 的 $O(\sqrt k\log n)$ 量子算法</span></h2><p>本节我们将给出针对 $\mathcal{F}_n^k$ 的量子平方加速。注意 Hard Instance 中，似乎自变量蕴含了它诸位和 $\boldsymbol{a}$ 的大小关系信息。此时，一个值得尝试的方向是对所有维度同时进行二分：我们希望实现一个算法，给定阈值 $\boldsymbol{m} \in [N]^k$，知道这样一个字符串 $\boldsymbol{b}\in \{0, 1\}^k$ 的内容：</p>
+<p>$$<br>b_i &#x3D; \mathbf{1}\{a_i &lt; m_i\}<br>$$</p>
+<p>现在假设我们有对函数 $f$ 的 unitary oracle access $\mathrm{O}_f$，按照惯例假设成：</p>
+<p>$$<br>\mathrm{O}_f|\boldsymbol{v}\rangle|\boldsymbol{z}\rangle &#x3D; |\boldsymbol{v}\rangle|\boldsymbol{z} + f(\boldsymbol{v})\rangle<br>$$</p>
+<p>此处 $+$ 系指 $\mathbb{Z}_N^k$ 下的加法。因为 $f$ 的结构良好，不妨考察给 $|\boldsymbol{v}\rangle| -\boldsymbol{v}\rangle$ 作用一个 $\mathrm{O}_{f^{\boldsymbol{a}}}$ 会发生什么。</p>
+<p>$$<br>\mathrm{O}_{f^{\boldsymbol{a}}}|\boldsymbol{v}\rangle|-\boldsymbol{v}\rangle &#x3D; |\boldsymbol{v}\rangle|g^{\boldsymbol{a}}(\boldsymbol{v})\rangle<br>$$</p>
+<p>其中 </p>
+<p>$$<br>g^{\boldsymbol{a}}(\boldsymbol{v}) &#x3D; \begin{cases}<br>    - 1 &amp; \text{if $v_i &gt; a_i$ and $\forall j &lt; i, v_j \leq a_j$} \\<br>    + 1 &amp; \text{if $v_i &lt; a_i$ and $\forall j &lt; i, v_j \geq a_j$} \\<br>    0   &amp; \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>直接调用 $g^{\boldsymbol{a}}(\boldsymbol{m})$，可以得到以下观察：</p>
+<ul>
+<li>如果存在某个 $b_i &#x3D; 1$，则序列里必有 $-1$；</li>
+<li>如果存在某个 $b_i &#x3D; 0$，则序列里必有 $0$ 或者 $+1$。</li>
+</ul>
+<p>换言之，我们可以检查 $\boldsymbol{b}$ 是否为全 $0$ 或者全 $1$。对量子搜索算法有研究者可能容易想到下面的这一条思路：</p>
+<blockquote>
+<p><strong>观察 3.9.1.</strong> 利用 $O(1)$ 次上述 oracle 访问，可以检查 $\boldsymbol{b}$ 的任意一个子序列是否是全 $0$、是否是全 $1$。</p>
+</blockquote>
+<p>假设这个子序列是 $S\subseteq [k]$。我们取</p>
+<p>$$<br>m’_i &#x3D; \begin{cases}<br>    m_i &amp; i\in S \\<br>    0 &amp; i\notin S<br>\end{cases}<br>$$</p>
+<p>则查询 $\mathrm{O}_{f^{\boldsymbol{a}}}|\boldsymbol{m}’\rangle|-\boldsymbol{m}’\rangle$ 所得第二个 register 中有 $-1$ 表明 $\boldsymbol{b}_S$ 不是全 $0$。全 $1$ 的检查类似。</p>
+<blockquote>
+<p><strong>观察 3.9.2.</strong> 利用 $O(1)$ 次上述 oracle 访问，可以检查 $\boldsymbol{b}$ 的任意一个子序列 $\boldsymbol{b}_S$ 是否等于 $\boldsymbol{y}$（$|\boldsymbol{y}| &#x3D; |S|$）。</p>
+</blockquote>
+<p>只需检查 $\boldsymbol{b}_S$ 中 $0$ 的部分是否全是 $0$，$1$ 的部分全是 $1$ 即可。</p>
+<p>至此我们搭建了一个 <strong>search with wildcard oracle</strong>。回忆</p>
+<div class="note warning"><p><strong>问题 3.9.1（search with wildcard problem）.</strong> 有一个长度为 $N$ 的隐藏的字符串 $\boldsymbol{b}\in \{0, 1\}^N$。给定 $b$ 的如下 oracle 访问：给定 $S\subseteq [N]$ 和字符串 $\boldsymbol{y}\in \{0, 1\}^{|S|}$，有 </p>
+<p>$$<br>\mathrm{O}_{\boldsymbol{b}} |S\rangle|\boldsymbol{y}\rangle|z\rangle &#x3D; |S\rangle|\boldsymbol{y}\rangle|z \oplus \mathbf{1}\{\boldsymbol{b}_S &#x3D; \boldsymbol{y}\}\rangle<br>$$</p>
+<p>求 $\boldsymbol{b}$。</p>
+</div>
+
+<p>关于这个问题，有以下结果：</p>
+<ol>
+<li>Ambainis, Montanaro, 2014（1210.1148）证明了存在 query complexity $O(\sqrt n\log n)$ 的量子算法；</li>
+<li>这个问题明显不弱于 Grover Search，因此存在 query complexity 为 $\Omega(\sqrt n)$ 的下界；</li>
+<li>Cornelissen, Mande, Patro, Raja, and Sanyal, 2025（2511.04669）证明了存在 $O(\sqrt n)$ 的量子算法。</li>
+</ol>
+<p>因此二分的判定有 $O(\sqrt k)$ 的算法。这样做并行二分，query complexity 实为 $O(\sqrt k \log N)$，我们实现了近乎平方的量子加速。</p>
+<h1><span id="总结">总结</span></h1><p>现在这个题的 Quantum 基本上没什么人做过。不知道有什么突破点，可能包括：</p>
+<ol>
+<li>量子算法对二分没有加速。可能 $k$ 比较小的时候可以证下界。不知道对着 $\texttt{Tarski}(N, 2)$ adversary 一下有没有用？</li>
+<li>量子算法可以解决高维情况下的经典 hard instance，说不定有希望？但是那个 hard instance 太特殊了。</li>
+<li>好像在这个问题上对所有维度一起二分有 work 的希望？但好像这个题在 hard instance 外面又不是什么二分。</li>
+<li>量子算法还有一个潜在的优势就是搞多叉分治，不知道这个题有没有类似的东西？</li>
+<li>有没有可能量子算法有别的分解引理？</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/15/TensorCalculus/" rel="prev" title="【失败作】人工智能用张量分析">
+                  <i class="fa fa-angle-left"></i> 【失败作】人工智能用张量分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
