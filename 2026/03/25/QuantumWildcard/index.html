@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明 参考资料 附录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Search with Wildcard Problem">
+<meta property="og:url" content="http://example.com/2026/03/25/QuantumWildcard/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明 参考资料 附录">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-03-25T06:58:46.000Z">
+<meta property="article:modified_time" content="2026-04-05T15:16:14.552Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/03/25/QuantumWildcard/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/03/25/QuantumWildcard/","path":"2026/03/25/QuantumWildcard/","title":"Search with Wildcard Problem"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Search with Wildcard Problem | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">$O(\sqrt n\log n)$ 算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">State Discrimination Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">正算子值测度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Pretty Good Measurement</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">完整证明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">附录</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/03/25/QuantumWildcard/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Search with Wildcard Problem | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Search with Wildcard Problem
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-03-25 14:58:46" itemprop="dateCreated datePublished" datetime="2026-03-25T14:58:46+08:00">2026-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-04-05 23:16:14" itemprop="dateModified" datetime="2026-04-05T23:16:14+08:00">2026-04-05</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF">问题背景</a></li>
+<li><a href="#osqrt-nlog-n-%E7%AE%97%E6%B3%95">$O(\sqrt n\log n)$ 算法</a></li>
+<li><a href="#state-discrimination-problem">State Discrimination Problem</a><ul>
+<li><a href="#%E6%AD%A3%E7%AE%97%E5%AD%90%E5%80%BC%E6%B5%8B%E5%BA%A6">正算子值测度</a></li>
+<li><a href="#pretty-good-measurement">Pretty Good Measurement</a></li>
+</ul>
+</li>
+<li><a href="#%E5%AE%8C%E6%95%B4%E8%AF%81%E6%98%8E">完整证明</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="问题背景">问题背景</span></h1><p>本文考虑 search with wildcard 问题：</p>
+<div class="note warning"><p><strong>问题 1.1（search with wildcard）.</strong> 有一个长度为 $N$ 的隐藏的字符串 $\boldsymbol{b}\in \{0, 1\}^N$。给定 $b$ 的如下 oracle 访问：给定 $S\subseteq [N]$ 和字符串 $\boldsymbol{y}\in \{0, 1\}^{|S|}$，有 </p>
+<p>$$<br>\mathrm{O}_{\boldsymbol{b}} |S\rangle|\boldsymbol{y}\rangle|z\rangle &#x3D; |S\rangle|\boldsymbol{y}\rangle|z \oplus \mathbf{1}\{\boldsymbol{b}_S &#x3D; \boldsymbol{y}\}\rangle<br>$$</p>
+<p>求 $\boldsymbol{b}$。</p>
+</div>
+
+<p>关于这个问题，已知：</p>
+<ul>
+<li>有一个 Information Theoretic Argument 证明经典算法询问复杂度下界是 $\Omega(n)$。</li>
+<li>如果 oracle 限制 $|S| &#x3D; 1$，也就是你只能问一位，那么量子有 $n &#x2F; 2 + \Omega(\sqrt n)$ 的询问复杂度下界，也有 $n &#x2F; 2 + O(\sqrt n)$ 的算法。</li>
+<li>如果你问的问题是 $\boldsymbol{y}$ 是否是 $\boldsymbol{x}$ 的子串？那么有 $\Omega(n &#x2F; \log^2 n)$ 的 Quantum Lowerbound。</li>
+</ul>
+<h1><span id="osqrt-nlog-n-算法">$O(\sqrt n\log n)$ 算法</span></h1><p>这个问题的量子加速，主要依赖于以下这个引理：</p>
+<div class="note info"><p><strong>引理 2.1.</strong> 对于 $n\geq 1$，$k &#x3D; n - O(\sqrt n)$。如果我们能制备这个态：</p>
+<p>$$<br>|\psi_x^k\rangle :&#x3D; \frac{1}{\binom nk^{1&#x2F;2}}\sum_{S\subseteq [n], |S| &#x3D; k}|S\rangle|x_S\rangle<br>$$</p>
+<p>则存在一个对 $|\psi_x^k\rangle$ 的正算子值测度下的测量（POVM Measurement），输出 $\widetilde{x}$，其中 $\mathbb{E}[d(x, \tilde{x})] &#x3D; O(1)$。$d(\cdot, \cdot)$ 是 Hamming Distance。</p>
+</div>
+
+<p>也就是说，如果叠加地丢了 $O(\sqrt n)$ 位信息，量子算法仍然能够把原信息还原出来。注意，拿到了一个期望 Hamming distance 与原来差不多的串，可以用期望 $O(\log n)$ 次询问来彻底修复它。做法是进行 $O(1)$ 次二分。</p>
+<p>有了这个引理之后，算法就非常显然了。我们取一列 $n_1, …, n_l$，其中 $n_1 &#x3D; O(1), n_l &#x3D; n$，且 $n_{i - 1} &#x3D; n_i - O(\sqrt n_i)$。记</p>
+<p>$$<br>|\psi_x^i\rangle &#x3D; \frac{1}{\binom{n}{n_i}^{1&#x2F;2}}\sum_{S\subseteq [n], |S| &#x3D; k} |S\rangle|x_S\rangle<br>$$</p>
+<p>我们的目标是 $|\psi_x^l\rangle$。显然有 $|\psi_x^1\rangle$ 是很好制备的。从 $|\psi_x^{i - 1}\rangle$ 制备 $|\psi_x^i\rangle$ 无非是一次 POVM 然后进行修复。</p>
+<div class="note "><p><strong>Remark 1.</strong> 容易证明这个序列的长度是 $\Theta(\sqrt n)$。考虑这个迭代 $f(n) &#x3D; n - \sqrt n$，它套 $O(\sqrt n)$ 次之后可以让 $n$ 除以一个常数，再等比数列求和立即得证。</p>
+</div>
+
+<div class="note "><p><strong>Remark 2.</strong> 可以看到这个算法成立是因为问题满足以下两个要点：</p>
+<ol>
+<li>可以 $O(1)$ 获取 $O(1)$ 位信息的叠加态；</li>
+<li>可以 $O(\log n)$ 纠错一位。</li>
+</ol>
+</div>
+
+<h1><span id="state-discrimination-problem">State Discrimination Problem</span></h1><p>欲证明的引理 2.1 是一个态区分问题：我们希望知道我们制备的 $|\psi_{\color{orange} x}\rangle$ 究竟是哪个 ${\color{orange} x}$ 对应的。然而，我们熟知这个事情是不能精确做到的（根据 Indistinguishability Theorem）。现在我们来准备一些工具。</p>
+<h2><span id="正算子值测度">正算子值测度</span></h2><p>接下来引入所谓的正算子值测度，以及这种测度下面的测量如何实现。首先我们回顾一下我们熟悉的测量使用的投影值测度。</p>
+<div class="note success"><p><strong>定义 3.1（投影值测度，PVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{P}(\mathcal{H})$（此处 $\mathscr{P}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体投影算符）的映射，满足：</p>
+<ol>
+<li>$\pi(\varnothing) &#x3D; \mathbf{0}, \pi(X) &#x3D; \mathbf{I}$；</li>
+<li>对于一列不相交的 $E_1, E_2, …\in M$，有<br>$$<br>\pi\left(\bigsqcup_{i &#x3D; 1}^\infty E_i\right) &#x3D; \sum_{i &#x3D; 1}^\infty \pi(E_i)<br>$$</li>
+<li>对于任意的 $E_1, E_2\in M$，有 $\pi(E_1\cup E_2) &#x3D; \pi(E_1)\pi(E_2)$。当然很明显这一条是前两条的推论。</li>
+</ol>
+</div>
+
+<p>这里的 Borel-可测的集合 $X$ 可以被理解为测量结果的集合。常见的 $X$ 有：</p>
+<ol>
+<li>$\mathbb{R}, \mathbb{R}^3$ 之类的集合，表示位置、动量等；</li>
+<li>$\{0, 1\}$ 之类的有限集，量子比特。</li>
+</ol>
+<p>在一个 PVM $\pi$ 下测量一个 $\mathcal{H}$ 中的量子态 $|\psi\rangle$ 进行测量，结果落在 $E\in M$ 中的概率为 </p>
+<p>$$<br>\Pr[E] &#x3D; \langle \psi| \pi(E) |\psi\rangle<br>$$</p>
+<p>若测量结果为 $x$，则测量后态为 </p>
+<p>$$<br>\frac{\pi(x)|\psi\rangle}{\langle\psi|\pi(x)|\psi\rangle^{1&#x2F;2}}<br>$$</p>
+<div class="note success"><p><strong>定义 3.2（正算子值测度，POVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{L}(\mathcal{H})$（此处 $\mathscr{L}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体正自伴随有界算符）的映射 $\textsf{E}$，满足：</p>
+<ol>
+<li>$\textsf{E}(\varnothing) &#x3D; \mathbf{0}, \textsf{E}(X) &#x3D; \mathbf{I}$；</li>
+<li>对于一列不相交的 $E_1, E_2, …\in M$，有<br>$$<br>\textsf{E}\left(\bigsqcup_{i &#x3D; 1}^\infty E_i\right) &#x3D; \sum_{i &#x3D; 1}^\infty \textsf{E}(E_i)<br>$$</li>
+</ol>
+</div>
+
+<p>对于一个量子态，其密度矩阵为 $\rho$，在 POVM $\textsf{E}$ 下测量结果在 $E$ 中的概率为</p>
+<p>$$<br>\Pr[E] &#x3D; \mathrm{tr}(\rho \textsf{E}(E))<br>$$</p>
+<p>直觉上来说，POVM 之于 PVM，就是混态之于纯态。事实上，POVM 总是可以嵌入到高维空间后用 PVM 实现。我们有如下的定理：</p>
+<div class="note info"><p><strong>定理 3.1（Naimark’s Dilation Theorem）.</strong> 设 $\textsf{E}$ 是 $\mathcal{H}_A$ 上的一个 POVM，则存在一个 $\mathcal{H}_B$ 及其上的 PVM $\pi$ 和一个 $\mathcal{H}_A \rightarrow \mathcal{H}_B$ 的保距映射 $V$，使得对于任意的 $E\in M$，有</p>
+<p>$$<br>\textsf{E}(E) &#x3D; V^*\pi(E)V<br>$$</p>
+</div>
+
+<p>当然这个定理过于抽象而不能指导我们具体怎么实现 POVM。这里我们考虑有限集 $X &#x3D; \{1, 2, …, n\}$。则可以令</p>
+<ul>
+<li>$\mathcal{H}_B &#x3D; \mathcal{H}_A\otimes \mathcal{H}_{A’}$，$\mathcal{H}_{A’}$ 是一个 $n$ 维希尔伯特空间；</li>
+<li>$\pi(i) &#x3D; \mathbf{I}_A \otimes |i\rangle\langle i|$，这构成 $\mathcal{H}_B$ 上的一组 PVM。</li>
+<li>$V &#x3D; \sum_{i &#x3D; 1}^n \sqrt{\textsf{E}(i)}\otimes |i\rangle$，这是一个 $\mathcal{H}_A$ 到 $\mathcal{H}_B$ 的映射，而它确实是保距的，因为 $VV^* &#x3D; \mathbf{I}$。</li>
+</ul>
+<p>注意到</p>
+<p>$$<br>V\pi(i)V^* &#x3D; \sum_{j &#x3D; 1}^n \sum_{k &#x3D; 1}^n \sqrt{\textsf{E}(j)\textsf{E}(k)}\otimes \langle j|i\rangle\langle i|k\rangle &#x3D; \textsf{E}(i)<br>$$</p>
+<p>这给出了测量的过程。假如你要做一个 POVM $\textsf{E}$，令 $U$ 是 $V$ 扩充成的 $\mathcal{H}$ 上的酉变换，首先复合上一个辅助 $n$ 维希尔伯特空间 $\mathcal{H}_{A’}$（用量子计算的语言就是加一个 ancilla $n$-qudit），然后按照 $U$ 演化，测量第二个 register。测出结果 $i$ 的概率为</p>
+<p>$$<br>\mathrm{tr}(U \rho U^\dagger \pi(i)) &#x3D; \mathrm{tr}(\rho U^\dagger \pi(i) U) &#x3D; \mathrm{tr}(\rho \textsf{E}(i))<br>$$</p>
+<p>测量后得到的态是 $U \rho U^\dagger \pi(i)$ 取 $\mathcal{H}_{A’}$ 上的偏迹。</p>
+<h2><span id="pretty-good-measurement">Pretty Good Measurement</span></h2><p>Pretty Good Measurement 对态区分问题的精确度最高的测量方法，参见 [2]。</p>
+<p>给定一组纯态 $\{|\phi_i\rangle\}$，定义 $\rho &#x3D; \sum_i |\phi_i\rangle\langle\phi_i|$，$\rho^{-1}$ 表示它的 Moore–Penrose 广义逆。定义 $|\mu_i\rangle &#x3D; \rho^{-1&#x2F;2}|\phi_i\rangle$，然后可以构造一个 POVM：</p>
+<p>$$<br>\textsf{E}(i) &#x3D; |\mu_i\rangle\langle\mu_i|<br>$$</p>
+<p>为了验证这是一个 POVM，只需观察到</p>
+<p>$$<br>\sum_{i}\textsf{E}(i) &#x3D; \rho^{-1&#x2F;2}\left(\sum_i |\phi_i\rangle\langle\phi_i|\right)\rho^{-1&#x2F;2} &#x3D; \mathbf{I}<br>$$</p>
+<p>而对于态 $|\phi_i\rangle$，测出结果 $i$ 的概率为 </p>
+<p>$$<br>\mathrm{tr}\left(|\phi_i\rangle\langle\phi_i|\rho^{-1&#x2F;2}|\phi_j\rangle\langle\phi_j|\rho^{-1&#x2F;2}\right) &#x3D; |\langle\phi_i|\rho^{-1&#x2F;2}|\phi_j\rangle|^2<br>$$</p>
+<p>需要注意到后面这个东西正是 $\{|\phi_i\rangle\}$ 的 Gram Matrix 的平方根，因为</p>
+<p>$$<br>\sum_k \langle\phi_i|\rho^{-1&#x2F;2}|\phi_k\rangle\langle\phi_k|\rho^{-1&#x2F;2}|\phi_j\rangle &#x3D; \langle\phi_i|\rho^{-1&#x2F;2}\left(\sum_k |\phi_k\rangle\langle\phi_k|\right)\rho^{-1&#x2F;2}|\phi_j\rangle &#x3D; \langle\phi_i|\phi_j\rangle<br>$$</p>
+<p>至此可以发现，向量组越正交，PGM 效果越好。这也非常符合直觉。</p>
+<p>关于为什么 PGM 是 Pretty Good 的，这里暂时不证明，读者可以参考各种文献，一个比较现代的版本是 <a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~jswright/quantumlearningtheory24/scribe%20notes/lecture06.pdf">这个讲义</a>。</p>
+<h1><span id="完整证明">完整证明</span></h1><p>首先来补全引理 2.1 的证明，核心是分析向量组 $\{|\psi_x^k\rangle\}$ Gram 矩阵 $\mathbf{G}$。注意</p>
+<p>$$<br>\langle\psi_x^k|\psi_y^k\rangle &#x3D; \frac{1}{\binom nk}\sum_{|S| &#x3D; k} [x_S &#x3D; y_S] &#x3D; \frac{\binom{n - d(x, y)}{k}}{\binom nk}<br>$$</p>
+<p>因此 $G_{xy}$ 只和 $d(x, y)$ 有关，进而只和 $x\oplus y$ 有关。熟悉傅里叶变换诸多含义的读者可能知道，这种矩阵在乘法意义下同构于 $n$ 元（指标都是 $[n]$ 的子集）集合幂级数在异或卷积意义下构成的环。类似于循环矩阵可以被傅里叶变换矩阵正交对角化，这样的矩阵可以被 $n$ 维沃尔什变换（$\mathbb{F}_2^n$ 上的 FFT）矩阵对角化，特征值就是集合幂级数</p>
+<p>$$<br>G(z) &#x3D; \sum_{S \subseteq \{0, 1\}^n} \frac{\binom {n - |S|}{k}}{\binom nk}z^S<br>$$</p>
+<p>做沃尔什变换后的诸元。计算可以知道</p>
+<p>$$<br>\begin{align}<br>\hat{G}(x) &amp;&#x3D; \frac{1}{2^n} \binom nk^{-1}\sum_y (-1)^{x\cdot y}\binom {n - |y|}{k} &#x3D; 2^{-k}\frac{\binom{n - |x|}{n - k}}{\binom nk} \label{eq:fourioer_G}<br>\end{align}<br>$$</p>
+<p>这个组合恒等式看起来不是很显然，至少组合意义不明显，我们将证明放在附录中（引理 A.1）。</p>
+<p>继续推进证明。尽管我们没法精确区分这些态，但我们可以 bound 住测量结果与真实结果的 Hamming Distance 的期望。考虑到矩阵的循环对称性，我们只需要算 $|\psi_x^k\rangle$ 测出的结果的模长的期望。</p>
+<p>$$<br>\mathbb{E}[|\boldsymbol{y}|] &#x3D; \sum_{\boldsymbol{y}\in \{0, 1\}^n} |\boldsymbol{y}|\sqrt{\mathbf{G}}_{0y}^2<br>$$</p>
+<p>众所周知根据 Plancherel 定理，傅里叶变换保持内积不变。我们有</p>
+<p>$$<br>\sum_{\boldsymbol{s}\in \{0, 1\}^n} f(\boldsymbol{s})h(\boldsymbol{s}) &#x3D; 2^n \sum_{\boldsymbol{s}\in \{0, 1\}^n} \hat{f}(\boldsymbol{s})\hat{g}(\boldsymbol{s})<br>$$</p>
+<p>我们来分析这两个东西的内积。首先令 $f(\boldsymbol{y}) &#x3D; |\boldsymbol{y}|$，其傅里叶变换为</p>
+<p>$$<br>\frac{1}{2^n}\sum_{\boldsymbol{x}\in \{0, 1\}^n}(-1)^{\boldsymbol{x}\cdot \boldsymbol{y}} |\boldsymbol{x}| &#x3D; \begin{cases}<br>    \frac n2 &amp; \boldsymbol{y} &#x3D; 0^n \\<br>    -\frac 12 &amp; |\boldsymbol{y}| &#x3D; 1 \\<br>    0 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>接下来要算 $h(\boldsymbol{y}) &#x3D; \sqrt{\mathbf{G}}_{0y}^2$。考虑 $g(\boldsymbol{y}) &#x3D; \sqrt{\mathbf{G}}_{0y}$，其傅里叶变换已经知道的 $(\ref{eq:fourioer_G})$ 的平方根。有 $h$ 实际上是 $g$ 自己点乘自己。那么做傅里叶变换之后，就有</p>
+<p>$$<br>\begin{align}<br>\hat{h}(\boldsymbol{s}) &amp;&#x3D; \frac{1}{2^n}\sum_{\boldsymbol{t}\in \{0, 1\}^n} g(\boldsymbol{s})g(\boldsymbol{s}\oplus \boldsymbol{t}) \\<br>&amp;&#x3D; \frac{2^{-n - k}}{\binom nk}\sum_{\boldsymbol{t}\in \{0, 1\}^n} \binom{n - |\boldsymbol{t}|}{n - k}^{1&#x2F;2}\binom{n - d(\boldsymbol{s}, \boldsymbol{t})}{n - k}^{1&#x2F;2}<br>\end{align}<br>$$</p>
+<p>我们只需要仔细计算 $|\boldsymbol{s}| &#x3D; 0, 1$ 处的点值即可。$\hat{h}(\boldsymbol{0}) &#x3D; 2^{-n}$ 是显然的。我们来计算 $\hat{h}(\boldsymbol{e}_i)$：</p>
+<p>$$<br>\begin{align}<br>    \hat{h}(\boldsymbol{e}_i) &amp;&#x3D; \frac{2^{-n - k}}{\binom nk}\sum_{t &#x3D; 0}^n \binom{n - t}{n - k}^{1&#x2F;2}\left(\binom{n - 1}{t - 1}\binom{n - t + 1}{n - k}^{1&#x2F;2} + \binom{n - 1}{t}\binom{n - 1}{t}\binom{n - t}{n - k}^{1&#x2F;2}\right) \\<br>    &amp;&#x3D; 2^{-n - k}\sum_{t &#x3D; 0}^k \binom{k}{t}\left(\frac{t}{n}\left(\frac{n - t + 1}{k - t + 1}\right)^{1&#x2F;2} + \left(1 - \frac tn\right)\left(\frac{k - t}{n - t}\right)^{1&#x2F;2}\right)<br>\end{align}<br>$$</p>
+<p>只需要把这个括号 bound 在 $1 - O(1 &#x2F; n)$ 范围内即可（$1$ 用来抵消 $0^n$ 的贡献，$O(1 &#x2F; n)$ 用来确保期望模长不要太大）。此处有很多细节，我就不写了，感兴趣可以自己推：</p>
+<ul>
+<li>根据 Chernoff Bound，只需要考虑 $t$ 在 $\frac 12 \pm a &#x2F; \sqrt n$ 范围内（$a$ 是常数）的情况即可，其他情况前面的系数是指数小的。</li>
+<li>取 $k &#x3D; n - c\sqrt n$ 是欲证明引理的要求。这个参数具体怎么选出来的这里就不再追究了。</li>
+<li>用 $\sqrt x \geq \frac 23 x - \frac 12 x^2$ 放缩。</li>
+</ul>
+<p>推下去确实可以 bound 住。综合起来得到 $\mathbb{E}[|\boldsymbol{y}|] &#x3D; O(1)$。<div style="text-align: right">$\blacksquare$</div></p>
+<h1><span id="参考资料">参考资料</span></h1><ol>
+<li>Ambainis, A. and Montanaro, A. (2014) “Quantum Algorithms for Search with Wildcards and Combinatrial Group Testing”, <em>Quantum Information &amp; Computation</em>, Vol. 14, No. 5&amp;6, pp. 439 - 453.</li>
+<li>Hausladen, P. and Wootters, W. K. (1994) “A ‘Pretty Good’ Measurement for Distinguishing Quantum States”, <em>Journal of Modern Optics</em>, 41(12), pp. 2385–2390. doi: 10.1080&#x2F;09500349414552221.</li>
+</ol>
+<h1><span id="附录">附录</span></h1><div class="note info"><p><strong>引理 A.1.</strong> 对于任意的 $\boldsymbol{x}\in \{0, 1\}^n$，$k$ 有</p>
+<p>$$<br>\sum_{\boldsymbol{y}\in \{0, 1\}^n} (-1)^{\boldsymbol{x}\cdot \boldsymbol{y}} \binom{n - |\boldsymbol{y}|}{k} &#x3D; 2^{n - k}\binom{n - |\boldsymbol{x}|}{n - k}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 首先枚举 $\boldsymbol{y}$ 的模，再枚举 $\boldsymbol{x}\cdot \boldsymbol{y}$ 有左边等于</p>
+<p>$$<br>\sum_{i &#x3D; 0}^n \binom{n - i}{k}{\color{blue}\sum_{j &#x3D; 0}^n (-1)^j \binom{|\boldsymbol{x}|}{j}\binom{n - |\boldsymbol{x}|}{j - i}} \label{eq:krawchouk_summation}<br>$$</p>
+<p>蓝色部分记作 $F(|\boldsymbol{x}|, i)$。考虑其普通型生成函数</p>
+<p>$$<br>G(\boldsymbol{x}, z) &#x3D; \sum_{i &#x3D; 0}^n F(|\boldsymbol{x}|, i)z^i &#x3D; (1 - z)^{|\boldsymbol{x}|}(1 + z)^{n - |\boldsymbol{x}|}<br>$$</p>
+<p>明显 $\ref{eq:krawchouk_summation}$ 的值就是</p>
+<p>$$<br>\begin{aligned}<br>    \frac{1}{k!} \cdot \frac{\mathrm{d}^k}{\mathrm{d}z^k} z^n G(\boldsymbol{x}, z^{-1})\bigg|_{z &#x3D; 1} &amp;&#x3D; \frac{1}{k!} \cdot \frac{\mathrm{d}^k}{\mathrm{d}z^k} \left((z - 1)^{|\boldsymbol{x}|}(z + 1)^{n - |\boldsymbol{x}|}\right)\bigg|_{z &#x3D; 1}<br>\end{aligned}<br>$$</p>
+<p>必须要把 $(z - 1)$ 因子全部导下来，否则代入 $z &#x3D; 1$ 等于 $0$。因此答案是</p>
+<p>$$<br>\frac{1}{k!}\cdot \binom{k}{|\boldsymbol{x}|} |\boldsymbol{x}|! \frac{(n - |\boldsymbol{x}|)!}{(n - k)!}2^{n - k} &#x3D; 2^{n - k}\binom{n - |\boldsymbol{x}|}{n - k}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/19/TarskiFixedPoint/" rel="prev" title="快速上手 Tarski 不动点问题">
+                  <i class="fa fa-angle-left"></i> 快速上手 Tarski 不动点问题
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
