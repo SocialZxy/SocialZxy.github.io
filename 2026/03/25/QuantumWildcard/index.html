@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明 参考资料 附录">
+    <meta name="description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明   组合群组测试 参考资料 附录 补充结论 其余情形的复杂度">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Search with Wildcard Problem">
 <meta property="og:url" content="http://example.com/2026/03/25/QuantumWildcard/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明 参考资料 附录">
+<meta property="og:description" content="Abstract.    问题背景 $O(\sqrt n\log n)$ 算法 State Discrimination Problem 正算子值测度 Pretty Good Measurement   完整证明   组合群组测试 参考资料 附录 补充结论 其余情形的复杂度">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-03-25T06:58:46.000Z">
-<meta property="article:modified_time" content="2026-04-05T15:16:14.552Z">
+<meta property="article:modified_time" content="2026-04-07T07:39:14.283Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">$O(\sqrt n\log n)$ 算法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">State Discrimination Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">正算子值测度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Pretty Good Measurement</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">完整证明</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">附录</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">问题背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">$O(\sqrt n\log n)$ 算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">State Discrimination Problem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.1.</span> <span class="nav-text">正算子值测度</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">2.1.2.</span> <span class="nav-text">Pretty Good Measurement</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">完整证明</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">组合群组测试</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考资料</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">补充结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">其余情形的复杂度</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">92</span>
+          <span class="site-state-item-count">94</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-04-05 23:16:14" itemprop="dateModified" datetime="2026-04-05T23:16:14+08:00">2026-04-05</time>
+      <time title="Modified: 2026-04-07 15:39:14" itemprop="dateModified" datetime="2026-04-07T15:39:14+08:00">2026-04-07</time>
     </span>
 
   
@@ -251,15 +251,22 @@
 
 <ul>
 <li><a href="#%E9%97%AE%E9%A2%98%E8%83%8C%E6%99%AF">问题背景</a></li>
-<li><a href="#osqrt-nlog-n-%E7%AE%97%E6%B3%95">$O(\sqrt n\log n)$ 算法</a></li>
+<li><a href="#osqrt-nlog-n-%E7%AE%97%E6%B3%95">$O(\sqrt n\log n)$ 算法</a><ul>
 <li><a href="#state-discrimination-problem">State Discrimination Problem</a><ul>
 <li><a href="#%E6%AD%A3%E7%AE%97%E5%AD%90%E5%80%BC%E6%B5%8B%E5%BA%A6">正算子值测度</a></li>
 <li><a href="#pretty-good-measurement">Pretty Good Measurement</a></li>
 </ul>
 </li>
 <li><a href="#%E5%AE%8C%E6%95%B4%E8%AF%81%E6%98%8E">完整证明</a></li>
+</ul>
+</li>
+<li><a href="#%E7%BB%84%E5%90%88%E7%BE%A4%E7%BB%84%E6%B5%8B%E8%AF%95">组合群组测试</a></li>
 <li><a href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99">参考资料</a></li>
-<li><a href="#%E9%99%84%E5%BD%95">附录</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a><ul>
+<li><a href="#%E8%A1%A5%E5%85%85%E7%BB%93%E8%AE%BA">补充结论</a></li>
+<li><a href="#%E5%85%B6%E4%BD%99%E6%83%85%E5%BD%A2%E7%9A%84%E5%A4%8D%E6%9D%82%E5%BA%A6">其余情形的复杂度</a></li>
+</ul>
+</li>
 </ul>
 <!-- tocstop -->
 
@@ -276,6 +283,7 @@
 <li>有一个 Information Theoretic Argument 证明经典算法询问复杂度下界是 $\Omega(n)$。</li>
 <li>如果 oracle 限制 $|S| &#x3D; 1$，也就是你只能问一位，那么量子有 $n &#x2F; 2 + \Omega(\sqrt n)$ 的询问复杂度下界，也有 $n &#x2F; 2 + O(\sqrt n)$ 的算法。</li>
 <li>如果你问的问题是 $\boldsymbol{y}$ 是否是 $\boldsymbol{x}$ 的子串？那么有 $\Omega(n &#x2F; \log^2 n)$ 的 Quantum Lowerbound。</li>
+<li>$\Omega(\sqrt n)$ 的下界是明显的，因为问题比 Grover Search 难。</li>
 </ul>
 <h1><span id="osqrt-nlog-n-算法">$O(\sqrt n\log n)$ 算法</span></h1><p>这个问题的量子加速，主要依赖于以下这个引理：</p>
 <div class="note info"><p><strong>引理 2.1.</strong> 对于 $n\geq 1$，$k &#x3D; n - O(\sqrt n)$。如果我们能制备这个态：</p>
@@ -297,9 +305,9 @@
 </ol>
 </div>
 
-<h1><span id="state-discrimination-problem">State Discrimination Problem</span></h1><p>欲证明的引理 2.1 是一个态区分问题：我们希望知道我们制备的 $|\psi_{\color{orange} x}\rangle$ 究竟是哪个 ${\color{orange} x}$ 对应的。然而，我们熟知这个事情是不能精确做到的（根据 Indistinguishability Theorem）。现在我们来准备一些工具。</p>
-<h2><span id="正算子值测度">正算子值测度</span></h2><p>接下来引入所谓的正算子值测度，以及这种测度下面的测量如何实现。首先我们回顾一下我们熟悉的测量使用的投影值测度。</p>
-<div class="note success"><p><strong>定义 3.1（投影值测度，PVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{P}(\mathcal{H})$（此处 $\mathscr{P}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体投影算符）的映射，满足：</p>
+<h2><span id="state-discrimination-problem">State Discrimination Problem</span></h2><p>欲证明的引理 2.1 是一个态区分问题：我们希望知道我们制备的 $|\psi_{\color{orange} x}\rangle$ 究竟是哪个 ${\color{orange} x}$ 对应的。然而，我们熟知这个事情是不能精确做到的（根据 Indistinguishability Theorem）。现在我们来准备一些工具。</p>
+<h3><span id="正算子值测度">正算子值测度</span></h3><p>接下来引入所谓的正算子值测度，以及这种测度下面的测量如何实现。首先我们回顾一下我们熟悉的测量使用的投影值测度。</p>
+<div class="note success"><p><strong>定义 2.2.1（投影值测度，PVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{P}(\mathcal{H})$（此处 $\mathscr{P}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体投影算符）的映射，满足：</p>
 <ol>
 <li>$\pi(\varnothing) &#x3D; \mathbf{0}, \pi(X) &#x3D; \mathbf{I}$；</li>
 <li>对于一列不相交的 $E_1, E_2, …\in M$，有<br>$$<br>\pi\left(\bigsqcup_{i &#x3D; 1}^\infty E_i\right) &#x3D; \sum_{i &#x3D; 1}^\infty \pi(E_i)<br>$$</li>
@@ -316,7 +324,7 @@
 <p>$$<br>\Pr[E] &#x3D; \langle \psi| \pi(E) |\psi\rangle<br>$$</p>
 <p>若测量结果为 $x$，则测量后态为 </p>
 <p>$$<br>\frac{\pi(x)|\psi\rangle}{\langle\psi|\pi(x)|\psi\rangle^{1&#x2F;2}}<br>$$</p>
-<div class="note success"><p><strong>定义 3.2（正算子值测度，POVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{L}(\mathcal{H})$（此处 $\mathscr{L}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体正自伴随有界算符）的映射 $\textsf{E}$，满足：</p>
+<div class="note success"><p><strong>定义 2.2.2（正算子值测度，POVM）.</strong> 给定希尔伯特空间 $\mathcal{H}$ 和 Borel 集 $X$，其上的 $\sigma$-代数记作 $M$。$\mathcal{H}$ 上一个关于 $X$ 的投影值测度是一个 $X\rightarrow \mathscr{L}(\mathcal{H})$（此处 $\mathscr{L}(\mathcal{H})$ 为 $\mathcal{H}$ 上全体正自伴随有界算符）的映射 $\textsf{E}$，满足：</p>
 <ol>
 <li>$\textsf{E}(\varnothing) &#x3D; \mathbf{0}, \textsf{E}(X) &#x3D; \mathbf{I}$；</li>
 <li>对于一列不相交的 $E_1, E_2, …\in M$，有<br>$$<br>\textsf{E}\left(\bigsqcup_{i &#x3D; 1}^\infty E_i\right) &#x3D; \sum_{i &#x3D; 1}^\infty \textsf{E}(E_i)<br>$$</li>
@@ -326,7 +334,7 @@
 <p>对于一个量子态，其密度矩阵为 $\rho$，在 POVM $\textsf{E}$ 下测量结果在 $E$ 中的概率为</p>
 <p>$$<br>\Pr[E] &#x3D; \mathrm{tr}(\rho \textsf{E}(E))<br>$$</p>
 <p>直觉上来说，POVM 之于 PVM，就是混态之于纯态。事实上，POVM 总是可以嵌入到高维空间后用 PVM 实现。我们有如下的定理：</p>
-<div class="note info"><p><strong>定理 3.1（Naimark’s Dilation Theorem）.</strong> 设 $\textsf{E}$ 是 $\mathcal{H}_A$ 上的一个 POVM，则存在一个 $\mathcal{H}_B$ 及其上的 PVM $\pi$ 和一个 $\mathcal{H}_A \rightarrow \mathcal{H}_B$ 的保距映射 $V$，使得对于任意的 $E\in M$，有</p>
+<div class="note info"><p><strong>定理 2.2.1（Naimark’s Dilation Theorem）.</strong> 设 $\textsf{E}$ 是 $\mathcal{H}_A$ 上的一个 POVM，则存在一个 $\mathcal{H}_B$ 及其上的 PVM $\pi$ 和一个 $\mathcal{H}_A \rightarrow \mathcal{H}_B$ 的保距映射 $V$，使得对于任意的 $E\in M$，有</p>
 <p>$$<br>\textsf{E}(E) &#x3D; V^*\pi(E)V<br>$$</p>
 </div>
 
@@ -341,7 +349,7 @@
 <p>这给出了测量的过程。假如你要做一个 POVM $\textsf{E}$，令 $U$ 是 $V$ 扩充成的 $\mathcal{H}$ 上的酉变换，首先复合上一个辅助 $n$ 维希尔伯特空间 $\mathcal{H}_{A’}$（用量子计算的语言就是加一个 ancilla $n$-qudit），然后按照 $U$ 演化，测量第二个 register。测出结果 $i$ 的概率为</p>
 <p>$$<br>\mathrm{tr}(U \rho U^\dagger \pi(i)) &#x3D; \mathrm{tr}(\rho U^\dagger \pi(i) U) &#x3D; \mathrm{tr}(\rho \textsf{E}(i))<br>$$</p>
 <p>测量后得到的态是 $U \rho U^\dagger \pi(i)$ 取 $\mathcal{H}_{A’}$ 上的偏迹。</p>
-<h2><span id="pretty-good-measurement">Pretty Good Measurement</span></h2><p>Pretty Good Measurement 对态区分问题的精确度最高的测量方法，参见 [2]。</p>
+<h3><span id="pretty-good-measurement">Pretty Good Measurement</span></h3><p>Pretty Good Measurement 对态区分问题的精确度最高的测量方法，参见 [2]。</p>
 <p>给定一组纯态 $\{|\phi_i\rangle\}$，定义 $\rho &#x3D; \sum_i |\phi_i\rangle\langle\phi_i|$，$\rho^{-1}$ 表示它的 Moore–Penrose 广义逆。定义 $|\mu_i\rangle &#x3D; \rho^{-1&#x2F;2}|\phi_i\rangle$，然后可以构造一个 POVM：</p>
 <p>$$<br>\textsf{E}(i) &#x3D; |\mu_i\rangle\langle\mu_i|<br>$$</p>
 <p>为了验证这是一个 POVM，只需观察到</p>
@@ -352,7 +360,7 @@
 <p>$$<br>\sum_k \langle\phi_i|\rho^{-1&#x2F;2}|\phi_k\rangle\langle\phi_k|\rho^{-1&#x2F;2}|\phi_j\rangle &#x3D; \langle\phi_i|\rho^{-1&#x2F;2}\left(\sum_k |\phi_k\rangle\langle\phi_k|\right)\rho^{-1&#x2F;2}|\phi_j\rangle &#x3D; \langle\phi_i|\phi_j\rangle<br>$$</p>
 <p>至此可以发现，向量组越正交，PGM 效果越好。这也非常符合直觉。</p>
 <p>关于为什么 PGM 是 Pretty Good 的，这里暂时不证明，读者可以参考各种文献，一个比较现代的版本是 <a target="_blank" rel="noopener" href="https://people.eecs.berkeley.edu/~jswright/quantumlearningtheory24/scribe%20notes/lecture06.pdf">这个讲义</a>。</p>
-<h1><span id="完整证明">完整证明</span></h1><p>首先来补全引理 2.1 的证明，核心是分析向量组 $\{|\psi_x^k\rangle\}$ Gram 矩阵 $\mathbf{G}$。注意</p>
+<h2><span id="完整证明">完整证明</span></h2><p>首先来补全引理 2.1 的证明，核心是分析向量组 $\{|\psi_x^k\rangle\}$ Gram 矩阵 $\mathbf{G}$。注意</p>
 <p>$$<br>\langle\psi_x^k|\psi_y^k\rangle &#x3D; \frac{1}{\binom nk}\sum_{|S| &#x3D; k} [x_S &#x3D; y_S] &#x3D; \frac{\binom{n - d(x, y)}{k}}{\binom nk}<br>$$</p>
 <p>因此 $G_{xy}$ 只和 $d(x, y)$ 有关，进而只和 $x\oplus y$ 有关。熟悉傅里叶变换诸多含义的读者可能知道，这种矩阵在乘法意义下同构于 $n$ 元（指标都是 $[n]$ 的子集）集合幂级数在异或卷积意义下构成的环。类似于循环矩阵可以被傅里叶变换矩阵正交对角化，这样的矩阵可以被 $n$ 维沃尔什变换（$\mathbb{F}_2^n$ 上的 FFT）矩阵对角化，特征值就是集合幂级数</p>
 <p>$$<br>G(z) &#x3D; \sum_{S \subseteq \{0, 1\}^n} \frac{\binom {n - |S|}{k}}{\binom nk}z^S<br>$$</p>
@@ -376,11 +384,42 @@
 <li>用 $\sqrt x \geq \frac 23 x - \frac 12 x^2$ 放缩。</li>
 </ul>
 <p>推下去确实可以 bound 住。综合起来得到 $\mathbb{E}[|\boldsymbol{y}|] &#x3D; O(1)$。<div style="text-align: right">$\blacksquare$</div></p>
+<h1><span id="组合群组测试">组合群组测试</span></h1><p><strong>群组测试</strong>也是一种经典的搜索问题。其定义为：</p>
+<div class="note warning"><p><strong>问题 3.1（Combinatrial Group Test）.</strong> 考虑一个 Hamming weight 至多为 $k$ 的字符串 $\boldsymbol{x}\in \{0, 1\}^n$。定义函数 $Q_\boldsymbol{x} : \mathcal{P}([n])\rightarrow \{0, 1\}$，$Q_\boldsymbol{x}(S)$ 的值为 $1$ 当且仅当存在 $i\in S, x_i &#x3D; 1$。你将获得 $Q_\boldsymbol{x}$ 的 Oracle 访问：</p>
+<p>$$<br>O_\boldsymbol{x}|S\rangle|z\rangle &#x3D; |S\rangle|z\oplus Q_\boldsymbol{x}(S)\rangle<br>$$</p>
+<p>求 $\boldsymbol{x}$。</p>
+</div>
+
+<p>这个问题具有明显的现实意义，因此经常被研究。很明显 Wildcard Search 比 CGT 容易。</p>
+<div class="note info"><p><strong>引理 3.1.</strong> 若可以在 $O(Q)$ 次询问内解决 CGT，则可以在 $O(Q)$ 次询问内解决 Wildcard Search。</p>
+</div>
+
+<p><strong>证明.</strong> Wildcard Search 只猜全 $0$ 即可的带 CGT 用的 oracle。</p>
+<p>首先来看一些初步的工具。</p>
+<div class="note info"><p><strong>引理 3.2.</strong> 当 $k &#x3D; 1$ 时，CGT 只需要 $O(1)$ 次 quantum query。</p>
+</div>
+
+<p><strong>证明.</strong> 叠加所有子集之后用 phase kickback 将函数值查到相位上得到：</p>
+<p>$$<br>\frac{1}{\sqrt{2^n}}\sum_{\boldsymbol{s}\in \{0, 1\}^n} (-1)^{\boldsymbol{s}\cdot \boldsymbol{x}} |\boldsymbol{s}\rangle<br>$$</p>
+<p>直接每个 Register 做 $H$ 门立刻可以拿到 $\boldsymbol{x}$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>相对地，经典确定性算法解决这种情况需要 $\Theta(\log n)$ 次询问，因为这个问题显然和二分等难。</p>
+<div class="note info"><p><strong>引理 3.3.</strong> CGT 只需要 $O(k)$ 次 query。</p>
+</div>
+
+<p><strong>证明.</strong> 我们来看看硬套上引理 3.2 的算法会发生什么。此时因为 $|\boldsymbol{x}| &gt; 1$，一般地，$\boldsymbol{x}\cdot \boldsymbol{s} &#x3D; \vee_i x_is_i$ 并不成立。但是我们首先做相位查询：</p>
+<p>$$<br>\frac{1}{\sqrt{2^n}}\sum_{\boldsymbol{s} \in \{0, 1\}^n} (-1)^{\vee_i s_ix_i}|\boldsymbol{s}\rangle<br>$$</p>
+<p>每一位做 $H$ 门得到</p>
+<p>$$<br>\frac{1}{2^n}\sum_{\boldsymbol{y} \in \{0, 1\}^n} \left(\sum_{\boldsymbol{s}\in \{0, 1\}^n} (-1)^{\vee_i s_i x_i + \boldsymbol{s}\cdot \boldsymbol{y}}\right)|y\rangle<br>$$</p>
+<p>注意，那些 $\boldsymbol{y} \vee \boldsymbol{x} \ne \boldsymbol{x}$ 的串都是没有振幅的。因为容易在前面求和的 $1$ 和 $-1$ 之间找到这样的一个一一对应：在 $\boldsymbol{y}\setminus \boldsymbol{x}$ 的第一个 $1$ 处，翻转 $\boldsymbol{s}$ 的这一位。</p>
+<p>因此每次测量至少能测出一个 $1$，然后归约到 $k’ &#x3D; k - 1$ 的子问题。<div style="text-align: right">$\blacksquare$</div></p>
+<p>相对地，经典情况下，用 Information Theoretic Argument 可以证出 $\Omega(k\log \frac{n}{k})$ 的下界。</p>
+<p>【FIXME：有人用神秘 <strong>Adversarial Bound</strong> 证明了这个问题有 $O(\sqrt n)$ 的<strong>上界</strong>，感觉还差点需要学的东西】</p>
 <h1><span id="参考资料">参考资料</span></h1><ol>
 <li>Ambainis, A. and Montanaro, A. (2014) “Quantum Algorithms for Search with Wildcards and Combinatrial Group Testing”, <em>Quantum Information &amp; Computation</em>, Vol. 14, No. 5&amp;6, pp. 439 - 453.</li>
 <li>Hausladen, P. and Wootters, W. K. (1994) “A ‘Pretty Good’ Measurement for Distinguishing Quantum States”, <em>Journal of Modern Optics</em>, 41(12), pp. 2385–2390. doi: 10.1080&#x2F;09500349414552221.</li>
+<li>Cornelissen, Arjan, et al. “Quantum Search With Generalized Wildcards.” <em>arXiv preprint</em> arXiv:2511.04669 (2025).</li>
 </ol>
-<h1><span id="附录">附录</span></h1><div class="note info"><p><strong>引理 A.1.</strong> 对于任意的 $\boldsymbol{x}\in \{0, 1\}^n$，$k$ 有</p>
+<h1><span id="附录">附录</span></h1><h2><span id="补充结论">补充结论</span></h2><div class="note info"><p><strong>引理 A.1.</strong> 对于任意的 $\boldsymbol{x}\in \{0, 1\}^n$，$k$ 有</p>
 <p>$$<br>\sum_{\boldsymbol{y}\in \{0, 1\}^n} (-1)^{\boldsymbol{x}\cdot \boldsymbol{y}} \binom{n - |\boldsymbol{y}|}{k} &#x3D; 2^{n - k}\binom{n - |\boldsymbol{x}|}{n - k}<br>$$</p>
 </div>
 
@@ -393,6 +432,14 @@
 <p>必须要把 $(z - 1)$ 因子全部导下来，否则代入 $z &#x3D; 1$ 等于 $0$。因此答案是</p>
 <p>$$<br>\frac{1}{k!}\cdot \binom{k}{|\boldsymbol{x}|} |\boldsymbol{x}|! \frac{(n - |\boldsymbol{x}|)!}{(n - k)!}2^{n - k} &#x3D; 2^{n - k}\binom{n - |\boldsymbol{x}|}{n - k}<br>$$</p>
 <div style="text-align: right">$\blacksquare$</div>
+
+<h2><span id="其余情形的复杂度">其余情形的复杂度</span></h2><p>参考文献 [3] 证明了</p>
+<ol>
+<li>只准问大小不超过 $k$ 的子集，则复杂度为 $\Theta(n &#x2F; \sqrt k)$。</li>
+<li>只准问子段，则复杂度为 $\tilde{\Theta}(n)$；</li>
+<li>只准问前缀，复杂度为 $\Theta(n)$。</li>
+</ol>
+
     </div>
 
     
@@ -410,6 +457,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/04/07/QuantumLowerboundsRemaster/" rel="next" title="一些证明量子查询复杂度下界的办法（2026 Remaster）">
+                  一些证明量子查询复杂度下界的办法（2026 Remaster） <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>

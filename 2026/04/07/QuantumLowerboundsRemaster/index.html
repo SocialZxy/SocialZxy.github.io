@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 主要的阅读材料是 Andrew M. Childs 的讲义和一些其他东西。    记号 Polynomial Method Example: PARITY Example：OR Example：COLLISION【未完成】   Adversarial Method Example: Unstructured Search Example: Binary Search   高级技">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些证明量子查询复杂度下界的办法（2026 Remaster）">
+<meta property="og:url" content="http://example.com/2026/04/07/QuantumLowerboundsRemaster/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 主要的阅读材料是 Andrew M. Childs 的讲义和一些其他东西。    记号 Polynomial Method Example: PARITY Example：OR Example：COLLISION【未完成】   Adversarial Method Example: Unstructured Search Example: Binary Search   高级技">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-07T07:35:34.000Z">
+<meta property="article:modified_time" content="2026-04-14T13:52:24.072Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/04/07/QuantumLowerboundsRemaster/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/04/07/QuantumLowerboundsRemaster/","path":"2026/04/07/QuantumLowerboundsRemaster/","title":"一些证明量子查询复杂度下界的办法（2026 Remaster）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>一些证明量子查询复杂度下界的办法（2026 Remaster） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">记号</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Polynomial Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Example: PARITY</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Example：OR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">Example：COLLISION【未完成】</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Adversarial Method</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">Example: Unstructured Search</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">Example: Binary Search</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">高级技巧</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/07/QuantumLowerboundsRemaster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="一些证明量子查询复杂度下界的办法（2026 Remaster） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          一些证明量子查询复杂度下界的办法（2026 Remaster）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-04-07 15:35:34" itemprop="dateCreated datePublished" datetime="2026-04-07T15:35:34+08:00">2026-04-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-04-14 21:52:24" itemprop="dateModified" datetime="2026-04-14T21:52:24+08:00">2026-04-14</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 主要的阅读材料是 Andrew M. Childs 的讲义和一些其他东西。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E8%AE%B0%E5%8F%B7">记号</a></li>
+<li><a href="#polynomial-method">Polynomial Method</a><ul>
+<li><a href="#example-parity">Example: PARITY</a></li>
+<li><a href="#exampleor">Example：OR</a></li>
+<li><a href="#examplecollision%E6%9C%AA%E5%AE%8C%E6%88%90">Example：COLLISION【未完成】</a></li>
+</ul>
+</li>
+<li><a href="#adversarial-method">Adversarial Method</a><ul>
+<li><a href="#example-unstructured-search">Example: Unstructured Search</a></li>
+<li><a href="#example-binary-search">Example: Binary Search</a></li>
+</ul>
+</li>
+<li><a href="#%E9%AB%98%E7%BA%A7%E6%8A%80%E5%B7%A7">高级技巧</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="记号">记号</span></h1><p>考虑计算函数 $f : S\rightarrow T$ 的任务，其中 $S\subseteq \Sigma^n$。</p>
+<ul>
+<li>若 $S &#x3D; \Sigma^n$，则称 $f$ 为<strong>完全函数（total function）</strong>；</li>
+<li>若 $S\subsetneq \Sigma^n$，则称 $f$ 为<strong>部分函数（partial function）</strong>。</li>
+</ul>
+<p>输入 $\boldsymbol{x}\in S$ 将会由一个 oracle $i \mapsto x_i$ 给出。对于量子的情况，Oracle 可以是加性查询（$O_x|i\rangle|z\rangle &#x3D; |i\rangle|z\oplus x_i\rangle$）或者相位查询（$O_x|i\rangle &#x3D; e^{2\pi i x_i &#x2F; |\Sigma|}|i\rangle$）。在均匀叠加态上面使用 QFT 做 phase kickback 得到这两种 oracle 的等价性。一个算法必须从无关于 $\boldsymbol{x}$ 的状态出发，经过一系列 oracle 访问和调用，计算出 $f(\boldsymbol{x})$。</p>
+<p>常见的计算模型有以下三种：</p>
+<ul>
+<li><strong>经典确定性算法复杂度.</strong> $D(f)$。</li>
+<li><strong>经典误差有界随机算法复杂度.</strong> $R_\epsilon(f)$。该随机算法可以是 bounded-error 的，错误概率至多为 $\epsilon$。注意对于常数 $\epsilon$ 有 $R_\epsilon(f) &#x3D; \Theta(R_{1&#x2F;3}(f))$。</li>
+<li><strong>误差有界量子算法复杂度</strong> $Q_\epsilon(f)$。该量子算法可以是 bounded-error 的，错误概率至多为 $\epsilon$。同样对于常数 $\epsilon$ 有 $Q_\epsilon(f) &#x3D; \Theta(Q_{1&#x2F;3}(f))$。</li>
+</ul>
+<p>只考虑询问复杂度时，一个算法总是可以被拆分成：</p>
+<p>$$<br>|0\rangle\rightarrow U_0 \rightarrow O_1 \rightarrow U_1\rightarrow O_2 \rightarrow \cdots \rightarrow U_{T - 1} \rightarrow O_T \rightarrow U_T \rightarrow \mathrm{Measurement.}<br>$$</p>
+<p>其中 $U_i$ 都是酉变换，$O_i$ 表示 oracle 访问。</p>
+<p>下面简单起见，我们只考虑 $\Sigma &#x3D; \{0, 1\}$。其他情况可以用编码解决。</p>
+<h1><span id="polynomial-method">Polynomial Method</span></h1><p>这种方法的核心是 phase polynomial。</p>
+<div class="note info"><p><strong>定理 2.1</strong> 一个 $t$ 次询问的量子算法最后测出任意一个态的概率都是关于 $x_1, …, x_n$ 的至多 $2t$ 次的多项式。</p>
+</div>
+
+<p><strong>证明.</strong> 我们直接考察每一个基底的振幅。施归纳于 $T$，证明做完 $U_T$ 后每个基底的振幅都是至多 $T$ 次的多项式。</p>
+<ul>
+<li>做完 $U_0$ 后，每个基底的振幅都是常数；</li>
+<li>假设做完 $U_{T - 1}$ 后，每个基底的振幅都是 $T - 1$ 次多项式。现在进行了一次 oracle 访问 $O_T$，有 $a_{i, b}|i\rangle|b\rangle$ 将会变成<br>$$<br>a_{i, b}(-1)^{x_i}|i\rangle|b\rangle &#x3D; a_{i, b}(1 - 2x_i)|i\rangle|b\rangle<br>$$<br>振幅的次数只升高了一次。而 $U_T$ 是线性组合，不会升高多项式的次数。</li>
+</ul>
+<p>最后测出一个态 $|i\rangle|b\rangle$ 的概率是 $a_{ib}^\dagger a_{ib}$，为 $2t$ 次多项式。<div style="text-align: right">$\blacksquare$</div></p>
+<p>上述定理启发我们量子算法的复杂度下界和多项式的度数之间存在联系。</p>
+<div class="note success"><p><strong>定义 2.1（布尔函数的 $\varepsilon$-近似度）.</strong> 对于布尔函数 $f : \{0, 1\}^n\rightarrow \{0, 1\}$，定义其 $\varepsilon$-近似度为</p>
+<p>$$<br>\widetilde{\deg}_\varepsilon(f) &#x3D; \inf \{ \mathrm{deg}(p) : \forall \boldsymbol{x}\in \{0, 1\}^n, |p(\boldsymbol{x}) - f(\boldsymbol{x})| &lt; \varepsilon \}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>推论 2.1（The Polynomial Method）.</strong> 对于任意布尔函数 $f : \{0, 1\}^n \rightarrow \{0, 1\}$，有 $Q_\varepsilon(f) \geq \widetilde{\deg}_\varepsilon(f) &#x2F; 2$。</p>
+</div>
+
+<h2><span id="example-parity">Example: PARITY</span></h2><p>在使用 Polynomial Method 分析下界的时候，我们经常需要分析多项式的度数。然而，多元多项式对于人类来说还是过于抽象。比如说遇到了下面的问题：</p>
+<div class="note warning"><p><strong>Example 2.1（Quantum Lowerbound for PARITY）.</strong> 定义函数 $\mathrm{PARITY}(\boldsymbol{x}) &#x3D; x_1\oplus \cdots \oplus x_n$。对于 $\varepsilon &lt; \frac 12$，分析 $Q_\varepsilon(\mathrm{PARITY})$。</p>
+</div>
+
+<p>我们就会对什么样的多项式能够 $\varepsilon$-近似 $\textrm{PARITY}$ 束手无策。实践中，对于此类答案仅和 $\boldsymbol{x}$ 的 Hamming weight 有关的题目，我们有如下的处理技巧。</p>
+<div class="note info"><p><strong>引理 2.1（Symmetrization）.</strong> 设 $p$ 是一个 $n$ 元多重线性多项式（i.e. 在每个项中 $x_i$ 的次数至多是 $1$）。定义 $p$ 的 Symmetrization 为以下的 $P(\cdot)$：</p>
+<p>$$<br>P(k) &#x3D; \mathbb{E}_{|\boldsymbol{x}| &#x3D; k}[p(\boldsymbol{x})]<br>$$</p>
+<p>有 $P$ 也是多项式，其次数不超过 $\deg(p)$。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 此处我们仅考虑多重线性多项式的原因是当 $x\in \{0, 1\}$ 时必然有 $x^2 &#x3D; x$。</p>
+</blockquote>
+<p><strong>证明.</strong> 不妨设</p>
+<p>$$<br>p(\boldsymbol{x}) &#x3D; \sum_{S\subseteq [n]}c_S\prod_{i \in S} x_i<br>$$</p>
+<p>则</p>
+<p>$$<br>\begin{align}<br>\mathbb{E}_{|\boldsymbol{x} &#x3D; k|}[p(\boldsymbol{x})] &amp;&#x3D; \sum_{S\subseteq [n]}c_S\mathbb{E}_{|\boldsymbol{x}| &#x3D; k}\left[\prod_{i \in S} x_i\right] \\<br>&amp;&#x3D;\sum_{S\subseteq [n]}c_S \binom{n - |S|}{k - |S|} \binom{n}{k}^{-1} \\<br>&amp;&#x3D;\sum_{S\subseteq [n]} c_S \frac{(n - |S|)!(n - k)!}{n!}\cdot k^{\underline{|S|}}<br>\end{align}<br>$$</p>
+<p>这个下降幂多项式的最高次数就是最大的 $|S|$，也就是 $p(\boldsymbol{x})$ 的次数。<div style="text-align: right">$\blacksquare$</div></p>
+<p>很明显，如果 $p$ 能够 $\varepsilon$-近似 $f$，则根据绝对值不等式，$p$ 的 Symmetrization 也应当能 $\varepsilon$-近似 $f$ 的 Symmetrization。那么将 $\mathrm{PARITY}$ Symmetrization 之后，便可以分析多项式的度数：</p>
+<div class="note info"><p><strong>命题 2.1.</strong> 对于任意的 $\varepsilon\in [0, 1&#x2F;2)$ 有 $Q_\varepsilon(\mathrm{PARITY}) &#x3D; n &#x2F; 2$。</p>
+</div>
+
+<p><strong>证明.</strong> 上界是显然的。我们可以将下标两两分组，组内做 Deutsch 算法可以精确求出两个数的异或值，再将其全部异或起来即可，因此 $Q_{\varepsilon}(\mathrm{PARITY}) \leq n &#x2F; 2$。</p>
+<p>下界考虑将 $\mathrm{PARITY}$ Symmetrization 得到 </p>
+<p>$$<br>P(k) &#x3D; \begin{cases}<br>    0 &amp; \text{$k$ is even} \\<br>    1 &amp; \text{$k$ is odd}<br>\end{cases}<br>$$</p>
+<p>对于 $\varepsilon &lt; 1&#x2F;2$，要 $\varepsilon$-近似这个函数，多项式和 $y &#x3D; 1&#x2F;2$ 至少有 $n &#x2F; 2$ 个交点，因此次数为 $n &#x2F; 2$。因此 $Q_\varepsilon(\mathrm{PARITY}) \geq n &#x2F; 2$。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="exampleor">Example：OR</span></h2><p>另一个问题是 $\mathrm{OR}$，这个问题弱于无结构搜索。做 Symmetrization 之后得到</p>
+<p>$$<br>F(k) &#x3D; \begin{cases}<br>    0 &amp; \text{k &#x3D; 0} \\<br>    1 &amp; \mathrm{otherwise}<br>\end{cases}<br>$$</p>
+<p>这里要分析这东西的最低次数，需要用到下面这个引理：</p>
+<div class="note info"><p><strong>引理 2.2（Markov）.</strong> 设 $P$ 是一个多项式。则有</p>
+<p>$$<br>\max_{x\in [0, n]} \frac{\mathrm{d}P}{\mathrm{d}x}(x) \leq \frac{\mathrm{deg}(P)^2}{n}\left(\max_{x\in [0, n]} P(x) - \min_{x\in [0, n]} P(x)\right)<br>$$</p>
+<p>简写作</p>
+<p>$$<br>\mathrm{deg}(P) \geq \sqrt{\frac{Nd}{h}}, \qquad \text{where } d &#x3D; \max_{x\in [0, n]}, h &#x3D; \left(\max_{x\in [0, n]} P(x) - \min_{x\in [0, n]} P(x)\right)<br>$$</p>
+</div>
+
+<p>这个引理比较平凡，将多项式写成 $\sum a_i x^i$ 之后使劲放缩即可。使用这个引理可以分析出</p>
+<div class="note info"><p><strong>命题 2.2.</strong> 对于任意的 $\varepsilon\in (0, 1&#x2F;2)$ 有 $Q_\varepsilon(\mathrm{OR}) &#x3D; \Theta(\sqrt n)$。</p>
+</div>
+
+<p><strong>证明.</strong> 对于一个 $\varepsilon$ 近似了 $F$ 的多项式而言，有：</p>
+<ol>
+<li>在 $[0, 1]$ 这段区间上使用微分中值定理得到 $d \geq 1 - 2\varepsilon$。</li>
+<li>在每段 $[0, 1]$ 之间的最高点（最低点）和与之较远的端点之间使用微分中值定理得到 $h + O(1) \leq 2\cdot d\cdot \frac 12$，因此 $d &#x2F; h\geq 1 \pm O(1 &#x2F; h)$。</li>
+</ol>
+<p>得到 </p>
+<p>$$<br>\mathrm{deg}(P) \geq \sqrt{n\mathrm{max}(1 - 2\varepsilon, 1 \pm O(1 &#x2F; h))} &#x3D; \Omega(\sqrt n)<br>$$</p>
+<p>下界得证。而上界就是直接 Grover Search。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="examplecollision未完成">Example：COLLISION【未完成】</span></h2><p>这部分本来计划讲 COLLISION 问题的复杂度下界，这也是多项式级别量子加速的一个重要例子。</p>
+<p>但是 Polynomial Method 纯 ad hoc，我觉得在此处并无裨益，因此暂时先不写。</p>
+<h1><span id="adversarial-method">Adversarial Method</span></h1><p>考虑你将系统耦合上一个指示输入的系统 $\mathcal{A}$：从 </p>
+<p>$$<br>\sum_{x\in S} a_x|x\rangle|0\rangle<br>$$</p>
+<p>开始演化，每一步要么作用一个 $I\otimes U_t$，要么作用 oracle：</p>
+<p>$$<br>O &#x3D; \sum_{x\in S} |x\rangle\langle x|\otimes O_x<br>$$</p>
+<p>经过若干轮演化之后，系统的状态必然形如</p>
+<p>$$<br>\sum_{x\in S} a_x|x\rangle|\psi_x^t\rangle<br>$$</p>
+<p>这为我们提供了一个证明量子算法复杂度下界的思路：为了解决这个问题，上述态必须要足够“纠缠”，而一次要让态的纠缠程度发生变化，必须调用 oracle。衡量纠缠程度时，我们有惯用的手法：考虑这个态关于系统 $\mathcal{A}$ 的约化密度矩阵 </p>
+<p>$$<br>\sum_{x, y\in S} a_x^* a_y \langle \psi_x^t|\psi_y^t\rangle |x\rangle\langle y|<br>$$</p>
+<p>使用纠缠熵来刻画这个纠缠程度可能要丢失关于 $f$ 的理解，因此我们从测量的角度来审视这个矩阵：既然这个电路能够以不超过 $\varepsilon$ 的概率求出 $f(\boldsymbol{x})$，则对于任意的 $\boldsymbol{x}_1, \boldsymbol{x}_2$ 使得 $f(\boldsymbol{x}_1)\ne f(\boldsymbol{x}_2)$，我们根据计算结果就可以区分 $|\psi_{\boldsymbol{x}_1}^t\rangle$ 和 $|\psi_{\boldsymbol{x}_2}^t\rangle$ 这两个态。我们不加证明地摆出以下常识</p>
+<div class="note info"><p><strong>引理 1.</strong> 对于两个态 $|\phi\rangle, |\psi\rangle$，区分这两个态的错误率不超过 $\varepsilon$ 当且仅当 $|\langle\phi|\psi\rangle| \geq 2\sqrt{\varepsilon(1 - \varepsilon)}$。</p>
+</div>
+
+
+
+<p>对于庞大的输入量而言，逐个分析 $\langle\psi_x^t|\psi_y^t\rangle$ 自然是天方夜谭。一个可能的松弛方法就是配一个直觉上是两个输入的相似程度的系数 $\Gamma_{xy}$ 加权平均起来，这个数必须大于 $2\sqrt{\varepsilon(1 - \varepsilon)}$。</p>
+<div class="note success"><p><strong>定义 3.1（Adversary Matrix）.</strong> 矩阵 $\mathbf{\Gamma} \in \mathbb{R}^{|S|\rightarrow |S|}$ 称为函数 $f: S\rightarrow T$ 的 Adversary Matrix，若 </p>
+<ul>
+<li>$\forall x, y\in S$，$\Gamma_{xy} &#x3D; \Gamma_{yx}$；</li>
+<li>$\forall x, y\in S$，若 $f(x) &#x3D; f(y)$，则 $\Gamma_{xy} &#x3D; 0$。</li>
+</ul>
+<p>对于初级的技术，我们还要求 $\Gamma_{xy}\geq 0$ 成立。</p>
+</div>
+
+<p>将想要的加权求和定义做 $W^t$（$t$ 表示 oracle 访问次数）。因为初始状态和输入无关，</p>
+<p>$$<br>\begin{align}<br>W^0 &#x3D; \sum_{x, y\in S} a_x^* \Gamma_{xy} a^y \langle\psi_x^0|\psi_y^0\rangle &#x3D; \sum_{x, y\in S} a_x^* \Gamma_{xy} a_y<br>\end{align}<br>$$</p>
+<p>而按态区分的要求，必须有</p>
+<p>$$<br>\begin{align}<br>|W^t| &amp;&#x3D; \sum_{x, y\in S} a_x^* \Gamma_{xy} a_y \langle\psi_x^0|\psi_y^0\rangle \\<br>&amp;\leq 2\sqrt{\varepsilon(1 - \varepsilon)} \sum_{x, y\in S} a_x^* \Gamma_{xy} a_y<br>\end{align}<br>$$</p>
+<p>两个式子中都出现了 $\sum_{x, y\in S} a_x^* \Gamma_{xy} a_y$。本质上 $a$ 也是我们需要配置的参数，简明期间，我们直接让它取 $\mathbf{\Gamma}$ 最大特征值所对应的特征向量。此时</p>
+<p>$$<br>\sum_{x, y\in S} a_x^* \Gamma_{xy} a_y &#x3D; \left\lVert\mathbf{\Gamma}\right\rVert<br>$$</p>
+<p>对于 $\mathbf{\Gamma}$ 可以有负的元的情况，讨论稍微更复杂一些，这里我们先跳过这一段。剩下的工作是，oracle 对 $W^t$ 的影响。我们考虑 $W^t$ 和 $W^{t - 1}$ 之间的递推关系：</p>
+<p>$$<br>\begin{align}<br>W^t - W^{t - 1} &amp;&#x3D; \sum_{x, y\in S} \Gamma_{xy} a_x^*a_y\langle\psi_x^{t - 1}|(O_x^\dagger U_t^\dagger U_t O_y - I)|\psi_x^{t - 1}\rangle \\<br>&amp;&#x3D; \sum_{x, y\in S} \Gamma_{xy} a_x^*a_y\langle\psi_x^{t - 1}|(O_x^\dagger O_y - I)|\psi_x^{t - 1}\rangle \label{inter:w_diff1} \\<br>\end{align}<br>$$</p>
+<p>回忆 $O_x$ 是 $x$ 的 phase oracle，因此</p>
+<p>$$<br>O_x &#x3D; I\otimes \sum_{i &#x3D; 1}^n (-1)^{x_i}|i\rangle\langle i|, \qquad O_x^\dagger O_y - I &#x3D; -2\mathbf{I}\otimes \sum_{i: x_i\ne y_i}|i\rangle\langle i|<br>$$</p>
+<p>记 $P_i$ 为向 $|i\rangle$ 的投影：$\mathbf{I}\times |i\rangle\langle i|$，继续算。我们可能想要先交换求和顺序，因此定义</p>
+<p>$$<br>(\mathbf{\Gamma}_i)_{xy} &#x3D; \begin{cases}<br>    \Gamma_{xy} &amp; x_i\ne y_i \\<br>    0 &amp; \text{otherwise}<br>\end{cases}<br>$$</p>
+<p>那么记 $(\boldsymbol{v}_i)_x &#x3D; |a_x| \left\lVert P_i|\psi_x^{t - 1}\rangle \right\rVert$，时刻牢记 $P_i$ 是一组正交投影，$a_x$ 是归一化的。</p>
+<p>$$<br>\begin{align}<br>    (\ref{inter:w_diff1}) &amp;&#x3D; 2\sum_{i &#x3D; 1}^n \sum_{x, y\in S} a_x^* a_y (\mathbf{\Gamma}_i)_{xy} \langle\psi_x^{t - 1}|P_i|\psi_y^{t - 1}\rangle \\<br>    &amp;\leq 2\sum_{i &#x3D; 1}^n \boldsymbol{v}_i^\dagger \mathbf{\Gamma_i} {\boldsymbol{v}_i} \\<br>    &amp;\leq 2\sum_{i &#x3D; 1}^n \left\lVert\mathbf{\Gamma}_i\right\rVert \left\lVert\boldsymbol{v}_i\right\rVert^2 \\<br>    &amp;\leq 2\max_{i\in [n]}(\left\lVert\mathbf{\Gamma}_i\right\rVert) \sum_{x\in S} |a_x|^2 \sum_{i &#x3D; 1}^n \left\lVert P_i |\psi_x\rangle^{t - 1}\right\rVert^2 \\<br>    &amp;\leq 2\max_{i\in [n]}(\left\lVert\mathbf{\Gamma}_i\right\rVert) \sum_{x\in S} |a_x|^2 \\<br>    &amp;&#x3D; 2\max_{i\in [n]}(\left\lVert\mathbf{\Gamma}_i\right\rVert)<br>\end{align}<br>$$</p>
+<p>综上所述我们证明了：</p>
+<div class="note info"><p><strong>定理 3.1（Adversary Bound）.</strong> 对于函数 $f: S\rightarrow T$，有</p>
+<p>$$<br>Q_\varepsilon(f) \geq \frac{1 - 2\sqrt{\varepsilon(1 - \varepsilon)}}{2} \mathrm{Adv}(f)<br>$$</p>
+<p>其中</p>
+<p>$$<br>\mathrm{Adv}(f) &#x3D; \sup_{\mathbf{\Gamma}} \frac{\left\lVert\mathbf{\Gamma}\right\rVert}{\max_{i\in [n]}\left\lVert \mathbf{\Gamma}_i\right\rVert}<br>$$</p>
+</div>
+
+<h2><span id="example-unstructured-search">Example: Unstructured Search</span></h2><p>考虑至多有一个 $1$ 的 OR 问题。取一个 $(n + 1)\times (n + 1)$ 的矩阵：</p>
+<p>$$<br>\mathbf{\Gamma} &#x3D; \begin{pmatrix}<br>    0 &amp; 1 &amp; \cdots &amp; 1 \\<br>    1 &amp; 0 &amp; \cdots &amp; 0 \\<br>    \vdots &amp; \vdots &amp;  &amp; \vdots \\<br>    1 &amp; 0 &amp; \cdots &amp; 0<br>\end{pmatrix}<br>$$</p>
+<p>这个行列式是经典的箭形行列式，可以算出</p>
+<p>$$<br>\det (\lambda \mathbf{I} - \mathbf{\Gamma}) &#x3D; \lambda^n \left(\lambda - \frac{n}{\lambda}\right) &#x3D; \lambda^{n - 1}(\lambda + \sqrt n)(\lambda - \sqrt n)<br>$$</p>
+<p>谱范数为 $\sqrt n$。而 $\Gamma_i$ 更是都是对合矩阵，谱范数都是 $1$。对于已知共有 $k$ 个 $1$ 的 OR 问题，计算同样简单，此时</p>
+<p>$$<br>\left\lVert\mathbf{\Gamma}\right\rVert &#x3D; \sqrt{\binom nk}, \qquad \left\lVert\mathbf{\Gamma}_i\right\rVert &#x3D; \sqrt{\binom {n - 1}{k - 1}}, \qquad Q_{\varepsilon}(\mathrm{OR}_k) &#x3D; O\left(\sqrt{\frac{n}{k}}\right)<br>$$</p>
+<p>与熟知的结果匹配。</p>
+<h2><span id="example-binary-search">Example: Binary Search</span></h2><div class="note warning"><p><strong>Example 3.1（Quantum Lowerbound for Binary Search）.</strong> 定义函数 $F(\boldsymbol{x}) &#x3D; \{i : \text{$x_i$ is the first $1$ in $\boldsymbol{x}$}\}$。这个函数只定义在单调的 $0&#x2F;1$ 向量上。简便起见，我们记有 $i$ 个 $0$，$n - i$ 个 $1$ 的向量为 $\langle i\rangle$</p>
+</div>
+
+<p>这样定义 $\mathbf{\Gamma}$ 矩阵：</p>
+<p>$$<br>\Gamma_{xy} &#x3D; \begin{cases}<br>    \frac{1}{|i - j|} &amp; x &#x3D; \langle i\rangle, y &#x3D; \langle j\rangle, i\ne j \\<br>    0 &amp; \text{otherwise.}<br>\end{cases}<br>$$</p>
+<p>首先来求 $\mathbf{\Gamma}$ 的谱范数下界。这里我们直接乘上一个全 $1$ 向量，看看拉伸了多少。注意每一行都至少拉伸了</p>
+<p>$$<br>\sum_{i &#x3D; 1}^{n &#x2F; 2} \frac{1}{i} &#x3D; \Theta(\log n)<br>$$</p>
+<p>因此 $\left\lVert\mathbf{\Gamma}\right\rVert \geq \Theta(\log n)$。接下来考察 $\mathbf{\Gamma}_i$ 是什么。注意 $\langle x\rangle_i \ne \langle y\rangle_i$ 当且仅当这两个东西分居 $i$ 的两侧。限制在可能有 $1$ 的子矩阵上，$\mathbf{\Gamma}_i$ 是</p>
+<p>$$<br>\begin{pmatrix}<br>    &amp; \mathbf{A}_i \\<br>    \mathbf{A}_i^\top &amp;<br>\end{pmatrix}, \qquad \mathbf{A}_i &#x3D; \begin{pmatrix}<br>    \frac{1}{i + 1}&amp; \cdots &amp;\frac{1}{n} \\<br>    \vdots &amp;  &amp; \vdots \\<br>    1 &amp; \cdots &amp; \frac{1}{n - i}<br>\end{pmatrix}<br>$$</p>
+<p>这样看来，如果乘上一个 $(\boldsymbol{u}, \boldsymbol{v})^\top$，所得向量的模方为 $\boldsymbol{v}^\top \mathbf{AA}^\top \boldsymbol{v} + \boldsymbol{u}^\top \mathbf{A}^\top \mathbf{A}\boldsymbol{u}$。两部分的放大倍数都是 $\mathbf{A}^\top$ 的最大奇异值。因此 $\left\lVert\mathbf{\Gamma}_1\right\rVert &#x3D; \sigma_1(\mathbf{A}_i)$。我们把 $\mathbf{A}_i$ 补全成 $N\times N~(N\geq n)$ 的方阵，显然，新矩阵的谱范数必然大于这个矩阵的最大奇异值。这个矩阵整理之后是一个循环矩阵</p>
+<p>$$<br>\widetilde{\mathbf{A}}_i &#x3D;<br>\begin{pmatrix}<br>    1 &amp; \frac 12 &amp;  \cdots &amp; \frac 1N \\<br>    \frac 12 &amp; \frac 13 &amp; \cdots &amp; 1 \\<br>    \vdots &amp; \vdots &amp;  &amp; \vdots \\<br>    \frac 1N &amp; 1 &amp; \cdots &amp; \frac{1}{n - 1}<br>\end{pmatrix}<br>$$</p>
+<p>也就是 $N$ 阶 Hilbert 矩阵。关于这个矩阵的谱范数的结果，可以参考 Peter Otte (2005) 的 $(5)$ 式，这个数不会超过</p>
+<p>$$<br>\pi + O\left(\frac{1}{\ln n}\right)<br>$$</p>
+<p>综上得到了 $\mathrm{Adv}(\mathrm{F}) &#x3D; \Omega(\log n)$。因此 </p>
+<div class="note info"><p><strong>命题 3.1.</strong> 长度为 $n$ 的二分查找没有量子加速。</p>
+<p>$$<br>Q_\varepsilon(\mathrm{F}) &#x3D; \Theta(\log n)<br>$$</p>
+</div>
+
+<h1><span id="高级技巧">高级技巧</span></h1>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/03/25/QuantumWildcard/" rel="prev" title="Search with Wildcard Problem">
+                  <i class="fa fa-angle-left"></i> Search with Wildcard Problem
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/04/19/OSRevision1/" rel="next" title="Revision | 操作系统（上）">
+                  Revision | 操作系统（上） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 操作系统（上）">
+<meta property="og:url" content="http://example.com/2026/04/19/OSRevision1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-04-19T06:17:05.000Z">
+<meta property="article:modified_time" content="2026-05-26T14:45:05.946Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/04/19/OSRevision1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/04/19/OSRevision1/","path":"2026/04/19/OSRevision1/","title":"Revision | 操作系统（上）"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 操作系统（上） | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史和动机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">操作系统基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">操作系统中的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">线程和进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">文件和 I&#x2F;O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">进程间通信（IPC），管道和套接字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">操作系统中的同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">锁，以及案例分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">锁的实现，同步原素和管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">读者-写者问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">经典策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">Case Study</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/04/19/OSRevision1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 操作系统（上） | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 操作系统（上）
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-04-19 14:17:05" itemprop="dateCreated datePublished" datetime="2026-04-19T14:17:05+08:00">2026-04-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-05-26 22:45:05" itemprop="dateModified" datetime="2026-05-26T22:45:05+08:00">2026-05-26</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 没学明白，写的东西望之不似人言。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%8E%86%E5%8F%B2%E5%92%8C%E5%8A%A8%E6%9C%BA">历史和动机</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">操作系统基本概念</a></li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E6%8A%BD%E8%B1%A1">操作系统中的抽象</a><ul>
+<li><a href="#%E7%BA%BF%E7%A8%8B%E5%92%8C%E8%BF%9B%E7%A8%8B">线程和进程</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E5%92%8C-io">文件和 I&#x2F;O</a></li>
+<li><a href="#%E8%BF%9B%E7%A8%8B%E9%97%B4%E9%80%9A%E4%BF%A1ipc%E7%AE%A1%E9%81%93%E5%92%8C%E5%A5%97%E6%8E%A5%E5%AD%97">进程间通信（IPC），管道和套接字</a></li>
+</ul>
+</li>
+<li><a href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E4%B8%AD%E7%9A%84%E5%90%8C%E6%AD%A5">操作系统中的同步</a><ul>
+<li><a href="#%E9%94%81%E4%BB%A5%E5%8F%8A%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90">锁，以及案例分析</a></li>
+<li><a href="#%E9%94%81%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%90%8C%E6%AD%A5%E5%8E%9F%E7%B4%A0%E5%92%8C%E7%AE%A1%E7%A8%8B">锁的实现，同步原素和管程</a></li>
+<li><a href="#%E8%AF%BB%E8%80%85-%E5%86%99%E8%80%85%E9%97%AE%E9%A2%98">读者-写者问题</a></li>
+</ul>
+</li>
+<li><a href="#%E8%B0%83%E5%BA%A6">调度</a><ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E7%AD%96%E7%95%A5">经典策略</a></li>
+<li><a href="#case-study">Case Study</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="历史和动机">历史和动机</span></h1><p>历史上的操作系统有四条主要的演化谱系：</p>
+<ol>
+<li>Multics - AT&amp;T Unix - BSD Unix - Ultrix, SunOS, NetBSD, …</li>
+<li>Mach (micro-kernel) + Unix BSD - NextStep - XNU - Apple OS X, iOS </li>
+<li>MINIX - Linux - Android OS, Chrome OS, RedHat, Ubuntu, Fedora, Debian, Suse, …</li>
+<li>CP&#x2F;M - QDOS - MS-DOS - Windows 3.1 - NT - 95 - 98 - 2000 - XP - Vista - 7 - 8 - 9 - 10 - …</li>
+</ol>
+<h1><span id="操作系统基本概念">操作系统基本概念</span></h1><p><strong>操作系统</strong>乃是一个特殊层次的软件（Special layer of software），向应用软件提供硬件资源访问（access to hardware resources）。这层软件需要实现以下功能：</p>
+<ol>
+<li>复杂硬件设备的易用抽象；</li>
+<li>受保护的共享资源访问；</li>
+<li>安全性（security）和认证能力（authentication）；</li>
+<li>逻辑实体之间的通信机制。</li>
+</ol>
+<p>实践中的操作系统，提供的抽象包括文件系统，进程 &#x2F; 线程，虚拟内存 &#x2F; 容器，命名系统等；管理的资源包括内存，CPU 和存储等。以上功能的实现涉及到调度、并发控制、事务、安全等概念。总而言之，操作系统将硬件细节抽象给应用，应用程序面向操作系统提供的这个抽象编程，而不是直接面向底层硬件行为。形象地，操作系统扮演以下三个角色：</p>
+<ol>
+<li><p><strong>Illusionist.</strong> 提供物理资源的干净、易用的抽象。</p>
+<p>进程是一个程序运行的环境，其中仅有 OS 提供的有限的权限。一个进程包含以下要素：地址空间、一个或多个跑在这个地址空间中的线程、以及一些附加的系统状态如打开的文件和套接字等。</p>
+<p>“机器的虚拟化”：每个应用程序看到的机器其实是 OS 给它提供的进程抽象，在它自己的进程中运行，面对的接口比裸硬件更加简明。</p>
+</li>
+<li><p><strong>Referee.</strong> 管理保护、隔离和资源共享；</p>
+<p>进程的概念要求即便所有的进程本质上都运行在同一套物理硬件之上，进程之间也必须隔离，操作系统也必须和用户进程之间隔离。这就要求操作系统有一定的保护机制。</p>
+<p>也是为了在一套物理硬件之上运行多个进程，操作系统必须要合理分配计算资源。实践中操作系统会进行进程切换（Switching Process），来并发地运行所有的进程。</p>
+</li>
+<li><p><strong>Glue.</strong> 提供存储、窗口系统、网络、共享、授权等公共服务。</p>
+<p>存储、网络、显示之类的我们熟悉的计算机功能都是通过 OS 提供的 I&#x2F;O 机制实现的。</p>
+</li>
+</ol>
+<hr>
+<p>一个 OS 的根本任务是把程序跑起来。本质上这涉及到以下任务：</p>
+<ol>
+<li>把可执行文件的指令和数据段装到内存中；</li>
+<li>创建堆栈；</li>
+<li>把控制权交给程序；</li>
+<li>给程序提供系统服务；</li>
+<li>同时保护 OS 和程序。</li>
+</ol>
+<p>此处就涉及到 OS 完成这个流程使用的四个基本概念：</p>
+<ul>
+<li><strong>线程.</strong> 单一、独立的执行上下文。一个线程包括如下要素：<ul>
+<li>程序计数器：记录这个线程正在运行的指令的地址；</li>
+<li>寄存器和标志（Flags）：这些寄存器记录了这个线程运行的<em>上下文</em>，如栈指针和数据等。我们称一个线程正在处理器上运行，当这些数据出现在该处理器的寄存器中。注意，寄存器只保存了当前线程的<em>根状态</em>，其余的状态在内存中，可以顺着寄存器记录的信息找到。</li>
+<li>栈空间。</li>
+</ul>
+</li>
+<li><strong>地址空间（和翻译）.</strong> 包含可用的（逻辑）地址，以及这些地址的状态。<ul>
+<li>一个 $i$ 位的处理器有 $2^i$ 个地址。</li>
+<li>当你向一个地址进行读写时，可能会发生以下事件之一：无事发生 &#x2F; 正常读写 &#x2F; 读写被忽略 &#x2F; 出发 IO &#x2F; 出发异常。</li>
+<li>方便起见，地址空间被分成若干个<em>段</em>，包括 Code Segment，Static Data，Heap，Stack 等。我们熟知栈空间向下生张，堆空间向上生长。</li>
+</ul>
+</li>
+<li><strong>进程.</strong> 带有有限权限的运行环境。<ul>
+<li>进程由地址空间以及一个或多个线程组成。一个线程拥有自己的地址空间、文件描述符、文件系统上下文等资源；</li>
+<li>提出进程是为了隔离不同的程序，包括用户程序内部与用户程序和操作系统。</li>
+<li>保护和效率之间有一个显然的 trade-off：跨进程通信的成本很高。</li>
+<li>每个应用程序的运行实例可能有多个进程。</li>
+</ul>
+</li>
+<li><strong>双模式 &#x2F; 保护.</strong><ul>
+<li>硬件需要提供两种模式：内核模式和用户模式。实现上具体包括一个模式位、一些内核态才能使用的特权操作、受控的用户态 &#x2F; 内核态切换（系统调用、中断、异常）。</li>
+<li>为了实现进程的保护，核心的机制是地址翻译。最简单的地址翻译方法就是 Base &amp; Bound（指定这个进程的地址空间在大地址空间中的起始位置和大小限制）。这有两种实现方式，就是在线翻译和装载期重定位，这两个东西是在干什么可以顾名思义。</li>
+</ul>
+</li>
+</ul>
+<h1><span id="操作系统中的抽象">操作系统中的抽象</span></h1><h2><span id="线程和进程">线程和进程</span></h2><p>操作系统有时候必须一次性处理多个事务（Multiple Things at Once，MTAO）。比如以下场景：</p>
+<ul>
+<li><strong>网络服务器.</strong> 多个连接必须被同时处理；</li>
+<li><strong>并行计算.</strong> 同时计算以追求更高性能；</li>
+<li><strong>带有 UI 的程序.</strong> 必须一边计算，一边响应用户；</li>
+<li><strong>带有网络和磁盘访存的程序.</strong> 以隐藏网络和磁盘访问的巨大延迟。</li>
+</ul>
+<p><strong>线程</strong>就是用来完成 MTAO 的工具，它是 OS 提供的并发的基本单元（a unit of concurrency）。每个线程表示一个事务。</p>
+<p>这里所说的“并发”（Concurrency）意思是多个任务在时间上重叠推进，而“并行”（Parallelism）则是两个任务真的被同时执行。比如说，单核 CPU 上的两个线程可以被并发地执行，但是不是并行。物理上，还需要区分以下几个概念：</p>
+<ul>
+<li><strong>Multiprocessing.</strong> 有多个 CPU 核心；</li>
+<li><strong>Multiprogramming.</strong> 多个任务 &#x2F; 进程共享 CPU；</li>
+<li><strong>Multithreading.</strong> 一个进程内部有多个线程。</li>
+</ul>
+<p>用多线程来屏蔽 I&#x2F;O 延迟的基本方法如下：一个线程有三种状态：RUNNING（正在运行）、READY（可以被运行，但是没在运行）；BLOCKED（不能被运行）。如果一个线程正在等 I&#x2F;O，它会被标记成 BLOCKED；当 I&#x2F;O 结束，他会被标记成 READY 然后等待调度。</p>
+<p>当编译了一个程序并且运行它时，将会创建一个运行这个程序的进程。最开始，这个进程里面只有一个<em>主线程</em>。进程运行时，可以发起系统调用来创建新线程。新的线程和主线程共用一个地址空间。</p>
+<p>在 C 语言中，有以下几个关键的 API：</p>
+<ul>
+<li><code>int pthread_create(pthread_t *thread, const pthread_attr_t *attr, void *(*start_routine)(void*), void *arg);</code><ul>
+<li><code>thread</code> 指向一个将要记录线程 ID 的变量；</li>
+<li><code>attr</code> 一些特殊设置，一般置为 <code>NULL</code> 以使用默认设置；</li>
+<li>后两个参数用来指定线程执行的函数和传入的参数。</li>
+<li>返回值和常见的系统调用一样（$0$ if success，<code>errno</code> on error）；</li>
+</ul>
+</li>
+<li><code>void pthread_exit(void *value_ptr)；</code><ul>
+<li>终止线程，如果有返回值，将通过 value_ptr 这个指针传给那个 join 它的线程。</li>
+</ul>
+</li>
+<li><code>int pthread_join(pthread_t thread, void **value_ptr);</code><ul>
+<li>挂起调用它的线程，直到编号为 <code>thread</code> 的线程终止。</li>
+<li>如果 <code>value_ptr</code> 不是非空，目标线程<code>pthread_exit</code> 的那个参数就会出现在 <code>value_ptr</code> 指向的位置。</li>
+</ul>
+</li>
+</ul>
+<p>在调用 <code>pthread_create</code> 之时，机器层面会发生以下事件：</p>
+<ul>
+<li>向正常函数一样压栈和跳转；</li>
+<li>库代码将系统调用编号存到 %eax，将参数放到 %ebx 等寄存器；</li>
+<li>调用 <code>trap</code> 指令，<strong>陷入内核</strong>。</li>
+<li>内核取参数，完成线程创建；</li>
+<li>内核把返回值放在 %eax，然后回到用户态；</li>
+<li>库函数从寄存器里面拿到内核的返回值，然后像正常函数一样返回。</li>
+</ul>
+<p>一般的多线程程序都采取 Fork-Join 的模式，即主线程创建多个工作线程，然后 Join 这些线程，收集结果。</p>
+<div class="note warning"><p><strong>Remark.</strong> 做题的时候需要注意以下要点：</p>
+<ul>
+<li>数线程不要漏了主线程；</li>
+<li>Join 的顺序取决于主线程怎么写；</li>
+<li>线程退出的顺序时不确定的；</li>
+<li>如果没有同步好，程序的输出也是不确定的。具体的分析在 ICS 里面见过了太多，这里不赘述。</li>
+</ul>
+</div>
+
+<p>一个线程的状态（形象地理解就是这个图灵机的 State 和纸带的总和）由以下东西共同构成：</p>
+<ul>
+<li><strong>进程内所有线程共享.</strong> 代码段，全局数据，堆；I&#x2F;O 资源如文件描述符和网络连接；</li>
+<li><strong>每个线程私有.</strong> CPU 寄存器、运行时栈（你创建线程的时候要指定一个函数，众所周知调用函数的时候要往栈里面压参数、临时变量、返回地址之类的东西，这就是逻辑上这个线程的栈的开始位置）。这些私有状态保存在 TCB（Thread Conctrol Block）之中。</li>
+</ul>
+<hr>
+<p>虽然逻辑上每个线程都有自己的 CPU，但物理上实际上是所有的线程在 CPU 上交替的执行。实际上，并发的线程之间不确定性主要来源于：</p>
+<ul>
+<li>调度器可以以任意顺序运行线程；</li>
+<li>调度器可以随时切换线程。</li>
+</ul>
+<p>在这种不确定性之下，合作线程（有共享状态的线程，相较于独立线程即没有任何共享状态的线程）的设计就需要仔细地约束。此处涉及到几个关键的概念：</p>
+<ul>
+<li><strong>互斥.</strong> 一种同步的方式。确保某件事情同一时间只能由一个线程来做。</li>
+<li><strong>Critical Section.</strong> 互斥的结果：某一段代码只能由一个线程运行。</li>
+<li><strong>锁.</strong> 一个对象，同一时间只有一个线程持有，用来制造互斥。</li>
+</ul>
+<p>称一个操作是原子的，若操作系统保证运行这个操作的时候不会进行调度。一个锁提供两种操作：</p>
+<ul>
+<li><code>Lock.aquire()</code> 等锁被释放，然后持有这个锁；</li>
+<li><code>Lock.release()</code> 释放持有的锁。</li>
+</ul>
+<p>在 C 语言中的 API 如下：</p>
+<ul>
+<li><code>int pthread_mutex_init(pthread_mutex_t *mutex, const pthread_mutexattr_t *attr)</code> 初始化锁；</li>
+<li><code>int pthread_mutex_lock(pthread_mutex_t *mutex);</code> 即 Aquire 操作；</li>
+<li><code>int pthread_mutex_unlock(pthread_mutex_t *mutex);</code> 即 Release 操作。</li>
+</ul>
+<p>更广义的锁的实现是信号量（Semaphores），由 Dijkstra 提出。它有两种操作：</p>
+<ul>
+<li><code>P()</code> 或者 <code>down()</code>，挂起线程直到信号量变成正的，然后将其减一；</li>
+<li><code>V()</code> 或者 <code>up()</code>，给信号量加一，然后唤醒一个正在 P 的线程。</li>
+</ul>
+<p>这个东西除了可以用来当锁，还可以实现线程间的信息传递。</p>
+<hr>
+<p>我们已经反复提及进程是具备有限权限的运行环境。每个进程里面有一个或者多个线程跑在一个地址空间上面，每个进程都有自己的文件描述符和网络连接。当你运行一个可执行文件时，它一定跑在一个进程里面。一个应用程序可能会打开一个或者多个进程来共同完成工作。</p>
+<p>不同的进程彼此之间有保护，OS 和进程之间也有保护。在现代操作系统中，任何在内核外运行的东西一定都跑在一个进程之中。</p>
+<p>可以用 <code>pid_t fork()</code> 函数创建一个进程，此时这个程序会被分离成父进程和子进程（原来程序的状态会被复制成两份）。这个函数的返回值非常巧妙：</p>
+<ul>
+<li>如果错误会返回负数；</li>
+<li>如果当前程序是父进程，会返回子进程的 pid。</li>
+<li>如果当前程序是子进程，会返回 $0$。</li>
+</ul>
+<p>这个函数在写 shell 的时候非常常用。你要在后台运行一个程序，就是 fork 一个子进程，然后调用 <code>execv(&quot;filename&quot;, args)</code> 函数。<code>execv</code> 不会返回。总的来说可能用到的 API 有：</p>
+<ul>
+<li><code>exit</code>：终止一个进程；</li>
+<li><code>fork</code>：复制当前进程；</li>
+<li><code>exec</code>：改变当前进程中跑的程序；</li>
+<li><code>wait</code>：等一个进程结束。这个 wait 有个参数，传入一个地址，函数会向其中写入子进程的返回值。wait 的返回值是子进程 pid；</li>
+<li><code>kill</code>：发信号，用于进程间通信；</li>
+<li><code>sigaction</code>：设置 signal handler。</li>
+</ul>
+<p>Windows 系统的 API 叫做 <code>CreateProcess()</code>。</p>
+<div class="note danger"><p><strong>不要在多线程的进程中调用 <code>fork</code>.</strong> 因为 <code>fork</code> 之后只有调用 <code>fork</code> 的那个线程会保留，其他线程会直接消失。</p>
+<p>如果其他线程此时持有锁，或者正在修改共享数据结构就炸了。</p>
+<p>当然，如果你之后打算 <code>exec</code> 就可以不在意这一点，因为 <code>exec</code> 会重置整个地址空间开始运行新程序。</p>
+</div>
+
+<h2><span id="文件和-ix2fo">文件和 I&#x2F;O</span></h2><p>Unix 系统的主旨就是所有东西都是“文件”，此处的所有东西包括但不限于磁盘上的文件、外设、网络、进程间通信。一切操作都是基于 <code>open()</code>，<code>close()</code>，<code>read()</code>，<code>write</code> 这几个系统调用。对于不适合通用接口的设备特定控制，通常用 <code>ioctl()</code>。</p>
+<p>POSIX 系指 Portable Operating System Interface。它规范了面向程序员的接口，使得软件能够在类 Unix 系统之间具备可移植性。</p>
+<p>所谓的文件，就是一篮子被命名的数据。POSIX 文件就是字节序列。文件里面有一些特殊的数据，记录了文件的大小、所有者、修改时间等。这些数据称为元数据。</p>
+<p>文件被组织成层次结构。一个目录里面包含了文件和目录。顺着 <code>/home/ff/pkuos/public_html/index.html</code> 这样的层次命名可以找到唯一的一个文件。</p>
+<p>每一个进程都有一个工作目录（current working directory，CWD）。这个东西可以通过系统调用 <code>chdir(const char *path)</code> 来修改。在进程中使用绝对路径 <code>/...</code> 就会忽略 CWD 来找文件，使用相对路径 <code>index.html</code> &#x2F; <code>./index.html</code> 之类的东西，就会在 CWD 的基础上去找文件。</p>
+<p>接下来的内容里面我们来分层讲文件操作的 API。</p>
+<p>最上层的文件 API 将文件视作流，即没有任何格式的比特序列。此处有两个函数用来打开和关闭文件：</p>
+<ul>
+<li><code>FILE *fopen(const char *filename, const char *mode);</code> 这里的 mode 可以是 r, w, a, rb 之类的习见的东西，用来指定操作这个文件的权限。</li>
+<li><code>int fclose(FILE *fp);</code></li>
+</ul>
+<p>已经打开的流可以被一个 <code>FILE *</code> 指针定位。任何一个程序执行时，默认都会打开三个流：<code>stdin, stdout, stderr</code>。而且这三个东西都可以被重定向。比如使用著名的管道算符，运行 <code>cat hello.txt | grep &quot;World!&quot;</code> 之时，cat 的 stdout 就会被定向到 grep 的 stdin。为了在流上读写，常用的 API 有 </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fputc</span><span class="params">(<span class="type">int</span> c, FILE *fp)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fputs</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *s, FILE *fp)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fgetc</span><span class="params">(FILE *fp)</span>;</span><br><span class="line"><span class="type">char</span> *<span class="title function_">fgets</span><span class="params">(<span class="type">char</span> *buf, <span class="type">int</span> n, FILE *fp)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fread</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size_of_elements, <span class="type">size_t</span> number_of_elements, FILE *a_file)</span>;</span><br><span class="line"><span class="type">size_t</span> <span class="title function_">fwrite</span><span class="params">(<span class="type">void</span> *ptr, <span class="type">size_t</span> size_of_elements, <span class="type">size_t</span> number_of_elements, FILE *a_file)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">fprintf</span><span class="params">(FILE *<span class="keyword">restrict</span> stream, <span class="type">const</span> <span class="type">char</span> *<span class="keyword">restrict</span> format, ...)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">fscanf</span><span class="params">(FILE *<span class="keyword">restrict</span> stream, <span class="type">const</span> <span class="type">char</span> *<span class="keyword">restrict</span> format, ...)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>还有几个以前没见过的操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">fseek</span><span class="params">(FILE *stream, <span class="type">long</span> <span class="type">int</span> offset, <span class="type">int</span> whence)</span>; <span class="comment">// 更改流位置的指针</span></span><br><span class="line"><span class="comment">// 这里 whence 指示 offset 的作用，可以是： </span></span><br><span class="line"><span class="comment">// - SEEK_SET（从文件开头往后数）</span></span><br><span class="line"><span class="comment">// - SEEK_END（从文件末尾往前数）</span></span><br><span class="line"><span class="comment">// - SEEK_CUR（从当前位置开始数）</span></span><br><span class="line"><span class="type">long</span> <span class="type">int</span> <span class="title function_">ftell</span><span class="params">(FILE *stream)</span>; <span class="comment">// 查询当前位置</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">rewinf</span><span class="params">(FILE *stream)</span>; <span class="comment">// 把流的位置调到最开头 </span></span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p><strong>Remark.</strong> 在用这些系统检查的时候，一定要检查返回值。</p>
+</div>
+
+<hr>
+<p>较低层次的文件 I&#x2F;O 使用的是文件描述符。这些 API 都在 <code>fcntl.h</code> 里面。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="title function_">open</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">int</span> flags, <span class="type">mode_t</span> mode)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">creat</span><span class="params">(<span class="type">const</span> <span class="type">char</span> *filename, <span class="type">mode_t</span> mode)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">close</span><span class="params">(<span class="type">int</span> filedes)</span>;</span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">read</span><span class="params">(<span class="type">int</span> filedes, <span class="type">void</span> *buffer, <span class="type">size_t</span> maxsize)</span>;</span><br><span class="line"><span class="type">ssize_t</span> <span class="title function_">write</span><span class="params">(<span class="type">int</span> filedes, <span class="type">const</span> <span class="type">void</span> *buffer, <span class="type">size_t</span> size)</span>;</span><br><span class="line"><span class="type">off_t</span> <span class="title function_">lseek</span><span class="params">(<span class="type">int</span> filedes, <span class="type">off_t</span> offset, <span class="type">int</span> whence)</span>; </span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">dup2</span><span class="params">(<span class="type">int</span> old, <span class="type">int</span> new)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">dup</span><span class="params">(<span class="type">int</span> old)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">pipe</span><span class="params">(<span class="type">int</span> pipefd[<span class="number">2</span>])</span>; <span class="comment">//  Writes to pipefd[1] can be read from pipefd[0]</span></span><br></pre></td></tr></table></figure>
+
+<p>这些 API 我们其实已经比较熟悉了，这里不再赘述。在调用这些底层 POSIX I&#x2F;O 时，注意以下要点：</p>
+<ul>
+<li>使用前打开；</li>
+<li>注意接口都是面向字节的；</li>
+<li>显示关闭文件以释放资源。</li>
+</ul>
+<p>另外需要知道读写时，内核都设置有缓冲。read 和 write 都不直接发起磁盘访问，而是在用户空间缓冲区和内核缓冲缓存之间复制数据，此后由内核发起磁盘读写。</p>
+<hr>
+<p>至此，一个值得思考的问题是文件的 API 的高低两层有何异同，以及这样做的必要性。</p>
+<p>从函数实现上看，<code>read</code> 是一个单纯的系统调用，而 <code>fread</code> 在前面还加了一些用户态的处理。</p>
+<p>其次，我们申明一些高层 I&#x2F;O API 的特性，核心是其包含的<strong>用户态缓冲</strong>机制。<code>FILE*</code> 里面也包含了一系列别的组件，包括但不限于：</p>
+<ol>
+<li>文件描述符；</li>
+<li>缓冲区；</li>
+<li>文件锁（这是多线程并发使用 FILE 的必要之物）</li>
+<li>…</li>
+</ol>
+<p>此处需要展开说明一下这个缓冲区。当你调用 <code>fwrite</code> 时，会发生以下事件：</p>
+<ol>
+<li>你传入的数组被写到 FILE 的缓冲区；</li>
+<li>如果缓冲区满了（或 c 语言标准库中，发生某种事件，比如见到某个字符），就会发生 flush。当然手动调用 <code>fflush()</code> 或者关闭文件 <code>fclose</code> 也会刷新缓冲区。</li>
+</ol>
+<p>因此，不 flush 缓冲区可能会引发一系列问题。比如在以下代码中：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">char</span> x = <span class="string">&#x27;c&#x27;</span>;</span><br><span class="line">FILE* f1 = fopen(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;w&quot;</span>);</span><br><span class="line">fwrite(<span class="string">&quot;b&quot;</span>, <span class="keyword">sizeof</span>(<span class="type">char</span>), <span class="number">1</span>, f1);</span><br><span class="line">FILE* f2 = fopen(<span class="string">&quot;file.txt&quot;</span>, <span class="string">&quot;r&quot;</span>);</span><br><span class="line">fread(&amp;x, <span class="keyword">sizeof</span>(<span class="type">char</span>), <span class="number">1</span>, f1); <span class="comment">// x 可能变成 b，也可能还是 c，取决于有没有发生缓冲区刷新</span></span><br></pre></td></tr></table></figure>
+
+<p>在写代码的时候，不能包含此等未定义行为。正确的做法是必要时 <code>fflush</code>，以及释放内存和关闭文件描述符之前先 <code>fclose</code> 那个 <code>FILE*</code> 指针。在底层 API 中没有这样的问题，只要 write 完，接下来的 read 就能读到它写的内容。</p>
+<p>可以看到，引入高层 API 中的用户态缓冲，固然给程序员带来了一些麻烦，你必须恰当地考虑刷新时机。然而，引入这个机制实乃必要：</p>
+<ol>
+<li><strong>提升吞吐量</strong>。注意，系统调用比正常函数调用开销更大。</li>
+<li><strong>提供更丰富的功能</strong>。注意，系统调用为了保证内核实现的简明，没有考虑任何的格式信息，而是完全面向字节。比方说，内核中没有“读一行”这样的操作。这个需要先读进缓冲区然后进行用户态处理来实现。</li>
+</ol>
+<div class="note danger"><p><strong>不要混用高低层次的 I&#x2F;O API.</strong> 我们前面说到了 <code>fread</code> 有缓冲区。调用这个函数时，会从 <code>fd</code> 里面读很多东西到缓冲区里面留待用户态处理。此时，如果你再用 <code>read</code> 读入，就不知道当前你在文件的哪个位置了。</p>
+</div>
+
+<hr>
+<p>接下来我们详细考察文件描述符里面有什么。</p>
+<p>众所周知，每个进程都有一个文件描述符到打开文件描述的映射，叫做文件描述符表。一次成功调用的 open 之后，用户将会拿到一个文件描述符（整数），而内核会创建一条打开文件描述，然后将描述符表的对应指针指向它。一条打开文件描述里面由很多资料，我们最关心的两个是：</p>
+<ol>
+<li>文件在磁盘上的位置；</li>
+<li>当前我们处于这个文件的哪个位置。</li>
+</ol>
+<p>如果调用 <code>fork</code>，文件描述符表会被复制到子进程里面。一个进程 close 掉一个文件描述符，只会减少打开文件描述的一次引用。只要存在一个进程引用这个打开文件描述，它就会存在于内存中。这个特性有以下应用：</p>
+<ul>
+<li>（stdout 的复制）如果你 <code>fork()</code> 一个进程，则父子进程的输出会去同一个终端。</li>
+<li>（socket 的复制）对于服务器来说，fork 出一个子进程会保留网络连接。</li>
+</ul>
+<p>回到 <code>dup</code> 和 <code>dup2</code> 两个底层 API。<code>dup(fd)</code> 就是文件描述符表开一个新项，指向 <code>fd</code> 对应的打开文件描述。<code>dup2(fd1, fd2)</code> 就是让 <code>fd2</code> 指的打开文件描述变成 <code>fd1</code> 指向的那个。</p>
+<h2><span id="进程间通信ipc管道和套接字">进程间通信（IPC），管道和套接字</span></h2><p>同一主机上，乃至不同主机上的不同的进程间时常需要进行通信。此时，一个最简单的方法是，使用一个文件。写者把要传输的内容写在某文件中（文件位于<strong>磁盘</strong>上），然后读者从中读出。然而，这实际上并不高效，因为：</p>
+<ol>
+<li>我们时常需要做 $N$ 个进程之间的点对点通信；</li>
+<li>我们有时候只需要瞬时通信，这个文件不需要永久存在。</li>
+</ol>
+<p>现代操作系统中的解决方案是，由内核来维护一个存在于<strong>内存</strong>中的一个长度有限的队列，进程可以通过系统调用来访问这个队列。如果队列长度达到上限时尝试向其中写内容，写者阻塞；若读者尝试读这个队列时队列为空，读者阻塞。</p>
+<p>POSIX&#x2F;Unix PIPE 就是这个方案的一个例子。其 API 为 <code>int pipe(int filds[2]);</code>：创建一个管道，相关的两个套接字会被写入这个数组：向 <code>fileds[1]</code> 写的内容可以在 <code>fileds[0]</code> 中读到。使用 PIPE 做父子进程间通信的方法是先 <code>pipe</code>，然后 <code>fork</code>。此时父子进程都会持有 pipe 的入口和出口的文件描述符。此时，父子进程都可以通过两个描述符向对方发消息和接受对方的消息，从而实现半双工通信。然而实践中不推荐这样做，因为不知道线程的调度何时会发生，队列里面可能会混杂双方的信息。常见的处理是，父进程关闭 <code>fileds[0]</code>，子进程关闭 <code>fileds[1]</code>，实现父进程到子进程的单工通信；反之亦然。</p>
+<p>值得一提的是在关闭诸描述符之后，pipe 的行为：</p>
+<ul>
+<li>最后一个写口的描述符被关闭之后，pipe 视为成功关闭。此时，任意的 read 都只会收到 EOF；</li>
+<li>最后一个读口的描述符被关闭之后，所有的写操作都会触发 SIGPIPE 信号。如果进程不处理这个信号，则 write 失败，错误信息为 EPIPE。</li>
+</ul>
+<hr>
+<p>两个进程进行通信之时，应当达成双方如何通信的协议。一个协议包含以下两个要素：</p>
+<ol>
+<li><strong>语法.</strong> 消息格式和发送顺序；</li>
+<li><strong>语义.</strong> 消息含义与收发后的动作。</li>
+</ol>
+<p>通常用状态机来刻画一个协议。如果通信的两个主体位于两个不同结构的主机上，可能还需要决定如何翻译消息中的数字、字符串的表示，这种翻译在 RPC（远程过程调用）中时常发生，这也属于通信协议的一部分。</p>
+<p>通信协议在跨网络的进程间通信中至关重要，而协议具体是怎么实现的都是计算机网络的内容，这里我们只关注操作系统层面的抽象。众所周知，一个 TCP 连接是两个进程之间的双向比特流。可以想象按照此前的进程间通信的范式，这需要内核维护一个临时存储 A 发给 B 的数据的队列，以及一个临时存储 B 发给 A 的数据的队列。为了让这一切看起来和文件读写一样以契合 UNIX 系统的哲学，这些资料都被抽象做<strong>套接字（Socket）</strong>。</p>
+<p>具体地，所谓的套接字是一个网络连接的一个端点的抽象。它包含一个文件描述符和两个队列，向这个描述符里 write 会往写队列里面增加内容；向这个描述符发起 read 会消耗读队列里面的内容。此时 lseek 这个操作就无效了。至于一对建立了连接的套接字的这两个队列如何变化，那是网络协议栈中下层协议的任务。对于 TCP 套接字，程序可以大胆假设连接的可靠性。</p>
+<p>当然在计算机网络的层面，“打开一个套接字”还颇须一番工夫。主要是套接字是为了连接服务，不能凭空存在，这里主要是需要解决两个问题：</p>
+<ul>
+<li>如何命名我们打开的这个连接，从而知道是在与哪个进程通信；</li>
+<li>怎么让这些互不相干的程序知道有人想要与之通信。</li>
+</ul>
+<p>在计算机网络课里面我们已经知道了这两个问题的答案，在 IP 协议中，进程的命名包括主机名、IP 地址和端口号；而在常见的 Client-Server 模式中，建立连接（打开一对 socket）的步骤为：</p>
+<ul>
+<li>服务器会在熟知端口打开一个特殊的套接字，称为 server socket。服务器不能读写这个 socket，而是只有两种操作，<code>listen</code>（监听某个端口） 和 <code>accept</code>（给连接的客户端开一个新的 socket）。</li>
+<li>客户端通过 <code>connect</code> 向一个正在监听的套接字发起连接。</li>
+<li>经过 connect - accept 之后，客户端的套接字和 accept 新分配的套接字就绑定在一起。</li>
+</ul>
+<p>服务器可以通过 <code>fork</code> 或者多线程来并发地服务多个客户。注意如果是多线程，一般地写法是开一个有限大小地线程池，连接来了就从池里抽一个空闲的线程来服务。</p>
+<h1><span id="操作系统中的同步">操作系统中的同步</span></h1><p>我们首先来回顾一下操作系统里面并发是如何实现的。</p>
+<p>内核为每一个进程维护了一个 PCB（Process Control Block），其中包含以下资料：</p>
+<ul>
+<li><strong>状态</strong>（Running &#x2F; Ready &#x2F; Blocked &#x2F; …）；</li>
+<li><strong>寄存器</strong>（当不是 Ready 状态时，必须要维护寄存器状态）；</li>
+<li><strong>一些必要的元数据</strong> （PID，用户，优先级，运行时间等）；</li>
+<li><strong>内存信息</strong> （包括地址空间和地址翻译需要的必要资料）</li>
+</ul>
+<p>内核中有一个调度器，来给进程分配 CPU、内存、IO 之类的资源。某些中断或者系统调用会触发<strong>上下文切换</strong>。此时内核会把当前进程的状态存进 PCB 里，然后让调度器拿出另一个进程的 PCB 接着运行。在进程的整个生命周期中，可以有以下五种状态：</p>
+<ul>
+<li><strong>New.</strong> 新创建的进程 &#x2F; 线程；</li>
+<li><strong>Ready.</strong> 该进程可以运行。被调度器调度之后可以转移到 Running；</li>
+<li><strong>Running.</strong> 该进程正在被 CPU 运行。触发某些中断之后可能进入 Ready，阻塞之后进入 waiting；</li>
+<li><strong>Waiting.</strong> 该进程正在等待某事件（I&#x2F;O 或者锁）发生。该事件发生之后转移到 Ready。</li>
+<li><strong>Terminated.</strong> 调用 exit。</li>
+</ul>
+<p>调度器一般都是用队列来维护这些 PCB，如 ready 队列，I&#x2F;O 队列，睡眠队列之类的东西。系统运行时，PCB 在诸队列之间传递。</p>
+<p>此外，回忆在<strong>多线程</strong>程序中，每个线程的私有信息存在 TCB（Thread Control Block） 中，包括栈、寄存器、线程元数据等，而堆、全局变量和代码段都是共享的。当创建一个线程时：</p>
+<ol>
+<li>栈指针被初始化到栈上某个位置；</li>
+<li>返回 PC 被设置为 <code>&amp;ThreadRoot</code>。</li>
+<li>参数寄存器中放入函数指针和指针。</li>
+</ol>
+<p>线程真正开始运行的位置是 ThreadRoot 函数，而不是你指定的那个函数。ThreadRoot 还负责维护一些基本信息，切换到用户态和收垃圾，其伪代码为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">ThreadRoot(fcnPRT, fcnArgPtr) &#123;</span><br><span class="line">  DoStartupHouseKeeping();</span><br><span class="line">  UserModeSwitch(); <span class="comment">// 进入用户态</span></span><br><span class="line">  Call <span class="title function_">fcnPre</span><span class="params">(fcnArgPtr)</span>;</span><br><span class="line">  ThreadFinish();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>发生线程调度的时候，需要保存旧线程所有必要的状态，然后将新线程的私有状态（寄存器，PC，栈指针）加载到 CPU 中，然后跳转到那个 PC 处执行即可，这比进程上下文切换快得多。以下两种事件可能触发线程调度：</p>
+<ul>
+<li><strong>内部事件.</strong> 发生 I&#x2F;O，等锁，或者线程自己调用 <code>yeild()</code>。</li>
+<li><strong>外部事件.</strong> 该线程被抢占（preempted）。如果写过 lab1 就知道如果来了一个优先级更高的线程，现在执行的线程就会被抢占。此时还需要实现一个定时器，每隔一段时间，强制触发一次调度。</li>
+</ul>
+<p>注意并发不是并行。当然，如果 CPU 是多核的，就可以并行地运行多个线程。事实上，现代超标量还可能支持所谓的 HyperThreading，即一个周期发送来自不同的线程的指令。</p>
+<p>【Shinjuku：FIXME】</p>
+<p>那么，既然有多线程这种缺乏保护的并发，就一定有同步的问题。因为线程调度具有不确定性，调度器可以以任意顺序运行线程，也可以随时切换线程。对于不共享状态的独立线程，这自然没有什么影响。但是对于有共享状态的<strong>合作线程</strong>，这就是一个重大挑战，需要在设计代码时保证正确性。在此之前，我们摆出几个同步中常见的名词：</p>
+<ul>
+<li><strong>原子操作.</strong> 某一个操作，这个操作执行过程中不会调度；</li>
+<li><strong>同步.</strong> 用原子操作来实现线程间合作；</li>
+<li><strong>互斥.</strong> 保证一个事情同一时间只有一个线程在做；</li>
+<li><strong>关键区域.</strong> 同一时间只能有一个线程在做的区域；</li>
+<li><strong>锁.</strong> 实现互斥的关键机制。</li>
+</ul>
+<h2><span id="锁以及案例分析">锁，以及案例分析</span></h2><p>回忆我们之前讲的<strong>原子操作</strong>的概念。事实上，很多指令（双精度浮点数存储、数组拷贝等）甚至都不是原子的。此外，实践中的大部分关键区域也不是单条指令的。<strong>锁</strong>就是将这些东西原子化的手段。在一段操作之前 <code>acquire</code> 一个锁，然后在之后 <code>release</code> 掉，这一段操作就会变成原子的。</p>
+<p>回忆操作全局数据结构的时候就需要加锁。现在考虑两个程序，一个生产者要往一个队列里面塞东西，一个消费者要处理队列中的东西。此时不能简单地加锁：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Producer(item) &#123;</span><br><span class="line">  acquire(&amp;buf_lock); <span class="comment">// 这里锁加载 while 前面也是必要的，不然中途调度就炸了</span></span><br><span class="line">  <span class="keyword">while</span> (buffer_full) &#123; <span class="comment">/* release(&amp;buf_lock); acquire(&amp;buf_lock); */</span> &#125;; <span class="comment">// 但是这个 while 循环会死锁。</span></span><br><span class="line">  enqueue(item);</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">&#125; </span><br><span class="line">Consumer(item) &#123;</span><br><span class="line">  acquire(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">while</span> (buffer_full) &#123; <span class="comment">/* release(&amp;buf_lock); acquire(&amp;buf_lock); */</span> &#125;;</span><br><span class="line">  item = dequeue()</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>正确操作是取消 while 循环里面的那两个注释。要点是判断条件和数据结构操作都要加锁，数据结构操作和前一次判断必须是原子的。此外有一种替代实现，就是用信号量来替代这个判断条件，方法为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Producer(item) &#123;</span><br><span class="line">  P(&amp;empty); P(&amp;mutex); enqueue(item); V(&amp;mutex); V(&amp;full);</span><br><span class="line">&#125; </span><br><span class="line">Consumer() &#123;</span><br><span class="line">  P(&amp;full); P(&amp;mutex); enqueue(item); V(&amp;mutex); V(&amp;empty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>信号量初值之类的细节的不再赘述。注意 P 的顺序不能交换，否则容易死锁；而 V 的顺序实际上无所谓。这里假设生产者和消费者有多个，代码也无需做任何修改。</p>
+<hr>
+<p>除了生产者 - 消费者问题之外，还有一个经典的问题是 Too Much Milk。这一个案例分析旨在证明实现同步需要 load &amp; store 之外的原子的同步原素。考虑两个人（线程）想要喝牛奶，这两个人都有如下基本的工作模式：</p>
+<ol>
+<li>看冰箱里是否有牛奶；</li>
+<li>如果没有，出门前往超市；</li>
+<li>购买牛奶；</li>
+<li>回家，把牛奶放入冰箱。</li>
+</ol>
+<p>本质上，我们要保护一个 <code>if (noMilk) buy Milk;</code> 的关键区域。</p>
+<p>这里，我们用自然语言描述了这些线程的行为模式，但是记住计算机的调度方式可能不符合人类的直觉，因此最后还是需要脱离生活考虑详细的调度方式。</p>
+<p>显然存在一种调度顺序，使得两个人都会去买牛奶。自然，如果有所谓的锁，我们可以直接这么写：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">acquire(&amp;lock);</span><br><span class="line"><span class="keyword">if</span> (!Milk) buy Milk;</span><br><span class="line">release(&amp;milklock);</span><br></pre></td></tr></table></figure>
+
+<p>现在忘记我们有锁的 acquire &#x2F; release 等操作，假设我们只有习见的 load &amp; store 这两个原素（primitive）。直觉上有一个这样的方案：如果一个人要出门，就在冰箱上贴一张纸条。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!Milk) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!Note) &#123;</span><br><span class="line">    Note = <span class="number">1</span>;</span><br><span class="line">    buy Milk;</span><br><span class="line">    Note = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>这个程序的问题是如果在判断条件 <code>!Note</code> 结束之后调度走了，还是会发生 Too Much Milk 的问题。这样确实降低了错误频率，但是本质上还是错的，此等错误最为棘手，自然不是我们想要的解决方案。另一个方案是先贴标签，为此需要两个人贴不同的标签，然后检查对方是不是去买了：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Note_self = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (!Milk) &#123;</span><br><span class="line">  <span class="keyword">if</span> (!Note_other) &#123;</span><br><span class="line">    buy Milk;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Note_self = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>这个程序的问题是如果程序在判断条件 <code>!Note_other</code> 之前调度走了，就不会有人去买东西了，出现另一种调度错误。最终一个可能的的解决方案如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Thread A</span></span><br><span class="line">Note_A = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">while</span> (Note_B) &#123;  &#125;</span><br><span class="line"><span class="keyword">if</span> (!Milk) buy Milk;</span><br><span class="line">Note_A = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Thread B</span></span><br><span class="line">Note_B = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">if</span> (!Note_A)</span><br><span class="line">  <span class="keyword">if</span> (!Milk) buy Milk;</span><br><span class="line">Note_B = <span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+
+<p>不难确认这样确实没有任何问题。但是工程上已经非常复杂，而且两个地位相等的线程代码不同，扩展到多线程时维护性很差。至此，在我们不知道锁怎么实现的时候，我们已经具备了如下知识：如果只有单独的 if 和赋值操作，很难完成同步。实际上，我们还需要 test&amp;set、compare&amp;swap 之类的原子操作把 if 和赋值绑定起来，才能更灵活地实现同步。</p>
+<h2><span id="锁的实现同步原素和管程">锁的实现，同步原素和管程</span></h2><p>现在的问题是怎么实现锁。首先考虑单核处理器，在这上面有一个天然的阻止调度的方法就是关闭中断：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LockAcquire &#123; disable Ints; &#125;</span><br><span class="line">LockRelease &#123; enable Ints; &#125; </span><br></pre></td></tr></table></figure>
+
+<p>这个实现有显而易见的几个问题：</p>
+<ol>
+<li>你不能让用户在屏蔽中断的情况下持续运行。如果用户此时开了一个死循环，整个机器就炸了。</li>
+<li>这样使得程序过度串行化；</li>
+<li>如果关键区域里面有 I&#x2F;O 或者 sleep 之类的东西就直接炸了。</li>
+</ol>
+<p>但这提供了一个启发，就是你可以 Acquire 里面关闭中断。代码为：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">  disable interrupts;</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="number">1</span>) &#123;</span><br><span class="line">    Put thread on wait-<span class="built_in">queue</span>;</span><br><span class="line">    sleep();</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    value = <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  enable interrupts;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Release() &#123;</span><br><span class="line">  disable interrupts;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">queue</span>.empty()) &#123;</span><br><span class="line">    Take thread off wait-<span class="built_in">queue</span>;</span><br><span class="line">    Place on ready <span class="built_in">queue</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    value = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  enable interrupts;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>注意调用 Acquire 之后，你需要在恰当的位置打开中断。因为你让当前线程 sleep 之后，就会调度一个新的线程上来顶住。但是这个新的线程必须要能够接收中断，也必须能够被正常唤醒。所以，必须在等锁的程序 sleep 之后因此最终的方案是，由调度器调度出来的下一个线程来关中断。</p>
+<hr>
+<p>上面的问题是，关闭中断的方法对于多处理器来说开销很大，因为关闭所有处理器核心的中断需要处理器间通信。因此，硬件一般会提供额外的同步原素，比如说以下几种操作：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">test&amp;<span class="title function_">set</span> <span class="params">(&amp;address)</span> &#123;</span><br><span class="line">  ressult = M[address];</span><br><span class="line">  M[address] = <span class="number">1</span>;</span><br><span class="line">  <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br><span class="line">swap (&amp;address, <span class="keyword">register</span>) &#123;</span><br><span class="line">  <span class="comment">// trivial.</span></span><br><span class="line">&#125;</span><br><span class="line">compare&amp;<span class="title function_">swap</span><span class="params">(&amp;address, reg1, reg2)</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (reg1 == M[address]) &#123;</span><br><span class="line">    M[address] = reg2;</span><br><span class="line">    <span class="keyword">return</span> success;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> failure;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>有了这几个原素，最简单的锁就可以写成：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">  <span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(value));</span><br><span class="line">&#125; </span><br><span class="line">Release() &#123;</span><br><span class="line">  value = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个实现逻辑上是正确的，但是它的问题是等锁的程序会一直消耗 CPU 资源。可以想象一个减小消耗的方法是把等锁的程序放进睡眠队列，一个参考实现是用一个这种自旋的 while 循环去代替之前的关闭终端：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">Acquire() &#123;</span><br><span class="line">  <span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">  <span class="keyword">if</span> (value == <span class="number">1</span>) &#123;</span><br><span class="line">    Put thread on wait-<span class="built_in">queue</span>;</span><br><span class="line">    sleep() &amp; guard = <span class="number">0</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    value = <span class="number">1</span>;</span><br><span class="line">    guard = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Release() &#123;</span><br><span class="line">  <span class="keyword">while</span>(test&amp;<span class="built_in">set</span>(guard));</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">queue</span>.empty()) &#123;</span><br><span class="line">    Take thread off wait-<span class="built_in">queue</span>;</span><br><span class="line">    Place on ready <span class="built_in">queue</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    value = <span class="number">0</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  guard = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>实现并发的一个范式是<strong>管程（Monitor）</strong>。一个管程包含一个锁以及零或多个条件变量，用于管理对共享数据的并发访问。其中，<strong>条件变量（Condition Variable）</strong>系指一个队列，其中包含若干个正在等某件事情（这件事情的语义由程序员记忆）的线程。对条件变量中有以下几个操作：</p>
+<ul>
+<li><code>Wait(&amp;lock)</code> 释放锁，然后 sleep；在 sleep 结束之前重新请求锁；</li>
+<li><code>Signal()</code> 唤醒一个 Waiter；</li>
+<li><code>Broadcast()</code> 唤醒所有的 Waiter。</li>
+</ul>
+<p>要点是一个线程操作一个条件变量时，必须持有那个锁。</p>
+<p>一个利用管程实现的（无限大的）生产者-消费者问题解法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">lock buf_lock;</span><br><span class="line">condition buf_CV;</span><br><span class="line"><span class="built_in">queue</span> <span class="built_in">queue</span>;</span><br><span class="line"></span><br><span class="line">Producer(item) &#123;</span><br><span class="line">  acquire(&amp;buf_lock);</span><br><span class="line">  enqueue(&amp;<span class="built_in">queue</span>, item);</span><br><span class="line">  cond_signal(&amp;buf_CV);</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Consumer() &#123;</span><br><span class="line">  acquire(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">while</span> (is_Empty(&amp;<span class="built_in">queue</span>)) &#123; <span class="comment">// ?</span></span><br><span class="line">    cond_wait(&amp;buf_CV, &amp;buf_lock);</span><br><span class="line">  &#125;</span><br><span class="line">  item = dequeue(&amp;<span class="built_in">queue</span>);</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>（？）处使用 while 还是 if 取决于调度器的语义。调度器可以有两种写法：</p>
+<ol>
+<li><strong>Hoare Style.</strong> signal 之后立即把锁和 CPU 交给等待线程，然后等待线程立刻运行。</li>
+<li><strong>Mesa Style.</strong> signal 之后继续持有锁，只是把一个等待线程放入 ready queue。当它被从 ready queue 中拿出来之后可能已经不满足那个条件了。</li>
+</ol>
+<p>现代操作系统多数使用 Mesa Style。因为你发现正常情况下，尽管 Hoare Style 语义简明，但 Mesa Style 可以比 Hoare Style 少调度几次，而且更好实现。完整版的生产者-消费者问题的管程解法如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">lock buf_lock;</span><br><span class="line">condition producer_CV;</span><br><span class="line">condition consumer_CV;</span><br><span class="line"></span><br><span class="line">Producer(item) &#123;</span><br><span class="line">  acquire(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">while</span> (buffer_full) &#123; cond_wait(&amp;producer_CV, &amp;buf_lock); &#125;</span><br><span class="line">  enqueue(item);</span><br><span class="line">  cond_signal(&amp;consumer_CV);</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Consumer() &#123;</span><br><span class="line">  acquire(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">while</span> (is_Empty(&amp;<span class="built_in">queue</span>)) &#123; cond_wait(&amp;consumer_CV, &amp;buf_lock); &#125;</span><br><span class="line">  item = dequeue(&amp;<span class="built_in">queue</span>);</span><br><span class="line">  cond_signal(&amp;producer_CV);</span><br><span class="line">  release(&amp;buf_lock);</span><br><span class="line">  <span class="keyword">return</span> item;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>建议不要考虑用信号量实现管程得 API，你会发现有很多麻烦得问题。</p>
+<h2><span id="读者-写者问题">读者-写者问题</span></h2><p>这个是并发编程中一类常见的问题。有两种用户：</p>
+<ul>
+<li><strong>读者.</strong> 从来不会修改数据库；</li>
+<li><strong>写者.</strong> 读和写数据库。</li>
+</ul>
+<p>正确性要求是：</p>
+<ul>
+<li>没有写者时，读者可以访问数据库；</li>
+<li>既没有读者又没有写者时，写者可以访问数据库；</li>
+<li>你可能会使用很多状态变量。同一时间只有一个线程能够访问状态变量。很显然这里你可能想维护<ul>
+<li>活跃读者数量 <code>AR</code>，等待读者数量 <code>WR</code>，活跃写者数量 <code>AW</code>，等待写者数量 <code>WW</code>；</li>
+<li>两个条件变量 <code>okToRead</code> 和 <code>okToWrite</code>。</li>
+</ul>
+</li>
+</ul>
+<p>你可以发现这很符合管程的范式。据此可以写出一份写者优先（优先唤醒写者）代码：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">Reader() &#123;</span><br><span class="line">  acquire(&amp;lock);</span><br><span class="line">  <span class="keyword">while</span> ((AW + WW) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    WR++;</span><br><span class="line">    cond_wait(&amp;okToRead, &amp;lock);</span><br><span class="line">    WR--;</span><br><span class="line">  &#125;</span><br><span class="line">  AR++;</span><br><span class="line">  release(&amp;lock);</span><br><span class="line">  <span class="comment">// read</span></span><br><span class="line">  acquire(&amp;lock);</span><br><span class="line">  AR--;</span><br><span class="line">  <span class="keyword">if</span> (AR == <span class="number">0</span> &amp;&amp; WW &gt; <span class="number">0</span>)</span><br><span class="line">    cond_signal(&amp;okToWrite);</span><br><span class="line">  release(&amp;lock);</span><br><span class="line">&#125; </span><br><span class="line"></span><br><span class="line">Writer() &#123;</span><br><span class="line">  acquire(&amp;lock);</span><br><span class="line">  <span class="keyword">while</span> ((AW + AR) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    WW++;</span><br><span class="line">    cond_wait(&amp;okToWrite, &amp;lock);</span><br><span class="line">    WW--;</span><br><span class="line">  &#125;</span><br><span class="line">  AW++;</span><br><span class="line">  release(&amp;lock);</span><br><span class="line">  <span class="comment">// write</span></span><br><span class="line">  acquire(&amp;lock);</span><br><span class="line">  AW--;</span><br><span class="line">  <span class="keyword">if</span> (WW &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    cond_signal(&amp;okToWrite);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    cond_broadcast(&amp;okToRead);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<div class="note warning"><p><strong>Remark.</strong> 关于这个代码有以下这些评论：</p>
+<ol>
+<li>该策略是写者优先，因此会有读者饥饿。</li>
+<li>这个代码做了最大程度的保险，有一些地方可以精简，但是也有代价：<ol>
+<li>读者退出可以不判断任何东西，因为写者的 while 循环中会判断。代价是你会频繁唤醒写者，效率变低；</li>
+<li>读者退出时甚至可以 broadcast 给写者。但是这样大量的写者就会被唤醒然后发现条件不满足，然后继续 sleep（惊群效应），效率更低；</li>
+<li>读者和写者甚至可以共用一个条件变量，但是因此此时队首不一定是你想唤醒的东西，此处必须 broadcast，导致效率降低。</li>
+</ol>
+</li>
+</ol>
+</div>
+
+<hr>
+<p>最后来说一些语言层面的支持。有一件事情是，你必须确保所有出一个关键区域的路径都有解锁。比如说你依次调用以下东西：</p>
+<ul>
+<li><code>setjmp()</code>，然后调用一个函数；</li>
+<li>这个函数请求一个锁，然后调用一个函数；</li>
+<li>这个函数调用 <code>longjump</code>；</li>
+</ul>
+<p>或者</p>
+<ul>
+<li>请求一个锁，触发一个异常，然后释放锁；</li>
+<li>触发异常之后不会再回去释放锁。</li>
+</ul>
+<p>你就会一直死锁在第二层，然后就炸了。很多语言实现了一些东西来帮你避免这种情况。一方面，你可以用 <code>try ... catch ...</code> 这种语法，在 catch 里面把锁释放了。另一方面：</p>
+<ul>
+<li>C++ 里面有个叫做 <code>lock_guard</code> 的东西，以任何路径出了 <code>lock_guard</code> 的作用域自动释放与之关联的那个锁；</li>
+<li>Python 里面可以写 <code>with lock:</code>，进入这个代码块自动加锁，以任何路径出了这一个代码块自动释放锁；</li>
+<li>Java 有 <code>synchronized</code> 这个修饰函数的关键字，进入这个函数加锁，以任何路径出这个函数释放锁。</li>
+</ul>
+<h1><span id="调度">调度</span></h1><p>回忆线程调度的大体框架状如：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">run_new_thread() &#123;</span><br><span class="line">  <span class="keyword">if</span> (readyThreads(TCBs)) &#123;</span><br><span class="line">    nextTCB = selectThread(TCBs);</span><br><span class="line">    run (nextTCB);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    run_idle_thread();</span><br><span class="line">  &#125;</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+<p>那么这些 <code>selectThread</code> 该怎么写，就是调度器要回答的问题。我们首先来刻画一下这个问题的模型，虽然下面似乎全是批话，完全没有形式化的内容。</p>
+<p>首先我们假设：</p>
+<ul>
+<li>一个用户只跑一个程序；</li>
+<li>一个程序只跑一个线程；</li>
+<li>程序之间是独立的。</li>
+</ul>
+<p>这里的假设很奇怪，主要是为了简化一些现实问题，比如说我在跑一个大实验，你在跑五个小实验，那么谁应该分到更多的机时之类的公平性问题。此外，我们假设一个程序在两个阶段之间交替：</p>
+<ul>
+<li>CPU Burst；</li>
+<li>I&#x2F;O Burst。</li>
+</ul>
+<p>经验上，CPU Burst 的长度一般比较短。评价标准包括：</p>
+<ul>
+<li><strong>最小化完成时间</strong>（这里的完成时间就是小学老师说的那种你耽误一分钟就是耽误了所有人一分钟，求所有线程的完成时间的平均值）；</li>
+<li><strong>最大化吞吐量</strong>（最大化每秒执行的操作数，通过最小化上下文切换开销和合理使用资源等实现）；</li>
+<li><strong>公平性</strong>；</li>
+</ul>
+<p>这三个目标之间直觉上存在一些 Trade-off。</p>
+<h2><span id="经典策略">经典策略</span></h2><p>最简明的调度策略就是<strong>先到先服务 FCFS（First Come，First Services）</strong>，就是用 FIFO 队列来调度，一直运行到阻塞为止。</p>
+<p>这个策略的优缺点十分显然：</p>
+<ul>
+<li><strong>优点.</strong> 简单，策略开销低；</li>
+<li><strong>缺点.</strong> 对到达顺序非常敏感，有队头阻塞。</li>
+</ul>
+<hr>
+<p>另一个简单的策略叫<strong>时间片轮转（RR，Roung Robin）</strong>：每个进程运行至多 $q$ 时间单位之后被抢占，然后塞到队尾。显然</p>
+<ul>
+<li>$q$ 取无穷大的极限就是 FCFS；</li>
+<li>$q$ 越小交错越强。$q$ 越小上下文切换开销越大。</li>
+</ul>
+<p>$q$ 给出了一个等待时间 - 吞吐量之间的 trade-off。但因为计算代价的时候有个很垃圾的除法下取整运算，这两件事情都不是单调的：</p>
+<ul>
+<li>RR 的平均完成时间并不总优于 FCFS；</li>
+<li>$q$ 变小，平均完成时间不一定变小。</li>
+</ul>
+<hr>
+<p>一个自然的想法是给每个任务赋一个优先级。<strong>严格优先级调度（SPS，Strict Priority Scheduling）</strong>就是给每个优先级开个队列，然后从优先级最大的任务里面挑一个运行。如果写过 Lab 就会知道这东西有以下问题：</p>
+<ul>
+<li><strong>公平性.</strong> 低优先级作业长期得不到 CPU；</li>
+<li><strong>优先级反转.</strong> 有三个线程优先级分别为 H，M，L，H 等待一个 L 上面的锁，这样高优先级任务的等待时间反而比 M 长。</li>
+</ul>
+<p>有各种动态分配优先级的启发式算法，比如说之前写过的所有权捐赠等。</p>
+<hr>
+<p>如果我们能预知未来，那么有两种调度策略：</p>
+<ul>
+<li><strong>Shortest Time to Completion First（STCF）</strong>；</li>
+<li><strong>Shortest Remaining Time First（SRTF）</strong>；</li>
+</ul>
+<p>顾名思义。后者是前者的有抢占版本。用 exchange argument 可以看出这两个是（等待时间方面）最优的贪心。然而很遗憾，如果有很多个小任务和一个大任务，那么大任务会饥饿。下面的手段都是用来近似 SRTF 的。</p>
+<hr>
+<p>在策略中我们经常需要动态估计某些量，比如说一个 job 的 CPU Burst 时间。这种估计一般是通过采样和统计手段实现。此处统计手段可以是卡尔曼滤波器，甚至最简单的指数加权平均</p>
+<p>$$<br>\bar\tau_n &#x3D; \alpha\tau_{n - 1} + (1 - \alpha)\bar\tau_{n - 1}<br>$$</p>
+<hr>
+<p>一个随机近似 SRTF 的手段是给每个 Job 发一定量的 lottery，然后用俄罗斯轮盘赌方法随机抽取。注意，采取这种调度策略时必须：</p>
+<ol>
+<li>时间短的 Job 得到的 lottery 多；</li>
+<li>每个 Job 必须持有至少一个 lottery 来避免饥饿。</li>
+</ol>
+<hr>
+<p><strong>多级反馈队列（Multi-Level Feedback Queue）</strong> 是一种启发式策略。我们开若干个队列表示不同的优先级，每个优先级内部是 FCFS 或者 RR，然而：</p>
+<ul>
+<li>一个新任务来了，先进入高优先级队列；</li>
+<li>若用满时间片，则下调优先级；</li>
+<li>若没有超时，上调优先级。</li>
+</ul>
+<p>当然这里不同优先级之间的调度策略也可以有选择，比如说硬要先调度最高优先级，或者可以用时间切片法让每个优先级获得某个比例的 CPU 时间。这个策略有一个问题是它可以被攻击，如果直到你用了 MLFQ，那么 CPU 密集的程序可以频繁 I&#x2F;O 来留在高优先级。</p>
+<h2><span id="case-study">Case Study</span></h2>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/07/QuantumLowerboundsRemaster/" rel="prev" title="一些证明量子查询复杂度下界的办法（2026 Remaster）">
+                  <i class="fa fa-angle-left"></i> 一些证明量子查询复杂度下界的办法（2026 Remaster）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
