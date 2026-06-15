@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题     参考文献 附录 A：补充结论 B：一些习题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Revision | 凸分析与优化方法">
+<meta property="og:url" content="http://example.com/2026/05/30/ConvexOptimizationRevision/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题     参考文献 附录 A：补充结论 B：一些习题">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/picture/armijo-rule.png">
+<meta property="article:published_time" content="2026-05-30T13:48:48.000Z">
+<meta property="article:modified_time" content="2026-06-13T15:49:58.527Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/picture/armijo-rule.png">
+
+
+<link rel="canonical" href="http://example.com/2026/05/30/ConvexOptimizationRevision/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/05/30/ConvexOptimizationRevision/","path":"2026/05/30/ConvexOptimizationRevision/","title":"Revision | 凸分析与优化方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Revision | 凸分析与优化方法 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">线性代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">$\mathbb{R}^n$ 上的点集拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">$\mathbb{R}^n$ 上的分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">凸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">凸集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">凸函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">凸优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">无约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.1.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.2.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.3.</span> <span class="nav-text">牛顿法的改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.4.</span> <span class="nav-text">优函数优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">有约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.1.</span> <span class="nav-text">对偶问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">A：补充结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">B：一些习题</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/05/30/ConvexOptimizationRevision/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Revision | 凸分析与优化方法 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Revision | 凸分析与优化方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-05-30 21:48:48" itemprop="dateCreated datePublished" datetime="2026-05-30T21:48:48+08:00">2026-05-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-06-13 23:49:58" itemprop="dateModified" datetime="2026-06-13T23:49:58+08:00">2026-06-13</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>22k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1:19</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E5%AE%9A%E4%B9%89">基础定义</a><ul>
+<li><a href="#%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0">线性代数</a></li>
+<li><a href="#mathbbrn-%E4%B8%8A%E7%9A%84%E7%82%B9%E9%9B%86%E6%8B%93%E6%89%91">$\mathbb{R}^n$ 上的点集拓扑</a></li>
+<li><a href="#mathbbrn-%E4%B8%8A%E7%9A%84%E5%88%86%E6%9E%90">$\mathbb{R}^n$ 上的分析</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%B8%E5%88%86%E6%9E%90">凸分析</a><ul>
+<li><a href="#%E5%87%B8%E9%9B%86">凸集</a></li>
+<li><a href="#%E5%87%B8%E5%87%BD%E6%95%B0">凸函数</a></li>
+</ul>
+</li>
+<li><a href="#%E5%87%B8%E4%BC%98%E5%8C%96">凸优化</a><ul>
+<li><a href="#%E6%97%A0%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96">无约束优化</a><ul>
+<li><a href="#%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8D">梯度下降</a></li>
+<li><a href="#%E7%89%9B%E9%A1%BF%E6%B3%95">牛顿法</a></li>
+<li><a href="#%E7%89%9B%E9%A1%BF%E6%B3%95%E7%9A%84%E6%94%B9%E8%BF%9B">牛顿法的改进</a></li>
+<li><a href="#%E4%BC%98%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96">优函数优化</a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%89%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96">有约束优化</a><ul>
+<li><a href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98">对偶问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+<li><a href="#%E9%99%84%E5%BD%95">附录</a><ul>
+<li><a href="#a%E8%A1%A5%E5%85%85%E7%BB%93%E8%AE%BA">A：补充结论</a></li>
+<li><a href="#b%E4%B8%80%E4%BA%9B%E4%B9%A0%E9%A2%98">B：一些习题</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="基础定义">基础定义</span></h1><p>所谓的优化问题系指如下形式的问题：给定函数 $f : \mathbb{R}^n\rightarrow \mathbb{R}$，和限制 $\mathcal{C}\subseteq \mathbb{R}^n$，求 </p>
+<p>$$<br>\min_{\boldsymbol{x}\in \mathcal{C}} f(\boldsymbol{x})<br>$$</p>
+<p>为了解决这类问题，使用的算法统称优化方法。优化方法的“没有免费的午餐”定理也是 D. H. Wolpert 的众多灌水结论之一：</p>
+<div class="note info"><p><strong>定理 1.1（Theorem 1 of [1]）.</strong> 对于任意的 query complexity 为 $m$ 的优化算法 $\mathcal{A}_1, \mathcal{A}_2$，不妨设这两个算法不会进行重复的 query。现在这两个函数优化一个有限定义域的函数 $f : \mathcal{X}\rightarrow \mathcal{Y}$：记 </p>
+<p>$$<br>\boldsymbol{d}_m &#x3D; \{(\boldsymbol{d}_1^x, \boldsymbol{d}_1^y), …, (\boldsymbol{d}_m^x, \boldsymbol{d}_m^y)\}<br>$$</p>
+<p>为算法在函数 $f$ 上运行的 trajectory，即一列点-对应函数值的序列。我们有这两个优化算法的 trajectory 是非常平均的：</p>
+<p>$$<br>\sum_{f} \Pr[\boldsymbol{d}_m^y | f, m, \mathcal{A}_1] &#x3D; \sum_{f} \Pr[\boldsymbol{d}_m^y | f, m, \mathcal{A}_2]<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 平凡的数学归纳法。当 $m &#x3D; 1$ 时，设 $\mathcal{A}_1$ 产生的第一个点的分布为 $\boldsymbol{X}_1$，左边等于</p>
+<p>$$<br>\sum_{a\in \mathcal{Y}} \Pr[\boldsymbol{X}_1 &#x3D; a] \sum_f \mathbf{1}\{f(a) &#x3D; \boldsymbol{d}_1^y\} &#x3D; |\mathcal{Y}|^{|\mathcal{X}| - 1}<br>$$</p>
+<p>右边也是一样。当 $m &gt; 1$ 时，先用链式法则拆开条件概率，同样枚举两个算法询问的第 $m$ 个点，并用完全一样的手法交换求和顺序即可。<div style="text-align: right">$\blacksquare$</div></p>
+<p>作为一个自然的推论，我们对算法的“评价”必然是一个关于 $\boldsymbol{d}_m^y$ 的可观测量 $\Phi$。必然有</p>
+<p>$$<br>\sum_f \mathbb{E}[\Phi(\boldsymbol{d}_m^y) | f, m, \mathcal{A}_1] &#x3D; \sum_f \mathbb{E}[\Phi(\boldsymbol{d}_m^y) | f, m, \mathcal{A}_2]<br>$$</p>
+<p>也就是说，不论评价标准如何，必然不存在一个最好的优化算法。这启发我们，优化算法必须具体问题具体分析。我们一般将优化问题按照以下几个标准分类：</p>
+<ol>
+<li><strong>连续性.</strong><ul>
+<li>称一个优化问题是连续的若 $\mathcal{C}$ 是 $\mathbb{R}^n$ 的一个连续的子集；</li>
+<li>称一个优化问题是离散的若 $\mathcal{C}$ 是 $\mathbb{R}^n$ 的一个离散的子集；</li>
+<li>称一个优化问题是组合的若 $\mathcal{C}$ 是有限集；</li>
+<li>称一个优化问题是变分的若 $\mathcal{C}$ 是函数空间的一个无限维的子集。</li>
+</ul>
+</li>
+<li><strong>有无约束.</strong><ul>
+<li>称一个优化问题是无约束的若 $\mathcal{C} &#x3D; \mathbb{R}^n$；</li>
+<li>称一个优化问题是有约束的若 $\mathcal{C}\subseteq \mathbb{R}^n$。</li>
+</ul>
+</li>
+<li><strong>凸性.</strong><ul>
+<li>称一个优化问题是凸的若 $f$ 是凸函数，$\mathcal{C}$ 是凸集合；</li>
+<li>否则该优化问题是非凸的。</li>
+</ul>
+</li>
+</ol>
+<p>接下来是一些必要的数学知识。</p>
+<h2><span id="线性代数">线性代数</span></h2><p>本节罗列一些凸分析中常用的线性代数知识。许多证明教科书上都有，这里都省略。</p>
+<div class="note info"><p><strong>定理 1.1.1（对称特征值分解，EVD）.</strong> 设矩阵 $\mathbf{A}$ 是大小为 $n\times n$ 的实对称矩阵（$\mathbf{A}\in \mathbb{S}^n$）。则 $\mathbf{A}$ 可以被分解成</p>
+<p>$$<br>\mathbf{A} &#x3D; \mathbf{Q\Lambda Q}^\top<br>$$</p>
+<p>其中 $\mathbf{Q}$ 正交（$\mathbf{Q}^\top\mathbf{Q} &#x3D; \mathbf{I}$），$\mathbf{\Lambda}$ 对角（$\mathbf{\Lambda} &#x3D; \mathrm{diag}(\lambda_1, …, \lambda_n)$，且 $\lambda_1\geq \lambda_2\geq \cdots \geq \lambda_n$。</p>
+</div>
+
+<div class="note info"><p><strong>定理 1.1.2（Cholesky 分解）.</strong> 设矩阵 $\mathbf{A}$ 正定（$\mathbf{A}\in \mathbb{S}_+^n$），则存在矩阵 $\mathbf{X}$ 使得 $\mathbf{X}^\top \mathbf{X} &#x3D; \mathbf{A}$。$\mathbf{X}$ 是下三角矩阵且对角元都是正数的分解方案存在且唯一。</p>
+</div>
+
+<p>如果不对 $\mathbf{X}$ 附加这么强的要求，可以直接令 $\mathbf{X} &#x3D; \mathbf{Q}\mathrm{diag}(\lambda_1^{1&#x2F;2}, …, \lambda_m^{1&#x2F;2})\mathbf{Q}^\top$。</p>
+<div class="note info"><p><strong>定理 1.1.3（奇异值分解，SVD）.</strong> 设 $\mathbf{A}\in \mathbb{R}^{m\times n}$，$\mathrm{rank}(\mathbf{A}) &#x3D; r$。则存在 $\mathbf{U}\in \mathbb{R}^{m\times r}, \mathbf{V}\in \mathbb{R}^{n\times r}, \mathbf{\Sigma}$ 满足：</p>
+<ol>
+<li>$\mathbf{A} &#x3D; \mathbf{U\Sigma V}^\top$；</li>
+<li>$\mathbf{U}^\top \mathbf{U} &#x3D; \mathbf{I}, \mathbf{V}^\top \mathbf{V} &#x3D; \mathbf{I}$；</li>
+<li>$\mathbf{\Sigma} &#x3D; \mathrm{diag}(\sigma_1, …, \sigma_r)$，其中 $\sigma_1 \geq \cdots \geq \sigma_r &gt; 0$。</li>
+</ol>
+<p>如果 $\mathbf{A}^\top \mathbf{A}$ 的非零特征值两两不同则奇异值分解唯一。</p>
+</div>
+
+<p><strong>证明.</strong> 补充这个证明主要是为了回顾奇异值分解的算法。</p>
+<p><em>存在性.</em> 因为 $\mathbf{A}^\top \mathbf{A}\in \mathbb{S}^n_{+}$，它必然有谱分解 $\mathbf{A}^\top \mathbf{A} &#x3D; \mathbf{Q}^\top \mathbf{\Lambda Q}$。取 $\sigma_i$ 为 $\sqrt{\lambda_i}$，$\boldsymbol{v}_i$ 为 $\lambda_i$ 对应的特征值拼成矩阵 $\mathbf{V}$，$\mathbf{U} &#x3D; \mathbf{AV\Sigma}^{-1}$。令 $\boldsymbol{u}_i &#x3D; \frac{1}{\sqrt{\sigma_i}} \boldsymbol{a}_i$。</p>
+<p>$\mathbf{Q}$ 的正交性蕴含 $\mathbf{V}$ 的正交性。因此 $\mathbf{AV} &#x3D; \mathbf{U\Sigma}$ 表明 $\mathbf{A} &#x3D; \mathbf{U\Sigma V}^\top$。还需要验证的是 $\mathbf{U}$ 的正交性。有 </p>
+<p>$$<br>\mathbf{U}^\top \mathbf{U} &#x3D; (\mathbf{AV\Sigma}^{-1})^\top \mathbf{AV\Sigma^{-1}} &#x3D; \mathbf{\Sigma}^{-1}(\mathbf{V}^\top\mathbf{A}^\top\mathbf{A}\mathbf{V})\mathbf{\Sigma}^{-1} &#x3D; \mathbf{I}<br>$$</p>
+<p><em>唯一性.</em> 注意 $\mathbf{A}^\top \mathbf{A} &#x3D; \mathbf{V}\mathbf{\Sigma}^2\mathbf{V}^\top$，因此 $(\mathbf{A}^\top \mathbf{A})\mathbf{V} &#x3D; \mathbf{V}\mathbf{\Sigma}^2$ 意味着 $\mathbf{V}$ 构成 $\mathbf{A}^\top \mathbf{A}$ 的非零特征子空间的基，在 $\mathbf{A}^\top \mathbf{A}$ 非零特征值两两不同之时，$\mathbf{V}$ 唯一，$\mathbf{\Sigma}$ 和 $\mathbf{U}$ 和 $\mathbf{V}$ 联动，进而整个奇异值分解唯一。</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note info"><p><strong>定理 1.1.4（von Neumann 迹定理）.</strong> 设 $\mathbf{A}, \mathbf{B}\in \mathbb{R}^{m\times n}$。有</p>
+<p>$$<br>\mathrm{Tr}(\mathbf{A}^\top \mathbf{B}) \leq \sum_{i &#x3D; 1}^{\min(m, n)} \sigma_i(\mathbf{A})\sigma_i(\mathbf{B})<br>$$</p>
+<p>取等当且仅当 $\mathbf{A}, \mathbf{B}$ 的奇异值分解的左右奇异向量都相等，即 $\mathbf{A} &#x3D; \mathbf{U\Sigma_A V}^\top, \mathbf{B} &#x3D; \mathbf{U\Sigma_B V}^\top$。</p>
+</div>
+
+<p><strong>证明.</strong> 参见附录中的<em>“定理 1.1.4 的证明”</em>。</p>
+<p>定理中的 $\mathrm{Tr}(\mathbf{A}^\top \mathbf{B})$ 就是两矩阵逐点相乘求和，也简记为 $\left\langle \mathbf{A}, \mathbf{B}\right\rangle$。</p>
+<hr>
+<p>凸优化中的优化目标经常是某种范数。对于矩阵有以下几种常见的范数</p>
+<div class="note success"><p><strong>定义 1.1.1（矩阵 $p$-范数）.</strong> 对于矩阵 $\mathbf{A}$，定义</p>
+<p>$$<br>\left\lVert\mathbf{A}\right\rVert_p &#x3D; \max_{\left\lVert\boldsymbol{x}\right\rVert_p &#x3D; 1}\left\lVert\mathbf{A}\boldsymbol{x}\right\rVert_p<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>命题 1.1.5.</strong> 任意矩阵的 $p$-范数不小于其谱半径（最大特征值，同时显然也是 $2$-范数）。</p>
+</div>
+
+<p><strong>证明.</strong> 去 $\boldsymbol{x}$ 为最大特征值对应的单位特征向量立即得证。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note success"><p><strong>定义 1.1.2（Frobenius 范数）.</strong> 对于矩阵 $\mathbf{A}$，定义</p>
+<p>$$<br>\left\lVert\mathbf{A}\right\rVert_F &#x3D; \sqrt{\left\langle\mathbf{A}, \mathbf{A}\right\rangle}<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.1.3（核范数）.</strong> 对于矩阵 $\mathbf{A}$，定义</p>
+<p>$$<br>\left\lVert\mathbf{A}\right\rVert_* &#x3D; \sum_i \sigma_i(\mathbf{A})<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.1.4（$(p, q)$-范数）.</strong> 对于矩阵 $\mathbf{A}$，定义</p>
+<p>$$<br>\left\lVert\mathbf{A}\right\rVert_{p, q} &#x3D; \left(\sum_{i &#x3D; 1}^n \left\lVert\mathbf{A}_i\right\rVert_p^q\right)^{\frac 1q}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>命题 1.1.6.</strong> 核范数有以下刻画：</p>
+<p>$$<br>\left\lVert\mathbf{X}\right\rVert_* &#x3D; \max_{\mathbf{U}^\top \mathbf{U} &#x3D; \mathbf{I}, \mathbf{V}^\top \mathbf{V} &#x3D; \mathbf{I}} \mathrm{Tr}(\mathbf{U}^\top \mathbf{XV})<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 注意 $\mathrm{Tr}(\mathbf{U}^\top \mathbf{X}\mathbf{V}) &#x3D; \mathrm{Tr}(\mathbf{VU}^\top \mathbf{X})$，前者奇异值只有 $1$ 和 $0$，根据 von Neumann 迹不等式及其取等条件证毕。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>命题 1.1.7.</strong> 以下不等式成立：</p>
+<ol>
+<li>$\left\lVert\mathbf{A}\right\rVert_2\leq \left\lVert\mathbf{A}\right\rVert_F \leq \left\lVert\mathbf{A}\right\rVert_*$；</li>
+<li>（插值不等式）$\left\lVert\mathbf{A}\right\rVert_2 \leq \sqrt{\left\lVert\mathbf{A}\right\rVert_1\left\lVert\mathbf{A}\right\rVert_\infty}$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 注意 </p>
+<p>$$<br>\left\lVert\mathbf{A}\right\rVert_F &#x3D; \sqrt{\mathrm{Tr}(\mathbf{A}^\top\mathbf{A})} &#x3D; \sqrt{\sum_{i &#x3D; 1}^r \sigma_i^2 (\mathbf{A})}<br>$$</p>
+<p>因此 $\left\lVert\mathbf{A}\right\rVert_2 &#x3D; \sigma_1(\mathbf{A}) \leq \left\lVert\mathbf{A}\right\rVert_F$ 是显然的。因为奇异值全正，所以 $\left\lVert\mathbf{A}\right\rVert_F \leq \left\lVert\mathbf{A}\right\rVert_*$ 也是显然的。对于第二个结论有</p>
+<p>$$<br>\begin{align}<br>\left\lVert\mathbf{A}\right\rVert_2 &amp;&#x3D; \sqrt{\left\lVert\mathbf{A}^\top \mathbf{A}\right\rVert_2} \\<br>&amp;\leq \sqrt{\left\lVert\mathbf{A}^\top\mathbf{A}\right\rVert_1} &amp; \color{blue}{\text{(命题 1.1.5)}} \\<br>&amp;\leq \sqrt{\left\lVert\mathbf{A}^\top\right\rVert_1 \left\lVert\mathbf{A}\right\rVert_1} &amp; \color{blue}{\text{($p$-范数的次乘性，容易验证)}} \\<br>&amp;\leq \sqrt{\left\lVert\mathbf{A}\right\rVert_\infty\left\lVert\mathbf{A}\right\rVert_1} &amp; \color{blue}{\text{(容易验证 $\left\lVert\mathbf{A}\right\rVert_\infty &#x3D; \left\lVert\mathbf{A}\right\rVert_\infty$)}}<br>\end{align}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note success"><p><strong>定义 1.1.5（条件数）.</strong> 对于非奇异矩阵 $\mathbf{A}\in \mathbb{R}^{n\times n}$，定义 </p>
+<p>$$<br>\kappa(\mathbf{A}) &#x3D; \left\lVert\mathbf{A}\right\rVert_2\left\lVert\mathbf{A}^{-1}\right\rVert_2 &#x3D; \sigma_\max(\mathbf{A}) &#x2F; \sigma_\min(\mathbf{A})<br>$$</p>
+</div>
+
+
+
+<h2><span id="mathbbrn-上的点集拓扑">$\mathbb{R}^n$ 上的点集拓扑</span></h2><div class="note success"><p><strong>定义 1.2.1（开集）.</strong> 称 $\mathcal{C}\subseteq \mathbb{R}^n$ 是开集，若 </p>
+<p>$$<br>\forall \boldsymbol{x}\in \mathcal{C}, \exists \varepsilon &gt; 0, B_{\varepsilon}(\boldsymbol{x})\subseteq \mathcal{C}<br>$$</p>
+<p>其中 $B_\varepsilon(\boldsymbol{x})$ 系指以 $\boldsymbol{x}$ 为心，半径为 $\varepsilon$ 的开球：$B_\varepsilon(\boldsymbol{x}) &#x3D; \{\boldsymbol{y} : \left\lVert\boldsymbol{y} - \boldsymbol{x}\right\rVert_2 &lt; \varepsilon\}$。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.2（闭集）.</strong> 称 $\mathcal{C}\subseteq \mathbb{R}^n$ 是闭集，若 $\mathbb{R}^n\setminus \mathcal{C}$ 是开集。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.3（有界集合）.</strong> 称 $\mathcal{C}\subseteq\mathbb{R}^n$ 有界，若存在 $R &gt; 0$ 使得 $\forall \boldsymbol{x}\in \mathcal{C}, \left\lVert\boldsymbol{x}\right\rVert &lt; R$。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.4（紧集）.</strong> 称 $\mathcal{C}\subseteq\mathbb{R}^n$ 是紧集，若对于任意 $\mathcal{C}$ 的开覆盖，都有有限子覆盖。在 $\mathbb{R}^n$ 中，这等价于 $\mathcal{C}$ 是有界闭集。</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.5（内点）.</strong> 集合 $\mathcal{C}\subseteq \mathbb{R}^n$ 的内点定义为</p>
+<p>$$<br>\mathcal{C}^\circ :&#x3D; \{\boldsymbol{y} : \exists \varepsilon &gt; 0, B_\varepsilon(\boldsymbol{y})\subseteq \mathcal{C}\}<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.6（闭包）.</strong> $\mathcal{C}$ 的闭包定义为</p>
+<p>$$<br>\overline{\mathcal{C}} :&#x3D; \mathbb{R}^n \setminus (\mathbb{R}^n\setminus \mathcal{C})^\circ<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 1.2.7（边界）.</strong> $\mathcal{C}$ 的边界定义为 $\partial \mathcal{C} &#x3D; \overline{\mathcal{C}}\setminus \mathcal{C}^\circ$</p>
+</div>
+
+<p>点集拓扑自然有无数的结论，但是本课程不要求掌握。所有需要点集拓扑知识的证明全部放在附录中，且在该附录中，我们假设读者掌握常见的点集拓扑的结论。</p>
+<h2><span id="mathbbrn-上的分析">$\mathbb{R}^n$ 上的分析</span></h2><div class="note success"><p><strong>定义 1.3.1（点列的 $Q$-收敛速率）.</strong> 设 $\boldsymbol{x}_k\rightarrow \boldsymbol{x}^*$。定义序列的残差为 $\boldsymbol{e}_k &#x3D; \boldsymbol{x}_k - \boldsymbol{x}^*$。我们称序列 $\{\boldsymbol{x}_k\}$ 的收敛速率为 $r$，收敛常数为 $c$，若 </p>
+<p>$$<br>\lim_{k\rightarrow \infty} \frac{\left\lVert\boldsymbol{e}_{k + 1}\right\rVert}{\left\lVert\boldsymbol{e}_k\right\rVert^r} &#x3D; C<br>$$</p>
+</div>
+
+<p>有几种特殊的称呼：</p>
+<ul>
+<li><strong>线性收敛.</strong> $r &#x3D; 1, 0 &lt; C &lt; 1$；</li>
+<li><strong>亚线性收敛.</strong> $r &#x3D; 1, C &#x3D; 1$；</li>
+<li><strong>超线性收敛.</strong> $r &#x3D; 1, C &#x3D; 0$；</li>
+<li><strong>平方收敛.</strong> $r &#x3D; 2$；</li>
+<li><strong>三次方收敛.</strong> $r &#x3D; 3$。</li>
+</ul>
+<p>这个收敛速率的刻画意味着 $\log \left\lVert\boldsymbol{e}_{k + 1}\right\rVert \approx r\log \left\lVert\boldsymbol{e}_k\right\rVert + \log C$。我们可以据此来估计 $r$ 的大小。实践中序列经常是交错的，我们只需要取一个 $\left\lVert\boldsymbol{x}_k - \boldsymbol{x}^*\right\rVert \leq e_k$ bound 住残差即可。</p>
+<p>关于多元函数微分的内容，参见 <a href="../../../../2026/03/15/TensorCalculus/">人工智能用张量分析</a>。给定一个计算图，有 $O(n + m)$ 的反向传播算法能够求出 $\partial \mathcal{L} &#x2F; \partial \boldsymbol{x}_i$，方法是拓扑排序然后 DP。</p>
+<p>采样操作会阻断梯度的传播。为此我们需要引入<strong>重参数化技巧</strong>：选择非参数化的分布 $q(\varepsilon)$ 和函数 $g_\theta$ 使得 $g_\theta(\varepsilon)$ 正是欲采样的分布。对于正态分布之类的简单分布，重参数化的方法是很容易想到的。对于离散的分布（采样 $x_i$ 的概率为 $\pi_i$）需要使用 Grumbel-Softmax 技巧，其过程为【FIXME】。</p>
+<h1><span id="凸分析">凸分析</span></h1><h2><span id="凸集">凸集</span></h2><div class="note success"><p><strong>定义 2.1.1（凸集）.</strong> 一个集合 $\mathcal{C}\subseteq \mathbb{R}^n$ 是凸的，若其中任意两点连线段都在其中，即 </p>
+<p>$$<br>\forall \boldsymbol{x}_1, \boldsymbol{x}_2\in \mathcal{C}, \theta\in [0, 1], \quad \theta \boldsymbol{x}_1 + (1 - \theta)\boldsymbol{x}_2\in \mathcal{C}<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.1.2（凸包）.</strong> 一个集合 $\mathcal{C}$ 的凸包 $\mathrm{conv}(\mathcal{C})$ 是包含它的最小凸集。</p>
+</div>
+
+<p>很容易证明，一个点集 $\mathcal{C}$ 的凸包就是其中所有点的凸组合：</p>
+<p>$$<br>\mathrm{conv}(\mathcal{C}) &#x3D; \left\{\sum_{i &#x3D; 1}^n \theta_i \boldsymbol{x}_i : n\in \mathbb{N}, \boldsymbol{x}_i\in \mathcal{C}, \theta_i \geq 0 \wedge \sum_{i &#x3D; 1}^n \theta_i &#x3D; 1\right\}<br>$$</p>
+<p>因为任意一个包含 $\mathcal{C}$ 的凸集必然包含以上这些点，而这些点自己又构成一个凸包。指定 $\mathcal{C}$ 上的一个测度 $p(\boldsymbol{x})$，也可以定义 $\mathcal{C}$ 的广义凸组合</p>
+<p>$$<br>\inf_c p(\boldsymbol{x})\boldsymbol{x}\mathrm{d}\boldsymbol{x}<br>$$</p>
+<p>可以证明如果这个积分存在，则其结果属于 $\mathcal{C}$ 的凸包。</p>
+<div class="note success"><p><strong>定义 2.1.3（锥）.</strong> 集合 $\mathcal{C}$ 被称为锥，若 </p>
+<p>$$<br>\forall \boldsymbol{x}\in \mathcal{C}, \theta \geq 0, \quad \theta \boldsymbol{x}\in \mathcal{C}<br>$$</p>
+<p>若 $\mathcal{C}$ 还是凸集，那么 $\mathcal{C}$ 被称为凸锥。</p>
+</div>
+
+<div class="note success"><p><strong>定义 2.1.4（锥包）.</strong> 集合 $\mathcal{C}$ 的锥包为包含它的最小锥。</p>
+</div>
+
+<p>同样可以证明，锥包是集合所有点的锥组合：</p>
+<p>$$<br>\left\{\sum_{i &#x3D; 1}^n \theta_i \boldsymbol{x}_i : \boldsymbol{x}_i\in C, \theta_i \geq 0\right\}<br>$$</p>
+<div class="note success"><p><strong>定义 2.1.5（仿射集合）.</strong> 集合 $\mathcal{C}$ 被称为仿射的，若</p>
+<p>$$<br>\forall \boldsymbol{x}_1, \boldsymbol{x}_2\in \mathcal{C}, \theta\in \mathbb{R}, \qquad \theta \boldsymbol{x}_1 + (1 - \theta)\boldsymbol{x}_2\in \mathcal{C}<br>$$</p>
+</div>
+
+<p>显然任取 $\boldsymbol{x}_0\in \mathcal{C}$，有 $\mathcal{V} :&#x3D; \mathcal{C} - \boldsymbol{x}_0$ 是线性空间。记 $\mathcal{C}$ 的维数为 $\mathcal{V}$ 的维数。类似定义 2.1.2 和 2.1.4，可以定义仿射包 $\mathrm{aff}(\mathcal{C})$，没有什么意思，这里不再赘述。</p>
+<div class="note success"><p><strong>定义 2.1.6（对偶锥）.</strong> 设 $\mathcal{K}$ 是一个锥。定义</p>
+<p>$$<br>\mathcal{K}^* &#x3D; \{\boldsymbol{y} : \forall \boldsymbol{x}\in \mathcal{K}, \boldsymbol{x}^\top \boldsymbol{y} \geq 0\}<br>$$</p>
+</div>
+
+<p>严格来说这不是一个好的对偶，因为 $(\mathcal{K}^*)^* &#x3D; \mathcal{K}$ 未必成立。可以观察到 $\mathcal{K}^*$ 必然是凸锥，即便 $\mathcal{K}$ 不是。但若 $\mathcal{K}$ 是闭凸锥，这个对偶就是好的，这是因为：</p>
+<ul>
+<li>显然有 $\mathcal{K} \subseteq \mathcal{K}^{**}$。</li>
+<li>为了证明这个关系不是真子集，施反证法。对于锥外部的点，一定存在分离超平面（参见定理【FIXME】），而分离超平面的法向量又一定在对偶锥内部，于是矛盾。</li>
+</ul>
+<div class="note info"><p><strong>命题 2.1.1.</strong> 以下这些操作保持凸性：设 $\mathcal{C}_1, \mathcal{C}_2$ 为凸集合，则 </p>
+<ol>
+<li><em>交集.</em> $\mathcal{C}_1\cap \mathcal{C}_2$ 也是凸集。</li>
+<li><em>仿射变换.</em> $f : \mathbb{R}^n\rightarrow \mathbb{R}^m$ 是仿射变换，即 $f(\boldsymbol{x}) &#x3D; \mathbf{A}\boldsymbol{x} + \boldsymbol{b}$，则 $f(\mathcal{C}_1)$ 也是凸集。若 $f : \mathbb{R}^k \rightarrow \mathbb{R}^n$，则 $\mathcal{C}_1$ 的原像 $f^{-1}(\mathcal{C})$ 也是凸集。</li>
+<li><em>闵可夫斯基和.</em> $\mathcal{C}_1 + \mathcal{C}_2 :&#x3D; \{\boldsymbol{x} + \boldsymbol{y} : \boldsymbol{x}\in \mathcal{C}_1, \boldsymbol{y}\in \mathcal{C}_2\}$ 也是凸集；</li>
+<li><em>笛卡尔积.</em> $\mathcal{C}_1\times \mathcal{C}_2$ 也是凸集；</li>
+<li><em>射影函数.</em> 函数 $P : \mathbb{R}^n\times \mathbb{R}_{++}\rightarrow \mathbb{R}^n$ 将 $(\boldsymbol{x}, t)$ 映射到 $(\boldsymbol{x} &#x2F; t)$。则 $P(\mathcal{C}_1)$ 也是凸集。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 均为琐碎的验证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>可以证明，任意点到凸集的投影（凸集上到其最近的点）唯一。可以证明 </p>
+<div class="note info"><p><strong>命题 2.1.2.</strong> 设 $\Omega$ 是 $\mathbb{R}^n$ 上的一个凸集，$P_\Omega(\boldsymbol{x})$ 是 $\boldsymbol{x}$ 到它的投影。有：</p>
+<ul>
+<li>给定 $\boldsymbol{x}\in \mathbb{R}^n$，$\boldsymbol{x}^*\in \Omega &#x3D; P_\Omega(\boldsymbol{x})$ 当且仅当<br>$$<br>\forall \boldsymbol{y}\in \Omega, \qquad \left\langle\boldsymbol{y} - \boldsymbol{x}^*, \boldsymbol{x} - \boldsymbol{x}^*\right\rangle \leq 0<br>$$</li>
+<li>对于任意的 $\boldsymbol{x}, \boldsymbol{y}\in \mathbb{R}^n$，有<br>$$<br>\left\lVert P_\Omega(\boldsymbol{x}) - P_\Omega(\boldsymbol{y})\right\rVert \leq \left\lVert\boldsymbol{x} - \boldsymbol{y}\right\rVert<br>$$</li>
+</ul>
+</div>
+
+<p><strong>证明.</strong></p>
+<ol>
+<li>简单平面几何；</li>
+<li>简单的立体几何：考察这个四棱锥，其中条件将给出两个不可能同时出现的钝角。</li>
+</ol>
+<div style="text-align: right">$\blacksquare$</div>
+
+<hr>
+<p>接下来的这条线索是一系列分离超平面的定理，这些结论对于线性规划来说非常重要，但是本课不涉及线性规划，暂时没看到哪里有用。</p>
+<div class="note info"><p><strong>定理 2.1.3（点与凸集的超平面分离定理）.</strong> 设 $\mathcal{C}$ 是非空凸集，$\boldsymbol{x}\notin \mathcal{C}$。则存在 $\boldsymbol{a}$ 使得 $\forall \boldsymbol{y}\in \mathcal{C}, \boldsymbol{a}^\top \boldsymbol{y} \geq \boldsymbol{a}^\top \boldsymbol{x}$。</p>
+</div>
+
+<p><strong>证明.</strong> 不妨设 $\boldsymbol{x} &#x3D; \boldsymbol{0}, b &#x3D; 0$，然后分两类讨论：</p>
+<ol>
+<li>若 $\boldsymbol{0}\notin \overline{\mathcal{C}}$，则做投影立即得证。</li>
+<li>若 $\boldsymbol{0}\in \overline{\mathcal{C}}$，由点到闭凸集的超平面分离定理（附录定理 A.3）得证。</li>
+</ol>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note info"><p><strong>定理 2.1.4（分离超平面定理）.</strong> 设 $\mathcal{C}, \mathcal{D}$ 是两个非空凸集，则 $\mathcal{C}\cap \mathcal{D} &#x3D; \varnothing$ 当且仅当存在 $\boldsymbol{a}\ne 0$ 和 $b\in \mathbb{R}$，使得</p>
+<p>$$<br>\forall \boldsymbol{x}\in \mathcal{C}, \boldsymbol{a}^\top \boldsymbol{x} \leq b, \quad \forall \boldsymbol{x}\in \mathcal{D}, \boldsymbol{a}^\top \boldsymbol{x} \geq b<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> $\Rightarrow$. 取 $\mathcal{E} &#x3D; \mathcal{C} - \mathcal{D}$，由于闵可夫斯基和保持凸性不变，所以 $\mathcal{E}$ 是凸集。</p>
+<p>$\mathcal{E}$ 和 $\boldsymbol{0}$ 的分离超平面（根据定理 2.1.3 存在）立即给出这个 $\boldsymbol{a}$。</p>
+<p>$\Leftarrow$. 显然。<div style="text-align: right">$\blacksquare$</div></p>
+<blockquote>
+<p><strong>Remark.</strong> 如果要严格分离，一个充分条件是 $\mathcal{C}$ 和 $\mathcal{D}$ 都是闭集且至少有一个是紧集。</p>
+</blockquote>
+<div class="note success"><p><strong>定义 2.1.7（支撑超平面）.</strong> 设凸集 $\mathcal{C}\subseteq \mathbb{R}^n$，$\boldsymbol{x}_0\in \partial \mathcal{C}$。对于 $\mathcal{a}\ne \boldsymbol{0}$，若 $\forall \boldsymbol{x}\in \mathcal{C}$ 都有 $\boldsymbol{a}^\top \boldsymbol{x} \leq \boldsymbol{a}^\top \boldsymbol{x}_0$，则称 $\boldsymbol{a}$ 给出 $\mathcal{C}$ 在 $\boldsymbol{x}_0$ 处的支撑超平面 $\{\boldsymbol{x} : \boldsymbol{a}^\top \boldsymbol{x} &#x3D; \boldsymbol{a}^\top \boldsymbol{x}_0\}$。</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.1.5（支撑超平面定理）.</strong> 对于任意非空凸集合 $\mathcal{C}$，令 $\boldsymbol{x}_0\in \partial \mathcal{C}$，必然存在 $\boldsymbol{x}_0$ 处的支撑超平面。</p>
+</div>
+
+<p><strong>证明.</strong> 考虑 $\overline{C}$ 和 $\boldsymbol{x}_0$ 的非严格分离超平面（定理 A.3）即可。<div style="text-align: right">$\blacksquare$</div></p>
+<blockquote>
+<p>教科书上的证明是做如下分类讨论：</p>
+<ul>
+<li>$\mathcal{C}^\circ\ne \varnothing$。直接套用分离超平面定理，可以推出存在超平面支撑 $\mathcal{C}$ 的内点。从内点推到整个 $\mathcal{C}$ 只需要从内部取点列逼近；</li>
+<li>$\mathcal{C}^\circ &#x3D; \varnothing$，则 $\mathcal{C}$ 的仿射包必然不是全空间（否则必然至少包含一个 $n$ 维单纯形，这是有体积的），而该仿射包必然是一个闭集，可以套用闭集的超平面分离定理。</li>
+</ul>
+<p>我不知道这样做的意义何在。</p>
+</blockquote>
+<p>超平面分离定理的直接推论是 Farkas Lemma。Farkas Lemma 有非常多种，比如</p>
+<div class="note info"><p><strong>定理 2.1.6（Farkas Lemma）.</strong> 设 $\mathbf{A}\in \mathbb{R}^{m\times n}, \boldsymbol{b}\in \mathbb{R}^m$，则以下两条件见合：</p>
+<ol>
+<li>$\exists \boldsymbol{x}\in \mathbb{R}^n_+$ 使得 $\mathbf{A}\boldsymbol{x} &#x3D; \boldsymbol{b}$；</li>
+<li>$\exists \boldsymbol{y}\in \mathbb{R}^m$ 使得 $\mathbf{A}^\top \boldsymbol{y}\succeq \boldsymbol{0}$ 且 $\boldsymbol{b}^\top \boldsymbol{y} &lt; 0$。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 这个定理的几何意义是要么 $\boldsymbol{b}$ 在 $\mathbf{A}$ 的列向量的锥包内部，要么存在过原点的分离超平面。严格来说：</p>
+<ul>
+<li>$1)\rightarrow \neg 2)$：施反证，如果你宣称存在一个 $\boldsymbol{y}$，在左右两边同时乘以 $\boldsymbol{y}^\top$ 得到 $(\mathbf{A}^\top \boldsymbol{y})^\top \boldsymbol{x} &#x3D; \boldsymbol{b}^\top \boldsymbol{y}$，但左边大于 $0$，右边小于 $0$，矛盾；</li>
+<li>$\neg 1) \rightarrow 2)$：说明 $\boldsymbol{b}$ 不再 $\mathbf{A}$ 的列向量的锥包内部，必然存在过原点的分离超平面。</li>
+</ul>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>另一种形式的 Farkas Lemma 参见附录中的定理 B.1。超平面分离定理也给出了线性不等式有解的条件。</p>
+<div class="note info"><p><strong>定理 2.1.7.</strong> $\mathbf{A}\boldsymbol{x} &lt; \boldsymbol{b}$ 无解当且仅当</p>
+<p>$$<br>\exists \boldsymbol{\lambda},\quad \boldsymbol{\lambda}\ne 0, \boldsymbol{\lambda}\succ\boldsymbol{0},\mathbf{A}^\top \boldsymbol{\lambda} &#x3D; 0, \boldsymbol{\lambda}^\top \boldsymbol{b} \leq 0<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 考虑 $\mathcal{C} &#x3D; \{\boldsymbol{b} - \mathbf{A}\boldsymbol{x} : \boldsymbol{x}\in \mathbb{R}^n\}, \mathcal{D} &#x3D; \{\boldsymbol{y}\in \mathbb{R}^m : \boldsymbol{y}\succeq \boldsymbol{0}\}$。而这两个凸集不交当且仅当存在 $\mathcal{C}, \mathcal{D}$ 的分离超平面。你可以自己验证分离超平面等价于上述式子。</p>
+<h2><span id="凸函数">凸函数</span></h2><div class="note success"><p><strong>定义 2.2.1（下凸函数）.</strong> 称函数 $f : \mathbb{R}^n\rightarrow \mathbb{R}$ 是下凸的，若 $\mathrm{dom}~f$ 是凸集，并且</p>
+<p>$$<br>\forall \boldsymbol{x}, \boldsymbol{y}\in \mathrm{dom}~f, \theta\in [0, 1], \quad f(\theta\boldsymbol{x} + (1 - \theta)\boldsymbol{y}) \leq \theta f(\boldsymbol{x}) + (1 - \theta) f(\boldsymbol{y})<br>$$</p>
+</div>
+
+<p>特别地，若</p>
+<ul>
+<li>上述不等式在 $\boldsymbol{x}\ne \boldsymbol{y}$ 时永不取等，则称 $f$ 是<strong>严格下凸</strong>的。</li>
+<li>$f - \frac{\mu}{2}\left\lVert\boldsymbol{x}\right\rVert^2$ 是下凸的，则称 $f$ 是 $\mu$-强凸的。</li>
+</ul>
+<p>注意 $\mu$-强凸的定义展开之后是</p>
+<p>$$<br>f(\theta \boldsymbol{x} + (1 - \theta)\boldsymbol{y}) \leq \theta f(\boldsymbol{x}) + (1 - \theta)f(\boldsymbol{y}) - \frac{\theta(1 - \theta)\mu}{2}\left\lVert\boldsymbol{y} - \boldsymbol{x}\right\rVert^2<br>$$</p>
+<p>这是 $\mu$-强凸的等价定义。常数 $\mu$ 也被叫做模量。对于强凸的函数，两点处的凸组合可以自然地推广至有限个点，乃至积分。任取 $\mathrm{dom}~f$ 上的测度 $p$，有 </p>
+<p>$$<br>f\left(\inf_S p(\boldsymbol{x})\boldsymbol{x}\mathrm{d}\boldsymbol{x}\right) \leq \int_S f(\boldsymbol{x}) p(\boldsymbol{x})\mathrm{d}\boldsymbol{x}, \quad \text{or} \quad f(\mathbb{E}_p[\boldsymbol{x}]) \leq \mathbb{E}_p[f(\boldsymbol{x})]<br>$$</p>
+<p>【FIXME：Holder 不等式，Rademacher 定理】</p>
+<p>对于可微的函数，其凸性的刻画可以用求导来判定。</p>
+<div class="note info"><p><strong>定理 2.2.1.</strong> 若 $f$ 可微，则 $f$ 是凸函数当且仅当 $\mathrm{dom}~f$ 是凸的并且</p>
+<p>$$<br>\forall \boldsymbol{x},\boldsymbol{y}\in \mathrm{dom}~f, \quad f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \left\langle\nabla f(\boldsymbol{x}), \boldsymbol{y} - \boldsymbol{x}\right\rangle<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> $\Rightarrow.$ 注意到根据凸性的定义稍加变形立即得到</p>
+<p>$$<br>f(\boldsymbol{y}) - f(\boldsymbol{x}) &#x3D; \frac{f((1 - \theta)\boldsymbol{x} + \theta\boldsymbol{y})}{1 - \theta}<br>$$</p>
+<p>取 $\theta\rightarrow 0$ 立即得证，这是方向导数的定义。$\Leftarrow.$ 是平凡的分析习题。<div style="text-align: right">$\blacksquare$</div></p>
+<p>基于此，我们知道严格的条件是该等号不能取等。因为</p>
+<p>$$<br>f(y) &gt; f(\boldsymbol{x}) + \frac{f(\boldsymbol{x} + \alpha(\boldsymbol{y} - \boldsymbol{x})) - f(\boldsymbol{x})}{\alpha} \geq f(\boldsymbol{x}) + \frac{\alpha \left\langle\nabla f(\boldsymbol{x}), \boldsymbol{y} - \boldsymbol{x}\right\rangle}{\alpha}<br>$$</p>
+<p>强凸的条件是 $f(\boldsymbol{y}) &gt; f(\boldsymbol{x}) + \left\langle\nabla f(\boldsymbol{x}), \boldsymbol{y} - \boldsymbol{x}\right\rangle + \frac{\mu}{2}\left\lVert\boldsymbol{y} - \boldsymbol{x}\right\rVert^2$。</p>
+<div class="note info"><p><strong>定理 2.2.2.</strong> 若 $f$ 二阶可微，则 $f$ 是凸当且仅当 $\mathrm{dom}~f$ 是凸集且每个点处的 Hessian $\nabla^2 f(\boldsymbol{x})$ 都半正定。</p>
+</div>
+
+<blockquote>
+<p>我可能不是很想纠结这种东西的证明了。</p>
+</blockquote>
+<p>类似地，$\mu$-强凸等价于 $\nabla^2 f(\boldsymbol{x}) \succeq \mu \mathbf{I}$。正定可以退出严格凸，但是反之不然。</p>
+<p>证明高维凸性的常见手段是降维。很显然</p>
+<div class="note info"><p><strong>定理 2.2.3.</strong> 对于 $f(\boldsymbol{x}) : \mathbb{R}^n \rightarrow \mathbb{R}$，$\forall x\in \mathrm{dom}~f$ 和 $\boldsymbol{v}\in \mathbb{R}^n$，可以定义 $g(t) &#x3D; f(\boldsymbol{x} + t\boldsymbol{v})$。则，$f(\boldsymbol{x})$ 凸当且仅当所有的 $g(t)$ 都凸。</p>
+</div>
+
+<p><strong>证明.</strong> 注意凸性都是两点连线，所以可以在 $f(\boldsymbol{x}), f(\boldsymbol{y})$ 和 $g(s), g(t)$ 之间建立非常显然的联系。</p>
+<p>比如在证明 $\log \det \mathbf{X}$ （其中 $\mathbf{X}$ 正定）的凸性的时候，没有人想要去分析一个四阶张量的正定性。但是注意任取 $\mathbf{X}, \mathbf{V}$</p>
+<p>$$<br>g(t) &#x3D; -\log \det(\mathbf{X}) - \log \det(\mathbf{I} + t\mathbf{X}^{-1&#x2F;2}\mathbf{VX}^{-1&#x2F;2}) &#x3D; -\log \det \mathbf{X} - \sum_{i &#x3D; 1}\log(1 + t\lambda_i)<br>$$</p>
+<p>关于 $t$ 上凸。</p>
+<div class="note success"><p><strong>定义 2.2.2（$\alpha$-Sublevel）.</strong> 函数 $f$ 的一个 $\alpha$-子层级定义为</p>
+<p>$$<br>C_\alpha &#x3D; \{\boldsymbol{x} : f(\boldsymbol{x}) \leq \alpha\}<br>$$</p>
+</div>
+
+<p>有凸函数的子层级都凸，但是反之若一个函数的子层级都凸，它不一定是凸函数。这种函数称为半凸函数，其等价定义为</p>
+<p>$$<br>f(\alpha\boldsymbol{x} + (1 - \alpha)\boldsymbol{y}) \leq \max(f(\boldsymbol{x}), f(\boldsymbol{y})), \quad \alpha\in [0, 1]<br>$$</p>
+<div class="note success"><p><strong>定义 2.2.3（Epigraph）.</strong> 函数 $f$ 的 Epigraph 为</p>
+<p>$$<br>\mathrm{epi}(f) &#x3D; \{(\boldsymbol{x}, t) : \boldsymbol{x}\in \mathrm{dom}~f, f(\boldsymbol{x}) \leq t\}<br>$$</p>
+</div>
+
+<p>显然，函数为凸函数当且仅当 Epigraph 是凸集合。凸函数的很多性质可以借助 Epigraph 直观理解，如凸函数的一阶条件可以看作 Epigraph 的支撑超平面定理。称一个凸函数是<strong>恰当（proper）</strong>的，若 $f(\boldsymbol{x}) &lt; \infty$ 且至少存在一个 $\boldsymbol{x}$ 使得 $f(\boldsymbol{x}) &gt; -\infty$。几何上，这意味着 epigraph 非空且不包含垂线。</p>
+<p>对于任意的可微凸函数，将函数值减去某点处的支撑超平面，得到一个非负的值</p>
+<p>$$<br>B_f(\boldsymbol{y}, \boldsymbol{x}) &#x3D; f(\boldsymbol{y}) - f(\boldsymbol{x}) - \left\langle \nabla f(\boldsymbol{x}), \boldsymbol{y} - \boldsymbol{x}\right\rangle<br>$$</p>
+<p>这个值可以刻画空间内两点之间的远近，虽然它不对称，但是还是强名之为 <strong>Bregman 距离</strong>。</p>
+<p>即便凸函数不可导，曲线上每一点的支撑超平面仍必然存在。该点处的全体支撑超平面记为该点的次微分，形式化地</p>
+<div class="note success"><p><strong>定义 2.2.4（次微分）.</strong> 对于下凸函数 $f(\boldsymbol{x})$，记</p>
+<p>$$<br>\partial f(\boldsymbol{x}) &#x3D; \{\boldsymbol{g} : f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \left\langle\boldsymbol{g}, \boldsymbol{y} - \boldsymbol{x}\right\rangle\}<br>$$</p>
+<p>这个集合叫做 $f$ 的次微分，其中元素叫做 $f$ 的次梯度。</p>
+</div>
+
+<p>如果次微分是单点集，很明显 $f$ 在此处可微。可以证明：</p>
+<div class="note info"><p><strong>定理 2.2.4.</strong> 设 $f : \mathbb{R}^n\rightarrow \mathbb{R}$ 是恰当下凸函数。则有：</p>
+<ol>
+<li>对于任意的 $\boldsymbol{x}\in \mathrm{dom}~f^\circ$ 有 $\partial f(\boldsymbol{x})$ 是非空的紧凸集。</li>
+<li>若 $\mathcal{X}$ 是一个有界集，则 $\cup_{\boldsymbol{x}\in \mathcal{X}} \partial f(\boldsymbol{x})$ 有界。</li>
+<li>若序列 $\boldsymbol{x}_k$ 收敛于 $\boldsymbol{x}_k$，且 $\boldsymbol{g}_k \in \partial f(\boldsymbol{x}_k)$，则 $\boldsymbol{g}_k$ 有界，且它的任意一个聚点都是 $f$ 在 $\boldsymbol{x}$ 处的次梯度。</li>
+</ol>
+</div>
+
+<p>次微分的计算也有一些规则：</p>
+<div class="note info"><p><strong>定理 2.2.5.</strong> 若 $f_j : \mathbb{R}^n\rightarrow \mathbb{R}, j &#x3D; 1, …, m$ 都是恰当凸函数，令 $f &#x3D; \sum f_i$，则有 </p>
+<p>$$<br>\begin{aligned}<br>   \partial f(\boldsymbol{x})\supseteq \sum_{i &#x3D; 1}^m \partial f_i(\boldsymbol{x}), \quad &amp; \forall \boldsymbol{x}\in \bigcap_{i &#x3D;1}^m \mathrm{dom}~f_i \\<br>   \partial f(\boldsymbol{x}) &#x3D;        \sum_{i &#x3D; 1}^m \partial f_i(\boldsymbol{x}), \quad &amp; \forall \boldsymbol{x}\in \bigcap_{i &#x3D; 1}^m (\mathrm{dom}~f_i)^\circ<br>\end{aligned}<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.2.6（链式法则）.</strong> 有两种链式法则：</p>
+<ol>
+<li><p>设 $f: \mathbb{R}^m\rightarrow \mathbb{R}$ 是凸函数，$\mathbf{A}$ 是 $m\times n$ 的矩阵，令 $F(\boldsymbol{x}) &#x3D; f(\mathbf{A}\boldsymbol{x})$，则<br>$$<br>\partial F(\boldsymbol{x}) &#x3D; \mathbf{A}^\top \partial f(\mathbf{A}\boldsymbol{x})<br>$$</p>
+</li>
+<li><p>设 $f: \mathbb{R}^n$ 凸，$h: \mathbb{R}\rightarrow \mathbb{R}$ 是可微，下凸，单调非降的函数，则 $F &#x3D; h\circ f$ 也是凸函数，且 </p>
+<p>$$<br>\partial F(\boldsymbol{x}) &#x3D; \partial h(f(\boldsymbol{x}))\partial f(\boldsymbol{x})<br>$$</p>
+</li>
+</ol>
+</div>
+
+<p>计算次梯度时，除了直接分析，常用的方法是以下的 Danskin 定理：</p>
+<div class="note info"><p><strong>定理 2.2.7（Danskin 定理）.</strong> 令 $\mathcal{Z}$ 紧集。设 $\phi: \mathbb{R}^n\times \mathcal{Z}\rightarrow \mathbb{R}$ 满足以下条件：</p>
+<ol>
+<li>连续；</li>
+<li>对于任意的 $\boldsymbol{z}\in \mathcal{Z}$，$\phi(\cdot, \boldsymbol{z})$ 是凸函数，而且可微；</li>
+<li>对于任意的 $\boldsymbol{x}$，$\nabla_{\boldsymbol{x}} \phi(\boldsymbol{x}, \cdot)$ 在 $\mathcal{Z}$ 上连续；</li>
+</ol>
+<p>那么，定义 $f(\boldsymbol{x}) &#x3D; \max_{\boldsymbol{z}\in \mathcal{Z}}\phi(\boldsymbol{x}, \boldsymbol{z})$ 和 $\mathcal{Z}(\boldsymbol{x}) &#x3D; \left\{\overline{\boldsymbol{z}} : \phi(\boldsymbol{x}, \overline{\mathcal{z}}) &#x3D; \max_{\boldsymbol{z}\in \mathcal{Z}} \phi(\boldsymbol{x}, \boldsymbol{z})\right\}$，有 </p>
+<ol>
+<li>$f(\boldsymbol{x})$ 是凸函数；</li>
+<li>$\partial f(\boldsymbol{x}) &#x3D; \mathrm{conv}\{\nabla_{\boldsymbol{x}} \phi(\boldsymbol{x}, \boldsymbol{z}) : \boldsymbol{z}\in \mathcal{Z}(\boldsymbol{x})\}$。</li>
+</ol>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 直观理解这个定理，你可以考虑取 $\mathcal{Z}$ 是 $\{1, 2\}$，这是 $\{1, 2\}$ 上的平凡拓扑的一个紧集。你会发现，在两个凸函数相交之处，次梯度正是从第一个函数的梯度滚动到第二个函数的梯度。</p>
+</blockquote>
+<p>这个定理可以用来求范数的次梯度，因为范数确实可以被刻画成其对偶范数的 max：若 $\left\lVert\cdot\right\rVert$ 是赋内积 $\left\langle\cdot, \cdot\right\rangle$ 线性空间上的范数，$\left\lVert\cdot\right\rVert^*$ 是其对偶范数，有 </p>
+<p>$$<br>\partial \left\lVert\boldsymbol{x}\right\rVert &#x3D; \{\boldsymbol{y} : \left\langle\boldsymbol{y}, \boldsymbol{x}\right\rangle &#x3D; \left\lVert\boldsymbol{x}\right\rVert, \left\lVert\boldsymbol{y}\right\rVert^* \leq 1\}<br>$$</p>
+<p>这是因为</p>
+<p>$$<br>\left\lVert\boldsymbol{x}\right\rVert &#x3D; \max_{\boldsymbol{y}}\{\left\langle\boldsymbol{y}, \boldsymbol{x}\right\rangle : \left\lVert\boldsymbol{y}\right\rVert^* \leq 1\}<br>$$</p>
+<p>取 $\phi(\boldsymbol{x}, \boldsymbol{y}) &#x3D; \left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle$ 后应用 Danskin 定理立即得证。</p>
+<hr>
+<p>很多操作可以保持函数的凸性。</p>
+<div class="note info"><p><strong>定理 2.2.8.</strong> 设 $f_1, …, f_m$ 是凸函数。取 $w_1, …, w_m\geq 0$，有 </p>
+<p>$$<br>f &#x3D; \sum_{i &#x3D; 1}^m w_i f_i, g &#x3D; \max_{i &#x3D; 1}^m f_i<br>$$</p>
+<p>也都是凸函数。</p>
+</div>
+
+<p>这个取 max 的结论可以推出以下结论：</p>
+<ul>
+<li>设 $f^r(\boldsymbol{x})$ 表示 $\boldsymbol{x}$ 的前 $r$ 大的分量之和。则 $f^r(\boldsymbol{x})$ 是凸的。</li>
+<li>对于任意的集合 $C$，其支撑函数定义为 $S_C(\boldsymbol{x}) &#x3D; \sup\{\left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle : \boldsymbol{y}\in C\}$。有 $S_C$ 是凸函数。</li>
+<li>设 $f_C(x)$ 是到 $C$ 集合最远点的距离。则 $f_C(\boldsymbol{x})$ 是凸函数。</li>
+<li>矩阵范数是凸的。因为 $\left\lVert\mathbf{X}\right\rVert_2 &#x3D; \sup\{\boldsymbol{u}^\top \mathbf{X}\boldsymbol{v} : \left\lVert\boldsymbol{u}\right\rVert_2 &#x3D; \left\lVert\boldsymbol{v}\right\rVert_2 &#x3D; 1\}$</li>
+</ul>
+<p>对凸函数进行复合，也会得到凸函数。比如</p>
+<div class="note info"><p><strong>定理 2.2.9.(凸函数复合仿射变换).</strong> 若 $f(\boldsymbol{x})$ 是凸函数，则 $g(\boldsymbol{x}) &#x3D; f(\mathbf{A}\boldsymbol{x} + \boldsymbol{b})$ 也是凸函数。</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.2.10（标量函数复合凸函数）.</strong> 设 $g : \mathbb{R}^n\rightarrow \mathbb{R}, h : \mathbb{R}\rightarrow \mathbb{R}$，$\mathrm{dom}~h &#x3D; \mathbb{R}$，令 $f &#x3D; h(g(\boldsymbol{x}))$，那么若：</p>
+<ul>
+<li>$h$ 是下凸函数且单调不减，$g$ 下凸，则 $f$ 下凸；</li>
+<li>$h$ 是下凸函数且单调不增，$g$ 上凸，则 $f$ 下凸。</li>
+</ul>
+</div>
+
+<p>这个条件的来源，以第一个为例：</p>
+<p>$$<br>\begin{aligned}<br>   f(\theta\boldsymbol{x} + (1 - \theta)\boldsymbol{y}) &amp;&#x3D; h(g(\theta\boldsymbol{x} + (1 - \theta)\boldsymbol{y})) \leq h(\theta g(\boldsymbol{x}) + (1 - \theta)g(\boldsymbol{y})) \\<br>   &amp;\leq \theta h(g(\boldsymbol{x})) + (1 - \theta)h(g(\boldsymbol{y})) &#x3D; \theta f(\boldsymbol{x}) + (1 - \theta)f(\boldsymbol{y})<br>\end{aligned}<br>$$</p>
+<p>凸性和单调性都有用。</p>
+<div class="note info"><p><strong>定理 2.2.11（矢量函数复合凸函数）.</strong> 设 $h : \mathbb{R}^k\rightarrow \mathbb{R}, g_1, …, g_k : \mathbb{R}^n\rightarrow \mathbb{R}$，若 $\mathrm{dom}~g_i &#x3D; \mathbb{R}^n, \mathrm{dom}~h &#x3D; \mathbb{R}^k$，令 $f(\boldsymbol{x}) &#x3D; h(g_1(\boldsymbol{x}), …, g_k(\boldsymbol{x}))$，那么若</p>
+<ul>
+<li>$h$ 下凸，关于每一维都单调不降，$g_i$ 都下凸，则 $f$ 下凸；</li>
+<li>$h$ 下凸，关于每一维都单调不增，$g_i$ 都上凸，则 $f$ 下凸。</li>
+</ul>
+</div>
+
+<p>都很显然，可以直接用定义验证。</p>
+<div class="note info"><p><strong>定理 2.2.12.</strong> 设 $f(\boldsymbol{x}, \boldsymbol{y})$ 关于两维联合下凸，$\mathcal{C}$ 是一个非空凸集，则 </p>
+<p>$$<br>g(\boldsymbol{x}) &#x3D; \inf_{\boldsymbol{y}\in \mathcal{C}} f(\boldsymbol{x}, \boldsymbol{y})<br>$$</p>
+<p>也是凸函数。</p>
+</div>
+
+<p>和 max 不同，min 要求 minimizer 是一个凸集才可以。</p>
+<div class="note info"><p><strong>定理 2.2.13.</strong> 设 $f : \mathbb{R}^n\rightarrow \mathbb{R}$ 是一个凸函数。则 $f$ 的视野定义为 </p>
+<p>$$<br>g(\boldsymbol{x}, t) &#x3D; tf(\boldsymbol{x} &#x2F; t)<br>$$</p>
+<p>这也是凸函数。</p>
+</div>
+
+<p>注意 $\mathrm{epi}(g)$ 无非是 $\mathrm{epi}(f)$ 作用一个射影函数。</p>
+<hr>
+<p>对于一个函数 $f$，我们可以取一个斜率为 $\boldsymbol{g}$ 的平面去截这个函数，所得截距定义为 $f^*(\boldsymbol{g})$。学过物理的读者可能知道，这就是 $f$ 的勒让德变换。在凸优化中，这个函数称为 $f(\boldsymbol{x})$ 的共轭。</p>
+<div class="note success"><p><strong>定义 2.2.5（共轭函数）.</strong> 令 $f: \mathbb{R}^n\rightarrow \mathbb{R}$。定义 </p>
+<p>$$<br>f^*(\boldsymbol{y}) &#x3D; \mathrm{sup}_{\boldsymbol{x}\in \mathrm{dom}~f} (\left\langle\boldsymbol{y}, \boldsymbol{x}\right\rangle - f(\boldsymbol{x}))<br>$$</p>
+</div>
+
+<p>如果 $f$ 是可微的，其共轭非常容易计算。显然，任意的最小值点都满足 $\boldsymbol{y} &#x3D; \nabla f(\boldsymbol{x}^*)$。如果你会解这个方程，就容易拿到共轭函数的值。</p>
+<p>容易验证，无论 $f$ 如何，$f^*(\boldsymbol{x})$ 总是凸的。这个定义在优化中尤其重要，我们可以看几个简单的性质。</p>
+<p>根据定义有：</p>
+<div class="note info"><p><strong>定理 2.2.13（Fenchel’s 不等式）.</strong> 对于任意的函数 $f$，有 </p>
+<p>$$<br>f(\boldsymbol{x}) + f^*(\boldsymbol{y}) \geq \left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle<br>$$</p>
+</div>
+
+<p>对于凸函数来说，共轭是一个很好的对偶，因为可以知道凸函数的两次共轭必然是它自己。</p>
+<div class="note info"><p><strong>定理 2.2.14.</strong> 设 $f$ 是一个恰当的闭凸函数，则 $f^{**} &#x3D; f$。</p>
+</div>
+
+<p><strong>证明.</strong> 首先 $f^{**} \leq f$ 是容易证明的。我们有根据定义对于任意的 $\boldsymbol{x}, \boldsymbol{y}$</p>
+<p>$$<br>f^*(\boldsymbol{y}) \geq \left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle - f(\boldsymbol{x})<br>$$</p>
+<p>移项之后立即得证。另一方面，若存在 $\boldsymbol{x}_0, \gamma$ 使得 $f^{**}(\boldsymbol{x}_0) &lt; f(\boldsymbol{x})$，则存在 $\boldsymbol{x}_0, f^{**}(\boldsymbol{x}_0)$ 和 $\mathrm{epi}~f$ 之间的分离超平面 $(\boldsymbol{w}, \zeta)$ 和 $\mu$ 满足：</p>
+<p>$$<br>\forall \boldsymbol{x}\in \mathrm{dom}~f, t \geq f(\boldsymbol{x}), \quad \boldsymbol{w}^\top \boldsymbol{x} + \zeta t &lt; \mu &lt; \boldsymbol{w}^\top \boldsymbol{x}_0 + \zeta f^{**}(\boldsymbol{x}_0)<br>$$</p>
+<p>在这个分离超平面的定义中，$\zeta$ 必然要是负数。不妨设 $\zeta &#x3D; -1$。取 $t &#x3D; f(\boldsymbol{x})$ 得到 </p>
+<p>$$<br>\boldsymbol{w}^\top \boldsymbol{x} - f(\boldsymbol{x}) &lt; \mu &lt; \boldsymbol{w}^\top \boldsymbol{x}_0 - f^{**}(\boldsymbol{x}_0)<br>$$</p>
+<p>对最左边取上确界，它也不会超过 $\mu$。因此有</p>
+<p>$$<br>f^*(\boldsymbol{w}) &lt; \boldsymbol{w}^\top \boldsymbol{x}_0 - f^{**}(\boldsymbol{x}_0)<br>$$</p>
+<p>与 Fenchel 不等式矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 2.2.15.</strong> 对于任意的 $f$，$f^{**}$ 是不超过 $f$ 的最大的凸函数，即 $f$ 的凸包。</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明“最大”，其他东西是自然成立的。考虑存在一个恰当的闭凸函数 $\boldsymbol{g}$ 使得 $f^{**}(\boldsymbol{x}) \leq g(\boldsymbol{x}) \leq f(\boldsymbol{x})$。很明显，若 $f_1(\boldsymbol{x})\leq f_2(\boldsymbol{x})$，则 $f_1^*(\boldsymbol{x}) \geq f_2^*(\boldsymbol{x})$。因此，对这条大不等式链取共轭得到</p>
+<p>$$<br>f^{***}(\boldsymbol{x}) \geq g^{*}(\boldsymbol{x}) \geq f^{*}(\boldsymbol{x})<br>$$</p>
+<p>然而 $f^{*}(\boldsymbol{x})$ 是恰当的闭凸函数，根据定理 2.2.14，它共轭两次就是自己，因此上面的不等式完全取等，有 $f^*(\boldsymbol{x}) &#x3D; g^*(\boldsymbol{x})$，因此 $f^{**} &#x3D; g^{**} &#x3D; g$。<div style="text-align: right">$\blacksquare$</div> </p>
+<p>这个定理意味着，任取一个 $f(\boldsymbol{x})$，对它做两次共轭，立即得到一个包络 $f(\boldsymbol{x})$ 的替代凸优化目标（convex surrogate）。另外，你可以发现这个共轭的定义和之前次梯度的定义形式极其相似，不难猜到它们之间确实存在一定关系：</p>
+<div class="note info"><p><strong>定理 2.2.16.</strong> 若 $f$ 是闭凸函数，则 </p>
+<p>$$<br>\boldsymbol{y}\in \partial f(\boldsymbol{x}) \Leftrightarrow \boldsymbol{x}\in \partial f^*(\boldsymbol{y}) \Leftrightarrow f(\boldsymbol{x}) + f^*(\boldsymbol{y}) &#x3D; \left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明 $(1)\Leftrightarrow (3)$，而这只需要稍加比较两者的定义即可。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>推论 2.2.17.</strong> 若 $f$ 严格凸，则 $f^*$ 可微，并且</p>
+<p>$$<br>\nabla f^*(\boldsymbol{y}) &#x3D; \arg\max_{\boldsymbol{x}} \{\left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle - f(\boldsymbol{x})\}<br>$$</p>
+</div>
+
+<p>这个结论用来求对偶问题的梯度。</p>
+<div class="note info"><p><strong>定理 2.2.18.</strong> 若 $f$ 是 $\rho$-强凸的，则 $f^*$ 是 $\rho^{-1}$-光滑的，即 </p>
+<p>$$<br>\left\lVert\nabla f^*(\boldsymbol{y}_1) - \nabla f^*(\boldsymbol{y}_2)\right\rVert \leq \rho^{-1}\left\lVert\boldsymbol{y}_1 - \boldsymbol{y}_2\right\rVert<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 考虑 $\boldsymbol{x}_1 &#x3D; \nabla f^*(\boldsymbol{y}_1)$ 和 $\boldsymbol{x}_2 &#x3D; \nabla f^*(\boldsymbol{y}_2)$。我们接下来将会多次使用推论 2.2.16 和 2.2.17。利用强凸的性质对称地写出以下两条不等式：</p>
+<p>$$<br>\begin{aligned}<br>f(\boldsymbol{x}_1) - f(\boldsymbol{x}_2) &amp;\geq \left\langle\nabla f(\boldsymbol{x}_2), \boldsymbol{x}_1 - \boldsymbol{x}_2\right\rangle + \frac{\rho}{2}\left\lVert\boldsymbol{x}_1 - \boldsymbol{x}_2\right\rVert^2 &#x3D; \left\langle \boldsymbol{y}_2, \boldsymbol{x}_1 - \boldsymbol{x}_2\right\rangle + \frac{\rho}{2}\left\lVert\boldsymbol{x}_1 - \boldsymbol{x}_2\right\rVert^2 \\<br>f(\boldsymbol{x}_2) - f(\boldsymbol{x}_1) &amp;\geq \left\langle\nabla f(\boldsymbol{x}_1), \boldsymbol{x}_2 - \boldsymbol{x}_1\right\rangle + \frac{\rho}{2}\left\lVert\boldsymbol{x}_2 - \boldsymbol{x}_1\right\rVert^2 &#x3D; \left\langle \boldsymbol{y}_1, \boldsymbol{x}_2 - \boldsymbol{x}_1\right\rangle + \frac{\rho}{2}\left\lVert\boldsymbol{x}_1 - \boldsymbol{x}_2\right\rVert^2<br>\end{aligned}<br>$$</p>
+<p>直接把这两个不等式加起来得到</p>
+<p>$$<br>\left\langle\boldsymbol{y}_2 - \boldsymbol{y}_1, \boldsymbol{x}_2 - \boldsymbol{x}_1\right\rangle \geq \rho \left\lVert\boldsymbol{x}_1 - \boldsymbol{x}_2\right\rVert^2<br>$$</p>
+<p>串上一个柯西不等式得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>对函数稍加变形，有时共轭函数可以快速计算。比如</p>
+<div class="note info"><p><strong>定理 2.2.19.</strong> </p>
+<ul>
+<li>令 $a &gt; 0, b\in \mathbb{R}$，$g(x) &#x3D; af(x) + b$。则 $g^*(y) &#x3D; af^*(y &#x2F; a) - b$。</li>
+<li>令 $\mathbf{A}\in \mathbb{R}^{n\times n}$ 非奇异，$\boldsymbol{b}\in \mathbb{R}^n$，$g(\boldsymbol{x}) &#x3D; f(\mathbf{A}\boldsymbol{x} + \boldsymbol{b})$。则<br>$$<br>g^*(\boldsymbol{y}) &#x3D; f^*(\mathbf{A}^{-\top}\boldsymbol{y}) - \boldsymbol{b}^\top\mathbf{A}^{-\top}\boldsymbol{y}<br>$$</li>
+<li>若 $f(\boldsymbol{u}, \boldsymbol{v}) &#x3D; f_1(\boldsymbol{u}) + f_2(\boldsymbol{v})$，则这两个函数都凸，则<br>$$<br>f^*(\boldsymbol{w}, \boldsymbol{z}) &#x3D; f_1^*(\boldsymbol{w}) + f_2^*(\boldsymbol{z})<br>$$</li>
+</ul>
+</div>
+
+<p>都是验证即可。</p>
+<hr>
+<p>最后两个概念也是优化中十分常见的。</p>
+<div class="note success"><p><strong>定义 2.2.6（包络函数，近端函数）.</strong> 令 $f : \mathbb{R}^n\rightarrow (-\infty, +\infty]$ 是一个闭的恰当函数。对于任意的 $c &gt; 0$，可以定义包络函数 $\mathrm{Env}_c f$ 和近端函数 $\mathrm{Prox}_c f$ 如下：</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{Env}_c f(\boldsymbol{x}) &amp;&#x3D; \inf_{\boldsymbol{w}}\left(f(\boldsymbol{w}) + \frac{1}{2c}\left\lVert\boldsymbol{w} - \boldsymbol{x}\right\rVert_2^2\right) \\<br>\mathrm{Prox}_c f(\boldsymbol{x}) &amp;&#x3D; \arg \min_{\boldsymbol{w}} \left(f(\boldsymbol{w}) + \frac{1}{2c}\left\lVert\boldsymbol{w} - \boldsymbol{x}\right\rVert_2^2\right)<br>\end{aligned}<br>$$</p>
+</div>
+
+<p>注意到 $\boldsymbol{u} &#x3D; \mathrm{Prox}_c f(\boldsymbol{x})$ 等价于 $\frac 1c (\boldsymbol{x} - \boldsymbol{u}) \in \partial f(\boldsymbol{u})$，这是因为 $\boldsymbol{u}$ 是函数的全局最小值点等价于</p>
+<p>$$<br>\boldsymbol{0}\in \partial\left(f(\boldsymbol{u}) + \frac{1}{2c}\left\lVert\boldsymbol{u} - \boldsymbol{x}\right\rVert\right) &#x3D; \partial f(\boldsymbol{u}) - \frac{1}{c}(\boldsymbol{u} - \boldsymbol{x})<br>$$</p>
+<p>因此，直接把 $\boldsymbol{x}$ 变成 $\mathrm{Prox}_c f(\boldsymbol{x})$ 这样迭代，类似于某种共轭的梯度下降。至少容易证明这样迭代的二次变差之和收敛，如果配上 Kurdyka-Łojasiewicz 条件，甚至能证明一次变差之和收敛。这个结论暂时先跳过。</p>
+<p>你也可以对函数的输入各种变换，此时得到新函数的近端函数计算就是各种配方，这里没什么好说的。所以，近端函数和次微分的关系也给出如下结论：</p>
+<div class="note info"><p><strong>定理 2.2.20（近端函数的单调性）.</strong> 对于任意函数 $f$，$\mathrm{Prox}_c f(\boldsymbol{x})$ 具有如下单调性：</p>
+<p>$$<br>\left\langle\boldsymbol{x}_1 - \boldsymbol{x}_2, \boldsymbol{y}_1 - \boldsymbol{y}_2\right\rangle\geq 0, \quad \forall \boldsymbol{y}_i \in \mathrm{Prox}_c f(\boldsymbol{x}_i)<br>$$</p>
+</div>
+
+<blockquote>
+<p>当函数是凸函数时，这无非就是次梯度的单调性，非常平凡。但教材说是任意函数，我不知道怎么证明。</p>
+</blockquote>
+<p>另外，这两个函数是将函数光滑化的经典手段。我们有</p>
+<div class="note info"><p><strong>定理 2.2.21（包络函数的光滑性）.</strong> 对于任意的可微的恰当闭凸函数 $f$，$c &gt; 0$，有 $\mathrm{Env}_c f$ 是光滑的凸函数，其梯度为</p>
+<p>$$<br>\nabla \mathrm{Env}_c f(\boldsymbol{x}) &#x3D; \frac{1}{c}(\boldsymbol{x} - \mathrm{Prox}_c f(\boldsymbol{x}))<br>$$</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.2.22.</strong> 对于任意的恰当闭凸函数 $f$，$c &gt; 0$，则 $\mathrm{Prox}_c f$ 单值且连续。</p>
+</div>
+
+<div class="note info"><p><strong>定理 2.2.23.</strong> 若 $\boldsymbol{x}^*\in \arg\min_{\boldsymbol{x}} f(\boldsymbol{x})$，则 $\nabla \mathrm{Env}_c f(\boldsymbol{x}^*) &#x3D; \boldsymbol{0}$。</p>
+</div>
+
+<blockquote>
+<p>【FIXME】这三个暂时都不会证。但有了这些东西，对于非光滑函数，你可以对着 $\mathrm{Env}_c f$ 做梯度下降，最后也会走到最优点。</p>
+</blockquote>
+<p>最后是一个计算近端函数的手段：</p>
+<div class="note info"><p><strong>定理 2.2.24（Moreau Decomposition）.</strong> $\boldsymbol{x} &#x3D; \mathrm{Prox}_c f(\boldsymbol{x}) + c\mathrm{Prox}_{c^{-1}} f^*(c^{-1}\boldsymbol{x})$。</p>
+</div>
+
+<p><strong>证明.</strong> 令 $\boldsymbol{u} &#x3D; \mathrm{Prox}_c f(\boldsymbol{x})$。则有 $-c^{-1}(\boldsymbol{u} - \boldsymbol{x})\in \partial f(\boldsymbol{u})$。根据定理 2.2.16，有 $\boldsymbol{u}\in \partial f^*(-c^{-1}(\boldsymbol{u} - \boldsymbol{x}))$。反过来，这意味着</p>
+<p>$$<br>-c^{-1}(\boldsymbol{u} - \boldsymbol{x}) \in \mathrm{Prox}_{c^{-1}} f^*(c^{-1}\boldsymbol{x})<br>$$</p>
+<p>整理得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>比如用来计算范数的近端函数时，这东西就非常好用，因为范数的对偶函数非常简单。</p>
+<h1><span id="凸优化">凸优化</span></h1><h2><span id="无约束优化">无约束优化</span></h2><p>现在考虑以下问题：</p>
+<p>$$<br>\min_{\boldsymbol{x}} f(\boldsymbol{x})<br>$$</p>
+<p>其中 $f$ 是二次连续可微、有唯一最优点的下凸函数。根据费马原理，$\boldsymbol{x}^*$ 是最优点的充分必要条件是</p>
+<p>$$<br>\nabla f(\boldsymbol{x}^*) &#x3D; 0<br>$$</p>
+<p>在对以上问题进行数值计算的过程中，我们经常需要设计一个算法生成一系列点 $\boldsymbol{x}^{(0)}, \boldsymbol{x}^{(1)}, …$，使得 $f(\boldsymbol{x}^{(k)})\rightarrow p^* &#x3D; f(\boldsymbol{x}^*)$。我们容忍一定的误差，即只需要 $f(\boldsymbol{x}^{(k)}) - p^* \leq \varepsilon$。因为我们不知道 $p^*$，所以只能检查 $\left\lVert\nabla f(\boldsymbol{x}^{(k)})\right\rVert \leq \varepsilon$ 是否成立。这个条件叫做停止条件，对于强凸函数，这两个条件的误差只差一个常数。</p>
+<h3><span id="梯度下降">梯度下降</span></h3><p>最简单的一类优化算法是下降方法（Descent Method），其遵循如下范式：</p>
+<ol>
+<li>给定一个初始点 $\boldsymbol{x}$；</li>
+<li><strong>Do</strong></li>
+<li>$\qquad$ 决定一个方向 $\Delta \boldsymbol{x}$；</li>
+<li>$\qquad$ （线搜索）决定一个步长 $t$；</li>
+<li>$\qquad$ $\boldsymbol{x} \leftarrow \boldsymbol{x} + t\Delta \boldsymbol{x}$；</li>
+<li><strong>While</strong> 停止条件不成立。</li>
+</ol>
+<p>我们首先来看线搜索这个部分。</p>
+<div class="note "><p><strong>Exact Line Search.</strong> 令</p>
+<p>$$<br>t &#x3D; \arg\min_{s\geq 0} f(\boldsymbol{x} + s\Delta \boldsymbol{x})<br>$$</p>
+</div>
+
+<p>实践中，往往做不到这一点。因此常用 Inexact Line Search 来近似上述算法。一类 Inexact Line Search 被叫做回溯搜索法，其基本上服从如下的框架：取 $\alpha\in (0, 1), \beta\in (0, 1)$，</p>
+<ol>
+<li>$t\leftarrow 1$；</li>
+<li><strong>while</strong> 某条件 $(\star)$ 不成立</li>
+<li>$\qquad$ $t\leftarrow \beta t$。</li>
+</ol>
+<p>关于条件 $(\star)$ 的选取，有以下变种：</p>
+<div class="note "><p><strong>Armijo Rule.</strong> $(\star) : f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) + \alpha t\left\langle \nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle$</p>
+</div>
+
+<p>下图直观展示了这个规则的直觉：它尝试用一条直线去和 $f(\boldsymbol{x})$ 框出最小值。在 $0\rightarrow t_0$ 这个范围内，函数能得到足够的下降。考虑</p>
+<p><img src="/../picture/armijo-rule.png"></p>
+<p>为了避免步长过于短，还有以下的 Armijo-Goldstein 规则和 Armijo-Wolfe 规则：</p>
+<div class="note "><p><strong>Armijo-Goldstein Rule.</strong></p>
+<p>$$<br>(\star) : \begin{matrix}<br>   f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) + \alpha t\left\langle \nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle \\<br>   f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \geq f(\boldsymbol{x}) + (1 - \alpha) t\left\langle \nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle<br>\end{matrix}<br>$$</p>
+</div>
+
+<div class="note "><p><strong>Armijo-Wolfe Rule.</strong></p>
+<p>$$<br>(\star) : \begin{matrix}<br>   f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) + \alpha_1 t\left\langle \nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle \\<br>   \left\langle\nabla f(\boldsymbol{x} + t\Delta\boldsymbol{x}), \Delta\boldsymbol{x}\right\rangle \geq \alpha_2 \left\langle\nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle<br>\end{matrix}<br>$$</p>
+<p>第二行两边加绝对值得到强 Armijo-Wolfe 规则。</p>
+</div>
+
+<p>Wolfe Rule 通过限制梯度不能太小来阻止步长过小。</p>
+<p>另外一类选取步长的方法的直觉是两次 Descent 的时候，$\Delta \boldsymbol{x}$ 和 $\Delta \boldsymbol{g}$ 应当是成比例的。因此我们解这两个方程：</p>
+<p>$$<br>\min_{t &gt; 0}\left\lVert t\Delta \boldsymbol{g}^{k - 1}, \Delta \boldsymbol{x}^{k - 1}\right\rVert^2, \quad \min_{t &gt; 0}\left\lVert\Delta \boldsymbol{g}^{k - 1} - t^{-1}\Delta \boldsymbol{x}^{k - 1}\right\rVert^2<br>$$</p>
+<p>得到 Barzilai-Borwein 步长</p>
+<div class="note "><p><strong>Barzilai-Borwein 步长.</strong> 记 $\Delta \boldsymbol{x}^{k - 1} &#x3D; \boldsymbol{x}^k - \boldsymbol{x}^{k - 1}$，$\Delta\boldsymbol{g}^{k - 1} &#x3D; \nabla f(\boldsymbol{x}^{k}) - \nabla f(\boldsymbol{x}^{k - 1})$。令 $t$ 取以下二者之一：</p>
+<p>$$<br>t_{BB1, k} &#x3D; \frac{\left\langle\Delta \boldsymbol{x}^{k - 1}, \Delta \boldsymbol{g}^{k - 1}\right\rangle}{\left\lVert\Delta \boldsymbol{x}^{k - 1}\right\rVert^2}, \quad t_{BB2, k} &#x3D; \frac{\left\lVert\Delta \boldsymbol{x}^{k - 1}\right\rVert^2}{\left\langle\Delta \boldsymbol{x}^{k - 1}, \Delta \boldsymbol{g}^{k - 1}\right\rangle}<br>$$</p>
+<p>然后将其 clip 到 $[t_\min, t_\max]$ 之间。</p>
+</div>
+
+<p>而关于下降方法，最简明的方法是取负梯度 $\Delta \boldsymbol{x} &#x3D; -\nabla f(\boldsymbol{x})$。这样得到<strong>梯度下降法</strong>。</p>
+<p>现在，我们来分析梯度下降的收敛速率。一般情况下，我们习惯于对函数附加强凸、光滑的假设。对于这两条性质的应用，基本上是一切凸优化算法分析的起手式。这里进行一些推导。</p>
+<p>从函数强凸的定义出发</p>
+<p>$$<br>f(\boldsymbol{y}) \geq f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top(\boldsymbol{y} - \boldsymbol{x}) + \frac m2\left\lVert\boldsymbol{y} - \boldsymbol{x}\right\rVert_2^2<br>$$</p>
+<p>先代入 $\boldsymbol{y} &#x3D; \boldsymbol{x}^*$。等号右边是关于 $\boldsymbol{y}$ 有全局最小值的二次型，最小值点是 $\widetilde{\boldsymbol{y}} &#x3D; \boldsymbol{x} - (1&#x2F;m)\nabla f(\boldsymbol{x})$。代入得到</p>
+<p>$$<br>\boxed{<br>f(\boldsymbol{x}) - p^* \leq \frac{1}{2m}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2 } \label{eq:error_ub}<br>$$</p>
+<p>在从函数光滑出发。这首先给出 $\nabla^2 f(\boldsymbol{x}) \preceq M\mathbf{I}$，将函数展开到二阶拉格朗日余项之后用这个不等式放缩，得到这意味着</p>
+<p>$$<br>f(\boldsymbol{y}) \leq f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top(\boldsymbol{y} - \boldsymbol{x}) + \frac M2\left\lVert\boldsymbol{y} - \boldsymbol{x}\right\rVert_2^2<br>$$</p>
+<p>先取 $\boldsymbol{y}$ 最小化右边，再由 $p^* \leq f(\boldsymbol{y})$ 得到</p>
+<p>$$<br>\boxed{<br>f(\boldsymbol{x}) - p^*\geq \frac{1}{2M}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2 } \label{eq:error_lb}<br>$$</p>
+<p>对于梯度下降而言，有 $\boldsymbol{y} &#x3D; \boldsymbol{x} - t\nabla f(\boldsymbol{x})$。此时若定义 $\widetilde{f}(t) &#x3D; f(\boldsymbol{x} - t\nabla f(\boldsymbol{x}))$，便有</p>
+<p>$$<br>\widetilde{f}(t) \leq f(\boldsymbol{x}) + \left(\frac{Mt^2}{2} - t\right)\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2 \label{eq:gradient_descent_start}<br>$$</p>
+<div class="note info"><p><strong>定理 3.1.1.</strong> 假设 $f$ $m$-强凸，$M$-光滑，则使用 exact line search 的梯度下降中 $f(\boldsymbol{x}^k)$ 线性收敛于 $p^*$。</p>
+</div>
+
+<p><strong>证明.</strong> 从 $(\ref{eq:gradient_descent_start})$ 出发，先最小化右边再最小化左边立即得到</p>
+<p>$$<br>f(\boldsymbol{x}^{k}) \leq f(\boldsymbol{x}^{k - 1}) - \frac{1}{2M}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2<br>$$</p>
+<p>两边同时减去 $p^*$，然后应用式 $(\ref{eq:error_ub})$ 得到</p>
+<p>$$<br>f(\boldsymbol{x}^k) - p^* \leq \left(1 - \frac{m}{M}\right) (f(\boldsymbol{x}^{k - 1}) - p^*)<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note info"><p><strong>定理 3.1.2.</strong> 假设 $f$ $m$-强凸，$M$-光滑，使用 Armijo 规则做回溯先搜索的梯度下降。若初始步长 $t_0 \geq \frac{2(1 - \alpha)\beta}{M}$，则 $f(\boldsymbol{x}^k)$ 线性收敛于 $p^*$。</p>
+</div>
+
+<p><strong>证明.</strong> 从 $(\ref{eq:gradient_descent_start})$ 出发：对于任意的 $t$ 有</p>
+<p>$$<br>\widetilde{f}(t) \leq \widetilde{f}(0) - \left(\frac{Mt^2}{2} - t\right)\left\lVert\nabla f(\boldsymbol{x}_k)\right\rVert^2 \label{eq:armijo1}<br>$$</p>
+<p>假设回溯确实发生了至少一次，且 Armijo 规则给出的回溯搜索停止于 $\hat{t}$ 之时，必然有 </p>
+<p>$$<br>\begin{align}<br>\widetilde{f}(\hat{t}) &amp;\leq f(\boldsymbol{x}) - \alpha \hat{t}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2 \label{eq:armijo2} \\<br>\widetilde{f}(\hat{t} &#x2F; \beta) &amp;&gt; f(\boldsymbol{x}) - \alpha \hat{t} &#x2F; \beta \left\lVert\nabla f(\boldsymbol{x})\right\rVert^2 \label{eq:armijo3}<br>\end{align}<br>$$</p>
+<p>因此在 $(\ref{eq:armijo1})$ 中代入 $t &#x3D; \hat{t} &#x2F; \beta$，然后用 $(\ref{eq:armijo3})$ 放缩得到</p>
+<p>$$<br>\hat{t} \geq \frac{2(1 - \alpha)\beta}{M}<br>$$</p>
+<p>因此根据 $(\ref{eq:armijo2})$</p>
+<p>$$<br>f(\boldsymbol{x}^{k + 1}) \leq f(\boldsymbol{x}^{k}) - \frac{2\alpha(1 - \alpha)\beta}{M}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2<br>$$</p>
+<p>故技重施得证：</p>
+<p>$$<br>f(\boldsymbol{x}^{k + 1}) - p^* \leq \left(1 - \frac{4\alpha(1 - \alpha)\beta m}{M}\right)(f(\boldsymbol{x}^k) - p^*)<br>$$</p>
+<p>如果回溯没有发生，那么我们没有 $(\ref{eq:armijo3})$ 可用。但是回忆我们用这个式子只是想拿到一个步长的 lowerbound，因此只需要令 $t_0\geq \frac{2(1 - \alpha)\beta}{M}$，线性收敛便仍然成立。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 3.1.3.</strong> 假设 $f$ 凸，且 $M$-光滑，进行梯度下降时采用固定学习率，其中 $\alpha\in (0, 1 &#x2F; M]$，则 $f(\boldsymbol{x}^k)$ 以反比例曲线逼近 $f^*$。</p>
+</div>
+
+<p><strong>证明.</strong> 直接计算。</p>
+<p>$$<br>\begin{aligned}<br>f(\boldsymbol{x}^{k + 1}) &amp;&#x3D; f(\boldsymbol{x}^k - \alpha\nabla f(\boldsymbol{x}^k)) \\<br>&amp;\leq f(\boldsymbol{x}_k) - \alpha\left(1 - \frac{\alpha M}{2}\right)\left\lVert\nabla f(\boldsymbol{x}^k)\right\rVert^2 \\<br>&amp;\leq p^* + \left\langle \nabla f(\boldsymbol{x}^k), \boldsymbol{x}^k - \boldsymbol{x}^*\right\rangle - \frac{\alpha}{2} \left\lVert\nabla f(\boldsymbol{x}^k)\right\rVert^2 \\<br>&amp;&#x3D; p^* + \frac{1}{2\alpha}\left(\left\lVert\boldsymbol{x}^k - \boldsymbol{x}^*\right\rVert^2 - \left\lVert\boldsymbol{x}_k - \boldsymbol{x}^* - \alpha\nabla f(\boldsymbol{x}_k)\right\rVert^2\right) \\<br>&amp;&#x3D; p^* + \frac{1}{2\alpha}\left(\left\lVert\boldsymbol{x}_k - \boldsymbol{x}^*\right\rVert - \left\lVert\boldsymbol{x}_{k + 1} - \boldsymbol{x}^{*}\right\rVert^2\right)<br>\end{aligned}<br>$$</p>
+<p>如果每一步都造成 $f(\boldsymbol{x}^k)$ 下降，则有 </p>
+<p>$$<br>f(\boldsymbol{x}^k) - f^* \leq \frac{1}{k}\sum_{i &#x3D; 1}^k (f(\boldsymbol{x}_i) - f^*) \leq \frac{1}{2\alpha k}\left\lVert\boldsymbol{x}_0 - \boldsymbol{x}^*\right\rVert<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>定理 3 解释了我们在训 AI 时常见的 loss 曲线的成因。值得注意的是，无论是定理 3.1.1 还是定理 3.1.2，收敛常数中均可以看到 Hessian 矩阵的条件数 $M &#x2F; m$。矩阵条件数越小，收敛越快。</p>
+<hr>
+<p>最陡下降是梯度下降的一个变种。无论朝着什么方向下降，若步长比较小，有以下一阶近似 </p>
+<p>$$<br>f(\boldsymbol{x} + \boldsymbol{v}) \approx f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top \boldsymbol{v}<br>$$</p>
+<p>最陡下降是指对于某范数 $\left\lVert\cdot\right\rVert$，找一个在该范数下归一化的方向向量使得 $f(\boldsymbol{x})$ 下降最多。近似地，这个方向就是</p>
+<p>$$<br>\Delta \boldsymbol{x}_{nsd} &#x3D; \arg\min_{\boldsymbol{v}} \{ \nabla f(\boldsymbol{x})^\top \boldsymbol{v} : \left\lVert\boldsymbol{v}\right\rVert &#x3D; 1\}<br>$$</p>
+<p>方便起见，我们一般考虑记</p>
+<p>$$<br>\Delta \boldsymbol{x}_{sd} &#x3D; \left\lVert\nabla f(\boldsymbol{x})\right\rVert^* \Delta \boldsymbol{x}_{sd}<br>$$</p>
+<p>来模拟梯度下降的方向选取（当 $\left\lVert\cdot\right\rVert$ 是欧几里得范数时，$\Delta \boldsymbol{x}_{sd}$ 就是 $-\nabla f(\boldsymbol{x})$）。每一步梯度下降造成的 $f(\boldsymbol{x})$ 的变化近似是 $-\left\lVert\nabla f(\boldsymbol{x})\right\rVert_*^2$。</p>
+<p>这里有一些特例。</p>
+<div class="note "><p><strong>二次范数最陡下降.</strong> 对于正定矩阵 $\mathbf{P}$，考虑它诱导出的范数 $\left\lVert\boldsymbol{x}\right\rVert_{\mathbf{P}} &#x3D; (\boldsymbol{x}^\top \mathbf{P}\boldsymbol{x})^{1 &#x2F; 2} &#x3D; \left\lVert\mathbf{P}^{1 &#x2F; 2}\boldsymbol{x}\right\rVert_2$。</p>
+</div>
+
+<p>在这个范数下面做最陡下降有</p>
+<p>$$<br>\Delta \boldsymbol{x}_{sd} &#x3D; -\mathbf{P}^{-1}\nabla f(\boldsymbol{x})<br>$$</p>
+<p>容易发现，这就等价于做换元 $\boldsymbol{x}’ &#x3D; \mathbf{P}^{1 &#x2F; 2}\boldsymbol{x}$，然后对于 $f(\boldsymbol{x}’)$ 做正常的梯度下降。如果知道 $\boldsymbol{x}^*$ 附近的 Hessian 基本上是 $\mathbf{H}$，那么令 $\mathbf{P} &#x3D; \mathbf{H}$ 可以让矩阵条件数接近 $1$。</p>
+<div class="note "><p><strong>$\ell_1$ 范数最陡下降.</strong> 考虑取 $\left\lVert\cdot\right\rVert &#x3D; \left\lVert\boldsymbol{x}\right\rVert_1$。</p>
+</div>
+
+<p>令 $i$ 是 $\boldsymbol{x}$ 绝对值最大的分量。显然有</p>
+<p>$$<br>\Delta \boldsymbol{x}_{sd} &#x3D; -\frac{\partial f}{\partial x_i} \boldsymbol{e}_i<br>$$</p>
+<p>这种最陡下降总是沿着坐标轴方向，类似于 Coordinate Descent。好处是可能这样线上的函数形式会比较简明，方便做 Exact Line Search。</p>
+<h3><span id="牛顿法">牛顿法</span></h3><p>如果我们有函数的二阶 oracle，则可以对函数值做如下的二阶近似：</p>
+<p>$$<br>f(\boldsymbol{x}’)\approx f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top (\boldsymbol{x}’ - \boldsymbol{x}) + \frac{1}{2}(\boldsymbol{x}’ - \boldsymbol{x})^\top \nabla^2 f(\boldsymbol{x}) (\boldsymbol{x}’ - \boldsymbol{x})<br>$$</p>
+<p>那么，每次迭代将 $\boldsymbol{x}$ 换成以上函数的 Minimizer，也是优化的手段之一。该 Minimizer 的解析解显然是</p>
+<p>$$<br>\boldsymbol{x}’ &#x3D; \boldsymbol{x} - (\nabla^2 f(\boldsymbol{x}))^{-1} \nabla f(\boldsymbol{x})<br>$$</p>
+<p>这种迭代称为牛顿迭代法。本节中，记 $\Delta \boldsymbol{x} &#x3D; -(\nabla^2 f(\boldsymbol{x}))^{-1} \nabla f(\boldsymbol{x})$。值得说明的是，可以证明：</p>
+<ol>
+<li>对于非凸函数，牛顿迭代法未必是一种下降方法（保证迭代中函数值递减）；</li>
+<li>即便是对于凸函数，牛顿迭代法也未必是下降方法。</li>
+<li>对于任意 $f\in \mathrm{C}^3$，其 Hessian 处处非奇异，$\boldsymbol{x}^*$ 是一个一阶驻点（$\nabla f(\boldsymbol{x}^*) &#x3D; 0$），则若选取的 $\boldsymbol{x}^0$ 充分靠近 $\boldsymbol{x}^*$，便有 $\boldsymbol{x}^k$ 以至少 $r &#x3D; 2$ 阶的速率收敛于 $\boldsymbol{x}^*$。</li>
+</ol>
+<p>在凸优化中，附加一些条件也可以证明牛顿迭代收敛。因为牛顿迭代的直觉就是把函数近似成二次函数，所以如果函数长得像二次函数，牛顿迭代跑的就快，所以我们假设二阶导 $L$-Lipschitz 连续。为了让连续性发挥作用，还是需要让初始点接近于</p>
+<div class="note info"><p><strong>定理 3.1.4.</strong> 设 $f$ $m$-强凸，二阶导 $L$-Lipschitz 连续，即</p>
+<p>$$<br>\left\lVert\nabla^2 f(\boldsymbol{x}) - \nabla^2 f(\boldsymbol{y})\right\rVert_F \leq L\left\lVert\boldsymbol{x} - \boldsymbol{y}\right\rVert_2<br>$$</p>
+<p>则对于任意与 $\boldsymbol{x}^*$ 充分接近的 $\boldsymbol{x}^0$，牛顿迭代以至少 $2$ 阶的速率收敛。</p>
+</div>
+
+<p><strong>证明.</strong> 因为有强凸条件，所以我们可以看梯度的收敛速率。分析二阶算法有如下常见的起手式：将另一个点上的梯度改成在线上的积分。</p>
+<p>$$<br>\begin{aligned}<br>\left\lVert\nabla f(\boldsymbol{x}’)\right\rVert &amp;&#x3D; \left\lVert\int_0^1 \nabla^2 f(\boldsymbol{x} + t\Delta \boldsymbol{x})\Delta \boldsymbol{x}\mathrm{d}t + \nabla f(\boldsymbol{x})\right\rVert \\<br>&amp;&#x3D; \left\lVert\int_0^1 (\nabla^2 f(\boldsymbol{x} + t\Delta \boldsymbol{x}) - \nabla^2 f(\boldsymbol{x}))\Delta \boldsymbol{x}\mathrm{d}t\right\rVert \\<br>&amp;\leq \frac{L}{2}\left\lVert\Delta \boldsymbol{x}\right\rVert_2^2 \\<br>&amp;\leq \frac{L}{2m^2} \left\lVert\nabla f(\boldsymbol{x})\right\rVert^2<br>\end{aligned}<br>$$</p>
+<p>第三行使用了柯西不等式和 von-Neumann 迹不等式。充分近是要求一开始 $\nabla f(\boldsymbol{x})$ 不能太大。<div style="text-align: right">$\blacksquare$</div></p>
+<p>我们发现，牛顿法也给出了一个方向 $\Delta \boldsymbol{x}$。是否可以用它来做一个下降算法？这还需要一些分析。首先我们有</p>
+<div class="note info"><p><strong>引理 3.1.5.</strong> 给定目标函数 $f$。若其 Hessian 处处正定，则对于任意不是一阶驻点的 $\boldsymbol{x}$，$\Delta \boldsymbol{x}$ 都是一个下降方向。</p>
+</div>
+
+<p><strong>证明.</strong> 计算该方向的方向导数可知 </p>
+<p>$$<br>\nabla f(\boldsymbol{x})^\top \Delta \boldsymbol{x} &#x3D; -\nabla f(\boldsymbol{x})^\top (\nabla^2 f(\boldsymbol{x}))^{-1} f(\boldsymbol{x}) &lt; 0<br>$$</p>
+<p>因此这确实是一个下降方向。<div style="text-align: right">$\blacksquare$</div></p>
+<p>于是，我们确实可以拿着 $\Delta \boldsymbol{x}$ 用线搜索找到一个 $\alpha_k$，然后做下降算法。这样得到的算法叫做<strong>阻尼牛顿法</strong>。可以证明，用阻尼牛顿法做下降，其收敛有如下保证：</p>
+<div class="note info"><p><strong>定理 3.1.6.</strong> 设 $f$ $m$-强凸，$M$ 光滑，其 Hessian $L$-Lipschitz 连续。做阻尼牛顿迭代，用 Armijo 规则做回溯线搜索，则存在 $\eta\in (m^2 &#x2F; L], \gamma &gt; 0$ 使得</p>
+<ul>
+<li>若 $\left\lVert\nabla f(\boldsymbol{x}^{k})\right\rVert \geq \eta$，则 $f(\boldsymbol{x}^{k + 1}) - f(\boldsymbol{x}^k) \leq -\gamma$；</li>
+<li>若 $\left\lVert\nabla f(\boldsymbol{x}^k)\right\rVert_2 \leq \eta$，则每次线搜索都会选择 $t &#x3D; 1$，算法二次收敛。</li>
+</ul>
+</div>
+
+<p><strong>证明.</strong> 记 $\lambda^2 (\boldsymbol{x}) &#x3D; -\left\langle\nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle$，这个量称为 Newton Decrement。显然 $\lambda^2(\boldsymbol{x}) \geq m\left\lVert\Delta \boldsymbol{x}\right\rVert^2$。$M$-光滑条件给出</p>
+<p>$$<br>f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) + t\left\langle\nabla f(\boldsymbol{x}), \Delta \boldsymbol{x}\right\rangle + \frac{Mt^2}{2}\left\lVert\Delta \boldsymbol{x}_{nt}\right\rVert^2 \leq f(\boldsymbol{x}) + \left(\frac{Mt^2}{2m} - t\right)\lambda^2(\boldsymbol{x})<br>$$</p>
+<p>Armijo 规则给出的终止条件是 $f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) - \alpha t \lambda^2(\boldsymbol{x})$。在上式中代入 $t &#x3D; m &#x2F; M$ 得到</p>
+<p>$$<br>f(\boldsymbol{x} + t\Delta \boldsymbol{x}) \leq f(\boldsymbol{x}) - \frac{m}{2M}\lambda^2(\boldsymbol{x}) \leq f(\boldsymbol{x}) - \alpha t\lambda^2(\boldsymbol{x})<br>$$</p>
+<p>因此对于任意的 $t \leq m &#x2F; M$，算法不会继续回溯。因此，本步算法决定的步长一定满足 $t &gt; \beta m &#x2F; M$。于是，Armijo 规则表明</p>
+<p>$$<br>\begin{aligned}<br>f(\boldsymbol{x} + t\Delta \boldsymbol{x}) - f(\boldsymbol{x}) &amp;\leq -\alpha t\lambda^2 (\boldsymbol{x}) \leq -\alpha\beta \frac{m}{M}\lambda^2(\boldsymbol{x}) \\<br>&amp;\leq \alpha\beta\frac{m}{M^2}\left\lVert \nabla f(\boldsymbol{x}) \right\rVert^2 \leq -\alpha\beta \eta^2 \frac{m}{M^2}<br>\end{aligned}<br>$$</p>
+<p>因此对于任意的 $\eta$ 都可以取到对应的 $\gamma &#x3D; \alpha\beta\eta^2 m &#x2F; M^2$。至于 $\eta$ 的选择，用附录定理 B.2 可以算出取类似于 $\min(m^2 &#x2F; L, m^2 &#x2F; M^2)$ 之类的东西即可。<div style="text-align: right">$\blacksquare$</div></p>
+<h3><span id="牛顿法的改进">牛顿法的改进</span></h3><p>牛顿法主要有以下几个问题：</p>
+<ol>
+<li>Hessian 矩阵不正定的时候，收敛性没有任何保障。</li>
+<li>二阶 oracle 开销大。</li>
+<li>Hessian 求逆开销大。</li>
+</ol>
+<p>本节展示几种改进牛顿法的方法。</p>
+<hr>
+<p><strong>处理 Hessian 不正定.</strong> 第一种是最直接的的修正函数技术，考虑每一步都用二次函数近似并优化</p>
+<p>$$<br>f(\boldsymbol{x}) + \frac{\mu_k}{2}\left\lVert\boldsymbol{x} - \boldsymbol{x}^k\right\rVert^2<br>$$</p>
+<p>这样推出的阻尼牛顿法式子是</p>
+<p>$$<br>\boldsymbol{x}^{k + 1} &#x3D; \boldsymbol{x}^k - \alpha_k (\nabla^2 f(\boldsymbol{x}^k) + \mu_k\mathbf{I})^{-1}\nabla f(\boldsymbol{x}^k)<br>$$</p>
+<p>对着这个式子迭代的算法叫做牛顿迭代的 <strong>Levenberg-Marquardt 修正</strong>。注意 $\mu_k \rightarrow 0$ 的时候这就是牛顿迭代，$\mu_k \rightarrow \infty$ 时这就是梯度下降。因此实践中，我们需要 $\mu_k$ 足够大来给出下降方向，但是又不希望它过大使得算法丢失牛顿迭代的快速收敛，于是这个值一般是现场决定的（一开始设置为一个很小的值，然后缓慢放大知道给出下降方向）。</p>
+<p>优化中一种常见的问题是最小二乘拟合问题。给定一堆数据点，用某格式的函数拟合这些数据，可以抽象成以下问题：给定函数 $\boldsymbol{r}: \mathbb{R}^n\rightarrow \mathbb{R}^m$，求</p>
+<p>$$<br>\min_{\boldsymbol{x}}\frac 12 \boldsymbol{r}(\boldsymbol{x})^\top \boldsymbol{r}(\boldsymbol{x})<br>$$</p>
+<p>求其前两阶导数得到</p>
+<p>$$<br>\begin{aligned}<br>\nabla f(\boldsymbol{x}) &amp;&#x3D; \mathbf{J}(\boldsymbol{x})^\top \boldsymbol{r}(\boldsymbol{x}) \\<br>\nabla^2 f(\boldsymbol{x}) &amp;&#x3D; \mathbf{J}^\top \mathbf{J} + \mathbf{S}, \qquad \mathrm{where}~\mathbf{J} &#x3D; \sum_{i &#x3D; 1}^m r_i\nabla^2 r_i<br>\end{aligned}<br>$$</p>
+<p>这个 $\mathbf{S}$ 不一定是半正定的。但是实践中可以发现它有时非常小。因此我们直接将其忽略，得到如下迭代：</p>
+<p>$$<br>\boldsymbol{x}^{k + 1} &#x3D; \boldsymbol{x}^k - (\mathbf{J}(\boldsymbol{x}^k)^\top \mathbf{J}(\boldsymbol{x}^k))^{-1}\mathbf{J}(\boldsymbol{x}^k)^\top \boldsymbol{r}(\boldsymbol{x}^k)<br>$$</p>
+<p>显然只要 Jacobian 满秩，这便是一个下降方向。这种做法称为 <strong>Gauss-Newton 法</strong>。</p>
+<hr>
+<p><strong>避免算 Hessian.</strong> 本节所述方法称为共轭方向法。它的直觉如下：Newton 法是每次用一个二次函数近似函数的邻域，然后跳到最优点的解析解。但是我们不想求 Hessian，因此拿不到这个解析解。于是，我们考虑用下降算法加精确线搜索来解这个二次函数的最优点。一般来说，共轭方向法跑得比梯度下降快，但是跑不过牛顿迭代。</p>
+<p>首先考虑用梯度下降求二次型最小值的理论。直觉上，二次型梯度下降过程中，如果下降的方向做仿射变换 $\boldsymbol{x}\mapsto \boldsymbol{Q}^{1&#x2F;2}\boldsymbol{x}$ 之后都是正交的（你走到一条线的谷底之后，要垂直走出这条线），这会给出下降的次数定然不超过维度。</p>
+<div class="note success"><p><strong>定义 3.1.1.</strong> 设 $\mathbf{Q}$ 是一个实对称矩阵。称 $\boldsymbol{d}^0, …, \boldsymbol{d}^m$ 是 $\mathbf{Q}$-共轭的，若对于任意 $i\ne j$，都有 </p>
+<p>$$<br>\boldsymbol{d}^{i\top}\mathbf{Q}\boldsymbol{d}^j &#x3D; 0<br>$$</p>
+</div>
+
+<p>很显然，如果 $\mathbf{Q}$ 是正定矩阵，那么 $\mathbf{Q}$-共轭可以推出 $\boldsymbol{d}$ 线性无关和 $\mathbf{Q}^{1&#x2F;2}\boldsymbol{d}^i$ 正交。假如我们现在要优化一个正定二次型</p>
+<p>$$<br>f(\boldsymbol{x}) &#x3D; \frac 12 \boldsymbol{x}^\top \mathbf{Q}\boldsymbol{x} - \boldsymbol{x}^\top \boldsymbol{b}<br>$$</p>
+<p>对着我们的直觉，可以算出这样一个下降算法的迭代过程：初始点为 $\boldsymbol{x}^0$，令 $\boldsymbol{g}^i &#x3D; \nabla f(\boldsymbol{x}^i)$：</p>
+<p>$$<br>\begin{aligned}<br>   \boldsymbol{x}^{k + 1} &#x3D; \boldsymbol{x}^k + \alpha_k \boldsymbol{d}^k, \text{ where } &amp;<br>   \alpha_k &#x3D; -\frac{\boldsymbol{g}^{k\top}\boldsymbol{d}^k}{\boldsymbol{d}^{k\top}\mathbf{Q}\boldsymbol{d}^{k}} \\<br>   &amp; \boldsymbol{d}^{k + 1} &#x3D; -\boldsymbol{g}^{k + 1} + \beta \boldsymbol{d}^k \\<br>   &amp; \beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}\mathbf{Q}\boldsymbol{d}^k}{\boldsymbol{d}^{k\top}\mathbf{Q}\boldsymbol{d}^k}<br>\end{aligned}<br>$$</p>
+<p>这里，$\alpha$ 就是对应的 minimizer，$\boldsymbol{d}$ 这里是先取 $-\boldsymbol{g}$ 作为下降方向，然后 Schmidt 正交化。容易同时归纳证明：</p>
+<div class="note info"><p><strong>定理 3.1.7.</strong> 在上述迭代中，有</p>
+<ol>
+<li>若 $\boldsymbol{d}^0, …, \boldsymbol{d}^k$ 都是 $\mathbf{Q}$-共轭的，则对于 $i &#x3D; 0, …, k$，都有 $\boldsymbol{g}^{(k + 1)^\top}\boldsymbol{d}^i &#x3D; 0$；</li>
+<li>$\boldsymbol{d}^0, …, \boldsymbol{d}^{(k + 1)}$ 是 $\mathbf{Q}$-共轭的。</li>
+</ol>
+</div>
+
+<p>对于未知形式的凸函数，我们需要把式子里的 $\mathbf{Q}$ 删掉。注意这东西只出现在 $\alpha_k, \beta_k$ 中。而我们知道 $\alpha_k$ 是 minimizer，$\beta_k$ 是做 Schmidt 正交化用的参数。在拓展到一般函数之后，$\alpha_k$ 用 line search 给出即可。我们只需要考虑 $\beta_k$ 的求法。当函数非凸的时候，不一定 $n$ 步能够找到解。所以这时候我们不追求完全的正交化，只要在函数是二次型时，能够模拟原来的情况即可。回忆</p>
+<p>$$<br>\beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}\mathbf{Q}\boldsymbol{d}^k}{\boldsymbol{d}^{k\top}\mathbf{Q}\boldsymbol{d}^k}<br>$$</p>
+<p>有以下几种近似：</p>
+<div class="note "><p><strong>Hestenes-Stiefel 公式.</strong> 注意在二次型优化中 $\mathbf{Q}\boldsymbol{d}^k &#x3D; (\boldsymbol{g}^{k + 1} - \boldsymbol{g}^k) &#x2F; \alpha_k$。因此可以令</p>
+<p>$$<br>\beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}(\boldsymbol{g}^{k + 1} - \boldsymbol{g}^k)}{\boldsymbol{d}^{k\top}(\boldsymbol{g}^{k + 1} - \boldsymbol{g}^k)}<br>$$</p>
+</div>
+
+<div class="note "><p><strong>Polak-Ribiere 公式.</strong> 注意在二次型优化中 $\boldsymbol{d}^{k\top}\boldsymbol{g}^{k + 1} &#x3D; \boldsymbol{0}, \boldsymbol{d}^{k\top}\boldsymbol{g}^k &#x3D; \boldsymbol{d}^k\boldsymbol{g}^k$，因此可以令</p>
+<p>$$<br>\beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}(\boldsymbol{g}^{k + 1} - \boldsymbol{g}^k)}{\boldsymbol{g}^{k\top}\boldsymbol{g}^k}<br>$$</p>
+</div>
+
+<div class="note "><p><strong>Fletcher-Reeves 公式.</strong> 注意在二次型优化中 $\boldsymbol{g}^{k\top}\boldsymbol{g}^{k + 1} &#x3D; 0$。因此可以令</p>
+<p>$$<br>\beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}\boldsymbol{g}^{k + 1}}{\boldsymbol{g}^{k\top}\boldsymbol{g}^k}<br>$$</p>
+<p>在 Fletcher-Reeves 公式的基础上还可以拿到 <strong>Dai-Yuan 公式</strong>：</p>
+<p>$$<br>\beta_k &#x3D; \frac{\boldsymbol{g}^{(k + 1)\top}\boldsymbol{g}^{k + 1}}{\boldsymbol{g}^{k\top}(\boldsymbol{g}^k - \boldsymbol{g}^{k + 1})}<br>$$</p>
+</div>
+
+<p>经验上，有 </p>
+<ol>
+<li>过几轮就重置下降方向为 $\boldsymbol{g}$。</li>
+<li>如果 line search 是不精确的，最好不要做更多近似。使用 Hestenes-Stiefel 公式。</li>
+<li>公式的选择和目标函数强相关。</li>
+</ol>
+<hr>
+<p><strong>近似 Hessian 的逆.</strong> 这一系列方法称为半牛顿（Quasi-Newton）方法。回忆阻尼牛顿法的迭代：</p>
+<p>$$<br>\boldsymbol{x}^{k + 1} &#x3D; \boldsymbol{x}^k - \alpha_k(\nabla^2 f(\boldsymbol{x}^k))^{-1} \boldsymbol{g}^k<br>$$</p>
+<p>半牛顿法用一列 $\mathbf{H}_k$ 来近似 Hessian 的逆。此时要求：</p>
+<ol>
+<li>$\mathbf{H}_k$ 可以快速递推；</li>
+<li>$-\mathbf{H}_k\boldsymbol{g}$ 必须是一个下降方向。当然只要 $\mathbf{H}_k$ 正定，这个必然成立。</li>
+</ol>
+<p>考虑一个 Hessian 为 $\mathbf{Q}$ 的二次型。那么显然有（$\Delta \boldsymbol{x}^i &#x3D; \boldsymbol{x}^{i + 1} - \boldsymbol{x}^i$）</p>
+<p>$$<br>\Delta \boldsymbol{g}^i &#x3D; \mathbf{Q}\Delta \boldsymbol{x}^i, \qquad \mathbf{Q}^{-1}\Delta \boldsymbol{g}^{i} &#x3D; \Delta \boldsymbol{x}^i<br>$$</p>
+<p>这个两个条件分别叫做“正割条件”（secant condition）和“逆正割条件”（inverse secant condition）。为了模拟这个条件，我们对 $\mathbf{H}_k$ 提出以下要求：$\mathbf{H}_k\Delta \boldsymbol{g}^i &#x3D; \Delta \boldsymbol{x}^i$。因此，所谓的半牛顿方法是具有如下形式的下降算法：</p>
+<ol>
+<li>第 $k$ 步的下降方向 $\boldsymbol{d} &#x3D; -\mathbf{H}_k\boldsymbol{g}^k$。</li>
+<li>$\alpha_k$ 由线搜索给出。</li>
+<li>$\boldsymbol{x}^{k + 1} &#x3D; \boldsymbol{x}^k + \alpha\boldsymbol{d}^k$。</li>
+</ol>
+<p>其中 $\mathbf{H}_k$ 都是对称矩阵，且满足逆正割条件。</p>
+<p>如果用半牛顿法来求解二次函数，有如下定理：</p>
+<div class="note info"><p><strong>定理 3.1.8.</strong> 考虑求解一个 Hessian 是 $\mathbf{Q}\in \mathbb{S}^n_{++}$ 的二次型。对于任意逆牛顿算法，有 $\boldsymbol{d}^0, …, \boldsymbol{d}^{k + 1}$ 都是 $\mathbf{Q}$-共轭的。</p>
+</div>
+
+<p><strong>证明.</strong> 施归纳于 $k$ 有 </p>
+<p>$$<br>\boldsymbol{d}^{(k+1)\top}\mathbf{Q}\boldsymbol{d}^{i} &#x3D; -\frac{1}{\alpha_i}\boldsymbol{g}^{(k+1)\top}\mathbf{H}_{k+1}\mathbf{Q}\Delta\boldsymbol{x}^{(i)} &#x3D; -\frac{1}{\alpha_i}\boldsymbol{g}^{(k + 1)\top}\Delta \boldsymbol{x}^{i} &#x3D; \boldsymbol{g}^{(k + 1)\top}\boldsymbol{d}^i<br>$$</p>
+<p>这里你得同时归纳一个定理 3.1.7 的第一条一样的东西，然后就可以得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>于是我们知道了，$\mathbf{H}_k$ 具有相当的自由度，唯独满足逆正割条件。我们尝试给出一些递推式。</p>
+<div class="note "><p><strong>秩 1 修正公式.</strong> 考虑对 $\mathbf{H}_k$ 做秩为 $1$ 的修正来完成递推。</p>
+</div>
+
+<p>设 $\mathbf{H}_{k + 1} &#x3D; \mathbf{H}_k + a_k\boldsymbol{z}^k\boldsymbol{z}^{k\top}$。那么逆正割条件在 $i &#x3D; k$ 时给出</p>
+<p>$$<br>(\mathbf{H}_k + a_k\boldsymbol{z}^k\boldsymbol{z}^{k\top})\Delta\boldsymbol{g}^k &#x3D; \Delta \boldsymbol{x}^k<br>$$</p>
+<p>首先决定 $\boldsymbol{z}^k$ 的方向。显然它的方向是 $\Delta \boldsymbol{x}^k - \mathbf{H}_k\Delta\boldsymbol{g}^k$，然后把 $a_k$ 算出来就行。总之可以得到</p>
+<p>$$<br>\mathbf{H}_{k + 1} &#x3D; \mathbf{H}_k + \frac{(\Delta \boldsymbol{x}^k - \mathbf{H}_k\Delta\boldsymbol{g}^k)(\Delta \boldsymbol{x}^k - \mathbf{H}_k\Delta\boldsymbol{g}^k)^\top}{\Delta \boldsymbol{g}^{k\top}(\Delta \boldsymbol{x}^k - \mathbf{H}_k\Delta \boldsymbol{g}^k)}<br>$$</p>
+<p>进一步，可以归纳证明，如果用这个递推式给出的 $\mathbf{H}$ 去解二次型，那么 $\mathbf{H}_k$ 确实是满足逆正割条件。但是，它不一定是正定的。反例广泛存在。</p>
+<div class="note "><p><strong>秩 2 修正公式.</strong> 考虑对 $\mathbf{H}_k$ 做秩为 $2$ 的修正得到 $\mathbf{H}_{k + 1}$。</p>
+</div>
+
+<p>逆正割条件给出</p>
+<p>$$<br>(\mathbf{H}_{k} + a\boldsymbol{u}\boldsymbol{u}^\top + b\boldsymbol{v}\boldsymbol{v}^\top)\Delta \boldsymbol{g}^k &#x3D; \Delta \boldsymbol{x}^k<br>$$</p>
+<p>这里自由度比较非常大，只要 $\boldsymbol{u}, \boldsymbol{v}$ 能线性表出 $\mathbf{H}_{k}\Delta \boldsymbol{g} - \Delta \boldsymbol{x}$ 即可。我们不妨就让 $\boldsymbol{u} &#x3D; \Delta \boldsymbol{x}, \boldsymbol{v} &#x3D; \mathbf{H}_k\Delta \boldsymbol{g}^k$，得到递推式</p>
+<p>$$<br>\mathbf{H}_{k + 1} &#x3D; \mathbf{H}_k + \frac{\Delta \boldsymbol{x}^k\Delta \boldsymbol{x}^{k\top}}{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k} - \frac{(\mathbf{H}_k\Delta\boldsymbol{g}^k)(\mathbf{H}_k\Delta\boldsymbol{g}^k)^\top}{\Delta \boldsymbol{g}^{k\top}\mathbf{H}_k\Delta \boldsymbol{g}^k}<br>$$</p>
+<p>用这个递推式，线搜索使用精确线搜索，得到的半牛顿算法，称为 <strong>Davidon-Fletcher-Powell 算法</strong>。</p>
+<div class="note info"><p><strong>定理 3.1.9.</strong> 将 DFP 算法应用于 Hessian 为 $\mathbf{Q}$ 的二次型，所得 $\mathbf{H}_k$ 满足逆正割条件。</p>
+</div>
+
+<p><strong>证明.</strong> 验证即可。施归纳于 $k$ 得到 </p>
+<p>$$<br>\begin{aligned}<br>\mathbf{H}_{k + 1}\Delta \boldsymbol{g}^i &amp;&#x3D; \mathbf{H}_k\Delta \boldsymbol{g}^i + \frac{\Delta \boldsymbol{x}^k}{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k}\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^i - \frac{(\mathbf{H}_k\Delta\boldsymbol{g}^k)}{\Delta \boldsymbol{g}^{k\top}\mathbf{H}_k\Delta \boldsymbol{g}^k}\Delta\boldsymbol{g}^{k\top}\mathbf{H}_k\Delta \boldsymbol{g}^i \\<br>&amp;&#x3D; \Delta \boldsymbol{x}^i + \frac{\Delta \boldsymbol{x}^k }{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k}\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^i - \frac{(\mathbf{H}_k\Delta\boldsymbol{g}^k)}{\Delta \boldsymbol{g}^{k\top}\mathbf{H}_k\Delta \boldsymbol{g}^k}\Delta\boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^i<br>\end{aligned}<br>$$</p>
+<p>接下来我们知道</p>
+<p>$$<br>\Delta \boldsymbol{x}^{i\top}\Delta \boldsymbol{g}^i &#x3D; \Delta \boldsymbol{x}^{i\top}\mathbf{Q}\Delta \boldsymbol{x}^j\propto \boldsymbol{d}^{i\top}\mathbf{Q}\boldsymbol{d}^j &#x3D; 0<br>$$</p>
+<p>后两项都是 $0$。得证。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 3.1.10.</strong> 将 DFP 算法应用于二次型，若 $\mathbf{H}_k$ 正定，那么 $\mathbf{H}_{k + 1}$ 也是。</p>
+</div>
+
+<p><strong>证明.</strong> 首先简单计算得到</p>
+<p>$$<br>\boldsymbol{x}^\top \mathbf{H}_{k + 1}\boldsymbol{x} &#x3D; \boldsymbol{x}^\top \mathbf{H}_{k}\boldsymbol{x} + \frac{(\boldsymbol{x}^\top\Delta \boldsymbol{x}^k)^2}{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k} - \frac{(\boldsymbol{x}^\top \mathbf{H}^k \Delta \boldsymbol{g}^k)^2}{\Delta \boldsymbol{g}^{k\top}\mathbf{H}_k\Delta \boldsymbol{g}^k}<br>$$</p>
+<p>因为 $\mathbf{H}_k$ 正定，可以定义 $\boldsymbol{a} &#x3D; \mathbf{H}^{1&#x2F;2}\boldsymbol{x}, \boldsymbol{b} &#x3D; \mathbf{H}^{1&#x2F;2}\Delta \boldsymbol{g}^k$。那么上述式子等于</p>
+<p>$$<br>\frac{\left\lVert\boldsymbol{a}\right\rVert^2\left\lVert\boldsymbol{b}\right\rVert^2 - (\left\langle \boldsymbol{a}, \boldsymbol{b}\right\rangle)^2}{\left\lVert\boldsymbol{b}\right\rVert^2} + \frac{(\boldsymbol{x}^\top\Delta \boldsymbol{x}^k)^2}{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k}<br>$$</p>
+<p>前半部分根据柯西不等式一定大于等于 $0$。对于后半部分，着重分析分子。有 </p>
+<p>$$<br>\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^l &#x3D; \alpha_k\boldsymbol{d}^{k\top}\boldsymbol{g}^{k + 1} - \Delta \boldsymbol{x}^{k\top}\boldsymbol{g}^k &#x3D;  - \Delta \boldsymbol{x}^{k\top}\boldsymbol{g}^k &#x3D; \alpha_k \boldsymbol{g}^{k\top}\mathbf{H}_k \boldsymbol{g}^k \geq 0<br>$$</p>
+<p>因此后一项也是正数，证毕。<div style="text-align: right">$\blacksquare$</div></p>
+<p>实践中，在求解非二次型问题时 DFP 算法经常卡住，因为 $\mathbf{H}_k$ 趋向不可逆，数值性质不好。</p>
+<div class="note "><p><strong>Broyden-Fletcher-Goldfarb-Shanno 算法.</strong> 考虑用秩 2 修正公式维护 $\mathbf{Q}$ 的近似值 $\mathbf{B}_k$，然后求 $\mathbf{H}_k &#x3D; \mathbf{B}^{-1}_k$。</p>
+</div>
+
+<p>我们首先考虑用秩 2 修正公式递推一列复合正割条件的 $\mathbf{B}$。有</p>
+<p>$$<br>\mathbf{B}_{k + 1} &#x3D; \mathbf{B}_k + \frac{\Delta \boldsymbol{g}^k\Delta \boldsymbol{g}^{k\top}}{\Delta \boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^k} - \frac{(\mathbf{B}_k\Delta\boldsymbol{x}^k)(\mathbf{B}_k\Delta\boldsymbol{x}^k)^\top}{\Delta \boldsymbol{x}^{k\top}\mathbf{B}_k\Delta \boldsymbol{x}^k}<br>$$</p>
+<p>这里我们对 $\mathbf{B}$ 做了一个低秩修改。此时，常见的操作是使用 SMW（Sherman-Morrison-Woodbury 公式）：对于可逆的 $\mathbf{A}, \mathbf{C}$，和另外两个矩阵 $\mathbf{U}, \mathbf{V}$，有</p>
+<p>$$<br>(\mathbf{A} + \mathbf{UCV}^\top)^{-1} &#x3D; \mathbf{A}^{-1} - \mathbf{A}^{-1}\mathbf{U}(\mathbf{C}^{-1} + \mathbf{V}^\top \mathbf{A}^{-1}\mathbf{U})^{-1}\mathbf{V}^\top \mathbf{A}^{-1}<br>$$</p>
+<p>这里定义</p>
+<p>$$<br>\mathbf{U} &#x3D; \mathbf{V} &#x3D; (\Delta \boldsymbol{g}^k \quad \boldsymbol{B}_k\Delta \boldsymbol{x}^k), \qquad \mathbf{C} &#x3D; \begin{pmatrix}<br>   \frac{1}{\Delta \boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^k} &amp; \\<br>   &amp; \frac{1}{\Delta \boldsymbol{x}^{k\top}\mathbf{B}_k\Delta \boldsymbol{x}^k}<br>\end{pmatrix}<br>$$</p>
+<p>暴力计算得到</p>
+<p>$$<br>\begin{aligned}<br>\mathbf{H}_{k + 1} &amp;&#x3D; \mathbf{H}_k + \left(1 + \frac{\Delta \boldsymbol{g}^{\top}\mathbf{H}_k \Delta \boldsymbol{g}^k}{\Delta \boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^k}\right)\frac{\Delta \boldsymbol{x}\Delta\boldsymbol{x}^{k\top}}{\Delta \boldsymbol{x}^{k\top}\Delta \boldsymbol{g}^k} \\<br>&amp;- \frac{\mathbf{H}_k\Delta \boldsymbol{g}^k\Delta \boldsymbol{x}^{k\top} + (\mathbf{H}_k\Delta \boldsymbol{g}^k\Delta \boldsymbol{x}^{k\top})^\top}{\Delta \boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^k}<br>\end{aligned}<br>$$</p>
+<p>也可以配方成更简明的形式：</p>
+<p>$$<br>\mathbf{H}_{k + 1} &#x3D; \mathbf{V}\mathbf{H}_k\mathbf{V}_k^\top + \rho_k\Delta \boldsymbol{x}_k\Delta \boldsymbol{x}_k^\top, \qquad \text{where }\rho_k &#x3D; \frac{1}{\Delta \boldsymbol{g}^{k\top}\Delta \boldsymbol{x}^k}, \mathbf{V}_k &#x3D; \mathbf{I} - \rho_k\Delta \boldsymbol{g}^k\Delta \boldsymbol{x}^{k\top}<br>$$</p>
+<p>实践中，这个算法比 DFP 算法稳定且快得多。对于非二次函数，定期重置 $\mathbf{H}$ 为一个对称正定函数也是很常见的技巧。</p>
+<p>最后，BFGS 算法有一个有意思的写法。如果你没有 $O(n^2)$ 的空间，只有 $O(mn)$ 的空间，但是想要拿到梯度下降的方向 $\boldsymbol{g}^k$，可以反向使用一次 Horner’s Rule 来实现以空间换时间。从递推式出发，我们想算的方向是</p>
+<p>$$<br>\mathbf{H}_{k}\boldsymbol{g}^{k} &#x3D; \mathbf{V}_{k - 1}\mathbf{H}_{k - 1}\mathbf{V}_{k - 1}^\top\boldsymbol{g}^k + \rho_k\Delta \boldsymbol{x}_k\Delta \boldsymbol{x}_k^\top\boldsymbol{g}^k<br>$$</p>
+<p>那么可以这样递推：定义 $\boldsymbol{q}^k &#x3D; \boldsymbol{g}^k$，$\boldsymbol{p}^i &#x3D; \mathbf{H}_i\boldsymbol{q}^i$。</p>
+<ul>
+<li>首先倒着推出所有 $\boldsymbol{q}$：$\boldsymbol{q}^{k - 1} &#x3D; \mathbf{V}^{\top}_{k - 1}\boldsymbol{q}_k$。注意 $\mathbf{V}$ 是 $\mathbf{I}$ 加上一个低秩矩阵，可以线性空间计算。</li>
+<li>然后可以算出 $\boldsymbol{p}^0 &#x3D; \mathbf{V}_0\mathbf{H}_0\boldsymbol{q}_0 + \rho_0\Delta\boldsymbol{x}_0\Delta\boldsymbol{x}_k^\top \boldsymbol{g}^k$;</li>
+<li>最后正着算出所有 $\boldsymbol{p}$：$\boldsymbol{p}^{k} &#x3D; \mathbf{V}_{k - 1}\boldsymbol{p}^{k - 1} + \rho_k\Delta \boldsymbol{x}_k\Delta \boldsymbol{x}_k^\top\boldsymbol{g}^k$。</li>
+</ul>
+<p>这样一来，每 $m$ 次迭代，将 $\mathbf{H}_0$ 重置为 $\gamma_0\mathbf{I}$，然后接下来 $m$ 次迭代都可以用 $O(nm)$ 空间算出下降方向。这个算法叫做闲置空间 BFGS 算法（L-BFGS）。实践中一般令</p>
+<p>$$<br>\gamma_k &#x3D; \frac{\Delta \boldsymbol{x}_{k - 1}^\top \Delta \boldsymbol{g}_{k - 1}}{\Delta \boldsymbol{g}_{k - 1}\Delta \boldsymbol{g}_{k - 1}}<br>$$</p>
+<p>而且 Line Search 要用弱 Armijo-Wolfe 规则或者强 Armijo-Wolfe 规则。</p>
+<h3><span id="优函数优化">优函数优化</span></h3><p>牛顿迭代启发我们，在做非凸优化的时候，可以考虑如下框架：现在要优化函数 $f(\boldsymbol{x})$。迭代做如下操作：</p>
+<ol>
+<li>找一个凸函数 $g_k(\boldsymbol{x})$，满足以下条件：<ol>
+<li>$f(\boldsymbol{x}) \leq g_k(\boldsymbol{x})$；</li>
+<li>$f(\boldsymbol{x}_k) &#x3D; g_k(\boldsymbol{x}_k)$；</li>
+</ol>
+</li>
+<li>然后优化 $g_k$，$\boldsymbol{x}_{k + 1} &#x3D; \arg\min_{\boldsymbol{x}\in \mathcal{C}} g_k(\boldsymbol{x})$。</li>
+</ol>
+<p>很明显，因为 $f(\boldsymbol{x}_{k + 1}) \leq g_k(\boldsymbol{x}_{k + 1}) \leq \boldsymbol{g}_k(\boldsymbol{x}_k) &#x3D; f(\boldsymbol{x}_k)$，所以这是一个下降算法。此处，$g_k(\boldsymbol{x})$ 就称为全局优函数（global majorant）。实际上只需要在最小值处满足该条件这个算法就成立，对应的 $g_k$ 称为局部优函数（local majorant）。</p>
+<p>现在考虑 majorant 如何选取。如果 $f$ 是 $L$-Lipschitz 光滑的，那么将 $f$ 泰勒展开到二阶拉格朗日余项，余项用 Lipschitz 性质放缩得到一个显然的 majorant：</p>
+<div class="note "><p><strong>Lipschitz Gradient Surrogate</strong></p>
+<p>$$<br>g_k(\boldsymbol{x}) :&#x3D; f(\boldsymbol{x}_k) + \left\langle\nabla f(\boldsymbol{x}_k), \boldsymbol{x} - \boldsymbol{x}_k\right\rangle + \frac{L}{2}\left\lVert\boldsymbol{x} - \boldsymbol{x}_k\right\rVert^2 \geq f(\boldsymbol{x})<br>$$</p>
+</div>
+
+<p>最小化它的结果是 $\boldsymbol{x}_{k + 1} &#x3D; \boldsymbol{x}_k - \frac{1}{L}\nabla f(\boldsymbol{x}_k)$。代入回去发现</p>
+<p>$$<br>f(\boldsymbol{x}_{k + 1}) \leq f(\boldsymbol{x}_k) - \frac{1}{2L}\left\lVert\nabla f(\boldsymbol{x})\right\rVert^2<br>$$</p>
+<p>这给出了足量的下降，对于凸函数，这甚至直接就给出了线性收敛。如果没有 Lipschitz 条件，你可以取这样的 Surrogate</p>
+<p>$$<br>g_k(\boldsymbol{x}) :&#x3D; f(\boldsymbol{x}_k) + \left\langle\nabla f(\boldsymbol{x}_k), \boldsymbol{x} - \boldsymbol{x}_k\right\rangle + \frac{1}{2\alpha_k}\left\lVert\boldsymbol{x} - \boldsymbol{x}_k\right\rVert^2<br>$$</p>
+<p>其中 $\alpha_k$ 用回溯法搜索：先随便试一个东西，如果不是 local majorant，将它乘上 $\mu$。可以发现这本质上就是梯度下降加上回溯线搜索。</p>
+<div class="note "><p><strong>Quadratic Surrogate.</strong> 取 $\boldsymbol{H}_k \succ \nabla^2 f$</p>
+<p>$$<br>g_k(\boldsymbol{x}) &#x3D; f(\boldsymbol{x}_k) + \left\langle\nabla f(\boldsymbol{x}_k), \boldsymbol{x} - \boldsymbol{x}_k\right\rangle + \frac 12(\boldsymbol{x} - \boldsymbol{x}_k)^\top \mathbf{H}_k(\boldsymbol{x} - \boldsymbol{x}_k)<br>$$</p>
+</div>
+
+<p>这个是泰勒展开之后用 $\mathbf{H}$ 去 bound 住二次项。最小化它的结果是 $\boldsymbol{x}_{k + 1} &#x3D; \boldsymbol{x}_k - \mathbf{H}_k^{-1}\nabla f$。对于 $\mathbf{H}\succ 0$，必然存在一个 $\alpha$ 使得 $\alpha \mathbf{H}\succ \nabla^2 f(\boldsymbol{x})$。你也可以用回溯线搜索来猜这个 $\alpha_k$，所得算法本质上就是阻尼牛顿法。</p>
+<div class="note "><p><strong>Jensen Surrogate.</strong> 如果 $f(\boldsymbol{x}) &#x3D; \widetilde{f}(\boldsymbol{\theta}^\top \boldsymbol{x})$，其中 $\widetilde{f}$ 是凸函数，那么取 $\left\lVert\boldsymbol{w}\right\rVert_1 &#x3D; 1$ 有以下函数是全局 majorant：</p>
+<p>$$<br>g_k(\boldsymbol{x}) &#x3D; \sum_{i &#x3D; 1}^n w_i \widetilde{f}\left(\frac{\theta_i}{w_i}(x_i - x_{k, i}) + \boldsymbol{\theta}^\top \boldsymbol{x}_k\right)<br>$$</p>
+</div>
+
+<p>这个本质上就是 Jensen 不等式。</p>
+<div class="note "><p><strong>Convex-Concave Procedure.</strong> 若目标函数可以写成 $f(\boldsymbol{x}) + h(\boldsymbol{x})$，其中 $f$ 下凸，$h$ 上凸。则 $h$ 可以直接被换成该处的支撑超平面。</p>
+</div>
+
+<div class="note "><p><strong>Variational Surrogate.</strong> 若目标函数可以被写成 $f(\boldsymbol{x}) &#x3D; \min_{\boldsymbol{y}\in \mathcal{Y}} h(\boldsymbol{x}, \boldsymbol{y})$，则 </p>
+<p>$$<br>g_k(\boldsymbol{x}) &#x3D; h(\boldsymbol{x}, \boldsymbol{y}_k^*), \quad \mathrm{where } \boldsymbol{y}_k^* &#x3D; \arg\min_{\boldsymbol{y}\in \mathcal{Y}} h(\boldsymbol{x}_k, \boldsymbol{u})<br>$$</p>
+</div>
+
+<p>优函数优化有一类经典应用：优化</p>
+<p>$$<br>f(\boldsymbol{\theta}) &#x3D; \log\int_{\boldsymbol{z}}p(\boldsymbol{x}, \boldsymbol{z} | \boldsymbol{\theta})\mathrm{d}\boldsymbol{z}<br>$$</p>
+<p>这个目标函数的组合意义是求一个混合分布上采出某个样本的最大似然。比如说著名的 Mixture-of-Gaussian 模型的训练，就是优化这样一个目标函数：</p>
+<p>$$<br>\max_{\boldsymbol{\theta}, \boldsymbol{\mu}, \mathbf{\Sigma}}\sum_{i &#x3D; 1}^m \log \sum_{k &#x3D; 1}^n \theta_k\frac{1}{(2\pi)^{d &#x2F; 2} |\mathbf{\Sigma}_k|^{1 &#x2F; 2}}\exp\left(-\frac{1}{2}(\boldsymbol{x}_i - \boldsymbol{\mu}_k)^\top \mathbf{\Sigma}_k^{-1}(\boldsymbol{x}_i - \boldsymbol{\mu}_k)\right)<br>$$</p>
+<p>这里积分是在 $[n]$ 上的均匀测度上完成的。任取变分分布 $q$，有</p>
+<p>$$<br>f(\boldsymbol{\theta}) &#x3D; \log\int_{\boldsymbol{z}} q(\boldsymbol{z}) \frac{p(\boldsymbol{x}, \boldsymbol{z} | \boldsymbol{\theta})}{q(\boldsymbol{z})}\mathrm{d}\boldsymbol{z} \geq D_{KL}(p(\boldsymbol{x}, \cdot | \boldsymbol{\theta}) \Vert q(\boldsymbol{z}))<br>$$</p>
+<p>于是找到了一个 majorant。所谓的 EM 算法就是分成两步：</p>
+<ul>
+<li><strong>E Step.</strong> 置 $q &#x3D; p(\cdot | \boldsymbol{x}, \boldsymbol{\theta})$。</li>
+<li><strong>M Step.</strong> 固定 $q$，优化 $\boldsymbol{\theta}$。</li>
+</ul>
+<p>对于有些函数，这个形式非常好。</p>
+<hr>
+<p>我们经常见到这样的优化目标：</p>
+<p>$$<br>f(\boldsymbol{x}) + \lambda g(\boldsymbol{x})<br>$$</p>
+<p>其中 $g$ 可能非凸。但我们有以下定理：</p>
+<div class="note info"><p><strong>定理 3.1.11.</strong> 对于任意的函数 $g : \mathbb{R}^n \rightarrow \mathbb{R}$，定义 $\widetilde{g}(\boldsymbol{x}) &#x3D; g(\sqrt {\boldsymbol{x}})$。则以下两条件等价：</p>
+<ol>
+<li>存在 $\phi(\boldsymbol{a})$ 使得 $g(\boldsymbol{x}) &#x3D; \min_{\boldsymbol{a}}[\left\langle\boldsymbol{a}, \boldsymbol{x}^2\right\rangle + \phi(\boldsymbol{a})]$；</li>
+<li>$g$ 关于每一个分量都是偶函数，并且是恰当的闭函数，$\widetilde{g}(\boldsymbol{x})$ 上凸。</li>
+</ol>
+<p>实际上有 $\phi(\boldsymbol{a}) &#x3D; (-\widetilde{g})^*(-\boldsymbol{a})$。</p>
+</div>
+
+<p><strong>证明.</strong> $(2)\Rightarrow (1)$：有 $-\hat{g}(\boldsymbol{x})$ 是恰当的闭下凸函数。那么，它是它对偶的对偶，根据定义有</p>
+<p>$$<br>-\widetilde{g}(\boldsymbol{x}) &#x3D; \max_{a} \boldsymbol{a}^\top \boldsymbol{x} - (-\widetilde{g})^*(\boldsymbol{a}) \quad \Rightarrow \widetilde{g}(\boldsymbol{x}) &#x3D;  \min_{\boldsymbol{a}} \boldsymbol{a}^\top \boldsymbol{x} + (-\hat{g})^*(-\boldsymbol{a})<br>$$</p>
+<p>换回 $g$ 证毕。$(2)\Rightarrow (1)$ 验证即可。<div style="text-align: right">$\blacksquare$</div></p>
+<p>这样一来，某些时候我们可以将问题转化为一个 Variational Surrogate 的优函数优化。这种做法称为乘性半平方法，对于 $g(x) &#x3D; |\boldsymbol{x}|^p_p$ 来说，这个优化的形式很简单。</p>
+<p>其他形状的函数可能也可以找这种变分代理，比如</p>
+<div class="note info"><p><strong>定理 3.1.12.</strong> 对于任意的函数 $g : \mathbb{R}^n \rightarrow \mathbb{R}$，定义 $\widetilde{g}(\boldsymbol{x}) &#x3D; -g(\boldsymbol{x}) + \frac 12 \left\lVert\boldsymbol{x}\right\rVert^2$。则以下两条件等价：</p>
+<ol>
+<li>存在 $\phi(\boldsymbol{a})$ 使得 $g(\boldsymbol{x}) &#x3D; \min_{\boldsymbol{a}}\left[\frac{1}{2}(x - a)^2 + \phi(\boldsymbol{a})\right]$；</li>
+<li>$g$ 是恰当的闭函数，$\widetilde{g}(\boldsymbol{x})$ 下凸。</li>
+</ol>
+<p>实际上有 $\phi(\boldsymbol{a}) &#x3D; \widetilde{g}^{*}(\boldsymbol{a}) - \frac{1}{2}\left\lVert\boldsymbol{a}\right\rVert^2$。</p>
+</div>
+
+<p>证明也是类似的。这个做法称为加性半平方法。</p>
+<h2><span id="有约束优化">有约束优化</span></h2><p>现在考虑附加等式约束和不等式约束的优化问题：</p>
+<p>$$<br>\begin{aligned}<br>   \min_{\boldsymbol{x}} \quad &amp; f(\boldsymbol{x}) \\<br>   \text{s.t.} \quad  &amp; g_i(\boldsymbol{x}) \leq 0 \\<br>   &amp; h_i(\boldsymbol{x}) &#x3D; 0<br>\end{aligned}<br>$$</p>
+<p>其可行域记作 $\mathcal{F}$。一个点 $\boldsymbol{x}_0$ 可能使得若干条不等式约束取等，这些约束记为 $\mathcal{A}(\boldsymbol{x}_0)$。开始之前我们先讨论一些基本的最优性条件。</p>
+<div class="note success"><p><strong>定义 3.2.1（可行方向）.</strong> 对于 $\boldsymbol{d}\in \mathbb{R}^n, \boldsymbol{x}_0\in \mathcal{F}$，称 $\boldsymbol{d}$ 是一个可行方向当且仅当</p>
+<p>$$<br>\exists \delta &gt; 0, \forall \tau \in [0, \delta], \quad \boldsymbol{x}_0 + \tau\boldsymbol{d}\in \mathcal{F}<br>$$</p>
+<p>显然，一点处的所有可行方向构成一个锥，记为 $\mathcal{C}_{fd}(\boldsymbol{x}_0)$。</p>
+</div>
+
+<p>对于可微的 ${g}$，我们将其展开到二阶 Peano 余项有</p>
+<p>$$<br>g_i(\boldsymbol{x}_0 + \tau\boldsymbol{d}) &#x3D; g_i(\boldsymbol{x}_0) + \tau \nabla g_i(\boldsymbol{x}_0)^\top\boldsymbol{d} + o(\tau^2)<br>$$</p>
+<p>得到 $\boldsymbol{d}$ 是可行方向的一个必要条件是 $\nabla g_i(\boldsymbol{x}_0)^\top\boldsymbol{d} \leq 0$。若是等式约束，则有 $\nabla h_i(\boldsymbol{x}_0)^\top\boldsymbol{d} &#x3D; 0$。因此定义</p>
+<div class="note success"><p><strong>定义 3.2.2（线性可行锥）.</strong> 对于任意的 $\boldsymbol{x}_0\in \mathcal{F}$，定义</p>
+<p>$$<br>\mathcal{C}_l(\boldsymbol{x}_0) &#x3D; \{\boldsymbol{d} : \forall i\in \mathcal{A}(\boldsymbol{x}_0), \nabla g_i(\boldsymbol{x}_0)^\top \boldsymbol{d} \leq 0, h_i(\boldsymbol{x}_0)^\top \boldsymbol{d} &#x3D; 0\}<br>$$</p>
+</div>
+
+<div class="note success"><p><strong>定义 3.2.3（下降锥）.</strong> 对于任意的 $\boldsymbol{x}_0\in \mathbb{R}^n$，定义 </p>
+<p>$$<br>\mathcal{C}_{dd}(\boldsymbol{x}_0) :&#x3D; \{\boldsymbol{d}\in \mathbb{R}^n : \nabla f(\boldsymbol{x}_0)^\top \boldsymbol{d} &lt; 0\}<br>$$</p>
+</div>
+
+<p>显然，$\boldsymbol{x}_0$ 是最优解的一个充分条件是 $\mathcal{C}_{dd}(\boldsymbol{x}_0)\cup \mathcal{C}_{l}(\boldsymbol{x}_0) &#x3D; \varnothing$。现在，我们把必要条件转化成了两个锥包不交的结论。使用凸集分离定理得到：</p>
+<div class="note info"><p><strong>定理 3.2.1（Karush-Kuhn-Tucker 条件）.</strong> 对于任意 $\boldsymbol{x}_0\in \mathcal{F}$，$\mathcal{C}_l(\boldsymbol{x}_0)\cup \mathcal{C}_{dd}(\boldsymbol{x}_0) &#x3D; \varnothing$ 当且仅当存在 $\boldsymbol{\lambda}, \boldsymbol{\mu}$ 使得以下四个条件都成立：</p>
+<ol>
+<li>（拉格朗日乘子条件）<br>$$<br>\nabla f(\boldsymbol{x}_0) + \sum_{i &#x3D; 1}^m \lambda_i \nabla g_i(\boldsymbol{x}_0) + \sum_{j &#x3D; 1}^p \mu_j \nabla h_j(\boldsymbol{x}_0) &#x3D; \boldsymbol{0}<br>$$</li>
+<li>（互补松弛条件）<br>$$<br>\lambda_i g_i(\boldsymbol{x}_0) &#x3D; 0<br>$$</li>
+<li>（原始可行性）<br>$$<br>\boldsymbol{x}_0\in \mathcal{F}<br>$$</li>
+<li>（对偶可行性）<br>$$<br>\boldsymbol{\lambda}\succeq \boldsymbol{0}<br>$$</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 一条等式约束可以被翻译成两条不等式约束，因此只需要考虑只有不等式约束的情况。注意存在 $\boldsymbol{d}$ 处于两个集合的交等价于</p>
+<p>$$<br>\begin{cases}<br>   \nabla f(\boldsymbol{x}_0)^\top \boldsymbol{d} &lt; 0 \\<br>   \nabla g(\boldsymbol{x}_0)^\top \boldsymbol{d} \leq 0<br>\end{cases}<br>$$</p>
+<p>直接调用定理 2.1.7 得到拉格朗日乘子条件和对偶可行性成立。若一条不等式约束没有激活，那么应当置 $\lambda_i &#x3D; 0$，因此互补松弛条件也成立。<div style="text-align: right">$\blacksquare$</div></p>
+<p>现在我们知道 KKT 条件等价于最优点的一个必要条件。我们尝试将其加强：考虑这样一个集合</p>
+<div class="note success"><p><strong>定义 3.2.3（收敛方向）.</strong> 称一个序列从 $\boldsymbol{d}$ 方向收敛于 $\boldsymbol{x}_0$ 若 </p>
+<p>$$<br>\boldsymbol{x}_k &#x3D; \boldsymbol{x}_0 + \alpha_k(\boldsymbol{d} + \boldsymbol{r}_k), \quad \alpha_k\downarrow 0, \boldsymbol{r}_k\rightarrow 0<br>$$</p>
+<p>记作 $\boldsymbol{x}_k\xrightarrow{\boldsymbol{d}}\boldsymbol{x}_0$</p>
+</div>
+
+<div class="note success"><p><strong>定义 3.2.4（切锥）.</strong> 定义</p>
+<p>$$<br>\mathcal{C}_t(\boldsymbol{x}_0) :&#x3D; \left\{\boldsymbol{d} : \exists \boldsymbol{x}_k \in \mathcal{F}, \boldsymbol{x}_k\xrightarrow{\boldsymbol{d}} \boldsymbol{x}_0\right\}<br>$$</p>
+</div>
+
+<p>很明显有</p>
+<ol>
+<li>$\mathcal{C}_t(\boldsymbol{x}_0)$ 是个闭锥；</li>
+<li>$\overline{\mathcal{C}_{fd}}\subset \mathcal{C}_t(\boldsymbol{x}_0)\subset \mathcal{C}_l(\boldsymbol{x}_0)$。</li>
+</ol>
+<p>注意 $\mathcal{C}_t &#x3D; \mathcal{C}_l$ 不总是成立，比如在边界非常尖的情况下：</p>
+<p>$$<br>\mathcal{F} &#x3D; \{(x_1, x_2) : -x_1^3 + x_2 \leq 0, -x_2 \leq 0\}<br>$$</p>
+<p>你会发现 $\mathcal{C}_l$ 是直线，$\mathcal{C}_t$ 是射线。提出这个集合是因为</p>
+<div class="note info"><p><strong>定理 3.2.2.</strong> 若 $\boldsymbol{x}_0$ 是优化问题的一个局部最小值，则 $\nabla f(\boldsymbol{x}_0)\in \mathcal{C}_t(\boldsymbol{x}_0)^*$。因此 $\mathcal{C}_{dd}\cap \mathcal{C}_t(\boldsymbol{x}_0) &#x3D; 0$</p>
+</div>
+
+<p><strong>证明.</strong> 直接拿着泰勒展开和对偶锥验证。<div style="text-align: right">$\blacksquare$</div></p>
+<h3><span id="对偶问题">对偶问题</span></h3><h1><span id="参考文献">参考文献</span></h1><ol>
+<li>D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” in <em>IEEE Transactions on Evolutionary Computation</em>, vol. 1, no. 1, pp. 67-82, April 1997, doi: 10.1109&#x2F;4235.585893.</li>
+</ol>
+<h1><span id="附录">附录</span></h1><h2><span id="a补充结论">A：补充结论</span></h2><p>本节有以下内容，排列顺序与出现在上文中的顺序没有关系，只和我复习的顺序有关系：</p>
+<ol>
+<li>定义 A.1、引理 A.1、引理 A.2 补充 von Neumann 迹不等式证明的一些必要工具，然后我们证明 von Neumann 迹不等式。</li>
+<li>定理 A.3 证明点到闭凸集的超平面分离定理。</li>
+<li>定理 A.4，A.5 证明 Holder 不等式。</li>
+</ol>
+<div class="note success"><p><strong>定义 A.1.</strong> 若矩阵 $\mathbf{A}\in \mathbb{R}^{n\times n}$ 满足：</p>
+<ol>
+<li>$0\leq a_{ij} \leq 1$；</li>
+<li>$\mathbf{A}$ 每行求和不超过 $1$，每列求和不超过 $1$。</li>
+</ol>
+<p>则称 $\mathbf{A}$ 为次双随机矩阵。若 $\mathbf{A}$ 每行每列求和都是 $1$，则 $\mathbf{A}$ 称为双随机矩阵。</p>
+</div>
+
+<div class="note info"><p><strong>引理 A.1.</strong> 若矩阵 $\mathbf{A}$ 是次双随机矩阵，必然存在双随机矩阵 $\mathbf{B}$ 满足 $\forall i, j, a_{ij}\leq b_{ij}$。</p>
+</div>
+
+<p><strong>证明.</strong> 我们选一个不满 $1$ 的行 $i$ 和一个不满 $1$ 的列 $j$，然后给 $a_{ij}$ 加一个正数使得两者之一刚好被补满。</p>
+<p>此构造失败当且仅当所有行都满了但是存在列不满（或者反之），然而明显这是不可能发生的：注意所有行求和之和等于所有列求和之和等于矩阵中所有数求和。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>引理 A.2（Birkhoff-von Neumann）.</strong> 双随机矩阵是置换矩阵的凸包。即对于任意双随机矩阵 $\mathbf{A}$，存在若干个置换矩阵 $\mathbf{P}_1, …, \mathbf{P}_m$ 和系数 $\lambda_1, …, \lambda_m \geq 0$，使得</p>
+<p>$$<br>\mathbf{A} &#x3D; \sum_{i &#x3D; 1}^m \lambda_i \mathbf{P}_i, \qquad \sum_{i &#x3D; 1}^m \lambda_i &#x3D; 1<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 施归纳于矩阵中非零数字的个数 $c$。不可能有 $c &lt; n$（否则必然有空行空列）。当 $c &#x3D; n$ 时，矩阵必然是置换矩阵，结论成立。</p>
+<p>否则我们做如下构造：取一个排列 $\sigma$，使得 $\forall i, a_{i, \sigma(i)} &gt; 0$。然后令</p>
+<p>$$<br>\mathbf{A}’ &#x3D; \frac{1}{1 - m}(\mathbf{A} - m\mathbf{P}_\sigma)<br>$$</p>
+<p>完成递归，其中 $m &#x3D; \min_i(a_{i, \sigma(i)})$。只需要证明一定能找到这个排列即可。这等价于：取二分图 $G$，左右大小都为 $n$，若 $a_{ij} &gt; 0$，由左 $i$ 向右 $j$ 连边，则该图必然有完美匹配。根据 Hall 定理，这当且仅当对于任意 $\mathcal{X}\subseteq [n]$，$|R(\mathcal{X})| \geq |\mathcal{X}|$。</p>
+<p>施反证法。若存在 $\mathcal{X}$ 对应的右部点集合 $|R(\mathcal{X})| &lt; |\mathcal{X}|$，则有：</p>
+<p>$$<br>\begin{aligned}<br>|R(\mathcal{X})| &amp;&#x3D; \sum_{j\in |R(\mathcal{X})|}\sum_{i &#x3D; 1}^n a_{ij} &amp; \color{blue}{\text{($\mathbf{A}$ is doubly stochastic)}} \\<br>&amp;\geq \sum_{j\in |R(\mathcal{X})|}\sum_{i \in \mathcal{X}} a_{ij} &amp; \color{blue}{\text{($a_{ij}$ \geq 0)}} \\<br>&amp;&#x3D; \sum_{j &#x3D; 1}^n \sum_{i\in \mathcal{X}} a_{ij} &amp; \color{blue}{\text{(definition of the bipartite graph $G$)}} \\<br>&amp;&#x3D; |\mathcal{X}|<br>\end{aligned}<br>$$</p>
+<p>矛盾。串联上述结论得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p><strong>定理 1.1.4 的证明.</strong> 设 $\mathbf{A} &#x3D; \mathbf{U\Sigma V}^\top$，有 </p>
+<p>$$<br>\mathrm{Tr}(\mathbf{A}^\top\mathbf{B}) &#x3D; \mathrm{Tr}(\mathbf{\Sigma}(\mathbf{UBV}^\top))<br>$$</p>
+<p>问题转化为 $\mathbf{A}$ 为对角方阵。现在设 $\mathbf{B} &#x3D; \mathbf{U\Sigma V}^\top$。有</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{Tr}(\mathbf{A}^\top \mathbf{B}) &amp;&#x3D; \sum_{i &#x3D; 1}^n\sum_{j &#x3D; 1}^n \sigma_i(\mathbf{A})\sigma_j(\mathbf{B}) u_{ij}v_{ji}<br>\end{aligned}<br>$$</p>
+<p>记 $\boldsymbol{\sigma}(\mathbf{A}) &#x3D; (\sigma_1(\mathbf{A}), …, \sigma_n(\mathbf{A}))^\top, \boldsymbol{\sigma}(\mathbf{B}) &#x3D; (\sigma_1(\mathbf{B}), …, \sigma_n(\mathbf{B}))^\top, S_{ij} &#x3D; |u_{ij}v_{ji}|$。则 </p>
+<p>$$<br>\begin{aligned}<br>    \mathrm{Tr}(\mathbf{A}^\top \mathbf{B}) &#x3D; \boldsymbol{\sigma}(\mathbf{A})^\top \mathbf{S} \boldsymbol{\sigma}(\mathbf{B})<br>\end{aligned}<br>$$</p>
+<p>根据柯西不等式有 </p>
+<p>$$<br>\sum_{j &#x3D; 1}^n S_{ij} \leq \left\lVert\boldsymbol{u}_i\right\rVert_2\left\lVert\boldsymbol{v}_i\right\rVert_2 &#x3D; 1<br>$$</p>
+<p>因此 $\mathbf{S}$ 是次双随机矩阵，故存在双随机矩阵 $\mathbf{T}$ 支配之（引理 A.1）。而 $\mathbf{T}$ 可以被分解做置换矩阵的凸组合（引理 A.2），注意我们有排序不等式：</p>
+<p>$$<br>\boldsymbol{\sigma}(\mathbf{A})\mathbf{P}_\pi \boldsymbol{\sigma}(\mathbf{B}) &#x3D; \sum_{i &#x3D; 1}^n \sigma_i(\mathbf{A}) \sigma_{\pi(i)}(\mathbf{B}) \leq \sum_{i &#x3D; 1}^n \sigma_i(\mathbf{A})\sigma_i(\mathbf{B})<br>$$</p>
+<p>取等需要排序全是正序，即 $\mathbf{S} &#x3D; \mathbf{I}$。稍加推理可以知道 $\mathbf{U} &#x3D; \mathbf{V} &#x3D; \mathbf{I}$。</p>
+<hr>
+<p>本节证明闭凸集和边界上点的分离超平面定理。</p>
+<div class="note info"><p><strong>定理 A.3.</strong> 设 $\mathcal{C}$ 是 $\mathbb{R}^n$ 中的闭凸集，若 $\boldsymbol{0}\in \partial \mathcal{C}$，则存在 $\boldsymbol{a}\ne 0$ 使得 $\forall \boldsymbol{x}\in \mathcal{C}, \boldsymbol{a}^\top \boldsymbol{x} \geq 0$。</p>
+</div>
+
+<p><strong>证明.</strong> 首先取一列 $\mathcal{C}$ 外的 $\boldsymbol{x}_k$ 逼近 $\boldsymbol{0}$。因为 $\boldsymbol{0}$ 在边界上，任意小邻域内部都有 $\mathcal{C}$ 外部的点。此序列存在。</p>
+<p>这一系列 $\boldsymbol{x}_k$ 每个都与 $\mathcal{C}$ 严格分离，使用定理 2.1.3 Case 1 的论证，得到存在一列分离超平面 $\boldsymbol{a}_k$。不失一般性设 $\left\lVert\boldsymbol{a}_k\right\rVert &#x3D; 1$。</p>
+<p>注意，$\boldsymbol{a}_k$ 都落在单位球面 $\mathbb{S}^{n - 1}$ 上。而 $\mathbb{S}^{n - 1}$ 是紧集，其中任意无穷点列都有收敛子列，设它收敛于 $\boldsymbol{a}$。容易验证 $\boldsymbol{a}$ 给出分离超平面。<div style="text-align: right">$\blacksquare$</div></p>
+<hr>
+<p>本节证明 Holder 不等式。首先证明 Young 不等式：</p>
+<div class="note info"><p><strong>定理 A.4（Young 不等式）.</strong> 对于任意的 $x, y\geq 0, p, q &gt; 0$，满足 $1 &#x2F; p + 1 &#x2F; q &#x3D; 1$，有 </p>
+<p>$$<br>xy \geq \frac{x^p}{p} + \frac{y^q}{q}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 求偏导计算即可。</p>
+<div class="note info"><p><strong>定理 A.5（Holder 不等式）.</strong> 对于任意 $\boldsymbol{x}, \boldsymbol{y}, p, q &gt; 0$ 满足 $1&#x2F;p + 1&#x2F;q &#x3D; 1$，有 </p>
+<p>$$<br>\left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle \leq \left\lVert\boldsymbol{x}\right\rVert_p\left\lVert\boldsymbol{x}\right\rVert_q<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 有 </p>
+<p>$$<br>\begin{aligned}<br>\left\langle\boldsymbol{x}, \boldsymbol{y}\right\rangle &amp;&#x3D; \left\lVert\boldsymbol{x}\right\rVert_p\left\lVert\boldsymbol{y}\right\rVert_q\sum_{i &#x3D; 1}^n \frac{x_i}{\left\lVert\boldsymbol{x}\right\rVert_p}\frac{y_i}{\left\lVert\boldsymbol{y}\right\rVert_q} \\<br>&amp;\leq \left\lVert\boldsymbol{x}\right\rVert_p\left\lVert\boldsymbol{y}\right\rVert_q\sum_{i &#x3D; 1}^n \left(\frac{1}{p}\cdot\frac{x_i^p}{\left\lVert\boldsymbol{x}\right\rVert_p} + \frac{1}{q}\cdot \frac{y_i^q}{\left\lVert\boldsymbol{y}\right\rVert_q}\right) \\<br>&amp;&#x3D; \left\lVert\boldsymbol{x}\right\rVert_p\left\lVert\boldsymbol{y}\right\rVert_q<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<h2><span id="b一些习题">B：一些习题</span></h2><div class="note info"><p><strong>定理 B.1.</strong> 设 $\mathbf{A}\in \mathbb{R}^{m\times n}, \boldsymbol{b}\in \mathbb{R}^m$，以下两条件见合：</p>
+<ol>
+<li>$\exists \boldsymbol{x}\succ\boldsymbol{0}, \mathbf{A}\boldsymbol{x} &#x3D; \boldsymbol{b}$；</li>
+<li>$\exists \boldsymbol{\lambda}, \mathbf{A}^\top \boldsymbol{v}\succeq \boldsymbol{0}, \mathbf{A}^\top \boldsymbol{v}\ne \boldsymbol{0}, \boldsymbol{b}^\top \boldsymbol{v} \leq 0$。</li>
+</ol>
+</div>
+
+<div class="note info"><p><strong>定理 B.2.</strong> 设 $f$ $m$-强凸，$M$-光滑，$\Delta \boldsymbol{x}$ 是一个下降方向，使用 Armijo 回溯搜索，$\alpha \in (0, 1&#x2F;2]$，有当</p>
+<p>$$<br>t \leq -\frac{\nabla f(\boldsymbol{x})^\top\Delta \boldsymbol{x}}{M\left\lVert\Delta \boldsymbol{x}\right\rVert^2}<br>$$</p>
+<p>时，线搜索必然停止。</p>
+</div>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/04/19/OSRevision1/" rel="prev" title="Revision | 操作系统（上）">
+                  <i class="fa fa-angle-left"></i> Revision | 操作系统（上）
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">429k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:59</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study">
+    <meta name="description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study   内存 虚拟内存和地址翻译 高速缓存 需求分页   I&#x2F;O 文件系统 文件系统的设">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 操作系统（上）">
 <meta property="og:url" content="http://example.com/2026/04/19/OSRevision1/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study">
+<meta property="og:description" content="Abstract. 没学明白，写的东西望之不似人言。    历史和动机 操作系统基本概念 操作系统中的抽象 线程和进程 文件和 I&#x2F;O 进程间通信（IPC），管道和套接字   操作系统中的同步 锁，以及案例分析 锁的实现，同步原素和管程 读者-写者问题   调度 经典策略 Case Study   内存 虚拟内存和地址翻译 高速缓存 需求分页   I&#x2F;O 文件系统 文件系统的设">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-04-19T06:17:05.000Z">
-<meta property="article:modified_time" content="2026-05-26T14:45:05.946Z">
+<meta property="article:modified_time" content="2026-06-15T15:32:41.559Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史和动机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">操作系统基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">操作系统中的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">线程和进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">文件和 I&#x2F;O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">进程间通信（IPC），管道和套接字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">操作系统中的同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">锁，以及案例分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">锁的实现，同步原素和管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">读者-写者问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">经典策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">Case Study</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">历史和动机</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">操作系统基本概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">操作系统中的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">线程和进程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">文件和 I&#x2F;O</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.3.</span> <span class="nav-text">进程间通信（IPC），管道和套接字</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">操作系统中的同步</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.1.</span> <span class="nav-text">锁，以及案例分析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.2.</span> <span class="nav-text">锁的实现，同步原素和管程</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">4.3.</span> <span class="nav-text">读者-写者问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">调度</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">经典策略</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">Case Study</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">6.</span> <span class="nav-text">内存</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.1.</span> <span class="nav-text">虚拟内存和地址翻译</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.2.</span> <span class="nav-text">高速缓存</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">6.3.</span> <span class="nav-text">需求分页</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">7.</span> <span class="nav-text">I&#x2F;O</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">8.</span> <span class="nav-text">文件系统</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.1.</span> <span class="nav-text">文件系统的设计要点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.2.</span> <span class="nav-text">Case Study</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">8.3.</span> <span class="nav-text">文件系统的细节</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">94</span>
+          <span class="site-state-item-count">95</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -234,10 +234,25 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-05-26 22:45:05" itemprop="dateModified" datetime="2026-05-26T22:45:05+08:00">2026-05-26</time>
+      <time title="Modified: 2026-06-15 23:32:41" itemprop="dateModified" datetime="2026-06-15T23:32:41+08:00">2026-06-15</time>
     </span>
 
   
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>22k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1:21</span>
+    </span>
 </div>
 
         </div>
@@ -267,6 +282,19 @@
 <li><a href="#%E8%B0%83%E5%BA%A6">调度</a><ul>
 <li><a href="#%E7%BB%8F%E5%85%B8%E7%AD%96%E7%95%A5">经典策略</a></li>
 <li><a href="#case-study">Case Study</a></li>
+</ul>
+</li>
+<li><a href="#%E5%86%85%E5%AD%98">内存</a><ul>
+<li><a href="#%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98%E5%92%8C%E5%9C%B0%E5%9D%80%E7%BF%BB%E8%AF%91">虚拟内存和地址翻译</a></li>
+<li><a href="#%E9%AB%98%E9%80%9F%E7%BC%93%E5%AD%98">高速缓存</a></li>
+<li><a href="#%E9%9C%80%E6%B1%82%E5%88%86%E9%A1%B5">需求分页</a></li>
+</ul>
+</li>
+<li><a href="#io">I&#x2F;O</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F">文件系统</a><ul>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E8%AE%BE%E8%AE%A1%E8%A6%81%E7%82%B9">文件系统的设计要点</a></li>
+<li><a href="#case-study-1">Case Study</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%86%E8%8A%82">文件系统的细节</a></li>
 </ul>
 </li>
 </ul>
@@ -787,7 +815,373 @@
 <li>若没有超时，上调优先级。</li>
 </ul>
 <p>当然这里不同优先级之间的调度策略也可以有选择，比如说硬要先调度最高优先级，或者可以用时间切片法让每个优先级获得某个比例的 CPU 时间。这个策略有一个问题是它可以被攻击，如果直到你用了 MLFQ，那么 CPU 密集的程序可以频繁 I&#x2F;O 来留在高优先级。</p>
-<h2><span id="case-study">Case Study</span></h2>
+<h2><span id="case-study">Case Study</span></h2><p>【FIXME】</p>
+<h1><span id="内存">内存</span></h1><p>在第二节我们已经讲过，地址空间和翻译乃是操作系统的四个基本成分之一。所谓的<strong>地址空间</strong>，就是 $2^k$ 个单元的集合。其中，每个单元是一个 $k$ 位的二进制数，代表一个可以访问的<strong>地址</strong>。</p>
+<p>截至目前，我们通过已经解决了“不同的进程和线程需要复用 CPU 的问题”。事实上，进程和线程还需要复用内存。在共享内存时，有以下要点的概念：</p>
+<ul>
+<li><strong>保护.</strong> 线程不能访问其他进程中的私有内存。</li>
+<li><strong>翻译.</strong> 如果使用虚拟地址，应当能把虚拟地址翻译成物理地址。如果加入了地址翻译，处理器可以用虚拟地址，硬件可以用物理地址，这样一方面给了程序一个对内存的统一视角，另一方面可以阻止地址相交。</li>
+<li><strong>受控的相交.</strong> 如果想要进程共享一些块，我们应该能做到这一点。</li>
+</ul>
+<p>那么，操作系统对于内存访问起什么作用？如果对于每次内存访问，操作系统都要通过某种中断介入其中，那么效率太低。因此，地址翻译应当交由硬件（MMU，Memory Manage Unit）完成，操作系统只负责解决异常的情况（比如 Page Fault）。</p>
+<p>历史上，操作系统对于地址的约束有以下发展阶段：</p>
+<ol>
+<li><strong>Uniprogramming.</strong> 所有应用跑在同一片物理地址之上，可以访问全部物理地址，没有任何翻译和保护。</li>
+<li><strong>Primitive Multiprogramming.</strong> 没有地址翻译和保护。不同的应用被划分了相应的地址段。在程序开始运行之时需要现场链接来重定位所有访存地址。在这个阶段一个程序出 Bug 可能导致其他程序甚至操作系统崩溃。</li>
+<li><strong>Multiprogramming with Protection.</strong> 使用 Base and Bound 方法，每个进程被分配一个 Base 和一个 Bound，只能在这个连续段内访存。除了每次运行前重新链接，这里开始就可以进行初步的地址翻译了（当然这会导致每次访存多算一次加法）。普通的 Base and Bound 有以下问题：<ul>
+<li><em>碎片问题.</em> 每个进程可能不一样大，那么和堆空间一样，此处会有碎片化问题；</li>
+<li><em>不支持稀疏地址空间.</em> 回忆我们的虚拟地址空间被分成 code，data，stack，heap 之类的段，每一段可能用的非常少，但是有向上生长、向下生长导致中间有很多空位。直接 Base and Bound 非常浪费；</li>
+<li><em>很难做进程间共享.</em> 比如两个进程想要共享 code 段（这很常见，你 fork 一下立即就会出现这种需求，否则浪费物理空间），对于 Base and Bound 这就很困难。</li>
+</ul>
+</li>
+<li><strong>Segmentation.</strong> 解决的方法非常自然，就是把这些段分别分配 Base 和 Bound。一个虚拟地址的格式现在就是 $\mathrm{SegId}:\mathrm{Offset}$，然后 CPU 里面会有一个表，每个表项是 $\mathrm{Base}:\mathrm{Limit}:V&#x2F;N$，MMU 可以拿着每个 SegID 找到表项，检查是否合法，然后加出物理地址。这样一来<ul>
+<li>我们实现了稀疏地址空间；</li>
+<li>如果是栈空间和堆空间超过了 Limit，可以增加其大小；</li>
+<li>通过 V&#x2F;N 这一位可以实现保护，标记只读和读写等；</li>
+<li>在上下文切换时，可能不得不把所有内存放到磁盘上去（所谓的交换空间）。</li>
+</ul>
+</li>
+</ol>
+<p>至此，现代的虚拟地址和地址翻译已然初具雏形。</p>
+<h2><span id="虚拟内存和地址翻译">虚拟内存和地址翻译</span></h2><p>回忆一个进程的虚拟地址空间定义为：全体它可以访问的地址，以及每个地址的状态。对于一个 32 位的机器，它一共有 $2^{32}$ 个 $32$ 位二进制的地址。</p>
+<p>然而，上面提到的 Segmentation 有以下问题：</p>
+<ol>
+<li><strong>碎片.</strong> 因为你还是要把不同长度的片段塞进物理地址里，所以不可避免地存在内部碎片（段内没完全用完）和外部碎片（段间有很多 gap）；</li>
+<li><strong>上下文切换开销大.</strong> 这个交换空间的技术开销非常大。</li>
+</ol>
+<p>解决的办法是<strong>分页（Paging）</strong>：把物理地址划分成固定大小的片段。最简单的分页机制可以这样实现：</p>
+<ul>
+<li>开一个<strong>页表（Page Table）</strong>。该表存在于物理内存中，可以通过页表指针（PTP）找到。每个表项包含页基地址和权限位（V 可用性，R 可读性，W 可写性）。</li>
+<li>虚拟地址为页编号 + 偏移量。</li>
+<li>翻译方式为拿着页编号查页表，拿到页表起始地址。然后做诸多检查（检查 bound 和权限），通过即可拼上偏移量得到物理地址。</li>
+</ul>
+<p>在页表里面取相同的页基地址就可以实现共享页。共享页的应用范围如下：</p>
+<ul>
+<li>每个进程的“内核区域”具有相同的页表项；</li>
+<li>不同进程跑了相同的可执行文件，则代码段可以共享；</li>
+<li>用户层系统库也可以共享；</li>
+<li>其他根据需要共享的内存。</li>
+</ul>
+<p>在上下文切换的时候，需要切换 PTP 和页表大小限制。这种机制通过地址翻译和阻止进程自己修改页表实现了保护。</p>
+<p>但是简单页表最大的问题就是页表体积庞大。一般来说页表是 4KB，也就是说 offset 是 12 位。对于 32 位操作系统，虚拟地址的前 20 位就都是 Page ID，页表有 $1048576$ 项；对于 64 位操作系统，页表就有 $4503599627370496$ 项，很明显，这样单是装一个页表都是不可接受的。然而实践中，地址空间里面有用的东西非常稀疏。此处惯用的手法是使用哈希表（称为 Inverted Hash Table）。要么，就是使用动态开点数据结构，体现在具体实现上就是多级页表。此时，无论是几级页表，其表项被叫做 PTE，包含以下两个元素：指向下一级对象（可能是下一级页表基地址，也可能是物理页基地址）的指针，和权限位。</p>
+<p>对于一个 32 位系统，虚拟地址由三段拼成：10 位一级页表索引；10 位二级页表索引；12 位偏移量。地址翻译方式如下：</p>
+<ol>
+<li>MMU 拿着 PTP 找到一级页表基地址；</li>
+<li>根据一级页表索引拿到二级页表基地址；</li>
+<li>根据二级页表索引拿到物理页基地址，拼上 offset 完成翻译。</li>
+</ol>
+<p>x86_64 使用 48 位虚拟地址，四级页表，每一级页表都是 9 位索引。无论如何，这个迭代查找多级页表的操作，叫做页表树遍历（page table tree traversal），由 MMU（Memory Manage Unit）完成。具体地，MMU 接受指令和具体的地址，然后要么（通过查找 cache 或者内存）返回一个具体的物理帧，要么返回错误。</p>
+<h2><span id="高速缓存">高速缓存</span></h2><p>实践中，如果每次访存都要下沉到主存（通常是 DRAM）则开销巨大。然而，程序的访存一般具有一定的局部性：</p>
+<ul>
+<li><strong>时间局部性.</strong> 同一个地址经常在短时间内被多次访问；</li>
+<li><strong>空间局部性.</strong> 短时间内访问的地址通常是连续的。</li>
+</ul>
+<p>因此，现代处理器通常进行高速缓存（Caching），在 CPU 内部有一块东西（通常是 SRAM）里面存储了部分近期读取过的内存数据，访问这个单元比查询内存更快。如果你要访问的地址在 Cache 里面，那么你无需继续往下做 DRAM 访问。其效率度量为 Average Access Time：</p>
+<p>$$<br>\mathrm{AAT} &#x3D; \text{Hit Rate}\times \text{Hit Time} + \text{Miss Rate} \times \text{Miss Time}<br>$$</p>
+<p>如果你要访问的地址不在 Cache 里面，那么称发生了一次缓存不命中（Cache Miss）。缓存不命中有以下来源：</p>
+<ol>
+<li><strong>冷不命中.</strong> 第一次访问某个 Block；</li>
+<li><strong>容量.</strong> Cache 空间有限，存不下所有的东西；想要减少这种不命中唯有增大 Cache 大小；</li>
+<li><strong>冲突.</strong> 即便有时候 Cache 空间有剩余，由于 Cache 的实现方式，可能有多个地址被映射到同一个 Cache 的位置，反复造成驱逐。除了增大 Cache 大小之外，可以增加相联度；</li>
+<li><strong>相干.</strong> 其他进程修改了内存，导致你 Cache 的东西无效了。</li>
+</ol>
+<p>接下来讨论如何实现 Cache。Cache 的基本单元叫做 Block，每个 Block 内部有一些比特。对于每一个虚拟地址，它被分割成以下段：</p>
+<ul>
+<li><strong>Block Address.</strong> 这一段被进一步分为<ul>
+<li><strong>Tag.</strong> 标志位，用来判断缓存是否命中；</li>
+<li><strong>Index.</strong> 用来索引缓存位置；注意，根据局部性的定义，Index 必须是低位。</li>
+</ul>
+</li>
+<li><strong>Block offset.</strong> 顾名思义。</li>
+</ul>
+<p>在 ICS 中我们已经学习过最简单的 Cache 叫做直接映射高速缓存。对于 32 位系统，这种高速缓存有以下参数：若块大小为 $2^M$，Cache 有效容量为 $2^N$ 比特，那么地址的前 $32 - N$ 位就是 Tag，最后 $M$ 位是 Block offset，中间是 Cache Index。直接映射高速缓存被组织成 $2^{32 - N - M}$ 行，每一行包含 $2^M$ 个字节的数据，$32 - N$ 位的 Tag，和一位有效位（Valid Bit）。访存时，先拿着 Index 找到对应的行，然后看 Tag 是否匹配以及有效位是不是 1，如果都是，缓存命中。</p>
+<p>另一种叫做 $r$ 级组相联高速缓存，与上面的区别是 Cache 被组织成 $2^{32 - N - M}$ 组，每一组有 $M$ 行数据，访存时组里有一个对上就命中。</p>
+<p>最极限的情况是全相联高速缓存，它只有一个组。</p>
+<p>对于后两种，如果发生了 Cache Miss，你需要知道组里哪一行需要被驱逐。惯用的手法是随机驱逐或者驱逐上次访问时间最远的（LRU）。</p>
+<p>现在一个新的问题是，Cache 的索引是虚拟地址还是物理地址？按照这个标准，可以有两种不同的 Pipeline：</p>
+<ul>
+<li><strong>Physically-Indexed Caches.</strong> Cache 的索引是物理地址。需要先做完翻译，然后交给 Cache，Cache Miss 之后访存；</li>
+<li><strong>Virtually-Indexed Caches.</strong> Cache 的索引是虚拟地址。CPU 可以拿着虚拟地址去查 Cache，如果未命中再做地址翻译。</li>
+</ul>
+<p>前者的好处是任意数据在 Cache 中有唯一的虚拟地址，而且在上下文切换中 Cache 可以不改变，但是 TLB 是一个关键路径。后者则是完全反过来。实践中处理器（比如 x86 处理器）一般都是第一种。</p>
+<p>考虑 Caching 的另一个原因是，每次地址翻译都需要查询内存，对于三级页表来说，每一次实际上的 DRAM 访问都伴随两次必要的 DRAM 访问（页表查询）。因此，如果我们的页表可以被装在 Cache 当中，自然访存能获得加速。地址翻译专用的 Cache 叫做 TLB（Translation Lookaside Buffer），它是一个全相联高速缓存，里面存的是近期地址翻译的结果。很明显：</p>
+<ul>
+<li>Code 段访问基本上是连续的，局部性非常好；</li>
+<li>栈空间访问必然是具有局部性的；</li>
+<li>data 段的访问局部性不是很好，但是还是存在。</li>
+</ul>
+<p>TLB 自然也可以做成多级的。由于 TLB 是访存的关键路径，它必须非常快。关于 TLB 的效率，直觉上：</p>
+<ul>
+<li>如果 TLB 未命中，开销非常大。</li>
+<li>Index 必须是 Block Address 的低位，然而 code，data，stack 的这些位基本上都是一样的，所以会持续产生冲突不命中。</li>
+</ul>
+<p>基于以上考量，TLB 设计通常遵循以下规范：小（128-512 行）；高连通度（一般是全联通的）。有些时候还会在前面加一个非常小（4-16 个 Entry）的直接缓存高速缓存，称为 TLB 摘要（TLB Slice）来加速全相联的查找。</p>
+<p>在现代机器中，通常虚拟地址的 Offset 段完全盖住了物理地址的 index 和 offset 两个字段。这意味着，你在做地址翻译找页基地址的时候，可以同时拿着 index 去查 cache。这样可以并行地做地址翻译和查 cache。这样相当于在虚拟地址高速缓存和物理地址高速缓存之间拉了一条线。</p>
+<p>注意上下文切换的时候 TLB 里面的东西就无效了。一般来说有以下解决方案：</p>
+<ul>
+<li>上下文切换之后直接把所有行标记成 invalid；这样会造成大量的冷不命中；</li>
+<li>在 TLB 的 Tag 里面加上进程 ID；这样需要硬件协同设计。</li>
+</ul>
+<p>注意如果地址翻译表发生了变化，比如说一个页面被从内存里丢到了磁盘里，那么你必须马上把 TLB 的对应表项给 invalid 掉，不然后续地址翻译会出问题。</p>
+<h2><span id="需求分页">需求分页</span></h2><p>如果地址翻译中，发生了异常，那么就会返回 Page Fault。可能的原因包括：PTE 被标记不合法，没有权限，或者<strong>缺页</strong>。这时候内核会被唤醒来处理错误，对于不合法的问题，一般地保护措施是直接终止执行。但是缺页是必然出现且必须解决的。原因是，现代程序使用的空间通常非常大，然而它不会随时使用全部的空间。比如说，一个统计数据是，一个程序的 90% 的时间都只花在 10% 的代码上（90-10 定律）。那么，你把所有的代码都存在主存里，就很浪费空间了。因此，解决方法是进行<strong>需求分页（Demand Paging）</strong>，简单来说就是将主存视为硬盘的 Cache。所谓的缺页就是“主存不命中”。</p>
+<p>这个特殊的 Cache 的结构有以下要点：</p>
+<ul>
+<li>块大小是一页的大小（4KB）。</li>
+<li>因为地址翻译会帮你找到对应的行，所以可以视为全相联的。</li>
+<li>定位 Page 的方式是先查 TLB，查不到就进行地址翻译。</li>
+<li>驱逐策略还是随机或者 LRU 之类的，但是有另外的说法，本节最后展开；</li>
+<li>如果没有命中，下到磁盘去找；</li>
+<li>写策略必须是写回（不然每次都要访问硬盘开销太大）</li>
+</ul>
+<p>这里，PTE 的有效位就显得格外重要了。如果一个 PTE 被标记成 valid，那么表示 PTE 指向主存中的一个位置。否则，这表示页面不在主存中，PTE 中的信息可以指示你在磁盘里面找到对应的页面的备份。访问 invalid 的 PTE 之时立即触发页错误，然后操作系统将负责：</p>
+<ol>
+<li>选择一个要驱逐的页面（或者一个空页面）。</li>
+<li>如果该页面是脏的，要将其写回硬盘。</li>
+<li>修改它的 PTE，和对应的 TLB（如果有）。</li>
+<li>从磁盘中拉取正在访问的这个页面。</li>
+<li>修改当前页面的 PTE。</li>
+<li>返回用户态。</li>
+<li>修改当前页面的 TLB（因为本次地址翻译的成功时间点在返回用户态之后）。</li>
+</ol>
+<p>关于空页面的选取，主要是依靠以下东西：</p>
+<ol>
+<li>操作系统维护一个 free list，里面存当前空闲的所有块；</li>
+<li>Unix 有一个回收器（reaper），在主存快要满了的时候，写回脏页面并且清除一些很久没有用过的（干净）页面。</li>
+</ol>
+<p>磁盘上有一个专门的区域用来保存这些 Page（可以被视为一个文件），称为 swap file。</p>
+<p>注意，4 这一步是开销巨大的磁盘访问，OS 要挂起当前线程，执行其他线程。需求分页和虚拟内存协同起来，可以实现以下操作：</p>
+<ol>
+<li>扩展堆栈的时候，只需要开一个新的页。</li>
+<li>Fork 的时候，可以直接复制页表，PTE 指向父进程的物理地址，但是被标记成 NO-WRITE。发生写操作的时候懒惰地复制页面。</li>
+<li>用 MMAP 来实现共享区域，以及随机访问磁盘上的文件。</li>
+</ol>
+<p>需求分页的效率用以下的有效访问时间（Effective Access Time）刻画：</p>
+<p>$$<br>\text{EAT} &#x3D; \text{Hit Rate} \times \text{Hit Time} + \text{Miss Rate}\times \text{Miss Time} &#x3D; \text{Hit Time} + \text{Miss Rate}\times \text{Miss Penalty}<br>$$</p>
+<p>然后我们来考虑 Paging 的驱除策略。直观上可以想象这几种：</p>
+<ul>
+<li><strong>FIFO.</strong> 将主存视为一个循环队列。<em>可以想象这东西会把频繁访问的东西扔掉。</em></li>
+<li><strong>RANDOM.</strong> 随机驱除。<em>不好分析</em></li>
+<li><strong>MIN.</strong> 去掉下一次使用的时间最靠后的。<em>可以证明最优，但是我们没法预测未来。</em></li>
+<li><strong>LRU.</strong> 去掉上一次使用时间最早的。<em>根据局部性，最近没有用的东西将来很可能也不会用。因此这是 MIN 的一个近似。</em></li>
+</ul>
+<p>直观展示一个驱除策略的效果，可以画出 Page Faults - Number of Frames 曲线。对于 MIN 和 LRU，可以证明这个曲线都是单调递减的。但是对于 FIFO 则不然，这叫做 Bélády’s anomaly。</p>
+<p>实践中，因为主存非常珍贵，我们甚至不希望开很多位来存一个帧上次被访问的时间，或者开一个数据结构来维护这个最小值。对于 LRU 有一个零阶近似的方案是 Clock 算法：</p>
+<ol>
+<li>将所有帧顺时针排成一个环，每个帧附加一个叫做 use 的 bit。</li>
+<li>顺时针扫描。如果 use 是 $1$，将其改成 $0$；直到遇到空帧或者遇到一个 use 为 $0$ 的帧。</li>
+</ol>
+<p>这个策略一方面可以证明均摊 $O(1)$，另一方面确实也近似了 LRU。自然可以想到这个算法的拓展：$N$ 次机会 Clock 算法。每个帧额外配备一个计数器，如果发现 use 为 $1$，则清空 use 和计数器。如果 use 为 $1$，将计数器加一。如果遇到一个计数器为 $N$ 的东西，驱除这个页面。</p>
+<p>容易发现 $N$ 越大，堆 LRU 的近似越精确。而算法是均摊 $O(N)$ 的。这里有一个 trade-off。另一个问题是对于脏页面，其写回开销也非常大。因此，实践中对于干净页面和脏页面并不是一视同仁的，而是对于干净页面置 $N &#x3D; 1$，对于脏页面，$N &#x3D; 1$ 时写回，$N &#x3D; 2$ 时驱除。</p>
+<p>另一个近似 LRU 的方法是 Second-Chance List 算法。</p>
+<ol>
+<li>开两个队列，叫做 Active list（有读写权限）和 SC list（没有权限）；</li>
+<li>如果一个页面在 Active list 里，可以直接访问。</li>
+<li>否则报 Page Fault。<ol>
+<li>如果这一页在 SC List 里面，将其弹出并插入 Active List 的头部；</li>
+<li>如果这一页不在 SC List 里面，直接插入 Active List 的头部。</li>
+<li>Active List 大小有限。任意时刻如果它溢出了，弹出队头将其插入队尾。SC List 大小有限，任意时刻如果它移除了，驱除队尾。</li>
+</ol>
+</li>
+</ol>
+<p>这个算法相当于是在 LRU 和 FIFO 之间拉了一条线：如果两队列加起来大小就是 Page 数量，那么这就是 LRU；如果 SC List 大小为 0，这就是 FIFO。</p>
+<p>可以额外维护一个 Free List 存所有的空帧来提速。</p>
+<p>最后还剩一些遗留问题。</p>
+<p><strong>反向页映射.</strong> 驱除一页的时候，怎么直到要 invalid 哪个 PTE？在有共享段的时候这更难了。可能的选项是</p>
+<ul>
+<li><strong>PTE 链表.</strong> 那么开销可能比较大。</li>
+<li><strong>基于对象的反向映射.</strong> 注意你的每个共享的 Page 通常都是某一个唯一的对象（比如说代码）的部分，因此页表只需要存相对这个对象的位置。而在驱除的时候，你只需要 invalid 这个对象就可以。</li>
+</ul>
+<p><strong>进程间的内存分配.</strong> 上下文切换时，肯定不需要把一个进程的所有页面全都放进 swap space。在这种情况下，有两种页面置换策略：</p>
+<ul>
+<li><strong>全局置换.</strong> 一个页面可以驱除任何一个页面，包括别的进程占用的页面；</li>
+<li><strong>局部置换.</strong> 每个进程被分配了一些页面，它只能驱除自己被分配的页面。此处，分配页面的方法可以有：<ul>
+<li>均匀分配，所有进程分配等量的内存；</li>
+<li>正比于进程的空间大小；</li>
+<li>按照优先级分配；</li>
+<li>根据 Page Fault 率调整。常见的手法是设置一个 Lower bound 和一个 upper bound。如果 page fault 次数超过上界，给它分配更多空间；如果低于下界，减少它的空间。</li>
+</ul>
+</li>
+</ul>
+<p><strong>抖动.</strong> 称一个程序正在使用的所有 Page 为 working set。如果剩余空间小于 working set 的大小，则会出现页面在磁盘和内存之间反复跳跃。这种现象称为抖动（Thrashing）。</p>
+<p>常见的解决方法是如果发现 working set 大小超过剩余空间，立即挂起进程。</p>
+<p><strong>减小冷不命中.</strong> 有时候读入是非常线性的。你可能可以预读一堆页面，这需要你写一个程序来跟踪 woking set。</p>
+<h1><span id="ix2fo">I&#x2F;O</span></h1><p>这一节讲了一堆神秘体系结构，不知道要干什么，此处抄一下 PPT，可能没什么逻辑。我们默认读者熟悉硬盘和 SSD 的结构，课件中对于这两个东西的大量介绍不抄。</p>
+<p>很明显，计算机没有 I&#x2F;O 就没有作用了。然而在 I&#x2F;O 时，涉及到的设备多种多样。我们希望：</p>
+<ol>
+<li>提供不同硬件设备的统一接口；</li>
+<li>处理硬件错误和传输错误；</li>
+<li>在未知硬件是否会卡住的情况下，管理硬件。</li>
+</ol>
+<p>在体系结构课中我们曾经学过，I&#x2F;O 的实现依靠 I&#x2F;O 控制器。处理器通过像访问内存一样，读写其中的 I&#x2F;O 寄存器来访问 I&#x2F;O 功能。这里，寄存器的编制可以是分开编址（通过特制的 in &#x2F; out 访问）或者统一编址（寄存器被编进物理地址空间，用 load &#x2F; store 指令访问）。</p>
+<p>现代 I&#x2F;O 系统的一个重要组成部分是总线。总线是多余两个模块之间传送信息的公共通路，以及附加其上的协议。一般来说，靠近处理器一端带宽高，但是传输模式不灵活；靠经 I&#x2F;O 子系统段带宽低，但是传输模式灵活。使用总线使得我们用一套线缆维护了 $O(n^2)$ 个设备之间的问题。代价就是每次只有一个事务可以被执行，其他的都必须等待。</p>
+<p>关于 I&#x2F;O，有这样一些参数：</p>
+<ul>
+<li><strong>数据颗粒度.</strong> 比特（比如键盘） &#x2F; 块（比如磁盘等）；</li>
+<li><strong>访问模式.</strong> 序列（比如磁带）&#x2F; 随机访问（比如磁盘等）；有些设备需要持续监控（polling），有些在它们需要服务的时候发起中断。关于 polling 和中断，两者的优缺点如下：<ul>
+<li>Polling：优点是瞬时开销比处理中断小，但是在长时间或者不可预测的 I&#x2F;O 操作时多耗费很多周期；</li>
+<li>中断：可以很好地处理不可预测的事件，但是处理一次中断开销比较大。</li>
+</ul>
+</li>
+<li><strong>传输机制.</strong> 程序控制 I&#x2F;O，或者直接存储器访问方式（DMA）。</li>
+</ul>
+<p>为了操作不同的设备，需要的一个关键组件是设备驱动程序。一个设备的驱动程序系指内核中一段和它相关的特定代码，用于与该设备交互。所有的设备驱动程序需要给出统一的 I&#x2F;O 接口，对于特殊的操作，用 <code>ioctl()</code> 函数完成。驱动程序通常分成两个部分：</p>
+<ul>
+<li><strong>Top half.</strong> 运行截至系统调用函数的部分。需要实现 <code>open(), close(), read(), write(), ioctl()</code> 之类的接口。这部分将会指示设备开始 I&#x2F;O，然后可能会让线程陷入睡眠；</li>
+<li><strong>Bottom half.</strong> 作为中断处理程序的部分。用于获取输入或者传输输出。</li>
+</ul>
+<p>那么不同的设备需要实现哪些接口呢？可以按照设备的类型分类：</p>
+<ul>
+<li><strong>Block Device.</strong> 访问块状数据的设备，如磁盘，磁带，DVD-ROM。需要支持 <code>open(), read()</code>，甚至 <code>write(), seek()</code>。</li>
+<li><strong>Character Device.</strong> 如键盘，鼠标等，每次只传输一个字节的。需要实现 <code>get(), put()</code>。</li>
+<li><strong>Network Devices.</strong> 需要实现一众 <code>socket</code> 接口。</li>
+</ul>
+<p>在上端确实发起了 I&#x2F;O 操作之后，这个时间操作系统是否需要等待？这里也需要看接口的类型：</p>
+<ul>
+<li><strong>Blocking Interface.</strong> 让当前线程 sleep，直到数据准备好；</li>
+<li><strong>Non-blocking Interface.</strong> 返回非常快，因此直接等到数据传输成功；</li>
+<li><strong>Asynchronous Interface.</strong> 立即返回 buffer 的地址，在 buffer 被装满或者取走之后内核通知用户。</li>
+</ul>
+<p>最后我们来刻画 I&#x2F;O 的性能。这主要需要看两个量：响应时间或称为延迟（每个操作需要的时间），带宽或吞吐量（某个操作发生，或者比特传输的速率）。回顾 I&#x2F;O 操作的 pipeline，可以发现对于延迟而言，其主要产因分三部分：来自软件（可以用排队来刻画），来自硬件控制器，和来自 I&#x2F;O 设备。此处我们主要来分析排队的部分。</p>
+<p>首先考虑最简单的确定性情形：所有请求顺次以固定时间间隔到达，用一个固定时间完成。这里只需要看两个参数：服务率 $\mu &#x3D; 1 &#x2F; T_s$（其中 $T_s$ 是完成一次服务需要的时间），和到达率 $1 &#x2F; T_a$（其中 $T_a$ 是到达的时间间隔）。显然，吞吐量关于 $\lambda &#x2F; \mu$ 呈现出先线性增长后不变的态势。若 $\lambda \leq \mu$，那自然永远不会排队，而若 $\lambda &gt; \mu$，则队列会持续增大。因此排队时延随着时间增长显然会呈现出先不变后线性增长的态势。</p>
+<p>实践中，请求总是爆发性地到来的。为了分析这种东西，我们需要排队论。这里我们做两个基本假设：</p>
+<ol>
+<li>系统达到平衡态，队列长度没有限制；</li>
+<li>两个请求到来之间的时间间隔服从某一无记忆性地随机分布（泊松过程）。</li>
+</ol>
+<p>模型中一般考虑以下参数：</p>
+<ul>
+<li>$\lambda$：请求到达的平均时间；</li>
+<li>$T_{s}$：服务一次请求的平均时间（即 $m$）；其倒数就是服务率 $\mu$，利用率为 $u :&#x3D; \lambda &#x2F; \mu &#x3D; \lambda T_s$；</li>
+<li>$C$：服务时间的变异系数（$\sigma^2 &#x2F; m^2$）；</li>
+</ul>
+<p>我们希望计算 $T_q$（排队的时间）和平均队列长度 $L_q &#x3D; \lambda T_q$（根据 Little 定律）。计算表明 </p>
+<p>$$<br>T_q &#x3D; T_s\times \frac 12(1 + C)\times \frac{u}{1 - u}<br>$$</p>
+<p>$C &#x3D; 1$ 的情况叫做 M&#x2F;M&#x2F;I 队列，其他情况叫做 M&#x2F;G&#x2F;I 队列。值得一提的是，根据磁盘的特性，如果在磁盘访问这里有了一个这样的队列，除了直接 FIFO 之外，还可以对磁盘访问做如下优化：</p>
+<ul>
+<li><strong>SSTF（Shortest Seek Time First）.</strong> 在队列中找转圈时间最小的那个来服务。显然，这个策略可能导致饥饿。</li>
+<li><strong>SCAN.</strong> 开环，把队列分成在当前磁头左边和右边，然后先倒着服务左边，再顺着服务右边。这解决了饥饿，但是和 SSTF 的味道可能不是很一样。</li>
+<li><strong>C-SCAN.</strong> 让磁盘只往一个方向转。</li>
+</ul>
+<h1><span id="文件系统">文件系统</span></h1><p>文件系统是操作系统中负责将硬盘的区块接口转换成文件、目录之类的对象的一个层次。它将受限的硬件接口（只是普通的 block 序列）转化成更方便、有用的接口，其提供：</p>
+<ul>
+<li><strong>文件命名.</strong> 通过名字查找文件，而非 block 的编号；</li>
+<li><strong>文件组织.</strong> 文件名被组织成树状的目录，文件内容被映射到 block 中；</li>
+<li><strong>保护.</strong> 访问权限等；</li>
+<li><strong>可靠性.</strong> 防止文件因为软件崩溃和硬件错误而损坏。</li>
+</ul>
+<p>文件的基本实体包含以下两类：</p>
+<ul>
+<li><strong>文件.</strong> 用户可见的逻辑上的 block 序列；</li>
+<li><strong>目录.</strong> 用户可见的名字到文件的映射。</li>
+</ul>
+<p>从用户的视角看，一个文件是一个持久的数据结构。而从系统的视角来看，文件就是字节序列，至于它以什么样的数据结构形式存在于磁盘上，是无所谓的。在操作系统内部，文件就是一系列 block。一般来说 block 的大小不小于 sector 的大小，为 4KB。</p>
+<p>注意，文件操作的一切单元都是 block（这是磁盘读写的单元）。所以即便你只需要写一个字节，也需要拉出整个 block。现代操作系统处理这个事情的手段主要是 buffer。</p>
+<p>一个磁盘可以被视为 sector 的一维数组。其中每个 sector 的物理位置都由以下三元组描述：$[sylinder, surface, sector]$。实践中，每个 sector 都有一个整数的逻辑地址。磁盘控制器负责将逻辑地址翻译成物理位置。对操作系统，只提供其逻辑地址（Logical Block Addressing）。</p>
+<p>一个文件系统至少要能做到：</p>
+<ol>
+<li>你需要知道哪些 block 对应哪些文件（对于一个文件，要知道它存在哪里）；</li>
+<li>你需要直到一个目录底下有哪些文件名；</li>
+<li>你需要直到哪里有空的 block（写入新的内容时，这一点很重要）。</li>
+</ol>
+<p>维护这些东西的必要信息都存在于磁盘上的某处。此外，还需要注意必须考虑磁盘上的东西的持久性。因为磁盘是非易失性存储，所以在关机之后，文件系统必须保持有意义的状态。</p>
+<h2><span id="文件系统的设计要点">文件系统的设计要点</span></h2><p>设计文件系统的时候，需要注意以下因素：</p>
+<ol>
+<li><strong>尽量优化访存的性能。</strong> 多用连续的访问，最小化寻找时间。<em>这一点非常难。</em></li>
+<li><strong>读写前先打开文件。</strong> 此时可以检查权限，和寻找文件的位置等；</li>
+<li><strong>使用文件时必须确定其大小。</strong></li>
+<li><strong>文件需要被组织成目录。</strong></li>
+<li><strong>需要仔细分配和释放块。</strong> 这其实本质上就是 1 的在线要求。</li>
+</ol>
+<p>据此，通常的文件系统的包含以下四个成分：目录（directory），索引结构（index structure），存储区块（storage blocks），空闲空间映射（free space map）。</p>
+<p>回忆文件描述符表当中，每个描述符指向一个 OFD。这个 OFD 会告诉你打开的是哪个文件，手段是给出这个文件的文件编号（file number，<code>inumber</code>）。所谓的<strong>目录</strong>，就是文件名到文件编号的映射。每一个 (file_number, file_name) 二元组，称为一个目录表项（directory entry）。此处，操作系统提供如下的保护：任意进程不允许直接用 <code>read</code> 阅读目录的原始比特序列。它只允许通过 <code>readdir</code> 函数来枚举这个映射中的二元组，这不会暴露目录的原始比特序列。以下几个系统调用用于访问目录：</p>
+<ul>
+<li><code>open, creat, readdir</code>，可以用来打开并遍历目录；</li>
+<li><code>mkdir / rmdir</code> 可以用于给目录添加或者删除 entry；</li>
+<li><code>link / unlink</code> 用来创建链接（可以理解成文件的别名）。</li>
+</ul>
+<p>每一个地址空间，都有一个指针，指向它用来解析文件名的目录，称为 current working directory。每个文件自己都在磁盘里面有一个 inode，里面包含这个文件的全部文件描述。每次调用 open，它就会从 cwd 开始（如果是相对路径），找到磁盘上的 inode，然后将其拉到内存中的全局打开文件表里，然后将对应进程的文件描述符表的指针指向它。</p>
+<h2><span id="case-study">Case Study</span></h2><p><strong>File Allocation Table.</strong> 假设我们现在已经有了一个手段将文件名翻译成 file number。那么拿着这个 file number 怎么找到整个文件呢？FAT 是微软的的系统系统，它主要是这样的一个数据结构，存在磁盘上：</p>
+<ul>
+<li>一个大小等于磁盘区块数目的表。</li>
+<li>对于每个文件，将其占有的区块按顺序穿成一个链表。</li>
+<li>链表的根节点编号就是 file number。</li>
+<li>对于空闲区块，用一个 free list 来存。</li>
+</ul>
+<p>如果你要格式化一个硬盘，只需要将所有 block 清空，然后把 FAT 每一项都标记成功。快速格式化只需要做后者。</p>
+<p>在 FAT 中，目录被组织成一个链表。其中，root 的链表的根节点存在一个良定义的位置，一般是 2 号。</p>
+<p><strong>UNIX File System.</strong> 文件被组织成一个 inode 的数组，下标就是 file number。inode 主要包含文件的元数据，和一个多层级的树状结构用来找到文件的区块。具体地</p>
+<ul>
+<li><em>文件元数据.</em> 包含文件所属的 User，Group，9 个权限位。</li>
+<li>对于小文件，它包含 12 个直接指针，直接指向数据区块；</li>
+<li>对于大文件，它包含若干间接指针，间接指针将指向一个全是指针的区块。回忆一个区块大小是 4KB，因此它可以包含 1024 个指针。那么 2 级间接指针可以覆盖 4MB 内存，3 阶可以覆盖 4 GB，依次类推。</li>
+<li>倍增决定一个文件有几个直接指针和间接指针，共同构成对整个文件的索引。</li>
+</ul>
+<p>后来，Berkeley 的研究人员改进了这个文件系统，提出了 FFS。它的改动主要有：将 inode 的位置重新安排；用 bitmap 存空闲块，而不是 free list；保留 10% 空间；尝试连续编排文件。重新编排 inode 的动机主要是：</p>
+<ol>
+<li>所有 inode 都在同一个位置，而且通常是磁盘的外圈轨道。这导致两个问题：磁头故障可能会直接摧毁整个文件系统；inode 离文件太远，在读小文件的时候需要来回转，非常耗时。</li>
+<li>创建文件的时候，你通常不知道它有多大，因此难以知道它被放在何处，增加优化难度。</li>
+</ol>
+<p>在 FFS 中，磁盘被分割成不同的 block group。其中，目录和其中的文件都被分在同一个 block group，这些文件的 inode 和这个 block group 的 bitmap 也被放在一起。当文件长度变大时，在 bitmap 上查后继然后写这些后继的区块。</p>
+<p>对于大目录，我们用 B 树来加速查找。</p>
+<p><strong>Windows NTFS（New Technology File System）.</strong> 文件数据被组织成一个数据库状的 MFT（Master File Table），其中所有的东西都是 <code>&lt;attribute : value&gt;</code> 对的序列。具体来说，MFT 的一项最大有 1KB，里面包含：</p>
+<ul>
+<li>如果是小文件，直接包含文件的数据；</li>
+<li>文件的开始 block，大小；</li>
+<li>对于更大的文件：指向其他的 MFT 表项的指针。</li>
+</ul>
+<p>目录都用 B 树实现。</p>
+<h2><span id="文件系统的细节">文件系统的细节</span></h2><p><strong>内存映射文件.</strong> 传统的 I&#x2F;O 进行时需要在内存中的 buffer 和地址空间中显式传输数据，这样开销非常大。常见的手段是，将文件直接 mmap 到地址空间中，即虚拟内存上的某些 Page 就直接映射到磁盘上的具体的 Page，加载可执行文件的时候就使用了这种手法。</p>
+<p>系统提供了以下接口：<code>mmap(void *addr, size_t len, int prot, int flags, int fd, off_t offset)</code>，用于将某文件从某处开始的东西映射到虚拟内存中 addr 开始的区块，并指定权限。</p>
+<p>进程很容易借助一个文件，通过 MMAP 实现区块共享。</p>
+<p><strong>缓冲区高速缓存.</strong> 内核要修改磁盘，必须把磁盘上的 block 复制到主存，修改之后写回。这个过程通常有一些局部性，因此可以在内存中设置一个缓冲区用于高效访问数据，目录，inode 和 freemap。这个 cache 有以下要点：</p>
+<ul>
+<li>完全由操作系统软件实现，和 CPU 中的 Cache 不一样；</li>
+<li>置换策略是 LRU。因为我们完全承担得起 LRU 的开销。当然这样有一个弊端就是如果一个应用要扫描整个文件系统，LRU 就会把 cache 里面所有东西驱除，换成一些可能只用这一下的东西。</li>
+<li>这个 Cache 的大小是动态决定的，使得文件访问和驱除页面造成的磁盘操作达到平衡。</li>
+<li>使用预取策略。</li>
+<li>写策略为写回。但是必须定期写回数据，来减小系统崩溃的损失。</li>
+</ul>
+<p><strong>几个重要的性质.</strong> 文件系统还需要考虑以下几个重要性质：</p>
+<ul>
+<li><strong>Availability.</strong> 系统能够接受并处理请求的概率。用百分数里面 9 的个数来衡量；</li>
+<li><strong>Durability.</strong> 文件系统的纠错能力；</li>
+<li><strong>Reliability.</strong> 系统在规定时间内完成其全部功能的概率；</li>
+</ul>
+<hr>
+<p>如何增加系统的 Durability？</p>
+<ul>
+<li>在磁盘上，用 Reed-Solomon 纠错码进行纠错。</li>
+<li>保证写操作在短时间内可以存货。比如说你可以用所谓的 NVRAM 来做 buffer cache。</li>
+<li>备份数据。这里的关键因素是，备份的位置应当尽可能独立（比如说备份在两张盘上，这样一张炸了另一张还能用）。</li>
+</ul>
+<p>为备份数据，有一类专门的技术叫做独立磁盘冗余阵列（RAID，Redundant array of Independent Disks）。RAID 的方案分为</p>
+<ul>
+<li><strong>RAID 1.</strong> 每个盘都被完整的复制到另一个磁盘上。对于这种方案，写操作需要两次同步的写，但是读操作可以并行起来。如果一个磁盘炸了，可以马上换掉坏盘，然后通过另一个来恢复。此时必须确保你随时都有能用的空盘（Hot Spare）。</li>
+<li><strong>RAID 5.</strong> 假设你有 $N$ 个盘，每个盘有 $M$ 个 block。我们这样存储：<ul>
+<li>先令第 $i \bmod N$ 个磁盘的第 $i \bmod N$ 为第 $i$ 个校验块（这样将所有 block 视为一个 $M\times N$ 的矩阵，每一行都有一个校验块）。</li>
+<li>然后数据矩阵被从上到下，从左到右地被填入非校验快。</li>
+<li>第 $i$ 行的校验块存储这一行的数据块的 xor sum。</li>
+<li>如果一个磁盘炸了，可以拿着其他磁盘和校验块恢复数据。这样改进了 RAID 每次写操作要写两次的问题。</li>
+</ul>
+</li>
+<li><strong>RAID 6.</strong> 实践中磁盘很大，可能你在恢复数据的过程中有一个盘又炸了。为此 RAID 使用更复杂的纠错码而不只是奇偶校验，EVENODD 码或者 Reed-Solomon 之类的。</li>
+</ul>
+<p>RAID 6 启发我们做一种叫做 Geographic Replication 的操作。比方说，对于 4 个片段的数据，我们用 Reed-Solomon Code 生成 16 个副本，根据经典编码理论的知识，我们知道随便拿着这 16 个中的 4 个都可以拿到完整的数据。因此我们把这些东西分布式地存起来。这样做 durability 非常高，因为你很难销毁 12 个副本，而且非常容易读。但是必须等 16 个东西都在线地时候才能写。</p>
+<hr>
+<p>如何增加文件系统的 Reliability？此处还需要解决磁盘断电、系统崩溃这些问题。此时，可能有些正在进行的操作会丢失。RAID 并不能处理这种情况。这些要求一个文件系统能提供类似于可持久化的功能来回滚版本。有一些经典的实现 Reliability 的方法：</p>
+<ul>
+<li><strong>Careful Ordering and Recovery.</strong> 仔细规定操作磁盘的顺序，保证如果一列操作从中间断了，要能够被检测或者修复。这个看起来不是很本质。</li>
+<li><strong>Copy on Write.</strong> 写的时候复制一个新的块，对于改动小的块直接复用。这似乎是标准的可持久化套路。</li>
+</ul>
+<p>更一般地，实现 Reliability 需要你实现如下概念：一个<strong>事务</strong>系指一个原子的操作，其将文件系统从一个自洽地状态转移到另一个。如果事务进行途中出现了错误或者与其他事务冲突，都需要回滚，只有成功执行这个事务才被确认（commit）。容易想到的一种实现方法是，开一个日志。一个事务在它被写进日志之后被承认。虽然可能文件系统没有被立即修改，但是数据还在日志里面。课件上说所谓的“Log Structured Filesystem”中一切数据以 log 的形式存在，我并没有理解这句话在说什么。</p>
+<p>基于日志的 reliability 的一种实现方法叫做 <strong>Journaling</strong>。在这种做法中，我们不直接修改磁盘。我们首先把要更新的东西作为事务存进一个 Log（也在磁盘上），前后用 Start 和 Commit 包住。一旦修改被写入 Log，就可以写进文件系统。一个修改一旦成功执行，就删掉 Log 中的表项。此时便有维护文件系统一致性的手段：</p>
+<ul>
+<li>如果在写 Journal 的时候断电，那么存在有 start 没有 commit 的事务。我们找到这种东西，直接删掉。</li>
+<li>如果在某个操作 apply 的时候断电，那么你可以直接从一个 start 处开始执行到 commit。</li>
+</ul>
+<p>可以想象这个 jounaling 开销很大，因为每次写操作都要做两遍。现代操作系统确实做了 journaling，但是只针对文件元数据。</p>
+<p><strong>分布式系统.</strong> 摆了。</p>
+
     </div>
 
     
@@ -805,6 +1199,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/05/30/ConvexOptimizationRevision/" rel="next" title="Revision | 凸分析与优化方法">
+                  Revision | 凸分析与优化方法 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -830,6 +1227,20 @@
     </span>
     <span class="author" itemprop="copyrightHolder">King Strange</span>
   </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">429k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">25:59</span>
+  </span>
+</div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
   </div>
 
