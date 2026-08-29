@@ -19,16 +19,17 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题     参考文献 附录 A：补充结论 B：一些习题">
+    <meta name="description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题 直接解原始问题 对偶相关的算法     参考文献 附录 A：补充结论 B：一些习题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Revision | 凸分析与优化方法">
 <meta property="og:url" content="http://example.com/2026/05/30/ConvexOptimizationRevision/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题     参考文献 附录 A：补充结论 B：一些习题">
+<meta property="og:description" content="基础定义 线性代数 $\mathbb{R}^n$ 上的点集拓扑 $\mathbb{R}^n$ 上的分析   凸分析 凸集 凸函数   凸优化 无约束优化 梯度下降 牛顿法 牛顿法的改进 优函数优化   有约束优化 对偶问题 直接解原始问题 对偶相关的算法     参考文献 附录 A：补充结论 B：一些习题">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/armijo-rule.png">
+<meta property="og:image" content="http://example.com/picture/convex_optimization_implifications.png">
 <meta property="article:published_time" content="2026-05-30T13:48:48.000Z">
-<meta property="article:modified_time" content="2026-06-13T15:49:58.527Z">
+<meta property="article:modified_time" content="2026-06-17T04:04:22.413Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/picture/armijo-rule.png">
@@ -115,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">线性代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">$\mathbb{R}^n$ 上的点集拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">$\mathbb{R}^n$ 上的分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">凸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">凸集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">凸函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">凸优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">无约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.1.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.2.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.3.</span> <span class="nav-text">牛顿法的改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.4.</span> <span class="nav-text">优函数优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">有约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.1.</span> <span class="nav-text">对偶问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">A：补充结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">B：一些习题</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">基础定义</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">线性代数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">$\mathbb{R}^n$ 上的点集拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">$\mathbb{R}^n$ 上的分析</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">凸分析</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">凸集</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">凸函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">凸优化</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.1.</span> <span class="nav-text">无约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.1.</span> <span class="nav-text">梯度下降</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.2.</span> <span class="nav-text">牛顿法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.3.</span> <span class="nav-text">牛顿法的改进</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.1.4.</span> <span class="nav-text">优函数优化</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">3.2.</span> <span class="nav-text">有约束优化</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.1.</span> <span class="nav-text">对偶问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.2.</span> <span class="nav-text">直接解原始问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link"><span class="nav-number">3.2.3.</span> <span class="nav-text">对偶相关的算法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">附录</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.1.</span> <span class="nav-text">A：补充结论</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">5.2.</span> <span class="nav-text">B：一些习题</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -130,7 +131,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">95</span>
+          <span class="site-state-item-count">96</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -236,7 +237,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-06-13 23:49:58" itemprop="dateModified" datetime="2026-06-13T23:49:58+08:00">2026-06-13</time>
+      <time title="Modified: 2026-06-17 12:04:22" itemprop="dateModified" datetime="2026-06-17T12:04:22+08:00">2026-06-17</time>
     </span>
 
   
@@ -246,14 +247,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>22k</span>
+      <span>27k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1:19</span>
+      <span>1:38</span>
     </span>
 </div>
 
@@ -287,6 +288,8 @@
 </li>
 <li><a href="#%E6%9C%89%E7%BA%A6%E6%9D%9F%E4%BC%98%E5%8C%96">有约束优化</a><ul>
 <li><a href="#%E5%AF%B9%E5%81%B6%E9%97%AE%E9%A2%98">对偶问题</a></li>
+<li><a href="#%E7%9B%B4%E6%8E%A5%E8%A7%A3%E5%8E%9F%E5%A7%8B%E9%97%AE%E9%A2%98">直接解原始问题</a></li>
+<li><a href="#%E5%AF%B9%E5%81%B6%E7%9B%B8%E5%85%B3%E7%9A%84%E7%AE%97%E6%B3%95">对偶相关的算法</a></li>
 </ul>
 </li>
 </ul>
@@ -1212,7 +1215,7 @@
 
 <p>证明也是类似的。这个做法称为加性半平方法。</p>
 <h2><span id="有约束优化">有约束优化</span></h2><p>现在考虑附加等式约束和不等式约束的优化问题：</p>
-<p>$$<br>\begin{aligned}<br>   \min_{\boldsymbol{x}} \quad &amp; f(\boldsymbol{x}) \\<br>   \text{s.t.} \quad  &amp; g_i(\boldsymbol{x}) \leq 0 \\<br>   &amp; h_i(\boldsymbol{x}) &#x3D; 0<br>\end{aligned}<br>$$</p>
+<p>$$<br>\begin{aligned}<br>   \min_{\boldsymbol{x}} \quad &amp; f(\boldsymbol{x}) \\<br>   \text{s.t.} \quad  &amp; g_i(\boldsymbol{x}) \leq 0 \\<br>   &amp; h_i(\boldsymbol{x}) &#x3D; 0<br>\end{aligned} \label{def:constr_optimzation}<br>$$</p>
 <p>其可行域记作 $\mathcal{F}$。一个点 $\boldsymbol{x}_0$ 可能使得若干条不等式约束取等，这些约束记为 $\mathcal{A}(\boldsymbol{x}_0)$。开始之前我们先讨论一些基本的最优性条件。</p>
 <div class="note success"><p><strong>定义 3.2.1（可行方向）.</strong> 对于 $\boldsymbol{d}\in \mathbb{R}^n, \boldsymbol{x}_0\in \mathcal{F}$，称 $\boldsymbol{d}$ 是一个可行方向当且仅当</p>
 <p>$$<br>\exists \delta &gt; 0, \forall \tau \in [0, \delta], \quad \boldsymbol{x}_0 + \tau\boldsymbol{d}\in \mathcal{F}<br>$$</p>
@@ -1243,7 +1246,9 @@
 <p><strong>证明.</strong> 一条等式约束可以被翻译成两条不等式约束，因此只需要考虑只有不等式约束的情况。注意存在 $\boldsymbol{d}$ 处于两个集合的交等价于</p>
 <p>$$<br>\begin{cases}<br>   \nabla f(\boldsymbol{x}_0)^\top \boldsymbol{d} &lt; 0 \\<br>   \nabla g(\boldsymbol{x}_0)^\top \boldsymbol{d} \leq 0<br>\end{cases}<br>$$</p>
 <p>直接调用定理 2.1.7 得到拉格朗日乘子条件和对偶可行性成立。若一条不等式约束没有激活，那么应当置 $\lambda_i &#x3D; 0$，因此互补松弛条件也成立。<div style="text-align: right">$\blacksquare$</div></p>
-<p>现在我们知道 KKT 条件等价于最优点的一个必要条件。我们尝试将其加强：考虑这样一个集合</p>
+<p>现在我们知道 KKT 条件等价于最优点的一个必要条件。对于什么样的最优点，KKT 条件成立？首先由于下降锥是一个半平面，所以 $\mathcal{C}_l(\boldsymbol{x}_0)\cap \mathcal{C}_{dd}(\boldsymbol{x}_0) &#x3D; \varnothing$ 等价于</p>
+<p>$$<br>\nabla f(\boldsymbol{x}_0) \in \mathcal{C}_l(\boldsymbol{x}_0)^*<br>$$</p>
+<p>实际上，切锥还是比可行方向锥大不少。我们尝试将其加强：考虑这样一个集合</p>
 <div class="note success"><p><strong>定义 3.2.3（收敛方向）.</strong> 称一个序列从 $\boldsymbol{d}$ 方向收敛于 $\boldsymbol{x}_0$ 若 </p>
 <p>$$<br>\boldsymbol{x}_k &#x3D; \boldsymbol{x}_0 + \alpha_k(\boldsymbol{d} + \boldsymbol{r}_k), \quad \alpha_k\downarrow 0, \boldsymbol{r}_k\rightarrow 0<br>$$</p>
 <p>记作 $\boldsymbol{x}_k\xrightarrow{\boldsymbol{d}}\boldsymbol{x}_0$</p>
@@ -1265,7 +1270,249 @@
 </div>
 
 <p><strong>证明.</strong> 直接拿着泰勒展开和对偶锥验证。<div style="text-align: right">$\blacksquare$</div></p>
-<h3><span id="对偶问题">对偶问题</span></h3><h1><span id="参考文献">参考文献</span></h1><ol>
+<p>至此容易推出</p>
+<div class="note info"><p><strong>定理 3.2.3（Karush-Kuhn-Tucker）.</strong> 设 $\boldsymbol{x}_0$ 是原问题的一个局部最小值点，且 $\mathcal{C}_l(\boldsymbol{x}^0)^* &#x3D; \mathcal{C}_t(\boldsymbol{x}_0)^*$，则 KKT 条件成立。</p>
+</div>
+
+<p><strong>证明.</strong> 定理 3.2.2 给出 $\nabla f(\boldsymbol{x})\mathcal{C}_t(\boldsymbol{x}_0)^*$，而 $\mathcal{C}_t^* &#x3D; \mathcal{C}_l^*$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>此处，$\mathcal{C}_l(\boldsymbol{x}^0)^* &#x3D; \mathcal{C}_t(\boldsymbol{x}_0)^*$ 是一个非常强，但是很抽象、很难验证的条件，称为<strong>约束规格（Constraint Qualification）</strong>。还有一些稍微弱一些，但是可能比较方便验证的约束规格：</p>
+<ul>
+<li><strong>GCQ（Guignard Constraint Qualification）.</strong> $\mathcal{C}_l(\boldsymbol{x}_0)^* &#x3D; \mathcal{C}_t(\boldsymbol{x}_0)^*$；</li>
+<li><strong>ACQ（Abadie Constraint Qualification）.</strong> $\mathcal{C}_l(\boldsymbol{x}_0) &#x3D; \mathcal{C}_t(\boldsymbol{x}_0)$；</li>
+<li><strong>SCQ（Slater Constraint Qualification）.</strong> 不等式约束中所有的 $g_i$ 都是可微凸函数，等式约束都是仿射的，且对于一切非线性的不等式约束（其全体记作 $\mathcal{I}_1$），有<br>$$<br>\exists \widetilde{\boldsymbol{x}}\in \mathcal{F}, \forall i\in \mathcal{I}_1, \quad g_i(\widetilde{\boldsymbol{x}}) &lt; 0<br>$$</li>
+</ul>
+<p>可以发现 SCQ 就是一个非常好用、容易验证的条件。而且，SCQ 蕴含 GCQ：</p>
+<div class="note info"><p><strong>定理 3.2.4.</strong> $\mathrm{SCQ}\Rightarrow \mathrm{ACQ}\Rightarrow \mathrm{GCQ}$。</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明 Slater 条件成立之时有 $\mathcal{C}_t \subset \mathcal{C}_l$，另一侧显然成立。任取 $\boldsymbol{d}\in \mathcal{C}_l$，$\left\lVert\boldsymbol{d}\right\rVert &#x3D; 1$，证明它是收敛方向即可。此处证明的直觉是显然的：利用 $\widetilde{\boldsymbol{x}}$ 把 $\boldsymbol{x}_0 + t\boldsymbol{d}$ 往可行域内部拉扯。即只需要证明存在一列 $\varepsilon_t$ 满足 $\varepsilon_t &#x2F; t$ 随着 $t\rightarrow 0$ 趋近于 $0$，使得</p>
+<p>$$<br>\boldsymbol{x}_t &#x3D; \boldsymbol{x}_0 + t\boldsymbol{d} + \varepsilon_t(\widetilde{\boldsymbol{x}} - \boldsymbol{x}_0)\in \mathcal{F}<br>$$</p>
+<p>即可。不失一般性设存在整数 $\gamma &gt; 0$，且 $g_i(\widetilde{\boldsymbol{x}}) &lt; -\gamma$。注意 $\boldsymbol{x}_0 + t\boldsymbol{d} &#x2F; (1 - \varepsilon_t)$，$\boldsymbol{x}_t$ 和 $\widetilde{\boldsymbol{x}}$ 三点共线，根据 $g_i$ 的凸性须有</p>
+<p>$$<br>g_i(\boldsymbol{x}_t) \leq (1 - \varepsilon_t)g_i\left(\boldsymbol{x}_0 + \frac{t}{1 - \varepsilon_i}\boldsymbol{d}\right) + \varepsilon_t g_i(\widetilde{\boldsymbol{x}})<br>$$</p>
+<p>很明显无需讨论未激活约束（对于未激活约束，右边两项均为负数）。对于激活约束，有 $g_i(\boldsymbol{x}_0)$ 和 $\left\langle\nabla g_i(\boldsymbol{x}), \boldsymbol{d}\right\rangle \leq 0$，便于我们用泰勒展开对第一项做一阶估计，有右边</p>
+<p>$$<br>(1 - \varepsilon_t)g_i\left(\boldsymbol{x}_0 + \frac{t}{1 - \varepsilon_i}\boldsymbol{d}\right) + \varepsilon_t g_i(\widetilde{\boldsymbol{x}}) \leq (1 - \varepsilon_t) O\left(\left(\frac{t}{1 - \varepsilon_t}\right)^2\right) -\varepsilon_t \gamma<br>$$</p>
+<p>因此惟须构造一列 $\varepsilon_t$ 使得 $t\rightarrow 0$ 时，$\varepsilon_t\rightarrow 0, \varepsilon_t &#x2F; t\rightarrow 0$，且</p>
+<p>$$<br>O\left(\frac{t}{1 - \varepsilon_t}\right) \leq \frac{\varepsilon_t}{t}\gamma<br>$$</p>
+<p>随便搞个 $\varepsilon_t &#x3D; \Theta(t^{1.5})$ 的序列就行。<div style="text-align: right">$\blacksquare$</div></p>
+<p>最后我们来定义什么叫有约束的凸优化。</p>
+<div class="note success"><p><strong>定义 3.2.5（有约束凸优化）.</strong> 称问题 </p>
+<p>$$<br>(CP): \begin{matrix}<br>   \max &amp; f(\boldsymbol{x}) \\<br>   \text{s.t.} &amp; g_i(\boldsymbol{x}) \leq 0 \\<br>   &amp; h_i(\boldsymbol{x}) &#x3D; 0<br>\end{matrix}<br>$$</p>
+<p>是凸的，若 $f(\boldsymbol{x})$ 是凸函数，$g_i$ 都是凸函数，$h_i$ 是仿射函数。</p>
+</div>
+
+<div class="note info"><p><strong>定理 3.2.5.</strong> 考虑一个有约束凸优化凸优化问题，对于任意 $\boldsymbol{x}_0 \in \mathcal{F}$，若存在 $\boldsymbol{\lambda}\succeq \boldsymbol{0}, \boldsymbol{\mu}$ 使得</p>
+<p>$$<br>\nabla f(\boldsymbol{x}_0) + \sum_{i} \lambda_i \nabla g_i(\boldsymbol{x}_0) + \sum_{j} \mu_j \nabla h_j(\boldsymbol{x}_0) &#x3D; 0, \quad \lambda_i g_i(\boldsymbol{x}_0) &#x3D; 0<br>$$</p>
+<p>则 $\boldsymbol{x}_0$ 是全局最小值。</p>
+</div>
+
+<p><strong>证明.</strong> 直接计算：</p>
+<p>$$<br>\begin{aligned}<br>   f(\boldsymbol{x}) - f(\boldsymbol{x}_0) &amp;\geq \nabla f(\boldsymbol{x}_0)^\top (\boldsymbol{x} - \boldsymbol{x}_0) \\<br>   &amp;&#x3D; -\sum_{i} \lambda_i \nabla g_i(\boldsymbol{x}_0)^\top (\boldsymbol{x} - \boldsymbol{x}_0) - \sum_{j} \mu_j \nabla h_j(\boldsymbol{x}_0) ^\top (\boldsymbol{x} - \boldsymbol{x}_0) \\<br>   &amp;\geq -\sum_i \lambda_i(g_i(\boldsymbol{x}) - g_i(\boldsymbol{x}_0)) \\<br>   &amp;&#x3D; -\sum_{i}\lambda_i\boldsymbol{g}_i(\boldsymbol{x}) \geq 0<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 本节所有性质之关系罗列如下：</p>
+<p><img src="/../picture/convex_optimization_implifications.png"></p>
+</blockquote>
+<h3><span id="对偶问题">对偶问题</span></h3><p>我们现在考虑怎么求出 KKT 条件中的 $\boldsymbol{\lambda}, \boldsymbol{\mu}$，从而解决找到优化问题的 Local Minimum。注意到，拉格朗日乘子条件正是以下函数的驻点条件：</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}, \boldsymbol{\mu}) &#x3D; f(\boldsymbol{x}) + \boldsymbol{\lambda}^\top \boldsymbol{g}(\boldsymbol{x}) + \boldsymbol{\mu}^\top \boldsymbol{h}(\boldsymbol{x})<br>$$</p>
+<p>这个函数称为一个优化问题的<strong>拉格朗日函数</strong>，其定义域是 $\mathcal{D}\times \mathbb{R}^m_{\geq 0}\times \mathbb{R}^p$。其中 $\boldsymbol{\lambda}, \boldsymbol{\mu}$ 称为原问题的<strong>对偶变量</strong>，或者<strong>拉格朗日乘子</strong>。此处驻点条件启发我们定义</p>
+<p>$$<br>g(\boldsymbol{\lambda}, \boldsymbol{\mu}) &#x3D; \inf_{\boldsymbol{x}\in \mathcal{D}} \mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}, \boldsymbol{\mu})<br>$$</p>
+<p>如果下确界不存在，该点处函数值记为 $-\infty$。</p>
+<div class="note info"><p><strong>定理 3.2.6（弱对偶性）.</strong> 对于任意的 $\boldsymbol{\lambda}\geq \boldsymbol{0}$ 和 $\boldsymbol{\mu}$，有</p>
+<p>$$<br>g(\boldsymbol{\lambda}, \boldsymbol{\mu}) \leq p^*<br>$$</p>
+<p>其中 $\boldsymbol{p}^*$ 是原问题的最优解。</p>
+</div>
+
+<p><strong>证明.</strong> 在定义式中代入 $\boldsymbol{x}^*$ 立即得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>至此，可以定义一个优化问题的对偶问题：</p>
+<div class="note success"><p><strong>定义 3.2.6（对偶问题）.</strong> 形如式 $\ref{def:constr_optimzation}$ 的问题的对偶问题是</p>
+<p>$$<br>\begin{aligned}<br>\max_{\boldsymbol{\lambda}, \boldsymbol{\mu}} \quad &amp; g(\boldsymbol{\lambda}, \boldsymbol{\mu}) \\<br>\text{s.t.} \quad &amp; \boldsymbol{\lambda}\geq 0<br>\end{aligned}<br>$$</p>
+<p>其最优解记为 $d^*$，对应变量取值为 $\boldsymbol{\lambda}^*, \boldsymbol{\mu}^*$</p>
+</div>
+
+<p>可以证明，无论原问题是否凸，对偶问题一定是凸的。从一个角度可以直观感受这一点：如果所有的约束都是仿射的，即对于问题</p>
+<p>$$<br>\begin{aligned}<br>\min \quad &amp; f(\boldsymbol{x}) \\<br>\text{s.t.}\quad &amp; \mathbf{A}\boldsymbol{x} \preceq \boldsymbol{b} \\<br>&amp; \mathbf{C}\boldsymbol{x} &#x3D; \boldsymbol{d}<br>\end{aligned}<br>$$</p>
+<p>稍加计算知道其对偶问题为</p>
+<p>$$<br>\begin{aligned}<br>\mathrm{max} \quad &amp; -\boldsymbol{b}^\top \boldsymbol{\lambda} - \boldsymbol{d}^\top \boldsymbol{\mu} - f^*(-\mathbf{A}^\top \boldsymbol{\lambda} - \mathbf{C}^\top \boldsymbol{v}) \\<br>\text{s.t.} \quad &amp; \boldsymbol{\lambda}\geq 0<br>\end{aligned}<br>$$</p>
+<p>其中 $f^*$ 是共轭函数，一定是凸的。</p>
+<p>根据定理 3.2.6 知道，$d^* \leq p^*$。何时这个能够取等？</p>
+<div class="note success"><p><strong>定义 3.2.7（强对偶性）.</strong> 若一个问题满足 $d^* &#x3D; p^*$，则称其有强对偶性。</p>
+</div>
+
+<div class="note info"><p><strong>定理 3.2.7（Slater’s Lemma）.</strong> 如果一个优化问题满足 SCQ，且 $f$ 是凸函数，那么它有强对偶性。</p>
+</div>
+
+<p><strong>证明.</strong> 【FIXME】</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>即便达不到强对偶性，显然任意时刻也有</p>
+<div class="note info"><p><strong>定理 3.2.8.</strong> 若 $\boldsymbol{x}$ 是原始可行的，$(\boldsymbol{\lambda}, \boldsymbol{\mu})$ 是对偶可行的，则有 </p>
+<p>$$<br>f(\boldsymbol{x}) - p^* \leq f(\boldsymbol{x}) - g(\boldsymbol{\lambda}, \boldsymbol{\mu})<br>$$</p>
+</div>
+
+<p>但在强对偶性成立的时候，我们确实就可以拿着对偶问题来解原问题。因为我们有</p>
+<p>$$<br>\begin{aligned}<br>f(\boldsymbol{x}^*) &amp;&#x3D; g(\boldsymbol{\lambda}^*, \boldsymbol{\mu}^*) \\<br>&amp;&#x3D; \inf_{\boldsymbol{x}} f(\boldsymbol{x}) + \boldsymbol{\lambda}^\top \boldsymbol{g}(\boldsymbol{x}) + \boldsymbol{\mu}^\top \boldsymbol{h}(\boldsymbol{x}) \\<br>&amp;\leq f(\boldsymbol{x}^*) + \boldsymbol{\lambda}^\top \boldsymbol{g}(\boldsymbol{x}^*) + \boldsymbol{\mu}^\top \boldsymbol{h}(\boldsymbol{x}^*) \\<br>&amp;\leq f(\boldsymbol{x}^*)<br>\end{aligned}<br>$$</p>
+<p>因此等号必须全取等。我们可以先求对偶问题的最优解 $\boldsymbol{\lambda}^*, \boldsymbol{\mu}^*$，然后求 $g(\boldsymbol{\lambda}^*, \boldsymbol{\mu}^*)$ 以还原出 $\boldsymbol{x}^*$。对于对偶问题比原问题好做的问题，比如 SVM，这非常有用。</p>
+<h3><span id="直接解原始问题">直接解原始问题</span></h3><p>接下来几节都是有约束问题的具体算法。它们都没有用对偶问题的信息。</p>
+<p><strong>投影梯度法.</strong> 在原本的梯度下降中，我们的迭代方法为</p>
+<p>$$<br>\boldsymbol{x}’ &#x3D; \boldsymbol{x} + \alpha \boldsymbol{d}<br>$$</p>
+<p>其中 $\boldsymbol{d}$ 一般是梯度，比如 $\nabla f(\boldsymbol{x})$。显然这个做法在有约束优化中没有用，因为你可能跑出可行区域。最简单的修复方法就是直接做投影：</p>
+<p>$$<br>\boldsymbol{x}’ &#x3D; P_{\Omega}(\boldsymbol{x} - \alpha\nabla f(\boldsymbol{x}^k)) \label{eq:pgd_iter}<br>$$</p>
+<p>这种做法叫做 PGD（Projected Gradient Descent）。对于凸优化问题，以下定理是 PGD 成立的依据：</p>
+<div class="note info"><p><strong>定理 3.2.9.</strong> 设 $\boldsymbol{x}^*$ 是式 $\ref{eq:pgd_iter}$ 的一个不动点。则 $\boldsymbol{x}^*$ 是问题的最优解。</p>
+</div>
+
+<p><strong>证明.</strong> 利用投影的性质（命题 2.1.2）和 $f$ 的凸性立即得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>这个定理启发我们以 $\left\lVert\boldsymbol{x}^k - \boldsymbol{x}^{k + 1}\right\rVert \leq \varepsilon$ 作为算法停止的依据。</p>
+<div class="note info"><p><strong>定理 3.2.9.</strong> 假设 $f$ 和 $\Omega$ 都是凸集，$f$ $L$-光滑，有下界。令 $\boldsymbol{x}^k$ 是 $\ref{eq:pgd_iter}$ 生成的一列点，其中学习率固定为 $\alpha &lt; 2 &#x2F; L$，则每次函数值都会下降。</p>
+</div>
+
+<p><strong>证明.</strong> 根据投影的性质有对于任意的 $\boldsymbol{x} \in \Omega$：</p>
+<p>$$<br>\left\langle\boldsymbol{x}^k - \alpha \nabla f(\boldsymbol{x}^k) - \boldsymbol{x}^{k + 1}, \boldsymbol{x} - \boldsymbol{x}^{k + 1}\right\rangle \leq 0<br>$$</p>
+<p>直接取 $\boldsymbol{x} &#x3D; \boldsymbol{x}^k$ 得到</p>
+<p>$$<br>\left\lVert\boldsymbol{x}^k - \boldsymbol{x}^{k + 1}\right\rVert^2 \leq \alpha \left\langle\nabla f(\boldsymbol{x}^k), \boldsymbol{x}^k - \boldsymbol{x}^{k + 1}\right\rangle<br>$$</p>
+<p>根据强凸定义有 </p>
+<p>$$<br>f(\boldsymbol{x}^{k + 1}) - f(\boldsymbol{x}^k) \leq \left\langle\nabla f(\boldsymbol{x}^k), \boldsymbol{x}^{k + 1} - \boldsymbol{x}^k\right\rangle + \frac{L}{2}\left\lVert\boldsymbol{x}^{k + 1} - \boldsymbol{x}^k\right\rVert^2 \leq \left(\frac{L}{2} - \frac{1}{\alpha}\right)^2 &lt; 0<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>对于只有线性等式约束的问题，这个做法非常方便，因为你只需要算最小二乘即可。</p>
+<hr>
+<p><strong>线性等式约束牛顿法.</strong> 考虑在只有线性等式约束的情况下，用牛顿法来解问题。此时，一切归结为解如下方程：</p>
+<p>$$<br>\min_{\boldsymbol{v}} : f(\boldsymbol{x}) + \nabla f(\boldsymbol{x})^\top \boldsymbol{v} + \frac{1}{2}\boldsymbol{v}^\top\nabla^2 f(\boldsymbol{x})\boldsymbol{v}, \quad \text{s.t. } \mathbf{A}\boldsymbol{v} &#x3D; \boldsymbol{0}<br>$$</p>
+<p>这是一个满足 SCQ 的凸优化问题，我们直接拿着 KKT 条件手算，假设拉格朗日乘子为 $\boldsymbol{w}$，可以列出拉格朗日乘子条件和原始可行性的方程（没有对偶可行性和互补松弛条件，因为都是等式约束）</p>
+<p>$$<br>\begin{pmatrix}<br>   \nabla^2 f(\boldsymbol{x}) &amp; \mathbf{A}^\top \\<br>   \mathbf{A} &amp; \mathbf{0}<br>\end{pmatrix}<br>\begin{pmatrix}<br>   \Delta \boldsymbol{x} \\<br>   \boldsymbol{w} \\<br>\end{pmatrix} &#x3D; \begin{pmatrix}<br>   -\nabla f(\boldsymbol{x}) \\<br>   \boldsymbol{0}<br>\end{pmatrix}<br>$$</p>
+<p>只要上述矩阵可逆，就可以方便地进行牛顿迭代。而且这里可以知道 $\Delta \boldsymbol{x}$ 确实是一个下降方向，因为根据 KKT 条件有 </p>
+<p>$$<br>\nabla f(\boldsymbol{x})^\top \Delta \boldsymbol{x} &#x3D; - \Delta \boldsymbol{x}^\top f(\boldsymbol{x})\Delta \boldsymbol{x} - (\mathbf{A}\Delta \boldsymbol{x})^\top \boldsymbol{w} &lt; 0<br>$$</p>
+<p>因此也可以拿着这个方向做阻尼牛顿法。停止条件又两种：</p>
+<ol>
+<li>$\Delta \boldsymbol{x}^\top \nabla f(\boldsymbol{x})\Delta \boldsymbol{x} \leq \varepsilon$。很明显这个量是对 $f(\boldsymbol{x}) - p^*$ 的二阶估计。</li>
+<li>$\left\lVert\nabla f(\boldsymbol{x} + \Delta \boldsymbol{x}) + \mathbf{A}^\top \boldsymbol{w}\right\rVert \leq \varepsilon$。这个量是判断现在的解是不是差不多满足 KKT 条件了。</li>
+</ol>
+<hr>
+<p><strong>罚函数法.</strong> 一个最平凡的想法是将有约束问题转换成无约束问题来求解。方法就是加一个正则项，优化 $\boldsymbol{x} + \gamma P(\boldsymbol{x})$。</p>
+<div class="note success"><p><strong>定义 3.2.8.</strong> 称 $P : \mathbb{R}^n\rightarrow R$ 为某优化问题的一个罚函数，如果它满足以下三个条件：</p>
+<ol>
+<li>$P$ 连续；</li>
+<li>$\forall \boldsymbol{x}, P(\boldsymbol{x})\geq 0$；</li>
+<li>$P(\boldsymbol{x}) &#x3D; 0$ 当且仅当 $\boldsymbol{x}$ 可行。</li>
+</ol>
+</div>
+
+<p>对于不等式约束的问题来说，最简单的罚函数就是</p>
+<p>$$<br>P(\boldsymbol{x}) &#x3D; \sum_i \max(g_i(\boldsymbol{x}), 0)<br>$$</p>
+<p>上面函数很明显可能不可微，稍加修改立即可以让它可微：</p>
+<p>$$<br>P(\boldsymbol{x}) &#x3D; \sum_i \max(g_i(\boldsymbol{x}), 0)^2<br>$$</p>
+<p>今后简便起见记 $g^+(\boldsymbol{x}) &#x3D; max(g(\boldsymbol{x}), 0)$。</p>
+<p>定义 $q(\gamma, \boldsymbol{x}) &#x3D; f(\boldsymbol{x}) + \gamma P(\boldsymbol{x})$。罚函数法成立的依据如下：</p>
+<div class="note info"><p><strong>定理 3.2.10.</strong> 设 $\gamma_k$ 是一列递增的序列，$\boldsymbol{x}^k$ 是 $q(\gamma_k, \boldsymbol{x})$ 的 minimizer。则以下不等式成立：</p>
+<ol>
+<li>$q(\gamma_{k + 1}, \boldsymbol{x}^{k + 1}) \geq q(\gamma_k, \boldsymbol{x}^k)$；</li>
+<li>$P(\boldsymbol{x}^{k + 1})\leq P(\boldsymbol{x}^k)$；</li>
+<li>$f(\boldsymbol{x}^{k + 1}) \geq f(\boldsymbol{x}^k)$；</li>
+<li>$f(\boldsymbol{x}^*) \geq q(\gamma_k, \boldsymbol{x}^k)\geq f(\boldsymbol{x}^k)$</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 都是平凡的凑。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 3.2.11.</strong> 设 $f$ 连续，$\gamma_k\rightarrow \infty$，则 $\boldsymbol{x}^k$ 的极限（若存在）是有约束问题的解。</p>
+</div>
+
+<p><strong>证明.</strong> 平凡的反证。</p>
+<p>现在，我们将问题的计算困难性全部推到了某个 $q(\gamma, \boldsymbol{x})$（对于有限的 $q$）的优化上去。然而，实际上这非常难，因为 $P$ 可能不可微。我们有 </p>
+<div class="note info"><p><strong>定理 3.2.12.</strong> 设可行域 $\Omega$ 凸，$\boldsymbol{x}^*\in \partial \Omega$，且存在一个可行方向 $\boldsymbol{d}$ 使得 $\boldsymbol{d}^\top \nabla f(\boldsymbol{x}^*) &gt; 0$。若 $q(\gamma, \boldsymbol{x})$ 的最优解与原问题相同，则 $P$ 在 $\boldsymbol{x}^*$ 点必不可微。</p>
+</div>
+
+<p><strong>证明.</strong> 施反证法。如果它可微，从可行域内部逼近该点处的微分，得到必然有 $\boldsymbol{d}^\top \nabla P(\boldsymbol{x}^*) &#x3D; 0$。这表明 $\boldsymbol{d}^\top (\nabla f + \gamma \nabla P) &gt; 0$，顺着 $-\boldsymbol{d}$ 走一步可以继续下降，矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<p>从另一个角度看待罚函数法，可以发现这个形式和优化拉格朗日函数没什么两样。对于函数 $\xi : \mathbb{R}^m\rightarrow \mathbb{R}$ 使得 $\nabla \xi(\boldsymbol{0}) &#x3D; \boldsymbol{0}$，我们可以构造出罚函数并求其梯度</p>
+<p>$$<br>P(\boldsymbol{x}) &#x3D; \xi(g^+(\boldsymbol{x})) \quad \Rightarrow \quad \nabla P(\boldsymbol{x}) &#x3D; \sum_{i}\frac{\partial \xi (g^+(\boldsymbol{x}))}{\partial y_i} \nabla g_i(\boldsymbol{x})<br>$$</p>
+<p>定义 </p>
+<p>$$<br>u_i^k &#x3D; \gamma_k \frac{\partial \xi (g^+(\boldsymbol{x}))}{\partial y_i}<br>$$</p>
+<p>则因为 $\boldsymbol{x}^k$ 是最优解，根据驻点条件立即得到</p>
+<p>$$<br>\nabla f(\boldsymbol{x}^k) + \boldsymbol{u}^{k\top}\nabla \boldsymbol{g}(\boldsymbol{x}) &#x3D; 0<br>$$</p>
+<p>$\boldsymbol{u}$ 的地位确实等同于拉格朗日乘子。具体地有</p>
+<div class="note info"><p><strong>定理 3.2.13.</strong> 设 $\xi(\boldsymbol{y})$ 关于 $\boldsymbol{y}$ 单调，连续，可微，且满足在 $0$ 处梯度为 $0$。另外，设 $f(\boldsymbol{x}), g(\boldsymbol{x})$ 都可微。则如果 $\boldsymbol{x}^k\rightarrow \overline{\boldsymbol{x}}$，且 $\overline{\boldsymbol{x}}$ 满足 LICQ，则 $\boldsymbol{u}^k\rightarrow \overline{\boldsymbol{u}}$，其中 $\overline{\boldsymbol{u}}$ 是原问题的 KKT 乘子。</p>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 这个定理我不会证。但这里需要补充以下 LICQ 的定义：设 $\boldsymbol{x}$ 处的激活约束集合为 $\mathcal{A}(\boldsymbol{x})$，有</p>
+<p>$$<br>\mathrm{LICQ} \quad : \quad \{\nabla g_i(\boldsymbol{x}) : i\in \mathcal{A}(\boldsymbol{x})\} \text{ linear independent}<br>$$</p>
+</blockquote>
+<p>这个定理实际上也揭示了 $q$ 的优化可能并不容易。不妨算一下 $q$ 关于 $\boldsymbol{x}$ 的 Hessian：</p>
+<p>$$<br>\nabla^2 q(\gamma_k, \boldsymbol{x}) &#x3D; \nabla^2 f(\boldsymbol{x}) + \gamma_k\sum_{i}g_i(\boldsymbol{x}) \nabla^2 g_i(\boldsymbol{x}) + \gamma_k \nabla g(\boldsymbol{x})^\top \nabla g(\boldsymbol{x})<br>$$</p>
+<p>在最优点附近，$\gamma_k \boldsymbol{g}$ 基本上就是拉格朗日乘子 $\boldsymbol{u}$。也就是说前两项的和大致就是拉格朗日函数的 Hessian。然而第三项基本上是一个半正定矩阵，而且很可能确实是奇异矩阵。此时可以发现，矩阵的条件数基本上随着 $\gamma_k$ 是线性增长的。</p>
+<p>还可以证明 $\gamma$ 的大小也和拉格朗日乘子有关系：</p>
+<div class="note info"><p><strong>定理 3.2.14.</strong> 对于一个 KKT 条件是最优解必要条件的凸优化问题，若取罚函数为</p>
+<p>$$<br>P(\boldsymbol{x}) &#x3D; \sum_i g_i^+(\boldsymbol{x})<br>$$</p>
+<p>则只要 $\gamma &gt; \max_i\{\boldsymbol{u}\}$，原问题的解就和 $f(\boldsymbol{x}) + \gamma P(\boldsymbol{x})$ 的解相同。其中 $\boldsymbol{u}$ 是一个 KKT 乘子。</p>
+</div>
+
+<hr>
+<p><strong>屏障法.</strong> 【FIXME】</p>
+<hr>
+<p><strong>Frank-Wolfe 算法.</strong> 本质上是可行域内最陡下降。</p>
+<p>考虑 $\Omega$ 是一个紧凸集。首先我们对函数值可以有如下的一阶估计：</p>
+<p>$$<br>f(\boldsymbol{x}) \approx f(\boldsymbol{x}_k) + \left\langle\nabla f(\boldsymbol{x}_k), \boldsymbol{x} - \boldsymbol{x}_k\right\rangle<br>$$</p>
+<p>考虑限制区域内的最速下降：</p>
+<p>$$<br>\boldsymbol{s}_k &#x3D; \arg\min_{\boldsymbol{s}\in \Omega} \left\langle\boldsymbol{s}, \nabla f(\boldsymbol{x}_k)\right\rangle<br>$$</p>
+<p>显然 $\boldsymbol{s}_k - \boldsymbol{x}_k$ 必然是一个下降方向。取一列学习率 $\gamma_k$（实践中令 $\gamma_k &#x3D; 2 &#x2F; (k + 2)$）得到如下迭代公式：</p>
+<p>$$<br>\boldsymbol{x}_{k + 1} &#x3D; (1 - \gamma_k)\boldsymbol{x}_k + \gamma_k \boldsymbol{s}_k<br>$$</p>
+<p>如果 $\mathcal{D}$ 是一个范数的单位球，这个问题可能会非常好做。接下来我们来分析 Frank-Wolfe 算法。首先按照惯例，对于一种下降法，将迭代用上一个点、一阶项和高阶项控制住。方便起见先定义下面两个记号：</p>
+<ul>
+<li><strong>Frank-Wolfe 对偶差.</strong><br>$$<br>g(\boldsymbol{x}) :&#x3D; \max_{\boldsymbol{x}\in \mathcal{D}} \left\langle\boldsymbol{s}, \nabla f(\boldsymbol{x}_k)\right\rangle<br>$$</li>
+<li><strong>曲率常数.</strong><br>$$<br>C_f &#x3D; \sup_{\boldsymbol{x}, \boldsymbol{s}\in \mathcal{D}, \gamma\in [0, 1], \boldsymbol{y} &#x3D; \boldsymbol{x} + \gamma(\boldsymbol{s} - \boldsymbol{x})} \frac{2}{\gamma^2}(f(\boldsymbol{y}) - f(\boldsymbol{x}) - \left\langle\boldsymbol{y} - \boldsymbol{x}, \nabla f(\boldsymbol{x})\right\rangle)<br>$$</li>
+</ul>
+<div class="note info"><p><strong>引理 3.2.15.</strong> 对于任意的 Frank-Wolfe 迭代 $\boldsymbol{x}_{k + 1} &#x3D; \boldsymbol{x}_k + \gamma(\boldsymbol{s}_k - \boldsymbol{x}_k), \gamma\in [0, 1]$，以下不等式成立：</p>
+<p>$$<br>f(\boldsymbol{x}_{k + 1}) \leq f(\boldsymbol{x}_k) \gamma g(\boldsymbol{x}_k) + \frac{\gamma^2}{2} C_f<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 展开立即得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>在对收敛性的分析中，$g(\boldsymbol{x})$ 的作用主要是 Upperbound 和最优解的函数值差距（由凸性立即得证）：$g(\boldsymbol{x}) \geq f(\boldsymbol{x}) - f(\boldsymbol{x}^*)$。$C_f$ 这个常数则主要是和光滑性常数有关。拿着光滑性的定义容易证明 $C_f \leq L\mathrm{diam}(\Omega)^2$。因此容易算出 Frank-Wolfe 算法是像反比例函数一样收敛到目标解的：</p>
+<div class="note info"><p><strong>定理 3.2.16.</strong> Frank-Wolfe 迭代中有</p>
+<p>$$<br>f(\boldsymbol{x}_k) - f(\boldsymbol{x}^*) \leq \frac{2C_f}{k + 2}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 定理 3.2.15 两边减去 $f(\boldsymbol{x}^*)$ 之后用 $h$ 控制 $g$ 立即得到 </p>
+<p>$$<br>f(\boldsymbol{x}_{k + 1}) - f(\boldsymbol{x}^*) \leq (1 - \gamma_k)(f(\boldsymbol{x}_k) - f(\boldsymbol{x}^*)) + \frac{\gamma_k^2}{2}C_f<br>$$</p>
+<p>归纳得证。<div style="text-align: right">$\blacksquare$</div></p>
+<h3><span id="对偶相关的算法">对偶相关的算法</span></h3><p>考虑利用对偶问题的性质来解决原问题。对于一个只有不等式约束的问题，其对偶问题记作</p>
+<p>$$<br>\begin{aligned}<br>   \max_{\boldsymbol{\mu}} \quad &amp; q(\boldsymbol{\mu}) \\<br>   \text{s.t.}\quad &amp; \boldsymbol{\mu} \succeq \boldsymbol{0}<br>\end{aligned}<br>$$</p>
+<p>其中</p>
+<p>$$<br>q(\boldsymbol{\mu}) &#x3D; \inf_{\boldsymbol{x}\in \mathcal{X}} \mathcal{L}(\boldsymbol{x}, \boldsymbol{\mu})<br>$$</p>
+<p><strong>对偶梯度上升法.</strong> 记 $\boldsymbol{x}_{\boldsymbol{\mu}}$ 最小化了这个式子。一个观察是，对偶函数的梯度竟然只和约束有关：</p>
+<div class="note info"><p><strong>定理 3.2.17.</strong> 若 $\boldsymbol{x}_\mu$ 最小化了 $\mathcal{L}(\boldsymbol{x}, \boldsymbol{\mu})$，那么 $\boldsymbol{g}(\boldsymbol{x}_\mu)$ 是 $q$ 在 $\boldsymbol{\mu}$ 点处的超梯度（上凸函数的次梯度）。</p>
+</div>
+
+<p><strong>证明.</strong> 任取 $\boldsymbol{\mu}’$，有</p>
+<p>$$<br>\begin{aligned}<br>q(\boldsymbol{\mu}’) &amp;&#x3D; \inf_{\boldsymbol{x}} f(\boldsymbol{x}) + \boldsymbol{\mu}’^\top \boldsymbol{g}(\boldsymbol{x}) \\<br>&amp;\leq f(\boldsymbol{x}_\mu) + \boldsymbol{\mu}’^\top g(\boldsymbol{x}_\mu) \\<br>&amp;&#x3D; q(\boldsymbol{\mu}) + (\boldsymbol{\mu}’ - \boldsymbol{\mu})\boldsymbol{g}(\boldsymbol{x}_\mu)<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>因此，只要 $\boldsymbol{x}_\mu$ 存在且 $\boldsymbol{g}(\boldsymbol{x}_\mu)$ 唯一，那么 $q(\boldsymbol{\mu})$ 可导，梯度就是 $\boldsymbol{g}(\boldsymbol{x}_\mu)$。据此可以得到<strong>对偶梯度上升法</strong>：该算法分成两步</p>
+<ol>
+<li><strong>Primal Update.</strong> $\boldsymbol{x}_{k + 1} &#x3D; \arg\min_{\boldsymbol{x}} \mathcal{L}(\boldsymbol{x}, \boldsymbol{\lambda}_k)$；</li>
+<li><strong>Dual Update.</strong> $\boldsymbol{\lambda}_{k + 1} &#x3D; \boldsymbol{\lambda} + \alpha_k(\boldsymbol{g}(\boldsymbol{x}_{k}))$。</li>
+</ol>
+<p>还有一种做法可以让 Primal Update 更好看一点。我们给原函数加上一个罚函数，定义增广拉格朗日函数</p>
+<p>$$<br>\mathcal{L}_\beta(\boldsymbol{x}, \boldsymbol{\lambda}) &#x3D; f(\boldsymbol{x}) + \boldsymbol{\lambda}^\top \boldsymbol{g}(\boldsymbol{x}) + \beta P(\boldsymbol{x})<br>$$</p>
+<p>实践中对于仿射等式约束 $\mathbf{A}\boldsymbol{x} &#x3D; \boldsymbol{b}$，可以取 $\beta &#x3D; \frac{1}{2}\left\lVert\mathbf{A}\boldsymbol{x} - \boldsymbol{b}\right\rVert^2$。有如下的<strong>增广拉格朗日乘子法</strong>：</p>
+<ol>
+<li><strong>Primal Update.</strong> $\boldsymbol{x}_{k + 1} &#x3D; \arg\min_{\boldsymbol{x}} \mathcal{L}_\beta(\boldsymbol{x}, \boldsymbol{\lambda}_k)$；</li>
+<li><strong>Dual Update.</strong> $\boldsymbol{\lambda}_{k + 1} &#x3D; \boldsymbol{\lambda} + \beta(\boldsymbol{g}(\boldsymbol{x}_{k}))$。</li>
+</ol>
+<p>这里步长取 $\beta$ 的原因是对于线性仿射等式约束有</p>
+<p>$$<br>\begin{aligned}<br>   \boldsymbol{0} &amp;&#x3D; \nabla \mathcal{L}_\beta(\boldsymbol{x}_{k + 1}, \boldsymbol{\lambda}_k) \\<br>   &amp;&#x3D; \nabla f(\boldsymbol{x}_{k + 1}) + \mathbf{A}^\top(\boldsymbol{\lambda}_k + \beta(\mathbf{A}\boldsymbol{x}_{k + 1} - \boldsymbol{b})) \\<br>   &amp;&#x3D; \nabla f(\boldsymbol{x}_{k + 1}) + \mathbf{A}^\top \boldsymbol{\lambda}_{k + 1}<br>\end{aligned}<br>$$</p>
+<p>因此，取 $\beta$ 作为步长，得到的 $(\boldsymbol{x}, \boldsymbol{\lambda})$ 始终是对偶可行的。另外，可以证明增广拉格朗日乘子法中对偶优化目标 $q_\beta$ 是 $1&#x2F;\beta$-光滑的。</p>
+<hr>
+<p><strong>交替方向法（Alternating Direction Method，ADM）.</strong> 考虑如果优化目标形如：</p>
+<p>$$<br>\min_{\boldsymbol{x}, \boldsymbol{y}} f(\boldsymbol{x}) + g(\boldsymbol{y}), \qquad \text{s.t. } \mathcal{A}(\boldsymbol{x}) + \mathcal{B}(\boldsymbol{y}) &#x3D; \boldsymbol{c}<br>$$</p>
+<p>首先考虑其增广拉格朗日函数</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{x}, \boldsymbol{y}, \boldsymbol{\lambda}) &#x3D; f(\boldsymbol{x}) + g(\boldsymbol{y}) + \left\langle\boldsymbol{\lambda}, \mathcal{A}(\boldsymbol{x}) + \mathcal{B}(\boldsymbol{x}) - \boldsymbol{c}\right\rangle + \frac{\beta}{2}\left\lVert\mathcal{A}(\boldsymbol{x}) + \mathcal{B}(\boldsymbol{y}) - \boldsymbol{c}\right\rVert^2<br>$$</p>
+<p>那么以下方法称为交替方向法：</p>
+<ol>
+<li><strong>X Update.</strong> $\boldsymbol{x}_{k + 1} &#x3D; \arg\min\mathcal{L}(\boldsymbol{x}, \boldsymbol{y}_k, \boldsymbol{\lambda}_k)$。配方可以知道这就是优化<br>$$<br>\arg\min_{\boldsymbol{x}} f(\boldsymbol{x}) + \frac{\beta}{2}\left\lVert\mathcal{A}(\boldsymbol{x}) + \mathcal{B}(\boldsymbol{y}_k) - \boldsymbol{c} + \frac{\boldsymbol{\lambda}_k}{\beta}\right\rVert^2<br>$$</li>
+<li><strong>Y Update.</strong> $\boldsymbol{y}_{k + 1} &#x3D; \arg\min\mathcal{L}(\boldsymbol{x}_{k + 1}, \boldsymbol{y}, \boldsymbol{lambda}_k)$。配方可以知道这就是优化<br>$$<br>\arg\min_{\boldsymbol{y}} g(\boldsymbol{y}) + \frac{\beta}{2}\left\lVert\mathcal{A}(\boldsymbol{x}_{k + 1}) + \mathcal{B}(\boldsymbol{y}) - \boldsymbol{c} + \frac{\boldsymbol{\lambda}_k}{\beta}\right\rVert^2<br>$$</li>
+<li><strong>Dual Update.</strong> 令<br>$$<br>\boldsymbol{\lambda}_{k + 1} &#x3D; \boldsymbol{\lambda}_k + \beta(\mathcal{A}(\boldsymbol{x}_{k + 1}) + \mathcal{B}(\boldsymbol{y}_{k + 1}) - \boldsymbol{c})<br>$$<br>此处 $\beta$ 也可以被替换成 $\tau\beta$，其中 $\tau\in (0, (1 + \sqrt 5) &#x2F; 2)$</li>
+</ol>
+<h1><span id="参考文献">参考文献</span></h1><ol>
 <li>D. H. Wolpert and W. G. Macready, “No free lunch theorems for optimization,” in <em>IEEE Transactions on Evolutionary Computation</em>, vol. 1, no. 1, pp. 67-82, April 1997, doi: 10.1109&#x2F;4235.585893.</li>
 </ol>
 <h1><span id="附录">附录</span></h1><h2><span id="a补充结论">A：补充结论</span></h2><p>本节有以下内容，排列顺序与出现在上文中的顺序没有关系，只和我复习的顺序有关系：</p>
@@ -1360,6 +1607,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/06/23/NeuralTangentKernel/" rel="next" title="Neural Tangent Kernel">
+                  Neural Tangent Kernel <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -1390,13 +1640,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">429k</span>
+    <span title="Word count total">436k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">25:59</span>
+    <span title="Reading time total">26:27</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

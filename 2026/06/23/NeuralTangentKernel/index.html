@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 【Under Construction】    简介 神经网络 核梯度 神经正切核">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Neural Tangent Kernel">
+<meta property="og:url" content="http://example.com/2026/06/23/NeuralTangentKernel/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 【Under Construction】    简介 神经网络 核梯度 神经正切核">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-06-23T09:56:07.000Z">
+<meta property="article:modified_time" content="2026-08-29T10:06:36.020Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/06/23/NeuralTangentKernel/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/06/23/NeuralTangentKernel/","path":"2026/06/23/NeuralTangentKernel/","title":"Neural Tangent Kernel"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Neural Tangent Kernel | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">神经网络</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">核梯度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">神经正切核</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/06/23/NeuralTangentKernel/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="Neural Tangent Kernel | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Neural Tangent Kernel
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-06-23 17:56:07" itemprop="dateCreated datePublished" datetime="2026-06-23T17:56:07+08:00">2026-06-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-29 18:06:36" itemprop="dateModified" datetime="2026-08-29T18:06:36+08:00">2026-08-29</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>2.5k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>9 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 【Under Construction】</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C">神经网络</a></li>
+<li><a href="#%E6%A0%B8%E6%A2%AF%E5%BA%A6">核梯度</a></li>
+<li><a href="#%E7%A5%9E%E7%BB%8F%E6%AD%A3%E5%88%87%E6%A0%B8">神经正切核</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="简介">简介</span></h1><h1><span id="神经网络">神经网络</span></h1><p>考虑一个 $L + 1$ 层的神经网络，诸层依次有 $n_0, …, n_L$ 个神经元，并且配备一个 Lipschitz 连续、二阶可导的非线性激活函数 $\sigma : \mathbb{R}\rightarrow \mathbb{R}$。一个这种形状的神经网络有以下参数：</p>
+<ul>
+<li><strong>线性映射.</strong> $\mathbf{W}^\ell \in \mathbb{R}^{n_\ell \times n_{\ell + 1}}$。</li>
+<li><strong>偏置项.</strong> $\boldsymbol{b}^\ell \in \mathbb{R}^{n_{\ell + 1}}$。</li>
+</ul>
+<p>所有参数统称为 $\theta\in \mathbb{R}^P$，其中总参数量 $P &#x3D; \sum_{i &#x3D; 0}^{L - 1} (n_i + 1)n_{i + 1}$。给定一组参数，这组参数被所谓的 $L$ 层<strong>神经网络实现函数</strong> $F^L : \mathbb{R}^P\rightarrow (\mathbb{R}^{n_0}\rightarrow \mathbb{R}^{n_L})$ 映射到下面的 $\mathbb{R}^{n_0}\rightarrow \mathbb{R}^{n_L}$ 的函数 $f_\theta$：</p>
+<ul>
+<li>输入 $\boldsymbol{x}^0\in \mathbb{R}^{n_0}$；</li>
+<li>$\widetilde{\boldsymbol{x}}^{i + 1} &#x3D; \frac{1}{\sqrt{n_i}}\mathbf{W}^i\boldsymbol{x}^i + \beta \boldsymbol{b}^i$；</li>
+<li>$\boldsymbol{x}^i &#x3D; \sigma(\widetilde{\boldsymbol{x}}^i)$（逐元作用）；</li>
+<li>输出 $\boldsymbol{x}^L$。</li>
+</ul>
+<p>上方的线性层中因子 $1 &#x2F; \sqrt{n_i}$ 的作用基本上是让网络在每个参数独立初始化为标准正态分布 $\mathcal{N}(0, 1)$ 和无穷宽假设之下不爆炸。如果不加这个缩放因子，等价于网络参数初始化为 $\mathcal{N}(1, 1 &#x2F; n_i)$（LeCun Initialization），和大名鼎鼎的 Kaiming Initialization 差了一个和 $\sigma$ 有关的缩放因子 $C_\sigma$。</p>
+<p>对于函数空间 $\mathcal{F} : \mathbb{R}^{n_0}\rightarrow \mathbb{R}^{n_L}$，任取输入概率分布 $p^{in}$，我们可以用如下内积度量这个函数空间的几何结构：</p>
+<p>$$<br>\left\langle f, g\right\rangle_{p^{in}} &#x3D; \mathbb{E}_{\boldsymbol{x}\in p^{in}} [f(\boldsymbol{x})^\top g(\boldsymbol{x})]<br>$$</p>
+<p>在分析深度学习中的具体实例之时，$p^{in}$ 通常被取作某个离散的数据集 $\mathcal{D} &#x3D; \{x_1, …, x_N\}$ 上的均匀分布：</p>
+<p>$$<br>\rho &#x3D; \frac{1}{N}\sum_{i &#x3D; 1}^N \delta_{x_i}<br>$$</p>
+<p>其中 $\delta$ 是狄拉克测度。</p>
+<h1><span id="核梯度">核梯度</span></h1><p>在优化一个神经网络时，我们往往取一个凸的损失函数 $\mathcal{L} : \mathbb{R}^{n_L}\rightarrow \mathbb{R}$，比如均方误差中有</p>
+<p>$$<br>\mathcal{L}(\boldsymbol{x}, \boldsymbol{x}^*) &#x3D; \frac 12\left\lVert\boldsymbol{x} - \boldsymbol{x}^*\right\rVert^2<br>$$</p>
+<p>以此对于给定的概率分布 $\rho$ 和 ground truth 函数，诱导出损失泛函 $C : \mathcal{F}\rightarrow \mathbb{R}$，定义为</p>
+<p>$$<br>C(f) &#x3D; \int \mathcal{L}(f(\boldsymbol{x}), f^*(\boldsymbol{x})) \rho(\boldsymbol{x})\mathrm{d}\boldsymbol{x} \label{eq:loss_functional}<br>$$</p>
+<p>本质上，我们是在寻找最优的一个参数 $\theta^*$ 使得 $(C\circ F)(\theta^*)$ 是最小化。然而，实践中 $C\circ F : \mathbb{R}^P\rightarrow \mathbb{R}$ 一般不凸，这给你用如下动力学方程去优化网络参数所得结果的分析带来了诸多疑云：</p>
+<p>$$<br>\frac{\mathrm{d}\theta}{\mathrm{d}t} &#x3D; -\nabla_\theta (C\circ F) (\theta) \label{eq:finite_dataset}<br>$$</p>
+<p>然而，因为 $C$ 在 $\mathcal{F}$ 上是凸的，我们不妨考虑在这个梯度流中，函数本身是如何变化的。有 </p>
+<p>$$<br>\begin{aligned}<br>    \frac{\mathrm{d} f_\theta(\boldsymbol{x})}{\mathrm{d}t} &amp;&#x3D; \nabla_\theta f_\theta(\boldsymbol{x})^\top \frac{\mathrm{d}\theta}{\mathrm{d}t} \\<br>    &amp;&#x3D; -\nabla_\theta f(\boldsymbol{x})^\top \nabla_{\theta} (C\circ F) (\theta) \\<br>    &amp;&#x3D; -\nabla_\theta f(\boldsymbol{x})^\top \int \nabla_\theta f_\theta(\boldsymbol{z}) \frac{\partial \mathcal{L}}{\partial f_\theta(\boldsymbol{z})}  \rho(\boldsymbol{z}) \mathrm{d}\boldsymbol{z} \\<br>    &amp;&#x3D; -\int {\color{blue} \nabla_\theta f(\boldsymbol{x})^\top \nabla_\theta f(\boldsymbol{z})} { \frac{\partial \mathcal{L}}{\partial f_\theta(\boldsymbol{z})}\rho(\boldsymbol{z})}\mathrm{d}\boldsymbol{z}<br>\end{aligned} \label{eq:gradient_descent_func}<br>$$</p>
+<details class="note "><summary><p><strong>Hint.</strong></p>
+</summary>
+<p>我们现在考虑有限的数据集 $(\ref{eq:finite_dataset})$，定义</p>
+<p>$$<br>\begin{aligned}<br>\boldsymbol{u} &amp;&#x3D; \begin{pmatrix}<br>    f(\boldsymbol{x}_1) \\<br>    \vdots \\<br>    f(\boldsymbol{x}_N)<br>\end{pmatrix}, \qquad<br>\frac{\partial \mathcal{L}}{\partial \boldsymbol{u}} &#x3D; \frac{1}{N}\begin{pmatrix}<br>    \frac{\partial \mathcal{L}}{\partial f_\theta(\boldsymbol{x}_1)} \\<br>    \vdots \\<br>    \frac{\partial \mathcal{L}}{\partial f_\theta(\boldsymbol{x}_N)}<br>\end{pmatrix}, \\<br>\mathbf{K} &amp;&#x3D; \begin{pmatrix}<br>    \nabla_\theta f_\theta(\boldsymbol{x}_1)^\top \nabla_\theta f_\theta(\boldsymbol{x}_1) &amp; \cdots &amp; \nabla_\theta f_\theta(\boldsymbol{x}_1)^\top \nabla_\theta f_\theta(\boldsymbol{x}_N) \\<br>    \vdots &amp; &amp; \vdots \\<br>    \nabla_\theta f_\theta(\boldsymbol{x}_N)^\top \nabla_\theta f_\theta(\boldsymbol{x}_1) &amp; \cdots &amp; \nabla_\theta f_\theta(\boldsymbol{x}_1)^\top \nabla_\theta f_\theta(\boldsymbol{x}_N)<br>\end{pmatrix}<br>\end{aligned}<br>$$</p>
+<p>可以整理出</p>
+<p>$$<br>\frac{\mathrm{d}\boldsymbol{u}}{\mathrm{d}t} &#x3D; -\mathbf{K}\frac{\partial \mathcal{L}}{\partial \boldsymbol{u}}<br>$$</p>
+<p>显然在神经网络被过参数化（$P \gg N$）的训练中，$\mathbf{K}$ 始终是一个正定矩阵。如果 $\mathbf{K}$（近似）保持不变，那么单看样本上的函数值，这个优化过程就是关于诱导范数 $\left\lVert\cdot\right\rVert_{\mathbf{K}^{-1}}$ 的最陡峭梯度下降（Steepest Descent Method）。而 $\mathcal{L}$ 关于 $\boldsymbol{u}$ 是凸的，因此函数将收敛于唯一的最低点。</p>
+
+</details>
+
+<p>从形式上看，这无非是 $\partial L &#x2F; \partial f_\theta$ 乘上了一个线性变换。此处，我们补充一套记号来刻画这种线性变换及其正定性：</p>
+<div class="note success"><p><strong>定义 2.1（高维核）.</strong> 一个高维核 $K$ 是一个 $\mathcal{F}\otimes \mathcal{F}$ 上的二阶对称张量。即</p>
+<p>$$<br>K : \mathbb{R}^{n_0}\times \mathbb{R}^{n_0} \rightarrow \mathbb{R}^{n_L\times n_L}<br>$$</p>
+<p>且满足 $K(\boldsymbol{x}, \boldsymbol{y}) &#x3D; K(\boldsymbol{y}, \boldsymbol{x})^\top$。</p>
+</div>
+
+<p>对于任意一个高维核 $K$，在概率分布 $\rho$ 之下，可以诱导出核内积</p>
+<p>$$<br>\left\langle f, g\right\rangle_K &#x3D; \mathbb{E}_{\boldsymbol{x}\sim \rho, \boldsymbol{z}\sim \rho} [f(\boldsymbol{x})^\top K(\boldsymbol{x}, \boldsymbol{z}) g(\boldsymbol{z})]<br>$$</p>
+<p>如果 $K$ 还满足正定性：</p>
+<p>$$<br>\forall f, \quad \left\langle f, f\right\rangle_K\geq 0 \quad \wedge \quad \left\lVert f\right\rVert_\rho &gt; 0 \rightarrow \left\langle f, f\right\rangle &gt; 0<br>$$</p>
+<p>还可以进一步诱导出核范数 $\left\lVert\cdot\right\rVert_K$。</p>
+<div class="note success"><p><strong>定义 2.2（变分导数）.</strong> 对于一个式 $\ref{eq:loss_functional}$ 形式泛函 $C : \mathcal{F}\rightarrow \mathbb{R}$，其变分导数定义为如下线性泛函：</p>
+<p>$$<br>\partial C|_f &#x3D; \delta \mapsto \lim_{\varepsilon \rightarrow 0} \frac{C(f + \varepsilon \delta)}{\varepsilon}<br>$$</p>
+</div>
+
+<p>该泛函的线性性可以这样算出：对于任意式 $\ref{eq:loss_functional}$ 形式的泛函有</p>
+<p>$$<br>\begin{aligned}<br>\partial C|_f &amp;&#x3D; \frac{\partial}{\partial \varepsilon}\int \mathcal{L}(f(\boldsymbol{x}) + \varepsilon \delta(\boldsymbol{x}), f^*(\boldsymbol{x})) \rho(\boldsymbol{x}) \mathrm{d}\boldsymbol{x} \\<br>&amp;&#x3D; \int \frac{\partial L}{\partial f(\boldsymbol{x})}^\top \delta(\boldsymbol{x})\rho(\boldsymbol{x})\mathrm{d}x &#x3D; \left\langle \frac{\partial \mathcal{L}}{\partial f(\boldsymbol{x})}, \delta(\boldsymbol{x})\right\rangle<br>\end{aligned}<br>$$</p>
+<p>因此，任意泛函的变分导数 $\partial C|_f$ 都具有 $\left\langle d_f， \cdot\right\rangle_\rho$ 的形式，也就是对偶空间 $\mathcal{F}^*$ 中的一个元素。现在我们来定义一个高维核怎么作用在 $\mathcal{F}^*$ 上。我们知道对于任意的 $K$，锁定一个列号和它的第二元得到 $K_{\cdot, i}(\boldsymbol{x}, \cdot)$，这也是一个 $\mathcal{F}$ 中的元素，因此不妨自然地定义 $\Phi_K : \mathcal{F}^*\rightarrow \mathcal{F}$，其中</p>
+<p>$$<br>\Phi_K(d^*)_i &#x3D; \boldsymbol{x}\mapsto \left\langle d, K_{\cdot, i}(\cdot, \boldsymbol{x})\right\rangle<br>$$</p>
+<div class="note success"><p><strong>定义 2.3（核梯度）.</strong> 原变分导数经过核 $K$ 作用之后得到的东西称为核梯度，记</p>
+<p>$$<br>\nabla_K C|_f &#x3D; \phi_K(\partial C|_f)<br>$$</p>
+</div>
+
+<h1><span id="神经正切核">神经正切核</span></h1><p>将式 $\ref{eq:gradient_descent_func}$ 中的蓝色部分写成 $\mathcal{F}\otimes \mathcal{F}$ 的形式，当然你完全可以使用其他的记号，这里只是为了对齐原论文。</p>
+<div class="note success"><p><strong>定义 3.1（神经正切核）.</strong> 对于一个 $L$ 层的神经网络，参数 $\theta$ 处的神经正切核定义为</p>
+<p>$$<br>\Theta^L(\theta) &#x3D; \sum_{i &#x3D; 1}^P \frac{\partial}{\partial \theta_i} F(\theta)\otimes \frac{\partial}{\partial \theta_i} F(\theta)<br>$$</p>
+</div>
+
+<p>对比式 $\ref{eq:gradient_descent_func}$，可以发现对原函数做梯度下降时，神经网络所表示的函数会在函数空间中关于神经正切核做核梯度下降，动力学方程如下：</p>
+<p>$$<br>\frac{\mathrm{d}f_{\theta}}{\mathrm{d}t} &#x3D; -\nabla_{\Theta(\theta)} C|_{f_\theta}<br>$$</p>
+<p>本节主要证明以下结果：</p>
+<ol>
+<li><strong>初始化.</strong> 如果使用 LeCun 初始化，那么<ol>
+<li>在无穷宽极限下，网络依分布收敛于一个高斯过程；</li>
+<li>NTK 依概率收敛于某个确定的核；</li>
+</ol>
+</li>
+<li><strong>训练时.</strong> <ol>
+<li>在无穷宽极限下，任意时刻的 NTK 一致收敛于上面那个确定的核；</li>
+<li>$L\geq 2$ 时 NTK 保持正定。</li>
+</ol>
+</li>
+</ol>
+<p>接下来我们逐一证明这些结果。</p>
+<div class="note info"><p><strong>定理 3.1.</strong> 对于任意 $L$ 层的神经网络（定义见第 2 节），若其中参数被独立同分布地初始化为 $\mathcal{N}(0, 1)$，当 $n_1, …, n_{L - 1}$ 依次趋向 $\infty$ 时，有网络诸层输出的第 $k$ 维 $f_{\theta, k}(\boldsymbol{x})$（$k &#x3D; 1, …, n_L$）依分布收敛于独立同分布的的高斯过程，这些高斯过程的均值均为 $0$，协方差满足以下递推关系</p>
+<p>$$<br>\begin{aligned}<br>    \Sigma^1(\boldsymbol{x}, \boldsymbol{x}’) &amp;&#x3D; \frac{1}{n_0}\boldsymbol{x}^\top \boldsymbol{x}’ + \beta^2 \\<br>    \Sigma^{L + 1}(\boldsymbol{x}, \boldsymbol{x}’) &amp;&#x3D; \mathbb{E}_{f\sim \mathcal{GP}(0, \Sigma^L)}[\sigma(f(\boldsymbol{x}))\sigma(f(\boldsymbol{x}’))] + \beta^2<br>\end{aligned}<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 施归纳于 $L$。当 $L &#x3D; 1$ 时，没有隐藏层，且</p>
+<p>$$<br>f_\theta(\boldsymbol{x}) &#x3D; \frac{1}{\sqrt{n_0}}\mathbf{W}^0\boldsymbol{x} + \beta \boldsymbol{b}^0<br>$$</p>
+<p>很明显 $f_\theta$ 是高斯过程，均值和方差容易计算，分别就是 $0$ 和上面的 $\Sigma^1$。</p>
+<p>而当 $L\geq 1$ 时，希望归纳到 $L + 1$。这时候考虑 $f_{\theta, k}(\boldsymbol{x})$ 是什么：</p>
+<p>$$<br>f_{\theta, k}(\boldsymbol{x}) &#x3D; \frac{1}{\sqrt{n_L}}\sum_{i &#x3D; 1}^{n_L} W_{ki}^L \sigma(\boldsymbol{x}_i^{L}(\boldsymbol{x})) + \beta \boldsymbol{b}_k^L<br>$$</p>
+<p>取输入 $\boldsymbol{x}_1, …, \boldsymbol{x}_n$，根据多元中心极限定理，在 $n_L$ 趋向无穷时，$[f_{\theta, k}(\boldsymbol{x}_1), …, f_{\theta, k}(\boldsymbol{x}_n)]$ 依分布收敛于高斯分布。简单计算一下两个变量时的协方差，容易发现确实就是要证明的形式。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note info"><p><strong>定理 3.2.</strong> 对于任意 $L$ 层的神经网络，若其中参数被独立同分布地初始化为 $\mathcal{N}(0, 1)$，当 $n_1, …, n_{L - 1}$ 依次趋向 $\infty$ 时，有 $\Theta^L(\theta)$ 依概率收敛于 $\Theta^L_\infty \mathbf{I}$。其中 $\Theta^L_\infty : \mathbb{R}^{n_0}\times \mathbb{R}^{n_0}\rightarrow \mathbb{R}$，服从如下递推关系：</p>
+<p>$$<br>\begin{aligned}<br>\Theta_\infty^1(\boldsymbol{x}, \boldsymbol{x}’) &amp;&#x3D; \Sigma^1(\boldsymbol{x}, \boldsymbol{x}’) \\<br>\Theta_\infty^{L + 1}(\boldsymbol{x}, \boldsymbol{x}’) &amp;&#x3D; \Theta_\infty^L(\boldsymbol{x}, \boldsymbol{x}’)\dot{\Sigma}(\boldsymbol{x}, \boldsymbol{x}’) + \Sigma^{L + 1}(\boldsymbol{x}, \boldsymbol{x}’)<br>\end{aligned}<br>$$</p>
+<p>其中 $\dot{\Sigma}(\boldsymbol{x}, \boldsymbol{x}’) &#x3D; \mathbb{E}_{f\sim \mathcal{GP}(0, \Sigma^L)}(\dot{\sigma}(f(\boldsymbol{x}))\dot{\sigma}(f(\boldsymbol{x}’)))$。</p>
+</div>
+
+<p><strong>证明.</strong> 依旧施归纳于 $L$。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/05/30/ConvexOptimizationRevision/" rel="prev" title="Revision | 凸分析与优化方法">
+                  <i class="fa fa-angle-left"></i> Revision | 凸分析与优化方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">436k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:27</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
