@@ -19,12 +19,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本章以经典的重复码引出量子纠错码 bit flip code 和 phase flip code，然后刻画了量子线路的错误模型，最后介绍几个最广泛使用的稳定子体系和几个典型的纠错码。    引子：从经典纠错码到量子纠错码 QEC 的错误模型 稳定子体系 典型的纠错码 Shor Code Steane Code Five Qubit C">
+    <meta name="description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本章以经典的重复码引出量子纠错码 bit flip code 和 phase flip code，然后刻画了量子线路的错误模型，最后介绍几个最广泛使用的稳定子体系和几个典型的纠错码。 读本篇的时候最好只关注直觉，比如量子纠错和经典纠错的相似性、以及 stabilizer 这个集合为什么要提出。标记（Sketch）的证明都是不严格的，因">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QEC Workshop | 1 概述">
 <meta property="og:url" content="http://example.com/2026/01/23/QECNote1Introduction/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本章以经典的重复码引出量子纠错码 bit flip code 和 phase flip code，然后刻画了量子线路的错误模型，最后介绍几个最广泛使用的稳定子体系和几个典型的纠错码。    引子：从经典纠错码到量子纠错码 QEC 的错误模型 稳定子体系 典型的纠错码 Shor Code Steane Code Five Qubit C">
+<meta property="og:description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本章以经典的重复码引出量子纠错码 bit flip code 和 phase flip code，然后刻画了量子线路的错误模型，最后介绍几个最广泛使用的稳定子体系和几个典型的纠错码。 读本篇的时候最好只关注直觉，比如量子纠错和经典纠错的相似性、以及 stabilizer 这个集合为什么要提出。标记（Sketch）的证明都是不严格的，因">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="http://example.com/picture/quantum-repitition.png">
 <meta property="og:image" content="http://example.com/picture/bit-flip-code.png">
@@ -34,7 +34,7 @@
 <meta property="og:image" content="https://pic4.zhimg.com/v2-cdedcad0e21311c9db3b60c5c1d7b67b_1440w.jpg">
 <meta property="og:image" content="http://example.com/picture/surface-code-check.png">
 <meta property="article:published_time" content="2026-01-23T14:09:37.000Z">
-<meta property="article:modified_time" content="2026-02-07T11:55:04.543Z">
+<meta property="article:modified_time" content="2026-08-31T15:24:21.496Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="http://example.com/picture/quantum-repitition.png">
@@ -136,7 +136,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">96</span>
+          <span class="site-state-item-count">97</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -242,7 +242,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-02-07 19:55:04" itemprop="dateModified" datetime="2026-02-07T19:55:04+08:00">2026-02-07</time>
+      <time title="Modified: 2026-08-31 23:24:21" itemprop="dateModified" datetime="2026-08-31T23:24:21+08:00">2026-08-31</time>
     </span>
 
   
@@ -252,7 +252,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>4.3k</span>
+      <span>4.5k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -270,6 +270,7 @@
     
     
     <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QECNotes/">合集（量子纠错研讨班学习笔记）</a>。本章以经典的重复码引出量子纠错码 bit flip code 和 phase flip code，然后刻画了量子线路的错误模型，最后介绍几个最广泛使用的稳定子体系和几个典型的纠错码。</p>
+<p>读本篇的时候最好只关注直觉，比如量子纠错和经典纠错的相似性、以及 stabilizer 这个集合为什么要提出。标记（Sketch）的证明都是不严格的，因为可能需要定义一些更形式化的东西。严谨的证明参见 <a href="../../../../2026/08/29/QECNote0Preliminaries/">Lecture 1+：补充内容</a>。</p>
 <!-- toc -->
 
 <ul>
@@ -314,7 +315,7 @@
 <p>接下来的篇幅中，我们的主要任务是补上本节中的几个未形式化的洞（什么是量子计算过程中的错误、怎么定义一个纠错码能够纠正某错误），以及讲解几个常用的纠错码。</p>
 <h1><span id="qec-的错误模型">QEC 的错误模型</span></h1><p>量子计算以何故产生错误？因为我们难以实现真正的孤立系统。因此演化时，某酉变换 $\mathcal{U}_{SE}$ 将作用于系统的态和环境的态之张量积 $|\varphi\rangle_S|0^n\rangle_E$，导致出现错误。不妨先考虑最简单的单量子比特的系统，此时写出 $\mathcal{U}_{SE}$ 作用的表达式：</p>
 <p>$$<br>\begin{aligned}<br>|0\rangle_S|0^n\rangle_E \xmapsto{\mathcal{U}_{SE}} \alpha_{00}|0\rangle_S|\phi_{00}\rangle_E + \alpha_{01}|1\rangle_S|\phi_{11}\rangle_E \\<br>|1\rangle_S|0^n\rangle_E \xmapsto{\mathcal{U}_{SE}} \alpha_{10}|0\rangle_S|\phi_{10}\rangle_E + \alpha_{11}|1\rangle_S|\phi_{11}\rangle_E<br>\end{aligned}<br>$$</p>
-<p>其中 $\alpha_{i0}^2 + \alpha_{i1}^2 &#x3D; 1$。观察形式，忽略环境态可见，本质上，这还是该 qubit 以一定概率发生了某种“翻转”。受此启发，我们尝试将 Error 建模成 Pauli 算符之线性组合，毕竟 Pauli 算符构成二维复线性变换的一组基。不妨设 $|\psi\rangle_S :&#x3D; \beta |0\rangle_S + \gamma|1\rangle_S$，则有</p>
+<p>其中 $\alpha_{i0}^2 + \alpha_{i1}^2 &#x3D; 1$。观察形式，对环境态取偏迹可见，从表面上看，这还是该 qubit 以一定概率发生了某种“翻转”。受此启发，我们尝试将 Error 建模成 Pauli 算符之线性组合，毕竟 Pauli 算符构成二维复线性变换的一组基。不妨设 $|\psi\rangle_S :&#x3D; \beta |0\rangle_S + \gamma|1\rangle_S$，则有</p>
 <p>$$<br>\begin{aligned}<br>&amp;\mathcal{U}_{SE}|\psi\rangle_S|0^n\rangle_E \\<br>&amp;&#x3D; \beta(\alpha_{00}|0\rangle_S|\phi_{00}\rangle_E + \alpha_{01}|1\rangle_S|\phi_{11}\rangle_E) + \gamma(\alpha_{10}|0\rangle_S|\phi_{10}\rangle_E + \alpha_{11}|1\rangle_S|\phi_{11}\rangle_E) \\<br>&amp;&#x3D; (\beta|0\rangle_S + \gamma |1\rangle_S)\frac{\alpha_{00}|\phi_{00}\rangle_E + \alpha_{11}|\phi_{11}\rangle_E}{2} + (\beta|1\rangle_S + \gamma |0\rangle_S)\frac{\alpha_{01}|\phi_{01}\rangle_E + \alpha_{10}|\phi_{10}\rangle_E}{2} \\<br>&amp;+ (\beta|0\rangle_S - \gamma |1\rangle_S)\frac{\alpha_{00}|\phi_{00}\rangle_E - \alpha_{11}|\phi_{11}\rangle_E}{2} + (\beta|1\rangle_S - \gamma |0\rangle_S)\frac{\alpha_{01}|\phi_{01}\rangle_E - \alpha_{10}|\phi_{10}\rangle_E}{2}\\<br>&amp;&#x3D; \alpha_I|\psi\rangle_S|\phi_I\rangle_E + \alpha_XX|\psi\rangle_S|\phi_X\rangle_E + \alpha_ZZ |\psi\rangle_S|\phi_Z\rangle_E + \alpha_{XZ}XZ|\psi\rangle_S|\phi_{XZ}\rangle_E<br>\end{aligned}<br>$$</p>
 <p>当然，对于多个量子比特的系统，也不外乎是这样。至此，我们知道了量子演化过程中的任何一个错误，都是 <strong>Pauli 门的线性组合</strong>（相较于经典情况下，错误是一个 01 串到 01 串的函数）。并可以用以下定义来刻画一个纠错码能够纠正的错误：</p>
 <div class="note success"><p><strong>定义 2.1.</strong> 令 $E$ 是 Pauli 算符的线性组合的一个子集。称一个纠错码 $(\cdot)_L$ 能够纠正 $E$ 中的全部错误，若对于任意的态 $|x\rangle, |y\rangle$</p>
@@ -322,7 +323,7 @@
 <p>此处 $c$ 仅取决于错误类型而不取决于逻辑比特的内容。在一些文献中也称 $\langle (\cdot)_L, E \rangle$ 构成一个量子纠错码（QECC）。</p>
 </div>
 
-<p>可以毫不费力的证明以下结论：</p>
+<p>至于为什么这个定义等价于 syndrome computation 然后 recovery 的过程，参见 <a href="../../../../2026/01/23/QECNote1Introduction/">Lecture 1+</a>，然后我们暂且接受这个定义。可以证明以下结论：</p>
 <div class="note info"><p><strong>定理 2.1.</strong> 若 $(\cdot)_L$ 能纠正 $E$ 中的错误，则能纠正 $\mathrm{span}(E)$ 中的错误。</p>
 </div>
 
@@ -360,7 +361,7 @@
 </div>
 
 <p>另一方面，只要给出了一组 stabilizer，这组 stabilizer 的不变子空间之交集便给出了一组合法的码字。</p>
-<p>这个范式以下述定理之故比直观看起来更为高效：</p>
+<p>这个范式看起来作用不大，因为 stabilizer 集合可能很大，对其每一个元素做 Pauli measurement 十分低效。然而：</p>
 <div class="note info"><p><strong>定理 3.1.</strong> $S$ 满足以下条件：</p>
 <ol>
 <li>$-\mathcal{I}\notin S$；</li>
@@ -371,17 +372,17 @@
 <p><strong>证明.</strong> 1 显然成立。视 $P_n$ 为集合 $C$ 上的作用可见，$S$ 无非是 $C$ 中全体元素的稳定子群之交集，故必然是群。这里着重证明它是阿贝尔群。</p>
 <p>回忆 Pauli 群的重要性质。Pauli 群中的元素只有特征值 $\pm 1$，且互相之间或者对易，或者反对易（注意 $\mathcal{I}$ 和 $\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ 对易，$\mathcal{X}, \mathcal{Y}, \mathcal{Z}$ 互相反对易）。因此对于任意的 $\mathcal{M}_1, \mathcal{M}_2\in S$，有或者 $[\mathcal{M}_1, \mathcal{M}_2] &#x3D; 0$，或者 $\{\mathcal{M}_1, \mathcal{M}_2\} &#x3D; 0$。只需排除后者。</p>
 <p>首先观察到对于任意的 $|\psi_L\rangle\in C$ 有 $[\mathcal{M}_1, \mathcal{M}_2]|\psi_L\rangle &#x3D; |\psi_L\rangle - |\psi_L\rangle &#x3D; 0$，然而若 $\{\mathcal{M_1}, \mathcal{M}_2\} &#x3D; 0$，则 $[\mathcal{M}_1, \mathcal{M}_2] &#x3D; 2\mathcal{M}_1\mathcal{M}_2$ 得 $[\mathcal{M}_1, \mathcal{M}_2]|\psi_L\rangle &#x3D; 2|\psi_L\rangle$ 导出矛盾。<div style="text-align: right">$\blacksquare$</div></p>
-<p>因此根据有限生成阿贝尔群的分解定理，我们只需对 $S$ 的生成元做 Pauli Measurement 即可。那么，如果一个码字集合 $C$ 的 Stabilizer 是 $S$，它能够纠正何种错误？显而易见，如果 Syndrome 测出来全是 $1$，即 $\mathcal{E}|\psi_L\rangle$ 是所有 stabilizer 的特征值为 $1$ 的特征向量，则没法纠正这种错误。这蕴含 $\mathcal{S}\mathcal{E}|\psi\rangle &#x3D; \mathcal{E}|\psi\rangle &#x3D; \mathcal{E}\mathcal{S}|\psi\rangle$，即 $\mathcal{E}$ 和 $\mathcal{S}$ 可交换。综上所述，此纠错码<strong>不能纠正</strong>的错误无非是 $S$ 的中心化子群，总结成如下定理：</p>
-<div class="note info"><p><strong>定理 3.2.</strong> 若一个纠错码的 Stabilizer 是 $S$。$S$ 的中心化子群是 $N(S) :&#x3D; \{\mathcal{E}\in P_n : \forall \mathcal{S}\in S, [\mathcal{E}, \mathcal{S}] &#x3D; 0\}$（不知道为何这里记号是 $N(S)$ 而非 $C(S)$）。该纠错码不能纠正的错误集合为 $N(S)\setminus S$。</p>
+<p>因此根据有限生成阿贝尔群的分解定理，我们只需对 $S$ 的生成元做 Pauli Measurement 即可。那么，如果一个码字集合 $C$ 的 Stabilizer 是 $S$，它能够纠正何种错误？显而易见，如果 Syndrome 测出来全是 $1$，即 $\mathcal{E}|\psi_L\rangle$ 是所有 stabilizer 的特征值为 $1$ 的特征向量，则症状看起来和没有发生错误时别别无二致，因此没法纠正这种错误。这蕴含 $\mathcal{S}\mathcal{E}|\psi\rangle &#x3D; \mathcal{E}|\psi\rangle &#x3D; \mathcal{E}\mathcal{S}|\psi\rangle$，即 $\mathcal{E}$ 和 $\mathcal{S}$ 可交换。综上所述，此纠错码<strong>不能检测</strong>的错误无非是 $S$ 的中心化子群，总结成如下定理：</p>
+<div class="note info"><p><strong>定理 3.2.</strong> 若一个纠错码的 Stabilizer 是 $S$。$S$ 的中心化子群是 $N(S) :&#x3D; \{\mathcal{E}\in P_n : \forall \mathcal{S}\in S, [\mathcal{E}, \mathcal{S}] &#x3D; 0\}$（不知道为何这里记号是 $N(S)$ 而非 $C(S)$）。该纠错码不能检测的错误集合为 $N(S)\setminus S$。</p>
 </div>
 
-<p><strong>证明.</strong> 前文之述备矣。注意我们从集合中刨掉了 $S$，因为其中的元素不会改变码字，故难以称得上“错误”。<div style="text-align: right">$\blacksquare$</div></p>
+<p><strong>证明（Sketch）.</strong> 前文之述备矣。注意我们从集合中刨掉了 $S$，因为其中的元素不会改变码字，故难以称得上“错误”。<div style="text-align: right">$\blacksquare$</div></p>
 <p>另外还需要区分不同的错误。如果两个错误具有相同的 Syndrome，那么我们也无法纠正之。事实上，我们有：</p>
 <div class="note info"><p><strong>定理 3.3.</strong> 一个纠错码可以纠正 $E\subseteq P_n$ 中的错误，当且仅当</p>
 <p>$$<br>\forall \mathcal{E}, \mathcal{F}\in E,\qquad \mathcal{E}^\dagger \mathcal{F}\notin N(S)\setminus S<br>$$</p>
 </div>
 
-<p><strong>证明.</strong> 显然如果 $\mathcal{E}, \mathcal{F}$ 有相同的症状，则 $\mathcal{E}^\dagger \mathcal{F}$ 有平凡的症状（所有特征值都是 $1$）。而如果 $\mathcal{E}^\dagger \mathcal{F}\in S$，则该错误可以通过同一种方式纠正。<div style="text-align: right">$\blacksquare$</div></p>
+<p><strong>证明（Sketch）.</strong> 显然如果 $\mathcal{E}, \mathcal{F}$ 有相同的症状，则 $\mathcal{E}^\dagger \mathcal{F}$ 有平凡的症状（所有特征值都是 $1$）。而如果 $\mathcal{E}^\dagger \mathcal{F}\in S$，则该错误可以通过同一种方式纠正。<div style="text-align: right">$\blacksquare$</div></p>
 <blockquote>
 <p><strong>Remark.</strong> 这里显然就显然在若 $[\mathcal{E}, \mathcal{S}] &#x3D; 0$ 则 $[\mathcal{E}, \mathcal{S}^\dagger] &#x3D; 0$，对于反对易性也有相同结论。读者不妨自行补充论证，此外需要时刻记住 $\mathcal{S}|\psi_L\rangle &#x3D; |\psi_L\rangle$ 和 Pauli 群中元素要么对易要么反对易。</p>
 </blockquote>
@@ -472,13 +473,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">436k</span>
+    <span title="Word count total">443k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:27</span>
+    <span title="Reading time total">26:50</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

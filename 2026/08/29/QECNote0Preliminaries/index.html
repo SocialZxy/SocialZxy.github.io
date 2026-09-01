@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 收录于 合集（量子纠错研讨班学习笔记）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QEC Workshop | 1+ 补充内容">
+<meta property="og:url" content="http://example.com/2026/08/29/QECNote0Preliminaries/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 收录于 合集（量子纠错研讨班学习笔记）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-08-29T10:21:36.000Z">
+<meta property="article:modified_time" content="2026-08-31T15:18:22.440Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/08/29/QECNote0Preliminaries/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/08/29/QECNote0Preliminaries/","path":"2026/08/29/QECNote0Preliminaries/","title":"QEC Workshop | 1+ 补充内容"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>QEC Workshop | 1+ 补充内容 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">量子信道的建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">纠错码的建模</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">纠错能力的刻画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">Stabilizer Formalism</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/08/29/QECNote0Preliminaries/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="QEC Workshop | 1+ 补充内容 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          QEC Workshop | 1+ 补充内容
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-08-29 18:21:36" itemprop="dateCreated datePublished" datetime="2026-08-29T18:21:36+08:00">2026-08-29</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-08-31 23:18:22" itemprop="dateModified" datetime="2026-08-31T23:18:22+08:00">2026-08-31</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>6.3k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>23 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 收录于 <a href="../../../../2026/01/23/QECNotes/">合集（量子纠错研讨班学习笔记）</a>。本章是对 <a href="../../../../2026/01/23/QECNote1Introduction/">Lecture 1</a> 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E4%BF%A1%E9%81%93%E7%9A%84%E5%BB%BA%E6%A8%A1">量子信道的建模</a></li>
+<li><a href="#%E7%BA%A0%E9%94%99%E7%A0%81%E7%9A%84%E5%BB%BA%E6%A8%A1">纠错码的建模</a></li>
+<li><a href="#%E7%BA%A0%E9%94%99%E8%83%BD%E5%8A%9B%E7%9A%84%E5%88%BB%E7%94%BB">纠错能力的刻画</a></li>
+<li><a href="#stabilizer-formalism">Stabilizer Formalism</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="量子信道的建模">量子信道的建模</span></h1><p><a href="../../../../2026/01/23/QECNote1Introduction/">Lecture 1</a> 中我们直接指出量子信道是一个跟环境耦合的系统演化之后取偏迹的结果。在这一篇中，我们给出另一个等价的定义。量子信道用于刻画一个量子系统中的全部可能的变化。那么对于量子信道最基本和唯一的要求就是，它要在任何情况下把一个态的密度矩阵变成另一个态的密度矩阵 $(\star)$。回忆密度矩阵必是 Hilbert space $\mathcal{H}$ 到自身的有界线性算子（不妨记为 $\mathcal{B}(\mathcal{H})$）。$(\star)$ 要求量子信道都是 CPTP map，其中：</p>
+<div class="note success"><p><strong>定义 1.1（Complete-positive trace-preserving maps）.</strong> 一个映射 $\mathcal{C}\colon\mathcal{B}(\mathcal{H})_A\rightarrow \mathcal{B}(\mathcal{H}’)$ 被称作 <em>CPTP map</em>，若它满足：</p>
+<ol>
+<li><strong>线性。</strong> 对于任意的实数 $p_1, p_2$ 和两个密度矩阵 $\rho_1, \rho_2$，有 $\mathcal{C}(p_1\rho_1 + p_2\rho_2) &#x3D; p_1\mathcal{C}(\rho_1) + p_2\mathcal{C}(\rho_2)$；</li>
+<li><strong>保迹。</strong> $\operatorname{Tr}(\mathcal{C}(\rho)) &#x3D; \operatorname{Tr}(\rho)$；</li>
+<li><strong>正定。</strong> 若 $\rho \geq 0$，则 $\mathcal{C}(\rho) \geq 0$；</li>
+<li><strong>全正。</strong> 给定系统 $A$ 上的一个密度矩阵 $\rho_A$，对于任意 $A\otimes B$ 上的、投影在 $A$ 空间中是 $\rho_A$ 的态 $\rho_{AB}$（即 $\operatorname{Tr}_B \rho_{AB} &#x3D; \rho_A$），有 $\mathcal{C}\otimes I(\rho_{AB})$ 正定。</li>
+</ol>
+</div>
+
+<p>关于 CPTP map，我们不加证明地给出两个常用性质。前者是 CPTP map 的一个方便的刻画。</p>
+<div class="note info"><p><strong>定理 1.2（Kraus decomposition）.</strong> 一个 $\mathcal{B}(\mathcal{H}_A)\rightarrow \mathcal{B}(\mathcal{H}’)$ 的映射 $\mathcal{E}$ 是 CPTP map 当且仅当它可以被分解成</p>
+<p>$$<br>\mathcal{E}(\rho) &#x3D; \sum_{k}A_k\rho A_k^\dagger,<br>$$</p>
+<p>其中</p>
+<p>$$<br>\sum_k A_kA_k^\dagger &#x3D; I.<br>$$</p>
+</div>
+
+<p>注意分解可能不唯一。但总之，给出一组合适的 $A_k$ 就可以给出一个量子信道。直观来说，每一个 $A_k$ 都表示一种可能发生的错误。另外，每一个量子信道本质上都是开放系统的演化。在系统和环境的张量积中考虑，有</p>
+<div class="note info"><p><strong>定理 1.3（Stinespring dilation）.</strong> 对于任意的 CPTP map $\mathcal{C}\colon \mathcal{H}_A\rightarrow \mathcal{H}_B$，存在一个 $\mathcal{H}_A\otimes \mathcal{H}_B$ 上的 unitary $V$ 使得<br>$$<br>\mathcal{C}(\rho) &#x3D; \operatorname{Tr}_{\mathcal{A}} V(\rho\otimes |0\rangle\langle0|) V^\dagger.<br>$$</p>
+</div>
+
+<p>接下来是一些典型的量子信道的定义。这里记号都采用 $\mathcal{E}(\rho)$</p>
+<div class="note success"><p><strong>定义 1.4（Pauli channels）.</strong> 若</p>
+<p>$$<br>\mathcal{E}(\rho) &#x3D; \sum_P p_P P\rho P^\dagger,<br>$$</p>
+<p>其中 $P$ 形如 Pauli $I, X, Y, Z$ 矩阵的张量积，$p$ 是一个概率分布。那么称 $\mathcal{E}(\rho)$ 为 Pauli channel。</p>
+</div>
+
+<p>直观上这表示该信道中有 $p_P$ 的概率发生一个 Pauli 错误 $P$。</p>
+<div class="note success"><p><strong>定义 1.5（Independent channels）.</strong> 若一个量子信道可以写成 $n$ 个子系统的张量积，即<br>$$<br>\mathcal{E} &#x3D; \bigotimes_{i &#x3D; 1}^n \mathcal{E}_i<br>$$</p>
+<p>则 $\mathcal{E}$ 称为 independent channel。</p>
+</div>
+
+<p>直观上这表示每一个子系统里面的 error 都是独立随机发生的。</p>
+<p>对于一个关于 $n$ 个 qubit 的 unitary $A$，若 $A$ 只非平凡地作用于其中 $t$ 个 qubit（这 $t$ 个 qubit 的集合叫做 $A$ 的 support），则称 $\operatorname{wt} A &#x3D; t$。若<br>$$<br>B &#x3D; \sum_i B_i,<br>$$<br>其中 $\operatorname{wt} B_i$ 均不超过 $t$，则称 $B$ 为 $t$-qubit 错误。</p>
+<div class="note success"><p><strong>定义 1.6（$t$-qubit error channels）.</strong> 若 $\mathcal{E}$ 的 Kraus decomposition 中每一个 $A$ 都是一个 $t$-qubit 错误，则称 $\mathcal{E}$ 是 $t$-qubit error channel。</p>
+</div>
+
+<h1><span id="纠错码的建模">纠错码的建模</span></h1><p>在本节中，$\mathcal{H}_D$ 表示 $D$ 维 Hilbert Space。</p>
+<div class="note success"><p><strong>定义 2.1.</strong> 一个 QECC $(U, \mathcal{E})$ 包含以下资料：</p>
+<ol>
+<li>一个保距的嵌入（Encoder） $U\colon \mathcal{H}_K\rightarrow \mathcal{H}_N$；</li>
+<li>一个可以纠正的错误集合 $\mathcal{E}$，集合中元素都是 $\mathcal{H}_N\rightarrow \mathcal{H}_M$ 的线性映射；</li>
+<li>一个 Decoder（CPTP map） $\mathcal{D}\colon \mathcal{H}_M\rightarrow \mathcal{H}_K$ 使得<br>$$<br>\forall E\in \mathcal{E}, |\psi\rangle\in\mathcal{H}_K, \quad \mathcal{D}(EU|\psi\rangle\langle\psi|U^\dagger E^\dagger) &#x3D; c(E, |\psi\rangle)|\psi\rangle\langle\psi|.<br>$$</li>
+</ol>
+</div>
+
+<blockquote>
+<p><strong>Remark.</strong> 一般来说，所有参数都是 $2$ 的幂次。另外一般 $N &#x3D; M$，除非我们要考虑原子丢失（使得 $N &gt; M$）或者 qubit erasure（使得 $N &lt; M$）这些错误。</p>
+</blockquote>
+<p>换言之，经过 $U$ 编码之后，无论发生 $\mathcal{E}$ 中的哪个错误，都可以被 $\mathcal{D}$ 恢复。这里 $E$ 并没有要求是 unitary，所以需要一个和 $E$ 相关的系数 $c(E, |\psi\rangle)$ 来保证 decode 之后的向量是 normalize 的。不难看出，在编码这一层，重要的不是 $U$，而仅仅是码字空间：</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 给定 $U_1, U_2\colon \mathcal{H}_K\rightarrow \mathcal{H}_N$ 都是保距嵌入，且 $\operatorname{Im} U_1 &#x3D; \operatorname{Im} U_2$。则 $(U_1, \mathcal{E})$ 是 QECC 当且仅当 $(U_2, \mathcal{E})$ 是 QECC。</p>
+</div>
+
+<p><strong>证明.</strong> 注意两个保距嵌入之间至多差一个 unitary $V$。即存在 unitary $V\colon \mathcal{H}_K\rightarrow \mathcal{H}_K$ 使得 $U_2 &#x3D; U_1 V$。那么如果 $\mathcal{D}_1$ 是 $(U_1, \mathcal{E})$ 的 decoder，容易验证 $V^\dagger \mathcal{D}_1$ 是 $(U_2, \mathcal{E})$ 的 decoder：<br>$$<br>\begin{align}<br>V^\dagger \mathcal{D}_1(EU_2|\psi\rangle\langle\psi|U_2^\dagger E^\dagger)V<br>&amp;&#x3D; V^\dagger \mathcal{D}_1(EU_1 V|\psi\rangle\langle\psi|V^\dagger U_2^\dagger E^\dagger)V \\<br>&amp;&#x3D; V^\dagger (c(E, V|\psi\rangle) V|\psi\rangle\langle\psi|V^\dagger)V \\<br>&amp;&#x3D; c(E, V|\psi\rangle) |\psi\rangle\langle\psi|.<br>\end{align}<br>$$</p>
+<p>此时 $c(E, V|\psi\rangle)$ 已经是只和 $E, |\psi\rangle$ 有关的缩放因子，符合定义 2.1 的要求。<div style="text-align: right">$\blacksquare$</div></p>
+<p>于是，我们后文也可能不考虑 $U$，直接写其码字空间 $Q &#x3D; \operatorname{Im} U$。同时，简单记 $|\bar{\psi}\rangle$ 表示 $|\psi\rangle$ 对应的码字。</p>
+<p>如果要在量子计算中实现 decoder $\mathcal{D}$ 这个 CPTP map。这需要用 Stinespring dilation 将其提升到 $\mathcal{H}_M\rightarrow \mathcal{H}_K$ 中去。假设对应的 unitary 是 $V$。定义 2.1 和定理 1.3 说明对于任意的 $E\in \mathcal{E}$ 有<br>$$<br>V(E|\bar{\psi}\rangle\otimes |0\rangle) &#x3D; \sqrt{c(E, |\psi\rangle)}|A(E, |\psi\rangle)\rangle\otimes |\psi\rangle. \label{eq:D-dilation}<br>$$</p>
+<p>符合实践中 Decode 的过程：对 logical qubit 做 syndrome extraction，然后 measure 之后纠错的过程。此时任取两个态 $|\psi\rangle, |\phi\rangle$，根据线性性必然有</p>
+<p>$$<br>\begin{align}<br>VE(\alpha|\bar{\psi}\rangle + \beta|\bar{\phi}\rangle)\otimes |0\rangle<br>&amp;&#x3D; \alpha \sqrt{c(E, |\psi\rangle)}|A(E, |\psi\rangle)\rangle\otimes |\psi\rangle + \beta \sqrt{c(E, |\phi\rangle)}|A(E, |\phi\rangle)\rangle\otimes |\phi\rangle \\<br>&amp;&#x3D; \sqrt{c(E, \alpha|\psi\rangle + \beta|\phi\rangle)}|A(E, \alpha|\phi\rangle + \beta |\psi\rangle)\rangle\otimes (\alpha|\psi\rangle + \beta|\phi\rangle).<br>\end{align}<br>$$</p>
+<p>上下对比可知必然有<br>$$<br>c(E, |\psi\rangle) &#x3D; c(E, |\phi\rangle) &#x3D; c(E), \quad |A(E, |\psi\rangle)\rangle &#x3D; |A(E, |\phi\rangle)\rangle &#x3D; |A(E)\rangle.<br>$$</p>
+<p>至此我们证明了</p>
+<div class="note info"><p><strong>定理 2.3.</strong> 定义 2.1 中的缩放系数必然与 $|\psi\rangle$ 无关。</p>
+</div>
+
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>这给你在一个大系统里分块用不同的纠错码提供了理论支持，因为 decode 之后差的是全局相位。</p>
+<div class="note info"><p><strong>定理 2.4.</strong> 如果 $(U, \mathcal{E})$ 是 QECC，则 $(U, \mathcal{E}’)$ 也是 QECC。其中 $\mathcal{E}’$ 是 $\mathcal{E}$ 张成的线性子空间。</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明如果 $E, F\in \mathcal{E}$，则 $\mathcal{D}$ 也可以纠正 $\alpha E + \beta F$。简单计算便知道</p>
+<p>$$<br>V((\alpha E + \beta F)|\langle\psi|\rangle\otimes |0\rangle) &#x3D; (\alpha c(E)|A(E)\rangle + \beta c(F)|A(F)\rangle)\otimes |\psi\rangle.<br>$$</p>
+<p>Trace 掉第一个子空间确实得到 $|\psi\rangle$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>以上定理自然推出，为了纠正所有的 $t$-qubit 错误，只需要纠正 $t$-qubit Pauli 错误，因为 Pauli 矩阵构成整个空间的一组基。</p>
+<h1><span id="纠错能力的刻画">纠错能力的刻画</span></h1><p>现在我们希望知道指定一个码字空间 $Q$ 和错误集合 $\mathcal{E}$，$(Q, \mathcal{E})$ 是 QECC 有没有除开给出具体的 $\mathcal{D}$ 之外的简明判断依据。比方说，可以想象如果所有的错误把码字映射到不同的、正交的子空间，而且每个错误都保距，那么明显 $\mathcal{D}$ 可以被简单地写出：若<br>$$<br>\forall |\phi\rangle, |\psi\rangle\in Q, E_i, E_j\in \mathcal{E}, \quad \langle\phi|E_i^\dagger E_j|\psi\rangle &#x3D; \delta_{ij}\langle\psi|\phi\rangle,<br>$$</p>
+<p>则 $(Q, \mathcal{E})$ 是 QECC。实际上，真正的充要条件也是这个形式：</p>
+<div class="note info"><p><strong>定理 3.1（QECC Condition）.</strong> $(Q, \mathcal{E})$ 是 QECC 当且仅当对于任意的 $|\phi\rangle, |\psi\rangle\in Q, E_i, E_j\in \mathcal{E}$ 都有<br>$$<br>\langle\phi|E_i^\dagger E_j|\psi\rangle &#x3D; C_{ij}\langle\psi|\phi\rangle, \label{eq:qecc-condition}<br>$$<br>注意此处 $C_{ij}$ 是只和错误类型有关、和态无关的数值。</p>
+</div>
+
+<p><strong>证明.</strong> 我们从更为显然的必要性开始证。如果存在 decoder $D$，相应地有他的 Stinespring dilation $V$，计算可知</p>
+<p>$$<br>\begin{align}<br>    \langle\phi|E_i^\dagger E_j|\psi\rangle &amp;&#x3D; (\langle\phi|\otimes \langle 0|)E_i^\dagger V^\dagger V E_j(|\psi\rangle\otimes \langle 0|) \\<br>    &amp;&#x3D; \sqrt{c(E_i)c(E_j)}\langle A(E_i)|A(E_j)\rangle \langle\phi|\psi\rangle,<br>\end{align}<br>$$</p>
+<p>可知所谓的 $C_{ij}$ 就是 $\sqrt{c(E_i)c(E_j)}\langle A(E_i)|A(E_j)\rangle$。</p>
+<p>接下来证明充分性。对式 \eqref{eq:qecc-condition} 两边取共轭立即得到 $C_{ij} &#x3D; C_{ji}^\dagger$，即 $\mathbf{C}$ 是厄密特矩阵，因此可以对角化。取 $\operatorname{span} \mathcal{E}$ 一组基 ${F_i}$，使得 $\mathbf{C}$ 在这组基下面对角化。有</p>
+<p>$$<br>\begin{align}<br>    \langle\phi|F_i^\dagger F_j|\psi\rangle &#x3D; d_i\delta_{ij}\langle\phi|\psi\rangle,<br>\end{align}<br>$$</p>
+<p>至少说明不同错误都被映射到了不同的正交子空间。这几乎是本节最开头的充分条件，除开 $d_i$ 可能是 $1$ 以外的实数。但是无论如何我们都可以做测量然后准确知道发生了什么错误，然后纠错。得到的态会和原来差 $d_i$ 倍，然而定义 2.1 允许这个差距。所以，我们确实有一个合法的 decoder。<div style="text-align: right">$\blacksquare$</div></p>
+<p>上面的证明并不禁止 $d_i &#x3D; 0$。形式上，这没什么问题。物理上，这表明 $F_i$ 这个错误对于码字空间 $Q$ 毫无影响。比如说考虑 Shor 9 qubit code（<a href="../../../../2026/01/23/QECNote1Introduction/#shor-code">概述 Section 4.1</a>）中就有 $Z_1|\bar{0}\rangle &#x3D; Z_2|\bar{0}\rangle, Z_1|\bar{1}\rangle &#x3D; Z_2|\bar{1}\rangle$，那么考虑 $\mathcal{E} &#x3D; \{Z_1 + Z_2, Z_1 - Z_2\}$ 这组基，在这组基上 $\mathbf{C}$ 就是对角化的，而 $d_2$ 等于 $0$。此等现象在 QECC 中非常常见。如果 $\mathcal{E}$ 是一个线性无关组，但是 $\mathbf{C}$ 仍然不满秩，就称这个 QECC 具有<strong>简并性</strong>。</p>
+<p>对于一个 QECC，称如下的量为它的码距：</p>
+<div class="note success"><p><strong>定义 3.2（码距）.</strong> 对于一个码字空间为 $C$ 的 QECC，记 $C$ 的码距为最小的 $\operatorname{wt} F$，满足：不存在 $c(F)$ 使得 $\forall |\phi\rangle, |\psi\rangle$</p>
+<p>$$<br>\langle \phi| F|\psi\rangle &#x3D; c(F)\langle\phi|\psi\rangle<br>$$</p>
+<p>恒成立。</p>
+</div>
+
+<p>显然，码距为 $2t + 1$ 的 QECC 总能纠正 weight 不超过 $t$ 的错误。</p>
+<p>如果弱化一下条件，仅要求检测是否发生错误而不是纠正错误，可以考察如下定义：</p>
+<div class="note success"><p><strong>定义 3.3.</strong> 称 $U$（给出码字空间 $T$）能够检测 $\mathcal{E}$，若他们满足如下性质：记 $\Pi$ 是到 $T$ 的投影，对于任意的 $E\in \mathcal{E}$，<br>$$<br>\Pi E|\psi\rangle &#x3D; c(E, |\psi\rangle) |\psi\rangle.<br>$$</p>
+</div>
+
+<p>直觉上，这个投影要么直接把错误纠正了，要么测量 $(\Pi, I - \Pi)$ 会查出确实发生了错误。和定理 2.3 一样，取一下 $\alpha \ket{\phi} + \beta\ket{\psi}$ 可以知道 $c$ 只和 $E$ 有关。关于 QECC 的检测能力，我们也有如下的判据：</p>
+<div class="note info"><p><strong>定理 3.4.</strong> $U$ 可以检测 $\mathcal{E}$ 当且仅当对于任意的码字 $|\phi\rangle, |\psi\rangle$ 和错误 $E\in \mathcal{E}$ 都有<br>$$<br>\langle\phi|E|\psi\rangle &#x3D; c(E)\langle\phi|\psi\rangle.<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 必要性显然：定义两边同时乘 $\langle\phi|$ 立即得证：<br>$$<br>\langle\phi|E|\psi\rangle &#x3D; (\langle\pi|\Pi)E|\psi\rangle &#x3D; c(E)\langle\phi|\psi\rangle.<br>$$</p>
+<p>为了证充分性，取 $\operatorname{Im} U$ 的一组标准正交基 $\{|\psi_i\rangle\}$ 把 $\Pi$ 写作谱分解 $\Pi &#x3D; \sum |\psi_i\rangle\langle\psi_i|$ 可知<br>$$<br>\Pi E|\psi\rangle &#x3D; \sum |\psi_i\rangle\langle\psi_i|E|\psi\rangle &#x3D; c(E)\sum |\psi_i\rangle\langle\psi_i|\psi\rangle &#x3D; c(E)|\psi\rangle.<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>因此码距为 $d + 1$ 的 QECC 可以检测 weight 不超过 $d$ 的错误。</p>
+<h1><span id="stabilizer-formalism">Stabilizer Formalism</span></h1><p>定义 Pauli 群 $\textsf{P}_n$ 表示：形如 $e^{\frac{\mathrm{i}n\pi}{2}}P_1\otimes \cdots \otimes P_n ~ (P_i \in \{I, X, Y, Z\}, n\in \mathbb{Z})$ 在乘法意义下构成的群，其中元素叫做 Pauli 算符。对于任意一个 Pauli 算符 $P$，令 $\hat{P}$ 表示模掉表示相位的正规子群得到的商群 $\textsf{P}_n &#x2F; {e^{\frac{\mathrm{i}n\pi}{2}} I}$ 中的 $P$ 对应的等价类。逐元素分析容易知道，两个 Pauli 算符要么对易要么反对易。因此定义 $c(\cdot, \cdot)$ 表示两个 Pauli 算符的对易性：<br>$$<br>PQ &#x3D; (-1)^{c(P, Q)}QP<br>$$</p>
+<p>为了计算 $c(P, Q)$，对 Pauli 群元素引入二元辛形式：对于任意的 $P\in \hat{\textsf{P}}_n$，定义 $\boldsymbol{v}_P &#x3D; (\boldsymbol{x}_P, \boldsymbol{v}_P)\in \mathbb{Z}_2^n\times \mathbb{Z}_2^n$ 如下：<br>$$<br>(x_{P, i} | z_{P, i}) &#x3D; \begin{cases}<br>    (0|0), &amp; P_i &#x3D; I \\<br>    (1|0), &amp; P_i &#x3D; X \\<br>    (1|1), &amp; P_i &#x3D; Y \\<br>    (0|1), &amp; P_i &#x3D; Z<br>\end{cases}<br>$$</p>
+<p>很明显这给出了 $(\hat{P}_n, \times)$ 和 $(\mathbb{Z}_2^n\times \mathbb{Z}_2^n, \oplus)$ 之间的同构。定义辛内积<br>$$<br>\boldsymbol{v}_P\odot \boldsymbol{v}_Q &#x3D; \boldsymbol{x}_P\cdot \boldsymbol{z}_Q \oplus \boldsymbol{z}_P \cdot \boldsymbol{x}_Q<br>$$</p>
+<p>则容易验证 $c(P, Q) &#x3D; \boldsymbol{v}_P \odot \boldsymbol{v}_Q$。至此我们已经清楚地刻画了 Pauli 群对易性的代数结构。</p>
+<div class="note success"><p><strong>定义 4.1（Stabilizer）.</strong> 一组码字 $C :&#x3D; \{|\psi_L\rangle\}$ 的稳定子集合定义为</p>
+<p>$$<br>\textsf{S}(C) &#x3D; \{P\in \textsf{P}_n : \forall |\psi_L\rangle\in C, {P}|\psi_L\rangle &#x3D; |\psi_L\rangle\}<br>$$</p>
+</div>
+
+<p>这个范式看起来作用不大，因为 stabilizer 集合可能很大，对其每一个元素做 Pauli measurement 十分低效。然而：</p>
+<div class="note info"><p><strong>定理 4.2.</strong> $\textsf{S}$ 满足以下条件：</p>
+<ol>
+<li>$-{I}\notin \textsf{S}$；</li>
+<li>$\textsf{S}$ 是有限阿贝尔群。</li>
+</ol>
+</div>
+
+<p><strong>证明.</strong> 1 显然成立。视 $\textsf{P}_n$ 为集合 $C$ 上的作用可见，$\textsf{S}$ 无非是 $C$ 中全体元素的稳定子群之交集，故必然是群。这里着重证明它是阿贝尔群。</p>
+<p>回忆 Pauli 群的重要性质。Pauli 群中的元素只有特征值 $\pm 1$，且互相之间或者对易，或者反对易（注意 ${I}$ 和 ${X}, {Y}, {Z}$ 对易，${X}, {Y}, {Z}$ 互相反对易）。因此对于任意的 $M_1, M_2\in \textsf{S}$，有或者 $[M_1, M_2] &#x3D; 0$，或者 $\{M_1, M_2\} &#x3D; 0$。只需排除后者。</p>
+<p>首先观察到对于任意的 $|\psi_L\rangle\in C$ 有 $[{M}_1, {M}_2]|\psi_L\rangle &#x3D; |\psi_L\rangle - |\psi_L\rangle &#x3D; 0$，然而若 $\{M_1, M_2\} &#x3D; 0$，则 $[M_1, M_2] &#x3D; 2M_1M_2$ 得 $[M_1, M_2]|\psi_L\rangle &#x3D; 2|\psi_L\rangle$ 导出矛盾。<div style="text-align: right">$\blacksquare$</div></p>
+<div class="note success"><p><strong>定义 4.3.</strong> 给定阿贝尔群 $\textsf{S}\subseteq \textsf{P}_n$，满足 $-I\notin \textsf{S}$。定义 $\textsf{S}$ 的码字空间为<br>$$<br>\mathcal{T}(\textsf{S}) &#x3D; \{|\psi\rangle : \forall M\in \textsf{S}, M|\psi\rangle &#x3D; |\psi\rangle\}.<br>$$</p>
+</div>
+
+<p>很明显一般地有对于任意的码字空间 $T$，$T\subseteq \mathcal{T}(\textsf{S}(T))$。如果这两者严格相等，那么 $T$ 就叫做一个 stabilizer code。那么，拿着 $\textsf{S}$，如何找到它对应的码字空间？</p>
+<p>设 $\textsf{S}$ 的一个极小生成元集合为 $\{M_1, …, M_r\}$。那么显然 $|\textsf{S}| &#x3D; 2^r$。定义如下的投影算符：<br>$$<br>\Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\prod_{i &#x3D; 1}^r (I + M_i) &#x3D; \frac{1}{2^r}\prod_{M\in \textsf{S}}M.<br>$$</p>
+<p>容易看到，这正是到 $\mathcal{T}(\textsf{S})$ 的投影。熟知 $\Pi_{\textsf{S}}$ 的迹就是 $\mathcal{T}(\textsf{S})$ 的秩，而如果码字的个数是 $K$，就有该子空间大小为 $2^K$。据此，我们可以算出任意一个 $n$ 个物理比特上的 stabilizer 集合（设 $|\textsf{S}| &#x3D; 2^r$）对应的码字个数：</p>
+<p>$$<br>\operatorname{tr} \Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\Pi_{M\in \textsf{S}}\operatorname{tr} M &#x3D; \frac{\operatorname{tr} I}{2^r} &#x3D; 2^{n - r},<br>$$</p>
+<p>这里需要注意 Pauli 群中只有 $\operatorname{tr} I\ne 0$。也就是说，支撑于 $n$ 个物理比特之上、由 $r$ 个生成元生成的 stabilizer 集合，必然对应一个可以编码 $n - r$ 个 qubit 的 QECC。我们后续会证明这个 QECC 是一个 stabilizer code（参见定理 4.【FIXME】，此后姑且也写 $\textsf{S}$ 对应的 stabilizer code）。现在我们来计算这个 QECC 能够检测 &#x2F; 纠正的错误集合。对于 Pauli 群元素 $E$，记其模掉相位之后所在的等价类为 $\hat{E}$。</p>
+<div class="note info"><p><strong>定理 4.4.</strong> $\textsf{S}$ 对应的 stabilizer code 不能检测的 Pauli 错误集合是 $\hat{\textsf{N}}(\textsf{S})\setminus \hat{\textsf{S}}$。其中<br>$$<br>\textsf{N}(\textsf{S}) &#x3D; \{N\in \textsf{P}_n : \forall M\in \textsf{S}, NM &#x3D; MN\}.<br>$$</p>
+</div>
+
+<blockquote>
+<p>这里这个 $\textsf{N}$ 和群论中的中心化子定义一致，和正规化子没有半毛钱关系，但是量子信息中专门以术语“normalizer”称呼之。</p>
+</blockquote>
+<p><strong>证明.</strong> 拿着定理 3.4 验算：</p>
+<ol>
+<li>若 $\hat{E}\in \hat{\textsf{S}}$，则 $E|\psi\rangle &#x3D; c(E)|\psi\rangle$，其中 $c(E)$ 就是那个全局相位，自然满足 $\langle\phi|E|\psi\rangle &#x3D; c(E)\langle\phi|\psi\rangle$。</li>
+<li>若 $\hat{E}\notin \hat{\textsf{N}}(\textsf{S})$，则存在 $M\in \textsf{S}$ 与 $E$ 反对易。于是<br>$$<br>\langle\phi|E|\psi\rangle &#x3D; \langle\phi|MEM|\psi\rangle &#x3D; -\langle\phi|EMM|\psi\rangle &#x3D; -\langle\phi|E|\psi\rangle.<br>$$<br>$c(E) &#x3D; 0$，可以检测。</li>
+<li>若 $\hat{E}\in \hat{\textsf{N}}(\textsf{S})\setminus \hat{\textsf{S}}$，则因为 $E$ 不是 stabilizer，存在 $|\psi\rangle$ 使得 $E|\psi\rangle &#x3D; |\phi\rangle \ne |\psi\rangle$。另外因为 $E\in \textsf{N}(\textsf{S})$，有对于任意的 $M\in \textsf{S}$，$ME|\psi\rangle &#x3D; EM|\psi\rangle &#x3D; E|\psi\rangle$，所以 $|\phi\rangle$ 也是一个码字。然而，<br>$$<br> \begin{align}<br> \langle\phi|E|\psi\rangle &amp;&#x3D; 1 &#x3D; \frac{1}{\langle\phi|\psi\rangle}\langle\phi|\psi\rangle, \\<br> \langle\psi|E|\psi\rangle &amp;&#x3D; \langle\psi|\phi\rangle \langle\psi|\psi\rangle.<br> \end{align}<br>$$<br>这表明 $E$ 可以检测当且仅当对于任意的 $|\psi\rangle$ 都有 $\langle\psi|E|\psi\rangle &#x3D; e^{\mathrm{i}\theta}$ 也就是 $E|\psi\rangle &#x3D; e^{\mathrm{i}\theta}|\psi\rangle$，这也等价于 $\hat{E} \in \hat{\textsf{S}}$。所以 $E$ 不可检测。</li>
+</ol>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>同样的道理，拿着定理 3.1 验算得到：</p>
+<div class="note info"><p><strong>定理 4.5.</strong> $(\mathcal{T}(\textsf{S}), \mathcal{E})$（其中 $\mathcal{E}\subseteq \textsf{P}_n$）是 QECC 当且仅当 $\forall E, F\in \mathcal{E}$,<br>$$<br>E^\dagger F\notin \hat{\textsf{N}}(\textsf{S}) \setminus \hat{\textsf{S}}.<br>$$ </p>
+</div>
+
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>有意思的是，考虑可能纠正的错误集合中出现了第一类情况，也就是 $\widehat{E_i^\dagger E_j}\in \hat{\textsf{S}}$，或者等价地，$e^{-\mathrm{i}\theta}E_i^\dagger E_j\in \textsf{S}$。此时我们有：对于任意的 $E_k\in \mathcal{E}$，<br>$$<br>e^{-\mathrm{i}\theta}E_i^\dagger E_j\in \textsf{S} \quad \Leftrightarrow \quad (e^{\mathrm{i}\rho}E_i^\dagger E_k)(e^{\mathrm{i}(\theta - \rho)} E_k^\dagger E_j) \in \textsf{S}.<br>$$</p>
+<p>因此 $e^{\mathrm{i}\rho}E_i^\dagger E_k\in \textsf{S}$ 等价于 $e^{\mathrm{i}(\rho - \theta)} E_j^\dagger E_k\in \textsf{S}$。所以，$\boldsymbol{C}_{i, \cdot}$ 和 $\boldsymbol{C}_{j, \cdot}$ 两行只差一个 $e^{-\mathrm{i}\theta}$ 的系数，矩阵 $\mathbf{C}$ 必不满秩，该 QECC 简并。结合 stabilizer formalism 的范式，这对应了 QECC 简并性的直观图像：存在两个错误，对码字的影响完全相同，可以被同一个电路纠正。具体的计算如下：如果对于 $E, F\in \textsf{N}(\textsf{S})$ 有 $E, F$ 属于 $\textsf{S}$ 的相同陪集（即 $E^\dagger F \in \textsf{S}$），那么对于任意的码字 $|\psi\rangle$，有</p>
+<p>$$<br>E^\dagger F|\psi\rangle &#x3D; |\psi\rangle \quad \Rightarrow \quad E|\psi\rangle &#x3D; F|\psi\rangle.<br>$$</p>
+<p>以下（至定理 4.9）我们来分析一下 stabilizer code 大概需要怎么纠错，以及甚至无法检测的“错误”有什么结构。</p>
+<p>首先是纠错方面，想要纠错自然先需要做 syndrome extraction：</p>
+<div class="note success"><p><strong>定义 4.6（Error syndrome）.</strong> 设 $\textsf{S}$ 是一个由 $M_1, …, M_r$ 生成的 stabilizer 集合。定义<br>$$<br>\sigma : \textsf{P}_n\rightarrow \mathbb{Z}_2^{r}<br>$$</p>
+<p>满足对于任意的码字 $|\phi\rangle\in \mathcal{T}(\textsf{S})$，$E|\phi\rangle$ 是 $M_i$ 的特征值为 $(-1)^{\sigma(E)_i}$ 的特征向量。</p>
+</div>
+
+<p>显然 $\sigma$ 是存在的。实际上，$\sigma(E)_i &#x3D; c(E, M_i)$。可以证明 $\sigma$ 是一个满射：</p>
+<div class="note info"><p><strong>定理 4.7.</strong> $\sigma$ 是满射。</p>
+</div>
+
+<p><strong>证明.</strong> 因为 $M_1, …, M_2$ 是 $\textsf{S}$ 的生成元，所以 $\boldsymbol{v}_{M_1}, …, \boldsymbol{v}_{M_r}$ 线性无关。进而，任意给定目标的 $\sigma(P)$，$\boldsymbol{v}_P$ 是无非是一个 $r$ 行 $2n$ 列的满秩常系数非齐次线性方程组的解。很明显这个解不但存在，而且有 $2^{2n - r} &#x3D; 2^{n + k}$ 个。</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>此外，对于 $\boldsymbol{s}\in \mathbb{Z}_2^n$，任取 $P\in \textsf{P}_n$ 使得 $\sigma(P) &#x3D; \boldsymbol{s}$。有 $\sigma(P’) &#x3D; \boldsymbol{s}$ 当且仅当 $\sigma(P^\dagger P’) &#x3D; \boldsymbol{0}$，也就是 $P^\dagger P’ \in \textsf{N}(\textsf{S})$。这表明 $P, P’$ 位于 $\textsf{N}(\textsf{S})$ 的同一个左陪集。据此我们知道了，$\textsf{N}(\textsf{S})$ 的陪集个数等于可能的 syndrome 个数，根据 Lagrange 定理可以算出</p>
+<p>$$<br>|\textsf{N}(\textsf{S})| &#x3D; 4\cdot 2^{n + k}.<br>$$</p>
+<p>综合 $\textsf{S}$ 和 $\textsf{N}(\textsf{S})$ 的陪集性质，我们得到了如下结论：</p>
+<div class="note info"><p><strong>定理 4.8.</strong> 设 stabilizer code $(\mathcal{T}(\textsf{S}), \mathcal{E})$ 是 QECC。对于两个可以纠正的错误 $E, F\in \mathcal{E}$，要么 $E, F$ 具有不同的 syndrome，要么 $E, F$ 作用在一切码字上效果相同。</p>
+</div>
+
+<p><strong>证明.</strong> 由于 $E, F$ 可以被纠错，所以 $E^\dagger F \notin \textsf{N}(\textsf{S}) \setminus \textsf{S}$。因此，要么 $E^\dagger F \notin \textsf{N}(\textsf{S})$（等价于 $E, F$ 位于 $\textsf{N}(\textsf{S})$ 的不同左陪集，进而等价于其具有不同的 syndrome），要么 $E^\dagger F\in \textsf{S}$（等价于对于任意的码字 $|\psi\rangle$ 都有 $E|\psi\rangle &#x3D; F|\psi\rangle$）。<div style="text-align: right">$\blacksquare$</div></p>
+<p>这个定理指明了 stabilizer formalism 中纠错的固定结构就是做 syndrome extraction，然后对症下药。</p>
+<p>另一方面，如果错误 $E$ 甚至没法检测，那么这类错误的结构如何？我们知道没法检测的错误集合恰好是 $\textsf{N}(\textsf{S})\setminus \textsf{S}$。因为 $\textsf{S}$ 是 $\textsf{N}(\textsf{S})$ 的正规子群，我们正好可以模掉对码字影响一致的等价类，转而研究商群 $\textsf{N}(\textsf{S}) &#x2F; \textsf{S}$ 的结构。首先，观察定理 4.4 中的 1、3 类情况可见，$\textsf{N}(\textsf{S})$ 中的元素把码字映射到码字，这是它们无法被检测的根本原因。值得利用的一点是，$\textsf{N}(\textsf{S}) &#x2F; \textsf{S}$ 保持了群结构：</p>
+<div class="note info"><p><strong>定理 4.9.</strong> $\textsf{N}(\textsf{S}) &#x2F; \textsf{S} \cong \textsf{P}_k$。</p>
+</div>
+
+<p><strong>证明.</strong> 只需要证明忽略相位之后的 Pauli 乘积形式一致即可。因此取二元辛形式：可知 $\textsf{N}(\textsf{S})$ 同构于 $\mathbb{Z}_2^{2n}$ 的一个维数为 $2n - r$ 的子空间（记作 $V_N$）。而 $\textsf{S}$ 是其一个维数为 $r$ 的子空间（记为 $V_S$）。因此<br>$$<br>\operatorname{dim} V_N &#x2F; V_S &#x3D; 2k<br>$$</p>
+<p>取 $V_N &#x2F; V_S$ 的一组基，然后考虑其中每个向量的坐标知道这东西同构于 $\mathbb{Z}_2^{2k}$，进而同构于 $\textsf{P}_k$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>因此 $\textsf{N}(\textsf{S}) &#x2F; \textsf{S}$ 不但确实把码字映射到码字，而且同构于 Pauli 群 $\textsf{P}_k$，因此 $\textsf{N}(\textsf{S}) &#x2F; \textsf{S}$ 恰好是全体对 $k$ 个逻辑比特的逻辑 Pauli 算符。</p>
+<p>最后，我们补全任意一个 stabilizer 集合 $\textsf{S}$ 都给出 stabilizer code 的证明。回忆这要求我们验证 $\mathcal{T}(\textsf{S}(\mathcal{T}(\textsf{S}))) &#x3D; \mathcal{T}(\textsf{S})$。我们证明</p>
+<div class="note info"><p><strong>定理 4.10.</strong> 对于任意的 stabilizer 集合 $\textsf{S}$，都有 $\textsf{S} &#x3D; \textsf{S}(\mathcal{T}(\textsf{S}))$。</p>
+</div>
+
+<p><strong>证明.</strong> $\textsf{S}\subseteq \textsf{S}(\mathcal{T}(\textsf{S}))$ 显然，我们着重证明另一面，即若 $N\notin \textsf{S}$，必有 $N\notin \textsf{S}(\mathcal{T}(\textsf{S}))$。并且可以大胆假设 $r &lt; n$，因为反面是平凡的。此时 $N$ 的归属无非落于以下两类情况之一：</p>
+<ol>
+<li>$N\notin \textsf{N}(\textsf{S})$。取 $|\psi\rangle\in \mathcal{T}(\textsf{S})$，一定存在 $M\in \textsf{S}$ 使得 $N|\psi\rangle &#x3D; NM|\psi\rangle &#x3D; -M(N|\psi\rangle)$，因此 $N|\psi\rangle$ 是 $M$ 的特征值为 $-1$，即 $N|\psi\rangle\notin \mathcal{T}(\textsf{S})$，于是更不可能有 $N|\psi\rangle &#x3D; |\psi\rangle$（这弱于 $N\in \textsf{S}(\mathcal{T}(\textsf{S}))$）。</li>
+<li>$N\in \textsf{N}(\textsf{S})\setminus \textsf{S}$。因为 $r &lt; n$，如下关于 $M$ 的方程有解（可以转化为二元辛形式的线性方程组）：<br>$$<br>\begin{cases}<br> c(M, M_i) &#x3D; 0, &amp; {\forall i &#x3D; 1, 2, …, r}, \\<br> c(M, N) &#x3D; 1.<br>\end{cases}<br>$$<br>解 $M$ 满足：对于任意的码字 $|\psi\rangle\in \mathcal{T}(\textsf{S})$，$M|\psi\rangle$ 都是码字，因为 $M_iM|\psi\rangle &#x3D; MM_i|\psi\rangle &#x3D; M|\psi\rangle$。然而 $NM|\psi\rangle &#x3D; -MN|\psi\rangle$。此时：<ul>
+<li>如果对于任意的 $|\psi\rangle$ 都有 $NM|\psi\rangle &#x3D; M|\psi\rangle$，那么对于任意的 $|\psi\rangle$ 都有 $N|\psi\rangle &#x3D; -|\psi\rangle$，矛盾，这种情况不可能发生。</li>
+<li>因此必然存在一个 $|\psi\rangle$ 使得 $N(M|\psi\rangle)\ne M|\psi\rangle$。然而 $M|\psi\rangle\in \mathcal{T}(\textsf{S})$，这蕴含 $N\notin \textsf{S}(\mathcal{T}(\textsf{S}))$。</li>
+</ul>
+</li>
+</ol>
+<p>两类情况都将导出 $N\notin \textsf{S}(\mathcal{T}(\textsf{S}))$，证明闭合。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/06/23/NeuralTangentKernel/" rel="prev" title="Neural Tangent Kernel">
+                  <i class="fa fa-angle-left"></i> Neural Tangent Kernel
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">443k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">26:50</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
