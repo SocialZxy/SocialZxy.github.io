@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="本文收录于 泛 AI 论文选读。    TL;DR 问题设定 算法 误差分析    TL;DR做零阶优化的量子算法，只需要一次查询。大概思路是用 phase kickback 把函数值信息挂在相位上，然后用 IQFT 提取。 似乎倒着考虑这个解法更为自然？ 问题设定在只给定 $d$ 元函数 $f : \mathbb{R}^d\rightarrow \mathbb{R}$ 的零阶 oracle 的情">
+    <meta name="description" content="Abstract. 本文收录于 泛 AI 论文选读 和 合集（量子计算文章选读）。。    TL;DR 问题设定 算法 误差分析">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Stephen P. Jordan, &lt;i&gt;Fast Quantum Algorithm for Numerical Gradient Estimation&lt;&#x2F;i&gt; (2005)">
+<meta property="og:title" content="零阶梯度估计的量子算法">
 <meta property="og:url" content="http://example.com/2025/03/18/JordanGradientEstimation/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="本文收录于 泛 AI 论文选读。    TL;DR 问题设定 算法 误差分析    TL;DR做零阶优化的量子算法，只需要一次查询。大概思路是用 phase kickback 把函数值信息挂在相位上，然后用 IQFT 提取。 似乎倒着考虑这个解法更为自然？ 问题设定在只给定 $d$ 元函数 $f : \mathbb{R}^d\rightarrow \mathbb{R}$ 的零阶 oracle 的情">
+<meta property="og:description" content="Abstract. 本文收录于 泛 AI 论文选读 和 合集（量子计算文章选读）。。    TL;DR 问题设定 算法 误差分析">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2025-03-18T06:47:09.000Z">
-<meta property="article:modified_time" content="2025-06-30T11:55:14.431Z">
+<meta property="article:modified_time" content="2026-11-04T12:49:33.021Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -36,10 +36,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/03/18/JordanGradientEstimation/","path":"2025/03/18/JordanGradientEstimation/","title":"Stephen P. Jordan, \u003ci>Fast Quantum Algorithm for Numerical Gradient Estimation\u003c/i> (2005)"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2025/03/18/JordanGradientEstimation/","path":"2025/03/18/JordanGradientEstimation/","title":"零阶梯度估计的量子算法"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Stephen P. Jordan, <i>Fast Quantum Algorithm for Numerical Gradient Estimation</i> (2005) | Stellary's Notes</title>
+<title>零阶梯度估计的量子算法 | Stellary's Notes</title>
   
 
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -211,12 +211,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Stephen P. Jordan, <i>Fast Quantum Algorithm for Numerical Gradient Estimation</i> (2005) | Stellary's Notes">
+      <meta itemprop="name" content="零阶梯度估计的量子算法 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Stephen P. Jordan, <i>Fast Quantum Algorithm for Numerical Gradient Estimation</i> (2005)
+          零阶梯度估计的量子算法
         </h1>
 
         <div class="post-meta-container">
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-06-30 19:55:14" itemprop="dateModified" datetime="2025-06-30T19:55:14+08:00">2025-06-30</time>
+      <time title="Modified: 2026-11-04 20:49:33" itemprop="dateModified" datetime="2026-11-04T20:49:33+08:00">2026-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -257,7 +257,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>771</span>
+      <span>784</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -274,7 +274,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p>本文收录于 <a href="../../../../2025/03/05/AIPaperReading/">泛 AI 论文选读</a>。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2025/03/05/AIPaperReading/">泛 AI 论文选读</a> 和 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。。</p>
 <!-- toc -->
 
 <ul>
@@ -284,6 +284,8 @@
 <li><a href="#%E8%AF%AF%E5%B7%AE%E5%88%86%E6%9E%90">误差分析</a></li>
 </ul>
 <!-- tocstop -->
+
+<span id="more"></span>
 
 <h1><span id="tldr">TL;DR</span></h1><p>做零阶优化的量子算法，只需要一次查询。大概思路是用 phase kickback 把函数值信息挂在相位上，然后用 IQFT 提取。</p>
 <p>似乎倒着考虑这个解法更为自然？</p>
@@ -335,8 +337,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2025/04/14/QuantumLowerbounds/" rel="next" title="一些证明量子复杂度下界的办法">
-                  一些证明量子复杂度下界的办法 <i class="fa fa-angle-right"></i>
+                <a href="/2025/04/17/ProbabilityTheoryRevision1/" rel="next" title="Revision | 信息科学中的概率统计（上）">
+                  Revision | 信息科学中的概率统计（上） <i class="fa fa-angle-right"></i>
                 </a>
             </div>
           </div>
@@ -368,13 +370,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">443k</span>
+    <span title="Word count total">450k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:50</span>
+    <span title="Reading time total">27:17</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

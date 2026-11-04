@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文收录于 合集（量子计算文章选读）。    乘积公式 稀疏哈密顿量模拟">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子模拟基础">
+<meta property="og:url" content="http://example.com/2026/09/07/HamiltonianSimulation1/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文收录于 合集（量子计算文章选读）。    乘积公式 稀疏哈密顿量模拟">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-09-07T04:18:15.000Z">
+<meta property="article:modified_time" content="2026-11-04T12:38:29.919Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/09/07/HamiltonianSimulation1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/09/07/HamiltonianSimulation1/","path":"2026/09/07/HamiltonianSimulation1/","title":"量子模拟基础"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>量子模拟基础 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">乘积公式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">稀疏哈密顿量模拟</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/09/07/HamiltonianSimulation1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="量子模拟基础 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          量子模拟基础
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-09-07 12:18:15" itemprop="dateCreated datePublished" datetime="2026-09-07T12:18:15+08:00">2026-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-04 20:38:29" itemprop="dateModified" datetime="2026-11-04T20:38:29+08:00">2026-11-04</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E4%B9%98%E7%A7%AF%E5%85%AC%E5%BC%8F">乘积公式</a></li>
+<li><a href="#%E7%A8%80%E7%96%8F%E5%93%88%E5%AF%86%E9%A1%BF%E9%87%8F%E6%A8%A1%E6%8B%9F">稀疏哈密顿量模拟</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<p>众所周知波函数的时间演化规律服从薛定谔方程</p>
+<p>$$<br>|\psi(t)\rangle\frac{\mathrm{d}}{\mathrm{d}t}|\psi(t)\rangle &#x3D; H(t)|\psi(t)\rangle.<br>$$</p>
+<p>如果哈密顿量 $H(t)$ 与时间无关，那么容易解出</p>
+<p>$$<br>|\psi(t)\rangle &#x3D; e^{-\mathrm{i}Ht}|\psi(0)\rangle.<br>$$</p>
+<p>我们希望用一个量子线路来模拟作用于 $n$ 个 qubit 的哈密顿量 $H$ 的演化。形式化地，称 $H$ 可以被<strong>高效模拟</strong>，若对于任意的 $t &gt; 0, \epsilon &gt; 0$，存在一个 $\operatorname{poly}(n, t, 1 &#x2F; \epsilon)$ 个门的量子线路 $U$ 使得 $\left\lVert U - e^{-\mathrm{i}Ht}\right\rVert &lt; \epsilon$。因为任意多项式个门的量子线路都可以被拆成多项式个哈密顿量模拟，所以一般哈密顿量的模拟是 $\textsf{BQP-hard}$ 的。现在，我们想知道什么样的哈密顿量是可以高效模拟的。</p>
+<p>事实上，不难列出一些明显的充分条件：</p>
+<ul>
+<li>如果一个哈密顿量只非平凡地作用于常数个 qubit 上（称为 $O(1)$-local Hamiltonian），那么根据 Solovay-Kitaev 定理，它可以被 $\operatorname{poly}\log \frac 1\epsilon$ 个门高效模拟。</li>
+<li>如果 $H$ 可以被高效模拟，那么 $UHU^\dagger$ 可以被高效模拟。这是因为 $e^{-\mathrm{i}UHU^\dagger} &#x3D; Ue^{-\mathrm{i}Ht}U^\dagger$。</li>
+<li>如果 $H$ 在 computational basis 下是对角化的，且对角元 $d(a) :&#x3D; \langle a|H|a\rangle$ 可以被快速计算，那么 $H$ 可以被高效模拟，算法如下：<ol>
+<li>对于 computational basis $|a\rangle$，引入一个 ancilla register，从 $|a, 0\rangle$ 开始。</li>
+<li>把对角元计算到 ancilla register 上，得到 $|a, d(a)\rangle$；</li>
+<li>用 controlled rotation 实现算出 $e^{-\mathrm{i} td(a)}|a, d(a)\rangle$；</li>
+<li>Uncompute 掉 ancilla register 得到 $e^{-\mathrm{i}td(a)}|a, 0\rangle$。</li>
+</ol>
+</li>
+</ul>
+<h1><span id="乘积公式">乘积公式</span></h1><p>许多哈密顿量都形如容易模拟的项之和。比如横场 Ising 模型的哈密顿量就形如</p>
+<p>$$<br>H &#x3D; -J\left(g\sum_i X_i + \sum_i Z_{i}Z_{i + 1}\right),<br>$$</p>
+<p>此处每一项都是 $O(1)$-local 的，因此都可以高效模拟。此处我们希望知道是否这些容易模拟的项之和也容易模拟。如果 $H_1, H_2$ 对易，那么显然 $e^{-\mathrm{i}(H_1 + H_2)t} &#x3D; e^{-\mathrm{i}H_1t}e^{-\mathrm{i}H_2t}$。当 $H_1, H_2$ 不对易时，可以使用 Lie 乘积公式：</p>
+<p>$$<br>e^{-\mathrm{i}(H_1 + H_2)t} &#x3D; \lim_{m\rightarrow \infty}\left(e^{-\mathrm{i}H_1t &#x2F; m}e^{-\mathrm{i} H_2 t &#x2F; m}\right)^m.<br>$$</p>
+<p>我们希望拿到 $m$ 的数量级，使得误差被 bound 在 $\varepsilon$ 级别。首先做初步的分析：简便起见，设 $\mathbf{U} &#x3D; e^{-\mathrm{i}H_1t &#x2F; m}e^{-\mathrm{i} H_2 t &#x2F; m}$，$\mathbf{V} &#x3D; e^{-\mathrm{i}(H_1 + H_2)t}$，则</p>
+<p>$$<br>\begin{aligned}<br>\left\lVert\mathbf{U}^m - \mathbf{V}^m\right\rVert &amp;&#x3D; \left\lVert \mathbf{U}^m -\sum_{i &#x3D; 1}^{m} \left(\mathbf{U}^{m - i}\mathbf{V}^{i} - \mathbf{U}^{m - i}\mathbf{V}^{i}\right) + \mathbf{V}^m\right\rVert \\<br>&amp;&#x3D;\left\lVert\sum_{i &#x3D; 0}^{m - 1}\mathbf{U}^{m - i}\mathbf{V}^i - \mathbf{U}^{m - i - 1}\mathbf{V}^{i + 1}\right\rVert \\<br>&amp;\leq\sum_{i &#x3D; 0}^m \left\lVert\mathbf{U}^{m - i}(\mathbf{U} - \mathbf{V})\mathbf{V}^{i}\right\rVert \\<br>&amp;\leq m\left\lVert\mathbf{U} - \mathbf{V}\right\rVert\cdot \left(\max\left(\left\lVert\mathbf{U}\right\rVert, \left\lVert\mathbf{V}\right\rVert\right)\right)^{m - 1} &#x3D; m\left\lVert\mathbf{U} - \mathbf{V}\right\rVert,<br>\end{aligned}<br>$$</p>
+<p>最后一个等号注意 $\mathbf{U}, \mathbf{V}$ 都是 unitary。这个不等式叫做 unitary 的 telescope 不等式，它反映如果把一个 unitary 的模拟拆成 $m$ 步，。接下来记 $A &#x3D; -\mathrm{i}H_1 t, B &#x3D; -\mathrm{i}H_2 t$，记 $O(y)$ 表示一个谱范数不超过 $y$ 级别的矩阵。我们用截断泰勒级数分析 $\left\lVert\mathbf{U} - \mathbf{V}\right\rVert$，发现只留下二阶小量：</p>
+<p>$$<br>\begin{aligned}<br>e^{A&#x2F;m}e^{B&#x2F;m} - e^{(A + B)&#x2F;m} &amp;&#x3D; \left(I + \frac Am + O\left(\frac{\left\lVert A\right\rVert^2}{m^2}\right)\right)\left(I + \frac Bm + O\left(\frac{\left\lVert B\right\rVert^2}{m^2}\right)\right) \\<br>&amp;- \left(I + \frac{A + B}{m} + O\left(\frac{\left\lVert A + B\right\rVert^2}{m^2}\right)\right) \\<br>&amp;&#x3D; \frac{\max\left(\left\lVert A\right\rVert, \left\lVert B\right\rVert^2\right)^2}{m^2}.<br>\end{aligned}<br>$$</p>
+<p>设 $\nu &#x3D; \max\left(\left\lVert H_1\right\rVert, \left\lVert H_2\right\rVert^2\right)$。则 $\max\left(\left\lVert A\right\rVert, \left\lVert B\right\rVert^2\right) &#x3D; \nu t$，可以得到总共谱范数差异的要求无非</p>
+<p>$$<br>O\left(\frac{\nu^2t^2}{m}\right) \leq \epsilon \Rightarrow m &#x3D; \Omega\left(\frac{\nu^2 t^2}{\epsilon}\right).<br>$$</p>
+<p>为了继续压缩关于 $t$ 的二次 dependence，还可以考虑二阶 Trotter 公式：<br>$$<br>e^{-\mathrm{i}(H_1, H_2)t} &#x3D; \lim_{m\rightarrow \infty} \left(e^{\mathrm{i}H_1t &#x2F; 2m}e^{\mathrm{i}H_2 t &#x2F; m}e^{\mathrm{i}H_1t &#x2F; 2m}\right)<br>$$</p>
+<p>用这个公式拿到 $\epsilon$ 误差所需的 $m$ 更小：你可以算一下把这东西展开到三阶小量，此时你会算出 $m &#x3D; \Omega(t^{1.5} &#x2F; \epsilon^{0.5})$。更一般地，存在 $k$ 阶 Trotter 公式，可以算出 $m &#x3D; \Omega(t^{1 + 1&#x2F;k} &#x2F; \epsilon^{1 &#x2F; k})$。</p>
+<p>如果 $H &#x3D; \sum_{i &#x3D; 1}^\ell H_i$，这里你可以选择分治地做两项合并，或者直接使用下面的一阶乘积公式：</p>
+<p>$$<br>\exp\left(-\mathrm{i}\left(\sum_{i &#x3D; 1}^\Gamma H_i\right)t\right) \approx \left(e^{-\mathrm{i}H_1 t &#x2F; m}e^{-\mathrm{i}H_2 t &#x2F; m}\cdots e^{-\mathrm{i}H_\ell t &#x2F; m}\right)^m<br>$$</p>
+<p>与上面完全相同的分析会给出 $m &#x3D; \Omega(\Gamma^2\nu^2 t^2)$，总之（在诸项本身谱范数都是多项式级别时）是多项式级别的。</p>
+<h1><span id="稀疏哈密顿量模拟">稀疏哈密顿量模拟</span></h1><p>乘积公式的一个著名应用是稀疏哈密顿量模拟：若一个 Hamiltonian 满足</p>
+<ol>
+<li>存在一组基 $\{|a\rangle\}$，对于任意的 $|a\rangle$，只存在 $\operatorname{poly}\log n$ 个 $|b\rangle$ 使得 $\langle a|H|b\rangle \ne 0$。</li>
+<li>存在一个 oracle $f(a, i)$ 给出第 $i$ 个这样的位置 $b$ 和对应的矩阵元 $H_{ab}$</li>
+</ol>
+<p>则 $H$ 可以被高效模拟。若将 $H$ 是为一个图 $G$ 的邻接矩阵，则 $G$ 的最大度为 $d$。</p>
+<p>不妨从最简单的情况开始：对于每一个 $a$，只有唯一的 $b$ 使得 $\langle a|H|b\rangle\ne 0$（$1$-sparse），这个位置记作 $v(a)$，此时 $G$ 是一个匹配。那么，$v(v(a)) &#x3D; a$。那么，每个以 $|a\rangle, |v(a)\rangle$ 为基的子空间中的演化是独立的，并且无非用一些 controlled SWAP 和 controlled rotation 就可以实现 $|x, y, h\rangle \mapsto \cos(t|h|)|x, y, h\rangle - \mathrm{i}\frac{\sin(t|h|)\bar{h}}{|h|}|y, x, \bar{h}\rangle$ 这个子空间上的局部演化。于是，如下算法只用 $O(1)$ 次对 oracle 的查询便可实现一个 $1$-local Hamiltonian 的演化：</p>
+<ol>
+<li>从 $|x, 0, 0\rangle$ 出发；</li>
+<li>查询 oracle 得到并做一些琐碎计算得到 $|x, v(x), H_{x, v(x)}\rangle$。</li>
+<li>做子空间上的局部演化；</li>
+<li>查询 oracle 的逆，uncompute 掉后面两个 register。</li>
+</ol>
+<p>现在问题转化为如何将一个稀疏哈密顿量转化为若干 $1$-sparse 哈密顿量之和。容易想到的是将图划分成若干个匹配（即边染色）：根据 Vizing 定理，一个最大度为 $d$ 的图有 $d+1$-边染色。那么，我们使用 Misra-Gries 算法拿着 oracle 先算出 $G$ 的边染色的近似解，然后就可以对于每一个颜色 $c$，知道 $1$-sparse 哈密顿量模拟需要的那个 $v_c$ oracle。总复杂度确实是多项式的，但是需要大量额外的 ancilla 来存储染色方案。</p>
+<p>此处还有有一个聪明的算法。考虑在 $|+\rangle|\phi\rangle$ 上演化 $X\otimes H$，然后忽略第一个 ancilla 即可得到 $H|\psi\rangle$。而 $X\otimes H$ 对应的 $G$ 是稀疏二分图，每个点度数不超过 $d$。我们可以直接用如下方法构造该图的一个 $d^2$-边染色：令一条边 $x, y$ 满足 $y$ 是与 $x$ 相邻的第 $i$ 个左部点，$x$ 是与 $y$ 相邻的第 $j$ 个左部点，则这条边颜色为 $(i - 1)d + j$。容易证明这确实给出了一个合法的边染色。但此时，对于任意一个颜色 $c$ 和点 $x$，$v_c(x)$ 可以用 $O(1)$ 次 oracle 查询算出，且没有额外的预处理复杂度和高额的额外存储空间。</p>
+<p>最后我们证明 $1$-sparse 哈密顿量的模拟中，至少需要 $\Omega(n)$ 次 oracle 访问。做法是将 $1$-sparse 哈密顿量模拟规约到 $\mathrm{PARITY}$（可以用 polynomial method 证明复杂度下界是 $\Omega(n)$）。</p>
+<p>对于任意的输入 $x\in \{0, 1\}^n$，我们构造 $2n$ 个点的图 $G$，其中 $(i - 1, b)$ 和 $(i, b\oplus x_i)$ 相连。这个图的邻接矩阵查询容易通过对 $x_i$ 的查询实现。构造</p>
+<p>$$<br>\langle i - 1, b| H|i, b\oplus x_i\rangle &#x3D; \sqrt{i(n - i + 1)} &#x2F; n.<br>$$</p>
+<p>这个矩阵本质上刻画了一个连续时间量子游走。分析可知它会在 $O(n)$ 时间走到 $|n, \mathrm{PARITY}(\boldsymbol{x})\rangle$。因此，如果能用 $o(n)$ 次 query 实现此哈密顿量模拟，必然能用 $o(n)$ 此 query 求解 $\mathrm{PARITY}$，导出矛盾。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/01/QECNote3pTheory/" rel="prev" title="QEC Workshop | 3+ 理论补充">
+                  <i class="fa fa-angle-left"></i> QEC Workshop | 3+ 理论补充
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2026/11/02/DiscreteTimeQuantumWalk/" rel="next" title="离散时间量子游走">
+                  离散时间量子游走 <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">450k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

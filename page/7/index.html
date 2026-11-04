@@ -123,7 +123,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -184,6 +184,280 @@
 
     <div class="main-inner index posts-expand">
 
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/15/MusicAndMathematicsProject/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/15/MusicAndMathematicsProject/" class="post-title-link" itemprop="url">关于管乐器泛音演奏（超吹）的一些探究</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-12-15 15:19:21" itemprop="dateCreated datePublished" datetime="2024-12-15T15:19:21+08:00">2024-12-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2024-12-21 23:54:59" itemprop="dateModified" datetime="2024-12-21T23:54:59+08:00">2024-12-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Misc/" itemprop="url" rel="index"><span itemprop="name">Misc</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>3.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>13 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong> 本文是 2024 秋季学期音乐与数学大作业的笔记，研究题目是“管乐器的超吹”，尤其是为何开管乐器能够吹出偶数倍泛音，闭管乐器只能够吹出奇数倍泛音，而锥形管乐器看似和闭管相同，但实际上也能吹出偶数倍泛音。对管乐器的分类参见第 3，第 4 节。</p>
+<div class="note danger"><p><strong>警告：</strong> 本文可能包含如下要素：</p>
+<ul>
+<li>随便忽略高阶小量。</li>
+<li>随便使用对称性。</li>
+<li>随便交换微分算子。</li>
+<li>对着参考文献人云亦云。</li>
+</ul>
+<p>如您无法接受这些操作，我们推荐您<strong>不要阅读此文</strong>。</p>
+</div>
+
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%E5%A3%B0%E6%B3%A2%E7%9A%84%E7%BA%BF%E6%80%A7%E6%B3%A2%E5%8A%A8%E6%96%B9%E7%A8%8B">前置知识：声波的线性波动方程</a></li>
+<li><a href="#%E4%BB%8E%E6%8B%A8%E5%BC%A6%E7%9A%84%E6%83%85%E5%BD%A2%E5%85%A5%E6%89%8B-dalembert-%E5%AE%9A%E7%90%86">从拨弦的情形入手 d’Alembert 定理</a></li>
+<li><a href="#%E6%9F%B1%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">柱形管乐器的振动方程解</a></li>
+<li><a href="#%E9%94%A5%E5%BD%A2%E7%AE%A1%E4%B9%90%E5%99%A8%E7%9A%84%E6%8C%AF%E5%8A%A8%E6%96%B9%E7%A8%8B%E8%A7%A3">锥形管乐器的振动方程解</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/15/MusicAndMathematicsProject/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+    
+      
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/12/07/QuantumComputation2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2024/12/07/QuantumComputation2/" class="post-title-link" itemprop="url">Revision | 量子计算</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2024-12-07 15:27:39" itemprop="dateCreated datePublished" datetime="2024-12-07T15:27:39+08:00">2024-12-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2025-06-30 20:55:19" itemprop="dateModified" datetime="2025-06-30T20:55:19+08:00">2025-06-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
+        </span>
+          , 
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Notes/Quantum-Computing/" itemprop="url" rel="index"><span itemprop="name">Quantum Computing</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>12k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>43 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><strong>Abstract.</strong></p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E5%9F%BA%E7%A1%80%E4%B8%8E%E6%A6%82%E8%A7%88">基础与概览</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E9%97%A8%E9%80%9A%E7%94%A8%E6%80%A7">量子门通用性</a></li>
+<li><a href="#%E5%9F%BA%E7%A1%80%E7%AE%97%E6%B3%95">基础算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E%E9%87%8F%E5%AD%90%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2%E7%9A%84%E7%AE%97%E6%B3%95">基于量子傅里叶变换的算法</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E7%9B%B8%E4%BD%8D%E4%BC%B0%E8%AE%A1">量子相位估计</a></li>
+<li><a href="#%E6%B1%82%E5%85%83%E7%B4%A0%E7%9A%84%E9%98%B6">求元素的阶</a></li>
+<li><a href="#shor-%E7%AE%97%E6%B3%95">Shor 算法</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-su2-%E6%97%8B%E8%BD%AC%E7%9A%84%E9%87%8F%E5%AD%90%E7%AE%97%E6%B3%95">基于 $SU(2)$ 旋转的量子算法</a><ul>
+<li><a href="#grover">Grover</a></li>
+<li><a href="#quantum-random-walk">Quantum Random Walk</a><ul>
+<li><a href="#quantum-random-walk-%E4%B8%AD%E7%9A%84%E6%97%8B%E8%BD%AC%E5%8F%98%E6%8D%A2">Quantum Random Walk 中的旋转变换</a></li>
+<li><a href="#%E5%88%A4%E6%96%AD%E5%AE%8C%E5%85%A8%E5%9B%BE%E4%B8%AD%E6%98%AF%E5%90%A6%E6%9C%89%E6%A0%87%E8%AE%B0">判断完全图中是否有标记</a></li>
+<li><a href="#%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%86%E9%97%AE%E9%A2%98">元素区分问题</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E4%BA%8E-hamiltonian-%E6%A8%A1%E6%8B%9F%E7%9A%84%E7%AE%97%E6%B3%95">基于 Hamiltonian 模拟的算法</a><ul>
+<li><a href="#%E4%B9%98%E7%A7%AF%E5%85%AC%E5%BC%8F">乘积公式</a></li>
+<li><a href="#%E7%A8%80%E7%96%8F-hamiltonian-%E6%A8%A1%E6%8B%9F">稀疏 Hamiltonian 模拟</a></li>
+<li><a href="#%E8%BF%9E%E7%BB%AD%E6%97%B6%E9%97%B4%E9%87%8F%E5%AD%90%E6%B8%B8%E8%B5%B0">连续时间量子游走</a></li>
+</ul>
+</li>
+</ul>
+<!-- tocstop -->
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2024/12/07/QuantumComputation2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
     
       
 
@@ -457,7 +731,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/11/11/QuantumStringMatching/" class="post-title-link" itemprop="url">H. Ramech, V.Vinay. String matching in $\tilde{O}(\sqrt n + \sqrt m)$ quantum time (2003)</a>
+          <a href="/2024/11/11/QuantumStringMatching/" class="post-title-link" itemprop="url">字符串匹配的量子算法</a>
         </h2>
 
         <div class="post-meta-container">
@@ -475,7 +749,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-11-27 17:06:47" itemprop="dateModified" datetime="2024-11-27T17:06:47+08:00">2024-11-27</time>
+      <time title="Modified: 2026-11-04 20:57:57" itemprop="dateModified" datetime="2026-11-04T20:57:57+08:00">2026-11-04</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -516,7 +790,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1016/S1570-8667(03)00010-8">https://doi.org/10.1016/S1570-8667(03)00010-8</a> 的阅读笔记。他们尝试把 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他们重新算一遍。最后一节“处理周期性串”看起来比较对，但我们放弃仔细验证了。</p>
+          <p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。本文是 <a target="_blank" rel="noopener" href="https://doi.org/10.1016/S1570-8667(03)00010-8">https://doi.org/10.1016/S1570-8667(03)00010-8</a> 的阅读笔记。他们尝试把 <a target="_blank" rel="noopener" href="https://doi.org/10.1137/0220002">https://doi.org/10.1137/0220002</a> 的技术用在了量子计算机上，发现很有道理。很遗憾的是作者好像不是量子计算从业者，他们的很多 approach 都是有问题的，但也不是不能修复。因为他的思路非常 trivial，所以我们有精力帮他们重新算一遍。最后一节“处理周期性串”看起来比较对，但我们放弃仔细验证了。</p>
 <!-- toc -->
 
 <ul>
@@ -1201,244 +1475,6 @@
 
 
     
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/24/ODE1-5Applications/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/24/ODE1-5Applications/" class="post-title-link" itemprop="url">常微分方程（1.5）应用举例</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-      
-
-      <time title="Created: 2024-09-24 22:19:20 / Modified: 22:25:30" itemprop="dateCreated datePublished" datetime="2024-09-24T22:19:20+08:00">2024-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/ODE/" itemprop="url" rel="index"><span itemprop="name">ODE</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>2.4k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>9 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文讨论几个拥有前置知识初等积分法之后可以解决的问题。解决问题的过程中用到了一些建模技巧和神秘手法，具有一些学习价值。此外后面几个关于生态的模型导出的结果是富有趣味和现实意义的，可供消遣。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E7%AD%89%E8%A7%92%E8%BD%A8%E7%BA%BF">等角轨线</a></li>
-<li><a href="#riccati-%E6%96%B9%E7%A8%8B">Riccati 方程</a></li>
-<li><a href="#%E4%BA%BA%E5%8F%A3%E6%A8%A1%E5%9E%8B">人口模型</a></li>
-<li><a href="#volterra-%E7%B3%BB%E7%BB%9F">Volterra 系统</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/24/ODE1-5Applications/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-    
-      
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/09/19/CompletenessOfND/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
-      <meta itemprop="name" content="King Strange">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Stellary's Notes">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2024/09/19/CompletenessOfND/" class="post-title-link" itemprop="url">一些逻辑话题：如何证明自然演绎系统的一致性、完备性，以及直觉主义逻辑</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2024-09-19 22:11:51" itemprop="dateCreated datePublished" datetime="2024-09-19T22:11:51+08:00">2024-09-19</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2024-09-22 16:52:53" itemprop="dateModified" datetime="2024-09-22T16:52:53+08:00">2024-09-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/" itemprop="url" rel="index"><span itemprop="name">Notes</span></a>
-        </span>
-          , 
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Notes/Discrete-Math/" itemprop="url" rel="index"><span itemprop="name">Discrete Math</span></a>
-        </span>
-    </span>
-
-  
-    <span class="post-meta-break"></span>
-    <span class="post-meta-item" title="Word count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Word count in article: </span>
-      <span>2.3k</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>9 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><strong>Abstract.</strong> 本文讨论了几个形式系统的语法和语义之间联系的问题，包括证明自然演绎系统的一致性和完备性，以及直觉主义逻辑中不能推导出 $(\neg\neg P)\rightarrow P$。阅读本文需要的对数理逻辑的理解大概与清华大学出版社的“数理逻辑与集合论”前三章一致，如果没有相关知识可以参考<a href="../../../../2024/01/22/Logic1Basic/">这篇笔记</a>。但本文不采用其中定义的公理系统和证明方式，这点在“声明与记号”中有所说明。</p>
-<!-- toc -->
-
-<ul>
-<li><a href="#%E5%A3%B0%E6%98%8E%E5%92%8C%E8%AE%B0%E5%8F%B7">声明和记号</a></li>
-<li><a href="#%E4%B8%80%E8%87%B4%E6%80%A7%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E">一致性定理的证明</a></li>
-<li><a href="#%E5%AE%8C%E5%A4%87%E6%80%A7%E5%AE%9A%E7%90%86%E7%9A%84%E8%AF%81%E6%98%8E">完备性定理的证明</a></li>
-<li><a href="#%E7%9B%B4%E8%A7%89%E4%B8%BB%E4%B9%89%E9%80%BB%E8%BE%91%E5%A6%82%E4%BD%95%E8%AF%81%E6%98%8E%E5%8E%BB%E6%8E%89%E5%8F%8D%E8%AF%81%E6%B3%95%E7%9A%84%E7%B3%BB%E7%BB%9F%E6%98%AF%E4%B8%8D%E5%AE%8C%E5%A4%87%E7%9A%84">直觉主义逻辑：如何证明去掉反证法的系统是不完备的？</a></li>
-</ul>
-<!-- tocstop -->
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2024/09/19/CompletenessOfND/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
   <nav class="pagination">
     <a class="extend prev" rel="prev" title="Previous page" aria-label="Previous page" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" title="Next page" aria-label="Next page" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
@@ -1462,13 +1498,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">443k</span>
+    <span title="Word count total">450k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:50</span>
+    <span title="Reading time total">27:17</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

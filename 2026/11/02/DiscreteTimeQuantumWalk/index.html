@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 7.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="Abstract. 本文收录于 合集（量子计算文章选读）。这篇文章爬了 21 世纪初对离散时间量子游走的研究线，形成了一套对于这个算法框架的动机比较充分、直觉比较清楚的理解。    经典随机游走 基本性质 用随机游走解决搜索问题   量子随机游走 量子随机游走算符 算法框架 优化：MNRS 随机游走框架   元素区分问题 参考文献">
+<meta property="og:type" content="article">
+<meta property="og:title" content="离散时间量子游走">
+<meta property="og:url" content="http://example.com/2026/11/02/DiscreteTimeQuantumWalk/index.html">
+<meta property="og:site_name" content="Stellary&#39;s Notes">
+<meta property="og:description" content="Abstract. 本文收录于 合集（量子计算文章选读）。这篇文章爬了 21 世纪初对离散时间量子游走的研究线，形成了一套对于这个算法框架的动机比较充分、直觉比较清楚的理解。    经典随机游走 基本性质 用随机游走解决搜索问题   量子随机游走 量子随机游走算符 算法框架 优化：MNRS 随机游走框架   元素区分问题 参考文献">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-11-02T07:54:19.000Z">
+<meta property="article:modified_time" content="2026-11-04T12:32:42.364Z">
+<meta property="article:author" content="King Strange">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2026/11/02/DiscreteTimeQuantumWalk/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/11/02/DiscreteTimeQuantumWalk/","path":"2026/11/02/DiscreteTimeQuantumWalk/","title":"离散时间量子游走"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>离散时间量子游走 | Stellary's Notes</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+<!-- hexo injector head_end end --></head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Stellary's Notes</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li><li class="menu-item menu-item-index"><a href="/index/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>index</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">经典随机游走</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">基本性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">用随机游走解决搜索问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">量子随机游走</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">量子随机游走算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">算法框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">优化：MNRS 随机游走框架</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">元素区分问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="King Strange"
+      src="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+  <p class="site-author-name" itemprop="name">King Strange</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">99</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">13</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">43</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/SocialZxy" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;SocialZxy" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:stellary@stu.pku.edu.cn" title="E-Mail → mailto:stellary@stu.pku.edu.cn" rel="noopener me" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          Links
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://hexo.io/" title="https:&#x2F;&#x2F;hexo.io" rel="noopener" target="_blank">Hexo</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://theme-next.js.org/" title="https:&#x2F;&#x2F;theme-next.js.org&#x2F;" rel="noopener" target="_blank">NexT</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://syksykccc.github.io/" title="https:&#x2F;&#x2F;syksykccc.github.io" rel="noopener" target="_blank">syksykCCC</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://blog.imyangty.com/" title="https:&#x2F;&#x2F;blog.imyangty.com" rel="noopener" target="_blank">YangTY's Blog - 越过山川</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://rpche-6626.github.io/" title="https:&#x2F;&#x2F;rpche-6626.github.io&#x2F;" rel="noopener" target="_blank">RPChe_6626</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2026/11/02/DiscreteTimeQuantumWalk/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://s2.loli.net/2023/11/24/rtCEFG1igyYAlm4.png">
+      <meta itemprop="name" content="King Strange">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="离散时间量子游走 | Stellary's Notes">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          离散时间量子游走
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2026-11-02 15:54:19" itemprop="dateCreated datePublished" datetime="2026-11-02T15:54:19+08:00">2026-11-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2026-11-04 20:32:42" itemprop="dateModified" datetime="2026-11-04T20:32:42+08:00">2026-11-04</time>
+    </span>
+
+  
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="Word count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Word count in article: </span>
+      <span>6.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>24 mins.</span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。这篇文章爬了 21 世纪初对离散时间量子游走的研究线，形成了一套对于这个算法框架的动机比较充分、直觉比较清楚的理解。</p>
+<!-- toc -->
+
+<ul>
+<li><a href="#%E7%BB%8F%E5%85%B8%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0">经典随机游走</a><ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%80%A7%E8%B4%A8">基本性质</a></li>
+<li><a href="#%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E8%A7%A3%E5%86%B3%E6%90%9C%E7%B4%A2%E9%97%AE%E9%A2%98">用随机游走解决搜索问题</a></li>
+</ul>
+</li>
+<li><a href="#%E9%87%8F%E5%AD%90%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0">量子随机游走</a><ul>
+<li><a href="#%E9%87%8F%E5%AD%90%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E7%AE%97%E7%AC%A6">量子随机游走算符</a></li>
+<li><a href="#%E7%AE%97%E6%B3%95%E6%A1%86%E6%9E%B6">算法框架</a></li>
+<li><a href="#%E4%BC%98%E5%8C%96mnrs-%E9%9A%8F%E6%9C%BA%E6%B8%B8%E8%B5%B0%E6%A1%86%E6%9E%B6">优化：MNRS 随机游走框架</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%83%E7%B4%A0%E5%8C%BA%E5%88%86%E9%97%AE%E9%A2%98">元素区分问题</a></li>
+<li><a href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE">参考文献</a></li>
+</ul>
+<!-- tocstop -->
+
+<span id="more"></span>
+
+<h1><span id="经典随机游走">经典随机游走</span></h1><h2><span id="基本性质">基本性质</span></h2><p>众所周知，一个支撑在 $N$ 个点图 $G &#x3D; (V, E)$ 上的随机游走可以用一个<em>随机矩阵</em> $P$ 刻画：$P_{ij}$ 表示每一步从 $j$ 到 $i$ 的转移概率，其中对于任意 $j$ 都有 $\sum_{k &#x3D; 1}^N P_{kj} &#x3D; 1$，且 $P_{ij}\ne 0$ 当且仅当 $(i, j)\in E$。给定任意一个支撑在该 $N$ 个点上的初始分布 $\pi$，经过一次转移之后分布将变成 $P\pi$。一个随机游走可以具有以下性质：</p>
+<div class="note success"><p><strong>定义 1.1.</strong> 称一个由 $P$ 刻画的随机游走具有：</p>
+<ol>
+<li><strong>不可约性.</strong> 若 $G$ 强连通。</li>
+<li><strong>非周期性.</strong> 若 $G$ 中所有圈长度的最大公约数为 $1$。</li>
+<li><strong>遍历性.</strong> 若它同时具有不可约性和非周期性。</li>
+</ol>
+</div>
+
+<p>Perron-Frobenius 定理的概率版本告诉我们，任意一个遍历性的随机游走都有唯一的稳态分布 $\pi$。我们继续定义一个遍历性随机游走的可逆性：</p>
+<div class="note success"><p><strong>定义 1.2.</strong> 称一个由 $P$ 刻画的随机游走是可逆的，若对于它是遍历性的，并且任意的 $i, j$ 都有</p>
+<p>$$<br>\pi_{i}P_{ji} &#x3D; \pi_j P_{ij},<br>$$</p>
+<p>其中 $\pi$ 是以上随机游走的稳态分布，以上条件称为细致平衡条件。</p>
+</div>
+
+<p>直觉上，这个性质就是在稳态分布下，从 $i\rightarrow j$ 和从 $j\rightarrow i$ 的概率质量相等。分析随机游走时经常使用的一个工具，<strong>对称化转移矩阵</strong>，定义如下：</p>
+<p>$$<br>D_{ij} &#x3D; \sqrt{P_{ij}P_{ji}}<br>$$</p>
+<p>对于可逆随机游走，它是一个保留了 $P$ 的谱信息的非负实对称矩阵：</p>
+<div class="note info"><p><strong>定理 1.3.</strong> 对于任意可逆的随机游走，$P$ 和 $D$ 相似。具体地，定义 $\Pi &#x3D; \operatorname{diag}(\pi)$。有</p>
+<p>$$<br>D &#x3D; \Pi^{-1&#x2F;2}P\Pi^{1&#x2F;2}.<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 使用细致平衡条件验算即可。<div style="text-align: right">$\blacksquare$</div></p>
+<h2><span id="用随机游走解决搜索问题">用随机游走解决搜索问题</span></h2><p>在常见的搜索问题中，我们要在一个大小为 $N$ 的搜索空间中搜寻一个被标记的点。使用随机游走，我们容易设计以下算法：</p>
+<ol>
+<li>设计一个随机游走的转移矩阵 $P$。</li>
+<li>从均匀分布（或者随便一个分布）里面采样 $x$。</li>
+<li>模拟 $t$ 随机游走，直到搜到一个目标解。</li>
+</ol>
+<p>形式化地，我们考虑一个图 $G &#x3D; (V, E)$，其中 $M \subset V$ 中的点被<em>标记</em>。任取一个随机矩阵 $P$，并且不妨设它是遍历且可逆的。将其改造成：</p>
+<p>$$<br>P’_{jk} &#x3D; \begin{cases}<br>    [j &#x3D; k], &amp; k\in M, \\<br>    P_{jk}, &amp; \text{otherwise.}<br>\end{cases} \label{eq:marked-walk}<br>$$</p>
+<p>最小的、使得 $t$ 步之后以常数概率走到一个被标记点的 $t$ 称为这个随机游走算法的<strong>命中时间（Hitting Time）</strong>。</p>
+<p>作为热身，本节先证明以下定理：</p>
+<div class="note info"><p><strong>定理 1.4.</strong> 设 $P$ 是遍历可逆的随机矩阵，其稳态分布为 $\pi$。若其谱间隙 $1 - \lambda_2(P)$ 为 $\delta$，且稳态分布在 $M$ 上的总质量为 $\epsilon &#x3D; \sum_{i\in M} \pi_i$，则这个随机游走的命中时间<br>$$<br>t &#x3D; O(1 &#x2F; (\delta\epsilon))<br>$$</p>
+</div>
+
+<p>为了计算方便，我们不妨对点进行重编号，让 $M$ 中的点编号靠后。此时可以将 $P’$ 写作一个简明的分块下三角矩阵：</p>
+<p>$$<br>P’ &#x3D; \begin{pmatrix}<br>    P_M &amp; 0 \\<br>    Q &amp; I<br>\end{pmatrix}, \qquad (P’)^t &#x3D; \begin{pmatrix}<br>    P_M^t &amp; 0 \\<br>    Q\frac{P^t_M - I}{P_M - I} &amp; I<br>\end{pmatrix}.<br>$$</p>
+<p>我们从 $V\setminus M$ 上的初始分布开始游走（如果随机出 $x\in M$，那么直接就做完了，因此我们在第一步没有随出带标记的元素的条件下计算）。将初始分布对应的向量记作 $v$。则 $t$ 步之后没有走到 $M$ 中的概率无非是：</p>
+<p>$$<br>\Pr[x_t\notin M | x_0 \notin M] &#x3D; \left\lVert P_M^t v\right\rVert_1 \leq \left\lVert P_M^t\right\rVert_1 \leq \left\lVert P_M^t\right\rVert_2 \leq \left\lVert P_M\right\rVert_2^t.<br>$$</p>
+<p>要让这个概率是 $O(1)$ 的，我们只需要令 $t &#x3D; \frac{1}{1 - \left\lVert P_M\right\rVert}$。接下来，我们使用定理 1.1 中的参数来限制 $\left\lVert P_M\right\rVert$。</p>
+<div class="note info"><p><strong>引理 1.5.</strong> 设 $P$ 可逆。若 $P$ 的谱间隙至少是 $\delta$，$|M|\geq \epsilon N$，那么 $\left\lVert P_M\right\rVert \leq 1 - \delta\epsilon$。</p>
+</div>
+
+<p><strong>证明.</strong> 定义 $D$ 左上角和 $P_M$ 形状相同的一块为 $D_M$，$D_M$ 是非负实对称矩阵，因此必然有一个主特征向量 $v$。将 $v$ 后面 $m$ 维补 $0$ 得到 $w$。根据定理 1.3，$D_M$ 保留了 $P_M$ 的谱信息。于是</p>
+<p>$$<br>\begin{aligned}<br>\left\lVert P_M\right\rVert &#x3D; \left\lVert D_M\right\rVert &#x3D; v^\top D_M v &#x3D; w^\top D w<br>\end{aligned}<br>$$</p>
+<p>现在将 $D$ 谱分解。有 $D$ 的主特征向量为 $\sqrt \pi$，</p>
+<p>$$<br>\begin{aligned}<br>w^\top D w &amp;&#x3D; |w^\top \sqrt \pi|^2 + \sum_{\lambda \ne 1} \lambda |v_\lambda^\top w|^2 \\<br>&amp;\leq |w^\top \pi|^2 + (1 - \delta)\sum_{\lambda \ne 1} |v_\lambda^\top w|^2 \\<br>&amp;&#x3D; 1 - \delta\left(1 - |w^\top \sqrt \pi|^2\right) \\<br>&amp;\leq 1 - \delta\left(1 - \lVert w\rVert_2^2 \left(\sum_{i\in V\setminus M} (\sqrt \pi)^2\right)\right) \\<br>&amp;&#x3D; 1 - \delta\left(1 - (1 - \epsilon)\right) &#x3D; 1 - \delta\epsilon<br>\end{aligned}<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>引理 1.5 和前面的论证自然可以推出定理 1.4。</p>
+<details class="note "><summary><p><strong>Remark.</strong> 这个 $1 &#x2F; (\epsilon \delta)$ 符合直觉，而且一般地，它是紧的。</p>
+</summary>
+<p>这个 bound 符合用 markov chain 独立随机采样的直觉：我们用 $1 &#x2F; \delta$ 步就可以让 markov chain 基本上收敛于稳态分布，此时抽出的样本的分布接近稳态分布。而从稳态分布中抽样抽到一个被标记的样本的概率正是 $\epsilon$。独立重复这个过程 $1 &#x2F; \epsilon$ 次，就可以高概率抽到一个样本。</p>
+<p>这个界基本上是紧的。考虑以下的随机游走：任取想要的稳态分布 $\pi$，每次以 $1 &#x2F; \delta$ 概率留在原地，以 $\delta$ 概率用稳态分布抽样转移。那么任意时刻，下一次抽到一个被标记样本的概率都是 $\epsilon \delta$。</p>
+
+</details>
+
+<h1><span id="量子随机游走">量子随机游走</span></h1><p>现在我们考虑“量子化”一个随机游走 $P$。一个最初步的想法是使用算符</p>
+<p>$$<br>|j\rangle \mapsto |\partial_j\rangle :&#x3D; \sum_k \sqrt{P_{kj}}|k\rangle<br>$$</p>
+<p>然而这个算符不是酉的。可以想象的是，量子的演化总是可逆的，但对于马尔可夫这种扩散状的过程则不是这样。所以，你几乎没有办法在原地构造一个量子的演化，使得每个点都对应一个 computational basis vector、将概率分布编码在振幅上、不做任何中途测量、最终模拟一个马尔科夫链的 dynamics。此处所谓量子随机游走之框架，其实和原来的随机游走 $P$ 关系不大。更合适的理解方法是如 Ambainis [1] 所言，将其视为某种 Grover 反射的利用了图 $G$ 结构信息的拓展。接下来的内容按照如下结构组织：</p>
+<ol>
+<li>在 2.1 节，我们给出一个量子意义下的随机游走算符 $U$，然后分析其谱性质。</li>
+<li>在 2.2 节，我们给出一个早期的随机游走框架，然后分析其查询复杂度。</li>
+<li>在 2.3 节，我们介绍 MNRS 意义下的随机游走框架，一个上述算法的优化。</li>
+</ol>
+<details class="note "><summary><p><strong>Remark.</strong> 本文内容和北京大学量子计算课程中的随机游走框架有什么关系？</p>
+</summary>
+<p>我们介绍的这个随机游走的框架和我校的量子计算课程讲授的框架 [5] 有一定的相通之处。该框架直接从 $O_U$ 出发，构造了矩阵 $D$ 的 block encoding </p>
+<p>$$<br>O_D &#x3D; O_U^\dagger S O_U<br>$$</p>
+<p>然后发现了 $D$ 的特征向量在 block encoding 中被 qubitization，此后便将其视作 $\operatorname{SU}(2)$ 中的旋转，分析区分两个态所需的旋转次数。而我们的框架下的 $U$ 为</p>
+<p>$$<br>SO_U^\dagger R_0 O_U<br>$$</p>
+<p>做一个坐标变换 $O_U (\cdot) O_U^\dagger$ 就发现在选定的基底下，我们和上述 block encoding 只差了一次关于 $|0\rangle$ 的反射 $R_0$。所以说本文将要使用的随机游走算符本质上是一个反射，和旋转之间还欠着另一个反射，我们最后得到的算法也不是某种旋转状物，而是使用相位估计。</p>
+<p>我个人觉得上来就提出要构造 $D$ 矩阵的 block encoding 这个 leap 太大，缺乏动机，此外讲义有些东西写的不清楚，所以我不考虑这条路径。</p>
+
+</details>
+
+
+<h2><span id="量子随机游走算符">量子随机游走算符</span></h2><p>这里我们给出 Andrew Childs 的讲义意义下 [2] 的随机游走的框架，它是 Szegedy 意义下的随机游走模型 [3] 的一个特例。本章所述的随机游走算符的源头还需要再往上面爬一点，我觉得不太必要，因此我们直接从这个形式的算符出发。</p>
+<p>考虑一个随机矩阵 $P$。定义 </p>
+<p>$$<br>|\psi_j\rangle &#x3D; |j\rangle\otimes \sum_{k}\sqrt{P_{kj}}|k\rangle<br>$$</p>
+<p>注意因为 $P$ 是随机矩阵，所以这个态确实是归一化的。此外，因为张量积第一项的存在性，这是一组标准正交基。考虑朝 $\{|\psi_i\rangle\}$ 的投影和交换算符：</p>
+<p>$$<br>\Pi :&#x3D; \sum_{j &#x3D; 1}^N |\psi_J\rangle\langle\psi_j|, \qquad S &#x3D; \sum_{j, k &#x3D; 1}^N |j, k\rangle\langle k, j|<br>$$</p>
+<p>我们定义 $P$ 对应的量子随机游走的算符为 $U :&#x3D; S(2\Pi - I)$，其中 $S$ 是 SWAP 门。粗浅地看，这个算符是首先用第一个 register 进行控制，让第二个 register 做关于 $|\partial_j\rangle$ 的反射以产生干涉。这个操作叫做 Grover Coin Flip，用于产生“随机性”。然后交换两个寄存器使得刚才扩散的结果被换到第一位，类似于你现在走到了下一个点。</p>
+<p>为了理解这个随机游走算符的行为，我们首先分析 $U$ 的几何结构。我们尝试的角度是寻找 $U$ 的一个比较细的不变子空间分解，来得到 $U$ 的谱结构。既然 $U$ 是一个反射复合上交换算符，我们不妨从这个反射的不变子空间开始。我们将 $2\Pi - I$ 的不变子空间的标准正交基 $\{|\psi_j\rangle\}$ 纵向排列成以下矩阵：</p>
+<p>$$<br>T :&#x3D; \sum_j |\psi_j\rangle\langle j|<br>$$</p>
+<p>自然有 $TT^\dagger &#x3D; \Pi$ 和 $T^\dagger T &#x3D; I$。接下来，有一个深刻的洞察是 $U$ 的谱结构和 $T^\dagger ST$ 这个矩阵的谱结构密切相关。</p>
+<details class="note "><summary><p><strong>Remark.</strong> 怎么看出来的？</p>
+</summary>
+<p>我们考虑直接计算 $U$ 的特征向量。假设 $|\mu\rangle$ 是 $U$ 的特征值为 $\mu$ 的特征向量。有</p>
+<p>$$<br>S(TT^\dagger - I)|\mu\rangle &#x3D; \mu|\mu\rangle<br>$$</p>
+<p>我们整理一下这个式子。首先有</p>
+<p>$$<br>STT^\dagger |\mu\rangle &#x3D; (S + \mu I)|\mu\rangle<br>$$</p>
+<p>注意 $S^2 &#x3D; I$。因此有当 $\mu \ne \pm 1$ 时，$(S + \mu I)^{-1} &#x3D; (S - \mu I) &#x2F; (1 - \mu^2)$。两边乘上这个逆，得到</p>
+<p>$$<br>\frac{T - \mu ST}{1 - \mu^2}\cdot T^\dagger|\mu\rangle &#x3D; |\mu\rangle \label{eq:mu-combination}<br>$$</p>
+<p>至此已经很明显。两边再乘上 $T^\dagger$，并且令 $|\lambda\rangle &#x3D; T^\dagger |\mu\rangle$ 得到</p>
+<p>$$<br>-\frac{\mu}{1 - \mu^2}\cdot T^\dagger ST |\lambda\rangle &#x3D; \left(1 - \frac{1}{1 - \mu^2}\right)|\lambda\rangle \label{eq:value-relation}<br>$$</p>
+<p>此处的 $|\lambda\rangle$ 就是 $T^\dagger ST$ 的特征向量。反过来注意 \ref{eq:mu-combination}。这表明 $|\mu\rangle$ 是 $T|\lambda\rangle, ST|\lambda\rangle$ 的线性组合。也就是说，只要我们分析出了 $T^\dagger ST$ 的谱结构，拿着一个特征向量，根据 \ref{eq:value-relation} 可知，$\mu$ 是带参数 $\lambda$ 的二次方程的根。据此可以解出两个 $U$ 的特征值 $\mu_1, \mu_2$，并用 \ref{eq:mu-combination} 线性组合出 $U$ 的两个特征向量；$U$ 的其余特征值的特征向量必然是 $\pm 1$，至此 $U$ 的谱结构已然明了，接下来我们的分析基本上沿着这条线进行。</p>
+
+</details>
+
+<p>先考虑计算 $T^\dagger ST$ 是什么。</p>
+<p>$$<br>\begin{align}<br>T^\dagger ST &amp;&#x3D; \sum_{i, j, k, l} \sqrt{P_{ji}P_{lk}}|i\rangle\langle i, j|l, k\rangle\langle k| \\<br>&amp;&#x3D; \sum_{i, k} \sqrt{P_{ki}P_{ik}}|i\rangle\langle k| &#x3D; D<br>\end{align}<br>$$</p>
+<p>于是，顺着 Remark 中的路线，我们便可以证明以下定理：</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 设 $P$ 是一个随机矩阵，$D$ 是其对称化转移矩阵。令 $D$ 的特征值是 ${\lambda}$，对应实特征向量 ${|\lambda\rangle}$。那么 $U$ 的特征值为 $\pm 1$ 和 $\lambda \pm i\sqrt{1 - \lambda^2} &#x3D; e^{\pm i\arccos \lambda}$。</p>
+</div>
+
+<p><strong>证明.</strong> 从 $|\lambda\rangle$ 出发。定义 $|\tilde \lambda\rangle &#x3D; T|\lambda\rangle$，简单计算可知</p>
+<p>$$<br>U|\tilde \lambda\rangle &#x3D; S|\tilde\lambda\rangle, \quad US|\tilde\lambda\rangle &#x3D; 2\lambda S|\tilde \lambda\rangle - |\tilde\lambda\rangle<br>$$</p>
+<p>于是，任意的 $\operatorname{span}\{|\tilde \lambda\rangle, S|\tilde \lambda\rangle\}$ 都是 $U$ 的不变子空间。限制在这个子空间上，$U$ 在这组基下的矩阵表示是</p>
+<p>$$<br>\begin{pmatrix}<br>    0 &amp; \lambda \\<br>    -1 &amp; 2\lambda<br>\end{pmatrix}<br>$$</p>
+<p>考虑全空间在这些不变子空间下的正交补 </p>
+<p>$$<br>\bot :&#x3D; \{|x\rangle : \forall \lambda, \langle x|\tilde \lambda\rangle &#x3D; \langle x|S|\tilde \lambda\rangle &#x3D; 0\}<br>$$</p>
+<p>同样可以验证这个空间也是 $U$ 的不变子空间，更具体地，$U$ 限制在 $\bot$ 上就是 $-S$。至此我们知道了 $U$ 将整个空间划分成它不变子空间的直和：</p>
+<p>$$<br>\mathcal{H} &#x3D; \bot \oplus \bigoplus_{\lambda} \mathrm{span}\{|\tilde\lambda\rangle, S|\tilde\lambda\rangle\}<br>$$</p>
+<p>要求 $U$ 的特征值，只需要在每个不变子空间中求解。对于 $\bot$，因为 $U$ 限制在其上是对合变换 $-S$，所以特征值只有 $\pm 1$。对于某个 $\mathrm{span}\{|\tilde\lambda\rangle, S|\tilde\lambda\rangle\}$，我们解特征方程</p>
+<p>$$<br>\mu^2 - 2\lambda\mu + \lambda &#x3D; 0, \qquad \Rightarrow \qquad \mu &#x3D; \lambda\pm i\sqrt{1 - \lambda^2} &#x3D; \exp(\pm i\arccos \lambda).<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<div class="note "><p><strong>Remark.</strong> 注意如果矩阵 $D$ 的谱间隙为 $\delta$，那么在量子随机游走中，$U$ 有谱相位间隙</p>
+<p>$$<br>\arccos(1 - \delta) \geq \sqrt{2\delta}<br>$$</p>
+<p>这给随机游走搜索中的一个关键变量——某种意义上的谱间隙带来了平方级别的放大，这个规律称为 <strong>spectral gap amplification</strong>。在下一节我们将看到基于量子游走的搜索如何利用这个现象。</p>
+</div>
+
+<h2><span id="算法框架">算法框架</span></h2><p>和经典类比，我们也可以用随机矩阵 $P$ 对应的量子游走算符来解决 quantum query model 下的问题 $\Psi$。这里假设读者熟悉 quantum query model，如果不熟悉可以看第 3 章（元素区分问题）。要求是：</p>
+<ol>
+<li>你需要用实例的 oracle $O_x$ 构造受控 $U$ 门。当该 oracle 对应一个 $\Phi(x) &#x3D; 0$（$M &#x3D; \varnothing$）的实例时，$U$ 是 $P$ 对应的随机游走；当该 oracle 对应一个 $\Phi(x) &#x3D; 1$（$M\ne \varnothing$）的实例时，$U$ 是 $P’$（参见式 \ref{eq:marked-walk}）对应的随机游走。</li>
+<li>如果问题有解，那么算法以常数 $1 - \varepsilon &gt; 0$ 概率输出 $1$。否则，算法一定输出 $0$。</li>
+</ol>
+<p>此处我们给出量子随机游走的算法框架。假设 $P$ 是一个遍历性可逆随机游走，且我们有以下原素的电路：</p>
+<ol>
+<li>$P$ 的稳态分布的制备线路 $O_S : |0\rangle \mapsto |\pi\rangle$。</li>
+<li>随机游走 oracle $O_U : |0, i\rangle \mapsto \sum_j \sqrt{P_{ji}}|j, i\rangle$。</li>
+<li>检查一个点是否为被标记点的线路 $O_C: |x, 0\rangle \mapsto |x, [x\in M]\rangle$。</li>
+</ol>
+<details class="note "><summary><p><strong>子过程.</strong> 用常数次 $O_U, O_C$ 制备 $U$。</p>
+</summary>
+<p>这里我们演示如何用以上两个算符来实现受控 $U$ 门。使用 $n$ 比特以及 $2$ 比特的 Toffoli 门和 phase-kickback，我们可以制备关于任意一个 computational basis $|x\rangle$ 的反射算符及其受控版本</p>
+<p>$$<br>R_x &#x3D; 2|x\rangle\langle x| - I<br>$$</p>
+<p>于是显然</p>
+<p>$$<br>O_U^\dagger (R_0 \otimes I) O_U &#x3D; 2\Pi - I, \qquad O_U^\dagger O_U &#x3D; I<br>$$</p>
+<p>因此受 $c$ 控制的 $U$ 的制备方法如下：</p>
+<ol>
+<li>先用 $O_C$ 将标记信息存到一个辅助比特 $|b\rangle$ 中；</li>
+<li>作用 $O_U^\dagger$；</li>
+<li>条件于 $\neg b \wedge c$ 作用 $R_0$；</li>
+<li>作用 $O_U$；</li>
+<li>条件于 $b\wedge c$ 作用 $R_x$，其中 $x$ 是边态的第一个 register。</li>
+</ol>
+
+</details>
+
+<details class="note "><summary><p><strong>步骤 1.</strong> 制备 $P$ 的稳态分布 $|\pi\rangle$。对 $|\pi, 0\rangle$ 作用 $O_C$ 之后测量第二个寄存器。如果结果为 $1$，输出 $1$ 并停止。如果没有停止，假设测量后态坍缩到了 $|\psi\rangle$。</p>
+</summary>
+<p>这一步做完之后，如果 $M &#x3D; \varnothing$，那么测量后第一个寄存器还是 $|\psi\rangle &#x3D; |\pi\rangle$。着重考虑 $M$ 非空的情况。此时如果我们测出了 $1$，那么我们可以断言答案为 $1$。否则 $|\pi\rangle$ 将坍缩至 $\{|x\rangle : x\in M\}$ 正交的子空间中。注意若 $M$ 非空，有<br>$$<br>D’ &#x3D; \begin{pmatrix}<br>    D_M &amp; 0 \\<br>    0 &amp; I<br>\end{pmatrix}<br>$$</p>
+<p>坍缩之后得到的态 $|\psi\rangle$ 是 $|D_M\rangle$ 的特征向量后面补 $0$。</p>
+
+</details>
+
+<details class="note "><summary><p><strong>步骤 2.</strong> 令 $|\tilde\psi\rangle &#x3D; O_U|0, \psi\rangle$。在 $|\tilde\psi\rangle$ 上用受控 $U$ 门做精度为 $\sqrt{\delta\epsilon}$ 的相位估计。测出相位 $\varphi$ 之后，输出 $[\varphi &#x3D; 0]$。</p>
+</summary>
+<p>如果 $M &#x3D; \varnothing$，那么</p>
+<p>$$<br>|\psi\rangle &#x3D; \sum_i\sqrt{\pi_i}|i\rangle\sum_j\sqrt{P_{ji}}|j\rangle<br>$$</p>
+<p>从这个形式可见 $(2\Pi - I)O_U|\pi\rangle &#x3D; O_U|\pi\rangle$。而由于 $P$ 是可逆随机游走，有</p>
+<p>$$<br>S|\psi\rangle &#x3D; \sum_i\sum_j \sqrt{\pi_i P_{ji}}|j, i\rangle &#x3D; \sum_i\sum_j \sqrt{\pi_i P_{ji}}|i, j\rangle<br>$$</p>
+<p>因此对 $|\psi\rangle$ 做相位估计，总是得到 $0$。</p>
+<p>另一方面，若 $M\ne \varnothing$，则 $|\psi\rangle$ 可以被分解为 $D_M$ 的特征向量的线性组合。相干的相位估计对于每个分量分别测出相位。注意 $O_U|0, \psi\rangle &#x3D; T|\psi\rangle$。因此，$|\tilde \psi\rangle$ 落在 $D_M$ 的特征值 $\{\lambda\}$ 对应的这些不变子空间 $\operatorname{span}\{|\tilde\lambda\rangle, S|\tilde\lambda\rangle\}$ 中。</p>
+<p>上一节的论证表明，对 $|\tilde\psi\rangle$ 做相位估计，可能的结果只有 $\pm \arccos(\lambda)$。引理 1.5 告诉我们，$D_M$ 的最大特征值不超过 $1 - \delta\epsilon$。因此，根据此前推导的谱相位间隙，有这些相位中与 $0$ 最接近者也至少有 $\sqrt{\delta\epsilon}$。做精度为 $O(\sqrt{\epsilon\delta})$ 的相位估计，即可以常数（具体来说是 $8&#x2F;\pi^2$ 的概率）输出一个非 $0$ 的相位估计。</p>
+
+</details>
+
+<p>最后我们来分析这个算法的查询复杂度。实践中，我们采用的图 $G &#x3D; (V, E)$ 的顶点 $V$ 一般是由搜索状态 $x$ 和<strong>它携带的数据结构</strong> $\operatorname{DS}(x)$ 共同决定。一般来说，单纯制备图上的稳态和转移不需要任何查询，查询只在维护数据结构时产生，详见元素区分问题。无论如何，我们考虑用我们使用的三个原素 $O_S, O_U, O_C$ 的查询次数来表示整个随机游走算法的查询复杂度。记</p>
+<ul>
+<li>$O_S$ 对搜索问题 oracle 的查询次数为 $S$。</li>
+<li>$O_U$ 对搜索问题 oracle 的查询次数为 $U$。</li>
+<li>$O_C$ 对搜索问题 oracle 的查询次数为 $C$。</li>
+</ul>
+<p>实际上，$U$ 就是各类广泛流传的讲义和定理 2.2 中所谓的维护数据结构所需的查询次数。考虑 $O_U$ 的构造：我们有了 $|u, \operatorname{DS}(u), 0, 0\rangle$，我们可以不用任意查询地算出 $P$ 的转移边 $|u, 0\rangle\mapsto \sum_v \sqrt{P_{vu}}|u, v\rangle$。将这个没有开销的算符作用在上述态的第 $1, 3$ 寄存器，得到若干形如 $|u, \operatorname{DS}(u), v, 0\rangle$ 的分量的叠加。现在，将 $\operatorname{DS}(u)$ 复制到第四个寄存器只需要用 CNOT 门，因此唯一产生查询的位置就是将 $\operatorname{DS}(u)$ 修改成 $\operatorname{DS}(v)$ 所需的开销。简单分析以上算法，得到本节的主定理：</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 在 quantum query model 下计算一个函数 $\Psi : S\rightarrow \{0, 1\}$。其中，问题的 instance $x\in S$ 仅能通过 quantum oracle $O_x: |i, z\rangle \mapsto |i, z\oplus x_i\rangle$ 访问。如果存在一个图 $G &#x3D; (V, E)$、标记函数 $M_x : V\rightarrow \{0, 1\}$ 和支撑在 $G$ 上的一个遍历性可逆随机游走 $P$，使得：</p>
+<ol>
+<li>$\Psi(x) &#x3D; 1$ 当且仅当存在 $v\in V, M_x(v) &#x3D; 1$；</li>
+<li>$P$ 的 spectral gap 至少为 $\delta$；</li>
+<li>对于任意的 $x$ 使得 $\Phi(x) &#x3D; 1$，有 $\Pr_{v\sim \pi}[M_v &#x3D; 1] \geq \epsilon$。</li>
+</ol>
+<p>并且，</p>
+<ol>
+<li>可以用 $S$ 次 query 制备稳态分布 $|\pi\rangle$；</li>
+<li>可以用 $U$ 次 query 完成转移 $u\rightarrow v$；</li>
+<li>可以用 $C$ 次 query 检查一个点 $v$ 是否带标记。</li>
+</ol>
+<p>那么本问题的查询复杂度</p>
+<p>$$<br>Q_\epsilon(\Phi) &#x3D; O\left(S + \frac{1}{\sqrt{\delta\epsilon}}(U + C)\right)<br>$$</p>
+</div>
+
+<p><strong>证明.</strong> 观察到本节所述算法调用 oracle 的位置分别是：</p>
+<ol>
+<li>制备稳态分布时调用了一次 $O_S$，产生 $S$ 次查询；然后调用了一次 $O_C$，产生了 $C$ 次查询。</li>
+<li>调用一次 $O_U$，产生 $U$ 次查询，然后做了精度为 $\sqrt{\delta\epsilon}$ 的相位估计。</li>
+</ol>
+<p>做精度为 $\epsilon$ 相位估计需要依次调用受控 $U, U^2, U^4, U^{2^{\lceil\log(1 &#x2F; \epsilon)\rceil}}$。总共调用了 $O(1 &#x2F; \epsilon)$ 次受控 $U$ 门，每次调用 $O(1)$ 次 $O_U$ 和 $1$ 次 $O_C$，产生 $O((U + C) &#x2F; \sqrt{\delta\epsilon})$ 次 oracle 访问。综上所述，上述算法的查询复杂度为</p>
+<p>$$<br>O\left(S + \frac{1}{\sqrt{\delta\epsilon}}(U + C)\right)<br>$$</p>
+<div style="text-align: right">$\blacksquare$</div>
+
+<h2><span id="优化mnrs-随机游走框架">优化：MNRS 随机游走框架</span></h2><p>上述随机游走算法的直觉类似于我们在 1 章开头中讲的经典随机游走算法：一直随机游走，直到找到一个目标解。另一方面，我们还可以从第 1 章末尾的 Remark 中的直觉出发，构造如下算法：</p>
+<ol>
+<li>从均匀分布出发；</li>
+<li>独立重复 $1 &#x2F; \epsilon$ 次：</li>
+<li>$\qquad$ 模拟 $1 &#x2F; \delta$ 次随机游走；</li>
+<li>$\qquad$ 检查是否走到一个标记点。如果走到，退出。</li>
+</ol>
+<p>这两个算法看起来没什么差别，但实际上仔细检查就可以发现，新的算法将检查标记的次数从 $1 &#x2F; (\epsilon\delta)$ 变成了 $1 &#x2F; \epsilon$。量子这边也是类似。我们可以在内层做精度为 $1 &#x2F; \sqrt{\delta}$ 的相位估计，制备标记位以后，对标记为 $1$ 的态做振幅放大。可以预见，你会得到一个</p>
+<p>$$<br>O\left(S + \frac{1}{\sqrt{\epsilon}}\left(\frac{1}{\sqrt{\delta}}U + C\right)\right)<br>$$</p>
+<p>的算法。这就是 Magniez-Nayak-Roland-Santha [4] 提出的框架，细节我暂时不研究。</p>
+<h1><span id="元素区分问题">元素区分问题</span></h1><p>我们给出量子随机游走的一个具体应用。考虑如下的元素区分问题：</p>
+<div class="note "><p><strong>Element Distinctness Problem.</strong> 给定一个函数 $f : [n]\rightarrow [n]$，判断是否存在 $1 \leq i &lt; j \leq n$ 使得 $f(i) &#x3D; f(j)$。</p>
+</div>
+
+<p>或者在 quantum query model 下，表述为：计算一个函数 $\text{EDP} : ([n]\rightarrow [n])\rightarrow \{0, 1\}$，其中</p>
+<p>$$<br>\text{EDP} : f\mapsto \left[\exists 1 \leq i &lt; j \leq n, f(i) &#x3D; f(j)\right]<br>$$</p>
+<p>输入 $f$ 被隐藏，只能通过 oracle $O_f : |i, z\rangle \mapsto |i, z\oplus f(i)\rangle$ 访问。熟知经典这个问题只有查询复杂度 $O(n)$（时间复杂度 $O(n\log n)$）的做法。而在量子这边，这个问题是一个量子随机游走的经典应用。在随机游走时，我们使用 quantum walk 中最为常见的 Hamming Graph，其中参数 $M$ 待定：</p>
+<div class="note success"><p><strong>定义 3.1.</strong> 一个参数为 $N, M$ 的 Hamming 图 $H(N, M)$ 包含以下资料：</p>
+<ol>
+<li>点集 $V &#x3D; [N]^M$。</li>
+<li>对于两个点 $(x_1, …, x_m), (y_1, …, y_m) \in V$，它们之间有一条边当且仅当这两个向量的 Hamming 距离为 $1$，即存在唯一的 $i$ 使得 $x_i\ne y_i$。</li>
+</ol>
+</div>
+
+<p>对于图上的每一个点 $(x_1, …, x_m)\in V$，我们给它配备数据结构</p>
+<p>$$<br>\operatorname{DS}(x_1, …, x_m) &#x3D; (f(x_1), …, f(x_m))<br>$$</p>
+<p>以及标记函数</p>
+<p>$$<br>M(x_1, …, x_m) &#x3D; \left[\exists 1\leq i &lt; j \leq m, f(x_i) &#x3D; f(x_j)\right]<br>$$</p>
+<p>注意在正确维护了数据结构之后，判断一个点有没有标记不需要任何查询。</p>
+<p>现在，我们考虑在附带数据结构的 $H(N, M)$ 上进行均匀的随机游走 $P$：每次从一个点 $v$ 出发，以 $1 &#x2F; (M(N - 1))$ 的概率走到它的任意一个邻居。显然对于非平凡的正则图，其中存在大小为 $2, 3$ 的圈，因此这是一个遍历性随机游走。另一方面，$P$ 甚至是对称的。于是 $P$ 可逆，且其唯一的稳态分布是均匀分布。于是在稳态分布中，对于一个有碰撞的实例，一个节点具有标记的概率至少是（此处我们考虑把碰撞的两个位置随意安进去，然后令其他位置都不是这两个东西）</p>
+<p>$$<br>\epsilon \geq \frac{M(M - 1)(N - 2)^{M - 2}}{N^M} &#x3D; \Theta(M^2 &#x2F; N^2)<br>$$</p>
+<p>然后我们需要分析 $P$ 的谱。事实上，$P$ 的封闭形式如下：</p>
+<p>$$<br>P &#x3D; \frac{1}{M(N - 1)}\sum_{i &#x3D; 1}^M I^{\otimes (i - 1)}\otimes (J - I)\otimes I^{\otimes (M - i)}<br>$$</p>
+<p>显而易见，$P$ 的特征向量形如 $|\psi_1, …, \psi_M\rangle$，对应特征值 $\frac{1}{M(N - 1)}\sum_{i &#x3D; 1}^M \lambda_i$。其中 $|\psi_i\rangle$ 都是 $J - I$ 的特征向量，对应特征值 $\lambda_i$。而 $J - I$ 是我们熟悉的：它有一个 $1$ 重特征值 $N - 1$，和一个 $N - 1$ 重特征值 $-1$。因此，</p>
+<p>$$<br>\delta &#x3D; \frac{1}{M}<br>$$</p>
+<p>最后我们来计算随机游走过程中的三个参数。</p>
+<ol>
+<li>在初态制备时，我们只需要制备均匀叠加态，然后初始化数据结构即可。初始化数据结构时，需要做 $M$ 次查询。因此 $S &#x3D; O(M)$。</li>
+<li>在转移 $u\rightarrow v$ 时维护数据结构，假设 $u$ 是把第 $i$ 位从 $x_i$ 改成了 $x_i’$，那么我们只需要 uncompute $f(x_i)$，然后 compute $f(x_{i}’)$ 即可算出 $\mathrm{DS}(v)$。因此 $U &#x3D; O(1)$。</li>
+<li>按前文所说，$C &#x3D; 0$。</li>
+</ol>
+<p>使用 2.2 节的随机游走算法，其时间复杂度为</p>
+<p>$$<br>O\left(M + \sqrt{\frac{N^2}{M}}\right)<br>$$</p>
+<p>调参知道令 $M &#x3D; N^{2&#x2F;3}$ 时算法复杂度为 $O(N^{2&#x2F;3})$。这和本问题的 $\Omega(N^{2&#x2F;3})$ 量子查询下界匹配。</p>
+<h1><span id="参考文献">参考文献</span></h1><ol>
+<li>Andris Ambainis. <em>Quantum walk algorithm for element distinctness</em>. 2003, <a target="_blank" rel="noopener" href="https://arxiv.org/pdf/quant-ph/0311001v1">https://arxiv.org/pdf/quant-ph/0311001v1</a>.</li>
+<li>Andrew M. Childs. <em>Lecture Notes on Quantum Algorithms</em>. 2025.</li>
+<li>Mario Szedy. <em>Quantum speed-up for Markov chain based algorithms</em>. 45th FOCS. 2004.</li>
+<li>Frédéric Magniez, Ashwin Nayak, Jérémie Roland, Miklos Santha. <em>Search via Quantum Walk</em>. 2011, <a target="_blank" rel="noopener" href="https://arxiv.org/abs/quant-ph/0608026">https://arxiv.org/abs/quant-ph/0608026</a></li>
+<li>Tongyang Li. <em>Introduction to Quantum Computing</em>. 2026. <a target="_blank" rel="noopener" href="https://pku-quantum.tech/">https://pku-quantum.tech/</a></li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2026/09/07/HamiltonianSimulation1/" rel="prev" title="量子模拟基础">
+                  <i class="fa fa-angle-left"></i> 量子模拟基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2026</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">King Strange</span>
+  </div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+    <span title="Word count total">450k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="Reading time total">27:17</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"all","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

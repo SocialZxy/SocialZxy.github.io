@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 收录于 合集（量子纠错研讨班学习笔记）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
+    <meta name="description" content="Abstract. 收录于 合集（量子计算文章选读）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QEC Workshop | 1+ 补充内容">
 <meta property="og:url" content="http://example.com/2026/08/29/QECNote0Preliminaries/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 收录于 合集（量子纠错研讨班学习笔记）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
+<meta property="og:description" content="Abstract. 收录于 合集（量子计算文章选读）。本章是对 Lecture 1 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。    量子信道的建模 纠错码的建模 纠错能力的刻画 Stabilizer Formalism">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-08-29T10:21:36.000Z">
-<meta property="article:modified_time" content="2026-08-31T15:18:22.440Z">
+<meta property="article:modified_time" content="2026-11-04T12:23:13.841Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-08-31 23:18:22" itemprop="dateModified" datetime="2026-08-31T23:18:22+08:00">2026-08-31</time>
+      <time title="Modified: 2026-11-04 20:23:13" itemprop="dateModified" datetime="2026-11-04T20:23:13+08:00">2026-11-04</time>
     </span>
 
   
@@ -261,7 +261,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 收录于 <a href="../../../../2026/01/23/QECNotes/">合集（量子纠错研讨班学习笔记）</a>。本章是对 <a href="../../../../2026/01/23/QECNote1Introduction/">Lecture 1</a> 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 收录于 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。本章是对 <a href="../../../../2026/01/23/QECNote1Introduction/">Lecture 1</a> 的补充。1 中有若干个定理的证明没有 close，但是直观比较清楚。本篇对代数结构分析的比较严格，但是直觉还需依赖 1 来补充。</p>
 <!-- toc -->
 
 <ul>
@@ -403,10 +403,10 @@
 </div>
 
 <p>很明显一般地有对于任意的码字空间 $T$，$T\subseteq \mathcal{T}(\textsf{S}(T))$。如果这两者严格相等，那么 $T$ 就叫做一个 stabilizer code。那么，拿着 $\textsf{S}$，如何找到它对应的码字空间？</p>
-<p>设 $\textsf{S}$ 的一个极小生成元集合为 $\{M_1, …, M_r\}$。那么显然 $|\textsf{S}| &#x3D; 2^r$。定义如下的投影算符：<br>$$<br>\Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\prod_{i &#x3D; 1}^r (I + M_i) &#x3D; \frac{1}{2^r}\prod_{M\in \textsf{S}}M.<br>$$</p>
-<p>容易看到，这正是到 $\mathcal{T}(\textsf{S})$ 的投影。熟知 $\Pi_{\textsf{S}}$ 的迹就是 $\mathcal{T}(\textsf{S})$ 的秩，而如果码字的个数是 $K$，就有该子空间大小为 $2^K$。据此，我们可以算出任意一个 $n$ 个物理比特上的 stabilizer 集合（设 $|\textsf{S}| &#x3D; 2^r$）对应的码字个数：</p>
-<p>$$<br>\operatorname{tr} \Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\Pi_{M\in \textsf{S}}\operatorname{tr} M &#x3D; \frac{\operatorname{tr} I}{2^r} &#x3D; 2^{n - r},<br>$$</p>
-<p>这里需要注意 Pauli 群中只有 $\operatorname{tr} I\ne 0$。也就是说，支撑于 $n$ 个物理比特之上、由 $r$ 个生成元生成的 stabilizer 集合，必然对应一个可以编码 $n - r$ 个 qubit 的 QECC。我们后续会证明这个 QECC 是一个 stabilizer code（参见定理 4.【FIXME】，此后姑且也写 $\textsf{S}$ 对应的 stabilizer code）。现在我们来计算这个 QECC 能够检测 &#x2F; 纠正的错误集合。对于 Pauli 群元素 $E$，记其模掉相位之后所在的等价类为 $\hat{E}$。</p>
+<p>设 $\textsf{S}$ 的一个极小生成元集合为 $\{M_1, …, M_r\}$。那么显然 $|\textsf{S}| &#x3D; 2^r$。定义如下的投影算符：<br>$$<br>\Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\prod_{i &#x3D; 1}^r (I + M_i) &#x3D; \frac{1}{2^r}\sum_{M\in \textsf{S}}M.<br>$$</p>
+<p>容易看到，这正是到 $\mathcal{T}(\textsf{S})$ 的投影。熟知 $\Pi_{\textsf{S}}$ 的迹就是 $\mathcal{T}(\textsf{S})$ 的维数，而如果码字的个数是 $K$，就有该子空间大小为 $2^K$。据此，我们可以算出任意一个 $n$ 个物理比特上的 stabilizer 集合（设 $|\textsf{S}| &#x3D; 2^r$）对应的码字个数：</p>
+<p>$$<br>\operatorname{tr} \Pi_{\textsf{S}} &#x3D; \frac{1}{2^r}\sum_{M\in \textsf{S}}\operatorname{tr} M &#x3D; \frac{\operatorname{tr} I}{2^r} &#x3D; 2^{n - r},<br>$$</p>
+<p>这里需要注意 Pauli 群中只有 $\operatorname{tr} I\ne 0$。也就是说，支撑于 $n$ 个物理比特之上、由 $r$ 个生成元生成的 stabilizer 集合，必然对应一个可以编码 $n - r$ 个 qubit 的 QECC。我们后续会证明这个 QECC 是一个 stabilizer code（参见定理 4.10，此后姑且也写 $\textsf{S}$ 对应的 stabilizer code）。特别地，如果 $r &#x3D; n$，则 $\mathcal{T}(\textsf{S})$ 中只有一个一维子空间，称这个子空间中的态为这组 stabilizer 的 <strong>stabilizer state</strong>。现在我们来计算这个 QECC 能够检测 &#x2F; 纠正的错误集合。对于 Pauli 群元素 $E$，记其模掉相位之后所在的等价类为 $\hat{E}$。</p>
 <div class="note info"><p><strong>定理 4.4.</strong> $\textsf{S}$ 对应的 stabilizer code 不能检测的 Pauli 错误集合是 $\hat{\textsf{N}}(\textsf{S})\setminus \hat{\textsf{S}}$。其中<br>$$<br>\textsf{N}(\textsf{S}) &#x3D; \{N\in \textsf{P}_n : \forall M\in \textsf{S}, NM &#x3D; MN\}.<br>$$</p>
 </div>
 
@@ -490,6 +490,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2026/09/01/QECNote3pTheory/" rel="next" title="QEC Workshop | 3+ 理论补充">
+                  QEC Workshop | 3+ 理论补充 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -520,13 +523,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">443k</span>
+    <span title="Word count total">450k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:50</span>
+    <span title="Reading time total">27:17</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>

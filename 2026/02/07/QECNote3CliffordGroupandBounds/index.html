@@ -19,15 +19,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":"flat","style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":"utterances","storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本节内容分成两大部分：一类共轭作用下保持 Pauli 群不变的酉变换——Clifford 门，并指出 Clifford 门没有量子优越性；以及几个 Bound。    Clifford 群 Clifford 群及其对称性 Clifford 群的经典模拟 补充材料   量子纠错码的上下界 Quantum Gilbert-Varshamo">
+    <meta name="description" content="Abstract. 本文收录于 合集（量子计算文章选读）。本节介绍 Clifford 群。这个群是 Pauli 群的正规化子。它的重要结构是 $\check{\textsf{C}}_n\cong \textsf{Sp}(2n, \mathbb{Z}_2)$，这使得 Clifford 门组成的电路可以被经典高效模拟，相应的也可以用来实现所有 stabilizer code 的 Encoder。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QEC Workshop | 3 更多工具：Clifford 群，一些 Bound">
+<meta property="og:title" content="QEC Workshop | 3 Clifford 群">
 <meta property="og:url" content="http://example.com/2026/02/07/QECNote3CliffordGroupandBounds/index.html">
 <meta property="og:site_name" content="Stellary&#39;s Notes">
-<meta property="og:description" content="Abstract. 本文收录于 合集（量子纠错研讨班学习笔记）。本节内容分成两大部分：一类共轭作用下保持 Pauli 群不变的酉变换——Clifford 门，并指出 Clifford 门没有量子优越性；以及几个 Bound。    Clifford 群 Clifford 群及其对称性 Clifford 群的经典模拟 补充材料   量子纠错码的上下界 Quantum Gilbert-Varshamo">
+<meta property="og:description" content="Abstract. 本文收录于 合集（量子计算文章选读）。本节介绍 Clifford 群。这个群是 Pauli 群的正规化子。它的重要结构是 $\check{\textsf{C}}_n\cong \textsf{Sp}(2n, \mathbb{Z}_2)$，这使得 Clifford 门组成的电路可以被经典高效模拟，相应的也可以用来实现所有 stabilizer code 的 Encoder。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-07T09:41:28.000Z">
-<meta property="article:modified_time" content="2026-03-06T03:17:28.256Z">
+<meta property="article:modified_time" content="2026-11-04T12:23:13.841Z">
 <meta property="article:author" content="King Strange">
 <meta name="twitter:card" content="summary">
 
@@ -36,10 +36,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/02/07/QECNote3CliffordGroupandBounds/","path":"2026/02/07/QECNote3CliffordGroupandBounds/","title":"QEC Workshop | 3 更多工具：Clifford 群，一些 Bound"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2026/02/07/QECNote3CliffordGroupandBounds/","path":"2026/02/07/QECNote3CliffordGroupandBounds/","title":"QEC Workshop | 3 Clifford 群"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>QEC Workshop | 3 更多工具：Clifford 群，一些 Bound | Stellary's Notes</title>
+<title>QEC Workshop | 3 Clifford 群 | Stellary's Notes</title>
   
 
 
@@ -113,7 +113,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">Clifford 群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.1.</span> <span class="nav-text">Clifford 群及其对称性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.2.</span> <span class="nav-text">Clifford 群的经典模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">1.3.</span> <span class="nav-text">补充材料</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">量子纠错码的上下界</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.1.</span> <span class="nav-text">Quantum Gilbert-Varshamov Bound</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.2.</span> <span class="nav-text">Quantum Hamming Bound</span></a></li><li class="nav-item nav-level-2"><a class="nav-link"><span class="nav-number">2.3.</span> <span class="nav-text">Quantum Singleton Bound, Linear Programming Bounds</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">1.</span> <span class="nav-text">代数结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">2.</span> <span class="nav-text">Clifford 群的经典模拟</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">3.</span> <span class="nav-text">Clifford 群生成元</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">4.</span> <span class="nav-text">用 Clifford 电路实现稳定子码的 Encoder</span></a></li><li class="nav-item nav-level-1"><a class="nav-link"><span class="nav-number">5.</span> <span class="nav-text">补充材料</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -128,7 +128,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">97</span>
+          <span class="site-state-item-count">99</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -211,12 +211,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="QEC Workshop | 3 更多工具：Clifford 群，一些 Bound | Stellary's Notes">
+      <meta itemprop="name" content="QEC Workshop | 3 Clifford 群 | Stellary's Notes">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          QEC Workshop | 3 更多工具：Clifford 群，一些 Bound
+          QEC Workshop | 3 Clifford 群
         </h1>
 
         <div class="post-meta-container">
@@ -234,7 +234,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2026-03-06 11:17:28" itemprop="dateModified" datetime="2026-03-06T11:17:28+08:00">2026-03-06</time>
+      <time title="Modified: 2026-11-04 20:23:13" itemprop="dateModified" datetime="2026-11-04T20:23:13+08:00">2026-11-04</time>
     </span>
 
   
@@ -244,14 +244,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Word count in article: </span>
-      <span>4.6k</span>
+      <span>4.9k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>17 mins.</span>
+      <span>18 mins.</span>
     </span>
 </div>
 
@@ -261,181 +261,189 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QECNotes/">合集（量子纠错研讨班学习笔记）</a>。本节内容分成两大部分：一类共轭作用下保持 Pauli 群不变的酉变换——Clifford 门，并指出 Clifford 门没有量子优越性；以及几个 Bound。</p>
+    <div class="post-body" itemprop="articleBody"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/hint.css/2.4.1/hint.min.css"><p><strong>Abstract.</strong> 本文收录于 <a href="../../../../2026/01/23/QCNotes/">合集（量子计算文章选读）</a>。本节介绍 Clifford 群。这个群是 Pauli 群的正规化子。它的重要结构是 $\check{\textsf{C}}_n\cong \textsf{Sp}(2n, \mathbb{Z}_2)$，这使得 Clifford 门组成的电路可以被经典高效模拟，相应的也可以用来实现所有 stabilizer code 的 Encoder。</p>
 <!-- toc -->
 
 <ul>
-<li><a href="#clifford-%E7%BE%A4">Clifford 群</a><ul>
-<li><a href="#clifford-%E7%BE%A4%E5%8F%8A%E5%85%B6%E5%AF%B9%E7%A7%B0%E6%80%A7">Clifford 群及其对称性</a></li>
+<li><a href="#%E4%BB%A3%E6%95%B0%E7%BB%93%E6%9E%84">代数结构</a></li>
 <li><a href="#clifford-%E7%BE%A4%E7%9A%84%E7%BB%8F%E5%85%B8%E6%A8%A1%E6%8B%9F">Clifford 群的经典模拟</a></li>
+<li><a href="#clifford-%E7%BE%A4%E7%94%9F%E6%88%90%E5%85%83">Clifford 群生成元</a></li>
+<li><a href="#%E7%94%A8-clifford-%E7%94%B5%E8%B7%AF%E5%AE%9E%E7%8E%B0%E7%A8%B3%E5%AE%9A%E5%AD%90%E7%A0%81%E7%9A%84-encoder">用 Clifford 电路实现稳定子码的 Encoder</a></li>
 <li><a href="#%E8%A1%A5%E5%85%85%E6%9D%90%E6%96%99">补充材料</a></li>
-</ul>
-</li>
-<li><a href="#%E9%87%8F%E5%AD%90%E7%BA%A0%E9%94%99%E7%A0%81%E7%9A%84%E4%B8%8A%E4%B8%8B%E7%95%8C">量子纠错码的上下界</a><ul>
-<li><a href="#quantum-gilbert-varshamov-bound">Quantum Gilbert-Varshamov Bound</a></li>
-<li><a href="#quantum-hamming-bound">Quantum Hamming Bound</a></li>
-<li><a href="#quantum-singleton-bound-linear-programming-bounds">Quantum Singleton Bound, Linear Programming Bounds</a></li>
-</ul>
-</li>
 </ul>
 <!-- tocstop -->
 
 <span id="more"></span>
 
-<h1><span id="clifford-群">Clifford 群</span></h1><h2><span id="clifford-群及其对称性">Clifford 群及其对称性</span></h2><p>现在，我们想要在编码后的逻辑比特上做门。假设现在你有一个态 $|\psi\rangle$，你在上面做了一个门 $\mathcal{U}$ 得到 $\mathcal{U}|\psi\rangle$。容易预见，此时的 Stabilizer 集合应当发生某些改变：$|\psi\rangle$ 是 $\mathcal{M}$ 的特征向量并不意味着 $\mathcal{U}|\psi\rangle$ 亦然。然而，$\mathcal{U}|\psi\rangle$ 是 $\mathcal{UMU}^\dagger$ 的特征向量。要保证 Stabilizer 变化后（$S’ &#x3D; \mathcal{U}S\mathcal{U}^\dagger$）还是合法的 Stabilizer，最简单粗暴的办法就是保持它不变，此时我们能做的门的集合只能是 $S$ 的正规化子。</p>
-<p>我们研究最大的可能的这种子群。</p>
-<div class="note success"><p><strong>定义 1.1.1（Clifford Group）.</strong> $P_n$ 为 $n$ 阶 Pauli 群。Clifford 群 $C_n$ 为 $\mathrm{SU}(2^n)$ 中，$P_n$ 的正规化子。</p>
-<p>$$<br>C_n &#x3D; \{\mathcal{U}\in \mathrm{SU}(2^n) : \forall \mathcal{P}\in P_n, ~ \mathcal{UPU}^\dagger \in P_n\}<br>$$</p>
+<p>前面几节我们已经掌握了 stabilizer 集合和稳定子码。现在我们往前走一步：考虑全体码字 $|\psi\rangle\in \mathcal{T}(\textsf{S})$。编完码之后，我们希望在上面做一个门 $U\in \textsf{U}(2^n)$。这会将码字集合映射到 $U(\mathcal{T}(\textsf{S}))$。然后，我们希望继续用 stabilizer formalism 对这个集合进行纠错，因此需要探究稳定住它的 unitary 有哪些。当即可以观察到的事实是，若 $\textsf{M}\in \textsf{S}$ 稳定住原本的码字，那么 $M’ &#x3D; UMU^\dagger$ 稳定住 $U(\mathcal{T}(\textsf{S}))$：<br>$$<br>M’U|\psi\rangle &#x3D; UMU^\dagger U|\psi\rangle &#x3D; UM|\psi\rangle &#x3D; U|\psi\rangle<br>$$</p>
+<p>也就是说，$\textsf{S}$ 的共轭 $U\textsf{S}U^\dagger$ 稳定住了 $U|\psi\rangle$ 是显而易见的事实。在实现 fault tolerant 时，我们希望直接利用这一点：直接让 $U\textsf{S}U^\dagger$ 就是 $U(\mathcal{T}(\textsf{S}))$ 的 stabilizer 集合。这首先要求 $U\textsf{S}U^\dagger$ 还是 Pauli 群的子群，其次 $\textsf{S}(U(\mathcal{T}(\textsf{S}))) &#x3D; U\textsf{S}U^\dagger$（而不是真子集，即 $U$ 保证 $U(\mathcal{T}(\textsf{S}))$ 还是 stabilizer code）。因此，本节分析满足上述要求的酉变换集合，即所谓的 Clifford 群。</p>
+<p>首先我们定义 Clifford 群，按照上方要求中最本质的一条，我们将 Clifford 群定义为 Pauli 群的正规化子：</p>
+<div class="note success"><p><strong>定义 1（Clifford Group）.</strong> 令<br>$$<br>\textsf{C}_n &#x3D; \{U\in \textsf{U}(2^n) : U\textsf{P}_n U^\dagger &#x3D; \textsf{P}_n\} \label{eq:stabilizer-state}<br>$$</p>
 </div>
 
-<p>你可以验证，$\mathcal{X}, \mathcal{Y}, \mathcal{Z}, \mathcal{H}, \mathcal{CNOT}, \mathcal{R}_{\pi &#x2F; 4}, e^{i\theta}\mathcal{I}$ 等都是 Clifford 群的元素，可以证明这些一并构成 Clifford 群的生成元。</p>
-<p>Clifford 群有一些变种的记号，你可以模掉相位乃至 Pauli 算符之间的差异（$\hat{P}_n &#x3D; P_n &#x2F; \{\pm \mathcal{I}, \pm i\mathcal{I}\}$），记</p>
-<p>$$<br>\begin{aligned}<br>\hat{C}_n &#x3D; C_n &#x2F; \{e^{i\theta}\mathcal{I}\} \\<br>\check{C}_n &#x3D; C_n &#x2F; \hat{P}_n<br>\end{aligned}<br>$$</p>
-<p>这三个群，在后面都叫做 Clifford 群，具体是哪个不妨基于语境推导。能够模掉全局相位的道理是若 $\mathcal{U}’ &#x3D; e^{i\theta} \mathcal{U}$，则 $\mathcal{U}\in C_n \Leftrightarrow \mathcal{U}’\in C_n$。事实上，全局相位是仅有的不影响共轭作用的因素：</p>
-<div class="note info"><p><strong>定理 1.1.1.</strong> 设 $\mathcal{U}$ 和 $\mathcal{V}$ 是两个具有相同共轭作用的酉变换，即对于任意的 Pauli 群元素 $\mathcal{P}$ 有</p>
-<p>$$<br>\mathcal{UPU}^\dagger &#x3D; \mathcal{VPV}^\dagger<br>$$</p>
-<p>则必有 $\mathcal{U} &#x3D; e^{i\theta}\mathcal{V}$，对于某个 $\theta$。</p>
-</div>
-
-<p><strong>证明.</strong> 不失一般性可以假设 $\mathcal{V} &#x3D; \mathcal{I}$ 然后证明 $\mathcal{U} &#x3D; e^{i\theta}\mathcal{i}$。这意味着，对于任意一个 Stabilizer 集合，$\mathcal{U}$ 将其共轭到相同的 Stabilizer，并且保证所有本征态的本征值不变。考虑这样一些生成元生成的 Stabilizer 集合（$i &#x3D; 1, 2, …, n$）：$(-1)^{j_i}\mathcal{Z}_i$，其中 $\mathcal{Z}_i$ 是给张量积第 $i$ 个分量作用 $\mathcal{Z}$ 的算子，$j_i$ 表示 $j$ 二进制第 $i$ 位。注意到这个 Stabilizer 仅有的本征态是 $e^{i\theta}|j\rangle$，这组基决定了 $\mathcal{U}$ 的矩阵表示必然是 $\mathrm{diag}(e^{i\theta_1}, …, e^{i\theta_{2^n}})$。</p>
-<p>再考虑这样一些生成元生成的 Stabilizer 集合：$\mathcal{X}_1$ 和 $(-1)^{j_{i - 1}}\mathcal{Z}_{i}$，这个 Stabilizer 仅有的本征态是 $e^{i\phi_j}|+\rangle|j\rangle$。第一维的 $|+\rangle$ 将约束 $e^{i\theta_j} &#x3D; e^{i\theta_{2^{n - 1} + j}}$。类似地，你把 $\mathcal{X}_1$ 换成 $\mathcal{X}_i$，就可以证明所有 $\theta$ 确实都相等。<div style="text-align: right">$\blacksquare$</div></p>
-<hr>
-<p>注意 Clifford 群中元素给出的共轭作用实际上是 Pauli 群的自同态，并且也保持群中对易 &#x2F; 反对易性质不变：记 $c(\mathcal{P}, \mathcal{Q})$ 满足 $\mathcal{PQ} &#x3D; (-1)^{c(\mathcal{P}, \mathcal{Q})}\mathcal{QP}$，有</p>
-<p>$$<br>(\mathcal{UPU}^\dagger)(\mathcal{UQU}^\dagger) &#x3D; \mathcal{UPQU}^\dagger &#x3D; (-1)^{c(\mathcal{P}, \mathcal{Q})}\mathcal{UQPU}^\dagger &#x3D; (-1)^{c(\mathcal{P}, \mathcal{Q})}(\mathcal{UQU}^\dagger)(\mathcal{UPU}^\dagger)<br>$$</p>
-<p>回忆上一节定义 2.1 声明的对称辛形式。既然 Clifford 群元素给出的共轭是 Pauli 群的自同态，那么作用这个共轭必然会给 Pauli 群元素的对称辛形式做线性变换。换言之有</p>
-<p>$$<br>v(\mathcal{P}) &#x3D; \mathbf{M}v(\mathcal{UPU}^\dagger)<br>$$</p>
-<p>综合 Clifford 共轭保持对易 &#x2F; 反对易性质不变和对易性与对称辛形式辛内积之联系得到 $\mathbf{M}$ 是 $\mathbb{Z}_2$ 上的辛矩阵：</p>
-<p>$$<br>\forall \boldsymbol{v}, \boldsymbol{w}\in \mathbb{Z}_2^{2n}, (\mathbf{M}\boldsymbol{v})^\top \Lambda (\mathbf{M}\boldsymbol{w}) &#x3D; \boldsymbol{v}^\top \Lambda \boldsymbol{w} \quad \Rightarrow \quad \mathbf{M}^\top \Lambda \mathbf{M} &#x3D; \Lambda, \qquad \text{where }\Lambda &#x3D; \begin{pmatrix}<br>    &amp; \mathbf{I} \\<br>    \mathbf{I} &amp;<br>\end{pmatrix}<br>$$</p>
-<p>故得到 Clifford 群与辛群 $\textsf{Sp}(2n, \mathbb{Z}_2)$ 之间至少存在一个同态。事实上我们接下来还将看到任意一个辛群中的矩阵（将其任意取全局相位提升至一个 $\textsf{P}_n$ 到 $\textsf{P}_n$ 的同态）都可以对应一个 Clifford 共轭：</p>
-<div class="note info"><p><strong>定理 1.1.2.</strong> 设 $M$ 是 $\textsf{P}_n\rightarrow \textsf{P}_n$ 的群同态，记 $M(\mathcal{X}_i) &#x3D; \overline{\mathcal{X}}_i, M(\mathcal{Z}_i) &#x3D; \overline{\mathcal{Z}}_i$，满足</p>
-<p>$$<br>c(\overline{\mathcal{X}}_i, \overline{\mathcal{X}}_j) &#x3D; c(\overline{\mathcal{Z}}_i, \overline{\mathcal{Z}}_j) &#x3D; 0, \qquad c(\overline{\mathcal{X}}_i, \overline{\mathcal{Z}}_j) &#x3D; \delta_{ij}<br>$$</p>
-<p>则存在一个酉变换 $\mathcal{U}$，使得 $M$ 正是 $\mathcal{U}$ 的共轭作用。根据 $M$ 是 $\textsf{P}_n\rightarrow \textsf{P}_n$ 的群同态，$\mathcal{U}$ 必然是 Clifford 群的元素。</p>
-</div>
-
-<p><strong>构造.</strong> 直接照如下方法构造 $\mathcal{U}$ 的矩阵表示</p>
+<blockquote>
+<p>Clifford 群这个术语来历不明，切莫为其困扰。</p>
+</blockquote>
+<p>可以验证，$\textsf{P}_n$、$H$、$\operatorname{CNOT}$ 都是 Clifford 群的元素。定义以下两个变种 Clifford group：<br>$$<br>\begin{align}<br>    \hat{\textsf{C}}_n &amp;&#x3D; \textsf{C}_n &#x2F; \{e^{\mathrm{i}\theta}I\} \\<br>    \check{\textsf{C}}_n &amp;&#x3D; \hat{\textsf{C}}_n &#x2F; \hat{\textsf{P}}_n<br>\end{align}<br>$$</p>
+<h1><span id="代数结构">代数结构</span></h1><p>两个变种定义分别反映了 Clifford 群的两方面结构：</p>
 <ol>
-<li>求 $|\psi_0\rangle$，使得 $|\psi_0\rangle$ 是全部 $\overline{\mathcal{Z}}_i$ 的本征值为 $+1$ 的本征态，这个态存在唯一性显然。</li>
-<li>对于任意的 $b &#x3D; 0, 1, …, 2^{n - 1}$，定义 $\overline{\mathcal{X}}(b) &#x3D; \prod_i (\overline{\mathcal{X}}_i)^{b_i}$。令 $|\psi_b\rangle &#x3D; \overline{\mathcal{X}}(b)|\psi_0\rangle$。</li>
-<li>有 $\mathcal{U}_{ab} &#x3D; \langle a|\psi_b\rangle$。</li>
+<li>Clifford 群模掉相位之后，任意两个商群中的元素对应 Pauli 群上不同的共轭作用。</li>
+<li>Clifford 群模掉 Pauli 群之后，任意两个商群中的元素对应 Pauli 群上本质不同的共轭作用（认为两个共轭作用本质相同，若它们作用于每个 $P$ 都只差相位），进而同构于辛群 $\textsf{Sp}(2n, \mathbb{Z}_2)$。</li>
 </ol>
-<p>证明方法为首先验证 $|\psi_b\rangle$ 构成标准正交基（于是知道 $\mathcal{U}$ 是酉变换），然后验证 $\mathcal{UZ}_i\mathcal{U}^\dagger|\psi_b\rangle$ 和 $\overline{\mathcal{Z}_i}|\psi_b\rangle$ 结果相同，对于 $\mathcal{X}$ 那边也一样，即可。<div style="text-align: right">$\blacksquare$</div></p>
-<p>至此我们证明了 Clifford 群具有辛对称性：</p>
-<div class="note info"><p><strong>定理 1.1.3.</strong> $\check{C}_n \cong \textsf{Sp}(2n, \mathbb{Z}_2)$。</p>
+<div class="note info"><p><strong>定理 1.1.</strong> 对于 $U, V\in \textsf{C}_n$，有</p>
+<p>$$<br>UPU^\dagger &#x3D; VPV^\dagger<br>$$</p>
+<p>对于一切 $P\in \textsf{P}_n$ 都成立当且仅当 $U &#x2F; \{e^{\mathrm{i}\theta}I\} &#x3D; V &#x2F; \{e^{\mathrm{i}\theta}I\}$。</p>
+</div>
+
+<p><strong>证明.</strong> 两边左乘 $V^\dagger$ 右乘 $V$ 知道只用证明</p>
+<p>$$<br>UPU^\dagger &#x3D; P \quad \Leftrightarrow \quad U &#x3D; e^{i\theta}I.<br>$$</p>
+<p>观察式 \eqref{eq:stabilizer-state} 可以知道，如果 $|\psi\rangle$ 是 $\textsf{S}$ 的 stabilizer state（回忆 <a href="../../../../2026/08/29/QECNote0Preliminaries/">补充内容</a> 第四节提过这个定义），那么 $U|\psi\rangle$ 是 $U\textsf{S}U^\dagger$ 的公共特征值。而 $UPU^\dagger &#x3D; P$，所以说 $U|\psi\rangle$ 还是 $\textsf{S}$ 的公共特征值。</p>
+<p>对于 $j\in [2^n]$，构造如下 stabilizer 生成元：$M_i &#x3D; (-1)^{j_i} Z_i$。其中 $j_i$ 表示 $j$ 在二进制数的第 $i$ 位。则可知 $|j\rangle$ 是该 stabilizer 集合的 stabilizer state。上一段的 argument 表明必然有 $U|j\rangle &#x3D; e^{\mathrm{i}\theta_j}|j\rangle$。至此我们知道 $U$ 必然是对角阵，其 $2^n$ 个对角元都形如 $e^{\mathrm{i}\theta_j}|j\rangle$。</p>
+<p>对于 $j\in [2^{n - 1}]$ 和 $i\in [n]$，构造如下 stabilizer 生成元：<br>$$<br>M_t &#x3D; \begin{cases}<br>    (-1)^{j_t} Z_t &amp; t &lt; i, \\<br>    X_i &amp; t &#x3D; i, \\<br>    (-1)^{j_{t - 1}} Z_t &amp; t &gt; i.<br>\end{cases}<br>$$</p>
+<p>可知 $|\psi_{ij}\rangle &#x3D; |j_{1\ldots i - 1}\rangle|+\rangle|j_{i\ldots n - 1}\rangle$ 是其 stabilizer state。必须有 $U|\psi_{ij}\rangle &#x3D; e^{\mathrm{i}\theta}|\psi_{ij}\rangle$。稍加讨论发现，这蕴含对于 $j\in [2^{n - 1}]$ 和 $i\in [n]$，有 $\theta_{j_1\cdots j_{i-1} 0 j_{i}\cdots j_{n - 1}} &#x3D; \theta_{j_1\cdots j_{i-1} 1 j_{i}\cdots j_{n - 1}}$。当 $i, j$ 遍历其取值范围，这会将所有的 $\theta$ 都连接起来，从而得到 $U &#x3D; e^{\mathrm{i}\theta}I$。<div style="text-align: right">$\blacksquare$</div></p>
+<p>现在来考察 $\check{\textsf{C}}_n$ 的结构。首先我们观察商掉 Pauli 群意味着什么。对于 $U, V\in \hat{\textsf{C}}_n$，$U &#x2F; \hat{P}_n &#x3D; V &#x2F; \hat{P}_n$ 当且仅当 $U^\dagger V \in \hat{\textsf{P}}_n$。那么有对于任意的 $P\in \textsf{P}_n$<br>$$<br>(UPU^\dagger)(VPV^\dagger)^\dagger &#x3D; (-1)^{c(U^\dagger V, P)} UPP(U^\dagger V)V^\dagger &#x3D; (-1)^{c(U^\dagger V, P)}I<br>$$</p>
+<p>也就是说，如果 $U &#x2F; \hat{P}_n &#x3D; V &#x2F; \hat{P}_n$，则它们对应的共轭作用只差一个相位。其实反过来也是一样：如果 $UPU^\dagger &#x3D; \pm P$ 对于每个 $P\in \textsf{P}_n$ 都成立，那么确实有 $U &#x3D; e^{\mathrm{i}\theta}Q$（其中 $Q\in \textsf{P}_n$）：</p>
+<div class="note info"><p><strong>定理 1.2.</strong> 若 $UPU^\dagger &#x3D; \pm P$ 对于任意 $P\in \textsf{P}_n$ 都成立，那么存在 $Q\in \textsf{P}_n, \theta\in \mathbb{R}$ 使得 $U &#x3D; e^{\mathrm{i}\theta}Q$。</p>
+</div>
+
+<p><strong>证明.</strong> $UP &#x3D; (-1)^{c_P}U^\dagger$ 且 $U\in \textsf{P}_n$ 这个约束条件限制在 $X_1, \ldots, X_n, Z_1, \ldots, Z_n$ 上面就对应一个二元辛形式的线性方程组，这个方程组显然有解，这个解便是 $Q$。再结合定理 1.2，如果存在一个别的 $U’$ 给出了同样的共轭作用，那么 $U’$ 和 $Q$ 必然只差全局相位，结论得证。<div style="text-align: right">$\blacksquare$</div></p>
+<p>知道了这个信息之后我们不难进行以下推理：</p>
+<ol>
+<li>考虑 $\check{\textsf{C}}_n$ 的结构时，由于相位不重要，我们将其作用对象——Pauli 群的诸元素，全部用二元辛形式表示。</li>
+<li>$\check{\textsf{C}}_n$ 中任一元素 $U$ 对应的共轭作用会把 Pauli 群元素映射到 Pauli 群元素，忽略相位之后，它可以写作一个 $\mathbb{Z}_2^n \times \mathbb{Z}_2^n$ 上的线性变换 $\mathbf{M}$。不同的 $U$ 必然对应不同的 $\mathbf{M}$。而且，这个 $\mathbf{M}$ 保持对易和反对易性不变（因为它是共轭作用）：取<br>$$<br>\mathbf{J} &#x3D; \begin{pmatrix}<br>  &amp; \mathbf{I} \\<br> -\mathbf{I} &amp;<br>\end{pmatrix},<br>$$<br>这个矩阵是辛内积的矩阵表示，即 $\boldsymbol{u}\odot\boldsymbol{v} &#x3D; \boldsymbol{u}^\top\mathbf{J}\boldsymbol{v}$。于是有 $\mathbf{J} &#x3D; \mathbf{M}^\top\mathbf{JM}$。回忆全体保持 $\mathbf{J} &#x3D; \mathbf{M}^\top\mathbf{JM}$ 的矩阵构成辛群 $\textsf{Sp}(2n, \mathbb{Z}_2)$。</li>
+<li>反过来，只要对于任何一个 $\mathbf{M}$，都能找到相应的共轭作用，那么我们就得到了 $\check{\textsf{C}}_n \cong \textsf{Sp}(2n, \mathbb{Z}_2)$。</li>
+</ol>
+<p>事实上，3 确实是成立的：</p>
+<div class="note info"><p><strong>定理 1.3.</strong> 设 $M\colon \textsf{P}_n\rightarrow \textsf{P}_n$ 是 Pauli 群上的同态。记 $M(X_i) &#x3D; \overline{X}_i, M(Z_i) &#x3D; \overline{Z}_i$，且 $M$ 保持对易性：$c(\overline{X}_i, \overline{X}_j) &#x3D; c(\overline{Z}_i, \overline{Z}_j) &#x3D; 0, c(\overline{X}_i, \overline{Z}_i) &#x3D; \delta_{ij}$。则存在一个酉变换 $U$ 使得 $M$ 正是 $U$ 的共轭作用。</p>
+</div>
+
+<blockquote>
+<p>这里要把 $c(\cdot, \cdot)$ 从 Pauli 群完整拓展到酉变换。如果 $U, V$ 既不对易也不反对易，不妨令 $c(u, v) &#x3D; \bot$。</p>
+</blockquote>
+<p><strong>证明.</strong> 直接构造 $U$：</p>
+<ol>
+<li>找到所有 $\overline{Z}_i$ 的一个公共特征向量（特征值都为 $1$） $|\psi_0\rangle$。</li>
+<li>对于 $b\in [2^n]$，令 $\overline{X}(b) &#x3D; \prod_i (\overline{X}_i)^{b_i}$，其中 $b_i$ 表示 $b$ 的二进制第 $i$ 位。</li>
+<li>令 $|\psi_b\rangle &#x3D; \overline{X}(b)|\psi_0\rangle$；$U_{ab} &#x3D; \langle a|\psi_b\rangle$。</li>
+</ol>
+<p>这个构造源自基本的线性代数直觉：Unitary 的共轭作用是联系两组标准正交基的坐标变换。$\{|\psi_b\rangle\}$ 这组基之于 $\overline{X}_i, \overline{Z}_i$ 相当于 $\{|a\rangle\}$ 之于 $X_i, Z_i$。联系它们的坐标变换无非是这两组基的 Gram 矩阵，也就是上方构造中的 $U$。验证上方构造确实成立无非以下几个步骤：</p>
+<ol>
+<li>$|\psi_0\rangle$ 的存在性。只需要注意到 $\{\overline{Z}_i\}$ 构成一组 stabilizer，于是至少有一个 stabilizer state。</li>
+<li>$U$ 的共轭作用确实把 $X_i$ 映射到 $\overline{X}_i$，把 $Z_i$ 映射到 $\overline{Z}_i$。这个验算即可。</li>
+</ol>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>至此，我们得到了 $\check{\textsf{C}}_n$ 的结构：</p>
+<div class="note info"><p><strong>推论 1.4.</strong> $\check{\textsf{C}}_n \cong \textsf{Sp}(2n, \mathbb{Z}_2)$。</p>
 </div>
 
 <div style="text-align: right">$\blacksquare$</div>
 
-<h2><span id="clifford-群的经典模拟">Clifford 群的经典模拟</span></h2><p>Clifford 群元素的描述并不需要过多的比特。上一节所述的 Clifford 群同构于辛群表明，惟须给定一个 Pauli 群元素的象（也是一个 Pauli 群元素）及其全局相位即可断定该 Clifford 群元素，所需惟 $2n(2n + 1)$ 个比特。相对地，$\textsf{U}(2^n)$ 中的元素需要 $2^{2^n}$ 个实参数方可刻画。因此，虽然引入 Clifford 群的初衷是其具有便于进行量子纠错的性质，但关于 Clifford 群的最为重要的结果给出了遗憾的事实：一切 Clifford 门组成的量子线路都可以被经典模拟。我们逐步推导这一结论。</p>
-<div class="note info"><p><strong>定理 1.2.1.</strong> 若一个电路由 Clifford 门复合而成：$\mathcal{U} &#x3D; \prod_{i &#x3D; m}^1 \mathcal{U}_i$（此处倒着乘是为了让 $\mathcal{U}_1$ 作为首个作用的门），其中 $\mathcal{U}_i \in \textsf{C}_n$，并已知它可以被它对 Pauli 群生成元的作用刻画：$\mathcal{U}_i : \mathcal{X}_j \mapsto U_i(\mathcal{X}_j), \mathcal{Z}_j \mapsto U_i(\mathcal{Z}_j)$。则整个电路对一个 Pauli 群中元素的共轭作用可用经典多项式复杂度算法求出。</p>
+<h1><span id="clifford-群的经典模拟">Clifford 群的经典模拟</span></h1><p>Clifford 群元素的描述并不需要过多的比特。上一节所述的 Clifford 群同构于辛群表明，惟须给定一个 Pauli 群元素的象（也是一个 Pauli 群元素）及其全局相位即可断定该 Clifford 群元素，所需惟 $2n(2n + 1)$ 个比特。相对地，$\textsf{U}(2^n)$ 中的元素需要 $2^{2^n}$ 个实参数方可刻画。因此，虽然引入 Clifford 群的初衷是其具有便于进行量子纠错的性质，但关于 Clifford 群的最为重要的结果给出了遗憾的事实：一切 Clifford 门组成的量子线路都可以被经典模拟。我们逐步推导这一结论。</p>
+<div class="note info"><p><strong>定理 2.1.</strong> 若一个电路由 Clifford 门复合而成：$U &#x3D; U_m\cdots U_1$，其中 $U_i \in \textsf{C}_n$，并已知它可以被它对 Pauli 群生成元的共轭作用刻画：$U_i : X_j \mapsto U_i(X_j), Z_j \mapsto U_i(Z_j)$。则整个电路对一个 Pauli 群中元素的共轭作用可用经典多项式复杂度算法求出。</p>
 </div>
 
-<p><strong>构造.</strong> 算法正是源于节首语所言：表示 Clifford 群中元素所需的比特数目仅为 $2n(2n + 1)$，以及共轭作用具有的同态性，因此 $U_i(U_{i - 1}(…U_1(\mathcal{X}_j)))$ 容易从 $U_{i - 1}(…U_1(\mathcal{X}_j))$ 推出。<div style="text-align: right">$\blacksquare$</div></p>
-<p>我们进一步考虑一个 Clifford 电路作用在一个给定的初态上的效果。当然，这个初态应当是某个 Stabilizer 的 $+1$ 本征态。</p>
-<div class="note info"><p><strong>定理 1.2.2.</strong> 若一个电路由 Clifford 门复合而成：$\mathcal{U} &#x3D; \prod_{i &#x3D; m}^1 \mathcal{U}_i$，其中 $\mathcal{U}_i \in \textsf{C}_n$，并已知它可以被它对 Pauli 群生成元的作用刻画：$\mathcal{U}_i : \mathcal{X}_j \mapsto U_i(\mathcal{X}_j), \mathcal{Z}_j \mapsto U_i(\mathcal{Z}_j)$。再考虑一个由 $\mathcal{M}_1, …, \mathcal{M}_{n - k}$ 生成的、编码了 $k$ 个逻辑比特的 Stabilizer $\textsf{S}$，其上方可以完成逻辑门 $\overline{\mathcal{X}}_j, \overline{\mathcal{Z}}_j$（对于 $j &#x3D; 1, 2, …, k$）。则整个电路对这个 Stabilizer Code 的作用可以用经典多项式复杂度算法求出。</p>
+<p><strong>构造.</strong> 从 $1$ 到 $m$ 递推即可：</p>
+<ol>
+<li>初始化 $\overline{X}_i &#x3D; X_i, \overline{Z}_i &#x3D; Z_i$；</li>
+<li>枚举 $i &#x3D; 1, …, m$；</li>
+<li>$\qquad$ 计算 $U_i(\overline{X}_j), U_i(\overline{Z}_j)$（将 $\overline{X}_j, \overline{Z}_j$ 写作 $X_j, Z_j$ 的乘积，利用共轭作用是同态即可）</li>
+<li>$\qquad$ $\overline{X_j} \leftarrow U_i(\overline{X}_j), \overline{Z}_j \leftarrow U_i(\overline{Z}_j)$。</li>
+</ol>
+<div style="text-align: right">$\blacksquare$</div>
+
+<p>我们进一步考虑一个 Clifford 电路作用在一个给定的初态上的效果，其中这个初态是某个由 $n$ 个生成元生成的 stabilizer 的 stabilizer state。</p>
+<div class="note info"><p><strong>定理 2.2.</strong> 若一个电路由 Clifford 门复合而成：$U &#x3D; U_m\cdots U_1$，其中 $U_i \in \textsf{C}_n$，并已知它可以被它对 Pauli 群生成元的作用刻画：$U_i : X_j \mapsto U_i(X_j), Z_j \mapsto U_i(Z_j)$。再考虑一个由 $M_1, …, M_{n - k}$ 生成的、编码了 $k$ 个逻辑比特的 stabilizer $\textsf{S}$，其上方逻辑操作记为 $\overline{X}_j, \overline{Z}_j$（对于 $j &#x3D; 1, 2, …, k$）。则作用整个电路之后，这个 stabilizer code 的生成元和逻辑操作的形式可以用经典多项式时间算法求出。</p>
 </div>
 
-<p><strong>构造.</strong> 同上所述，你可以追踪全部稳定子生成元和逻辑门的变化。<div style="text-align: right">$\blacksquare$</div></p>
-<p>最后我们来考察 Pauli 测量，现在要测量当前的态（属于某个 Stabilizer $\textsf{S}$ 的本征态）关于 $\mathcal{P}$ 的本征值。这里首先需要写一些直觉：</p>
-<ol>
-<li>如果你测量一个 $\textsf{S}$ 中的元素，那么态会保持原样；</li>
-<li>如果你测量一个 $N(\textsf{S})\setminus \textsf{S}$ 中的元素，那么态会被确定性地投影到一边，可能的态数量除以 $2$，可见 Stabilizer 的大小翻倍（生成元个数加一）；</li>
-<li>如果你测量这之外的元素，那么态会被随机地投到两个特征子空间中，可能的态数量并没有变，但是空间发生了变化，可见 Stabilizer 的大小不变，但是生成元变化。</li>
-</ol>
-<p>如果不能想象这三种情况，推荐考虑一个单比特线路，Stabilizer 取作 $\{\mathcal{I}\}$ 和 $\{\mathcal{I}, \mathcal{Z}\}$。</p>
-<p>首先有两种局部的特殊情况：</p>
-<ol>
-<li>$\pm \mathcal{P}\in \textsf{S}$ 答案无非是 $\pm 1$。</li>
-<li>$\mathcal{P}\in N(\textsf{S}) \setminus \textsf{S}$，则 $\mathcal{P}$ 必可写作逻辑门 $\overline{\mathcal{X}}_i, \overline{\mathcal{Z}}_i$ 之积。那么此时测量产出必然是原输入比特关于这个逻辑门的测量结果，而投影后的东西是 $\mathcal{P}$ 的本征值为 $\pm 1$ 的本征态，我们需要把 $\pm \mathcal{P}$ 加入 Stabilizer 中。</li>
-</ol>
-<p>比较困难的情形是 $\mathcal{P}\notin N(\textsf{S})$，即 $\textsf{S}$ 中存在一个与 $\mathcal{P}$ 反对易的元素 $\mathcal{M}$。注意到 </p>
-<p>$$<br>\langle\psi|\mathcal{P}|\psi\rangle &#x3D; \langle\psi|\mathcal{PM}|\psi\rangle &#x3D; -\langle\psi|\mathcal{MP}|\psi\rangle &#x3D; -\langle\psi|\mathcal{P}|\psi\rangle &#x3D; 0<br>$$</p>
+<p><strong>构造.</strong> 首先你容易追踪生成元的变化：因为作用一个 Clifford 门 $U_i$ 会把 stabilizer 变成 $U_i\textsf{S}U_i^\dagger$，相应地就是对生成元也做共轭作用。逻辑操作的变化也是共轭作用：</p>
+<p>$$<br>U\overline{X}_i |\psi\rangle &#x3D; (U\overline{X}_iU^\dagger)U|\psi\rangle<br>$$</p>
+<p>所以与用定理 1.6 里面的那个算法类似的结构，你可以追踪 stabilizer 生成元和逻辑操作。<div style="text-align: right">$\blacksquare$</div></p>
+<p>最后我们来考察 Pauli 测量，现在要测量一个满的 stabilizer $\textsf{S}$ 的 stabilizer state $|\psi\rangle$。简单推理发现：如果 $\pm P \in \textsf{S}$，测量结果无非是 $\pm 1$（取决于 $P\in \textsf{S}$ 还是 $-P\in \textsf{S}$），且不会影响被测量的态。比较困难的情形是 $P\notin \textsf{S} \wedge -P\notin \textsf{S}$，即 $\textsf{S}$ 中存在一个与 $P$ 反对易的元素 $M$。注意到测量结果的期望是</p>
+<p>$$<br>\langle\psi|P|\psi\rangle &#x3D; \langle\psi|PM|\psi\rangle &#x3D; -\langle\psi|MP|\psi\rangle &#x3D; -\langle\psi|P|\psi\rangle &#x3D; 0<br>$$</p>
 <p>这表明落在 $1, -1$ 两个特征子空间内的投影模长相等，换言之测出 $\pm 1$ 的可能性均等。假设测出了 $(-1)^b$，那么 $|\psi\rangle$ 将被投影至</p>
-<p>$$<br>|\psi’\rangle &#x3D; \frac{1}{\sqrt 2}(\mathcal{I} + (-1)^b \mathcal{P})|\psi\rangle<br>$$</p>
-<p>接下来如何更新 $\textsf{S}$？首先考虑 $|\psi’\rangle$ 是哪些东西的本征态，以下是两个比较局部的情况：</p>
+<p>$$<br>|\psi’\rangle &#x3D; \frac{1}{\sqrt 2}(I + (-1)^b P)|\psi\rangle<br>$$</p>
+<p>接下来如何更新 $\textsf{S}$？$\textsf{S}’ &#x3D; \textsf{S}(|\psi’\rangle)$，即全体使得 $|\psi’\rangle$ 是其特征值为 $+1$ 的特征向量的 Pauli 群元素。对于一个 $M\in \textsf{S}$，有</p>
 <ol>
-<li>我们宣称对于任意与 $\mathcal{P}$ 反对易的 $\mathcal{M}$ 而言，$|\psi’\rangle$ 都不是其本征态。原因是 $|\psi’\rangle$ 是 $(-1)^b\mathcal{P}$ 的本征值为 $+1$ 的本征态，你可以自行反证导出矛盾。</li>
-<li>我们宣称对于任意 $\textsf{S}$ 中与 $\mathcal{P}$ 对易的 $\mathcal{M}$ 而言，$|\psi’\rangle$ 都是其本征态。这点你可以自行验证。</li>
+<li>如果 $M$ 和 $P$ 对易，那么 $M|\psi’\rangle &#x3D; |\psi’\rangle$ 源自平凡的计算，于是 $M\in \textsf{S}’$。</li>
+<li>如果 $M$ 和 $P$ 反对易，那么 $M|\psi’\rangle &#x3D; |\psi’\rangle$ 推出 $P|\psi\rangle &#x3D; 0$（矛盾），于是 $M\notin \textsf{S}’$。</li>
 </ol>
-<p>剩下一部分情况（$\textsf{S}$ 以外与 $\mathcal{P}$ 对易的 $\mathcal{M}$）是难以通过计算验证的。我们转而计数证明 2 中即包含了全部可能的 Stabilizer：</p>
-<div class="note info"><p><strong>引理 1.2.3.</strong> 令 $\textsf{S}$ 为一个 Stabilizer，$\mathcal{P}\notin N(\textsf{S})$，则 $\textsf{S}$ 中恰有一半元素与 $\mathcal{P}$ 对易。事实上这个结论对于 $\mathcal{N}(\textsf{S}) &#x2F; \textsf{S}$ 中的每个陪集都成立。</p>
+<p>对于其他 Pauli 群中的元素，我们没有什么信息验证它是不是 $\textsf{S}’$ 的成员。然而我们可以转而计数与 $P$ 对易的 $M\in \textsf{S}$ 的数量，从而证明情况 1 和 $P$ 直积已然得到一个固定住 stabilizer state $|\psi’\rangle$ 的 stabilizer 集合：</p>
+<div class="note info"><p><strong>引理 2.3.</strong> 令 $\textsf{S}$ 为一个 stabilizer，$P\notin \textsf{N}(\textsf{S})$，则 $\textsf{S}$ 中恰有一半元素与 ${P}$ 对易。</p>
 </div>
 
-<p><strong>证明.</strong> 令 $\mathcal{M}$ 是 $\textsf{S}$ 中一个与 $\mathcal{P}$ 反对易的元素。则有 $\mathcal{N}\leftrightarrow \mathcal{MN}$ 构成了一个 $\textsf{S}$ 中元素之间的两两配对（须注意 $\mathcal{M}^2 &#x3D; \mathcal{I}$，因为是 Pauli 算符），且两者恰好分别与 $\mathcal{P}$ 对易和与 $\mathcal{P}$ 反对易。<div style="text-align: right">$\blacksquare$</div></p>
-<p>这直接推出了 $\textsf{S}$ 中与 $\mathcal{P}$ 对易的元素和 $(-1)^b\mathcal{P}$ 并起来生成的 Stabilizer $\textsf{S}’$ 和 $\textsf{S}$ 具有相同的大小。这表明测量至少不会导致码字空间变大。实际上，码字空间也不会变小【FIXME：这里需要引理 1.2.3 中关于陪集的论断，并可能需要补充一些关于码字从何而来的直觉，我们在第一章中遗漏了所以看不懂】。</p>
+<p><strong>证明.</strong> 令 $M$ 是 $\textsf{S}$ 中一个与 ${P}$ 反对易的元素。则有 $N\leftrightarrow MN$ 构成了一个 $\textsf{S}$ 中元素之间的两两配对（须注意 $M^2 &#x3D; I$，因为是 Pauli 算符），且两者恰好分别与 $P$ 对易和与 $P$ 反对易。<div style="text-align: right">$\blacksquare$</div></p>
+<p>这直接推出了 $\textsf{S}$ 中与 $P$ 对易的元素和 $(-1)^b P$ 并起来生成的 stabilizer $\textsf{S}’$ 和 $\textsf{S}$ 具有相同的大小：$2^n$。于是，stabilizer $\textsf{S}’$ 固定住唯一一个 stabilizer state。我们知道它固定住 $|\psi’\rangle$，所以 $|\psi’\rangle$ 就是 stabilizer state。</p>
 <p>综合以上全部结果得到著名的 Gottesman-Knill 定理：</p>
-<div class="note info"><p><strong>定理 1.2.3（Gottesman-Knill）.</strong> 若一个线路的作用于一个已知的 Stabilizer 的本征态，线路中仅包含以下三种要素：</p>
+<div class="note info"><p><strong>定理 2.4（Gottesman-Knill）.</strong> 若一个线路的作用于一个已知的 stabilizer 的 stabilizer state $\textsf{S}$，线路中仅包含以下三种要素：</p>
 <ol>
 <li>Clifford 门；</li>
 <li>Pauli 测量；</li>
-<li>关于测量结果的经典信号的分支。</li>
+<li>测量结果作为控制信号；</li>
 </ol>
 <p>则存在高效的经典算法模拟出全部的测量结果。</p>
 </div>
 
-<p><strong>构造.</strong> 假设线路的初态是 Stabilizer $\textsf{S}$ 的一个本征态，其中 $\textsf{S}$ 的生成元是 $\mathcal{M}_1, …, \mathcal{M}_{n - k}$，其上可以做逻辑门 $\overline{\mathcal{X}}_i, \overline{\mathcal{Z}}_i, i &#x3D; 1, …, k$；线路依次调用两种操作之一：</p>
+<p><strong>构造.</strong> 假设线路的初态是 stabilizer $\textsf{S}$ 的 stabilizer state，其中 $\textsf{S}$ 的生成元是 $M_1, …, M_n$，线路依次调用两种操作之一：</p>
 <ol>
-<li>$\mathcal{U}_i$，一个 Clifford 群元素，并有定理 1.2.1 中的刻画 $U_i$；</li>
-<li>对 $\mathcal{P}_i \in \textsf{P}_n$ 做 Pauli 测量。</li>
+<li>$U_i$，一个 Clifford 群元素，并有定理 1.2.1 中的刻画 $U_i$；</li>
+<li>对 $P_i \in P_n$ 做 Pauli 测量。</li>
 </ol>
 <p>则对其做经典模拟的完整算法如下：</p>
 <ol>
-<li>初始化，设 $k’ \leftarrow k$，$\mathcal{N}_j \leftarrow \mathcal{M}_j$（$j &#x3D; 1, …, n - k$），$\overline{\mathcal{X}}’_j \leftarrow \overline{\mathcal{X}}_j, \overline{\mathcal{Z}}’_j\leftarrow \overline{\mathcal{Z}}_j$（$j &#x3D; 1, …, k$），初态为 $|\overline{\psi}\rangle$（对应逻辑态为 $|\psi\rangle$）；</li>
+<li>初始化，设 $k’ \leftarrow k$，$N_j \leftarrow M_j$（$j &#x3D; 1, …, n - k$）；</li>
 <li><strong>For</strong> 每一个操作：</li>
-<li>$\qquad$ <strong>If</strong> 当前操作是门 $\mathcal{U}_i$：</li>
-<li>$\qquad\qquad$ $\mathcal{N}_j \leftarrow U_i(\mathcal{N}_j)$，$\overline{\mathcal{X}}_j \leftarrow U_i(\overline{\mathcal{X}}_j)$，$\overline{\mathcal{Z}}_j \leftarrow U_i(\overline{\mathcal{Z}}_j)$；</li>
-<li>$\qquad$ <strong>If</strong> 当前操作是对 $\mathcal{P}_i$ 测量，且 $\pm \mathcal{P}_i \in \textsf{S}$（本步骤可调用二元辛形式上的线性基完成）：</li>
+<li>$\qquad$ <strong>If</strong> 当前操作是门 $U_i$：</li>
+<li>$\qquad\qquad$ $U_j \leftarrow U_i(\mathcal{N}_j)$；</li>
+<li>$\qquad$ <strong>If</strong> 当前操作是对 $P_i$ 测量，且 $\pm P_i \in \textsf{S}$（本步骤可调用二元辛形式上的线性基完成）：</li>
 <li>$\qquad\qquad$ 输出 $\pm 1$；</li>
-<li>$\qquad$ <strong>If</strong> 当前操作是对 $\mathcal{P}_i$ 测量，且 $\mathcal{P}_i\in N(\textsf{S})\setminus \textsf{S}$（本步骤可以枚举生成元计算辛内积完成）：</li>
-<li>$\qquad\qquad$ 将 $\mathcal{P}_i$ 分解做 $\prod_{j &#x3D; 1}^{n - k’} N_j^{s_j}\prod_{j &#x3D; 1}^k {\overline{\mathcal{X}}’}_j^{t_j}{\overline{\mathcal{Z}}’}_j^{u_j}$；</li>
-<li>$\qquad\qquad$ 令 $\mathcal{Q} \leftarrow \prod_{j &#x3D; 1}^k \mathcal{X}_j^{t_j}\mathcal{Z}_j^{u_j}$；</li>
-<li>$\qquad\qquad$ 设 $(-1)^b$ 是 $|\psi\rangle$ 在 $Q$ 下的 Pauli 测量结果，输出之；</li>
-<li>$\qquad\qquad$ $k’ \leftarrow k’ - 1$，将 $(-1)^b\mathcal{P}_i$ 列入 Stabilizer 生成元；</li>
-<li>$\qquad$ <strong>If</strong> 当前操作是对 $\mathcal{P}_i$ 测量，且 $\mathcal{P}_i \notin N(\textsf{S})$：</li>
+<li>$\qquad$ <strong>If</strong> 当前操作是对 $P_i$ 测量，且 $P_i \notin \textsf{N}(\textsf{S})$：</li>
 <li>$\qquad\qquad$ 均匀随机采样 $b$，返回 $(-1)^b$；</li>
-<li>$\qquad\qquad$ 在生成元中找 $\mathcal{M}$ 使得其与 $\mathcal{P}_i$ 反对易；</li>
-<li>$\qquad\qquad$ 枚举 $i &#x3D; 2, …, n - k’$，若 $[\mathcal{N}_i, \mathcal{P}_i] &#x3D; 0$，保持其不变；否则 $\mathcal{N}_i \leftarrow \mathcal{MN}_i$；</li>
-<li>$\qquad\qquad$ $\mathcal{N}_1 \leftarrow (-1)^b\mathcal{P}_i$；</li>
-<li>$\qquad\qquad$ 对 ${\overline{\mathcal{X}}’}_i, {\overline{\mathcal{Z}}’}_i$ 也做 15 行中的变换。</li>
+<li>$\qquad\qquad$ 在生成元中找 $M$ 使得其与 $\mathcal{P}_i$ 反对易；</li>
+<li>$\qquad\qquad$ 枚举 $i &#x3D; 2, …, n - k’$，若 $[N_i, P_i] &#x3D; 0$，保持其不变；否则 $N_i \leftarrow MN_i$；</li>
+<li>$\qquad\qquad$ $N_1 \leftarrow (-1)^b P$；</li>
 </ol>
 <div style="text-align: right">$\blacksquare$</div>
 
-<h2><span id="补充材料">补充材料</span></h2><p>以下是一些没看懂但是至关重要的内容，这里罗列如下。</p>
+<blockquote>
+<p><strong>Remark.</strong> 上述算法可以拓展到 $\textsf{S}$ 的大小为 $n - k$，其中 $k$ 为<strong>常数</strong>的情形。此时，还需要手动维护当前的态 $|\overline{\psi}\rangle$ 对应的 logical state $|\psi\rangle$、所有的逻辑操作。当 $P\in \textsf{N}(\textsf{S}) \setminus \textsf{S}$ 时，你需要找到 $P$ 对应哪个 logical operation $\overline{O}$，然后手动对 logical state 做 $O$ 基测量。因为 $k$ 是常数，所以你哪怕把 $O$ 和 $|\psi\rangle\langle\psi|$ 乘起来然后暴力算 trace，复杂度也是 $(2^{k})^3$（常数）的，这并不影响算法渐进复杂度。</p>
+</blockquote>
+<p>算法时间复杂度为 $O(n^2 m)$。</p>
+<h1><span id="clifford-群生成元">Clifford 群生成元</span></h1><p>本节证明如下定理：</p>
+<div class="note info"><p><strong>定理 3.1.</strong> 设 $G\in \textsf{C}_n$。则 $G$ 可以被写成 $e^{\mathrm{i}\theta}I, H_i, R_{\pi &#x2F; 4, i}, \operatorname{CNOT}_{i, j}$ 的乘积。</p>
+</div>
+
+<p><strong>证明.</strong> 首先注意 Pauli 群和全局相位可以被 $O(1)$ 个 $e^{\mathrm{i}\theta}I, H_i, R_{\pi &#x2F; 4, i}$ 生成：$Z &#x3D; R_{\pi &#x2F; 4}^2$，$X &#x3D; HZH$。于是，我们只需要证明 $H_i, R_{\pi &#x2F; 4, i}, \operatorname{CNOT}_{i, j}$ 生成了 $\check{\textsf{C}}_n$，后者同构于辛群。于是，写出这几个东西对应的共轭作用对应的线性映射 $M$：</p>
+<p>$$<br>H\rightarrow \left(\begin{array}{c|c}<br>    0 &amp; 1 \\ \hline 1 &amp; 0<br>\end{array}\right), \qquad<br>R_{\pi &#x2F; 4} \rightarrow  \left(\begin{array}{c|c}<br>    1 &amp; 0 \\ \hline 1 &amp; 1<br>\end{array}\right), \qquad<br>\operatorname{CNOT} \rightarrow  \left(\begin{array}{cc|cc}<br>    1 &amp; 0 &amp; 0 &amp; 0 \\<br>    1 &amp; 1 &amp; 0 &amp; 0 \\<br>    \hline<br>    0 &amp; 0 &amp; 1 &amp; 1 \\<br>    0 &amp; 0 &amp; 0 &amp; 1<br>\end{array}\right)<br>$$</p>
+<p>要证明的是任何一个 $2n\times 2n$ 的 $0&#x2F;1$ 辛矩阵：</p>
+<p>$$<br>\mathbf{U} &#x3D; \left(\begin{array}{c|c}<br>\mathbf{A} &amp; \mathbf{B} \\<br>\hline<br>\mathbf{C} &amp; \mathbf{D}<br>\end{array}\right) \quad \text{s.t.} \quad \begin{array}{l}<br>\text{1. $\mathbf{U}$ has full rank;} \\<br>\text{2. $\mathbf{A}^\top \mathbf{C} + \mathbf{C}^\top \mathbf{A} &#x3D; 0$} \\<br>\text{3. $\mathbf{C}^\top \mathbf{B} + \mathbf{A}^\top \mathbf{D} &#x3D; I$} \\<br>\text{4. $\mathbf{B}^\top \mathbf{D} + \mathbf{D}^\top \mathbf{B} &#x3D; 0$} \\<br>\end{array}<br>$$</p>
+<p>都可以表示成这些东西的乘积。这三个矩阵的形式让人联想到初等变换：以左乘为例</p>
+<ol>
+<li>左乘 $H$ 交换上半部分第 $i$ 行和下半部分第 $i$ 行；</li>
+<li>左乘 $R_{\pi&#x2F;4}$ 让上半部分第 $i$ 行加到下半部分第 $i$ 行；</li>
+<li>左乘 $\operatorname{CNOT}$ 将上下半的第 $i$ 行同时分别加到对应半区的第 $j$ 行。</li>
+</ol>
+<p>此外还可以补充一些辅助操作：</p>
+<ol>
+<li>$\textsf{c-}Z &#x3D; (I\times H)\operatorname{CNOT}(I\times H)$，将上半部分的第 $i$ 行加到下半部分的第 $j$ 行，将下半部分的第 $i$ 行加到上半部分的第 $j$ 行；</li>
+<li>$\operatorname{SWAP}_{i, j} &#x3D; \mathrm{CNOT}_{i, j}\mathrm{CNOT}_{j, i}\mathrm{CNOT}_{i, j}$：分别交换上下两半的 $i, j$ 行。</li>
+</ol>
+<p>当然，右乘对应的列操作。用这些操作来构造一切辛矩阵的算法是一个相当显然的变体高斯消元，读者可以自行想象，这里不再赘述，操作数量仅为 $O(n^2)$。<div style="text-align: right">$\blacksquare$</div></p>
+<blockquote>
+<p><strong>Remark.</strong> 一些现代科技可以让这个复杂度除一个 $\log n$。</p>
+</blockquote>
+<h1><span id="用-clifford-电路实现稳定子码的-encoder">用 Clifford 电路实现稳定子码的 Encoder</span></h1><p>可以看到 Clifford 可以实现 stabilizer 集合之间的变换。而 Encoder 实际上做的是这样一件事情：</p>
 <ul>
-<li>David Gottesman 的教材中还涉及 Clifford 群生成元，以及将任意一个 $\check{\textsf{C}}_n$ 元素怎么表示成 $\mathcal{H}, \mathcal{CNOT}$ 之乘积的算法；</li>
+<li>一个 Encoder $U$ 把任意的 $|0\rangle^{\otimes (n - k)}|\psi\rangle$ 映射到 $|\overline{\psi}\rangle$（其中 $|\psi\rangle\in \mathcal{H}_{2^k}$）。</li>
+<li>前者被生成元为 $Z_1, …, Z_{n - k}$ 的 stabilizer 稳定住。后者被 $M_1, …, M_{n - k}$ 的 stabilizer 稳定住。这要求 $U$ 的共轭作用把 $Z_i$ 映射到 $M_i$。</li>
+<li>如果你还想要保证编码之后，对 $|\psi\rangle$ 的操作 $X_i, Z_i$ 恰好还对应对 $|\overline{\psi}\rangle$ 的逻辑操作 $\overline{X}_i, \overline{Z}_i$，这还要求 $U$ 给出的共轭作用把 $X_i$ 映射到 $\overline{X}_i$，把 $Z_i$ 映射到 $\overline{Z}_i$。</li>
+</ul>
+<p>上述要求直接给出了 $U$ 的共轭作用的辛矩阵，用上一节中的变体高斯消元必然可以将其转化为一个 Clifford 门组成的线路。</p>
+<h1><span id="补充材料">补充材料</span></h1><p>以下是一些没看懂但是至关重要的内容，这里罗列如下。</p>
+<ul>
 <li>发表于 FOCS’99 的文章 On Universal and Fault-Tolerant Quantum Computing 证明了 Clifford 群加上任意一个群外元素都构成通用量子门集合，现实中常用 Clifford + Toffoli 或者 Clifford + T；但这些门也构成量子纠错的主要开销。</li>
 <li>Solovay-Kitaev 定理告诉我们怎么将一个线路以较小代价编译到一个通用的门集上去。</li>
 </ul>
-<h1><span id="量子纠错码的上下界">量子纠错码的上下界</span></h1><p>按照以往惯例记 $((n, K, d))_q$ 表示用 $n$ 个物理比特编码了一个 $K$ 维子空间的逻辑比特，码距为 $d$ 的量子纠错码，其中一个量子比特是 $q$ 维复向量，不写默认为 $2$。和经典编码理论一样，量子纠错码也有一些上下界，其中：</p>
-<ul>
-<li>上界指出纠错的不可能性；</li>
-<li>下界指出纠错码存在的充分条件。</li>
-</ul>
-<h2><span id="quantum-gilbert-varshamov-bound">Quantum Gilbert-Varshamov Bound</span></h2><p>这是经典 Gilber-Varshamov 界的量子推广。</p>
-<div class="note info"><p><strong>定理 2.1.1（Quantum Gilbert Varshamov Bound）.</strong> 若 </p>
-<p>$$<br>2^k\left(\sum_{j &#x3D; 0}^{d - 1}3^j\binom nj\right) \leq 2^n<br>$$</p>
-<p>则存在 $((n, 2^k, d))$ 纠错码。事实上，存在 $[[n, k, d]]$ Stabilizer Code。</p>
-</div>
-
-<p><strong>证明.</strong> 首先一个重要观察是：对于任意两个错误 $\mathcal{E}, \mathcal{F}\in \textsf{P}_n \setminus \{\mathcal{I}\}$，有相同数量（不妨设这个数为 $C$）的 Stabilizer Code 不能纠正之。这是因为必然存在 Clifford 共轭 $U$，使得 $\mathcal{F} &#x3D; U(\mathcal{E})$。那么若 $\textsf{S}$ 不能纠正 $\mathcal{E}$，则 $U(\textsf{S})$ 不能纠正 $\mathcal{F}$，这给出了不能纠正 $\mathcal{E}, \mathcal{F}$ 的 Stabilizer Code 之间的双射。那么循证明经典 Gilbert Vashamov Bound 之惯例，设 $B$ 为距离小于 $d$ 的错误总数，$N$ 表示 $[[n, k, \cdot]]$ Stabilizer 的总数，由 Union Bound 可知只要</p>
-<p>$$<br>(B - 1)C &lt; N<br>$$</p>
-<p>则必有一 $[[n, k, \cdot]]$ 码之码距不小于 $d$。现在惟须计算上面各成分的具体数值，$B$ 的计算相当容易：</p>
-<p>$$<br>B &#x3D; \sum_{i &#x3D; 0}^{d - 1}\binom nj 3^j<br>$$</p>
-<p>关于 $C, N$，直接算起来非常棘手，所幸有以下方程成立：</p>
-<p>$$<br>C |\textsf{P}_n \setminus \{\mathcal{I}\}| &#x3D; N |N(\textsf{S}) \setminus \textsf{S}|<br>$$</p>
-<p>其中 $|\textsf{P}_n\setminus \{\mathcal{I}\}| &#x3D; 4^n - 1$ 显然；根据熟知的结果 $N(\textsf{S}) &#x2F; \textsf{S}\cong \textsf{P}_k$ 和拉格朗日定理有 $|N(\textsf{S})| &#x3D; 2^{n + k}$，因此 $|N(\textsf{S}) \setminus \textsf{S}| &#x3D; 2^{n + k} - 2^{n - k}$。代入得到</p>
-<p>$$<br>2^{n - k}\frac{4^k - 1}{4^n - 1}\sum_{i &#x3D; 0}^{d - 1}3^j\binom nj &lt; 1<br>$$</p>
-<p>当然实践中用不到这么紧，简明起见再用 $\frac{4^k - 1}{4^n - 1} &lt; 4^{k - n}$ 放缩立即得到欲证形式。<div style="text-align: right">$\blacksquare$</div></p>
-<h2><span id="quantum-hamming-bound">Quantum Hamming Bound</span></h2><p>Classic Sphere Packing Bound 的推广，只对非简并的纠错码成立，非常弱智。</p>
-<div class="note info"><p><strong>定理 2.2.1（Quantum Hamming Bound）.</strong> 若存在非简并的 $((n, K, 2t + 1))_q$ 码，则 </p>
-<p>$$<br>K\left(\sum_{j &#x3D; 0}^t (q^2 - 1)^j \binom nj\right) \leq q^n<br>$$</p>
-</div>
-
-<p><strong>证明.</strong> 【FIXME：这个结论需要补充证明】量子纠错码非简并可以用以下条件刻画：对于任意的两个错误 $\mathcal{E}_a, \mathcal{E}_b$ 和两个码字 $|\psi\rangle, |\phi\rangle$ 有</p>
-<p>$$<br>\langle\psi|\mathcal{E}_a^\dagger\mathcal{E}_b|\phi\rangle &#x3D; 0, \qquad \text{matrix $C_{ab} &#x3D; \langle\psi|\mathcal{E}_a^\dagger\mathcal{E}_b|\psi\rangle$ has full rank}<br>$$</p>
-<p>这表明 $\{\mathcal{E}_a|\psi_i\rangle\}$ 构成 $\mathrm{Span}\{|0\rangle, …, |q - 1\rangle\}^{\otimes n}$ 中的一个线性无关组，根据维数关系得到</p>
-<p>$$<br>|\{\mathcal{E}_a|\psi_i\rangle\}| \leq q^n<br>$$</p>
-<p>前者展开计算无非是欲证形式中的求和。<div style="text-align: right">$\blacksquare$</div></p>
-<h2><span id="quantum-singleton-bound-linear-programming-bounds">Quantum Singleton Bound, Linear Programming Bounds</span></h2><p>【FIXME】</p>
 
     </div>
 
@@ -487,13 +495,13 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-line"></i>
     </span>
-    <span title="Word count total">443k</span>
+    <span title="Word count total">450k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="Reading time total">26:50</span>
+    <span title="Reading time total">27:17</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a>
